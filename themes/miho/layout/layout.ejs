@@ -1,0 +1,37 @@
+<%- partial('_partial/head') %>
+<%- js('/js/jquery.min') %>
+<%- js('/js/pace.min') %>
+<%- js('/js/crypto-js') %>
+<%- js('/js/cookie') %>
+<%- js('/js/calendar') %>
+<%- js('/js/festival') %>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <%- partial('_partial/header', null, {cache: !config.relative_link}) %>
+
+      <!-- 悬浮音乐播放器 -->
+      <!-- <script id="ilt" src=<%- url_for('/player/js/player.js') %>></script> -->
+      <div class="outer">
+          <section id="main" class="body-wrap"><%- body %></section>
+        <% if (theme.sidebar && theme.sidebar !== 'bottom'){ %>
+          <%- partial('_partial/sidebar', null, {cache: !config.relative_link}) %>
+        <% } %>
+      </div>
+      <%- partial('_partial/footer', null, {cache: !config.relative_link}) %>
+    <%- partial('_partial/after-footer') %>
+  </div>
+</body>
+</html>

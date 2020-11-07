@@ -1,0 +1,40 @@
+Manifest-Version: 1.0
+Class-Path: spring-boot-devtools-1.5.8.RELEASE.jar spring-beans-4.3.12
+ .RELEASE.jar hibernate-validator-5.3.5.Final.jar lucene-misc-5.5.4.ja
+ r spring-aop-4.3.12.RELEASE.jar android-json-0.0.20131108.vaadin1.jar
+  spring-boot-starter-logging-1.5.8.RELEASE.jar slf4j-api-1.7.25.jar h
+ ibernate-search-orm-5.6.3.Final.jar log4j-over-slf4j-1.7.25.jar commo
+ ns-lang-2.6.jar commons-lang3-3.6.jar lucene-facet-5.5.4.jar hibernat
+ e-commons-annotations-5.0.1.Final.jar freemarker-2.3.26-incubating.ja
+ r lucene-core-5.5.4.jar classmate-1.3.4.jar snakeyaml-1.17.jar spring
+ -core-4.3.12.RELEASE.jar tomcat-juli-8.5.23.jar spring-jdbc-4.3.12.RE
+ LEASE.jar javax.transaction-api-1.2.jar tomcat-annotations-api-8.5.23
+ .jar commons-text-1.3.jar lucene-join-5.5.4.jar spring-webmvc-4.3.12.
+ RELEASE.jar hibernate-core-5.0.12.Final.jar spring-context-support-4.
+ 3.12.RELEASE.jar javax.mail-1.5.6.jar jackson-core-2.8.10.jar spring-
+ orm-4.3.12.RELEASE.jar hibernate-entitymanager-5.0.12.Final.jar logba
+ ck-classic-1.1.11.jar geronimo-jta_1.1_spec-1.1.1.jar spring-context-
+ 4.3.12.RELEASE.jar spring-boot-starter-tomcat-1.5.8.RELEASE.jar sprin
+ g-expression-4.3.12.RELEASE.jar jackson-databind-2.8.10.jar tomcat-em
+ bed-websocket-8.5.23.jar antlr-2.7.7.jar hibernate-search-engine-5.6.
+ 3.Final.jar spring-data-commons-1.13.8.RELEASE.jar tomcat-embed-core-
+ 8.5.23.jar javassist-3.21.0-GA.jar spring-boot-configuration-processo
+ r-1.5.8.RELEASE.jar spring-boot-starter-mail-1.5.8.RELEASE.jar spring
+ -tx-4.3.12.RELEASE.jar lucene-memory-5.5.4.jar spring-boot-autoconfig
+ ure-1.5.8.RELEASE.jar aspectjweaver-1.8.11.jar jandex-2.0.0.Final.jar
+  mysql-connector-java-5.1.44.jar spring-aspects-4.3.12.RELEASE.jar lo
+ gback-core-1.1.11.jar dom4j-1.6.1.jar lucene-queries-5.5.4.jar valida
+ tion-api-1.1.0.Final.jar jboss-logging-3.3.1.Final.jar spring-boot-st
+ arter-data-jpa-1.5.8.RELEASE.jar javax.servlet-api-3.1.0.jar activati
+ on-1.1.jar spring-boot-starter-web-1.5.8.RELEASE.jar jcl-over-slf4j-1
+ .7.25.jar hibernate-jpa-2.1-api-1.0.0.Final.jar jackson-annotations-2
+ .8.0.jar jul-to-slf4j-1.7.25.jar thumbnailator-0.4.8.jar spring-data-
+ jpa-1.11.8.RELEASE.jar lucene-highlighter-5.5.4.jar tomcat-jdbc-8.5.2
+ 3.jar spring-boot-starter-jdbc-1.5.8.RELEASE.jar tomcat-embed-el-8.5.
+ 23.jar fastjson-1.2.16.jar commons-io-1.3.2.jar spring-boot-starter-1
+ .5.8.RELEASE.jar ehcache-2.10.4.jar spring-boot-1.5.8.RELEASE.jar spr
+ ing-boot-starter-freemarker-1.5.8.RELEASE.jar lucene-analyzers-common
+ -5.5.4.jar lucene-analyzers-smartcn-5.5.4.jar spring-boot-starter-aop
+ -1.5.8.RELEASE.jar jsoup-1.9.2.jar spring-web-4.3.12.RELEASE.jar
+Main-Class: mblog.BootApplication
+

@@ -1,0 +1,93 @@
+<% if (theme.notice.enable) { %>
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id = "noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id = "noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();"  onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    getWeekend();
+    
+    var arr = [1, 2];
+    var bol = arr[Math.floor(Math.random()*arr.length)];
+    if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    }
+    
+    if(bol == 2){
+     //获取疫情数据
+     if($("#YQData").length>0){
+      getYQData();
+     }
+    }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            <% if (theme.countdown.enable) { %>
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            <% } %>
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            <% if (theme.countdown.enable) { %>
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             <% } %>
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+<% } %>
+
+
+

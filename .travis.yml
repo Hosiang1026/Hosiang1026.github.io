@@ -1,0 +1,84 @@
+#设置语言
+language: node_js
+
+#设置相应的版本
+node_js: 13.0.0
+  
+# 缓存不经常更改的内容
+cache:
+    apt: true
+    directories:
+        - node_modules
+
+# 更改时区
+before_install:
+    - export TZ='Asia/Shanghai'
+
+# 安装hexo及插件
+install:
+  # - npm install --ignore-scripts
+  - npm install
+  - npm install hexo-recommended-posts --save
+
+script:
+  #清除
+  - hexo clean
+  #同步语雀文档
+  #- yuque-hexo sync
+
+  #推荐文章
+  - hexo recommend
+
+  #生成相册json
+  - npm install request
+  - node tool.js
+
+  #抓取文章
+  #- npm install sqlite3
+  #- node article.js
+
+  #生成
+  - hexo g
+
+
+# 设置git提交名，邮箱；替换真实token到_config.yml文件，最后depoy部署
+after_script:
+ # GH_REF是最下面配置的仓库地址
+  - git clone https://${GH_REF} .deploy_git
+  - cd .deploy_git
+  - git checkout master
+  - cd ../
+  # 这一步之前的操作是为了保留master分支的提交记录，不然每次git init的话只有1条commit
+  - mv .deploy_git/.git/ ./public/
+  - cd ./public
+  - git init
+  - git config --global user.name "Hosiang1026"
+  - git config --global user.email "hosiang1026@sina.com"
+  - git add .
+  - git commit -m " TravisCI第 $TRAVIS_BUILD_NUMBER 次自动构建发布博客 -`date +"%Y-%m-%d %H:%M"`"
+
+  # Github Pages
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+  - git push --quiet "https://${GH_TOKEN}@${GH_REF}" master:master --tags
+  - git tag v0.$TRAVIS_BUILD_NUMBER -a -m "v0.2020$TRAVIS_BUILD_NUMBER 发布博客成功"
+  
+  # Coding Pages  
+  #- git  config --global  credential.helper  store
+  #- git push --force --quiet "https://${CO_TOKEN}@${CO_REF}" master:master
+  #- git push --quiet "https://${CO_TOKEN}@${CO_REF}" master:master --tags
+
+
+# 指定博客源码分支
+branches:
+  only:
+    - source
+
+
+# 配置Webhook通知
+notifications:
+  webhooks: https://oapi.dingtalk.com/robot/send?access_token=efd3fcd86a9e3e8b69c1db1e67284191826be28b775a6e60e7453755a9ae9289
+  on_success: change 
+  on_failure: always 
+  on_start:   change
+  on_cancel:  always
+  on_error:   always 

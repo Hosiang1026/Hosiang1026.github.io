@@ -1,0 +1,261 @@
+# hexo-theme-miho
+# https://github.com/wongminho/hexo-theme-miho
+#http://demo.demohuo.cn/3378/?id=91451362
+#url:http://y.wrdan.com
+
+# Favicon of your site | 网站icon
+favicon: /images/favicon.ico
+
+# Header
+
+# Keywords of your site | 网站关键字
+keywords: 分享技术经验与交流
+# Head headline | 头部标题
+header_title: 狂欢马克思
+# Head description | 头部描述
+header_description: 专注Web开发
+# Link to your logo | logo地址
+logo: ../images/logo.png
+# Link to your banner_img | 首页banner图地址
+#banner_img:
+# Menu setting | 菜单设置
+#  name:                  Font c icon | Font Awesome 图标
+#    title: Home          Title | 标题
+#    url: //minhow.com    Url, absolute or relative path | 链接，绝对或相对路径
+#    target: true         Whether to jump out | 是否跳出
+menu:
+
+#  star:
+#    title: 首页
+#    url: https://www.hosiang.ml
+#    target: false
+
+  home:
+    title: 主页
+    url: /
+    target: false
+
+  archive:
+    title: 归档
+    url: /archives
+    target: false
+
+  #columns:
+  #  title: 笔记
+  #  url: /gitbook
+  #  target: false
+
+  #list-alt:
+  #  title: 项目
+  #  url: /project
+  #  target: false
+
+  jsfiddle:
+    title: 云盘
+    url: http://hosiang.ccaeo.com/skydrive
+    target: true
+
+  film:
+    title: 影视
+    url: http://hosiang.ccaeo.com
+    target: true
+
+  music:
+    title: 音乐
+    url: /music
+    target: false
+    
+  picture-o:
+    title: 相册
+    url: /photo
+    target: false
+
+  envira:
+    title: 收藏
+    url: /collection
+    target: false
+
+  user:
+    title: 关于
+    url: /about
+    target: false
+
+# Social setting, use to display social information | 社交设置，用来展示社交信息
+#  name:                  Font Awesome icon | Font Awesome 图标
+#    title: Home          Icon title | 图标标题
+#    url: //minhow.com    Url, absolute or relative path | 链接，绝对或相对路径
+#    target: true         Whether to jump out | 是否跳出
+social:
+
+  github:
+    title: Github
+    url: //github.com/Hosiang1026
+    target: true
+  qq:
+    title: QQ
+    url: //wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes
+    target: true
+  weibo:
+    title: Weibo
+    url: //www.weibo.com/haoxiang969
+    target: true
+    
+  #twitter
+  #weixin:
+  #snapchat:
+  #telegram:
+  #envelope-o:
+  #facebook:
+  #google:
+  #linkedin:
+
+# Content
+
+# Excerpt length | 摘录长度
+excerpt_length: 190
+# Excerpt link | 摘录链接
+excerpt_link: 全文>>
+# New window open link | 新窗口打开文章
+open_new_link: false
+# Article default cover picture，size：350*150 | 文章默认封面图，尺寸：350*150
+cover_picture: images/deafult.jpg
+# Open background particles | 开启背景粒子
+open_bg_particle: true
+# Open animation in homepage and head | 开启主页及头部动画
+open_animation: true
+
+# Article
+
+# Open toc | 是否开启toc
+toc: true
+# Open share | 是否开启分享
+share: true
+
+# Style customization | 样式定制
+style:
+  # Main color tone | 主色调
+  main_color: '#0cc'
+
+# Reward | 打赏
+
+reward:
+  # 0-close, 1-All articles are rewarding, 2-Article's md file has reward:true attribute, only reward
+  # 0-关闭, 1-所有文章均有打赏, 2-文章的md文件里有reward:true属性，才有打赏
+  status: 1
+  # 标题
+  title: 喜欢就赞赏一下呗！
+  # 三码合一，关闭设为 false
+  threepay: images/threepay_code.jpg
+  # 微信，关闭设为 false
+  wechat: false
+  #wechat: images/wechat_code.jpg
+  # 支付宝，关闭设为 false
+  alipay: false
+  #alipay: images/alipay_code.jpg
+
+# Comments | 评论
+
+#Gitment Settings
+gitment:
+  #启用标记
+  enable: false
+  #Github 用户名
+  owner: Hosiang1026
+  #储存评论issue的github仓库名
+  repo: bolg-comment
+  # 输入clientID和clientSecret
+  clientID: dc1d51962171e24b7e0a
+  clientSecret: 3c24b37526a0fd9c634a945208f7029d3680ca8a
+
+#Gitalk Settings
+gitalk:
+  #启用标记
+  enable: true
+  #Github 用户名
+  owner: Hosiang1026
+  #Github 用户名
+  admin: Hosiang1026
+  #储存评论issue的github仓库名
+  repo: bolg-comment
+  #clientID和clientSecret
+  clientID: 37a2dd4473e8970cecc2
+  clientSecret: e30efa17d86d9de4f4ab810872dc62a7b2e7e634
+
+# Valine Settings
+valine:
+  #启用标记
+  enable: false
+  #appid和appkey
+  appid: dpIQ0vAoX0LY0dz3fR88xMXX-gzGzoHsz
+  appkey: OKgph3MWEjfQ85wb7Nx2m9Rv
+
+#畅言设置
+changyan:
+  #启用标记
+  enable: false
+  #appid和appkey
+  appid: cytlwB3Xl
+  appkey: a65a02ef5409e89e3ef56d454eb35cc7
+
+# 友言设置
+youyan:
+  #启用标记
+  enable: false
+  #输入id
+  id: false
+  disqus:
+
+#网易云设置
+wangyiyun:
+  #启用标记
+  enable: false
+  url:
+  sourceId:
+  productKey:
+
+#节日倒计时
+countdown:
+  #启用标记
+  enable: true
+  #生日祝福语
+  birth_content: 愿：时光能缓、美好如初、生日快乐
+  #国庆祝福语
+  anniversary_content: 愿：繁荣昌盛、国泰民安、喜乐安宁
+  #春节祝福语
+  lunar_content: 新春快乐、大吉大利
+  #新年祝福语
+  newyear_content: 元旦快乐、岁岁平安
+
+# 主页公告
+notice:
+  #启用标记
+  enable: true
+  #移动端-公告内容
+  app_content: 本站的PC端软件和移动端APP，请前往【收藏】下载使用!
+  #电脑端-公告内容
+  pc_content: 本站的PC端软件和移动端APP，请前往【收藏】下载使用!
+
+
+# Analytics | 分析
+# 站长分析，输入站点id
+cnzz_analytics: false
+#360seo，输入key值
+qihu_seo: false
+#qihu_seo: ffd78767eb940802ce924fb44de8b7ee
+#百度seo自动推送
+baidu_seo: true
+# 百度分析，输入key值
+baidu_analytics: 3cd8fa109426bf3f10bd5c362175bace
+# google analytics | google分析
+google_analytics: UA-111653724-1
+
+# Footer
+# Access statistics | “不蒜子”访问量统计
+access_counter:
+  on: true
+  site_uv: 总访客数：
+  site_pv: 总访问量：
+  word_number: 总字数：
+
+# Copyright Information | 版权信息
+copyright: 2017 Howe Hsiang

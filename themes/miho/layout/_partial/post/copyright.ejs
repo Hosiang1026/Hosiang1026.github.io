@@ -1,0 +1,20 @@
+<div class="post-copyright">
+    <div class="content">
+        <% if (post.title){ %>
+          <p>本文标题： <%= post.title %></p>
+        <% } %>
+        <% if (post.author ){ %>
+          <p>本文作者： <%= post.author %></p>
+        <% } %>
+        <p>发布时间： <%= post.date.format("YYYY年MM月DD日 HH:mm") %></p>
+        <p>最后更新： <%= post.updated.format("YYYY年MM月DD日 HH:mm") %></p>
+        <p>原始链接： <a class="post-url" href="<%- url_for(post.path) %>" title="<%= post.title %>"><%= post.permalink %></a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="<%- config.url %>">
+                <img src="<%- url_for(theme.logo) %>" alt="<%- config.author %>">
+                <%- config.author %>
+            </a>
+        </footer>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control"content="no-cache"/>
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0" />
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y" />
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV"/>
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"/> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be"/>
+  <%
+  var title = page.title;
+
+  if (is_archive()){
+    title = __('archive_a');
+
+    if (is_month()){
+      title += ': ' + page.year + '/' + page.month;
+    } else if (is_year()){
+      title += ': ' + page.year;
+    }
+  } else if (is_category()){
+    title = __('category') + ': ' + page.category;
+  } else if (is_tag()){
+    title = __('tag') + ': ' + page.tag;
+  }
+  %>
+  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  <% if (theme.keywords){ %>
+    <meta name="keywords" content="<%- theme.keywords %>" />
+  <% } %>
+  <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
+  <% if (theme.rss){ %>
+    <link rel="alternate" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
+  <% } %>
+  <% if (theme.favicon){ %>
+    <link rel="icon" href="<%- theme.favicon %>">
+  <% } %>
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <%- css('css/style') %>
+  <%- partial('plugins/analytics/baidu-analytics') %>
+  <%- partial('plugins/analytics/cnzz-analytics') %>
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <%- partial('plugins/seo/baidu-seo') %>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>

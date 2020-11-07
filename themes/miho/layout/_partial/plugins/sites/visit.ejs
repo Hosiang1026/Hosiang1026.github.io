@@ -1,0 +1,12 @@
+<% if (theme.access_counter.on) { %>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+     <span class="post-count">
+        <%- theme.access_counter.word_number %><span><%= totalcount(site) %></span>
+     </span>
+        <%- theme.access_counter.site_uv %><span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        <%- theme.access_counter.site_pv %><span id="busuanzi_value_site_pv"></span>
+    </span>
+  </br>
+<% } %>

@@ -182,7 +182,7 @@ deploy:
 - type: git
   repo:
       github: git@github.com:Hosiang1026/Hosiang1026.github.io.git
-      coding: git@e.coding.net:Hosiang1026/Hosiang1026.coding.me.git
+      #coding: git@e.coding.net:Hosiang1026/Hosiang1026.coding.me.git
   branch: master
   message: site updated at {{ now('YYYY-MM-DD HH:mm:ss') }}
 

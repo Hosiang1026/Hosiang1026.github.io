@@ -26,13 +26,13 @@
   
     <meta name="keywords" content="分享技术经验与交流">
   
-  <meta name="description" content="&amp;emsp;&amp;emsp;Sharding的基本思想就要把一个数据库切分成多个部分放到不同的数据库(server)上，从而缓解单一数据库的性能问题。">
+  <meta name="description" content="&amp;emsp;&amp;emsp;分库分表就是为了解决由于数据量过大而导致数据库性能降低的问题，将原来独立的数据库拆分成若干数据库组成 ，将数据大表拆分成若干数据表组成，使得单一数据库、单一数据表的数据量变小，从而达到提升数据库性能的目的。">
 <meta name="keywords" content="Database">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Database系列-分库分表最佳实践-实战篇">
 <meta property="og:url" content="https://www.hosiang.cn/22a741ff/index.html">
 <meta property="og:site_name" content="狂欢马克思">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;Sharding的基本思想就要把一个数据库切分成多个部分放到不同的数据库(server)上，从而缓解单一数据库的性能问题。">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;分库分表就是为了解决由于数据量过大而导致数据库性能降低的问题，将原来独立的数据库拆分成若干数据库组成 ，将数据大表拆分成若干数据表组成，使得单一数据库、单一数据表的数据量变小，从而达到提升数据库性能的目的。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.hosiang.cn/photo/album/image/image_124.png">
 <meta property="og:image" content="https://www.hosiang.cn/photo/album/image/image_127.png">
@@ -42,10 +42,10 @@
 <meta property="og:image" content="https://www.hosiang.cn/photo/album/image/image_131.png">
 <meta property="og:image" content="https://www.hosiang.cn/photo/album/image/image_132.png">
 <meta property="og:image" content="https://www.hosiang.cn/photo/album/image/image_133.png">
-<meta property="og:updated_time" content="2020-11-07T04:38:50.540Z">
+<meta property="og:updated_time" content="2020-11-07T04:42:08.278Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Database系列-分库分表最佳实践-实战篇">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;Sharding的基本思想就要把一个数据库切分成多个部分放到不同的数据库(server)上，从而缓解单一数据库的性能问题。">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;分库分表就是为了解决由于数据量过大而导致数据库性能降低的问题，将原来独立的数据库拆分成若干数据库组成 ，将数据大表拆分成若干数据表组成，使得单一数据库、单一数据表的数据量变小，从而达到提升数据库性能的目的。">
 <meta name="twitter:image" content="https://www.hosiang.cn/photo/album/image/image_124.png">
   
   
@@ -338,7 +338,7 @@ console.log=function(){};
           <span id="busuanzi_value_page_pv"></span>
         </li>
         <li>
-        <span class="post-count">字数统计: 2.5k字</span>
+        <span class="post-count">字数统计: 2.6k字</span>
         </li>
         <li>
         <span class="post-count">阅读时长: 8分钟</span>
@@ -353,7 +353,7 @@ console.log=function(){};
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <p>&emsp;&emsp;Sharding的基本思想就要把一个数据库切分成多个部分放到不同的数据库(server)上，从而缓解单一数据库的性能问题。</p>
+            <p>&emsp;&emsp;分库分表就是为了解决由于数据量过大而导致数据库性能降低的问题，将原来独立的数据库拆分成若干数据库组成 ，将数据大表拆分成若干数据表组成，使得单一数据库、单一数据表的数据量变小，从而达到提升数据库性能的目的。</p>
 <a id="more"></a>
 <p><img src="/photo/album/image/image_124.png" alt="Database" title="后端开发系列-分库分表最佳实践-实战篇"></p>
 <hr>
@@ -453,7 +453,7 @@ console.log=function(){};
           <p>本文作者： 狂欢马克思</p>
         
         <p>发布时间： 2020年10月01日 00:00</p>
-        <p>最后更新： 2020年11月07日 12:38</p>
+        <p>最后更新： 2020年11月07日 12:42</p>
         <p>原始链接： <a class="post-url" href="/22a741ff/" title="Database系列-分库分表最佳实践-实战篇">https://www.hosiang.cn/22a741ff/</a></p>
         <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
         <footer>
@@ -520,7 +520,7 @@ console.log=function(){};
             </a>
           </li>
             <li>
-                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/22a741ff/&title=《Database系列-分库分表最佳实践-实战篇》 — 狂欢马克思&source=&emsp;&emsp;Sharding的基本思想就要把一个数据库切分成多个部分放到不同的数据库(server)上，从而缓解单一数据库的性能问题。" data-title="QQ" rel="external nofollow noopener noreferrer">
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/22a741ff/&title=《Database系列-分库分表最佳实践-实战篇》 — 狂欢马克思&source=&emsp;&emsp;分库分表就是为了解决由于数据量过大而导致数据库性能降低的问题，将原来独立的数据库拆分成若干数据库组成 ，将数据大表拆分成若干数据表..." data-title="QQ" rel="external nofollow noopener noreferrer">
                     <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
                 </a>
             </li>
@@ -625,7 +625,7 @@ gitalk.render('gitalk');
         
     <span id="busuanzi_container_site_uv" style="display:none">
      <span class="post-count">
-        总字数：<span>53.8k</span>
+        总字数：<span>54k</span>
      </span>
         总访客数：<span id="busuanzi_value_site_uv"></span>
     </span>

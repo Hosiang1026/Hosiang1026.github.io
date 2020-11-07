@@ -26,21 +26,21 @@
   
     <meta name="keywords" content="分享技术经验与交流">
   
-  <meta name="description" content="&amp;emsp;&amp;emsp;Sharding的基本思想就要把一个数据库切分成多个部分放到不同的数据库(server)上，从而缓解单一数据库的性能问题。">
+  <meta name="description" content="&amp;emsp;&amp;emsp;分库分表就是为了解决由于数据量过大而导致数据库性能降低的问题，将原来独立的数据库拆分成若干数据库组成 ，将数据大表拆分成若干数据表组成，使得单一数据库、单一数据表的数据量变小，从而达到提升数据库性能的目的。">
 <meta name="keywords" content="Database">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Database系列-常用的分库分表中间件-基础篇">
 <meta property="og:url" content="https://www.hosiang.cn/5c15b7d3/index.html">
 <meta property="og:site_name" content="狂欢马克思">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;Sharding的基本思想就要把一个数据库切分成多个部分放到不同的数据库(server)上，从而缓解单一数据库的性能问题。">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;分库分表就是为了解决由于数据量过大而导致数据库性能降低的问题，将原来独立的数据库拆分成若干数据库组成 ，将数据大表拆分成若干数据表组成，使得单一数据库、单一数据表的数据量变小，从而达到提升数据库性能的目的。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.hosiang.cn/photo/album/image/image_124.png">
 <meta property="og:image" content="https://www.hosiang.cn/photo/album/image/image_125.png">
 <meta property="og:image" content="https://www.hosiang.cn/photo/album/image/image_126.png">
-<meta property="og:updated_time" content="2020-11-07T04:38:30.956Z">
+<meta property="og:updated_time" content="2020-11-07T04:42:03.299Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Database系列-常用的分库分表中间件-基础篇">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;Sharding的基本思想就要把一个数据库切分成多个部分放到不同的数据库(server)上，从而缓解单一数据库的性能问题。">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;分库分表就是为了解决由于数据量过大而导致数据库性能降低的问题，将原来独立的数据库拆分成若干数据库组成 ，将数据大表拆分成若干数据表组成，使得单一数据库、单一数据表的数据量变小，从而达到提升数据库性能的目的。">
 <meta name="twitter:image" content="https://www.hosiang.cn/photo/album/image/image_124.png">
   
   
@@ -333,7 +333,7 @@ console.log=function(){};
           <span id="busuanzi_value_page_pv"></span>
         </li>
         <li>
-        <span class="post-count">字数统计: 4.5k字</span>
+        <span class="post-count">字数统计: 4.6k字</span>
         </li>
         <li>
         <span class="post-count">阅读时长: 15分钟</span>
@@ -348,11 +348,11 @@ console.log=function(){};
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <p>&emsp;&emsp;Sharding的基本思想就要把一个数据库切分成多个部分放到不同的数据库(server)上，从而缓解单一数据库的性能问题。</p>
+            <p>&emsp;&emsp;分库分表就是为了解决由于数据量过大而导致数据库性能降低的问题，将原来独立的数据库拆分成若干数据库组成 ，将数据大表拆分成若干数据表组成，使得单一数据库、单一数据表的数据量变小，从而达到提升数据库性能的目的。</p>
 <a id="more"></a>
 <p><img src="/photo/album/image/image_124.png" alt="Database" title="后端开发系列-常用的分库分表中间件-基础篇"></p>
 <hr>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&emsp;&emsp;不太严格的讲，对于海量数据的数据库，如果是因为表多而数据多，这时候适合使用垂直切分，即把关系紧密（比如同一模块）的表切分出来放在一个server上。如果表并不多，但每张表的数据非常多，这时候适合水平切分，即把表的数据按某种规则（比如按ID散列）切分到多个数据库(server)上。当然，现实中更多是这两种情况混杂在一起，这时候需要根据实际情况做出选择，也可能会综合使用垂直与水平切分，从而将原有数据库切分成类似矩阵一样可以无限扩充的数据库(server)阵列。需要特别说明的是：当同时进行垂直和水平切分时，切分策略会发生一些微妙的变化。比如：在只考虑垂直切分的时候，被划分到一起的表之间可以保持任意的关联关系，因此你可以按“功能模块”划分表格，但是一旦引入水平切分之后，表间关联关系就会受到很大的制约，通常只能允许一个主表（以该表ID进行散列的表）和其多个次表之间保留关联关系，也就是说：当同时进行垂直和水平切分时，在垂直方向上的切分将不再以“功能模块”进行划分，而是需要更加细粒度的垂直切分，而这个粒度与领域驱动设计中的“聚合”概念不谋而合，甚至可以说是完全一致，每个shard的主表正是一个聚合中的聚合根！这样切分下来你会发现数据库分被切分地过于分散了（shard的数量会比较多，但是shard里的表却不多），为了避免管理过多的数据源，充分利用每一个数据库服务器的资源，可以考虑将业务上相近，并且具有相近数据增长速率（主表数据量在同一数量级上）的两个或多个shard放到同一个数据源里，每个shard依然是独立的，它们有各自的主表，并使用各自主表ID进行散列，不同的只是它们的散列取模（即节点数量）必需是一致的.</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&emsp;&emsp;Sharding的基本思想就要把一个数据库切分成多个部分放到不同的数据库(server)上，从而缓解单一数据库的性能问题。不太严格的讲，对于海量数据的数据库，如果是因为表多而数据多，这时候适合使用垂直切分，即把关系紧密（比如同一模块）的表切分出来放在一个server上。如果表并不多，但每张表的数据非常多，这时候适合水平切分，即把表的数据按某种规则（比如按ID散列）切分到多个数据库(server)上。当然，现实中更多是这两种情况混杂在一起，这时候需要根据实际情况做出选择，也可能会综合使用垂直与水平切分，从而将原有数据库切分成类似矩阵一样可以无限扩充的数据库(server)阵列。需要特别说明的是：当同时进行垂直和水平切分时，切分策略会发生一些微妙的变化。比如：在只考虑垂直切分的时候，被划分到一起的表之间可以保持任意的关联关系，因此你可以按“功能模块”划分表格，但是一旦引入水平切分之后，表间关联关系就会受到很大的制约，通常只能允许一个主表（以该表ID进行散列的表）和其多个次表之间保留关联关系，也就是说：当同时进行垂直和水平切分时，在垂直方向上的切分将不再以“功能模块”进行划分，而是需要更加细粒度的垂直切分，而这个粒度与领域驱动设计中的“聚合”概念不谋而合，甚至可以说是完全一致，每个shard的主表正是一个聚合中的聚合根！这样切分下来你会发现数据库分被切分地过于分散了（shard的数量会比较多，但是shard里的表却不多），为了避免管理过多的数据源，充分利用每一个数据库服务器的资源，可以考虑将业务上相近，并且具有相近数据增长速率（主表数据量在同一数量级上）的两个或多个shard放到同一个数据源里，每个shard依然是独立的，它们有各自的主表，并使用各自主表ID进行散列，不同的只是它们的散列取模（即节点数量）必需是一致的.</p>
 <h2 id="常用的分库分表中间件"><a href="#常用的分库分表中间件" class="headerlink" title="常用的分库分表中间件"></a>常用的分库分表中间件</h2><h4 id="简单易用的组件："><a href="#简单易用的组件：" class="headerlink" title="简单易用的组件："></a>简单易用的组件：</h4><ul>
 <li><a href="https://github.com/dangdangdotcom/sharding-jdbc" rel="external nofollow noopener noreferrer" target="_blank">当当sharding-jdbc</a></li>
 <li><a href="https://github.com/baihui212/tsharding" rel="external nofollow noopener noreferrer" target="_blank">蘑菇街TSharding</a></li>
@@ -440,7 +440,7 @@ console.log=function(){};
           <p>本文作者： 狂欢马克思</p>
         
         <p>发布时间： 2020年10月01日 00:00</p>
-        <p>最后更新： 2020年11月07日 12:38</p>
+        <p>最后更新： 2020年11月07日 12:42</p>
         <p>原始链接： <a class="post-url" href="/5c15b7d3/" title="Database系列-常用的分库分表中间件-基础篇">https://www.hosiang.cn/5c15b7d3/</a></p>
         <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
         <footer>
@@ -507,7 +507,7 @@ console.log=function(){};
             </a>
           </li>
             <li>
-                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/5c15b7d3/&title=《Database系列-常用的分库分表中间件-基础篇》 — 狂欢马克思&source=&emsp;&emsp;Sharding的基本思想就要把一个数据库切分成多个部分放到不同的数据库(server)上，从而缓解单一数据库的性能问题。" data-title="QQ" rel="external nofollow noopener noreferrer">
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/5c15b7d3/&title=《Database系列-常用的分库分表中间件-基础篇》 — 狂欢马克思&source=&emsp;&emsp;分库分表就是为了解决由于数据量过大而导致数据库性能降低的问题，将原来独立的数据库拆分成若干数据库组成 ，将数据大表拆分成若干数据表..." data-title="QQ" rel="external nofollow noopener noreferrer">
                     <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
                 </a>
             </li>
@@ -602,7 +602,7 @@ gitalk.render('gitalk');
         
     <span id="busuanzi_container_site_uv" style="display:none">
      <span class="post-count">
-        总字数：<span>53.8k</span>
+        总字数：<span>54k</span>
      </span>
         总访客数：<span id="busuanzi_value_site_uv"></span>
     </span>

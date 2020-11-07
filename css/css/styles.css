@@ -1,0 +1,246 @@
+/**
+ * BlankPlate | Yet another HTML5 Starter Kit
+ *
+ * BlankPlate Main stylesheet
+ *
+ * @copyright	Copyright 2012, Dimitris Krestos
+ * @license		Apache License, Version 2.0 (http://www.opensource.org/licenses/apache2.0.php)
+ * @link		http://vdw.staytuned.gr/html5-starter-kit-blankplate/
+ * @package		BlankPlate
+ * @version		v1.2.3
+ */
+
+/**
+ * WORLD
+ *
+ * -------------------------------------------------------------------------------------------------
+ */
+BODY {
+	/*font-family: "Open Sans", helvetica, arial, sans-serif;*/
+}
+
+H2 {
+	font-weight: 300;
+}
+
+SMALL {
+	font-size: 10px;
+}
+
+/* Clear fix */
+.clear {
+	clear: both;
+	display: block;
+	float: none;
+	font-size: 1px;
+	height: 0px;
+	line-height: 0
+}
+.mt20{margin-top: 20px;}
+/**
+ * BODY
+ * Your content rules
+ * -------------------------------------------------------------------------------------------------
+ */
+.separator {
+	border-bottom: 1px solid #E5E5E5;
+	color: #d4d5e2;
+	font-size: 16px;
+	font-weight: 700;
+	text-align: center;
+	text-transform: uppercase;
+	line-height: 80px;
+	letter-spacing: 2px;
+	width: 100%;
+}
+
+SECTION#body {
+	background: #a0cac0;
+}
+
+SECTION#body H2 {
+	color: white;
+	font-size: 18px;
+	font-weight: 300;
+	letter-spacing: 1px;
+	line-height: 34px;
+	margin-top: 2rem;
+}
+
+SECTION {
+	background: #F1F1F1;
+}
+
+ARTICLE {
+	padding: 30px 0 20px;
+}
+
+ARTICLE H4 {
+	color: #E95855;
+	margin-bottom: 10px;
+}
+
+PRE {
+	max-width: 400px;
+}
+
+/**
+ * TABS
+ *
+ * -------------------------------------------------------------------------------------------------
+ */
+.tabs > DIV {
+	/*border-top: 1px solid #c7c7c7*/
+	margin-top: 10px;
+	background: white !important;
+	/*border-bottom: 4px solid #E95855 !important;*/
+}
+
+.tabs > DIV SPAN {
+	border-bottom: 4px solid #E5E5E5 !important;
+	color: #ccc !important;
+	font-weight: 300;
+	line-height: 186px !important;
+	display: block;
+	text-align: center;
+	font-size: 24px;
+}
+
+.tabs UL.horizontal {
+	list-style: none outside none;
+	margin: 0;
+}
+
+.tabs LI {
+	background: white;
+	border-bottom: 4px solid #E5E5E5;
+	margin: 0 10px 0 0;
+	display: inline-block;
+}
+
+.tabs A {
+	color: #ccc;
+	display: block;
+	font-size: 18px;
+	font-weight: 300;
+	padding: 14px 24px;
+	text-decoration: none;
+}
+
+.tabs LI:hover {
+	background: #a0cac0;
+	border-bottom: 4px solid #68a697;
+}
+
+.tabs LI:hover A {
+	color: white;
+}
+
+.active {
+	background: #a0cac0 !important;
+	border-bottom: 4px solid #68a697 !important;
+}
+
+.active A {
+	color: white !important;
+}
+
+.link {
+	color: white;
+	font-size: 14px;
+	font-weight: 300;
+	letter-spacing: 1px;
+	line-height: 48px;
+	margin-top: 20px;
+	margin-left: 6px;
+	text-decoration: none;
+}
+
+.link:hover {
+	text-decoration: underline;
+	color: inherit;
+}
+
+.anchorLink {
+	border-bottom: 1px dashed white;
+	color: white;
+	text-decoration: none;
+}
+
+.anchorLink:hover {
+	text-decoration: none;
+	border-bottom: none;
+	color: inherit;
+}
+
+.screenshot {
+	position: absolute;
+	clip: rect(0 0 0 0);
+}
+
+.prev,
+.next {
+	background: white !important;
+	color: #a0cac0 !important;
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.prev:hover,
+.next:hover {
+	background: #a0cac0 !important;
+	color: white !important;
+}
+
+.logo {
+	margin-top: -6px;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+.button {
+	background-color: #a0cac0;
+	border: none;
+	border-bottom: 4px solid #68a697;
+	color: #FFFFFF;
+	border-radius: 0;
+	font-size: 14px;
+	letter-spacing: 2px;
+	height: 48px;
+	line-height: 48px;
+}
+
+.button:hover {
+	background: #93b7ae;
+	color: #FFF;
+	border-bottom-color: #68a697;
+}
+
+
+#notice {
+    color: #000;
+    z-index: 4999;
+    bottom: 0;
+    left: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 100%;
+    height: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#notice span {
+    text-align: center;
+    height: 70px;
+    line-height: 70px;
+    font-family: 'Microsoft YaHei';
+    font-weight: bold;
+    font-size: 1.5em;
+    text-shadow: 1px 1px 1px #CCC, 2px 2px 2px #CCC, 3px 3px 3px #444;
+}
+
+#notice.show {
+    height: 70px;
+}

@@ -1,0 +1,719 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>Web系列-EasyUI部分问题总结-技巧篇 | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;本篇文章，EasyUI部分问题总结，有需要的可以参考。">
+<meta name="keywords" content="EasyUI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web系列-EasyUI部分问题总结-技巧篇">
+<meta property="og:url" content="https://www.hosiang.cn/e6460db3/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;本篇文章，EasyUI部分问题总结，有需要的可以参考。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.hosiang.cn/images/gAhSjg.jpg">
+<meta property="og:updated_time" content="2020-11-07T02:46:36.178Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web系列-EasyUI部分问题总结-技巧篇">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;本篇文章，EasyUI部分问题总结，有需要的可以参考。">
+<meta name="twitter:image" content="https://www.hosiang.cn/images/gAhSjg.jpg">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="http://hosiang.ccaeo.com/skydrive " rel="external nofollow noopener noreferrer" target="_blank">
+                        <i class="fa fa-jsfiddle"></i>
+                        <span>云盘</span>
+                    </a>
+                    
+                    <a href="http://hosiang.ccaeo.com " rel="external nofollow noopener noreferrer" target="_blank">
+                        <i class="fa fa-film"></i>
+                        <span>影视</span>
+                    </a>
+                    
+                    <a href="/music " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    getWeekend();
+    
+    var arr = [1, 2];
+    var bol = arr[Math.floor(Math.random()*arr.length)];
+    if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    }
+    
+    if(bol == 2){
+     //获取疫情数据
+     if($("#YQData").length>0){
+      getYQData();
+     }
+    }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!-- <script id="ilt" src=/player/js/player.js></script> -->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-web-002-20190101" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Web系列-EasyUI部分问题总结-技巧篇
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/前端开发/">前端开发</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2019-01-01
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 2.2k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 11分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;本篇文章，EasyUI部分问题总结，有需要的可以参考。</p>
+<a id="more"></a>
+<p><img src="/images/gAhSjg.jpg" alt="EasyUI" title="EasyUI部分问题总结-技巧篇"></p>
+<h3 id="一、输入框处理"><a href="#一、输入框处理" class="headerlink" title="一、输入框处理"></a>一、输入框处理</h3><h4 id="1-1-四舍五入精度丢失"><a href="#1-1-四舍五入精度丢失" class="headerlink" title="1.1 四舍五入精度丢失"></a>1.1 四舍五入精度丢失</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 页面 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"query_ipt font_sz12 font_clr66 mg_r10"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>调账金额<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"easyui-numberbox"</span> <span class="attr">data-options</span>=<span class="string">"max:999999999"</span>  <span class="attr">id</span>=<span class="string">"adjustAmountJs"</span> <span class="attr">name</span>=<span class="string">"adjustAmount"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 页面JS</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">     <span class="comment">//重写Number.toFixed()方法</span></span><br><span class="line">     <span class="comment">//NumberBox指定小数位数有时候不能正常的四舍五入解决办法</span></span><br><span class="line">     $(<span class="string">"#adjustAmountJs"</span>).numberbox(&#123;</span><br><span class="line">           precision: <span class="number">2</span></span><br><span class="line">    &#125;)</span><br><span class="line">	</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//在Number的原型上重写toFixed方法</span></span><br><span class="line"><span class="built_in">Number</span>.prototype.toFixed = <span class="function"><span class="keyword">function</span> (<span class="params">s</span>) </span>&#123;  </span><br><span class="line">    <span class="keyword">var</span> Dight = <span class="built_in">Math</span>.pow(<span class="number">10</span>,s);</span><br><span class="line">    <span class="comment">//判断是否为正数</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">Number</span>(<span class="keyword">this</span>)&gt;<span class="number">0</span>)&#123;</span><br><span class="line">	   <span class="keyword">return</span> <span class="built_in">Math</span>.round(numMulti(<span class="keyword">this</span>, Dight))/Dight;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="comment">//取绝对值，再转化为负数</span></span><br><span class="line">		<span class="keyword">var</span> num = <span class="built_in">Math</span>.round(numMulti(<span class="built_in">Math</span>.abs(<span class="keyword">this</span>), Dight))/Dight;</span><br><span class="line">		<span class="keyword">return</span> -num;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment">  * 乘法运算，避免数据相乘小数点后产生多位数和计算精度损失。 </span></span><br><span class="line"><span class="comment">  * </span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param </span>num1被乘数 | num2乘数 </span></span><br><span class="line"><span class="comment">  */</span> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">numMulti</span>(<span class="params">num1, num2</span>) </span>&#123; </span><br><span class="line">	<span class="keyword">var</span> baseNum = <span class="number">0</span>; </span><br><span class="line">	<span class="keyword">try</span> &#123; </span><br><span class="line">	baseNum += num1.toString().split(<span class="string">"."</span>)[<span class="number">1</span>].length; </span><br><span class="line">	&#125; <span class="keyword">catch</span> (e) &#123; </span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">try</span> &#123; </span><br><span class="line">	baseNum += num2.toString().split(<span class="string">"."</span>)[<span class="number">1</span>].length; </span><br><span class="line">	&#125; <span class="keyword">catch</span> (e) &#123; </span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">Number</span>(num1.toString().replace(<span class="string">"."</span>, <span class="string">""</span>)) * <span class="built_in">Number</span>(num2.toString().replace(<span class="string">"."</span>, <span class="string">""</span>)) / <span class="built_in">Math</span>.pow(<span class="number">10</span>, baseNum); </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-科学计数法转化法"><a href="#1-2-科学计数法转化法" class="headerlink" title="1.2 科学计数法转化法"></a>1.2 科学计数法转化法</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 页面 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"query_ipt font_sz12 font_clr66 mg_r10"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"font_clred font_sz14"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">span</span>&gt;</span>价格/天<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"easyui-validatebox"</span> <span class="attr">id</span>=<span class="string">"npriceUpd"</span> <span class="attr">name</span>=<span class="string">"nprice"</span> <span class="attr">maxlength</span>=<span class="string">"12"</span> <span class="attr">onchange</span>=<span class="string">"calculateNyingshoumny()"</span>/&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  		</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"query_ipt font_sz12 font_clr66 mg_r10"</span> &gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"font_clred font_sz14"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">span</span>&gt;</span>天数<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">input</span>  <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"easyui-validatebox"</span><span class="attr">id</span>=<span class="string">"idaynumUpd"</span> <span class="attr">name</span>=<span class="string">"idaynum"</span> <span class="attr">maxlength</span>=<span class="string">"28"</span> <span class="attr">onchange</span>=<span class="string">"calculateNyingshoumny()"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"query_ipt font_sz12 font_clr66 mg_r10"</span> &gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">span</span>&gt;</span>应收金额<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"easyui-validatebox"</span> <span class="attr">id</span>=<span class="string">"nyingshoumnyUpd"</span> <span class="attr">name</span>=<span class="string">"nyingshoumny"</span> <span class="attr">disabled</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"query_ipt font_sz12 font_clr66 mg_r10"</span> &gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">span</span>&gt;</span>备注<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"easyui-validatebox"</span> <span class="attr">id</span>=<span class="string">"vremarkUpd"</span> <span class="attr">name</span>=<span class="string">"vremark"</span> <span class="attr">maxlength</span>=<span class="string">"20"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 页面JS</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 计算应收金额</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">calculateNyingshoumny</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">var</span> nyingshoumny = <span class="string">''</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//价格/天</span></span><br><span class="line">	<span class="keyword">var</span> nprice = $(<span class="string">'#npriceUpd'</span>).val();</span><br><span class="line">	<span class="comment">//天数</span></span><br><span class="line">	<span class="keyword">var</span> idaynum = $(<span class="string">"#idaynumUpd"</span>).val();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//验证价格/天</span></span><br><span class="line">	<span class="keyword">var</span> npriceFlag = validateNprice(npriceStr);</span><br><span class="line">	<span class="keyword">if</span> (!npriceFlag) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//验证天数</span></span><br><span class="line">	<span class="keyword">var</span> idaynumFlag = validateIdaynum(idaynum);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//验证是否通过</span></span><br><span class="line">	<span class="keyword">if</span> (!(npriceFlag&amp;&amp;idaynumFlag)) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//应收金额计算并赋值显示</span></span><br><span class="line">	nyingshoumny = (<span class="built_in">parseFloat</span>(npriceStr) * <span class="built_in">parseInt</span>(idaynum)).toLocaleString();</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">if</span> (nyingshoumny.indexOf(<span class="string">","</span>) != <span class="number">-1</span> ) &#123;</span><br><span class="line">	    $(<span class="string">"#nyingshoumnyUpd"</span>).val(nyingshoumny.replaceAll(<span class="regexp">/,/</span>,<span class="string">""</span>));</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		$(<span class="string">"#nyingshoumnyUpd"</span>).val(nyingshoumny);	</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 验证价格/天</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">validateNprice</span>(<span class="params">nprice</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//1.验证为空字符串</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="string">""</span> == npriceStr) &#123;</span><br><span class="line">		$.messager.alert(<span class="string">'提示'</span>,<span class="string">"价格/天不可为空，请输入!"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//2.验证为数字</span></span><br><span class="line">	<span class="keyword">var</span> npriceReg =  <span class="regexp">/^\d+(\.\d+)?$/</span>; </span><br><span class="line">	<span class="keyword">if</span>(nprice.match(<span class="literal">null</span> == npriceReg))&#123;</span><br><span class="line">		$.messager.alert(<span class="string">'提示'</span>,<span class="string">"价格/天必须为数字，请重新输入!"</span>);</span><br><span class="line">		$(<span class="string">'#npriceUpd'</span>).val(<span class="string">""</span>);</span><br><span class="line">	     <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	 &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//3.保留两位小数处理</span></span><br><span class="line">	<span class="keyword">var</span> npriceStr = <span class="built_in">eval</span>(nprice).toFixed(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	$(<span class="string">"#npriceUpd"</span>).val(npriceStr);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//4.验证类型和长度</span></span><br><span class="line">	<span class="keyword">var</span> reg =  <span class="regexp">/(?!0+$)^[+-]?\d&#123;0,9&#125;(.\d&#123;1,2&#125;)?$/</span>;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">if</span>(<span class="literal">null</span> == npriceStr.match(reg))&#123;</span><br><span class="line">		$.messager.alert(<span class="string">'提示'</span>,<span class="string">"价格/天必须为正负数且两位小数，整数位不能大于9位，请重新输入!"</span>);</span><br><span class="line">	     <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	 &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 验证天数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">validateIdaynum</span>(<span class="params">idaynum</span>)</span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//1.验证为空字符串</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="string">""</span> == idaynum) &#123;</span><br><span class="line">		$.messager.alert(<span class="string">'提示'</span>,<span class="string">"天数不可为空，请输入!"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125; </span><br><span class="line">	</span><br><span class="line">	<span class="comment">//2.验证为数字</span></span><br><span class="line">	<span class="keyword">var</span> idaynumReg =  <span class="regexp">/^\d+$/g</span>; </span><br><span class="line">	<span class="keyword">if</span>(<span class="literal">null</span> == idaynum.match(idaynumReg))&#123;</span><br><span class="line">		$.messager.alert(<span class="string">'提示'</span>,<span class="string">"天数必须为正整数，请重新输入!"</span>);</span><br><span class="line">		$(<span class="string">'#idaynumUpd'</span>).val(<span class="string">""</span>);</span><br><span class="line">	     <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	 &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//3.验证类型和长度</span></span><br><span class="line">	<span class="keyword">var</span> reg =  <span class="regexp">/^[1-9]\d&#123;0,28&#125;?$/</span>;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">if</span>(<span class="literal">null</span> == idaynum.match(reg))&#123;</span><br><span class="line">		$.messager.alert(<span class="string">'提示'</span>,<span class="string">"天数必须为正整数且长度不能大于28位，请重新输入!"</span>);</span><br><span class="line">	     <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	 &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 保存</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSave</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//获取表单的值</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//价格/天</span></span><br><span class="line">	<span class="keyword">var</span> nprice = $(<span class="string">'#npriceUpd'</span>).val(); </span><br><span class="line">	</span><br><span class="line">	<span class="comment">//天数</span></span><br><span class="line">	<span class="keyword">var</span> idaynum = $(<span class="string">"#idaynumUpd"</span>).val(); </span><br><span class="line">	</span><br><span class="line">	<span class="comment">//应收金额</span></span><br><span class="line">	<span class="keyword">var</span> nyingshoumny = $(<span class="string">"#nyingshoumnyUpd"</span>).val();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 后台验证数据</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountCoachServiceImpl</span> <span class="keyword">implements</span> <span class="title">AccountCoachService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Json <span class="title">verifyAccountCoach</span><span class="params">(FmAccountCoachDto dto)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line"></span><br><span class="line">	Json json = <span class="keyword">new</span> Json();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//天数</span></span><br><span class="line">	String idaynum = dto.getIdaynum();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//价格/天</span></span><br><span class="line">	String nprice = dto.getNprice();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//备注</span></span><br><span class="line">	String vremark = dto.getVremark();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//四舍五入并保留两位小数</span></span><br><span class="line">	BigDecimal bigDecimal = <span class="keyword">new</span> BigDecimal(nprice);  </span><br><span class="line">	BigDecimal npriceDou = bigDecimal.setScale(<span class="number">2</span>, BigDecimal.ROUND_HALF_UP); </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">	<span class="comment">//金额计算处理</span></span><br><span class="line">	BigDecimal nyingshoumny = (<span class="keyword">new</span> BigDecimal(nprice)).multiply(<span class="keyword">new</span> BigDecimal(idaynum));</span><br><span class="line">	DecimalFormat myformat=<span class="keyword">new</span> java.text.DecimalFormat(<span class="string">"0.00"</span>);</span><br><span class="line">	String nyingshoumnyStr = myformat.format(nyingshoumny);</span><br><span class="line">	accountCoach.setNyingshoumny(<span class="keyword">new</span> BigDecimal(nyingshoumnyStr));</span><br><span class="line">			</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//验证备注的长度</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="string">""</span>.equals(vremark) &amp;&amp; vremark.trim().getBytes(<span class="string">"GBK"</span>).length &gt; <span class="number">20</span>) &#123;</span><br><span class="line">		json.fail();</span><br><span class="line">		json.setInfo(<span class="string">"备注的长度不可超过20位，请重新输入!"</span>);</span><br><span class="line">		<span class="keyword">return</span> json;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="二、分页方法重写"><a href="#二、分页方法重写" class="headerlink" title="二、分页方法重写"></a>二、分页方法重写</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 加载列表数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">data</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadDatagrid</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">	</span><br><span class="line">    $(<span class="string">"#list_datagrid"</span>).datagrid(&#123;  </span><br><span class="line">      fitColumns:<span class="literal">false</span>, </span><br><span class="line">      striped:<span class="literal">true</span>, </span><br><span class="line">	  rownumbers:<span class="literal">true</span>, </span><br><span class="line">	  nowrap:<span class="literal">true</span>, </span><br><span class="line">	  singleSelect:<span class="literal">false</span>, </span><br><span class="line">	  serialCtrl:<span class="literal">true</span>, </span><br><span class="line">	  pagination:<span class="literal">true</span>, </span><br><span class="line">	  pageSize:<span class="number">10</span>, </span><br><span class="line">	  pageList:[<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>], </span><br><span class="line">	  onClickCell: onClickCell,</span><br><span class="line">      data:data.slice(<span class="number">0</span>,<span class="number">10</span>) </span><br><span class="line">    &#125;); </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//分页处理</span></span><br><span class="line">    pagerFilter(data);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 分页数据的操作 </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">data</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pagerFilter</span>(<span class="params">data</span>)</span>&#123; </span><br><span class="line">	</span><br><span class="line">	   <span class="keyword">var</span> pager = $(<span class="string">"#list_datagrid"</span>).datagrid(<span class="string">"getPager"</span>); </span><br><span class="line">	    pager.pagination(&#123; </span><br><span class="line">	      total:data.length, </span><br><span class="line">	      onSelectPage:<span class="function"><span class="keyword">function</span> (<span class="params">pageNo, pageSize</span>) </span>&#123; </span><br><span class="line">	        <span class="keyword">var</span> start = (pageNo - <span class="number">1</span>) * pageSize; </span><br><span class="line">	        <span class="keyword">var</span> end = start + pageSize; </span><br><span class="line">	        $(<span class="string">"#list_datagrid"</span>).datagrid(<span class="string">"loadData"</span>, data.slice(start, end)); </span><br><span class="line">	        </span><br><span class="line">	        <span class="keyword">var</span> rowNumbers = $(<span class="string">'.datagrid-cell-rownumber'</span>);</span><br><span class="line">	        $(rowNumbers).each(<span class="function"><span class="keyword">function</span>(<span class="params">index</span>)</span>&#123;</span><br><span class="line">	        <span class="keyword">var</span> row = <span class="built_in">parseInt</span>($(rowNumbers[index]).html()) + <span class="built_in">parseInt</span>(start);</span><br><span class="line">	          $(rowNumbers[index]).html(<span class="string">""</span>);</span><br><span class="line">	          $(rowNumbers[index]).html(row);</span><br><span class="line">	          &#125;);</span><br><span class="line">	          </span><br><span class="line">	        pager.pagination(<span class="string">'refresh'</span>, &#123; </span><br><span class="line">	          total:data.length, </span><br><span class="line">	          pageNumber:pageNo </span><br><span class="line">	        &#125;); </span><br><span class="line">	      &#125; </span><br><span class="line">	    &#125;); </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三、日历框方法重写"><a href="#三、日历框方法重写" class="headerlink" title="三、日历框方法重写"></a>三、日历框方法重写</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 页面 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"query_ipt font_sz12 font_clr66"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">" "</span> &gt;</span>运费月份<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span>  <span class="attr">class</span>=<span class="string">"easyui-datebox"</span> <span class="attr">id</span>=<span class="string">"month"</span> <span class="attr">name</span>=<span class="string">"month"</span> <span class="attr">data-options</span>=<span class="string">"editable:false"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"query_ipt font_sz12 font_clr66"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"autoStyle"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"font_clred font_sz14"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">span</span>&gt;</span>创建时间从<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span>  <span class="attr">class</span>=<span class="string">"easyui-datetimebox start"</span> <span class="attr">id</span>=<span class="string">"startDate"</span>  <span class="attr">data-options</span>=<span class="string">"formatter:ww3,parser:w3,editable:false,required:true"</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"query_ipt font_sz12 font_clr66"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"autoStyle"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"font_clred font_sz14"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">span</span>&gt;</span>创建时间到<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"easyui-datetimebox end"</span>  <span class="attr">id</span>=<span class="string">"endDate"</span>  <span class="attr">data-options</span>=<span class="string">"formatter:ww3,parser:w3,editable:false,required:true"</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 页面JS</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;       </span><br><span class="line"></span><br><span class="line">    <span class="comment">//加载日历-年月</span></span><br><span class="line">    doDatebox(<span class="string">"month"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//初始化默认时间</span></span><br><span class="line">    getDateForMat(<span class="string">'startDate'</span>,<span class="string">'endDate'</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//初始化日历框内时间</span></span><br><span class="line">    InitiTime(<span class="string">'startDate'</span>,<span class="string">'endDate'</span>); </span><br><span class="line">      </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 日历控件修改-只显示年月</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param </span>dateboxId  日历控件id</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param </span>callBack  回调函数，参数为选中的日期，可以做后期处理，可以不传   </span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doDatebox</span>(<span class="params">dateboxId,callBack</span>)</span>&#123;</span><br><span class="line">    $(<span class="string">'#'</span>+dateboxId).datebox(&#123;</span><br><span class="line">        onShowPanel: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="comment">//显示日趋选择对象后再触发弹出月份层的事件，初始化时没有生成月份层</span></span><br><span class="line">            span.trigger(<span class="string">'click'</span>); <span class="comment">//触发click事件弹出月份层</span></span><br><span class="line">            <span class="keyword">if</span> (!tds) setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="comment">//延时触发获取月份对象，因为上面的事件触发和对象生成有时间间隔</span></span><br><span class="line">                tds = p.find(<span class="string">'div.calendar-menu-month-inner td'</span>);</span><br><span class="line">                tds.click(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">                    e.stopPropagation(); <span class="comment">//禁止冒泡执行easyui给月份绑定的事件</span></span><br><span class="line">                    <span class="keyword">var</span> year = <span class="regexp">/\d&#123;4&#125;/</span>.exec(span.html())[<span class="number">0</span>]<span class="comment">//得到年份</span></span><br><span class="line">                    , month = <span class="built_in">parseInt</span>($(<span class="keyword">this</span>).attr(<span class="string">'abbr'</span>), <span class="number">10</span>); <span class="comment">//月份，这里不需要+1</span></span><br><span class="line">                    $(<span class="string">'#'</span>+dateboxId).datebox(<span class="string">'hidePanel'</span>)<span class="comment">//隐藏日期对象</span></span><br><span class="line">                    .datebox(<span class="string">'setValue'</span>, year + <span class="string">'-'</span> + month); <span class="comment">//设置日期的值</span></span><br><span class="line">                     <span class="comment">//alert(undefined != callBack);</span></span><br><span class="line">                    <span class="comment">//执行回调函数</span></span><br><span class="line">                    <span class="keyword">if</span>(<span class="literal">undefined</span> != callBack)&#123;</span><br><span class="line">                    	callBack(<span class="keyword">new</span> <span class="built_in">Date</span>(year + <span class="string">'-'</span> + month));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;, <span class="number">0</span>);</span><br><span class="line">            yearIpt.unbind();<span class="comment">//解绑年份输入框中任何事件</span></span><br><span class="line">        &#125;,</span><br><span class="line">        parser: <span class="function"><span class="keyword">function</span> (<span class="params">s</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (!s) <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">            <span class="keyword">var</span> arr = s.split(<span class="string">'-'</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">parseInt</span>(arr[<span class="number">0</span>], <span class="number">10</span>), <span class="built_in">parseInt</span>(arr[<span class="number">1</span>], <span class="number">10</span>) - <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        formatter: <span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123; <span class="keyword">return</span> d.getFullYear() + <span class="string">'-'</span> + (d.getMonth() + <span class="number">1</span>);<span class="comment">/*getMonth返回的是0开始的，忘记了。。已修正*/</span> &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> p = $(<span class="string">'#'</span>+dateboxId).datebox(<span class="string">'panel'</span>), <span class="comment">//日期选择对象</span></span><br><span class="line">        tds = <span class="literal">false</span>, <span class="comment">//日期选择对象中月份</span></span><br><span class="line">        yearIpt = p.find(<span class="string">'input.calendar-menu-year'</span>),<span class="comment">//年份输入框</span></span><br><span class="line">        span = p.find(<span class="string">'span.calendar-text'</span>); <span class="comment">//显示月份层的触发控件</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 初始化默认时间</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">startTime</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">endTime</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDateForMat</span>(<span class="params">startTime , endTime</span>)</span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">getNowFormatDate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">		<span class="keyword">var</span> seperator1 = <span class="string">"/"</span>;</span><br><span class="line">		<span class="keyword">var</span> seperator2 = <span class="string">":"</span>;</span><br><span class="line">		<span class="keyword">var</span> month = date.getMonth() + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">var</span> strDate = date.getDate();</span><br><span class="line">		<span class="keyword">if</span> (month &gt;= <span class="number">1</span> &amp;&amp; month &lt;= <span class="number">9</span>) &#123;</span><br><span class="line">		  month = <span class="string">"0"</span> + month;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (strDate &gt;= <span class="number">0</span> &amp;&amp; strDate &lt;= <span class="number">9</span>) &#123;</span><br><span class="line">		  strDate = <span class="string">"0"</span> + strDate;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">var</span> currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate</span><br><span class="line">		    + <span class="string">"/ "</span> + <span class="string">"00"</span> + seperator2 +<span class="string">"00"</span></span><br><span class="line">		    + seperator2 + <span class="string">"00"</span>;</span><br><span class="line">		<span class="keyword">return</span> currentdate;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">getNowFormatDate2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">		<span class="keyword">var</span> seperator1 = <span class="string">"/"</span>;</span><br><span class="line">		<span class="keyword">var</span> seperator2 = <span class="string">":"</span>;</span><br><span class="line">		<span class="keyword">var</span> month = date.getMonth() + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">var</span> strDate = date.getDate();</span><br><span class="line">		<span class="keyword">if</span> (month &gt;= <span class="number">1</span> &amp;&amp; month &lt;= <span class="number">9</span>) &#123;</span><br><span class="line">		  month = <span class="string">"0"</span> + month;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (strDate &gt;= <span class="number">0</span> &amp;&amp; strDate &lt;= <span class="number">9</span>) &#123;</span><br><span class="line">		  strDate = <span class="string">"0"</span> + strDate;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">var</span> currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate</span><br><span class="line">		    + <span class="string">"/ "</span> + <span class="string">"23"</span> + seperator2 +<span class="string">"59"</span></span><br><span class="line">		    + seperator2 + <span class="string">"59"</span>;</span><br><span class="line">		<span class="keyword">return</span> currentdate;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">time</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">		<span class="keyword">var</span> h = date.getHours();  </span><br><span class="line">		<span class="keyword">var</span> min = date.getMinutes();  </span><br><span class="line">		<span class="keyword">var</span> sec = date.getSeconds();  </span><br><span class="line">		<span class="keyword">var</span> str = (h&lt;<span class="number">10</span>?(<span class="string">'0'</span>+h):h)+<span class="string">':'</span>+(min&lt;<span class="number">10</span>?(<span class="string">'0'</span>+min):min)+<span class="string">':'</span>+(sec&lt;<span class="number">10</span>?(<span class="string">'0'</span>+sec):sec);  </span><br><span class="line">		<span class="keyword">return</span> str;  </span><br><span class="line">	&#125; </span><br><span class="line">	$(<span class="string">'#'</span>+startTime).datetimebox(&#123;</span><br><span class="line">		value:getNowFormatDate(),</span><br><span class="line">		onShowPanel:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			$(<span class="keyword">this</span>).datetimebox(<span class="string">"spinner"</span>).timespinner(<span class="string">"setValue"</span>,time()); </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	$(<span class="string">'#'</span>+endTime).datetimebox(&#123; </span><br><span class="line">		value : getNowFormatDate2(), </span><br><span class="line">		onShowPanel:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			$(<span class="keyword">this</span>).datetimebox(<span class="string">"spinner"</span>).timespinner(<span class="string">"setValue"</span>,time()); </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 初始化日历框内时间</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">startTime</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">endTime</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">InitiTime</span>(<span class="params">startTime,endTime</span>)</span>&#123;</span><br><span class="line">	</span><br><span class="line">	$(<span class="string">'#'</span>+startTime).datetimebox(&#123; </span><br><span class="line">	      required : <span class="literal">false</span>, </span><br><span class="line">	      onShowPanel:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	      $(<span class="keyword">this</span>).datetimebox(<span class="string">"spinner"</span>).timespinner(<span class="string">"setValue"</span>,<span class="string">"00:00:00"</span>); </span><br><span class="line">	      &#125;</span><br><span class="line">	    &#125;);</span><br><span class="line">	    $(<span class="string">'#'</span>+endTime).datetimebox(&#123; </span><br><span class="line">	      required : <span class="literal">false</span>, </span><br><span class="line">	      onShowPanel:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	      $(<span class="keyword">this</span>).datetimebox(<span class="string">"spinner"</span>).timespinner(<span class="string">"setValue"</span>,<span class="string">"23:59:59"</span>); </span><br><span class="line">	      &#125;</span><br><span class="line">	    &#125;);</span><br><span class="line">	    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 加载格式化日历当前2018/01/05/ 00:00:00 - 2018/01/05/ 23:59:59</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">date</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ww3</span>(<span class="params">date</span>)</span>&#123;  </span><br><span class="line">    <span class="keyword">var</span> y = date.getFullYear();  </span><br><span class="line">    <span class="keyword">var</span> m = date.getMonth()+<span class="number">1</span>;  </span><br><span class="line">    <span class="keyword">var</span> d = date.getDate();  </span><br><span class="line">    <span class="keyword">var</span> h = date.getHours();  </span><br><span class="line">    <span class="keyword">var</span> min = date.getMinutes();  </span><br><span class="line">    <span class="keyword">var</span> sec = date.getSeconds();  </span><br><span class="line">    <span class="keyword">var</span> str = y+<span class="string">'/'</span>+(m&lt;<span class="number">10</span>?(<span class="string">'0'</span>+m):m)+<span class="string">'/'</span>+(d&lt;<span class="number">10</span>?(<span class="string">'0'</span>+d):d)+<span class="string">'/'</span>+<span class="string">' '</span>+(h&lt;<span class="number">10</span>?(<span class="string">'0'</span>+h):h)+<span class="string">':'</span>+(min&lt;<span class="number">10</span>?(<span class="string">'0'</span>+min):min)+<span class="string">':'</span>+(sec&lt;<span class="number">10</span>?(<span class="string">'0'</span>+sec):sec);  </span><br><span class="line">    <span class="keyword">return</span> str;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 加载格式化日历当前2018/01/05/ 00:00:00 - 2018/01/05/ 23:59:59</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">s</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">w3</span>(<span class="params">s</span>)</span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (!s) <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>();  </span><br><span class="line">    <span class="keyword">var</span> y = s.substring(<span class="number">0</span>,<span class="number">4</span>);  </span><br><span class="line">    <span class="keyword">var</span> m =s.substring(<span class="number">5</span>,<span class="number">7</span>);  </span><br><span class="line">    <span class="keyword">var</span> d = s.substring(<span class="number">8</span>,<span class="number">10</span>);  </span><br><span class="line">    <span class="keyword">var</span> h = s.substring(<span class="number">11</span>,<span class="number">14</span>);  </span><br><span class="line">    <span class="keyword">var</span> min = s.substring(<span class="number">15</span>,<span class="number">17</span>);  </span><br><span class="line">    <span class="keyword">var</span> sec = s.substring(<span class="number">18</span>,<span class="number">20</span>);  </span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">isNaN</span>(y) &amp;&amp; !<span class="built_in">isNaN</span>(m) &amp;&amp; !<span class="built_in">isNaN</span>(d) &amp;&amp; !<span class="built_in">isNaN</span>(h) &amp;&amp; !<span class="built_in">isNaN</span>(min) &amp;&amp; !<span class="built_in">isNaN</span>(sec))&#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(y,m<span class="number">-1</span>,d,h,min,sec);  </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： Web系列-EasyUI部分问题总结-技巧篇</p>
+        
+        
+          <p>本文作者： 狂欢马克思</p>
+        
+        <p>发布时间： 2019年01月01日 00:00</p>
+        <p>最后更新： 2020年11月07日 10:46</p>
+        <p>原始链接： <a class="post-url" href="/e6460db3/" title="Web系列-EasyUI部分问题总结-技巧篇">https://www.hosiang.cn/e6460db3/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/e6460db3/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Web系列-EasyUI部分问题总结-技巧篇》 — 狂欢马克思&url=https://www.hosiang.cn/e6460db3/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/e6460db3/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/e6460db3/&title=《Web系列-EasyUI部分问题总结-技巧篇》 — 狂欢马克思&source=&emsp;&emsp;本篇文章，EasyUI部分问题总结，有需要的可以参考。" data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/e6460db3/&title=《Web系列-EasyUI部分问题总结-技巧篇》 — 狂欢马克思&pic=photo/album/image/image_060.jpg" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/e6460db3/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/EasyUI/" class="color2">EasyUI</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、输入框处理"><span class="post-toc-text">一、输入框处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1-四舍五入精度丢失"><span class="post-toc-text">1.1 四舍五入精度丢失</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2-科学计数法转化法"><span class="post-toc-text">1.2 科学计数法转化法</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、分页方法重写"><span class="post-toc-text">二、分页方法重写</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、日历框方法重写"><span class="post-toc-text">三、日历框方法重写</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/3047a232/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          Web系列-Ajax跨域问题解决方法-技巧篇
+        
+      </span>
+    </a>
+  
+  
+    <a href="/64384826/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Python系列-Python开发环境配置-入门篇</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>44.8k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2017-2020 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 20px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 13.33px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 16.67px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 20px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 13.33px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 20px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a target="_blank" href="http://hosiang.ccaeo.com/skydrive" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-jsfiddle"></i><span>云盘</span>
+                </a>
+            </li>
+            
+            <li>
+                <a target="_blank" href="http://hosiang.ccaeo.com" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-film"></i><span>影视</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 20px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 13.33px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 16.67px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 20px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 13.33px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 20px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

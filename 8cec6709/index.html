@@ -35,7 +35,7 @@
 <meta property="og:description" content="&amp;emsp;&amp;emsp;Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.hosiang.cn/photo/album/image_082.png">
-<meta property="og:updated_time" content="2020-11-07T03:17:21.785Z">
+<meta property="og:updated_time" content="2020-11-07T03:46:30.603Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo系列-Hexo中文博客站点-入门篇">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。">
@@ -348,11 +348,11 @@ console.log=function(){};
             
             <p>&emsp;&emsp;Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
 <a id="more"></a>
-<p><img src="https://www.hosiang.cn/photo/album/image_082.png" alt="Hexo" title="Hexo中文博客站点-入门篇"></p>
+<p><img src="/photo/album/image_082.png" alt="Hexo" title="Hexo中文博客站点-入门篇"></p>
 <h3 id="Windows平台"><a href="#Windows平台" class="headerlink" title="Windows平台"></a>Windows平台</h3><p><a href="https://hexo.io/zh-cn/docs/" rel="external nofollow noopener noreferrer" target="_blank">Hexo官网文档</a></p>
 <p>快速打开命令窗口的方式：<code>Win + R</code> ，输入 <code>cmd</code> , 敲下 Enter 键。</p>
-<h4 id="一、安装Git"><a href="#一、安装Git" class="headerlink" title="一、安装Git"></a>一、安装Git</h4><p>参考<a href="https://www.hosiang.cn/blog/hexo20171214001/">Hexo中文博客站点-基础篇</a>，配置步骤一中的 1.3。</p>
-<h4 id="二、安装Node-js"><a href="#二、安装Node-js" class="headerlink" title="二、安装Node.js"></a>二、安装Node.js</h4><p>参考<a href="https://www.hosiang.cn/dev/nodejs20171215001/">NodeJS开发环境配置-入门篇</a>，配置步骤一、二。</p>
+<h4 id="一、安装Git"><a href="#一、安装Git" class="headerlink" title="一、安装Git"></a>一、安装Git</h4><p>参考<a href="/blog/hexo20171214001/">Hexo中文博客站点-基础篇</a>，配置步骤一中的 1.3。</p>
+<h4 id="二、安装Node-js"><a href="#二、安装Node-js" class="headerlink" title="二、安装Node.js"></a>二、安装Node.js</h4><p>参考<a href="/dev/nodejs20171215001/">NodeJS开发环境配置-入门篇</a>，配置步骤一、二。</p>
 <h4 id="三、安装Hexo"><a href="#三、安装Hexo" class="headerlink" title="三、安装Hexo"></a>三、安装Hexo</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//安装hexo(全局)</span><br><span class="line">npm install -g hexo </span><br><span class="line"></span><br><span class="line">//初始化hexo</span><br><span class="line">hexo init hexo</span><br><span class="line"></span><br><span class="line">//打开hexo目录</span><br><span class="line">cd hexo</span><br><span class="line"></span><br><span class="line">//安装依赖文件</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line">//部署形成文件</span><br><span class="line">hexo generate </span><br><span class="line"></span><br><span class="line">//运行hexo服务</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
 <p>PS: 接着我们打开浏览器，输入<code>http://localhost:4000/</code> ，便可看到默认主题的博客。</p>
 <h3 id="Mac平台"><a href="#Mac平台" class="headerlink" title="Mac平台"></a>Mac平台</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//homebrew套件管理器（主要用来安装git和node.js）</span><br><span class="line">ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)”</span><br><span class="line"></span><br><span class="line">//安装git版本管理工具</span><br><span class="line">brew install git</span><br><span class="line"></span><br><span class="line">//安装node.js</span><br><span class="line">brew install node</span><br><span class="line"></span><br><span class="line">//安装hexo</span><br><span class="line">npm install -g hexo</span><br><span class="line"></span><br><span class="line">//初始化blog文件夹</span><br><span class="line">hexo init</span><br><span class="line"></span><br><span class="line">//安装依赖和插件</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line">//启动服务器进行本地预览</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
@@ -388,7 +388,7 @@ console.log=function(){};
           <p>本文作者： 狂欢马克思</p>
         
         <p>发布时间： 2016年01月02日 00:00</p>
-        <p>最后更新： 2020年11月07日 11:17</p>
+        <p>最后更新： 2020年11月07日 11:46</p>
         <p>原始链接： <a class="post-url" href="/8cec6709/" title="Hexo系列-Hexo中文博客站点-入门篇">https://www.hosiang.cn/8cec6709/</a></p>
         <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
         <footer>

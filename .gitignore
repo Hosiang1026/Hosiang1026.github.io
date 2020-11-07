@@ -1,0 +1,8 @@
+db.json
+.DS_Store
+.idea/
+node_modules/
+*.log
+package-lock.json
+public/
+.deploy_git/

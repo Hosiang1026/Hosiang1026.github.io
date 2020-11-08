@@ -271,16 +271,16 @@ function getMinFestival() {
     assigFestival(festivalTime,festivalNameTerm,festivalDateTerm,festivalTimeTerm);
     assigFestival(festivalTime,festivalNameSFtv,festivalDateSFtv,festivalTimeSFtv);
     assigFestival(festivalTime,festivalNameLFtv,festivalDateLFtv,festivalTimeLFtv);
-    festivalName = festivalName.substr(3);
 }
 
 /**
  * 赋值最近的名称和日期
  */
 function assigFestival(minTime,Names,Dates,Times) {
-    if (minTime == Times) {
+    if (minTime == Times&&-1==festivalName.indexOf(Names)) {
         festivalDate = Dates;
         festivalName = festivalName  + " | " + Names;
+        festivalName = festivalName.substr(3);
     }
 }
 

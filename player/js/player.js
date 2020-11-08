@@ -14,7 +14,7 @@ var autoPlayer = 1,
     playerWidth = 275,
     coverWidth = 90,
     showNotes = 1,
-    autoPopupPlayer = 1;
+    autoPopupPlayer = -1;
 
 var mainColor ='89,88,137';
 var font_color='0,0,0';

@@ -23,7 +23,7 @@
       <%- partial('_partial/header', null, {cache: !config.relative_link}) %>
 
       <!-- 悬浮音乐播放器 -->
-      <!-- <script id="ilt" src=<%- url_for('/player/js/player.js') %>></script> -->
+      <script id="ilt" src=<%- url_for('/player/js/player.js') %>></script>
       <div class="outer">
           <section id="main" class="body-wrap"><%- body %></section>
         <% if (theme.sidebar && theme.sidebar !== 'bottom'){ %>

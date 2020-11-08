@@ -20,7 +20,7 @@
       width="100%" 
       height="100%" 
       align="center"
-      src="https://music.larix.cc" >
+      src="https://m.myhkw.cn" >
 </iframe>
 
 <script type="text/javascript">

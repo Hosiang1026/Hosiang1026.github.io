@@ -50,15 +50,15 @@ menu:
   #  url: /project
   #  target: false
 
-  jsfiddle:
-    title: 云盘
-    url: http://hosiang.ccaeo.com/skydrive
-    target: true
+#  jsfiddle:
+#    title: 云盘
+#    url: http://hosiang.ccaeo.com/skydrive
+#    target: true
 
-  film:
-    title: 影视
-    url: http://hosiang.ccaeo.com
-    target: true
+#  film:
+#    title: 影视
+#    url: http://hosiang.ccaeo.com
+#    target: true
 
   music:
     title: 音乐

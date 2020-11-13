@@ -509,7 +509,7 @@ function songlistArr() {
 
     if (-1 != birthdayArr.indexOf(calendars)) {
         //生日歌
-        $("#banner").css("background-image", "url(/photo/album/system/banner_birthday.jpg)");
+        $("#banner").css("background-image", "url(/photo/album/system/system_002.jpg)");
         getFestivalSongList("birthdaySongList");
     }
 

@@ -59,15 +59,15 @@ var bannerNum = -1;
 
 //春节背景图片
 var springFestivalBannerArr = [
-    "/photo/album/system/banner_festival-1.jpg",
-    "/photo/album/system/banner_festival-2.jpg",
-    "/photo/album/system/banner_festival-3.jpg"
+    "/photo/album/system/system_003.jpg",
+    "/photo/album/system/system_004.jpg",
+    "/photo/album/system/system_005.jpg"
 ];
 
 //国庆背景图片
 var nationalFestivalBannerArr = [
-    "/photo/album/system/banner_national-1.gif",
-    "/photo/album/system/banner_national-2.gif"
+    "/photo/album/system/system_006.gif",
+    "/photo/album/system/system_007.gif"
 ];
 
 /**

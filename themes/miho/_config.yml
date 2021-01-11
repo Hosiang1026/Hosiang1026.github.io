@@ -62,7 +62,7 @@ menu:
 
   music:
     title: 音乐
-    url: /music
+    url: /music?id=91451362    
     target: false
     
   picture-o:

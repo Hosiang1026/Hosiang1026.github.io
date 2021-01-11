@@ -280,7 +280,10 @@ function assigFestival(minTime,Names,Dates,Times) {
     if (minTime == Times&&-1==festivalName.indexOf(Names)) {
         festivalDate = Dates;
         festivalName = festivalName  + " | " + Names;
-        festivalName = festivalName.substr(3);
+        if(festivalName.startsWith(" | ")){
+            var temp = " | ".length;
+            festivalName = festivalName.substr(temp);
+        }
     }
 }
 

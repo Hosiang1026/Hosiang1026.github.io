@@ -9,7 +9,7 @@
   
   操作平台 | 软件名称 | 软件版本 | 文件大小 | 发布日期 | 开发者 | 兼容性 | 下载地址 | 提取码
   ---|---|---|---|---|---|---|---|---
-  Windows | 狂欢马克思 | V1.0.0 | 104MB | 2019-03-02 | 吉祥草 | Win All | <a href="http://c7.gg/fwa4x">点击下载</a> | lktj
+  Windows | 狂欢马克思 | V1.0.0 | 104MB | 2019-03-02 | 吉祥草 | Win All | <a href="https://pan.baidu.com/s/1wxPUHyfv1-ISgwNmh7EkYA">点击下载</a> | abe3
   Android | 狂欢马克思 | V1.0.0 | 1.39MB | 2019-03-02 | 吉祥草 | Android 2.3及以上版本 |  <a href="https://hosiang.lanzous.com/iiKFPeo7zej">点击下载</a> | fk1w
  
  ### 导航网站

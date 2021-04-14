@@ -20,7 +20,7 @@
       width="100%" 
       height="100%" 
       align="center"
-      src="https://m.myhkw.cn" >
+      src="https://y.tsyinpin.com" >
 </iframe>
 
 <script type="text/javascript">

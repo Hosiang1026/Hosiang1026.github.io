@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 697
-cover_picture: 'https://cdn.pixabay.com/photo/2017/05/08/13/15/spring-bird-2295436__480.jpg'
+cover_picture: 'https://static.oschina.net/uploads/img/202005/06112558_Zmzf.jpg'
 abbrlink: e1d7b329
 date: 2021-04-14 07:56:10
 ---

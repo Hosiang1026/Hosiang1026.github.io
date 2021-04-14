@@ -6,6 +6,7 @@
     "version": "3.9.0"
   },
   "dependencies": {
+    "bagpipe": "^0.3.5",
     "browser-sync": "^2.18.13",
     "buffers": "^0.1.1",
     "cheerio": "^1.0.0-rc.3",

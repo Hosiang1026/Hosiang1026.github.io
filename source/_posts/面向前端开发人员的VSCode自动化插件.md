@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 900
+top: 749
 cover_picture: 'https://oscimg.oschina.net/oscnet/139239-20210402112342091-278246931.gif'
 abbrlink: 525f7294
-date: 2021-04-15 09:08:53
+date: 2021-04-15 10:16:57
 ---
 
 &emsp;&emsp;转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 原文参考：https://blog.bitsrc.io/vscode-automations-for-frontend-developers-6c66a6f36...
@@ -17,13 +17,13 @@ date: 2021-04-15 09:08:53
   
  
   
-编程是复杂的。在保证高生产力和代码质量的同时，有许多最优的方案需要记住，有许多准则需要遵循，还有许多 "已知问题 "需要避免。 
+编程是复杂的。在保证高生产力和代码质量的同时，有许多最优的方案需要记住，有许多准则需要遵循，还有许多 "已知问题 "�����避免。 
 现代开发过程如果没有自动化完成的工作，还是比较困难的。在本文中，我就将为大家介绍一些可以为前端开发人员提高开发效率的VSCode自动化技巧。 
  
 ### Live Server 
 一般情况下，当你在VSCode修改代码后，你需要手动刷新浏览器才能看到效果。也就是说，如果你对代码进行了100次更新，你需要刷新浏览器100次，这是一件很累且耗时的工作。 
 Live Server是VSCode中的一个很酷的插件，它可以为你自动完成上面说的这些工作，让你不必每次在保存后都要手动打开和刷新浏览器，这是由Live Reload这个Live Server的功能提供的，这个功能可以确保你的代码可以在保存后立即呈现。另外，如果你启用了VSCode的自动保存功能，Live Reload将会变得更酷，更方便。 
-![Test](https://oscimg.oschina.net/oscnet/139239-20210402112342091-278246931.gif 面向前端开发人员的VSCode自动化插件) 
+![Test](https://oscimg.oschina.net/oscnet/139239-20210402112342091-278246931.gif  '面向前端开发人员的VSCode自动化插件') 
   
  
 ### Turbo Console Log 
@@ -33,12 +33,12 @@ Turbo Console Log是可以帮你自动编写日志信息的工具， 在Turbo Co
  对当前文档中所有由插件嵌入的日志信息进行注释和取消注释。 
  从当前文档中删除所有由插件嵌入的日志信息。 
  
-![Test](https://oscimg.oschina.net/oscnet/139239-20210402112342091-278246931.gif 面向前端开发人员的VSCode自动化插件) 
+![Test](https://oscimg.oschina.net/oscnet/139239-20210402112342091-278246931.gif  '面向前端开发人员的VSCode自动化插件') 
   
  
 ### Live SASS编译器 
 可以通过Live SASS编译器将你的SASS或SCSS文件轻松地自动编译成CSS，并在代码编辑器本身的内部实时编译，并自动在浏览器中为你提供应用程序或编译后的样式的实时预览，就像这样。 
-![Test](https://oscimg.oschina.net/oscnet/139239-20210402112342091-278246931.gif 面向前端开发人员的VSCode自动化插件) 
+![Test](https://oscimg.oschina.net/oscnet/139239-20210402112342091-278246931.gif  '面向前端开发人员的VSCode自动化插件') 
   
 Live SASS 编译器是VSCode一个便捷的扩展插件，其中有很多很酷的功能，包括： 
  
@@ -53,14 +53,14 @@ Live SASS 编译器是VSCode一个便捷的扩展插件，其中有很多很酷�
 在一个包含成百上千行代码的应用程序中，你是否有因为要更改一个HTML标签而忘记或错误地更改了成对的另一个标签？这种工作很容易眼花且低效。 
 你现在有两个选择：一个是手工去维护成对标签再或是直接安装Auto Rename Tag插件，交由它帮你自动完成这些工作。 
 Auto Rename Tag是对开发人员很有帮助的插件，顾名思义，他会在更新其中一个承兑标签时自动更新另外的标签。 
-![Test](https://oscimg.oschina.net/oscnet/139239-20210402112342091-278246931.gif 面向前端开发人员的VSCode自动化插件) 
+![Test](https://oscimg.oschina.net/oscnet/139239-20210402112342091-278246931.gif  '面向前端开发人员的VSCode自动化插件') 
   
  
 ### ESLint 
 代码检测是用于检查程序中的语法错误或不按特定风格准则的代码， 
 而ESLint这样的代码检测工具允许开发人员在不执行JavaScript代码的情况下发现其代码的问题。ESLint是VS Code中下载量最大的扩展之一，有近1300万次下载，它能确保你坚持标准的代码准则，类似像定位、缩进等。这个扩展需要你在本地或全局电脑上安装ESLint，你只需运行npm install eslint即可。 
 以下是ESLint的一个演示 
-![Test](https://oscimg.oschina.net/oscnet/139239-20210402112342091-278246931.gif 面向前端开发人员的VSCode自动化插件) 
+![Test](https://oscimg.oschina.net/oscnet/139239-20210402112342091-278246931.gif  '面向前端开发人员的VSCode自动化插件') 
   
 当你的代码量较小时，上面这个错误还是很明显的。但如果你的代码超百行。通过运行ESLint，您可以快速识别代码中的问题，以提高代码的完整性和质量。 
  
@@ -70,10 +70,10 @@ Prettier，一个在前端开发者中流行的VSCode扩展，拥有1100万的�
  在样式指南更改时，Prettier可以自动应用到整个代码库中。 
  不需要花功夫去修正格式化。 
  不用在拉取请求中浪费时间讨论样式。 
- 不需要在样式指南中查找规则。 
+ 不需要在���式指南中查找规则。 
  
 Prettier不仅支持JavaScript，还支持许多开箱即用的不同语法，包括TypeScript、CSS、JSON、JSX、GraphQL等等。 
-![Test](https://oscimg.oschina.net/oscnet/139239-20210402112342091-278246931.gif 面向前端开发人员的VSCode自动化插件) 
+![Test](https://oscimg.oschina.net/oscnet/139239-20210402112342091-278246931.gif  '面向前端开发人员的VSCode自动化插件') 
 还有其他类似的扩展，其中最受欢迎的是，Beautify! 通过一些设置和配置，你再也不用担心写出丑陋的代码了。Beautify可以将你的代码变成漂亮而一致的代码。 
  
 ### Pre-Commit Hooks 

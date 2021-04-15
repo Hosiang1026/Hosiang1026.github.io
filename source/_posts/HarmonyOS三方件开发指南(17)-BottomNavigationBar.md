@@ -4,11 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 809
-cover_picture: >-
-  https://dl-harmonyos.51cto.com/images/202104/3902507910a6f5222b1260a27d8719b73ab6dc.png
+top: 869
+cover_picture: 'https://dl-harmonyos.51cto.com/images/202104/3902507910a6f5222b1260a27d8719b73ab6dc.png'
 abbrlink: 7c73ebd9
-date: 2021-04-15 09:08:53
+date: 2021-04-15 09:53:06
 ---
 
 &emsp;&emsp;目录： 1、引言 2、功能介绍 3、BottomNavigationBar使用指南 4、BottomNavigationBar开发指南 5、《HarmonyOS三方件开发指南》文章合集 引言 BottomNavigationBar底部导航栏，可以说所有的a...
@@ -25,22 +24,23 @@ date: 2021-04-15 09:08:53
        BottomNavigationBar底部导航栏，可以说所有的app是这样的页面架构，原因很简单，操作简单，模块化清晰，页面切换流畅，而且每页都可以展示不同的风格。相信开发者已经很熟悉Android的底部导航栏的开发以及开发流程，那么接下来将对比Android来讲解鸿蒙的底部导航栏的实现步骤。 
 功能介绍 
       鸿蒙BottomNavigationBar底部导航栏，根据所需要底部button的数量，动态生成对应的底部button，并且可以设置默认字体颜色，选中字体颜色，默认icon，选中icon属性。模拟器效果图如下： 
-![Test](https://dl-harmonyos.51cto.com/images/202104/3902507910a6f5222b1260a27d8719b73ab6dc.png HarmonyOS三方件开发指南(17)-BottomNavigationBar) 
-看了效果图，是不是都想知道在实际工作中，是如何使用的呢？接下来给大家详细介绍下BottomNavigationBar��何使用。 
+![Test](https://dl-harmonyos.51cto.com/images/202104/3902507910a6f5222b1260a27d8719b73ab6dc.png  'HarmonyOS三方件开发指南(17)-BottomNavigationBar') 
+看了效果图，是不是都想知道在实际工作中，是如何使用的呢？接下来给大家详细介绍下BottomNavigationBar如何使用。 
 BottomNavigationBar使用指南 
 Ø 新建工程， 添加组件Har包依赖 
 在应用模块中添加HAR，只需要将mylibrarybottom-debug.har复制到entry\libs目录下即可。 
 Ø 修改相关文件 
 1. 修改主页面的布局文件ability_main.xml： 
-![Test](https://dl-harmonyos.51cto.com/images/202104/3902507910a6f5222b1260a27d8719b73ab6dc.png HarmonyOS三方件开发指南(17)-BottomNavigationBar) 
+![Test](https://dl-harmonyos.51cto.com/images/202104/3902507910a6f5222b1260a27d8719b73ab6dc.png  'HarmonyOS三方件开发指南(17)-BottomNavigationBar') 
 2. 修改MainAbilitySlice代码： 
-![Test](https://dl-harmonyos.51cto.com/images/202104/3902507910a6f5222b1260a27d8719b73ab6dc.png HarmonyOS三方件开发指南(17)-BottomNavigationBar) 
+![Test](https://dl-harmonyos.51cto.com/images/202104/3902507910a6f5222b1260a27d8719b73ab6dc.png  'HarmonyOS三方件开发指南(17)-BottomNavigationBar') 
 3. 修改BaseAbilitySlinct代码： 
-![Test](https://dl-harmonyos.51cto.com/images/202104/3902507910a6f5222b1260a27d8719b73ab6dc.png HarmonyOS三方件开发指南(17)-BottomNavigationBar) 
+![Test](https://dl-harmonyos.51cto.com/images/202104/3902507910a6f5222b1260a27d8719b73ab6dc.png  'HarmonyOS三方件开发指南(17)-BottomNavigationBar') 
 4. MainAbility的代码： 
-![Test](https://dl-harmonyos.51cto.com/images/202104/3902507910a6f5222b1260a27d8719b73ab6dc.png HarmonyOS三方件开发指南(17)-BottomNavigationBar) 
+![Test](https://dl-harmonyos.51cto.com/images/202104/3902507910a6f5222b1260a27d8719b73ab6dc.png  'HarmonyOS三方件开发指南(17)-BottomNavigationBar') 
 配置好1-4步，接下来就看如何给对应的底部导航栏添加Fraction 
 1. initBottom 方法如下： 
+ 
  ```java 
   private void initBottom() {
     tabBottomLayout = (BottomNavigationBar)  mAbilitySliceProvider.findComponentById(ResourceTable.Id_bottom_navigation_bar);
@@ -91,28 +91,34 @@ BottomNavigationBar使用指南
     // 设置默认选中的条目，该方法一定要在最后调用
     tabBottomLayout.defaultSelected(homeInfo);
 
-  ```  
+  ``` 
+  
 2. 创建fraction类，继承BaseFraction 
 1. 引入需要展示页面的布局文件 
+ 
  ```java 
     @Override
 public int getUIComponent() {
     return ResourceTable.Layout_layout_fraction_home;
 }
-  ```  
+  ``` 
+  
 2. 操作布局文件中的控件 
+ 
  ```java 
   @Override
 public void initComponent(Component component) {
     text = (Text) component.findComponentById(ResourceTable.Id_text);
 }
-  ```  
+  ``` 
+  
 BottomNavigationBar开发指南 
        底部导航栏，在应用中真的非常常见，核心思想就是底部有几个选项，然后点击其中任意一个，切换至对应的页面。接下来主要介绍下核心实现步骤。 
 主要封装的原则是，动态的，通过外界传递，固定过的则封装起来。其中底部导航栏的图片、文字、文字的颜色是变的，其它的可以封装起来，外界只需要把每个条目的图片、文字以及文字的颜色传入进来即可，内部来实现底部导航栏。在封装的时候，需要面向接口编程，同时使用泛型。 
 定义接口IBarLayout 
 1、定义一个IBarLayout接口，第一个泛型就是底部导航栏中的每个条目，第二个泛型是每个条目的数据。在接口里面提供一些方法，可以根据数据查找条目，可以添加监听，可以设置默认选中的条目，可以初始化所有的条目，当某个条目被选中后需要通过回调方法。 
 代码如下： 
+ 
  ```java 
   public interface IBarLayout<Bar extends ComponentContainer, D> {
 
@@ -157,9 +163,11 @@ BottomNavigationBar开发指南
         void onBarSelectedChange(int index, D preInfo, D nextInfo);
     }
 }
-  ```  
+  ``` 
+  
 2、再定义一个单个条目的接口IBar，泛型就是每个条目的数据，接口里面定义方法，可以设置条目的数据，可以动态修改某个条目的大小 
 代码如下： 
+ 
  ```java 
   /**
  * 单个条目的接口
@@ -180,10 +188,12 @@ public interface IBar<D> extends IBarLayout.OnBarSelectedListener<D> {
      */
     void resetHeight(int height);
 }
-  ```  
+  ``` 
+  
 每个条目所对应的实体类BottomBarInfo 
-每个条目都有自己的图片、文字、文字的颜色，我们把这些属性定义在一个实体类中。由于颜色可以是整型，也可以是字符串，这里���义��型，泛型就是文字的颜色。具体是哪种类型的颜色，由调用者来决定。 
+每个条目都有自己的图片、文字、文字的颜色，我们把这些属性定义在一个实体类中。由于颜色可以是整型，也可以是字符串，这里定义泛型，泛型就是文字的颜色。具体是哪种类型的颜色，由调用者来决定。 
 注意下BarType这个枚举，我们的底部导航栏支持两种类型，IMAGE代表下图，某个条目只显示图片，也可以让某个条目凸出来，只需要将条目的高度变高即可。 
+ 
  ```java 
   public class BottomBarInfo<Color> extends TopBottomBarInfo {
 
@@ -221,10 +231,12 @@ public interface IBar<D> extends IBarLayout.OnBarSelectedListener<D> {
         this.tabType = BarType.IMAGE_TEXT;
     }
 }
-  ```  
+  ``` 
+  
 单个条目的封装 
         定义BottomBar，继承相对布局，实现之前定义的IBar接口，泛型就是每个条目所对应的实体类，由于目前并不知道泛型的具体类型，所以泛型直接使用问号来代替。BottomBar就是单个条目。 
 我们需要将component对象放入到BottomBar中，所以第二个参数传this，第三个参数为true。 
+ 
  ```java 
   public class BottomBar extends DependentLayout implements IBar<BottomBarInfo<?>> {
 
@@ -370,9 +382,11 @@ public interface IBar<D> extends IBarLayout.OnBarSelectedListener<D> {
         return mTabImage;
     }
 }
-  ```  
+  ``` 
+  
 底部导航栏的封装 
   定义BottomNavigationBar，继承栈布局。第一个泛型就是底部导航栏的条目，第二个泛型就是每个条目的数据。 
+ 
  ```java 
   public class BottomNavigationBar extends StackLayout implements IBarLayout<BottomBar, BottomBarInfo<?>> {
 
@@ -612,7 +626,8 @@ public interface IBar<D> extends IBarLayout.OnBarSelectedListener<D> {
         this.barBottomLineColor = barBottomLineColor;
     }
 }
-  ```  
+  ``` 
+  
 initInfo(List<BottomBarInfo<?>> infoList)该方法由外界调用，外界将所有的条目信息传递过来，我们将条目添加到底部导航栏。首先移除之前已经添加的组件，防止重复添加，然后添加背景，添加条目，添加线条。 
 更多原创，请关注：软通动力HarmonyOS学院https://harmonyos.51cto.com/column/30 
 作者：软通田可辉 

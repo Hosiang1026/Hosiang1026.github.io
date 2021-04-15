@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 862
+top: 2082
 cover_picture: 'https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png'
 abbrlink: a8395ed2
-date: 2021-04-15 09:08:53
+date: 2021-04-15 09:46:45
 ---
 
 &emsp;&emsp;数据脱敏背景及介绍 1.1数据库脱敏背景 伴随着互联网大数据、云服务等新兴技术的飞速发展和普及，业务上云、数据集中存储、数据共享等数据应用方式已成为未来发展的趋势，云数据库和云计算服...
@@ -38,7 +38,7 @@ date: 2021-04-15 09:08:53
    
    
     
-    数据脱敏，顾名思义就是将敏感数据通过变形、屏蔽等方式处理，其目的是保护隐私数据信息，防止数据泄露和恶意窥探。当企业或者机构收集用户个人身份数据、手机、银行卡号等敏感信息，然后将数据通过导出（非生产环境）或直接查询（结合生产环境）的方式投入使用时，按照隐私保护相关法律法规需将数据进行“脱敏”处理。 
+    数据脱敏，顾名思义就是将敏感数据通过变形、屏蔽等方式处理，其目的是保护隐私数据信息，防止数据泄露和恶意窥探。当企业或者机构收集用户个人身份数据、手机、银行卡号等敏感信息，然后将数据通过导出（非生产环境）或直接查询（结合生产环境）的方式投入使用时，按照隐私保护相关法律法规需��数���进行“脱敏”处理。 
     
    
    
@@ -55,7 +55,7 @@ date: 2021-04-15 09:08:53
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png openGauss动态数据脱敏) 
+    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png  'openGauss动态数据脱敏') 
     
    
    
@@ -79,7 +79,7 @@ date: 2021-04-15 09:08:53
    
    
     
-    从性能上来说，结果集解析方法需要在数据库返回结果集后再逐行字段解析、规则匹配、数据脱敏，需要逐个修改结果集中每一行数据，因此脱敏耗时与结果集容量线性相关，整体性能损耗较大；而语句改写通过将较为简短的查询语句进行解析并重写的方式，对语句中的敏感列外嵌了一层脱敏函数，数据库执行命令时将自动执行脱敏函数实现数据脱敏，返回的结果集即为脱敏后的数据。该方式仅仅改写一条查询语句而不涉及结果集的解析，因此能够极大地降低性能损耗，openGauss便是采用了语句改写的方式，10万条敏感数据脱敏的性能损耗低于5%。 
+    从性能上来说，结果集解析方法需要在数据库返回结果集后再逐行字段解析、规则匹配、数据脱敏，需要逐个修改结果集中每一行数据，因此脱敏耗时与结果集容量线性相关，整体性能损耗较大；而语句改写通过将较为简短的查询语句进行解析并重写的方式，对语句中的敏感列外嵌了一层脱敏函数，数据库执行命令时将自动执行脱敏函数实现数据脱敏，返回的结果集即为脱敏后的数据。该方式仅仅改写一条查询语句而不涉及结果集的解析，因��能够极大地降低性能损耗，openGauss便是采用了语句改写的方式，10万条敏感数据脱敏的性能损耗低于5%。 
     
    
    
@@ -167,7 +167,7 @@ date: 2021-04-15 09:08:53
    
    脱敏方式，是指该脱敏策略使用何种方式对目标字段进行脱敏，目前openGauss预置了7种脱敏方式：creditcardmasking、 basicemailmasking、fullemailmasking、alldigitsmasking、shufflemasking、randommasking、maskall。分别适用于不同的脱敏场景。 
    脱敏对象，是指脱敏策略生效时作用的对象集合（LABEL），若查询目标字段存在于LABEL中，则该字段将会根据脱敏策略进行敏感数据脱敏，需要注意的是，openGauss动态数据脱敏特性支持对仅包含数据列的LABEL进行脱敏。 
-   用户过滤器，指出脱敏策略在何种用户场景下生效，主要涉及USER（用户名）、APP（用户登录客户端名称）、IP���用���所处的ip）。当查询用户同时满足Masking Filter所指定的阈值时，数据脱敏策略才会生效。 
+   用户过滤器，指出脱敏策略在何种用户场景下生效，主要涉及USER（用户名）、APP（用户登录客户端名称）、IP（用户所处的ip）。当查询用户同时满足Masking Filter所指定的阈值时，数据脱敏策略才会生效。 
    
    
    以下案例演示了一个数据动态脱敏策略创建的基本过程。 
@@ -182,7 +182,7 @@ date: 2021-04-15 09:08:53
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png openGauss动态数据脱敏) 
+    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png  'openGauss动态数据脱敏') 
     
    
    
@@ -190,7 +190,7 @@ date: 2021-04-15 09:08:53
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png openGauss动态数据脱敏) 
+    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png  'openGauss动态数据脱敏') 
     
    
    
@@ -203,7 +203,7 @@ date: 2021-04-15 09:08:53
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png openGauss动态数据脱敏) 
+    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png  'openGauss动态数据脱敏') 
     
    
    
@@ -217,7 +217,7 @@ date: 2021-04-15 09:08:53
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png openGauss动态数据脱敏) 
+    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png  'openGauss动态数据脱敏') 
     
    
    
@@ -242,12 +242,12 @@ date: 2021-04-15 09:08:53
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png openGauss动态数据脱敏) 
+    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png  'openGauss动态数据脱敏') 
     
    
    
     
-    图2：openGauss动态数据脱敏架构 
+    图2：openGauss动态数据脱���架构 
     
    
    
@@ -265,7 +265,7 @@ date: 2021-04-15 09:08:53
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png openGauss动态数据脱敏) 
+    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png  'openGauss动态数据脱敏') 
     
    
    
@@ -275,7 +275,7 @@ date: 2021-04-15 09:08:53
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png openGauss动态数据脱敏) 
+    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png  'openGauss动态数据脱敏') 
     
    
    
@@ -288,7 +288,7 @@ date: 2021-04-15 09:08:53
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png openGauss动态数据脱敏) 
+    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png  'openGauss动态数据脱敏') 
     
    
    
@@ -303,7 +303,7 @@ date: 2021-04-15 09:08:53
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png openGauss动态数据脱敏) 
+    ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png  'openGauss动态数据脱敏') 
     
    
    
@@ -313,7 +313,7 @@ date: 2021-04-15 09:08:53
    
    
     
-    动态数据脱敏内置在openGauss内核中，能够在一定程度上保证数据传输路径上的安全性，而外部插件存在绕过风险：当外��插��将客户端发送的SQL或服务端返回的结果集改写后，攻击者依然可以绕过插件直接向数据库发送SQL或截取数据库返回的源数据结果集，导致脱敏插件失效。因此相较于外部插件脱敏的方式，openGauss动态数据脱敏在一定程度上也能降低传输路径上的敏感数据泄漏风险。 
+    动态数据脱敏内置在openGauss内核中，能够在一定程度上保证数据传输路径上的安全性，而外部插件存在绕过风险：当外部插件将客户端发送的SQL或服务端返回的结果集改写后，攻击者依然可以绕过插件直接向数据库发送SQL或截取数据库返回的源数据结果集，导致脱敏插件失效。因此相较于外部插件脱敏的方式，openGauss动态数据脱敏在一定程度上也能降低传输路径上的敏感数据泄漏风险。 
     
    
    
@@ -366,7 +366,7 @@ date: 2021-04-15 09:08:53
      
       
        
-       ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png openGauss动态数据脱敏) 
+       ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png  'openGauss动态数据脱敏') 
        
       
      
@@ -411,7 +411,7 @@ date: 2021-04-15 09:08:53
        
         
          
-         ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png openGauss动态数据脱敏) 
+         ![Test](https://oscimg.oschina.net/oscnet/c0e26e0a-7693-4b02-bdd8-7cfd7e714dd1.png  'openGauss动态数据脱敏') 
          
         
        

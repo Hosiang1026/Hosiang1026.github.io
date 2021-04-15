@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 614
+top: 771
 cover_picture: 'https://oscimg.oschina.net/oscnet/66b660fb-8b9a-4a4e-b4a7-f135f63624cf.png'
 abbrlink: 890e6a2e
-date: 2021-04-15 09:16:39
+date: 2021-04-15 09:53:06
 ---
 
 &emsp;&emsp;由于笔者之前维护了几个比较老的项目是用jquery全家桶开发的，其中有些需求是需要跨页面交互和父子页面通信，故借此总结一下。另一块是前端实现文件下载功能，虽然方法很多，为了不用重复造轮...
@@ -37,7 +37,7 @@ date: 2021-04-15 09:16:39
  ###### 1. 实现页面之间通信的方法 
  虽然我们使用postmessage也可以实现页面通信，但这里我们主要使用window.opener这个API，MDN对它的解释如下： 
   
- 意思就是window提供的opener接口返回一个打开当前页面的页面的一个引用，换句话说，如果A页面打开B，那么B页面的opener将返回A。通过这种方式，我们可以在A页面定义全局的方法挂载在window上，那么B页面就可以通过opener拿到A页面的方法从而控制A页面的行为。 
+ 意思就是window提供的opener接口返回一个打开当前页面的页面的一个引用，换句话说，如果A页面打开B，那么B页面的opener将返回A。通过这种方式，我们可以在A页面定���全局的方法挂载在window上，那么B页面就可以通过opener拿到A页面的方法从而控制A页面的行为。 
  目前主流的浏览器对这个API支持的都比较好，所以我们在大部分场景下可以考虑使用这个API。 
  为了更方便的理解他的应用场景，我们这里实现一个小功能：我们定义两个页面，A，B，当A页面打开B页面的时候，用B页面改变A页面的背景色。代码如下： 
    
@@ -45,43 +45,79 @@ date: 2021-04-15 09:16:39
   
    
    
-    ```java 
+    
+ ```java 
   // A页面
-  ```  ```java 
-  <body>
-  ```  ```java 
-      <h1>父页面A</h1>
-  ```  ```java 
-      <a href="./b.html" target="_blank">打开b页面</a>
-  ```  ```java 
-      <script>
-  ```  ```java 
-          function changeColor(color) {
-  ```  ```java 
-              document.body.style.background = color
-  ```  ```java 
-          }
-  ```  ```java 
-  </script>
-  ```  ```java 
-  </body>
-  ```  ```java 
+  ``` 
   
-  ```  ```java 
-  // B页面
-  ```  ```java 
+ ```java 
   <body>
-  ```  ```java 
-      <h1>父页面B</h1>
-  ```  ```java 
+  ``` 
+  
+ ```java 
+      <h1>父页面A</h1>
+  ``` 
+  
+ ```java 
+      <a href="./b.html" target="_blank">打开b页面</a>
+  ``` 
+  
+ ```java 
       <script>
-  ```  ```java 
-          window.opener.changeColor('blue')
-  ```  ```java 
+  ``` 
+  
+ ```java 
+          function changeColor(color) {
+  ``` 
+  
+ ```java 
+              document.body.style.background = color
+  ``` 
+  
+ ```java 
+          }
+  ``` 
+  
+ ```java 
   </script>
-  ```  ```java 
+  ``` 
+  
+ ```java 
   </body>
   ``` 
+  
+ ```java 
+  
+  ``` 
+  
+ ```java 
+  // B页面
+  ``` 
+  
+ ```java 
+  <body>
+  ``` 
+  
+ ```java 
+      <h1>父页面B</h1>
+  ``` 
+  
+ ```java 
+      <script>
+  ``` 
+  
+ ```java 
+          window.opener.changeColor('blue')
+  ``` 
+  
+ ```java 
+  </script>
+  ``` 
+  
+ ```java 
+  </body>
+  ``` 
+ 
   
   
    
@@ -113,39 +149,71 @@ date: 2021-04-15 09:16:39
   
    
    
-    ```java 
+    
+ ```java 
   // 父页面
-  ```  ```java 
+  ``` 
+  
+ ```java 
   window.onload = function() {
-  ```  ```java 
+  ``` 
+  
+ ```java 
       let iframe1 = $id('a1').contentWindow;
-  ```  ```java 
+  ``` 
+  
+ ```java 
       // 控制子页面dom
-  ```  ```java 
+  ``` 
+  
+ ```java 
       iframe1.document.body.style.background = "#000"
-  ```  ```java 
+  ``` 
+  
+ ```java 
       iframe1.loadData({a: '1'})
-  ```  ```java 
-  }
-  ```  ```java 
+  ``` 
   
-  ```  ```java 
-  function $id(id) {
-  ```  ```java 
-      return document.getElementById(id)
-  ```  ```java 
-  }
-  ```  ```java 
-  
-  ```  ```java 
-  // 子页面
-  ```  ```java 
-  function loadData(data) {
-  ```  ```java 
-      document.body.append(`父页面的数据数据${data.a}`)
-  ```  ```java 
+ ```java 
   }
   ``` 
+  
+ ```java 
+  
+  ``` 
+  
+ ```java 
+  function $id(id) {
+  ``` 
+  
+ ```java 
+      return document.getElementById(id)
+  ``` 
+  
+ ```java 
+  }
+  ``` 
+  
+ ```java 
+  
+  ``` 
+  
+ ```java 
+  // 子页面
+  ``` 
+  
+ ```java 
+  function loadData(data) {
+  ``` 
+  
+ ```java 
+      document.body.append(`父页面的数据数据${data.a}`)
+  ``` 
+  
+ ```java 
+  }
+  ``` 
+ 
   
   
    
@@ -156,19 +224,31 @@ date: 2021-04-15 09:16:39
   
    
    
-    ```java 
+    
+ ```java 
   // 父页面
-  ```  ```java 
-  function $id(id) {
-  ```  ```java 
-      return document.getElementById(id)
-  ```  ```java 
-  }
-  ```  ```java 
-  // 子页面
-  ```  ```java 
-  parent.window.$id('bridge').innerHTML = '子页面操控父页面dom'复���代���
   ``` 
+  
+ ```java 
+  function $id(id) {
+  ``` 
+  
+ ```java 
+      return document.getElementById(id)
+  ``` 
+  
+ ```java 
+  }
+  ``` 
+  
+ ```java 
+  // 子页面
+  ``` 
+  
+ ```java 
+  parent.window.$id('bridge').innerHTML = '子页面操控父页面dom'复制代码
+  ``` 
+ 
   
   
    
@@ -176,23 +256,33 @@ date: 2021-04-15 09:16:39
   
   ![Test](undefined  'JS夸页面通信极简方案&纯前端实现文件下载') 
   
- 接下来我们来解决子页面和子页面通信的问题，其实方法在上面已经提到了，我们可以把父页面作为一个桥梁，子页面A通过parent.window拿到父页面的window，进而可以获取另一个子页面B的dom，这样我们就可以让子页面A操作子页面B了，反之也是一样的。 
+ 接下来我们来解决子页面和子页面通信的问题，其实方法在上面已经提到了，我们可以把父页面作为一个桥梁，子页面A通过parent.window拿到父页面��window，进而可以获取另一个子页面B的dom，这样我们就可以让子页面A操作子页面B了，反之也是一样的。 
    
   
   
    
    
-    ```java 
+    
+ ```java 
   // 子页面A
-  ```  ```java 
+  ``` 
+  
+ ```java 
   let iframeBWin = parent.window.$id('a2').contentWindow
-  ```  ```java 
+  ``` 
+  
+ ```java 
   iframeBWin.onload = function() {
-  ```  ```java 
+  ``` 
+  
+ ```java 
       iframeBWin.document.getElementById('show').innerHTML = "来自子页面A的问候"
-  ```  ```java 
+  ``` 
+  
+ ```java 
   }复制代码
   ``` 
+ 
   
   
    
@@ -207,27 +297,47 @@ date: 2021-04-15 09:16:39
   
    
    
-    ```java 
+    
+ ```java 
   function download(url, filename) {
-  ```  ```java 
+  ``` 
+  
+ ```java 
       return fetch(url).then(res => res.blob().then(blob => {
-  ```  ```java 
+  ``` 
+  
+ ```java 
           let a = document.createElement('a');
-  ```  ```java 
+  ``` 
+  
+ ```java 
           let url = window.URL.createObjectURL(blob);
-  ```  ```java 
+  ``` 
+  
+ ```java 
           a.href = url;
-  ```  ```java 
+  ``` 
+  
+ ```java 
           a.download = filename;
-  ```  ```java 
+  ``` 
+  
+ ```java 
           a.click();
-  ```  ```java 
+  ``` 
+  
+ ```java 
           window.URL.revokeObjectURL(url);
-  ```  ```java 
+  ``` 
+  
+ ```java 
       }))
-  ```  ```java 
+  ``` 
+  
+ ```java 
   }
   ``` 
+ 
   
   
    

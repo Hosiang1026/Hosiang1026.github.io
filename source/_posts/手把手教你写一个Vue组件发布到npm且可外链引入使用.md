@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 1523
-cover_picture: ''
+top: 1989
+cover_picture: 'https://api.ixiaowai.cn/gqapi/gqapi.php'
 abbrlink: 5777c75f
-date: 2021-04-15 09:26:24
+date: 2021-04-15 09:46:45
 ---
 
 &emsp;&emsp;前言 我们为什么要写个组件上传到npm镜像上呢，我们肯定遇到过这样一个场景，项目中有很多地方与某个功能相似，你想到的肯定是把该功能封装成Component组件，后续方便我们调用。但是过了一段...

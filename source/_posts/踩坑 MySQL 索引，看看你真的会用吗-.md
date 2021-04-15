@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 730
+top: 2099
 cover_picture: 'https://oscimg.oschina.net/oscnet/22a494b2-9fed-4354-ae54-69038d7d9189.png'
 abbrlink: f37a80fe
-date: 2021-04-15 09:16:07
+date: 2021-04-15 09:46:45
 ---
 
 &emsp;&emsp;关于 MySQL 索引，对于研发同学，尤其是后端研发同学，一定不会陌生。我们工作中经常会用到 MySQL 数据库，就肯定会经常用到性能优化方面的设计和考量，常常用涉及到 MySQL 索引。但是关于 ...
@@ -32,14 +32,18 @@ date: 2021-04-15 09:16:07
  ![Test](https://oscimg.oschina.net/oscnet/22a494b2-9fed-4354-ae54-69038d7d9189.png  '踩坑 MySQL 索引，看看你真的会用吗-') 
  ![Test](https://oscimg.oschina.net/oscnet/22a494b2-9fed-4354-ae54-69038d7d9189.png  '踩坑 MySQL 索引，看看你真的会用吗-') 
  有一天，我在执行如下 SQL 的时候（一个是指定了字段 id，另一个未指定查询字段，而是利用了 *），发现两种情况下查询执行结果竟然不一样！ 
-  ```java 
+  
+ ```java 
   Case1：select id from cities limit 1;
-  ```    
+  ``` 
+    
  查询结果： 
  id：2 
-  ```java 
+  
+ ```java 
   Case2：select * from cities limit 1;
-  ```  
+  ``` 
+  
  查询结果： 
  ![Test](https://oscimg.oschina.net/oscnet/22a494b2-9fed-4354-ae54-69038d7d9189.png  '踩坑 MySQL 索引，看看你真的会用吗-') 
    
@@ -47,23 +51,29 @@ date: 2021-04-15 09:16:07
   
  #### 问题分析 
  按照之前的工作经验告诉我，遇事不要慌，先 explain 解释执行看看吧。 
-  ```java 
+  
+ ```java 
   Case1：explain select id from cities limit 1;
-  ```  
-  ```java 
+  ``` 
+  
+  
+ ```java 
   执行结果：
-  ```  
+  ``` 
+  
  ![Test](https://oscimg.oschina.net/oscnet/22a494b2-9fed-4354-ae54-69038d7d9189.png  '踩坑 MySQL 索引，看看你真的会用吗-') 
    
-  ```java 
+  
+ ```java 
   Case2：explain select * from cities limit 1;
-  ```  
+  ``` 
+  
  执行结果： 
  ![Test](https://oscimg.oschina.net/oscnet/22a494b2-9fed-4354-ae54-69038d7d9189.png  '踩坑 MySQL 索引，看看你真的会用吗-') 
    
  经过上面的执行计划查看，发现 Case1 中的 SQL 应用到了一个名为'uniq_city_code'的索引，而第二个走了全表扫描查询。 
    
- 问题初步结论：也就是说两个 SQL 由于查询字段的不同，导致 MySQL 在具体执行时候选取了不同��索引策略，从而导致了查询结果的不同。 
+ 问题初步结论：也就是说两个 SQL 由于查询字段的不同，导致 MySQL 在具体执行时候选取了不同的索引策略，从而导致了查询结果的不同。 
   
  #### 疑点跟进 
  其实经过上面的分析，其实还存在几个疑问点： 
@@ -93,19 +103,25 @@ date: 2021-04-15 09:16:07
    
  好了，我们还是回到问题本身。 
  我们其实可以得出这样一个初步结论： 
-  ```java 
+  
+ ```java 
   Case1：select id from cities limit 1;
-  ```  
- ���为 uniq_city_code 索引中包含 id 字段，此查询可以从 uniq_city_code 索引中直接取得数据，所以优化器选择走 uniq_city_code 索引； 
-  ```java 
+  ``` 
+  
+ 因为 uniq_city_code 索引中包含 id 字段，此查询可以从 uniq_city_code 索引中直接取得数据，所以优化器选择走 uniq_city_code 索引； 
+  
+ ```java 
   Case2：select * from cities limit 1;
-  ```  
+  ``` 
+  
  此查询中 select * 选取了在 uniq_city_code 索引中不包含的列，所以无法使用 uniq_city_code 这个索引。 
    
  为了验证一下我们刚刚得到的初步结论，我们来利用 Case3 验证一下。 
-  ```java 
+  
+ ```java 
   Case3：select id, city_code from cities limit 1;
-  ```  
+  ``` 
+  
  执行结果： 
  ![Test](https://oscimg.oschina.net/oscnet/22a494b2-9fed-4354-ae54-69038d7d9189.png  '踩坑 MySQL 索引，看看你真的会用吗-') 
    
@@ -133,7 +149,7 @@ date: 2021-04-15 09:16:07
   
  #### 总结 
  好了，最后我们一起来对整个分享做下总结吧。 
- 1）首先我们遇到一个查询问题，由于查询字段的不同导致我们的查询结果��据��在差异； 
+ 1）首先我们遇到一个查询问题，由于查询字段的不同导致我们的查询结果数据存在差异； 
  2）我们对问题进行追究，发现根据 select 的字段不同，MySQL 选取的索引策略不同，即结果数据不同； 
  3）对于是否存在索引覆盖问题，我们进行了 Case3 的验证，确认了存在索引覆盖的问题； 
  4）对于 MySQL 为什么会存在这样的索引选取原则，我们最终发现是辅助索引一定是主键索引的子集，从节约 IO 的角度，在全表扫描时优先选择辅助索引。 

@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 837
-cover_picture: ''
+top: 862
+cover_picture: 'https://api.ixiaowai.cn/gqapi/gqapi.php'
 abbrlink: 6bf59c72
-date: 2021-04-15 09:16:07
+date: 2021-04-15 09:48:03
 ---
 
 &emsp;&emsp;摘要 为什么没见人用Vector和Hashtable了？HashMap它又线程不安全在哪里？ ConcurrentHashMap的进化与骚操作有哪些？ Copy-On-Write是个啥思想？有哪些例子？ 为什么需要并发队列？又有哪些我...
@@ -18,16 +18,24 @@ date: 2021-04-15 09:16:07
    
   ### 摘要 
    
-   为什么没见人用 ```java 
+   为什么没见人用 
+ ```java 
   Vector
-  ``` 和 ```java 
+  ``` 
+ 和 
+ ```java 
   Hashtable
-  ``` 了？ ```java 
+  ``` 
+ 了？ 
+ ```java 
   HashMap
-  ``` 它又线程不安全在哪里？ 
-    ```java 
+  ``` 
+ 它又线程不安全在哪里？ 
+    
+ ```java 
   ConcurrentHashMap
-  ``` 的进化与骚操作有哪些？ 
+  ``` 
+ 的进化与骚操作有哪些？ 
    Copy-On-Write是个啥思想？有哪些例子？ 
    为什么需要并发队列？又有哪些我们视而不见的并发的队列？ 
    当我们想控制线程的先来后到时该咋办？一个个去讲道理吗？ 
@@ -35,22 +43,28 @@ date: 2021-04-15 09:16:07
    
   ### 并发容器 
   先总览一下这些并发容器都在整什么幺蛾子 
-   ```java 
+   
+ ```java 
   1. Concurrent*  大部分是通过CAS实现并发
 2. CopyOnWrite*  复制一份原数据
 3. Blocking*  通过AQS实现
 复制代码
-  ```  
+  ``` 
+  
    
   #### 一、为什么Vector和Hashtable被留在了历史的长河中？ 
   很简单，别想太多，就是因为性能不好。 
    
-  ##### 那为什么性能不好呢？它性能丢失��哪儿？ 
-  我们先看一看 ```java 
+  ##### 那为什么性能不好呢？它性能丢失在哪儿？ 
+  我们先看一看 
+ ```java 
   Vector
-  ``` 的 ```java 
+  ``` 
+ 的 
+ ```java 
   get
-  ``` 方法： 
+  ``` 
+ 方法： 
    
     
      
@@ -60,16 +74,22 @@ date: 2021-04-15 09:16:07
      
     
    look, look, 这个 
-   ```java 
+   
+ ```java 
   synchronized
-  ``` 是直接修饰在方法上的，如果你上下翻翻，就可以发现基本上这个类的所有��法都是 
-   ```java 
+  ``` 
+ 是直接修饰在方法上的，如果你上下翻翻，就可以发现基本上这个类的所有方法都是 
+   
+ ```java 
   synchronized
-  ``` 修饰的。 
+  ``` 
+ 修饰的。 
   那有人可能问了，为什么锁方法就性能差？因为这个锁粒度是实例对象呀 
-   ```java 
+   
+ ```java 
   Hashtable
-  ``` 也是如此。 
+  ``` 
+ 也是如此。 
    
   #### 二、为什么HashMap是线程不安全的？ 
    
@@ -122,11 +142,15 @@ date: 2021-04-15 09:16:07
        
       
       
-    保证并发安全 1.7使用分段锁Segment(extends ReentreenLock)来保证16个段的安全（段不可动态增加）；1.8使用 ```java 
+    保证并发安全 1.7使用分段锁Segment(extends ReentreenLock)来保证16个段的安全（段不可动态增加）；1.8使用 
+ ```java 
   CAS
-  ```  +  ```java 
+  ``` 
+  +  
+ ```java 
   synchronized
-  ``` 来保证，粒度为每个Node。 
+  ``` 
+ 来保证，粒度为每个Node。 
      
       
        
@@ -136,33 +160,48 @@ date: 2021-04-15 09:16:07
        
       
       
-    查询复杂度 当冲突超过8个时也能保证查询效率，由原来的拉链法的 ```java 
+    查询复杂度 当冲突超过8个时也能保证查询效率，由原来的拉链法的 
+ ```java 
   O(n)
-  ``` 变为红黑树的 ```java 
+  ``` 
+ 变为红黑树的 
+ ```java 
   O(logn)
-  ```   
+  ``` 
+   
    
    
   #### 四、ConcurrentHashMap 如何实现如a++这样的组合操作？ 
-  显然， ```java 
+  显然， 
+ ```java 
   ConcurrentHashMap
-  ``` 是保证了同时put的并发安全性，但是并没有说，你同时执行 ```java 
+  ``` 
+ 是保证了同时put的并发安全性，但是并没有说，你同时执行 
+ ```java 
   a++
-  ``` 时也是线程安全的： 
-   ```java 
+  ``` 
+ 时也是线程安全的： 
+   
+ ```java 
   int a = map.get(key);
 int b = a+1;
 map.put(key, b);
 复制代码
-  ```  
+  ``` 
+  
   那让我们来想想，咋解决这个问题呢？ 
-  把这段用 ```java 
+  把这段用 
+ ```java 
   synchronized
-  ``` 包起来吗？ 
-  那使用 ```java 
+  ``` 
+ 包起来吗？ 
+  那使用 
+ ```java 
   ConcurrentHashMap
-  ``` 还有什么意义呢？我们来看看这样一个方法：replace 
-   ```java 
+  ``` 
+ 还有什么意义呢？我们来看看这样一个方法：replace 
+   
+ ```java 
   // 利用CAS的思想，去循环的判断并进行++的操作，直到成功为止
 // replace保证了并发修改的安全性
 while (true) {
@@ -174,11 +213,15 @@ while (true) {
     }
 }
 复制代码
-  ```  
-  再看一个组合操作，用于解决相同key的put覆盖问题： ```java 
+  ``` 
+  
+  再看一个组合操作，用于解决相同key的put覆盖问题： 
+ ```java 
   putIfAbsent
-  ```  
-   ```java 
+  ``` 
+  
+   
+ ```java 
   // 核心思想如下表示
 if (!map.contains("key")){
     return map.put("key", "value");
@@ -186,31 +229,48 @@ if (!map.contains("key")){
     return map.get("key");
 }
 复制代码
-  ```  
+  ``` 
+  
    
   #### 五、CopyOnWriteArrayList适用场景有哪些？ 
    
   ##### 我们先想想为什么会有这个玩意？ 
    
-   用来代替 ```java 
+   用来代替 
+ ```java 
   Vector
-  ``` 和 ```java 
+  ``` 
+ 和 
+ ```java 
   SynchronizedList
-  ``` ，就和 ```java 
+  ``` 
+ ，就和 
+ ```java 
   ConcurrentHashMap
-  ``` 代替 ```java 
+  ``` 
+ 代替 
+ ```java 
   SynchronizedMap
-  ``` 的原因一样 
-    ```java 
+  ``` 
+ 的原因一样 
+    
+ ```java 
   Vector
-  ``` 和 ```java 
+  ``` 
+ 和 
+ ```java 
   SynchronizedList
-  ``` 的锁的粒度太大，并发效率相比较���，并且在遍历时无法修改。 
-   Copy-On-Write容器还包括 ```java 
+  ``` 
+ 的锁的粒度太大，并发效率相比较低，并且在遍历时无法修改。 
+   Copy-On-Write容器还包括 
+ ```java 
   CopyOnWriteArraySet
-  ``` ，用于替代同步的 ```java 
+  ``` 
+ ，用于替代同步的 
+ ```java 
   Set
-  ```  
+  ``` 
+  
    
    
   ##### 好了，现在我们来说说适用场景 
@@ -279,9 +339,11 @@ if (!map.contains("key")){
    
   那上图的这些队列有何特点呢？我们一一道来 
    
-     ```java 
+     
+ ```java 
   ArrayBlockingQueue
-  ``` : 有界、可指定容量、底层由数组实现、可设置公平与否 
+  ``` 
+ : 有界、可指定容量、底层由数组实现、可设置公平与否 
      
       
        
@@ -291,16 +353,24 @@ if (!map.contains("key")){
        
       
      我们可以看到在放入元素那一步使用了可重入锁的锁住（可打断）的方法。 
-     ```java 
+     
+ ```java 
   PriorityBlockingQueue
-  ``` : 支持优先级设置（依据对象的自然排序顺序或者是构造函数所带的Comparator）、队列的出入顺序是设置的顺序（不是先进先出）、无界队列、 ```java 
+  ``` 
+ : 支持优先级设置（依据对象的自然排序顺序或者是构造函数所带的Comparator）、队列的出入顺序是设置的顺序（不是先进先出）、无界队列、 
+ ```java 
   PriorityQueue
-  ``` 的线程安全版本。  
-     ```java 
+  ``` 
+ 的线程安全版本。  
+     
+ ```java 
   LinkedBlockingQueue
-  ``` : 默认无界(容量为Integer.MAX_VALUE，容量可指定）、内部结构为一个Node数组+两把锁、一般情况下性能优于 ```java 
+  ``` 
+ : 默认无界(容量为Integer.MAX_VALUE，容量可指定）、内部结构为一个Node数组+两把锁、一般情况下性能优于 
+ ```java 
   ArrayBlockingQueue
-  ``` （锁粒度更小） 
+  ``` 
+ （锁粒度更小） 
      
       
        
@@ -309,17 +379,27 @@ if (!map.contains("key")){
        
        
       
-     这里使用的是 ```java 
+     这里使用的是 
+ ```java 
   Condition
-  ```  +  ```java 
+  ``` 
+  +  
+ ```java 
   ReentrantLock
-  ``` ，其实就相当于  ```java 
+  ``` 
+ ，其实就相当于  
+ ```java 
   synchronized
-  ```  +  ```java 
+  ``` 
+  +  
+ ```java 
   Object.wait()
-  ```  +  ```java 
+  ``` 
+  +  
+ ```java 
   Object.notify()
-  ``` ，这是一个适用于生产者消费者的绝佳队列，如果想看原生实现可以瞅瞅我在并发原理中利用 wait + notify 实现的生产者消费者。 
+  ``` 
+ ，这是一个适用于生产者消费者的绝佳队列，如果想看原生实现可以瞅瞅我在并发原理中利用 wait + notify 实现的生产者消费者。 
      
       
        
@@ -329,11 +409,15 @@ if (!map.contains("key")){
        
       
      我们看这个放入元素的方法就可以理解到：如果队列已满，则阻塞，否则就放一个元素，如果还可以继续放，则唤醒在notFull中等待的线程，如果放之前队列为空，则唤醒在notEmpty上等待的线程。 
-     ```java 
+     
+ ```java 
   SynchronousQueue
-  ``` : 容量为0不是1、线程池 ```java 
+  ``` 
+ : 容量为0不是1、线程池 
+ ```java 
   Executors.newCacheThreadPool()
-  ``` 使用的阻塞队列 
+  ``` 
+ 使用的阻塞队列 
      
       
        
@@ -342,10 +426,12 @@ if (!map.contains("key")){
        
        
       
-     它没有实际的容量，任意线程（生产者线程或者消费者线程，生产类型的操作比如put，offer，消费类型的操作比如poll，take）都会等待知道获得数据或者交付完成数据才会返回，一个生产者线程的使命是将线程附着着的数据交付给一个消费者线程，而一个消费者线程则是等待一个生产者线程的数据。 
-     ```java 
+     它没有实际的容量，任意线程（生��者��程或者消费者线程，生产类型的操作比如put，offer，消费类型的操作比如poll，take）都会等待知道获得数据或者交付完成数据才会返回，一个生产者线程的使命是将线程附着着的数据交付给一个消费者线程，而一个消费者线程则是等待一个生产者线程的数据。 
+     
+ ```java 
   ConcurrentLinkedQueue
-  ``` : 并发包中唯一一个非阻塞的队列，内部由链表实现、核心思想也是CAS。 
+  ``` 
+ : 并发包中唯一一个非阻塞的队列，内部由链表实现、核心思想也是CAS。 
      
       
        
@@ -355,11 +441,15 @@ if (!map.contains("key")){
        
       
       
-     ```java 
+     
+ ```java 
   DelayQueue
-  ``` : 延迟队列（根据延迟时间排序）、元素需实现 ```java 
+  ``` 
+ : 延迟队列（根据延迟时间排序）、元素需实现 
+ ```java 
   Delayed
-  ``` 接口（规定排序规则）  
+  ``` 
+ 接口（规定排序规则）  
    
    
   ### 控制并发流程 
@@ -381,7 +471,8 @@ if (!map.contains("key")){
     多等多  
    
   下面举一个小栗子，模拟运动员跑步的场景，所有运动员等枪响后开跑，待运动员都到达终点后裁判才宣布比赛结束。 
-   ```java 
+   
+ ```java 
   CountDownLatch begin = new CountDownLatch(1);
 CountDownLatch end = new CountDownLatch(10);
 ExecutorService service = Executors.newFixedThreadPool(5);
@@ -410,7 +501,8 @@ begin.countDown();
 end.await();
 System.out.println("所有人到达终点，比赛结束！");
 复制代码
-  ```  
+  ``` 
+  
   这个类不能重用，即不可以重新计数。如果需要重用，考虑CyclicBarrier和建新的实例。 
    
   #### 八、Semaphore有哪些适用场景？ 
@@ -425,8 +517,9 @@ System.out.println("所有人到达终点，比赛结束！");
      
      
     
-   接下来看一个小Demo 
-   ```java 
+   ���下���看一个小Demo 
+   
+ ```java 
   static Semaphore semaphore = new Semaphore(3, true);
 
 public static void main(String[] args) {
@@ -461,7 +554,8 @@ static class Task implements Runnable {
     }
 }
 复制代码
-  ```  
+  ``` 
+  
   注意点： 
    
    获取和释放的数量必须一致（比如你请求的是3个，但是你却每次只释放2个，那这个许可证岂不是就越用越少了，这玩意并没有在类的层面进行限制，所以需要编码时候注意）。 
@@ -471,19 +565,30 @@ static class Task implements Runnable {
    
   #### 九、CyclicBarrier与CountDownLatch的区别是什么？ 
    
-    作用不同： ```java 
+    作用不同： 
+ ```java 
   CyclicBarrier
-  ``` 需要等待固定数量的线程到达栅栏后才能继续执行，而 ```java 
+  ``` 
+ 需要等待固定数量的线程到达栅栏后才能继续执行，而 
+ ```java 
   CountDownLatch
-  ``` 只需要计数到0即可。也就是说， ```java 
+  ``` 
+ 只需要计数到0即可。也就是说， 
+ ```java 
   CountDownLatch
-  ``` 用于事件， ```java 
+  ``` 
+ 用于事件， 
+ ```java 
   CyclicBarrier
-  ``` 用于线程。 来看一个 ```java 
+  ``` 
+ 用于线程。 来看一个 
+ ```java 
   CyclicBarrier
-  ``` 的Demo：  
+  ``` 
+ 的Demo：  
    
-   ```java 
+   
+ ```java 
   public static void main(String[] args) {
     CyclicBarrier cyclicBarrier = new CyclicBarrier(5, () -> System.out.println("所有人都到场了， 大家统一出发！"));
     for (int i = 0; i < 10; i++) {
@@ -514,24 +619,35 @@ static class Task implements Runnable{
     }
 }
 复制代码
-  ```  
+  ``` 
+  
    
-   可重用性不同： ```java 
+   可重用性不同： 
+ ```java 
   new CyclicBarrier(5)
-  ``` 等5个线程到了后执行 ```java 
+  ``` 
+ 等5个线程到了后执行 
+ ```java 
   run
-  ``` ，还可以继续等接下来的5个线程到。 
+  ``` 
+ ，还可以继续等接下来的5个线程到。 
    
    
   ### 总结 
-  呼呼，总算说完了花里胡哨的并发容器，现在知道了可以用CopyOnWrite去解决读多写少的场景；用阻塞队列去实现生产者消费者模型；用 ```java 
+  呼呼，总算说完了花里胡哨的并发容器，现在知道了可以用CopyOnWrite去解决读多写少的场景；用阻塞队列去实现生产者消费者模型；用 
+ ```java 
   CountDownLatch
-  ``` 来驯服一个个溜得贼快的线程。 
-  下一章我们搞个大事情，并发界的总统山： ```java 
+  ``` 
+ 来驯服一个个溜得贼快的线程。 
+  下一章我们搞个大事情，并发界的总统山： 
+ ```java 
   AQS
-  ``` 。尝试着利用 ```java 
+  ``` 
+ 。尝试着利用 
+ ```java 
   AQS
-  ``` 去实现一个我们自己的并发工具。 
+  ``` 
+ 去实现一个我们自己的并发工具。 
   
   
 

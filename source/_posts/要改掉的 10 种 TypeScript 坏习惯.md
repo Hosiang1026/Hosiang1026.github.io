@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 895
-cover_picture: ''
+top: 2110
+cover_picture: 'https://api.ixiaowai.cn/gqapi/gqapi.php'
 abbrlink: b51ae85d
-date: 2021-04-15 09:08:53
+date: 2021-04-15 09:46:45
 ---
 
 &emsp;&emsp;在过去的几年中，TypeScript 和 JavaScript 一直在稳步发展，而我们在过去的几十年中养成的一些编程习惯也变得过时了。其中有一些习惯可能从来就没有什么意义可言。这篇文章就来谈一谈我们大...
@@ -29,9 +29,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   {"compilerOptions": {"target": "ES2015","module": "commonjs"}}
-  ```  
+  ``` 
+  
   
   
   应该怎么做 
@@ -42,9 +44,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   {"compilerOptions": {"target": "ES2015","module": "commonjs","strict": true}}
-  ```  
+  ``` 
+  
   
   
   我们为什么养成了这样的习惯 
@@ -66,9 +70,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   function createBlogPost (text: string, author: string, date?: Date) {return {text: text,author: author,date: date || new Date()}}
-  ```  
+  ``` 
+  
   
   
   应该怎么做 
@@ -79,12 +85,14 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   function createBlogPost (text: string, author: string, date: Date = new Date())return {text: text,author: author,date: date}}
-  ```  
+  ``` 
   
   
-  我们为什么养成了这样的习惯 
+  
+  我��为什么养成了这样的习惯 
    
   
  这个?? 运算符是去年才引入的，所以在长函数中间使用值时，可能很难习惯将其设置为参数默认值。 
@@ -103,9 +111,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   async function loadProducts(): Promise<Product[]> {const response = await fetch('https://api.mysite.com/products')const products: any = await response.json()return products}
-  ```  
+  ``` 
+  
   
   
   应该怎么做 
@@ -116,9 +126,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   async function loadProducts(): Promise<Product[]> {const response = await fetch('https://api.mysite.com/products')const products: unknown = await response.json()return products as Product[]}
-  ```  
+  ``` 
+  
   
   
   我们为什么养成了这样的习惯 
@@ -143,9 +155,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   async function loadProducts(): Promise<Product[]> {const response = await fetch('https://api.mysite.com/products')const products: unknown = await response.json()return products as Product[]}
-  ```  
+  ``` 
+  
   
   
   应该怎么做 
@@ -156,9 +170,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   function isArrayOfProducts (obj: unknown): obj is Product[] {return Array.isArray(obj) && obj.every(isProduct)}function isProduct (obj: unknown): obj is Product {return obj != null&& typeof (obj as Product).id === 'string'}async function loadProducts(): Promise<Product[]> {const response = await fetch('https://api.mysite.com/products')const products: unknown = await response.json()if (!isArrayOfProducts(products)) {throw new TypeError('Received malformed products API response')}return products}
-  ```  
+  ``` 
+  
   
   
   我们为什么养成了这样的习惯 
@@ -168,7 +184,7 @@ date: 2021-04-15 09:08:53
   
   为什么应该纠正它 
   
- 即使断言现在可以保存，当有人将代码移植到其他���置时这种情况也可能会改变。type guard 将确保所有检查都是明确的。 
+ 即使断言现在可以保存，当有人将代码移植到其他位置时这种情况也可能会改变。type guard 将确保所有检查都是明确的。 
   
   5. 测试中的 as any 
   
@@ -180,9 +196,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   interface User {id: stringfirstName: stringlastName: stringemail: string}test('createEmailText returns text that greats the user by first name', () => {const user: User = {firstName: 'John'} as anyexpect(createEmailText(user)).toContain(user.firstName)}
-  ```  
+  ``` 
+  
   
   
   应该怎么做 
@@ -193,9 +211,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   interface User {id: stringfirstName: stringlastName: stringemail: string}class MockUser implements User {id = 'id'firstName = 'John'lastName = 'Doe'email = 'john@doe.com'}test('createEmailText returns text that greats the user by first name', () => {const user = new MockUser()expect(createEmailText(user)).toContain(user.firstName)}
-  ```  
+  ``` 
+  
   
   
   我们为什么养成了这样的习惯 
@@ -217,9 +237,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   interface Product {id: stringtype: 'digital' | 'physical'weightInKg?: numbersizeInMb?: number}
-  ```  
+  ``` 
+  
   
   
   应该怎么做 
@@ -230,9 +252,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   interface Product {id: stringtype: 'digital' | 'physical'}interface DigitalProduct extends Product {type: 'digital'sizeInMb: number}interface PhysicalProduct extends Product {type: 'physical'weightInKg: number}
-  ```  
+  ``` 
+  
   
   
   我们为什么养成了这样的习惯 
@@ -254,9 +278,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   function head<T> (arr: T[]): T | undefined {return arr[0]}
-  ```  
+  ``` 
+  
   
   
   应该怎么做 
@@ -267,12 +293,14 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   function head<Element> (arr: Element[]): Element | undefined {return arr[0]}
-  ```  
+  ``` 
   
   
-  我们为什么养成了这样的习惯 
+  
+  我们为什么养成��这样的习惯 
    
   
  我猜想这个习惯越来越常见，因为即使是官方文档也在使用一个字母的名称： 
@@ -293,9 +321,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   function createNewMessagesResponse (countOfNewMessages?: number) {if (countOfNewMessages) {return `You have ${countOfNewMessages} new messages`}return 'Error: Could not retrieve number of new messages'}
-  ```  
+  ``` 
+  
   
   
   应该怎么做 
@@ -306,9 +336,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   function createNewMessagesResponse (countOfNewMessages?: number) {if (countOfNewMessages !== undefined) {return `You have ${countOfNewMessages} new messages`}return 'Error: Could not retrieve number of new messages'}
-  ```  
+  ``` 
+  
   
   
   我们为什么养成了这样的习惯 
@@ -316,7 +348,7 @@ date: 2021-04-15 09:08:53
   
  编写简短的检查看起来更加简洁，这样我们就可以不去思考我们实际想要检查的内容。 
   
-  为什���应���纠正它 
+  为什么应该纠正它 
   
  也许我们应该考虑一下我们实际要检查的内容。例如，上面的示例处理了 countOfNewMessages 为 0 的不同情况。 
   
@@ -330,9 +362,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   function createNewMessagesResponse (countOfNewMessages?: number) {if (!!countOfNewMessages) {return `You have ${countOfNewMessages} new messages`}return 'Error: Could not retrieve number of new messages'}
-  ```  
+  ``` 
+  
   
   
   应该怎么做 
@@ -343,9 +377,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   function createNewMessagesResponse (countOfNewMessages?: number) {if (countOfNewMessages !== undefined) {return `You have ${countOfNewMessages} new messages`}return 'Error: Could not retrieve number of new messages'}
-  ```  
+  ``` 
+  
   
   
   我们为什么养成了这样的习惯 
@@ -367,9 +403,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   function createNewMessagesResponse (countOfNewMessages?: number) {if (countOfNewMessages != null) {return `You have ${countOfNewMessages} new messages`}return 'Error: Could not retrieve number of new messages'}
-  ```  
+  ``` 
+  
   
   
   应该怎么做 
@@ -380,9 +418,11 @@ date: 2021-04-15 09:08:53
    
   
   
-   ```java 
+   
+ ```java 
   function createNewMessagesResponse (countOfNewMessages?: number) {if (countOfNewMessages !== undefined) {return `You have ${countOfNewMessages} new messages`}return 'Error: Could not retrieve number of new messages'}
-  ```  
+  ``` 
+  
   
   
   我们为什么养成了这样的习惯 

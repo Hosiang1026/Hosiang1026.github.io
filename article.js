@@ -33,7 +33,7 @@ function crawler(domain) {
                 //nextPage( html );
             });
         });
-    }while (i != 15)
+    }while (i != 5)
 }
 
 //解析html页面
@@ -47,7 +47,7 @@ function filterHtml(html) {
         var url = ele.find(".header").attr("href");
         var listTime = ele.find(".extra").find(".list").find(".item")[1].children[0].data;
         //var cover = ele.find(".image").children()[0].attribs.src;
-        var cover = "";
+        var cover = "https://api.ixiaowai.cn/gqapi/gqapi.php";
         if (null != ele.find(".image").html()){
             cover = ele.find(".image")[0].children[1].attribs.src;
         }
@@ -170,6 +170,10 @@ function insertArrData() {
 //写入文件
 function writeFiles(index, title, cover, desc, content) {
 
+    if (-1 != cover.indexOf(">-")){
+        cover = cover.replace(">-","'");
+        cover.append("'");
+    }
     var titleTime = datetime.format(new Date(),'YYYY-MM-DD hh:mm:ss');
 
     var fileContent =
@@ -186,12 +190,11 @@ function writeFiles(index, title, cover, desc, content) {
         "\n" +
         "&emsp;&emsp;"+desc+"\n" +
         "<!-- more -->\n"+ content;
-    title = title.replace("?","");
+    console.log(title + " File has been created-"+index + "cover_picture: '"+cover+"'");
     fs.writeFileSync("./source/_posts/"+title+".md", fileContent, (err) => {
         if (err) {
             console.error(err);
             return;
         }
-        console.log(title + " File has been created-"+index);
     });
 }

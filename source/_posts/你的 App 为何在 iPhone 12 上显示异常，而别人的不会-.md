@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 620
+top: 711
 cover_picture: 'https://oscimg.oschina.net/oscnet/fbe79c30-6671-4e94-bcf7-d98045cec1b7.png'
 abbrlink: b3172a17
-date: 2021-04-15 09:16:39
+date: 2021-04-15 09:48:03
 ---
 
 &emsp;&emsp;作者 | hite和落雁 来源 | 简书，点击阅读原文查看作者更多文章 背景 10月14日 iPhone 12 系列正式发布，当我观看直播看到介绍 iPhone 12 系列的分辨率后，我注意到这些分辨率是全新的，我立...
@@ -18,15 +18,17 @@ date: 2021-04-15 09:16:39
    
   
   
-  作者 | hite和落雁来源 | 简书，点击阅读原文查看作者更多文章 
+  作者 | hite和落雁来源 | 简书，点击阅读原文��看作者更多文章 
    
   
   
  #### 背景 
  10月14日 iPhone 12 系列正式发布，当我观看直播看到介绍 iPhone 12 系列的分辨率后，我注意到这些分辨率是全新的，我立即在群里吐槽——又需要适配一波了。我以为只是宽高变化会导致字号、间距的变化，然而更严重的问题是我们判断是否是刘海屏使用了如下代码（这种写法是不完善的，但我相信很多 App 里都是这么写的）； 
-  ```java 
+  
+ ```java 
   self.is_iphonex =  (SCREEN_MAX_LENGTH==812.f || SCREEN_MAX_LENGTH==896.f);
-  ```  
+  ``` 
+  
  是否是刘海屏是枚举所有符合预期的设备高度来判断的，它的好处是快速稳定，但遇到新机型就悲催了。在新 iPhone 12 系列中，屏幕高度分别为： 
   
    
@@ -70,9 +72,11 @@ date: 2021-04-15 09:16:39
     
    
   
- 所以如果( ```java 
+ 所以如果( 
+ ```java 
   SCREEN_MAX_LENGTH==812.f || SCREEN_MAX_LENGTH==896.f
-  ``` ) 代码来判断刘海屏，定位导航栏位置肯定是错误的。预期表现是导航栏被刘海遮住。 
+  ``` 
+ ) 代码来判断刘海屏，定位导航栏位置肯定是错误的。预期表现是导航栏被刘海遮住。 
  实际情况如何呢？ 
   
  #### 巡查App Store 的 App 在 iPhone 12 的表现 
@@ -92,7 +96,7 @@ date: 2021-04-15 09:16:39
  当 App 运行在自己不认识的新设备上时，系统会把新设备当做上一代的设备来使用。换言之，新设备运行的 App 在兼容模式，避免 App 去处理 build 之时还不存在的设备上逻辑。 
   
  这个兼容规则也用着显示模式的设置里（在用户在设置 -> 显示和亮度 -> 放大显示 里设置了放大效果）。 
- 例如， iPhone 11 Pro Max 标准显示（Standard Zoom） 下分辨率是 414×896 points；而如果设置为放大显示（Display Zoom）会被当做 iPhone 11 Pro 设备，此时分辨率是 375×812 points。当设备运作在兼容模式，大部分设备的一些常见的高度，如 statusbar、 bottombar 的尺寸会被影响。 
+ 例如， iPhone 11 Pro Max 标准显示（Standard Zoom） 下分辨率是 414×896 points；而如果设置为放大显示（Display Zoom）会被当做 iPhone 11 Pro 设备，此时分辨率是 375×812 points。当设备运作在兼容模式，大部分设备��一些常见的高度，如 statusbar、 bottombar 的尺寸会被影响。 
   
  除了运行在兼容模式，退化为旧设备分辨率外，iPhone 还有一种尺寸适配策略：downsampling，例如全新一代的 iPhone12 mini，被当做 iPhone 11 Pro 渲染即 375×812 points，如果按照3x 图渲染，实际的渲染像素是 1125 x 2436，在 1080×2340 pixel 屏幕上显示不下，需要 downsampling / 1.04，不能按照 3x 图渲染；这样导致它的顶部安全距离是奇葩的 50 pt。 
  关于如何 downsampling ，这里用 8P 的渲染示例，截图取自 
@@ -104,14 +108,18 @@ date: 2021-04-15 09:16:39
   
  #### 附录 
  1、正确判断是否是刘海屏的方法，苹果会推荐我们使用 safeAreaInsets 来获取。如从 ViewController.view 获取时，时机太迟了，需要从更早创建的地方获取如 keyWindow，如： 
-  ```java 
+  
+ ```java 
   + (CGFloat)topOffset{    if (@available(iOS 11, *)) {        return [UIApplication sharedApplication].keyWindow.safeAreaInsets.top;// 其实也有隐患，如果是从推送打开 App ，可能还不存在 keyWindow    }        return 20;}
-  ```  
+  ``` 
+  
  直接使用 topOffset 来设置顶部安全距离或者通过判断 bottomOffset 是否大于 0 来确认是否是刘海屏，进而设置不同尺寸。 
  2、如果是判断刘海屏然后再加 statusbar 高度的作法（不推荐），你还需要完整的 statusbar 高度的表； 
-  ```java 
+  
+ ```java 
   iPhone11: 48iPhone12/12 pro/12 pro max: 47iPhone12 mini: 50iPad Pro、IPad Air: 24Other iPhones: 44.非刘海屏：20
-  ```  
+  ``` 
+  
   
  #### 参考 
  [1] https://links.jianshu.com/go?to=https%3A%2F%2Fhacknicity.medium.com%2Fhow-ios-apps-adapt-to-the-various-iphone-12-screen-sizes-e45c021e1b8b[2] https://links.jianshu.com/go?to=https%3A%2F%2Fdeveloper.apple.com%2Fvideos%2Fplay%2Fwwdc2019%2F224%2F%3Ftime%3D123[3]https://links.jianshu.com/go?to=https%3A%2F%2Fwww.paintcodeapp.com%2Fnews%2Fultimate-guide-to-iphone-resolutions 

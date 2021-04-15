@@ -5,8 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 770
-cover_picture: >-
-  https://ucc.alicdn.com/pic/developer-ecology/00028dc51710412d84b6945dfef1ef75.jpg
+cover_picture: 'https://ucc.alicdn.com/pic/developer-ecology/00028dc51710412d84b6945dfef1ef75.jpg'
 abbrlink: e92e5dd1
 date: 2021-04-15 09:10:30
 ---

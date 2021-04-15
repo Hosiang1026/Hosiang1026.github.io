@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 897
-cover_picture: ''
+top: 1965
+cover_picture: 'https://api.ixiaowai.cn/gqapi/gqapi.php'
 abbrlink: b8ca02a2
-date: 2021-04-15 09:08:53
+date: 2021-04-15 09:46:45
 ---
 
 &emsp;&emsp;前段时间利用空余时间基于 Gitee OpenApi 写了一个微信上的码云第三方非官方微信小程序，收获了一部分用户，一直想给它怼上跟随系统自动变化的暗黑模式，今天总算有时间给搞了。 实现原理 所...
@@ -18,9 +18,12 @@ date: 2021-04-15 09:08:53
  
 所有代码基本没碰到JavaScript部分，也没有使用小程序的API进行操作，全程使用媒体查询与环境变量实现，如下： 
 ###### 原始小程序部分 
-在小程序源代码根目录新建  ```java 
+在小程序源代码根目录新建  
+ ```java 
   theme.json
-  ```  文件，用于保存暗黑模式和普通模式下的一些颜色值和配置： 
+  ``` 
+  文件，用于保存暗黑模式和普通模式下的一些颜色值和配置： 
+ 
  ```java 
   {
   "light": {
@@ -41,12 +44,18 @@ date: 2021-04-15 09:08:53
   }
 }
 
-  ```  
-同时将这个配置文件引入到  ```java 
+  ``` 
+  
+同时将这个配置文件引入到  
+ ```java 
   app.json
-  ```  中，同时将  ```java 
+  ``` 
+  中，同时将  
+ ```java 
   window
-  ```  节点中的颜色配置成上面的变量： 
+  ``` 
+  节点中的颜色配置成上面的变量： 
+ 
  ```java 
   {
   "darkmode": true,
@@ -66,17 +75,25 @@ date: 2021-04-15 09:08:53
   },
 }
 
-  ```  
+  ``` 
+  
 这样，系统在切换显示模式时，小程序的导航栏部分就会自动跟着变色了 ：） 
 ###### 用户自定义页面部分 
 这部分无法直接引用这个配置文件的设置，而且可能很多地方有自定义的颜色值，所以这里需要自己写媒体查询了 ：( 
-这里编辑  ```java 
+这里编辑  
+ ```java 
   app.wxss
-  ```  或者每个页面单独的  ```java 
+  ``` 
+  或者每个页面单独的  
+ ```java 
   *.wxss
-  ```  ，当然，我为了省事，基本都写在了  ```java 
+  ``` 
+  ，当然，我为了省事，基本都写在了  
+ ```java 
   app.wxss
-  ```  中： 
+  ``` 
+  中： 
+ 
  ```java 
   
 @media (prefers-color-scheme: dark) {
@@ -85,13 +102,16 @@ date: 2021-04-15 09:08:53
 	}
 }
 
-  ```  
+  ``` 
+  
 #### 收工体验 
-欢迎微信搜索  ```java 
+欢迎微信搜索  
+ ```java 
   码云仓库
-  ```  来体验一下，小程序支持了查看仓库、Pull Requests、Issues、用户信息、粉丝关注、通知私信、组织信息等。 
+  ``` 
+  来体验一下，小程序支持了查看仓库、Pull Requests、Issues、用户信息、粉丝关注、通知私信、组织信息等。 
 你也可以扫码体验： 
-![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df0ca2a7395644e4a613e4e3694e94a2~tplv-k3u1fbpfcp-zoom-1.image 给Gitee小程序加上暗黑模式是什么体验) 
+![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df0ca2a7395644e4a613e4e3694e94a2~tplv-k3u1fbpfcp-zoom-1.image  '给Gitee小程序加上暗黑模式是什么体验') 
 #### 瞧瞧部分截图： 
-![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df0ca2a7395644e4a613e4e3694e94a2~tplv-k3u1fbpfcp-zoom-1.image 给Gitee小程序加上暗黑模式是什么体验) ![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df0ca2a7395644e4a613e4e3694e94a2~tplv-k3u1fbpfcp-zoom-1.image 给Gitee小程序加上暗黑模式是什么体验) ![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df0ca2a7395644e4a613e4e3694e94a2~tplv-k3u1fbpfcp-zoom-1.image 给Gitee小程序加上暗黑模式是什么体验)
+![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df0ca2a7395644e4a613e4e3694e94a2~tplv-k3u1fbpfcp-zoom-1.image  '给Gitee小程序加上暗黑模式是什么体验') ![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df0ca2a7395644e4a613e4e3694e94a2~tplv-k3u1fbpfcp-zoom-1.image  '给Gitee小程序加上暗黑模式是什么体验') ![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df0ca2a7395644e4a613e4e3694e94a2~tplv-k3u1fbpfcp-zoom-1.image  '给Gitee小程序加上暗黑模式是什么体验')
                                         

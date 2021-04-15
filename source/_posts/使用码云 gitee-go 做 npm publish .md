@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 772
+top: 835
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG'
 abbrlink: 5951975f
-date: 2021-04-15 09:10:30
+date: 2021-04-15 09:48:03
 ---
 
 &emsp;&emsp;gitee-go 其实去年已经上线了，但当时太忙，没时间折腾。 经过一再折腾，终于搞通了。操作步骤按照以下流程： Step-1：在仓库的 DevOps 进入 Gitee Go 的配置页面，点击新建流水线（以下 2 ...
@@ -16,12 +16,13 @@ date: 2021-04-15 09:10:30
                                                                                                                                                                                         gitee-go 其实去年已经上线了，但当时太忙，没时间折腾。 
 经过一再折腾，终于搞通了。操作步骤按照以下流程： 
 Step-1：在仓库的 DevOps 进入 Gitee Go 的配置页面，点击新建流水线（以下 2 图） 
-![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG 使用码云 gitee-go 做 npm publish ) 
-![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG 使用码云 gitee-go 做 npm publish ) 
+![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG  '使用码云 gitee-go 做 npm publish ') 
+![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG  '使用码云 gitee-go 做 npm publish ') 
 Step-2：新建流水线的初始化配置界面，操作如下图。 
 该配置文件创建保存后，会在你的仓库目录下创建对应的文件，如：.workflow/npm-publish.yml 文件。建议可在自己本地修改流水线配置文件，毕竟有代码高亮，格式也更可控。 
-![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG 使用码云 gitee-go 做 npm publish ) 
-Step-3：本地优化 npm-publish.yml 配置文件 
+![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG  '使用码云 gitee-go 做 npm publish ') 
+Step-3：本地优化 npm-publish.yml ��置文件 
+ 
  ```java 
   # ========================================================
 # npm 构建参考流水线样例
@@ -63,21 +64,22 @@ stages:                                   # 构建阶段配置
               npm install -g @jsdevtools/npm-publish
               npm-publish --token=$NPM_TOKEN ./package.json
 
-  ```  
+  ``` 
+  
 具体的说明，可以参考这里：Gitee Go 快速入门 和 流水线配置(YAML)格式说明 。这里补充说明一下这个配置文件的关键信息： 
  
  commitMessage 为匹配 git commit 提交时的注释信息，这里我用了匹配 build: 这个前缀 
  stage 这里配置了两个 steps，第一个 step 执行测试，第二个 step 执行 publish 
  Gitee Go 针对国内环境，默认使用的是 taobao 的仓库，所以要做 npm publish 需要手动修改仓库，或者用 @jsdevtools/npm-publish 这个库来辅助发布。经过摸索，这个库更易用，推荐使用。 
- $NPM_TOKEN 这个变量，是配置在仓库的环境变量，推荐阅读：环境变量管理 。补充说明，新建变量的时候，记得勾选 密钥模式 ，勾选该项后，这个变量在 Gitee Go 运行阶段，会自动掩饰为 ****** ，防止关键信息外泄。 ![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG 使用码云 gitee-go 做 npm publish )  被掩藏了的 $NPM_TOKEN 的截图说明： ![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG 使用码云 gitee-go 做 npm publish ) 
+ $NPM_TOKEN 这个变量，是配置在仓库的环境变量，推荐阅读：环境变量管理 。补充说明，新建变量的时候，记得勾选 密钥模式 ，勾选该项后，这个变量在 Gitee Go 运行阶段，会自动掩饰为 ****** ，防止关键信息外泄。 ![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG  '使用码云 gitee-go 做 npm publish ')  被掩藏了的 $NPM_TOKEN 的截图说明： ![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG  '使用码云 gitee-go 做 npm publish ') 
  
 Step-4：git 提交前，记得检查 package.json 中的 version 字段，加版本号。然后提交的时候，填写注释如：build: 1.0.0 ，这样就会触发 npm-publish.yml 的 commitMessage。 
 之后，进入仓库的 Gitee Go 界面，即可看到触发了一个新的流水线的记录： 
-![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG 使用码云 gitee-go 做 npm publish ) 
+![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG  '使用码云 gitee-go 做 npm publish ') 
 点击【查看】，可进入该流水线的详情记录： 
-![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG 使用码云 gitee-go 做 npm publish ) 
+![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG  '使用码云 gitee-go 做 npm publish ') 
 点击 【构建详情】，可查看构建的过程，注意，未完成的 step ，无法获得查看执行的详情： 
-![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG 使用码云 gitee-go 做 npm publish ) 
+![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG  '使用码云 gitee-go 做 npm publish ') 
 补充说明： 
  
  经过摸索，Stage（流水线）的 Step（环节）的失败判定，来自于 node.js 执行时的 process.stderr 的写入，如 eslint、单元测试、npm指令执行发生错误的时候，都会抛出错误，写入 process.stderr，即会触发 Step 的执行失败的判定。 

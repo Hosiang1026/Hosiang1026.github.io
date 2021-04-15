@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 680
-cover_picture: ''
+top: 529
+cover_picture: 'https://api.ixiaowai.cn/gqapi/gqapi.php'
 abbrlink: efdb92f5
-date: 2021-04-15 09:15:42
+date: 2021-04-15 10:16:56
 ---
 
 &emsp;&emsp;简介 正则表达式是我们做数据匹配的时候常用的一种工具，虽然正则表达式的语法并不复杂，但是如果多种语法组合起来会给人一种无从下手的感觉。 于是正则表达式成了程序员的噩梦。今天我们来看...
@@ -23,7 +23,8 @@ date: 2021-04-15 09:15:42
 通常来说，我们是通过序号来访问capture groups的，这叫做Numbered capture groups。 
 举个例子： 
  
-  ```java 
+  
+ ```java 
   const RE_DATE = /([0-9]{4})-([0-9]{2})-([0-9]{2})/;
 
 const matchObj = RE_DATE.exec('1999-12-31');
@@ -31,7 +32,8 @@ const year = matchObj[1]; // 1999
 const month = matchObj[2]; // 12
 const day = matchObj[3]; // 31
 
-  ```  
+  ``` 
+  
  
      
   
@@ -40,7 +42,8 @@ const day = matchObj[3]; // 31
 因为我们有三个括号，所以可以匹配三个group。然后通过1，2，3来访问特定的group。 
 我们把上面的matchObj输出看一下其中的内容： 
  
-  ```java 
+  
+ ```java 
   [
   '1999-12-31',
   '1999',
@@ -51,7 +54,8 @@ const day = matchObj[3]; // 31
   groups: undefined
 ]
 
-  ```  
+  ``` 
+  
  
      
   
@@ -62,7 +66,8 @@ const day = matchObj[3]; // 31
 上面讲到了numbered capture groups是通过序列号来访问到匹配的数据。但是匹配到的group是没有名字的。 
 我们看下怎么才能够给这些groups起个名字： 
  
-  ```java 
+  
+ ```java 
   const RE_DATE = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
 
 const matchObj = RE_DATE.exec('1999-12-31');
@@ -70,14 +75,16 @@ const year = matchObj.groups.year; // 1999
 const month = matchObj.groups.month; // 12
 const day = matchObj.groups.day; // 31
 
-  ```  
+  ``` 
+  
  
      
   
  
 看下matchObj的内容： 
  
-  ```java 
+  
+ ```java 
   [
   '1999-12-31',
   '1999',
@@ -88,7 +95,8 @@ const day = matchObj.groups.day; // 31
   groups: [Object: null prototype] { year: '1999', month: '12', day: '31' }
 ]
 
-  ```  
+  ``` 
+  
  
      
   
@@ -97,23 +105,27 @@ const day = matchObj.groups.day; // 31
 如果要匹配我们之前匹配过的group信息，则可以使用numbered groups的 \k 或者 named groups的 \k<name>. 
 我们看一个例子： 
  
-  ```java 
+  
+ ```java 
   const RE_TWICE = /^(?<word>[a-z]+)!\k<word>$/;
 RE_TWICE.test('abc!abc'); // true
 RE_TWICE.test('abc!ab'); // false
 
-  ```  
+  ``` 
+  
  
      
   
  
  
-  ```java 
+  
+ ```java 
   const RE_TWICE = /^(?<word>[a-z]+)!\1$/;
 RE_TWICE.test('abc!abc'); // true
 RE_TWICE.test('abc!ab'); // false
 
-  ```  
+  ``` 
+  
  
      
   
@@ -122,20 +134,23 @@ RE_TWICE.test('abc!ab'); // false
 Named capture groups还可以和replace一起使用。 
 有了group name，我们可以直接在replace中使用group name来做引用： 
  
-  ```java 
+  
+ ```java 
   const RE_DATE = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
 console.log('1999-12-31'.replace(RE_DATE,
     '<month>/<day>/$<year>'));
     // 12/31/1999
 
-  ```  
+  ``` 
+  
  
      
   
  
 replace的第二个参数还可以是一个函数，函数的参数就是我们group出来的一些内容： 
  
-  ```java 
+  
+ ```java 
   const RE_DATE = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
 console.log('1999-12-31'.replace(
     RE_DATE,
@@ -143,7 +158,8 @@ console.log('1999-12-31'.replace(
         month+'/'+day+'/'+year));
     // 12/31/1999
 
-  ```  
+  ``` 
+  
  
      
   
@@ -159,11 +175,13 @@ Age表示的是该字符什么时候被加入到Unicode中等等。
 这些属性还有对应的缩写： Lowercase_Letter = Ll ， Currency_Symbol = Sc 等等。 
 举个例子，比如说我们想匹配空格。传统做法是这样做的： 
  
-  ```java 
+  
+ ```java 
   > /^\s+$/.test('\t \n\r')
 true
 
-  ```  
+  ``` 
+  
  
      
   
@@ -171,18 +189,22 @@ true
 前面是正则表达式，然后使用一个test方法来匹配字符串，最终得到的true。 
 刚刚讲到了unicode的属性，我们也可以用属性来匹配： 
  
-  ```java 
+  
+ ```java 
   > /^\p{White_Space}+$/u.test('\t \n\r')
 true
 
-  ```  
+  ``` 
+  
  
      
   
  
-属性匹配使用的是 ```java 
+属性匹配使用的是 
+ ```java 
   \p
-  ``` , 后面跟的是属性值。 
+  ``` 
+ , 后面跟的是属性值。 
 注意，我们还要在正则表达式后面加上u，以表示使用的是Unicode属性转义。 
  
 ### lookaround assertion 
@@ -190,7 +212,8 @@ lookaround assertion可以被翻译为环视断言，它是正则表达式中的
 有两种lookaround assertion，一种是Lookahead一种是Lookbehind。 
 我们先看一下Lookahead的使用： 
  
-  ```java 
+  
+ ```java 
   const RE_AS_BS = /aa(?=bb)/;
 const match1 = RE_AS_BS.exec('aabb');
 console.log(match1[0]); // 'aa'
@@ -198,23 +221,31 @@ console.log(match1[0]); // 'aa'
 const match2 = RE_AS_BS.exec('aab');
 console.log(match2); // null
 
-  ```  
+  ``` 
+  
  
      
   
  
-lookahead就是向前查看，上面我们使用的是 ```java 
+lookahead就是向前查看，上面我们使用的是 
+ ```java 
   (?=bb)
-  ```  来向前匹配bb。 
+  ``` 
+  来向前匹配bb。 
  
 结果是第一个匹配上了，第二个没有匹配。 
-除了是用 ```java 
+除了是用 
+ ```java 
   ?=
-  ```  之外，我们还可以使用 ```java 
+  ``` 
+  之外，我们还可以使用 
+ ```java 
   ?!
-  ```  表示不等： 
+  ``` 
+  表示不等： 
  
-  ```java 
+  
+ ```java 
   > const RE_AS_NO_BS = /aa(?!bb)/;
 > RE_AS_NO_BS.test('aabb')
 false
@@ -223,38 +254,47 @@ true
 > RE_AS_NO_BS.test('aac')
 true
 
-  ```  
+  ``` 
+  
  
      
   
  
 再来看一下Lookbehind的使用。 
-Lookbehind和Lookahead查询的方向刚刚相反。 
-向后匹配是使用 ```java 
+Lookbehind和Lookahead查���的方向刚刚相反。 
+向后匹配是使用 
+ ```java 
   ?<=
-  ``` 来表示的，我们来看一个例子： 
+  ``` 
+ 来表示的，我们来看一个例子： 
  
-  ```java 
+  
+ ```java 
   const RE_DOLLAR_PREFIX = /(?<=\)foo/g;
 'foo %foo foo'.replace(RE_DOLLAR_PREFIX, 'bar');
     // '$bar %foo foo'
 
-  ```  
+  ``` 
+  
  
      
   
  
 上面的例子中，我们匹配了最前面的$，然后使用bar替换掉了foo。 
-同样的，我们也可以使用 ```java 
+同样的，我们也可以使用 
+ ```java 
   ?<!
-  ```  来表示非相等的情况： 
+  ``` 
+  来表示非相等的情况： 
  
-  ```java 
+  
+ ```java 
   const RE_NO_DOLLAR_PREFIX = /(?<!\)foo/g;
 'foo %foo foo'.replace(RE_NO_DOLLAR_PREFIX, 'bar');
     // '$foo %bar bar'
 
-  ```  
+  ``` 
+  
  
      
   
@@ -263,22 +303,26 @@ Lookbehind和Lookahead查询的方向刚刚相反。
 ### dotAll flag 
 正常情况下dot . 代表的是一个字符，但是这个字符不能够代表行的结束符： 
  
-  ```java 
+  
+ ```java 
   > /^.$/.test('\n')
 false
 
-  ```  
+  ``` 
+  
  
      
   
  
 而dotAll是在 dot . 匹配后面引入的s, 它可以被用来匹配行的结束符： 
  
-  ```java 
+  
+ ```java 
   > /^.$/s.test('\n')
 true
 
-  ```  
+  ``` 
+  
  
      
   

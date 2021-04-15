@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 1542
+top: 2008
 cover_picture: 'https://oscimg.oschina.net/oscnet/5b9ad40a-9ed9-4a62-9f51-603d6675ca7c.jpg'
 abbrlink: 838fb5c0
-date: 2021-04-15 09:26:24
+date: 2021-04-15 09:46:45
 ---
 
 &emsp;&emsp;持续坚持原创输出，点击蓝字关注我吧 作者：小傅哥 博客：https://bugstack.cn ❝ 沉淀、分享、成长，让自己和他人都能有所收获！😜 ❞ 目录 一、前言 二、面试题 三、代理Bean注册到Sprin...
@@ -153,7 +153,7 @@ date: 2021-04-15 09:26:24
  ```java 
   Proxy.newProxyInstance
   ``` 
- 。 
+ �� 
      
    
    

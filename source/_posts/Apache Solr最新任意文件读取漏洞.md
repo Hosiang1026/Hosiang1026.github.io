@@ -4,11 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 862
-cover_picture: >-
-  https://image.3001.net/images/20210401/1617262678_60657856dedf69f91e857.png!small
+top: 704
+cover_picture: 'https://image.3001.net/images/20210401/1617262678_60657856dedf69f91e857.png!small'
 abbrlink: 6fd7717a
-date: 2021-04-15 09:16:07
+date: 2021-04-15 10:16:56
 ---
 
 &emsp;&emsp;漏洞简介 Apache Solr是一个开源搜索服务引擎，默认安装未授权情况下攻击者可以构造恶意HTTP请求读取目标Apache Solr服务器的任意文件。 本文涉及相关实验：CVE-2019-0192 Apache Solr远程反...
@@ -16,11 +15,11 @@ date: 2021-04-15 09:16:07
 
                                                                                                                                                                                         漏洞简介 
 Apache Solr是一个开源搜索服务引擎，默认安装未授权情况下攻击者可以构造恶意HTTP请求读取目标Apache Solr服务器的任意文件。 
-本文涉及相关实验：CVE-2019-0192 Apache Solr远程反序列化代码执行漏洞（Apache Solr是一个开源的搜索服务器。具有高度可靠、可伸缩和容错的，提供分布式索引、复制和负载平衡查询、自动故障转移和恢复、集中配置等功能。） 
+本文涉及相关实验：CVE-2019-0192 Apache Solr远程反序列化代码执行漏洞（Apache Solr是一个开源的搜索服务器。具有高度可靠、可伸缩和容错的，提供分布式索引���复��和负载平衡查询、自动故障转移和恢复、集中配置等功能。） 
 影响版本 
 solr任意版本 
 环境搭建 
-漏洞环境下载： 
+漏���环境下载： 
 https://archive.apache.org/dist/lucene/solr/8.8.0/solr-8.8.0.tgz 
 解压后进入bin目录，启动（需要java环境）， 
 ./solr start 

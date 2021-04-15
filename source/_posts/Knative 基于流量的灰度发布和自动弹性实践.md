@@ -4,11 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 393
-cover_picture: >-
-  https://ucc.alicdn.com/pic/developer-ecology/8c5d94b688a448ef99b5812a4bc51305.png
+top: 720
+cover_picture:  https://ucc.alicdn.com/pic/developer-ecology/8c5d94b688a448ef99b5812a4bc51305.png
 abbrlink: e301d81b
-date: 2021-04-15 09:15:42
+date: 2021-04-15 09:48:03
 ---
 
 &emsp;&emsp;作者| 李鹏（元毅） 来源 | 阿里巴巴云原生公众号 Knative Knative 提供了基于流量的自动扩缩容能力，可以根据应用的请求量，在高峰时自动扩容实例数；当请求量减少以后，自动缩容实例，做到...
@@ -20,9 +19,9 @@ date: 2021-04-15 09:15:42
 Knative 提供了基于流量的自动扩缩容能力，可以根据应用的请求量，在高峰时自动扩容实例数；当请求量减少以后，自动缩容实例，做到自动化地节省资源成本。此外，Knative 还提供了基于流量的灰度发布能力，可以将流量的百分比进行灰度发布。 
 在介绍 Knative 灰度发布和自动弹性之前，先带大家了解一下 ASK Knative 中的流量请求机制。 
 ![Test](https://ucc.alicdn.com/pic/developer-ecology/8c5d94b688a448ef99b5812a4bc51305.png  'Knative 基于流量的灰度发布和自动弹性实践') 
-如上图��示，整体的流量请求机制分为以下部分： 
+如��图所示，整体的流量请求机制分为以下部分： 
  
- 左侧是 Knative Service 的版本信息，可以对流量设置百分比；下面是路由策略，在路由策略里，通过 Ingress controller 将相应的路由规则��置到阿里云 SLB； 
+ 左侧是 Knative Service 的版本信息，可以对流量设置百分比；下面是路由策略，在路由策略里，通过 Ingress controller 将相应的路由规则设置到阿里云 SLB； 
  右侧是对应创建的服务版本 Revision，在版本里对应有 Deployment 的资源，当流量通过 SLB 进来之后，直接根据相应的转发规则，转到后端服务器 Pod 上。 
  
 除了流量请求机制外，上图还展示了相应的弹性策略，如 KPA、HPA 等。 
@@ -98,7 +97,7 @@ Knative Service 中版本管理的资源：Revision，它是 Configuration 的�
  
 指标从哪来？像 Knative 社区提供的基于流量的 KPA，它的指标是通过一个定时的任务去每个 Pod 的 queue-proxy 容器中拉取 Metric 指标。通过 controller 对获取这些指标进行处理，做汇聚并计算需要扩容多少 Pod。 
 怎么执行扩缩容？其实通过调整相应的 Deployment 里面的 Pod 数即可。 
-调整采集指标和调整 Pod 实例数，实现这两部分后就可以很容易地实现自定义扩缩容插件。 
+调整采集指标和调整 Pod 实例数，实现这两部分后就可以很容易地实现自定义��缩容插件。 
 ### 实操演示 
 下面进行示例演示，演示内容主要有： 
  

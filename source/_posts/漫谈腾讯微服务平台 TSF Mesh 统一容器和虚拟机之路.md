@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 448
+top: 404
 cover_picture: 'https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png'
 abbrlink: 6465c54f
-date: 2021-04-15 09:10:30
+date: 2021-04-15 09:46:43
 ---
 
 &emsp;&emsp;导读 随着业务的增长，一些传统企业对诸如灰度发布、服务路由、服务熔断、服务限流等服务治理的需求越来越强烈，但他们又不想对业务代码做大量的改造，因而 Service Mesh 成了他们比较好的选...
@@ -17,7 +17,7 @@ date: 2021-04-15 09:10:30
   
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
     
    
    
@@ -27,7 +27,7 @@ date: 2021-04-15 09:10:30
        
         
          
-         ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+         ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
          
         
        
@@ -59,7 +59,7 @@ date: 2021-04-15 09:10:30
       
        
         
-        随着业务的增长，一些传统企业对诸如灰度发布、服务路由、服务熔断、服务限流等服务治理的需求越来越强烈，但他们又不想对业务代码做大量的改造，因而 Service Mesh 成了他们比较好的选择；不幸的是业内比较成熟能落地的 Service Mesh 方案如 Istio 都是基于各种容器平台构建的，而这些传统企业很多没有接入容器平台也不想做容器化改造，这就导致 Service mesh 很难应用于这些传统企业或者一些非容器化的场景。 
+        随着业务的增长，一些传统企业对诸如灰度发布、服务路由、服务熔断、服务限流等服务治理的需求越来越强烈，但他们又不想对业务代码做大量的改造，因而 Service Mesh 成了他们比较好的选择；不幸的是业内比较成熟能落地的 Service Mesh 方案如 Istio 都是基于各种容器平台构建的，而这些传统企业很多没有接入容器平台也不想做容器���改���，这就导致 Service mesh 很难应用于这些传统企业或者一些非容器化的场景。 
         
        
       
@@ -92,7 +92,7 @@ date: 2021-04-15 09:10:30
        
         
          
-         ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+         ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
          
         
        
@@ -111,7 +111,7 @@ date: 2021-04-15 09:10:30
    
     
      
-     张培培 
+     张��培 
       
      腾讯云微服务团队高级工程师 
      TSF Mesh 研发及负责人 
@@ -125,7 +125,7 @@ date: 2021-04-15 09:10:30
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
     
    
    
@@ -163,7 +163,7 @@ date: 2021-04-15 09:10:30
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
     
    
    
@@ -189,7 +189,7 @@ date: 2021-04-15 09:10:30
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
     
    
    
@@ -266,7 +266,7 @@ date: 2021-04-15 09:10:30
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
     
    
    
@@ -285,59 +285,111 @@ date: 2021-04-15 09:10:30
    
    
     
-     ```java 
+     
+ ```java 
   initContainers:
-  ```  ```java 
+  ``` 
+  
+ ```java 
         - args:
-  ```  ```java 
+  ``` 
+  
+ ```java 
           - -p
-  ```  ```java 
+  ``` 
+  
+ ```java 
           - "15001"
-  ```  ```java 
+  ``` 
+  
+ ```java 
           - -u
-  ```  ```java 
+  ``` 
+  
+ ```java 
           - "1337"
-  ```  ```java 
+  ``` 
+  
+ ```java 
           - -m
-  ```  ```java 
+  ``` 
+  
+ ```java 
           - REDIRECT
-  ```  ```java 
+  ``` 
+  
+ ```java 
           - -i
-  ```  ```java 
+  ``` 
+  
+ ```java 
           - '*'
-  ```  ```java 
+  ``` 
+  
+ ```java 
           - -x
-  ```  ```java 
+  ``` 
+  
+ ```java 
           - ""
-  ```  ```java 
+  ``` 
+  
+ ```java 
           - -b
-  ```  ```java 
+  ``` 
+  
+ ```java 
           - 9080,
-  ```  ```java 
+  ``` 
+  
+ ```java 
           - -d
-  ```  ```java 
+  ``` 
+  
+ ```java 
           - ""
-  ```  ```java 
+  ``` 
+  
+ ```java 
           image: istio/istio-release-proxy_init:1.0.1
-  ```  ```java 
+  ``` 
+  
+ ```java 
           imagePullPolicy: IfNotPresent
-  ```  ```java 
+  ``` 
+  
+ ```java 
           name: istio-init
-  ```  ```java 
+  ``` 
+  
+ ```java 
           resources: {}
-  ```  ```java 
+  ``` 
+  
+ ```java 
           securityContext:
-  ```  ```java 
+  ``` 
+  
+ ```java 
             capabilities:
-  ```  ```java 
+  ``` 
+  
+ ```java 
               add:
-  ```  ```java 
+  ``` 
+  
+ ```java 
               - NET_ADMIN
-  ```  ```java 
+  ``` 
+  
+ ```java 
             privileged: true
-  ```  ```java 
+  ``` 
+  
+ ```java 
           ...
-  ```  
+  ``` 
+  
     
    
    
@@ -351,21 +403,35 @@ date: 2021-04-15 09:10:30
    
    
     
-     ```java 
+     
+ ```java 
   FROM ubuntu:xenial
-  ```  ```java 
+  ``` 
+  
+ ```java 
   RUN apt-get update && apt-get install -y \
-  ```  ```java 
+  ``` 
+  
+ ```java 
       iproute2 \
-  ```  ```java 
+  ``` 
+  
+ ```java 
       iptables \
-  ```  ```java 
+  ``` 
+  
+ ```java 
    && rm -rf /var/lib/apt/lists/*
-  ```  ```java 
+  ``` 
+  
+ ```java 
   ADD istio-iptables.sh /usr/local/bin/
-  ```  ```java 
+  ``` 
+  
+ ```java 
   ENTRYPOINT ["/usr/local/bin/istio-iptables.sh"]
-  ```  
+  ``` 
+  
     
    
    
@@ -379,9 +445,11 @@ date: 2021-04-15 09:10:30
    
    
     
-     ```java 
+     
+ ```java 
   $ /usr/local/bin/istio-iptables.sh -p 15001 -u 1337 -m REDIRECT -i '*' -x "" -b 9080 -d ""
-  ```  
+  ``` 
+  
     
    
    
@@ -409,7 +477,7 @@ date: 2021-04-15 09:10:30
     
    
    
-   问题1的解决比较简单，我们对 pilot-agent 做些一些扩展，在 pilot-agent 中执行 iptables 脚本，pilot-agent 一个主要工作是生成 envoy 的 bootstrap 配置并启动 envoy、管理 envoy 的生命周期，类似容器环境下做 envoy 启动前的 init 准备，在启动 envoy 前执行 iptables 脚本，也比较合理。 
+   问题1的解决比较���单，我们对 pilot-agent 做些一些扩展，在 pilot-agent 中执行 iptables 脚本，pilot-agent 一个主要工作是生成 envoy 的 bootstrap 配置并启动 envoy、管理 envoy 的生命周期，类似容器环境下做 envoy 启动前的 init 准备，在启动 envoy 前执行 iptables 脚本，也比较合理。 
     
    问题2的解决就比较麻烦了，但又非常重要，不像 K8s 的 POD，POD 间网路是隔离的，一个 POD 一般只会运行一个应用，劫持整个 POD 网路空间里的流量完全没有问题，而虚拟机中可能还有其它进程的存在，这些进程可能也有 Outbound 的流量，因此我们不能劫持虚拟机所有的流量，一种比较合理的劫持方案应该是： 
    
@@ -436,7 +504,7 @@ date: 2021-04-15 09:10:30
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
     
    
    
@@ -450,7 +518,7 @@ date: 2021-04-15 09:10:30
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
     
    
    
@@ -522,7 +590,7 @@ date: 2021-04-15 09:10:30
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
     
    
    
@@ -539,7 +607,7 @@ date: 2021-04-15 09:10:30
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
     
    
    
@@ -601,27 +669,47 @@ date: 2021-04-15 09:10:30
    
    
     
-     ```java 
+     
+ ```java 
   apiVersion: v1
-  ```  ```java 
+  ``` 
+  
+ ```java 
   kind: Application
-  ```  ```java 
+  ``` 
+  
+ ```java 
   spec:
-  ```  ```java 
+  ``` 
+  
+ ```java 
     services:
-  ```  ```java 
+  ``` 
+  
+ ```java 
     - name: user # 服务名
-  ```  ```java 
+  ``` 
+  
+ ```java 
       ports:         
-  ```  ```java 
+  ``` 
+  
+ ```java 
       - targetPort: 8091 # 服务监听端口 
-  ```  ```java 
+  ``` 
+  
+ ```java 
         protocol: http # 服务协议类型
-  ```  ```java 
+  ``` 
+  
+ ```java 
       healthCheck:
-  ```  ```java 
+  ``` 
+  
+ ```java 
         path: /health # 健康检查 URL
-  ```  
+  ``` 
+  
     
    
    
@@ -669,7 +757,7 @@ date: 2021-04-15 09:10:30
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
     
    
    
@@ -738,7 +826,7 @@ date: 2021-04-15 09:10:30
      
       
        
-       ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+       ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
        
       
      
@@ -757,7 +845,7 @@ date: 2021-04-15 09:10:30
    
    
     
-    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
     
    
   
@@ -778,7 +866,7 @@ date: 2021-04-15 09:10:30
       
        
         
-        ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png 漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路) 
+        ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  '漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路') 
         
         
         点亮在看，你最好看 
@@ -790,5 +878,5 @@ date: 2021-04-15 09:10:30
    
   
  
-本文分享自���信公众号 - 腾讯云中间件（gh_6ea1bc2dd5fd）。如有侵权，请联系 support@oschina.cn 删除。本文参与“OSC源创计划”，欢迎正在阅读的你也加入，一起分享。
+本文分享自微信公众号 - 腾讯云中间件（gh_6ea1bc2dd5fd）。如有侵权，请联系 support@oschina.cn 删除。本文参与“OSC源创计划”，欢迎正在阅读的你也加入，一起分享。
                                         

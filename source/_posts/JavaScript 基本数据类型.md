@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 835
-cover_picture: ''
+top: 648
+cover_picture: 'https://api.ixiaowai.cn/gqapi/gqapi.php'
 abbrlink: d78db7c6
-date: 2021-04-15 09:08:53
+date: 2021-04-15 09:53:06
 ---
 
 &emsp;&emsp;JavaScript 数据类型分为两种，一种是基本数据类型：String、Number、Boolean、undefined 和 null，另一种是复杂数据类型：Object。JavaScript 不支持任何创建自定义类型的机制，所有的值最终...
@@ -31,7 +31,7 @@ var t = s.len // undifined
 这个临时对象称之为包装对象，字符串（还有数字和布尔值）的属性都是只读的，并不能赋值，有别于其他的对象 
 字符串是存放在堆内存里面的，一旦创建就不可更改，如果想改变某个变量保存的字符串，就必须先销毁原来的字符串，再用一个新的来填充该变量。 
 2. Number 
-在 JavaScript 里，所有与数字有关的都是 Number 类���，Number 类型又分为整数值和浮点数值，但是保存浮点数的内存空间是保存整数的内存空间的两倍，所以 JavaScript 当然不希望在寸土寸金的内存空间里过多的存放浮点数，有下面两种情况会将浮点数转成整数： 
+在 JavaScript 里，所有与数字有关的都是 Number 类型，Number 类型又分为整数值和浮点数值，但是保存浮点数的内存空间是保存整数的内存空间的两倍，所以 JavaScript 当然不希望在寸土寸金的内存空间里过多的存放浮点数，有下面两种情况会将浮点数转成整数： 
  
  小数点后面没有跟数字，比如 1. 
  小数点后面等于 0，比如 1.00 

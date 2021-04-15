@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 813
-cover_picture: ''
+top: 899
+cover_picture: 'https://api.ixiaowai.cn/gqapi/gqapi.php'
 abbrlink: dab44600
-date: 2021-04-15 09:08:53
+date: 2021-04-15 09:53:06
 ---
 
 &emsp;&emsp;前言 说到 Android 启动优化，你一般会想到什么呢？ Android 多线程异步加载 Android 首页懒加载 对，这是两种很常见的优化手段，但是如果让你主导这件事情，你会如何开始呢？ 梳理现有的业务...
@@ -71,12 +71,12 @@ date: 2021-04-15 09:08:53
  litho: https://github.com/facebook/litho 
  X2C: https://github.com/iReaderAndroid/X2C 
   
- 这两个开源库在大型的项目基本不会使用，不过他们的价值是值得肯定的，核心思想很有意义。 
+ 这两个开���库在大型的项目基本不会使用，不过他们的价值是值得肯定的，核心思想很有意义。 
  xml 布局加载耗时的问题， google 也想改善这种现状，最近 Compose beta 发布了，他是采用声明式 UI 的方式来编写布局，避免了 xml 带来的耗时。同时，还支持布局实时预览。这个应该是以后的发展趋势。 
  compose-samples: https://github.com/android/compose-samples 
   
  #### 小结 
- 上面讲了布局优化的现状与发展趋势，接下来我们一起来看一下，有哪些布局优化手段，可以应用���项目中的。 
+ 上面讲了布局优化的现状与发展趋势，接下来我们一起来看一下，有哪些布局优化手段，可以应用到项目中的。 
   
   渐进式加载 
   异步加载 
@@ -95,23 +95,33 @@ date: 2021-04-15 09:08:53
  缺点：还是需要在主线程读取 xml 文件 
   
  #### 核心伪代码 
-  ```java 
+  
+ ```java 
   1start(){2    loadA(){3        loadB(){4            loadC()5        }6    }7}
-  ```  
+  ``` 
+  
  上面的这种写法，是可以的，但是这种做法，有一个很明显的缺点，就是会造成回调嵌套层数过多。当然，我们也可以使用 RxJava 来解决这种问题。但是，如果项目中没用 Rxjava，引用进来，会造成包 size 增加。 
  一个简单的做法就是使用队列的思想，将所有的 ViewStubTask 添加到队列当中，当当前的 ViewStubTask 加载完成，才加载下一个，这样可以避免回调嵌套层数过多的问题。 
  改造之后的代码见 
-  ```java 
+  
+ ```java 
   1val decorView = this.window.decorView2ViewStubTaskManager.instance(decorView)3            .addTask(ViewStubTaskContent(decorView))4            .addTask(ViewStubTaskTitle(decorView))5            .addTask(ViewStubTaskBottom(decorView))6            .start()
-  ```  
-  ```java 
+  ``` 
+  
+  
+ ```java 
    1class ViewStubTaskManager private constructor(val decorView: View) : Runnable { 2 3    private var iViewStubTask: IViewStubTask? = null 4 5    companion object { 6 7        const val TAG = "ViewStubTaskManager" 8 9        @JvmStatic10        fun instance(decorView: View): ViewStubTaskManager {11            return ViewStubTaskManager(decorView)12        }13    }1415    private val queue: MutableList<ViewStubTask> = CopyOnWriteArrayList()16    private val list: MutableList<ViewStubTask> = CopyOnWriteArrayList()171819    fun setCallBack(iViewStubTask: IViewStubTask?): ViewStubTaskManager {20        this.iViewStubTask = iViewStubTask21        return this22    }2324    fun addTask(viewStubTasks: List<ViewStubTask>): ViewStubTaskManager {25        queue.addAll(viewStubTasks)26        list.addAll(viewStubTasks)27        return this28    }2930    fun addTask(viewStubTask: ViewStubTask): ViewStubTaskManager {31        queue.add(viewStubTask)32        list.add(viewStubTask)33        return this34    }353637    fun start() {38        if (isEmpty()) {39            return40        }41        iViewStubTask?.beforeTaskExecute()42        // 指定 decorView 绘制下一帧的时候会回调里面的 runnable43        ViewCompat.postOnAnimation(decorView, this)44    }4546    fun stop() {47        queue.clear()48        list.clear()49        decorView.removeCallbacks(null)50    }5152    private fun isEmpty() = queue.isEmpty() || queue.size == 05354    override fun run() {55        if (!isEmpty()) {56            // 当队列不为空的时候，先加载当前 viewStubTask57            val viewStubTask = queue.removeAt(0)58            viewStubTask.inflate()59            iViewStubTask?.onTaskExecute(viewStubTask)60            // 加载完成之后，再 postOnAnimation 加载下一个61            ViewCompat.postOnAnimation(decorView, this)62        } else {63            iViewStubTask?.afterTaskExecute()64        }6566    }6768    fun notifyOnDetach() {69        list.forEach {70            it.onDetach()71        }72        list.clear()73    }7475    fun notifyOnDataReady() {76        list.forEach {77            it.onDataReady()78        }79    }8081}8283interface IViewStubTask {8485    fun beforeTaskExecute()8687    fun onTaskExecute(viewStubTask: ViewStubTask)8889    fun afterTaskExecute()909192}
-  ```  
- 源码地址：https://github.com/gdutxiaoxu/AnchorTask，核心代码主要在  ```java 
+  ``` 
+  
+ 源码地址：https://github.com/gdutxiaoxu/AnchorTask，核心代码主要在  
+ ```java 
   ViewStubTask
-  ``` ， ```java 
+  ``` 
+ ， 
+ ```java 
   ViewStubTaskManager
-  ``` , 有兴趣的可以看看 
+  ``` 
+ , 有兴趣的可以看看 
   
  ### 异步加载 
  异步加载，简单来说，就是在子线程创建 View。在实际应用中，我们通常会先预加载 View，常用的方案有： 
@@ -123,38 +133,52 @@ date: 2021-04-15 09:08:53
  官方提供了一个类，可以来进行异步的inflate，但是有两个缺点： 
   
   每次都要现场new一个出来 
-  异���加载的view只能通过callback回调才能获得（死穴） 
+  异步加载的view只能通过callback回调才能获得（死穴） 
   
  因此，我们可以仿造官方的 AsyncLayoutInflater 进行改造。核心代码在 AsyncInflateManager。主要介绍两个方法。 
-  ```java 
+  
+ ```java 
   asyncInflate
-  ```  方法，在子线程 inflateView，并将加载结果存放到 mInflateMap 里面。 
-  ```java 
+  ``` 
+  方法，在子线程 inflateView，并将加载结果存放到 mInflateMap 里面。 
+  
+ ```java 
    1    @UiThread 2fun asyncInflate( 3        context: Context, 4        vararg items: AsyncInflateItem? 5    ) { 6        items.forEach { item -> 7            if (item == null || item.layoutResId == 0 || mInflateMap.containsKey(item.inflateKey) || item.isCancelled() || item.isInflating()) { 8                return 9            }10            mInflateMap[item.inflateKey] = item11            onAsyncInflateReady(item)12            inflateWithThreadPool(context, item)13        }1415    }
-  ```  
-  ```java 
+  ``` 
+  
+  
+ ```java 
   getInflatedView
-  ```  方法，用来获得异步inflate出来的view，核心思想如下 
+  ``` 
+  方法，用来获得异步inflate出来的view，核心思想如下 
   
   先从缓存结果里面拿 View，拿到了view直接返回 
   没拿到view，但是子线程在inflate中，等待返回 
   如果还没开始inflate，由UI线程进行inflate 
   
-  ```java 
+  
+ ```java 
    1    /** 2     * 用来获得异步inflate出来的view 3     * 4     * @param context 5     * @param layoutResId 需要拿的layoutId 6     * @param parent      container 7     * @param inflateKey  每一个View会对应一个inflateKey，因为可能许多地方用的同一个 layout，但是需要inflate多个，用InflateKey进行区分 8     * @param inflater    外部传进来的inflater，外面如果有inflater，传进来，用来进行可能的SyncInflate， 9     * @return 最后inflate出来的view10     */11    @UiThread12    fun getInflatedView(13        context: Context?,14        layoutResId: Int,15        parent: ViewGroup?,16        inflateKey: String?,17        inflater: LayoutInflater18    ): View {19        if (!TextUtils.isEmpty(inflateKey) && mInflateMap.containsKey(inflateKey)) {20            val item = mInflateMap[inflateKey]21            val latch = mInflateLatchMap[inflateKey]22            if (item != null) {23                val resultView = item.inflatedView24                if (resultView != null) {25                    //拿到了view直接返回26                    removeInflateKey(item)27                    replaceContextForView(resultView, context)28                    Log.i(TAG, "getInflatedView from cache: inflateKey is $inflateKey")29                    return resultView30                }3132                if (item.isInflating() && latch != null) {33                    //没拿到view，但是在inflate中，等待返回34                    try {35                        latch.await()36                    } catch (e: InterruptedException) {37                        Log.e(TAG, e.message, e)38                    }39                    removeInflateKey(item)40                    if (resultView != null) {41                        Log.i(TAG, "getInflatedView from OtherThread: inflateKey is $inflateKey")42                        replaceContextForView(resultView, context)43                        return resultView44                    }45                }4647                //如果还没开始inflate，则设置为false，UI线程进行inflate48                item.setCancelled(true)49            }50        }51        Log.i(TAG, "getInflatedView from UI: inflateKey is $inflateKey")52        //拿异步inflate的View失败，UI线程inflate53        return inflater.inflate(layoutResId, parent, false)54    }
-  ```  
+  ``` 
+  
   
  #### 简单 Demo 示范 
- 第一步：选择在合适的时机调用  ```java 
+ 第一步：选择在合适的时机调用  
+ ```java 
   AsyncUtils#asyncInflate
-  ```  方法预加载 View， 
-  ```java 
+  ``` 
+  方法预加载 View， 
+  
+ ```java 
    1object AsyncUtils { 2 3    fun asyncInflate(context: Context) { 4        val asyncInflateItem = 5            AsyncInflateItem( 6                LAUNCH_FRAGMENT_MAIN, 7                R.layout.fragment_asny, 8                null, 9                null10            )11        AsyncInflateManager.instance.asyncInflate(context, asyncInflateItem)12    }1314    fun isHomeFragmentOpen() =15        getSP("async_config").getBoolean("home_fragment_switch", true)16}
-  ```  
+  ``` 
+  
  第二步：在获取 View 的时候，先去缓存里面查找 View 
-  ```java 
+  
+ ```java 
    1    override fun onCreateView( 2        inflater: LayoutInflater, container: ViewGroup?, 3        savedInstanceState: Bundle? 4    ): View? { 5        // Inflate the layout for this fragment 6        val startTime = System.currentTimeMillis() 7        val homeFragmentOpen = AsyncUtils.isHomeFragmentOpen() 8        val inflatedView: View 910        inflatedView = AsyncInflateManager.instance.getInflatedView(11            context,12            R.layout.fragment_asny,13            container,14            LAUNCH_FRAGMENT_MAIN,15            inflater16        )1718        Log.i(19            TAG,20            "onCreateView: homeFragmentOpen is $homeFragmentOpen, timeInstance is ${System.currentTimeMillis() - startTime}, ${inflatedView.context}"21        )22        return inflatedView23//        return inflater.inflate(R.layout.fragment_asny, container, false)24    }
-  ```  
+  ``` 
+  
   
  #### 优缺点 
  优点： 

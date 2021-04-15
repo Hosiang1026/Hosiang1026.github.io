@@ -5,8 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 2092
-cover_picture: >-
-  https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?cs=srgb&dl=art-close-up-ecology-886521.jpg&fm=jpg
+cover_picture: 'https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?cs=srgb&dl=art-close-up-ecology-886521.jpg&fm=jpg'
 abbrlink: c1aba8a6
 date: 2021-04-15 09:19:21
 ---

@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 1544
-cover_picture: ''
+top: 1998
+cover_picture: 'https://api.ixiaowai.cn/gqapi/gqapi.php'
 abbrlink: 3a9e31dd
-date: 2021-04-15 09:26:24
+date: 2021-04-15 09:46:45
 ---
 
 &emsp;&emsp;前言 在 go-zero 开源之后，非常多的用户询问是否可以支持以及什么时候支持 websocket，终于在 v1.1.6 里面我们从框架层面让 websocket 的支持落地了，下面我们就以 chat 作为一个示例来讲解...
@@ -77,7 +77,7 @@ date: 2021-04-15 09:26:24
  ```java 
   engine
   ``` 
- 。首先要支撑双��通信： 
+ 。首先要支撑双方通信： 
  
  得有一个交流数据的管道。客户端只管从 管道 读取/输送数据； 
  客户端在线情况。不能说你下线了，还往你那传输数据； 
@@ -266,7 +266,7 @@ func (h *Hub) Run() {
   client
   ``` 
   
- 当出现发送异常或者是超时，异常退出时，会��发下线  
+ 当出现发送异常或者是超时，异常退出时，会触发下线  
  ```java 
   client
   ``` 

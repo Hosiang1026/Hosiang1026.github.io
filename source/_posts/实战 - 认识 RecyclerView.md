@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 1558
+top: 845
 cover_picture: 'https://devrel.andfun.cn/devrel/posts/2021/04/cfd26a1f5e254.png'
 abbrlink: a37a06d8
-date: 2021-04-15 09:26:24
+date: 2021-04-15 10:08:52
 ---
 
 &emsp;&emsp;RecyclerView 是一款非常强大的 widget，它可以帮助您灵活地显示列表数据。当我开始学习 RecyclerView 的时候，我发现对于复杂的列表界面有很多资源可以参考，但是对于简单的列表展现就鲜有可...
@@ -17,13 +17,13 @@ date: 2021-04-15 09:26:24
 本文会通过创建一个简单的 RecyclerView 实现一个列表来显示不同种类的花的名字。在实现的过程中，我也会将 RecyclerView 的每个部分揉碎了展现给大家，这样大家就可以在自己的应用中实现了。 
 #### RecyclerView 是 "何方神圣"？为什么选择它呢？ 
 RecyclerView 是一个容器，它用于显示列表形式 (list) 或者网格形式 (grid) 的数据，比如文本或者照片。 
-当列表滑动的时候，实际上只有少量邻近的视图会显示在屏幕上。��视图滑出屏幕时，RecyclerView 会复用它并且填充新的数据。由于它是通过回收已有的结构而不是持续创建新的列表项，所以它可以有效提高应用的时间效率和空间效率。 
+当列表滑动的时候，实际上只有少量邻近的视图会显示在屏幕上。当视图滑出屏幕时，RecyclerView 会复用它并且填充新的数据。由于它是通过回收已有的结构而不是持续创建新的列表项，所以它可以有效提高应用的时间效率和空间效率。 
 ![Test](https://devrel.andfun.cn/devrel/posts/2021/04/cfd26a1f5e254.png  '实战 - 认识 RecyclerView') 
  
 为什么您需要使用 RecyclerView 呢？ 
  
  RecyclerView 使用 ViewHolder 模式，这样做可以提高性能，因为它无需频繁调用 findViewById() 方法即可访问表项的视图； 
- RecyclerView 使用 LayoutManager，它支持纵向滑动的列表和横向滑动的列表，以及交错布局的列表和网格布局的列表。您还可以创建自定义的 LayoutManager； 
+ RecyclerView 使用 LayoutManager，它支持纵向滑动的列表和横向滑动的列表，以及交错布局的列���和��格布局的列表。您还可以创建自定义的 LayoutManager； 
  RecyclerView 提供默认的表项动画以及自定义动画的入口。 
  
 总之，RecyclerView 兼顾了灵活性和个性化，所以它是功能强大的工具。 
@@ -239,7 +239,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
  ```java 
   RecyclerView
   ``` 
-  的重头戏了，也就是 ViewHolder 和 Adapter 类。ViewHolder 负责存储 RecyclerView 中每一个单独的表项所需要显示的信息。RecyclerView 仅需要创建当前所显示的表项数量的 ViewHolder 外加缓存中的几个 ViewHolder 即可。随着用户滑动屏幕，ViewHolder会被回收 (使用新数据进行填充)，已有的表项会在一端消失，并且在另一端显示一个新的表项。Adapter 类从数据源获得数据，并且将数据传递给正在更新其所持视图的 ViewHolder。下图显示了 RecyclerView、Adapter、ViewHolder 和数据之间的协作��系�� 
+  的重头戏了，也就是 ViewHolder 和 Adapter 类。ViewHolder 负责存储 RecyclerView 中每一个单独的表项所需要显示的信息。RecyclerView 仅需要创建当前所显示的表项数量的 ViewHolder 外加缓存中的几个 ViewHolder 即可。随着用户滑动屏幕，ViewHolder会被回收 (使用新数据进行填充)，已有的表项会在一端消失，并且在另一端显示一个新的表项。Adapter 类从数据源获得数据，并且将数据传递给正在更新其所持视图的 ViewHolder。下图显示了 RecyclerView、Adapter、ViewHolder 和数据之间的协作关系。 
 ![Test](https://devrel.andfun.cn/devrel/posts/2021/04/cfd26a1f5e254.png  '实战 - 认识 RecyclerView') 
 创建 Adapter 
 创建一个叫做 FlowerAdapter 的类，所需显示的列表数据作为该类的参数。 
@@ -255,7 +255,7 @@ class FlowerAdapter(val flowerList: Array<String>) {
   ``` 
   
 创建 ViewHolder 
-创建一个叫做 FlowerViewHolder 的内部类，并且它可以接收一个 itemView 作为参数。在 ViewHolder 中，创建一个变量来引用 TextView，然后将它指向表项布局里对应的视图。然后创建 bind() 函数，它用来将花的名字 (字符��) 和携带数据的 UI (flowerTextView) 关联起来。bind() 函数接收传入的字符串，并且将字符串作为 flowerTextView 的文本内容。 
+创建一个叫做 FlowerViewHolder 的内部类，并且它可以接收一个 itemView 作为参数。在 ViewHolder 中，创建一个变量来引用 TextView，然后将它指向表项布局里对应的视图。然后创建 bind() 函数，它用来将花的名字 (字符串) 和携带数据的 UI (flowerTextView) 关联起来。bind() 函数接收传入的字符串，并且将字符串作为 flowerTextView 的文本内容。 
  
  ```java 
   <!-- Copyright 2019 Google LLC. 
@@ -346,7 +346,7 @@ override fun onBindViewHolder(holder: FlowerViewHolder, position: Int) {
   ``` 
   
 重写 getItemCount() 
-RecyclerView 显示一个列表，所以它需要知道列表里共有多少项。由于 flowerList 就是数据源，所以直接返回它的长度即可。 
+RecyclerView ���示��个列表，所以它需要知道列表里共有多少项。由于 flowerList 就是数据源，所以直接返回它的长度即可。 
  
  ```java 
   <!-- Copyright 2019 Google LLC. 

@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 1235
+top: 603
 cover_picture: 'https://static.oschina.net/uploads/img/202104/13110009_LCi7.png'
 abbrlink: e765f1d1
-date: 2021-04-15 09:26:24
+date: 2021-04-15 10:04:46
 ---
 
 &emsp;&emsp;文章目录 什么是Hash 普通Hash的分析 普通Hash存在的问题 一致性Hashg概念 实现普通Hash和一致性Hash 普通Hash实现 一致性Hash实现 不带虚拟节点实现 带虚拟节点实现 什么是Hash Hash就是把任...
@@ -49,7 +49,7 @@ date: 2021-04-15 09:26:24
  
 ### 一致性Hashg概念 
 一致性Hash的出现就解决了上述的问题，在发生宕机或者和扩容的时候尽可能少的影响请求的分发。 
-一致性Hash的思路如下： ![Test](https://static.oschina.net/uploads/img/202104/13110009_LCi7.png  '浅谈一致性hash') 首先有一条直线，直线的开始为0，结尾为2的32次方减1，这相当于一个地址，然后把直线弯曲形成一个圆环形成闭环，这就是hash环。我们对服务器求hash然后把服务器放到hash环上的对应位置上，当有请求到来时，对请求进行计算，把请求放到hash环的对应位置，然后顺时针获得最近的服务器节点。 示意图如下 ![Test](https://static.oschina.net/uploads/img/202104/13110009_LCi7.png  '浅谈一致性hash') 当发生服务宕机或者扩容是请求转发也是会发生变化的，这次我用扩容示例，宕机同理 假如我们在server1和server2之间加个server4，请求转发如下图 ![Test](https://static.oschina.net/uploads/img/202104/13110009_LCi7.png  '浅谈一致性hash') 由上图我们可以得出当发生扩容或者宕机的时候只会影响极少数一部分的用户，最大限度上提高的体验 
+一致性Hash的思路如下： ![Test](https://static.oschina.net/uploads/img/202104/13110009_LCi7.png  '浅谈一致性hash') 首先有一条直线，直线的开始为0，结尾为2的32次方减1，这相当于一个地址，然后把直线弯曲形成一个圆环形成闭环，这就是hash环。我们对服务器求hash然后把服务器放到hash环上的对应位置上，当有请求到来时，对请求进行计算，把请求放到hash环的对应位置，然后顺时针获得最近的服务器节点。 示意图如下 ![Test](https://static.oschina.net/uploads/img/202104/13110009_LCi7.png  '浅谈一致性hash') 当发生服务宕机或者扩容是请求转发也是会发生变化的��这次我用扩容示例，宕机同理 假如我们在server1和server2之间加个server4，请求转发如下图 ![Test](https://static.oschina.net/uploads/img/202104/13110009_LCi7.png  '浅谈一致性hash') 由上图我们可以得出当发生扩容或者宕机的时候只会影响极少数一部分的用户，最大限度上提高的体验 
 当然一致性hash也可能存在一些问题的，比如如下图所示， 服务器分布及其不合理， 大量的请求都落在同一个服务器上，对服务的压力较大。 ![Test](https://static.oschina.net/uploads/img/202104/13110009_LCi7.png  '浅谈一致性hash') 针对这种情况我们可以用增加虚拟节点的方式来尽可能更合理的分发请求来，减轻对某一服务的压力。 如下图我们对每个节点增加两个虚拟节点 ![Test](https://static.oschina.net/uploads/img/202104/13110009_LCi7.png  '浅谈一致性hash') 
  
 ### 实现普通Hash和一致性Hash 
@@ -144,7 +144,7 @@ date: 2021-04-15 09:26:24
   ``` 
   
  
-##### 带虚拟节点实现 
+##### 带虚���节点实现 
  
  ```java 
   public static void main(String[] args) {

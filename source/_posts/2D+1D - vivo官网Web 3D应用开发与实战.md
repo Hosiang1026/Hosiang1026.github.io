@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 870
+top: 665
 cover_picture: 'https://static001.geekbang.org/infoq/e3/e33c7103073584525c9f3f7f4c4886fb.gif'
 abbrlink: 742eb57
-date: 2021-04-15 09:16:39
+date: 2021-04-15 09:53:06
 ---
 
 &emsp;&emsp;一、 前言 1.1 前端工程师，不写网页，还能做什么？ 在近20年的前端发展史中，前端经历了铁器时代（小前端），信息时代（大前端）以至现在的全能前端时代。经历了几个时代的沉淀之后，前端领...
@@ -76,7 +76,7 @@ WebGL既可以绘制2D数据可视化图形图表，更是一种 3D 绘图标准
   
  
 #### 四、vivo官网3D应用实战 
-对用户来讲，网上购物最大的痛点就是不能所见即所得，目前主流的网上商城一般都是通过图片或者视频展示产品的特点，而这些二维的信息展示方式无法让用户很好的去了解产品的信息。有了3D展示场景之后，用户通过手机模型的3D展示可以更加直观清楚的了解手机的产品细节及特点，从而提升用户的购买欲望。 
+对用户来讲，网上购物最大的痛点就是不能所见即所得，目前主流的网上商城一般都是通过图片或者视频展示产品的特点，而这些二维的信��展示方式无法让用户很好的去了解产品的信息。有了3D展示场景之后，用户通过手机模型的3D展示可以更加直观清楚的了解手机的产品细节及特点，从而提升用户的购买欲望。 
 下面我们一起来了解下vivo官网在实现3D展示时的技术选型及实现方案。 
  
 ##### 4.1 可视化工具介绍及技术选型 
@@ -128,10 +128,10 @@ WebGL既可以绘制2D数据可视化图形图表，更是一种 3D 绘图标准
 注：图片来自网络（https://blog.csdn.net） 
 从图中我们可以看出： 
 平行光是朝着某个方向照射的光，光线中的每一个光子与其它光子都是平行运动的。举个例子，阳光就可以认为是平行光，平行光只能照亮物体的一部分表面。 
-平行光除了颜色之外，同时具有方向属性，属于有向光。有向光和物体发生作用时根据物体的材质不同，会产生漫反射和镜面反射两种反射效果。3D场景中最终的反射效果是由环境光、平行光，漫反射以及镜面反射叠加在一起的效果��� 
+平行光除了颜色之外，同时具有方向属性，属于有向光。有向光和物体发生作用时根据物体的材质不同，会产生漫反射和镜面反射两种反射效果。3D场景中最终的反射效果是由环境光、平行光，漫反射以及镜面反射叠加在一起的效果。 
 点光源是指光线是从一个点发射出来的，是向着四面八方发射的。这种光在我们的现实生活中是最常被用到的。举个例子，电灯泡就是向各个方向发射光线的，它就可以被认作是点光源。 
 点光源不仅有方向属性，还有位置属性。因此计算点光源的光照，我们要先根据光源位置和物体表面相对位置来确定方向，然后再和平行光一样，计算光的方向和物体表面法向的夹角。 
-环境光就是指物体所在的三维空间中天然的光，它充满整个空间，在每一处的光照强度都一样。环境光没有方向，所以，物体表面反射环境光的效果，只和环境光本身以及材质的反射率有关。 
+环境光就是指物体所在的三维空间中天然的光，它充满整个空间，在每一处的光照强度都一样。环境光没有方向，所以，物体表面反射环境光的���果，只和环境光本身以及材质的反射率有关。 
  
 ###### 4.2.3 模型旋转实现 
 有了相机和光照就能够比较逼真的将模型呈现给用户了，但是还需要处理模型本身的一些交互操作，比如模型旋转、颜色切换等。实现3D场景中的模型旋转有两种实现方式： 
@@ -153,6 +153,7 @@ WebGL既可以绘制2D数据可视化图形图表，更是一种 3D 绘图标准
 ###### 4.2.5 全景场景搭建 
 为了让用户在浏览产品的3D页面时有更强的沉浸体验。我们采用了全景模式。用户在全景模式下旋转缩放手机时，对应的背景元素同样会跟随相机的旋转和缩放进行旋转缩放。这样用户在进行浏览查看时，交互的体验感更强。 
 在ThreeJs中全景模式可以通过加载纹理贴图的方式实现： 
+ 
  ```java 
   let texture = await Loader.loadImg(panoramicImg)
 texture.encoding = THREE.sRGBEncoding
@@ -166,7 +167,8 @@ let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
 // 设置材质对象的纹理贴图
 this.bgMap = sphere
 this.stage.scene.add(this.bgMap)
-  ```  
+  ``` 
+  
 上面代码首先创建一个球形几何SphereGeometry，将创建后的球形几何网格进行x轴反转：sphereGeometry.scale(-1, 1, 1)，使所有的面点向内。然后加载图片数据创建材质并加入map：new THREE.MeshBasicMaterial({map:texture})；new THREE.Mesh(sphereGeometry, sphereMaterial) 最终实现全景图效果。 
   
  
@@ -177,22 +179,27 @@ this.stage.scene.add(this.bgMap)
 谷歌针对GLB模型有一个压缩库Draco 3D，可以在不影响模型展示效果的情况下，对模型的体积进行压缩。可以利用GLTF Pipeline命令行对GLTF模型进行压缩。 
 压缩的步骤： 
 1、安装gltf-pipeline 
+ 
  ```java 
   npm install -g gltf-pipeline
-  ```  
+  ``` 
+  
 2、转换gltf至glb文件 
+ 
  ```java 
   Converting a glTF to glb
 gltf-pipeline -i model.gltf -o model.glb
 
 gltf-pipeline -i model.gltf -b
-  ```  
+  ``` 
+  
 压缩之后，glb文件的体积会减少80%左右，所以在加载速度和效果呈现上会比原始的GLTF文件更快。 
 ![Test](https://static001.geekbang.org/infoq/e3/e33c7103073584525c9f3f7f4c4886fb.gif  '2D+1D - vivo官网Web 3D应用开发与实战') 
 注：图片来自网络（https://cesium.com） 
  
 ###### 4.3.2 模型解压缩 
 ThreeJs有针对压缩模型的解压缩方案: 
+ 
  ```java 
   // Instantiate a loader
 const loader = new GLTFLoader();
@@ -201,7 +208,8 @@ const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath( '/examples/js/libs/draco/' );
 loader.setDRACOLoader( dracoLoader );
-  ```  
+  ``` 
+  
 首先构建一个GLTFLoader对象，然后在进行模型加载过程中，设置dracoLoader解析文件的路径，dracoLoader对压缩后的模型文件进行解析。最后将解析后的文件返回至脚本进行渲染呈现。 
   
  

@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 716
+top: 878
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG'
 abbrlink: 85362cc2
-date: 2021-04-15 09:10:30
+date: 2021-04-15 09:53:06
 ---
 
 &emsp;&emsp;大纲 在苏宁业务快速发展的背景下，以前的大促促销页使用到的组件已经无法满足业务的需求，为此我们设计了一套基于weex的组件动态构建方案，实现了模块的动态编译，减少了不必要的资源引用，...
@@ -38,7 +38,7 @@ date: 2021-04-15 09:10:30
   苏宁作为中国零售业的巨头，几乎每个月都在搞促销活动，除了几个大促，例如618、818、十一国庆、双十一、双十二、元旦、过年。在这个频繁的促销活动的背景下，要求业务开发人员高效的完成促销活动的开发工作，对于业务开发人员将是一个非常大的挑战。 
  
  
- ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG 基于nodejs的动态编译 weex 组件的平台) 
+ ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG  '基于nodejs的动态编译 weex 组件的平台') 
  
 
     
@@ -77,13 +77,13 @@ date: 2021-04-15 09:10:30
     
  
  
- 频道页&大促会场 
+ 频��页&大促会场 
  
 
   苏宁的业务主要分为频道页和促销会场。 
  
  
- ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG 基于nodejs的动态编译 weex 组件的平台) 
+ ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG  '基于nodejs的动态编译 weex 组件的平台') 
  
 
   频道页 
@@ -92,7 +92,7 @@ date: 2021-04-15 09:10:30
     
  
  
- ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG 基于nodejs的动态编译 weex 组件的平台) 
+ ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG  '基于nodejs的动态编译 weex 组件的平台') 
  
 
   促销会场 
@@ -143,7 +143,7 @@ date: 2021-04-15 09:10:30
   对于上述问题我们汇总了如下问题需要解决： 
  
  
- ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG 基于nodejs的动态编译 weex 组件的平台) 
+ ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG  '基于nodejs的动态编译 weex 组件的平台') 
  
  
  我们遇到的核心问题有：如何保证数据多端统一？如何保证一个好的开发体验？运营的维护成本？考虑降级方案？模块的共享设计？ 
@@ -161,7 +161,7 @@ date: 2021-04-15 09:10:30
     
  
  
- ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG 基于nodejs的动态编译 weex 组件的平台) 
+ ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG  '基于nodejs的动态编译 weex 组件的平台') 
  
 
     
@@ -176,7 +176,7 @@ date: 2021-04-15 09:10:30
   我们根据业务的特性，然后抽象出业务模块库，这样运营可以自行选择搭配，极大的提升了开发效率。将原本的页面形式的开发变为了组件的开发。 
  
  
- ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG 基于nodejs的动态编译 weex 组件的平台) 
+ ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG  '基于nodejs的动态编译 weex 组件的平台') 
  
  
  运营成本 
@@ -185,7 +185,7 @@ date: 2021-04-15 09:10:30
   运营人员就可以自行的搭建页面了，通过一次搭建，多端统一。而且对于数据的维护也只需要一份，很好的解决了维护问题，极大的提高了运营效率。 
  
  
- ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG 基于nodejs的动态编译 weex 组件的平台) 
+ ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG  '基于nodejs的动态编译 weex 组件的平台') 
  
 
     
@@ -206,7 +206,7 @@ date: 2021-04-15 09:10:30
   Weex 的另一个主要目标是跟进当代先进的 Web 开发和原生开发的技术，使生产力和性能共存。在开发 Weex 页面就像开发普通网页一样；在渲染 Weex 页面时和渲染原生页面一样。 
  
  
- ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG 基于nodejs的动态编译 weex 组件的平台) 
+ ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG  '基于nodejs的动态编译 weex 组件的平台') 
  
 
   开发人员通过编写 vue 文件，通过转换工具转换成各个平台的 JS Bundle然后可以分别运行在对应的IOS、安卓、H5上面。 
@@ -215,10 +215,10 @@ date: 2021-04-15 09:10:30
  weex&H5组件 
  
 
-  开发人员通过本地开发WEEX&H5组件，通过本地调试组件的基本功能，查看是否满足需求开发。通过测试之后，更新到组件库里面，更新���新的版本文件。 
+  开发人员通过本地开发WEEX&H5组件，通过本地调试组件的基本功能，查看是否满足需求开发。通过测试之���，更新到组件库里面，更新最新的版本文件。 
  
  
- ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG 基于nodejs的动态编译 weex 组件的平台) 
+ ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG  '基于nodejs的动态编译 weex 组件的平台') 
  
 
     
@@ -227,10 +227,10 @@ date: 2021-04-15 09:10:30
  动态构建 
  
 
-  利用 nodejs 我们搭建了一个动态编译 weex 组件的平台，运营人员通过在后台系统的图形界面构建出所要的大促页面，然后点击构建，后台系统就会统一页面所用到的组件，在内网通过http请求发送到node编译平台，然后平台根据所需的组件，在线更新组件文件，在线构建WEEX所需的编译环境，编译 JS Bundle文件，异步发送给后台平台。 
+  利用 nodejs 我们搭建了一个动态编译 weex 组件的平台，运营人员通过在后台系统的图形界面构建出所要的大促页面，然后点击构建，后台系统就会统一页面所用��的组件，在内网通过http请求发送到node编译平台，然后平台根据所需的组件，在线更新组件文件，在线构建WEEX所需的编译环境，编译 JS Bundle文件，异步发送给后台平台。 
  
  
- ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG 基于nodejs的动态编译 weex 组件的平台) 
+ ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG  '基于nodejs的动态编译 weex 组件的平台') 
  
  
  nodejs系统 
@@ -254,7 +254,7 @@ date: 2021-04-15 09:10:30
   在每一个任务执行的时候，都会有一个降级方案，就是在任何一个编译的过程中，如果有任何报错的情况，就会返回一个之前缓存在本地的全量的JS Bundle文件，同时发出告警。当发生错误的时候，也会更新最新的全量JS Bundle文件。 
  
  
- ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG 基于nodejs的动态编译 weex 组件的平台) 
+ ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG  '基于nodejs的动态编译 weex 组件的平台') 
  
 
     
@@ -269,7 +269,7 @@ date: 2021-04-15 09:10:30
   为了保证促销活动的进行，不允许出现任何问题，所以必须得有降级方案来保障大促活动。 
  
  
- ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG 基于nodejs的动态编译 weex 组件的平台) 
+ ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG  '基于nodejs的动态编译 weex 组件的平台') 
  
 
   当请求一个页面的时候，通过判断客户端版本，来选择是否加载WEEX页面，还是加载H5 页面，如果发现有需要降级处理，则直接选择渲染H5 页面。 
@@ -287,7 +287,7 @@ date: 2021-04-15 09:10:30
   原本采用weex组件动态编译，如果实现一个页面功能，需要一个IOS开发人员，一个安卓开发人员，一个H5开发人员。 
  
  
- ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG 基于nodejs的动态编译 weex 组件的平台) 
+ ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG  '基于nodejs的动态编译 weex 组件的平台') 
  
 
     
@@ -296,7 +296,7 @@ date: 2021-04-15 09:10:30
   重构之后，我们只需要一到两个人来编写WEEX代码通过代码同构编译出H5页面。 
  
  
- ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG 基于nodejs的动态编译 weex 组件的平台) 
+ ![Test](https://oscimg.oschina.net/oscnet/up-2942550e5df888e24b84f3a8689f0abc35f.JPEG  '基于nodejs的动态编译 weex 组件的平台') 
  
 
     
@@ -305,7 +305,7 @@ date: 2021-04-15 09:10:30
  总结 
  
 
-  在这套方案上线之后，已经服务过多次大促，现在线上页面已经达到了10000+，可以支撑大促期间的页面搭建，同时也给用户带来了很好的用户体验，并且极大的提升运营的搭建效率。 
+  在这套方案上线之后，已经服务过多次大促，现在线上页面已经达到了10000+，可以支撑大促期间的页面搭建，同时也给用户带来了很好的用户体验，并且极大的提升运���的搭建效率。 
  
 
     

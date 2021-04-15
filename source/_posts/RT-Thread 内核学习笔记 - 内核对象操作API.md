@@ -5,8 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 817
-cover_picture: >-
-  https://oss-club.rt-thread.org/uploads/20210124/b807950824783f507017e4891c5dab82.png
+cover_picture: 'https://oss-club.rt-thread.org/uploads/20210124/b807950824783f507017e4891c5dab82.png'
 abbrlink: cc1defba
 date: 2021-04-15 09:08:53
 ---

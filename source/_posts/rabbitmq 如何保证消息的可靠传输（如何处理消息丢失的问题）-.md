@@ -5,8 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 850
-cover_picture: >-
-  https://img2020.cnblogs.com/other/1931196/202011/1931196-20201123212958790-894151985.png
+cover_picture: 'https://img2020.cnblogs.com/other/1931196/202011/1931196-20201123212958790-894151985.png'
 abbrlink: 74c7c93e
 date: 2021-04-15 09:16:39
 ---

@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 729
+top: 1929
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-ff1bc9f8b1f1ae755daac24784c180cebaf.png'
 abbrlink: 35be3808
-date: 2021-04-15 09:08:53
+date: 2021-04-15 09:46:45
 ---
 
 &emsp;&emsp;欢迎关注公众号: 上篇介绍到：InfluxDB-IOx的环境搭建,详情见：https://my.oschina.net/u/3374539/blog/5016798 本章开始，讲解启动的主流程！ 打开src/main.rs文件可以找到下面的代码 fn m...
@@ -16,9 +16,12 @@ date: 2021-04-15 09:08:53
                                                                                                                                                                                          
 上篇介绍到：InfluxDB-IOx的环境搭建,详情见：https://my.oschina.net/u/3374539/blog/5016798 
 本章开始，讲解启动的主流程！ 
-打开 ```java 
+打开 
+ ```java 
   src/main.rs
-  ``` 文件可以找到下面的代码 
+  ``` 
+ 文件可以找到下面的代码 
+ 
  ```java 
   fn main() -> Result<(), std::io::Error> {
     // load all environment variables from .env before doing anything
@@ -33,29 +36,43 @@ date: 2021-04-15 09:08:53
     Ok(())
 }
 
-  ```  
-在 ```java 
+  ``` 
+  
+在 
+ ```java 
   main
-  ``` 方法中映入眼帘的第一行就是 ```java 
+  ``` 
+ 方法中映入眼帘的第一行就是 
+ ```java 
   load_dotenv()
-  ``` 方法，然后是 ```java 
+  ``` 
+ 方法，然后是 
+ ```java 
   Config::from_args()
-  ``` 接下来就分别跟踪这两个方法，看明白是怎么工作的。 
+  ``` 
+ 接下来就分别跟踪这两个方法，看明白是怎么工作的。 
 #### 加载配置文件 
-在 ```java 
+在 
+ ```java 
   README
-  ``` 文件中，我们可以看到这样一行： 
+  ``` 
+ 文件中，我们可以看到这样一行： 
  
-意思就是这个工程使用的配置文件，名字是 ```java 
+意思就是这个工程使用的配置文件，名字是 
+ ```java 
   .env
-  ``` 。了解这个特殊的名字之后，我们看代码 ```java 
+  ``` 
+ 。了解这个特殊的名字之后，我们看代码 
+ ```java 
   src/main.rs:276
-  ``` ： 
+  ``` 
+ ： 
+ 
  ```java 
   fn load_dotenv() {
     //调用dotenv方法，并对其返回值进行判断
     match dotenv() {
-        //如果返回成功，程序什么都不做，继续执行。
+        //如果返回成��，程序什么都不做，继续执行。
         Ok(_) => {}
         //返回的是错误，那么判断一下是否为'未找到'错误，
         //如果是未找到，那么就什么都不做（也就是有默认值填充）
@@ -70,12 +87,18 @@ date: 2021-04-15 09:08:53
     };
 }
 
-  ```  
-然后跟踪 ```java 
+  ``` 
+  
+然后跟踪 
+ ```java 
   dotenv()
-  ``` 方法看看如何执行(这里就进入了dotenv���个crate了)：  ```java 
+  ``` 
+ 方法看看如何执行(这里就进入了dotenv这个crate了)：  
+ ```java 
   为了方便写，我就直接把所有调用，从上到下的顺序全都写出来了
-  ```  
+  ``` 
+  
+ 
  ```java 
   //返回一个PathBuf的Result，之后再看这个Result
 pub fn dotenv() -> Result<PathBuf> {
@@ -168,10 +191,14 @@ impl<R: Read> Iterator for Iter<R> {
     }
 }
 
-  ```  
-研究这里的时候，我发现了一个比较好玩儿的东西就是返回值的 ```java 
+  ``` 
+  
+研究这里的时候，我发现了一个比较好玩儿的东西就是返回值的 
+ ```java 
   Result<PathBuf>
-  ``` 。标准库的定义中，Result是有两个值，分别是<T,E>。 
+  ``` 
+ ���标准库的定义中，Result是有两个值，分别是<T,E>。 
+ 
  ```java 
   自定义的类型，节省了Error这个模板代码
 pub type Result<T> = std::result::Result<T, Error>;
@@ -221,23 +248,35 @@ impl fmt::Display for Error {
     }
 }
 
-  ```  
+  ``` 
+  
 更详细的rust错误处理，可以参见：https://zhuanlan.zhihu.com/p/109242831 
 #### 命令行参数 
 在main方法中我们可以看到第二行， 
+ 
  ```java 
   let config = Config::from_args();
 
-  ```  
-这是 ```java 
+  ``` 
+  
+这是 
+ ```java 
   influx
-  ``` 使用了 ```java 
+  ``` 
+ 使用了 
+ ```java 
   structopt
-  ``` 这个 ```java 
+  ``` 
+ 这个 
+ ```java 
   crate
-  ``` ，调用该方法后，程序会根据结构体上的 ```java 
+  ``` 
+ ，调用该方法后，程序会根据结构体上的 
+ ```java 
   #[structopt()]
-  ``` 中的参数进行执行命令行解析。 
+  ``` 
+ 中的参数进行执行命令行解析。 
+ 
  ```java 
   #[derive(Debug, StructOpt)]
 #[structopt(
@@ -283,25 +322,40 @@ enum Command {
     Operation(commands::operations::Config),
 }
 
-  ```  
-下面通过打印出来的例子来对应 ```java 
+  ``` 
+  
+下面通过打印出来的例子来对应 
+ ```java 
   structopt
-  ``` 中的内容。 
+  ``` 
+ 中的内容。 
+ 
  ```java 
   $ ./influxdb_iox -vvvv run
 Config { verbose: 4, host: "http://127.0.0.1:8082", num_threads: None, command: Run(Config { rust_log: None, log_format: None, verbose_count: 0, writer_id: None, http_bind_address: 127.0.0.1:8080, grpc_bind_address: 127.0.0.1:8082, database_directory: None, object_store: None, bucket: None, aws_access_key_id: None, aws_secret_access_key: None, aws_default_region: "us-east-1", google_service_account: None, azure_storage_account: None, azure_storage_access_key: None, jaeger_host: None }) }
 
-  ```  
-可以看到，我们执行了 ```java 
+  ``` 
+  
+可以看到，我们执行了 
+ ```java 
   Run
-  ``` 这个变体的 ```java 
+  ``` 
+ 这个变体的 
+ ```java 
   Subcommand
-  ``` ，并且指定了 ```java 
+  ``` 
+ ，并且指定了 
+ ```java 
   Config
-  ``` 结构体中的 ```java 
+  ``` 
+ 结构体中的 
+ ```java 
   verbose
-  ```  4 次， ```java 
+  ``` 
+  4 次， 
+ ```java 
   IOx
-  ``` 也成功的识别了。 
+  ``` 
+ 也成功的识别了。 
 后面继续学习程序的启动过程，祝玩儿的开心！
                                         

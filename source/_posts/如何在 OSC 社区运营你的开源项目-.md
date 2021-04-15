@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 731
+top: 1981
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-c65f8996df72e45b20085be1b6a7e9c8480.png'
 abbrlink: d9d4ddf1
-date: 2021-04-15 09:16:07
+date: 2021-04-15 09:46:45
 ---
 
 &emsp;&emsp;在 OSCHINA 社区，拥有着围绕每一款开源软件展开的完整宣发链条。如果你或你的团队拥有一款开源软件，并且想要让更多的人了解和使用它，那么你可以： 在 OSCHINA 社区投递软件 投递与该软件相...
@@ -28,7 +28,7 @@ date: 2021-04-15 09:16:07
 选择投递软件，按页面提示内容输入你的软件信息： 
 ![Test](https://oscimg.oschina.net/oscnet/up-c65f8996df72e45b20085be1b6a7e9c8480.png  '如何在 OSC 社区运营你的开源项目-') 
 友情提示：软件详细介绍越丰富，就越能让开发者了解你的软件！并且，不要从产品的角度来描述项目，请更多地从开发者关注的特性、架构、逻辑原理等方向着手。 
-输入完毕后进入提交流程，我们通常会在一个工作日内对提交的软件��行审核。 
+输入完毕后进入提交流程，我们通常会在一个工作日内对提交的软���进��审核。 
 通过审核的开源项目将加入 OSCHINA 的收录项目库，获得参与 OSC 年度软件评选、每日软件推荐、Gitee 推荐等活动的资格，提升软件的曝光度。在这里，你将迈出项目社区运营的第一步！ 
 ![Test](https://oscimg.oschina.net/oscnet/up-c65f8996df72e45b20085be1b6a7e9c8480.png  '如何在 OSC 社区运营你的开源项目-') 
 投递软件参考： 

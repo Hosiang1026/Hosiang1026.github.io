@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 669
-cover_picture: ''
+top: 829
+cover_picture: 'https://api.ixiaowai.cn/gqapi/gqapi.php'
 abbrlink: 3ed23a5d
-date: 2021-04-15 09:16:39
+date: 2021-04-15 09:48:03
 ---
 
 &emsp;&emsp;简介： 最近在做数据库相关的事情，碰到了很多TCP相关的问题，新的场景新的挑战，有很多之前并没有掌握透彻的点，大大开了一把眼界，选了几个案例分享一下。 作者 | 韩述 来源 | 阿里技术公众...
@@ -18,12 +18,12 @@ date: 2021-04-15 09:16:39
  ![Test](https://mp.toutiao.com/mp/agw/article_material/open_image/get?code=ZWY2MWM3ODk2NzAzZmNhMWVhNjZjODg5MmYyMzU5YTAsMTYxODE5NTY0NDIyMw==  '那些你不知道的TCP冷门知识！') 
  
 作者 | 韩述 来源 | 阿里技术公众号 
-最近在做数据库相关的事情，碰到了很多TCP相关的问题，新的场景新的挑战，有很多之前并没有��握��彻的点，大大开了一把眼界，选了几个案例分享一下。 
+最近在做数据库相关的事情，碰到了很多TCP相关的问题，新的场景新的挑战，有很多之前并没有掌握透彻的点，大大开了一把眼界，选了几个案例分享一下。 
  
 ### 案例一：TCP中并不是所有的RST都有效 
  
 ### 背景知识 
-在TCP协议中，包含RST标识位的包，用来异常的关闭连接。在TCP的设计中它是不可或缺的，发送RST段关闭连接时，不必等缓冲区的数据都发送出去，直接丢弃缓冲区中的数据。而接收端收到RST段后，也不必发送ACK来确认。 
+在TCP协议中，包含RST标识位的包，用来异常的关闭连接。��TCP的设计中它是不可或缺的，发送RST段关闭连接时，不必等缓冲区的数据都发送出去，直接丢弃缓冲区中的数据。而接收端收到RST段后，也不必发送ACK来确认。 
  
 ### 问题现象 
 某客户连接数据库经常出现连接中断，但是经过反复排查，后端数据库实例排查没有执行异常或者Crash等问题，客户端Connection reset的堆栈如下图： 
@@ -62,11 +62,11 @@ Q：连接会立即终止么，还是会等10s?
 A：连接会立即终止，上面的例子中过了10s终止，正是因为，linux内核对RFC严格实现，无视了RST报文，但是客户端和数据库之间经过的SLB（云负载均衡设备），却处理了RST报文，导致10s（SLB 10s 后清理session）之后关闭了TCP连接 
  
  
-### ���例二：Linux内核究竟有多少TCP端口可用 
+### 案例二：Linux内核究竟有多少TCP端口可用 
  
 ### 背景知识 
 我们平时有一个常识，Linux内核一共只有65535个端口号可用，也就意味着一台机器在不考虑多网卡的情况下最多只能开放65535个TCP端口。 
-但是经常看到有单机百万TCP连接，是如何做到的呢，这是因为，TCP是采用四元组（Client端IP + Client端Port + Server端IP + Server端Port）作为TCP连接的唯一标识的。如果作为TCP的Server端，无论有多少Client端连接过来，本地只需要占用同一个端口号。而如果作为TCP的Client端，当连接的对端是同一个IP + Port，那确实每一个连接需要占用一个本地端口，但如果连接的对端不是同一个IP + Port，那么其实本地是可以复用端口的，所以实际上Linux中有效可用的端口是很多的（只要四元组不重复即可）。 
+但是经常看到有单机百万TCP连接，是如何做到的呢，这是因为，TCP是采用四元组（Client端IP + Client端Port + Server端IP + Server端Port）作为TCP连接的唯一标识的。如果作为TCP的Server端，无论有多少Client端连接过来，本地只需要占用同一个端口号。而如果作为TCP的Client端，当连接的对端是同一个IP + Port，那确实每一个连接需要占用一个本地端口，但如果连接的对端不是同一个IP + Port，��么其实本地是可以复用端口的，所以实际上Linux中有效可用的端口是很多的（只要四元组不重复即可）。 
  
 ### 问题现象 
 作为一个分布式数据库，其中每个节点都是需要和其他每一个节点都建立一个TCP连接，用于数据的交换，那么假设有100个数据库节点，在每一个节点上就会需要100个TCP连接。当然由于是多进程模型，所以实际上是每个并发需要100个TCP连接。假如有100个并发，那就需要1W个TCP连接。但事实上1W个TCP连接也不算多，由之前介绍的背景知识我们可以得知，这远远不会达到Linux内核的瓶颈。 
@@ -90,15 +90,17 @@ A：连接会立即终止，上面的例子中过了10s终止，正是因为，l
  
 Linux有多少端口可以被有效使用 
 理论来说，端口号是16位整型，一共有65535个端口可以被使用，但是Linux操作系统有一个系统参数，用来控制端口号的分配： 
+ 
  ```java 
   net.ipv4.ip_local_port_range
-  ```  
+  ``` 
+  
 我们知道，在写网络应用程序的时候，有两种使用端口的方式： 
  
  方式一：显式指定端口号 —— 通过 bind() 系统调用，显式的指定bind一个端口号，比如 bind(8080) 然后再执行 listen() 或者 connect() 等系统调用时，会使用应用程序在 bind() 中指定的端口号。 
  方式二：系统自动分配 —— bind() 系统调用参数传0即 bind(0) 然后执行 listen()。或者不调用 bind()，直接 connect()，此时是由Linux内核随机分配一个端口号，Linux内核会在 net.ipv4.ip_local_port_range 系统参数指定的范围内，随机分配一个没有被占用的端口。 
  
-例如如下情况，相当于 1-20000 是系统保留端口号（除非按方法一显式指定端口号），自动分���的���候，只会从 20000 - 65535 之间随机选择一个端口，而不会使用小于20000的端口： 
+例如如下情况，相当于 1-20000 是系统保留端口号（除非按方法一显式指定端口号），自动分配的时候，只会从 20000 - 65535 之间随机选择一个端口，而不会使用小于20000的端口： 
  
  ![Test](https://mp.toutiao.com/mp/agw/article_material/open_image/get?code=ZWY2MWM3ODk2NzAzZmNhMWVhNjZjODg5MmYyMzU5YTAsMTYxODE5NTY0NDIyMw==  '那些你不知道的TCP冷门知识！') 
  
@@ -133,7 +135,7 @@ TCP三次握手，SYN、SYN-ACK、ACK是所有人耳熟能详的常识，但是�
  
  ![Test](https://mp.toutiao.com/mp/agw/article_material/open_image/get?code=ZWY2MWM3ODk2NzAzZmNhMWVhNjZjODg5MmYyMzU5YTAsMTYxODE5NTY0NDIyMw==  '那些你不知道的TCP冷门知识！') 
  
-这个过程的关键点是，在Linux中，一般情况下都是内核代理三次握手的，也就是说，当你client端调用 connect() 之后���核���责发送SYN，接收SYN-ACK，发送ACK。然后 connect() 系统调用才会返回，客户端侧握手成功。 
+这个过程的关键点是，在Linux中，一般情况下都是内核代理三次握手的，也就是说，当你client端调用 connect() 之后内核负责发送SYN，接收SYN-ACK，发送ACK。然后 connect() 系统调用才会返回，客户端侧握手成功。 
 而服务端的Linux内核会在收到SYN之后负责回复SYN-ACK再等待ACK之后才会让 accept() 返回，从而完成服务端侧握手。于是Linux内核就需要引入半连接队列（用于存放收到SYN，但还没收到ACK的连接）和全连接队列（用于存放已经完成3次握手，但是应用层代码还没有完成 accept() 的连接）两个概念，用于存放在握手中的连接。 
  
 ### 问题现象 
@@ -170,7 +172,7 @@ Linux 4.9版本内核在全连接队列满时的行为
  
  ![Test](https://mp.toutiao.com/mp/agw/article_material/open_image/get?code=ZWY2MWM3ODk2NzAzZmNhMWVhNjZjODg5MmYyMzU5YTAsMTYxODE5NTY0NDIyMw==  '那些你不知道的TCP冷门知识！') 
  
-事实上，在刚遇到这个问题的时候，我第一时间就怀疑到了全连接队列满的情况，但是悲剧的是看的源码是Linux 3.10的，而随手找的一个本地日常测试的ECS却刚���是Linux 4.9内核的，导致写了个demo测试例子却死活没有复现问题。排除了所有其他原因，再次绕回来的时候已经是一周之后了（这是一个悲伤的故事）。 
+事实上，在刚遇到这个问题的时候，���第一时间就怀疑到了全连接队列满的情况，但是悲剧的是看的源码是Linux 3.10的，而随手找的一个本地日常测试的ECS却刚好是Linux 4.9内核的，导致写了个demo测试例子却死活没有复现问题。排除了所有其他原因，再次绕回来的时候已经是一周之后了（这是一个悲伤的故事）。 
  
 ### 总结 
 Q：当全连接队列满时，connect() 和 accept() 侧是什么表现行为? 

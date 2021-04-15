@@ -4,11 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 1509
-cover_picture: >-
-  https://img-blog.csdnimg.cn/20210118190044920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center
+top: 1985
+cover_picture: 'https://img-blog.csdnimg.cn/20210118190044920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center'
 abbrlink: ced2bb3a
-date: 2021-04-15 09:26:24
+date: 2021-04-15 09:46:45
 ---
 
 &emsp;&emsp;1 背景 在embedding&MLP方法中，维数有限的用户表示向量将成为表达用户兴趣的瓶颈。以电子商务网站展示广告为例，用户在访问电子商务网站时可能同时对不同种类的商品感兴趣，也就是说，用户的...
@@ -16,7 +15,7 @@ date: 2021-04-15 09:26:24
 
                                                                                                                                                                                          
 ### 1 背景 
-       在embedding&MLP方法中，维数有限的用户表示向量将成为表达用户兴趣的瓶颈。以电子商务网站展示广告为例，用户在访问电子商务网站时可能同时对不同种类的商品感兴趣，也就是说，用户的兴趣是多样的，当涉及到CTR预测任务时，通常从用户行为数据中获取用户兴趣。embedding&MLP方法通过将用户行为的嵌入向量转化为一个固定长度的向量来学习对某个用户所有兴趣的表示，该向量在欧氏空间中，所有用户的表示向量都是固定长度的。换句话说，用户的不同兴趣被压缩成一个固定长度的向量，这限制了嵌入MLP方法的表达能力。为了能够表达用户的不同兴趣，需要对定长向量的维数进行大幅度的扩展。然而它将极大地扩大学习参数的大��，并加剧在有限数据下过拟合的风险。此外，它增加了计算和存储的负担，这对于工业在线系统来说是不可容忍的。 
+       在embedding&MLP方法中，维数有限的用户表示向量将成为表达用户兴趣的瓶颈。以电子商务网站展示广告为例，用户在访问电子商务网站时可能同时对不同种类的商品感兴趣，也就是说，用户的兴趣是多样的，当涉及到CTR预测任务时，通常从用户行为数据中获取用户兴趣。embedding&MLP方法通过将用户行为的嵌入向量转化为一个固定长度的向量来学习对某个用户所有兴趣的表示，该向量在欧氏空间中，所有用户的表示向量都是固定长度的。换句话说，用户的不同兴趣被压缩成一个固定长度的向量，这限制了嵌入MLP方法的表达能力。为了能够表达用户的不同兴趣，需要对定长向量的维数进行大幅度的扩展。然而它将极大地扩大学习参数的大小��并加剧在有限数据下过拟合的风险。此外，它增加了计算和存储的负担，这对于工业在线系统来说是不可容忍的。 
        另一方面，在预测候选广告时，没有必要将某个用户的所有不同兴趣压缩到同一个向量中，因为只有用户的部分兴趣会影响他的行为（点击或不点击）。例如，一位女游泳运动员会点击推荐的护目镜，主要是因为她买了泳衣，而不是她上周购物清单上的鞋子。基于此，作者提出了一个新的模型：深度兴趣网络（Deep Interest Network，DIN），它通过考虑给定候选广告的历史行为的相关性，自适应地计算用户兴趣的表示向量，DIN通过软搜索历史行为的相关部分来关注相关的用户兴趣，并采用加权和池化的方法得到用户兴趣对候选广告的表示，与候选广告关联度越高的行为得到越高的激活权重，从而控制用户兴趣的表示兴趣。 
  
 ### 2 模型结构与原理 
@@ -49,7 +48,7 @@ date: 2021-04-15 09:26:24
        Local activation unit：具体而言，激活单元应用于用户行为特征，其作为加权求和池化来执行，以自适应地计算给定候选广告 ![Test](https://img-blog.csdnimg.cn/20210118190044920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center  '深度推荐模型之DIN') 的用户表示 ![Test](https://img-blog.csdnimg.cn/20210118190044920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center  '深度推荐模型之DIN') ： ![Test](https://img-blog.csdnimg.cn/20210118190044920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center  '深度推荐模型之DIN') 。 
  
 ### 3 代码实现 
-       这里主要和大家说一下DIN模型的总体运行逻辑，这样可以让大家从宏观的层面去把握模型的编写过程。该模型所使用的数据集是movielens数据集， 具体介绍���以参考后面的GitHub。因为上面反复强调了DIN的应用场景，需要基于用户的历史行为数据，所以在这个数据集中会有用户过去对电影评分的一系列行为。这在之前的数据集中往往是看不到的。大家可以导入数据之后自行查看这种行为特征(hist_behavior)。另外还有一点需要说明的是这种历史行为是序列性质的特征，并且不同的用户这种历史行为特征长度会不一样，但是我们的神经网络是要求序列等长的，所以这种情况我们一般会按照最长的序列进行padding的操作(不够长的填0)，而到具体层上进行运算的时候，会用mask掩码的方式标记出这些填充的位置，好保证计算的准确性。在我们给出的代码中，大家会在AttentionPoolingLayer层的前向传播中看到这种操作。下面开始说编写逻辑： 
+       这里主要和大家说一下DIN模型的总体运行逻辑，这样可以让大家从宏观的层面去把握模型的编写过程。该模型所使用的数据集是movielens数据集， 具体介绍可以参考后面的GitHub。因为上面反复强调了DIN的应用场景，需要基于用户的历史行为数据，所以在这个数据集中会有用户过去对电影评分的一系列行为。这在之前的数据集中往往是看不到的。大家可以导入数据之后自行查看这种行为特征(hist_behavior)。另外还有一点需要说明的是这种历史行为是序列性质的特征，并且不同的用户这种历史行为特征长度会不一样，但是我们的神经网络是要求序列等长的，所以这种情况我们一般会按照最长的序列进行padding的操作(不够长的填0)，而到具体层上进行运算的时候，会用mask掩码的方式标记出这些填充的位置，好保证计算的准确性。在我们给出的代码中，大家会在AttentionPoolingLayer层的前向传播中看到这种操作。下面开��说编写逻辑： 
        首先，DIN模型的输入特征大致上分为了三类：Dense(连续型), Sparse(离散型), VarlenSparse(变长离散型)，也就是指的上面的历史行为数据。而不同的类型特征也就决定了后面处理的方式会不同： 
  
    

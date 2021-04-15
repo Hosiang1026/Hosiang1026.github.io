@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 643
+top: 830
 cover_picture: 'https://pic3.zhimg.com/80/v2-d5f4df97aa7a4166f421304129d59a22_720w.jpg'
 abbrlink: 1570a7eb
-date: 2021-04-15 09:16:07
+date: 2021-04-15 09:48:03
 ---
 
 &emsp;&emsp;摘要：如果能用AI “复活”逝去的亲人 你愿意吗？ 清明节，很少有人会去特地想这样一个问题：我们为什么要给过世的人修墓，然后每年固定的时间去扫墓？当农耕文化的色彩褪去，清明节的祭祀活...

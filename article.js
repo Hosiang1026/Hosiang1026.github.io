@@ -54,10 +54,11 @@ function filterHtml(html) {
 
         var desc = ele.find(".line-clamp").text();
         //ele.find("small a").remove();
-        console.log(title + "-- " + url);
         //特殊符号处理
         var reg=/\\|\/|\?|\？|\*|\"|\“|\”|\'|\‘|\’|\<|\>|\{|\}|\[|\]|\【|\】|\：|\:|\、|\^|\$|\!|\~|\`|\|/g;
-        title = title.replace(reg,"-");
+        title = title.replaceAll(reg,"-");
+        console.log(title + "-- " + url);
+
         arcList.push({
             title: title,
             cover: cover,

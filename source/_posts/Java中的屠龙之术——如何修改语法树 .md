@@ -4,13 +4,13 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 532
+top: 1726
 cover_picture: 'https://static.oschina.net/uploads/img/202004/20133021_KxYb.jpg'
 abbrlink: e6fec711
-date: 2021-04-14 07:56:10
+date: 2021-04-15 09:19:21
 ---
 
-&emsp;&emsp;在Lombok经常用，但是你知道它的原理是什么吗？，和Lombok经常用，但是你知道它的原理是什么吗？(二)两篇文章中介绍了关于Lombok��底��原理，其实总结为一句话来说就是在编译期通过改变抽象语...
+&emsp;&emsp;在Lombok经常用，但是你知道它的原理是什么吗？，和Lombok经常用，但是你知道它的原理是什么吗？(二)两篇文章中介绍了关于Lombok的底层原理，其实总结为一句话来说就是在编译期通过改变抽象语...
 <!-- more -->
 
                                                                                                                                                                                         在Lombok经常用，但是你知道它的原理是什么吗？，和Lombok经常用，但是你知道它的原理是什么吗？(二)两篇文章中介绍了关于Lombok的底层原理，其实总结为一句话来说就是在编译期通过改变抽象语法树而实现的。上面两篇文章已经讲了抽象语法树的相关知识点，如果有不清楚的可以看一下。 
@@ -320,7 +320,7 @@ TreeMaker.Assign用户创建赋值语句语法树节点（JCAssign），源码�
 
   ```  
  
- lhs：赋��语句左边表达式 
+ lhs：赋值语句左边表达式 
  rhs：赋值语句右边表达式 
  
 ##### TreeMaker.Exec 
@@ -351,7 +351,7 @@ TreeMaker.Block用于创建组合语句的语法树节点（JCBlock），源码�
  stats：语句列表 
  
 #### com.sun.tools.javac.util.List介绍 
-在我们操作抽象语法树的时候，有时会涉及到关于List的操作，但是这个List不是我们经常使用的 ```java 
+在我们操作抽象语法树的时候，有时会涉及到关于List的操���，���是这个List不是我们经常使用的 ```java 
   java.util.List
   ``` 而是 ```java 
   com.sun.tools.javac.util.List
@@ -632,10 +632,10 @@ JCTree.JCMethodDecl test3 = treeMaker.MethodDef(
 
   ```  
 ##### 特殊的 
-我们学完了如何进行定义参数，如何进���定义方法，其实还有好多语句需要学习，例如如何生成new语句，如何生成方法调用的语句，如何生成if语句。j接下来我们就学习一些比较特殊的语法。 
+我们学完了如何进行定义参数，如何进行定义方法，其实还有好多语句需要学习，例如如何生成new语句，如何生成方法调用的语句，如何生成if语句。j接下来我们就学习一些比较特殊的语法。 
 ###### new一个对象 
  ```java 
-  // 创建��个new语句 CombatJCTreeMain combatJCTreeMain = new CombatJCTreeMain();
+  // 创建一个new语句 CombatJCTreeMain combatJCTreeMain = new CombatJCTreeMain();
 JCTree.JCNewClass combatJCTreeMain = treeMaker.NewClass(
         null,
         com.sun.tools.javac.util.List.nil(),

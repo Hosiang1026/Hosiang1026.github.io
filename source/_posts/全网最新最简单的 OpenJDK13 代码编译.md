@@ -4,17 +4,17 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 896
+top: 717
 cover_picture: 'https://static.oschina.net/uploads/img/201911/14151640_gtZF.jpg'
 abbrlink: 1fb96dd
-date: 2021-04-14 07:54:42
+date: 2021-04-15 09:17:50
 ---
 
 &emsp;&emsp;个人博客原文：全网最新最简单的 OpenJDK13 代码编译 [TOC] 最近因写文章需要查看 JVM 源码，有时代码逻辑不是很清晰，找半天，趁国庆假期，抽空下载了 OpenJDK13 搭建了 JVM debug 环境，把...
 <!-- more -->
 
                                                                                                                                                                                         个人博客原文：全网最新最简单的 OpenJDK13 代码编译 
- 
+![Test](http://www.liebrother.com/upload/6f0d236c9bc14e0c92064942c957044a_Dukenocoffeecup768x531.jpg  '全网最新最简单的 OpenJDK13 代码编译') 
 [TOC] 
 最近因写文章需要查看 JVM 源码，有时代码逻辑不是很清晰，找半天，趁国庆假期，抽空下载了 OpenJDK13 搭建了 JVM debug 环境，把操作记录写在这篇文章里，让有需要的朋友可以参考，少踩坑。 
 我是在 Ubuntu 18.04 下编译的，不是在 Windows，建议不在 Windows 下折腾，会遇到比在 Linux 环境下多得多的问题。如果你电脑也是 Windows，可以像我这样，安装个 VMware 虚拟机软件，在里面装个 Ubuntu 系统，在虚拟机里面玩，这 2 个软件在官网下载就行，当然如果懒得去找也可以 ```java 
@@ -41,7 +41,7 @@ date: 2021-04-14 07:54:42
 
   ```  
 想了解这些依赖软件是干嘛用的，可以看看官方文档，文档的位置如下图。 
- 
+![Test](http://www.liebrother.com/upload/6f0d236c9bc14e0c92064942c957044a_Dukenocoffeecup768x531.jpg  '全网最新最简单的 OpenJDK13 代码编译') 
 ##### 3.安装 jdk 12 
 这个在文档里面称为 Boot JDK，就是编译时需要上一个版本的 JDK 做为基础，一般是使用 N-1 版本，比如编译 OpenJDK8 就使用 JDK7 作为 Boot JDK，我们这里是编译 OpenJDK13，所以使用的是 JDK12。也是执行下面命令就搞定。 
  ```java 
@@ -53,7 +53,7 @@ sudo apt-get install openjdk-12-jdk
 安装完可以通过  ```java 
   java -version
   ```  来验证一下是否成功安装。见到如下结果就妥妥的。 
- 
+![Test](http://www.liebrother.com/upload/6f0d236c9bc14e0c92064942c957044a_Dukenocoffeecup768x531.jpg  '全网最新最简单的 OpenJDK13 代码编译') 
 执行完上面步骤，那么恭喜你，现在就可以开始编译了。 
 ##### 4.检查配置 
 我们安装了上面那么多东西，需要来检查一下是不是已经安装完所需要的软件，通过下面命令来检查。 
@@ -62,7 +62,7 @@ sudo apt-get install openjdk-12-jdk
 
   ```  
 如果执行过程中有异常，就根据异常和提示信息，安装所缺的软件就行。如果看到下面的结果，那么再一次恭喜你，所有依赖软件都准备好了。 
- 
+![Test](http://www.liebrother.com/upload/6f0d236c9bc14e0c92064942c957044a_Dukenocoffeecup768x531.jpg  '全网最新最简单的 OpenJDK13 代码编译') 
 ##### 5.开始编译 
 最激动人心的时刻到来了，敲入下面的命令，开始编译吧。这个过程大概需要半个小时，耐心等候，可以稍作休息，喝杯 82 年的咖啡。 
  ```java 
@@ -70,7 +70,7 @@ sudo apt-get install openjdk-12-jdk
 
   ```  
 见证奇迹的图片。看到下图说明编译成功啦。 
- 
+![Test](http://www.liebrother.com/upload/6f0d236c9bc14e0c92064942c957044a_Dukenocoffeecup768x531.jpg  '全网最新最简单的 OpenJDK13 代码编译') 
 ##### 6.验证是否成功 
 还需要再稳一点，验证编译后的 java 是否可用，通过下面的命令来验证。 
  ```java 
@@ -79,7 +79,7 @@ sudo apt-get install openjdk-12-jdk
   ```  
 看下图，出现  ```java 
   "13-internal" 2019-09-17
-  ```  字样，我们编译出来的 JDK13 可以用啦。  
+  ```  字样，我们编译出来的 JDK13 可以用啦。 ![Test](http://www.liebrother.com/upload/6f0d236c9bc14e0c92064942c957044a_Dukenocoffeecup768x531.jpg  '全网最新最简单的 OpenJDK13 代码编译') 
 这标题起得不过分吧，上面版本日期是 2019-09-17，还不到一个月，网上相关资料也没，就只有官方文档了（当然也是最好的资料）。 ```java 
   跟着步骤走，不会丢
   ``` ，为了验证这句话，还把上面的步骤在我快退休的笔记本上跑了一遍，妥妥的。 
@@ -99,5 +99,5 @@ sudo apt-get install openjdk-12-jdk
  ```java 
   觉得文章有用帮忙转发&点赞，多谢朋友们！
   ```  
-
+![Test](http://www.liebrother.com/upload/6f0d236c9bc14e0c92064942c957044a_Dukenocoffeecup768x531.jpg  '全网最新最简单的 OpenJDK13 代码编译')
                                         

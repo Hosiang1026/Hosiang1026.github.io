@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 886
+top: 1759
 cover_picture: 'https://static.oschina.net/uploads/img/202002/03143333_a9iy.jpg'
 abbrlink: efc2b93a
-date: 2021-04-14 07:54:42
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;I/O（ INPUT OUTPUT），包括文件I/O、网络I/O。 计算机世界里的速度鄙视： 内存读数据：纳秒级别。 千兆网卡读数据：微妙级别。1微秒=1000纳秒，网卡比内存慢了千倍。 磁盘读数据：毫秒级别。...
@@ -35,32 +35,32 @@ CPU 处理数据的速度远大于I/O准备数据的速度 。
  
 ##### 1.1.1 同步阻塞 
 点火后，傻等，不等到水开坚决不干任何事（阻塞），水开了关火（同步）。 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
 ###### 1.1.2 同步非阻塞 
 点火后，去看电视（非阻塞），时不时看水开了没有，水开后关火（同步）。 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
 ###### 1.1.3 异步阻塞 
 按下开关后，傻等水开（阻塞），水开后自动断电（异步）。 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
 网络编程中不存在的模型。 
 ###### 1.1.4 异步非阻塞 
 按下开关后，该干嘛干嘛 （非阻塞），水开后自动断电（异步）。 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
 ##### 1.2 内核空间 、用户空间 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
  
  内核负责网络和文件数据的读写。 
  用户程序通过系统调用获得网络和文件的数据。 
  
 ###### 1.2.1 内核态 用户态 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
  
  程序为读写数据不得不发生系统调用。 
  通过系统调用接口，线程从用户态切换到内核态，内核读写数据后，再切换回来。 
  进程或线程的不同空间状态。 
  
 ###### 1.2.2 线程的切换 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
 用户态和内核态的切换耗时，费资源（内存、CPU） 
 优化建议： 
  
@@ -68,19 +68,19 @@ CPU 处理数据的速度远大于I/O准备数据的速度 。
  共享空间。 
  
 ##### 1.3 套接字 – socket 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
  
  有了套接字，才可以进行网络编程。 
  应用程序通过系统调用socket(),建立连接，接收和发送数据（I / O）。 
  SOCKET 支持了非阻塞，应用程序才能非阻塞调用，支持了异步，应用程序才能异步调用 
  
 ##### 1.4 文件描述符 –FD 句柄 
- 
- 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
 网络编程都需要知道FD？？？ FD是个什么鬼？？？ 
 Linux：万物都是文件，FD就是文件的引用。像不像JAVA中万物都是对象?程序中操作的是对象的引用。JAVA中创建对象的个数有内存的限制，同样FD的个数也是有限制的。 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
 Linux在处理文件和网络连接时，都需要打开和关闭FD。 
 每个进程都会有默认的FD： 
  
@@ -89,7 +89,7 @@ Linux在处理文件和网络连接时，都需要打开和关闭FD。
  2 错误输出 stderr 
  
 ##### 1.5 服务端处理网络请求的过程 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
  
  连接建立后。 
  等待数据准备好（CPU 闲置）。 
@@ -105,8 +105,8 @@ Linux在处理文件和网络连接时，都需要打开和关闭FD。
 正是因为这两个阶段，Linux系统升级迭代中出现了下面三种网络模式的解决方案。 
 #### 二、IO模型介绍 
 ##### 2.1 阻塞 I/O - Blocking I/O 
- 
-简介：最原始的网络I/O模型。进程会一直阻塞，直到数据拷贝完成。 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
+简介：最原始的网络I/O模型。进程会一直阻塞���直到数据拷贝完成。 
 缺点：高并发时，服务端与客户端对等连接，线程多带来的问题： 
  
  CPU资源浪费，上下文切换。 
@@ -138,7 +138,7 @@ Linux在处理文件和网络连接时，都需要打开和关闭FD。
 
   ```  
 ##### 2.2 非阻塞 I/O - Non Blocking IO 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
 简介：进程反复系统调用，并马上返回结果。 
 缺点：当进程有1000fds,代表用户进程轮询发生系统调用1000次kernel，来回的用户态和内核态的切换，成本几何上升。 
  ```java 
@@ -172,10 +172,10 @@ Linux在处理文件和网络连接时，都需要打开和关闭FD。
 
   ```  
 ##### 2.3 I/O 多路复用 - IO multiplexing 
- 
-简介：单个线程就可以同时处理多个网络连接。内核负责轮询所有socket，当某个socket有数据到达了，就通知用户进程���多���复用在Linux内核代码迭代过程中依次支持了三种调用，即SELECT、POLL、EPOLL三种多路复用的网络I/O模型。下文将画图结合Java代码解释。 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
+简介：单个线程就可以同时处理多个网络连接。内核负责轮询所有socket，当某个socket有数据到达了，就通知用户进程。多路复用在Linux内核代码迭代过程中依次支持了三种调用，即SELECT、POLL、EPOLL三种多路复用的网络I/O模型。下文将画图结合Java代码解释。 
 ###### 2.3.1 I/O 多路复用- select 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
 简介：有连接请求抵达了再检查处理。 
 缺点： 
  
@@ -225,7 +225,7 @@ Linux在处理文件和网络连接时，都需要打开和关闭FD。
 
   ```  
 ###### 2.3.2 I/O 多路复用 – poll 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-d0bcb16731cc02e9ce38b2284ee91f4fac2.png  '从操作系统层面理解Linux下的网络IO模型') 
 简介：设计新的数据结构(链表)提供使用效率。 
 poll和select相比在本质上变化不大，只是poll没有了select方式的最大文件描述符数量的限制。 
 缺点：逐个排查所有FD状态效率不高。 
@@ -270,7 +270,7 @@ poll和select相比在本质上变化不大，只是poll没有了select方式的
     }
 
   ```  
-当然上面的缺点相比较它优点都可以忽略。JDK提供了异步方式实现，但在实际的Linux环境中底层还是epoll，只不过多了一层循环，不算真正的异步非阻塞。而且就像上图中代码调用，处理网络连接的代码和业务代码解耦得不够好。Netty提供了简洁、解耦、结构清晰的API。 
+当然上面的缺点相比较它优点都可以忽略。JDK提供��异步方式实现，但在实际的Linux环境中底层还是epoll，只不过多了一层循环，不算真正的异步非阻塞。而且就像上图中代码调用，处理网络连接的代码和业务代码解耦得不够好。Netty提供了简洁、解耦、结构清晰的API。 
  ```java 
    public static void main(String[] args) {
         new NettyServer().serverStart();

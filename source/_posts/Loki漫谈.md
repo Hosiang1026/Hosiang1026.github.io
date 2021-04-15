@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 884
+top: 1779
 cover_picture: 'https://static.oschina.net/uploads/img/202008/20142150_uGHl.jpg'
 abbrlink: cd16883e
-date: 2021-04-14 07:54:42
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;Loki诞生背景 Kubernetes已经成为编排领域事实上的标准，同时Prometheus也成为基于Kubernetes平台之上、监控领域的标配。Prometheus能够收集业务metrics数据，Grafana界面展示，AlertManage...
@@ -52,10 +52,10 @@ date: 2021-04-14 07:54:42
   ``` 两套平台之间频繁切换，影响工作效率，为了解决此问题 ```java 
   Loki
   ``` 问世。 
-  从此，一站式的监控、告警、日志分析平台解决了我们不用频繁切换系统的麻烦。 
+  ![Test](https://oscimg.oschina.net/oscnet/02aaa8e736c66acfc426b0aeb4bf589cc63.png  'Loki漫谈')从此，一站式的监控、告警、日志分析平台解决了我们不用频繁切换系统的麻烦。 
    
   #### Loki架构设计思路 
-  基于 ```java 
+  ![Test](https://oscimg.oschina.net/oscnet/02aaa8e736c66acfc426b0aeb4bf589cc63.png  'Loki漫谈')基于 ```java 
   Loki
   ``` 的完整的日志收集框架需要三部分完成 
    
@@ -130,7 +130,7 @@ date: 2021-04-14 07:54:42
    
   ##### Loki内部组件介绍 
    
-    
+   ![Test](https://oscimg.oschina.net/oscnet/02aaa8e736c66acfc426b0aeb4bf589cc63.png  'Loki漫谈') 
    
    
     
@@ -154,7 +154,7 @@ date: 2021-04-14 07:54:42
   Ingester
   ``` 上。 
    
-    
+   ![Test](https://oscimg.oschina.net/oscnet/02aaa8e736c66acfc426b0aeb4bf589cc63.png  'Loki漫谈') 
    
   其中 ```java 
   Distributor
@@ -177,10 +177,10 @@ date: 2021-04-14 07:54:42
   ingester
   ``` 会严格验证接收到的日志行是以时间戳升序接收的（即，每个日志的时间戳都比之前的日志晚一些）。 
    
-    
+   ![Test](https://oscimg.oschina.net/oscnet/02aaa8e736c66acfc426b0aeb4bf589cc63.png  'Loki漫谈') 
    
    
-    
+   ![Test](https://oscimg.oschina.net/oscnet/02aaa8e736c66acfc426b0aeb4bf589cc63.png  'Loki漫谈') 
    
   当 ```java 
   ingester
@@ -232,7 +232,7 @@ date: 2021-04-14 07:54:42
   chunk
   ``` ，超过这个限制可能会有问题。 
    
-    
+   ![Test](https://oscimg.oschina.net/oscnet/02aaa8e736c66acfc426b0aeb4bf589cc63.png  'Loki漫谈') 
    
    ```java 
   Index
@@ -269,7 +269,7 @@ date: 2021-04-14 07:54:42
   Loki
   ``` 在接收客户端发送日志可能会出现发送速率超过限制，这个时候可能需要修改 ```java 
   ingestion_rate_mb
-  ``` 。具体可以参考： 
+  ``` 。![Test](https://oscimg.oschina.net/oscnet/02aaa8e736c66acfc426b0aeb4bf589cc63.png  'Loki漫谈')具体可以参考： 
    
     ```java 
   https://github.com/grafana/loki/blob/v1.5.0/docs/configuration/README.md#storage_config
@@ -419,7 +419,7 @@ date: 2021-04-14 07:54:42
      
     
      
-      
+     ![Test](https://oscimg.oschina.net/oscnet/02aaa8e736c66acfc426b0aeb4bf589cc63.png  'Loki漫谈') 
      
     
     
@@ -433,7 +433,7 @@ date: 2021-04-14 07:54:42
      
    
    
-   
+  ![Test](https://oscimg.oschina.net/oscnet/02aaa8e736c66acfc426b0aeb4bf589cc63.png  'Loki漫谈') 
   日志根据 ```java 
   label
   ``` 类型进行查询，可以根据具体关键字进行内容搜索和日志内容统计，参考logQL： 

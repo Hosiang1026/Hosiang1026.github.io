@@ -4,16 +4,16 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 693
+top: 1730
 cover_picture: 'https://static.oschina.net/uploads/img/202002/03143232_LJDe.jpg'
 abbrlink: df8ec42b
-date: 2021-04-14 07:54:42
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;关于SQL和ORM的争论，永远都不会终止，我也一直在思考这个问题。最近温习了一遍SSH框架，发了动弹，和广大猿友进行了深刻的探讨，被喷的五体投地，感慨万千，于是就有了今天这篇文章。 声明：...
 <!-- more -->
 
-                                                                                                                                                                                        关��SQL和ORM的争论，永远都不会终止，我也一直在思考这个问题。最近温习了一遍SSH框架，发了动弹，和广大猿友进行了深刻的探讨，被喷的五体投地，感慨万千，于是就有了今天这篇文章。 
+                                                                                                                                                                                        关于SQL和ORM的争论，永远都不会终止，我也一直在思考这个问题。最近温习了一遍SSH框架，发了动弹，和广大猿友进行了深刻的探讨，被喷的五体投地，感慨万千，于是就有了今天这篇文章。 
 声明：本文只是小编的一点拙见，不喜勿喷。 
 欲速则不达，欲达则欲速！ 
 一、hibernate优势 
@@ -118,17 +118,17 @@ delete from CUSTOMERS where ID=k;
 由 此可见，直接通过Hibernate API进行Hibernate批量更新和Hibernate批量删除都不值得推荐。而直接通过JDBC API执行相关的SQL语句或调用存储过程，是hibernate批量更新和批量删除的最佳方式。 
 素小暖讲Spring JdbcTemplate 
 三、群众的眼光的雪亮的，千万不要逆天而行 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-4caf476092dcdebf4612298259c5c492abc.png  '为什么很多人不愿意用hibernate了-') 
   
- 
- 
- 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-4caf476092dcdebf4612298259c5c492abc.png  '为什么很多人不愿意用hibernate了-') 
+![Test](https://oscimg.oschina.net/oscnet/up-4caf476092dcdebf4612298259c5c492abc.png  '为什么很多人不愿意用hibernate了-') 
+![Test](https://oscimg.oschina.net/oscnet/up-4caf476092dcdebf4612298259c5c492abc.png  '为什么很多人不愿意用hibernate了-') 
+![Test](https://oscimg.oschina.net/oscnet/up-4caf476092dcdebf4612298259c5c492abc.png  '为什么很多人不愿意用hibernate了-') 
 四、被喷之后的一些感悟 
 感觉就是一场批斗大会，我深深的感觉到才疏学浅的无奈，我真的只是想好好学习而已，希望若干年后，我还能初心不改。 
 作为一个初级程序员而言，没有必要花费过多的时间去证明技术的无用论，我并没有对hibernate这个框架进行深入的研究，只是在肤浅的层面的一些个人感悟。 
 框架本身并没有对错一说，只有适合不适合，任何框架都有其自身的能力范围，hibernate封装了很多有用的API给我们，降低了操作数据库的难度和复杂度，同时也减少了模板代码的数量，但hibernate留给开发者的可操作空间相对mybatis少了很多；mybatis框架使用起来更加灵活，开发者可以自定义查询语句，但增加了模板代码量，看起来并没有hibernate边界。两种框架在便捷与灵活两个指标上做出了取舍和妥协，这不能说是框架的错。对于一个框架而言，需要有自身专注的领域和设计愿景，不可能面面俱到，就如这位大哥所言： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-4caf476092dcdebf4612298259c5c492abc.png  '为什么很多人不愿意用hibernate了-') 
 使用任何一种技术框架，都需要贴合现实的业务需求以及自身的技术能力。当你还没有深入的去了解一门技术或者当前业务需求无法与框架契合时，不要盲目的批判框架的好坏。 
   
 本博主已经全面进军CSDN，希望大家支持我一下，非常感谢！ 

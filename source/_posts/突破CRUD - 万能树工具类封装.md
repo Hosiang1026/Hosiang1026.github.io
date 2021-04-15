@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 899
+top: 2096
 cover_picture: 'https://static.oschina.net/uploads/img/202003/05110050_hPhj.jpeg'
 abbrlink: 3cbf5b29
-date: 2021-04-14 07:56:10
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;0、学完本文你或许可以收获 感受一个树工具从初始逐步优化完善的过程 树工具封装的设计思考与实现思路 最后收获一款拿来即用的树工具源代码 对于前端树组件有一定了解和使用过的同学可直接跳...
@@ -25,11 +25,11 @@ date: 2021-04-14 07:56:10
 ##### 1、树长什么样 ？ 
 前端的树组件大多数情况下出现在后端的管理系统中，比如我们常见的菜单树、机构树、某某分类树、树表格等。大致像下方图片所展示的这样。 
 菜单树 
- 
+![Test](https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg  '突破CRUD - 万能树工具类封装') 
 机构树 
-org_tree.png 
+![Test](https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg  '突破CRUD - 万能树工具类封装')org_tree.png 
 树表格 
- 
+![Test](https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg  '突破CRUD - 万能树工具类封装') 
 大致上来说，前端树的展现形式就是上面3张图所列的几种形式。而这种前端树组件的展现构成需要依赖于后端返回的数据格式。 
  
 ##### 2、数据格式 
@@ -79,7 +79,7 @@ org_tree.png
 }]
 
   ```  
-本文所讲的树工具封装主要是针对第二种数据格式树形结构来说，因为第一种本身不需要特殊处理，也就不存在什���封���，就是简单的列表查询展示，与一般数据列表数据格式的区别是多了数据ID与父ID属性提供给前端进行树组件的构造。 
+本文所讲的树工具封装主要是针对第二种数据格式树形结构来说，因为第一种本身不需要特殊处理，也就不存在什么封装，就是简单的列表查询展示，与一般数据列表数据格式的区别是多了数据ID与父ID属性提供给前端进行树组件的构造。 
 而第二种是要在列表形式的数据格式上进行转换，形成如上所示的树形结构。但是，我们发现里面没有数据ID与父ID属性，why ？ 因为后端完成了数据层面树结构的构造工作，前端树组件再无需根据这两个属性进行树结构的判断构建，直接展示就OK，当然也不绝对，最终还得看前端的树组件是否需要。 
 但一般都会保留这两个属性，因为除过树组件自身的构造需求，业务处理上往往需要这两个属性，而后端树工具要构造树结构，那一定是需要数据ID与父ID的。 
 如果感觉上面说的麻烦你就记住一点，不管是列表结构还是树形结构，始终保留数据ID与父ID两个属性就对了。 
@@ -137,7 +137,7 @@ OK，有了上面的内容那就来个简单的实现。
   public class TreeUtil {
 
     /**
-     * 树构建
+     * 树���建
      */
     public static List<TreeNode> build(List<TreeNode> treeNodes,Object parentId){
         List<TreeNode> finalTreeNodes = CollectionUtil.newArrayList();
@@ -311,11 +311,11 @@ OK，有了上面的内容那就来个简单的实现。
  
 ###### 3.0 哥们，你返回的属性不够用啊 
 前两点比较容易想到，也比较容易实现，但这时候前端同学抛来了新的问题，哥们，你返回的树节点属性不够用啊，你看我这界面。需要备注你没返回来啊。 
- 
+![Test](https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg  '突破CRUD - 万能树工具类封装') 
 好吧，这种情况确实没考虑到。 
 要满足上述需求，简单做法就将remark属性直接添加到 TreeNode 类中，Convert中赋下值，这不就满足了，但想想又不对，今天这个前端伙计缺个remark，明天可能别的伙计又缺个其他属性，全加到TreeNode中，TreeNode到底是树节点还是业务实体，所以不能这么搞。 
 这里要处理成可扩展，同时满足开闭原则，所以此处比较妥的处理方式是继承，TreeNode属性满足不了的情况下，通过继承扩展具体业务的树节点来实现。 
-具体改造点如下 
+具体改造点如�� 
 1 新增菜单实体扩展树节点如下 
  ```java 
   public class MenuEntityTreeNode extends TreeNode {
@@ -378,7 +378,7 @@ public static <T,E extends TreeNode> List<E> build(List<T> list,Object p
 ###### 4.0 哥们，我的属性名不叫code 
 完成了3.0版本，基本上大部分需求就都可以满足了，但是这时候前端同学又抛来了新的问题，哥们，你返回的树节点编号属性是code，但我这边的叫number，对应不上，我这边调整的话影响比较大，你看后端返回的时候能不能处理下。 
 code属性名肯定是不能调整的，因为其他模块树的节点编号都叫code。 
-那怎么办 ？其实也简单，跟3.0版本一样，在扩展的业务树节点去加个属性，这样问题是解决了，但万一出现所有treeNode的属性名都跟前端需要的不对应这种极端情况，那意味着所有树属性都需要自行扩展定义，这种岂不是返回了没什么用的父TreeNode心中的所有属性。序列化时倒是可以控制，为空的不进行序列化，但不是依赖序列化框架了么。还有没有其他办法。 
+那怎么办 ？其实也简单，���3.0��本一样，在扩展的业务树节点去加个属性，这样问题是解决了，但万一出现所有treeNode的属性名都跟前端需要的不对应这种极端情况，那意味着所有树属性都需要自行扩展定义，这种岂不是返回了没什么用的父TreeNode心中的所有属性。序列化时倒是可以控制，为空的不进行序列化，但不是依赖序列化框架了么。还有没有其他办法。 
 稍微整理下需求，就是树节点属性在返回前端时要能够支持自定义属性名。 
 类属性定义好就改不了了，怎么自定义，除了新增类和改现有的属性，还有什么办法呢 ？这时候我们应该想到map 
 具体怎么做 
@@ -557,7 +557,7 @@ public static <T> List<TreeNodeMap> build(List<T> list,Object parentId,Con
             treeNode.setParentId(object.getPid());
             treeNode.setCode(object.getCode());
             treeNode.setName(object.getName());
-            // 属性扩展
+            // 属性扩���
             treeNode.extra("extra1","123");
         }
     });
@@ -579,5 +579,5 @@ public static <T> List<TreeNodeMap> build(List<T> list,Object parentId,Con
 觉得还行，动动手指留个赞。 
 以上就是今天的内容，我们下期见。 
 更多优质内容，首发公众号【风象南】，欢迎关注。 
-
+![Test](https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg  '突破CRUD - 万能树工具类封装')
                                         

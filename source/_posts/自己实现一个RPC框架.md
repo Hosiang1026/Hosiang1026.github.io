@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 795
+top: 1798
 cover_picture: 'https://static.oschina.net/uploads/img/202006/22110244_UuUs.jpg'
 abbrlink: bd9cbc0f
-date: 2021-04-14 07:54:42
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;RPC框架称为远程调用框架，其实现的核心原理就是消费者端使用动态代理来代理一个接口的方法(基于JDK的动态代理，当然如果使用CGLib可以直接使用无接口类的方法)，通过加入网络传输编程，传输...
@@ -73,7 +73,7 @@ public class ConsumerProxy {
                         try {
                             //将动态代理的方法名写入对外传输的对象流中
                             output.writeUTF(method.getName());
-                            //将动态代理的方���的��数写入对外传输的对象流中
+                            //将动态代理的方法的参数写入对外传输的对象流中
                             output.writeObject(args);
                             //创建一个对内传输的对象流，绑定套接字
                             //这里是为了获取提供者端传回的结果

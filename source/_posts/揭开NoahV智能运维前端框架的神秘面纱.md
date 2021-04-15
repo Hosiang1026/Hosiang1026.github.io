@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 892
+top: 1829
 cover_picture: 'https://cdn.pixabay.com/photo/2015/12/13/02/07/pebbles-1090536__480.jpg'
 abbrlink: 53d612b9
-date: 2021-04-14 07:54:42
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;作者简介 莫海艳 百度资深前端研发工程师 百度智能运维（Noah）产品前端技术方向负责人，在运维数据可视化、中后台前端解决方案等方向上，有着丰富的实践经验。 干货概览 众所周知，前端有三...
@@ -24,11 +24,11 @@ date: 2021-04-14 07:54:42
 ### NoahV把后端工程师变成了全栈 
  
 #### 1.表格组件 
-在运维业务中，表格通常用来展示一些运维对象、运维事件列表（比如上线任务列表、监控任务列表、监控报警事件列表等）。但是运维的表格与基础表格不同的是，有一些运维对象，如图1，上线模板表格，除了渲染上线模板的列表信息，还需要按模板名称、创建时间进行筛选(图1.b)，对具体的一条模板信息进行编辑或者删除操作(图1.c)。所以运维业务中的表格应用通常包含了增删改查的操作，这类操作虽然简单，对于非前端人员上手这类开发还是需要一定的前端知识。我们在NoahV中把表格组件做了进一步的增强，用配置化实现数据展示，数据操作等行为的开发，让非前端开发人员轻松上手。 
- 
+在运维业务中，表格通常用来展示一些运维对象、运维事件列表（比如上线任务列表、监控任务列表、监控报警事件列表等）。但是运维的表格与基础表格不同的是，有一些运维对象，如图1，上线模板表格，除了渲染上线模板的列表信息，还需要按模板名称、创建时间进行筛选(图1.b)，对具体的一条模板信息进行编辑或者删除操作(图1.c)。所以运维业务中的表格应用通常包含了增删改查的操作，这类操作虽然简单，对于非前端人员上手这类开发还是需要一定的前端知识。���们��NoahV中把表格组件做了进一步的增强，用配置化实现数据展示，数据操作等行为的开发，让非前端开发人员轻松上手。 
+![Test](https://oscimg.oschina.net/oscnet/088ca425be8620c1edd7cdd91de98ec2cf1.jpg  '揭开NoahV智能运维前端框架的神秘面纱') 
 图1  上线模板表格 
 具体的配置看下图： 
- 
+![Test](https://oscimg.oschina.net/oscnet/088ca425be8620c1edd7cdd91de98ec2cf1.jpg  '揭开NoahV智能运维前端框架的神秘面纱') 
 图2  上线模板表格配置 
  
   columns：表格每列的数据定义，对应图1.a  
@@ -38,7 +38,7 @@ date: 2021-04-14 07:54:42
   action: 表格编辑，删除的数据交互，对应图1.c  
  
 在前后端分离的开发模式中，前端需要后端提供数据，但是后端通常还没开发完毕，这个时候前端就需要按照固定的数据结构自己来模拟数据。模拟数据其实是一个很繁琐的工作，比如上面的表格这类应用，在我们的实际业务场景中，需求还挺多的，模拟数据就是一个重复性的工作。在NoahV中，我们就用NoahV Mockup工具来生成这类重复性的应用。 
-noahv cli就是我们的命令行工具，里面包含了NoahV Mockup模块，这个模块有一个命令就是noahv create命令，当执行noahv create，提示输入模拟数据的接口名称，这个接口名称由一个具体的文件路径+文件名称组成，比如输入api/table, 会自动在mockup目录下生成api文件夹，同时会在api文件夹���创���table模拟数据。 
+noahv cli就是我们的命令行工具，里面包含了NoahV Mockup模块，这个模块有一个命令就是noahv create命令，当执行noahv create，提示输入模拟数据的接口名称，这个接口名称由一个具体的文件路径+文件名称组成，比如输入api/table, 会自动在mockup目录下生成api文件夹，同时会在api文件夹中创建table模拟数据。 
 备注：使用noahv create之前需要安装noahv cli命令行工具，更详细的使用步骤，请查看我们的文档中心（ https://baidu.github.io/NoahV）。 
  
 #### 2.布局应用 
@@ -46,11 +46,11 @@ noahv cli就是我们的命令行工具，里面包含了NoahV Mockup模块，�
  
 ##### 2.1 上-下布局 
 我们常用的页面布局有上-下布局，或者左-右布局模式。通常上-下布局中的上就是头部导航，下就是内容体，头部导航又有一级导航、二级导航之类，登录/退出等。这类共性的布局需求，我们在NoahV中也做了统一的封装，就是导航配置，我们先看下导航配置出来的效果图。 
- 
+![Test](https://oscimg.oschina.net/oscnet/088ca425be8620c1edd7cdd91de98ec2cf1.jpg  '揭开NoahV智能运维前端框架的神秘面纱') 
 图3  导航应用 
 a对应logo，b对应导航菜单，c对应登录，d对应面包屑，e对应内容体。 
 我们来看下通过怎样的配置来实现上面的界面： 
- 
+![Test](https://oscimg.oschina.net/oscnet/088ca425be8620c1edd7cdd91de98ec2cf1.jpg  '揭开NoahV智能运维前端框架的神秘面纱') 
 图4  导航配置 
  
   图4中的logo是对图3.a logo的配置  
@@ -60,8 +60,8 @@ a对应logo，b对应导航菜单，c对应登录，d对应面包屑，e对应�
  
  
 ##### 2.2 左-右布局 
-前面说到除了上-下这类布局，还有左-右这类情况，顾名思义，就是左侧导航，右侧内容体，通常情况下，头部导航与左侧导航有联动，其实看图4的导航配置中，看到有个type类型，type类型这里有两种值: header/header-sidebar，看具体的值就能对应上header-sidebar就是头部导航与左侧导航的情况。我们直接把图4中的type值改为header-sidebar，就得到下图的布局界面： 
- 
+前面说到除了上-下这类布局，还有左-右这类情况，顾名思义，就是左侧导航，右侧内容体，通常情况下，头部导航与左侧导航有联动，其实看图4的导航配置中，看到有个type类型，type类型这里有两种值: header/header-sidebar���看���体的值就能对应上header-sidebar就是头部导航与左侧导航的情况。我们直接把图4中的type值改为header-sidebar，就得到下图的布局界面： 
+![Test](https://oscimg.oschina.net/oscnet/088ca425be8620c1edd7cdd91de98ec2cf1.jpg  '揭开NoahV智能运维前端框架的神秘面纱') 
 图5  左侧导航配置 
  
 ##### 2.3 自定义布局扩展 
@@ -69,7 +69,7 @@ a对应logo，b对应导航菜单，c对应登录，d对应面包屑，e对应�
  
 ### NoahV可扩展性是前端工程师的利器 
 上面详细介绍了NoahV中表格组件，布局组件如何帮助开发人员解决效率问题，接下来我们从架构上对NoahV做一个更全面的介绍。以下是NoahV的架构图： 
- 
+![Test](https://oscimg.oschina.net/oscnet/088ca425be8620c1edd7cdd91de98ec2cf1.jpg  '揭开NoahV智能运维前端框架的神秘面纱') 
 图6  NoahV架构图 
 从这个架构图看，NoahV由三个部分组成，第一个是NoahV的架构主体，第二个是NoahV的工具，第三个是NoahV的规范。 
 架构主体是NoahV的主要部分，由底层依赖、组件、场景、页面、系统组成。NoahV又提供了开发阶段的项目初始化、页面创建、数据模拟，还有联调阶段、发布阶段的工具。架构主体与工具都遵循我们的开发规范、UI规范、API规范。下面我们来详细介绍NoahV的这三个部分。 
@@ -81,7 +81,7 @@ NoahV架构主体分成5层，第一层是NoahV的底层依赖Vue JS。第二层
 #### 2.NoahV的工具 
  
 ##### 2.1 开发阶段 
-当项目进入开发阶段的时候，我们用项目初始化工具来初始化项目，开发者也可以根据自己的需要用页面创建工具来创建页面、组件等，生成的页面与组件都可以用配置化的方式来开发，当然开发者也可以按照前面讲的布局那样用扩展的方式来做自定义开发。在开发阶段我们还需要使用模拟数据，所以NoahV用数据模拟工具来自动生成模拟接口。有了数据，就需要数据请求，对于数据请求，市面上有Fetch、Axios等一些高效的HTTP库，但是在实际的业务场景中，我们需要处理如Restful接口的支持，未登录的跳转，全局loading等等需求，这些在Fetch、Axios是没有封装的，所以NoahV的NoahV Request对这些需求做了一定的集成封装，而且还能通过Request Hook提供hook入口，让开发者在请求前与请求成功以后的数据适��与转换。 
+当项目进入开发阶段的时候，我们用项目初始化工具来初始化项目，开发者也可以根据自己的需要用页面创建工具来创建页面、组件等，生成的页面与组件都可以用配置化的方式来开发，当然开发者也可以按照前面讲的布局那样用扩展的方式来做自定义开发。在开发阶段我们还需要使用模拟数据，所以NoahV用数据模拟工具来自动生成模拟接口。有了数据，就需要数据请求，对于数据请求，市面上有Fetch、Axios等一些高效的HTTP库，但是在实际的业务场景中，我们需要处理如Restful接口的支持，未登录的跳转，全局loading等等需求，这些在Fetch、Axios是没有封装的，所以NoahV的NoahV Request对这些需求做了一定的集成封装，而且还能通过Request Hook提供hook入口，让开发者在请求前与请求成功以后的数据适配与转换。 
 关于NoahV Request更细的使用细节，请查看我们的使用文档（ https://baidu.github.io/NoahV/#/guide/request）。 
  
 ##### 2.2 联调阶段 
@@ -102,7 +102,7 @@ NoahV架构主体分成5层，第一层是NoahV的底层依赖Vue JS。第二层
   noahv –help  
  
 运行noahv –help，会得到如下界面： 
- 
+![Test](https://oscimg.oschina.net/oscnet/088ca425be8620c1edd7cdd91de98ec2cf1.jpg  '揭开NoahV智能运维前端框架的神秘面纱') 
 图7  noahv –help 
 步骤一：初始化页面 
  
@@ -112,7 +112,7 @@ NoahV架构主体分成5层，第一层是NoahV的底层依赖Vue JS。第二层
   用noahv start来启动应用  
  
 启动应用以后，会看到如下的界面： 
- 
+![Test](https://oscimg.oschina.net/oscnet/088ca425be8620c1edd7cdd91de98ec2cf1.jpg  '揭开NoahV智能运维前端框架的神秘面纱') 
 图8  NoahV初始化界面 
 步骤二：创建页面 
  
@@ -121,7 +121,7 @@ NoahV架构主体分成5层，第一层是NoahV的底层依赖Vue JS。第二层
 NoahV目前的创建功能包含有noahv create action | list | filterList | form | chart | api | test, 更详细的细节请参考我们的使用文档。 
 关于noahv-mockup、noahv-request、noahv-test等等也请参考我们的使用文档（https://baidu.github.io/NoahV/#/guide/quickstart）。 
 当创建相应的应用的时候，控制台界面会有相应的提示： 
- 
+![Test](https://oscimg.oschina.net/oscnet/088ca425be8620c1edd7cdd91de98ec2cf1.jpg  '揭开NoahV智能运维前端框架的神秘面纱') 
 图9  noahv create命令 
 步骤三：发布项目 
  
@@ -139,5 +139,5 @@ NoahV现已开源，Github地址：https://github.com/baidu/NoahV
 如果你喜欢本文，请分享到朋友圈，想要获得更多信息，请关注我们！ 
 如果你有任何问题欢迎留言咨询~ 
 如果想试用我们的企业级运维平台NoahEE，请联系邮箱：noah_bd@baidu.com 
-
+![Test](https://oscimg.oschina.net/oscnet/088ca425be8620c1edd7cdd91de98ec2cf1.jpg  '揭开NoahV智能运维前端框架的神秘面纱')
                                         

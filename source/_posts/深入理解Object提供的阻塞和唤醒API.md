@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 898
+top: 2094
 cover_picture: 'https://static.oschina.net/uploads/img/202008/20142229_q4W7.jpg'
 abbrlink: 16d52ba0
-date: 2021-04-14 07:56:10
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;点击上方蓝字 ↑↑ Throwable文摘 关注公众号设置星标，不定时推送高质量原创文章 关注 前提 前段时间花了大量时间去研读JUC中同步器AbstractQueuedSynchronizer的源码实现，再结合很久之前看...
@@ -22,7 +22,7 @@ date: 2021-04-14 07:56:10
        
         
          
-          
+         ![Test](https://oscimg.oschina.net/oscnet/16db69806e093dd6434df2520b4765c75c7.jpg  '深入理解Object提供的阻塞和唤醒API') 
          
         
        
@@ -91,7 +91,7 @@ date: 2021-04-14 07:56:10
   wait()
   ``` 方法提供了阻塞的功能，分超时和永久阻塞的版本，实际上，底层只提供了一个JNI方法： 
    ```java 
-  // 这个是底层提供的JNI方法，带超时的阻塞等待，响应中断，其他两个只是变体public final native void wait(long timeoutMillis) throws InterruptedException;// 变体方法1，永久阻塞，响应中断public final void wait() throws InterruptedException {    wait(0L);}// 变体方法2，带超时的阻塞，超时时间分两段：毫秒和纳秒，实际上纳秒大于0直接毫秒加1(这么暴力...)，响应中断public final void wait(long timeoutMillis, int nanos) throws InterruptedException {    if (timeoutMillis < 0) {        throw new IllegalArgumentException("timeoutMillis value is negative");    }    if (nanos < 0 || nanos > 999999) {        throw new IllegalArgumentException("nanosecond timeout value out of range");    }    if (nanos > 0) {        timeoutMillis++;    }    wait(timeoutMillis);}
+  // 这个是底层提供的JNI方法，带超时的阻塞等待，响应中断，其他两个只是变体public final native void wait(long timeoutMillis) throws InterruptedException;// 变体方法1，永久阻塞，响应中断public final void wait() throws InterruptedException {    wait(0L);}// 变体方法2，带超时的阻塞，超时时间分两段：毫秒和纳秒，实际上纳秒大于0直接毫秒加1(这么暴��...)，响应中断public final void wait(long timeoutMillis, int nanos) throws InterruptedException {    if (timeoutMillis < 0) {        throw new IllegalArgumentException("timeoutMillis value is negative");    }    if (nanos < 0 || nanos > 999999) {        throw new IllegalArgumentException("nanosecond timeout value out of range");    }    if (nanos > 0) {        timeoutMillis++;    }    wait(timeoutMillis);}
   ```  
   也就是只有一个 ```java 
   wait(long timeoutMillis)
@@ -288,7 +288,7 @@ date: 2021-04-14 07:56:10
   ```  
    ```java 
   JVM
-  ``` 需要保证每���个 ```java 
+  ``` 需要保证每一个 ```java 
   monitorenter
   ``` 都有一个 ```java 
   monitorexit
@@ -383,7 +383,7 @@ date: 2021-04-14 07:56:10
   notify()
   ``` 可以简单总结出一个同步代码块的伪代码如下： 
    ```java 
-  final Object lock = new Object();// 等待synchronized(lock){    1、线程进入同步代码块，意味着获取对象监视器锁成功    while(!condition){        lock.wait();   2.线程调用wait()进行阻塞等待        break;    }    3.线程从wait()的阻塞等待中被唤醒，尝试恢复第1步之后的同步状态，并不会马上生效，直到notify被调用并且调用notify方法的线程已经释放锁，同时当前线程需要竞争成功    4.继续执行后面的代码，直到离开同步代码块}// 唤醒synchronized(lock){    1、线程进入同步代码块，意味着获取对象监视器锁成功    lock.notify();  2.唤醒其中一个在对象监视器上等待的线程    3.准备推出同步代码块释放锁，只有释放锁之后第2步才会生效}
+  final Object lock = new Object();// 等待synchronized(lock){    1、线程进入同步代码块，意味着获取对象监视器锁成功    while(!condition){        lock.wait();   2.线程调用wait()进行阻塞等待        break;    }    3.线程从wait()的阻塞等待中被唤醒，尝试恢复第1步之后的同步状态，并不会马上生效，直到notify被调用并且调用notify方法的线程已经释放锁，同时当前线程需要竞争成功    4.继续执行后面的代码，直到离开同步代码块}// 唤醒synchronized(lock){    1、线程进入同步代码块，意味着获取对象监视器锁成功    lock.notify();  2.唤醒其中一个在对象监视器上等待的线程    3.准备推出同步代码块��放��，只有释放锁之后第2步才会生效}
   ```  
    
   #### 图解Object提供的阻塞和唤醒机制 
@@ -391,7 +391,7 @@ date: 2021-04-14 07:56:10
   API
   ``` 的工作示意过程： 
    
-    
+   ![Test](https://oscimg.oschina.net/oscnet/16db69806e093dd6434df2520b4765c75c7.jpg  '深入理解Object提供的阻塞和唤醒API') 
     
     j-u-c-o-w-n-1.png 
     

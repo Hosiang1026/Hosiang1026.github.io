@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 897
+top: 1850
 cover_picture: 'https://static.oschina.net/uploads/img/202001/09181210_9HGN.jpg'
 abbrlink: ab380242
-date: 2021-04-14 07:56:10
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;本项目综合运用了 Vue3.0 的新特性。 基于 Composition API 即 Function-based API 进行改造，配合 Vue Cli，优先体验 Vue3 特性 使用单例对象模式进行组件通信 使用 axios 库进行网络请求，...
@@ -17,7 +17,7 @@ date: 2021-04-14 07:56:10
   Vue3.0
   ```  的新特性。 
  
- 基于  ```java 
+ ��于  ```java 
   Composition API
   ```  即  ```java 
   Function-based API
@@ -144,7 +144,7 @@ new Vue({
   components
   ```  属性值清空  ```java 
   <template>
-  ```  模板��内容，删除  ```java 
+  ```  模板的内容，删除  ```java 
   <style>
   ```  模板，等待重新引入新的组件。 
  ```java 
@@ -316,7 +316,7 @@ export default {
 };
 </script>
   ```  
- 
+![Test](https://image-static.segmentfault.com/325/741/3257418281-5deefc525c34a_articlex  'Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目') 
  
 ### context 
  ```java 
@@ -405,7 +405,7 @@ export default {
         return state.searchValue;
       },
       () => {
-        // 存储输入框到���态 store 中心，用于组件通信
+        // 存储输入框到状态 store 中心，用于组件通信
         store.setSearchValue(state.searchValue);
         // window.console.log(state.searchValue);
       }
@@ -444,7 +444,7 @@ export default {
   };
 }
   ```  
- 
+![Test](https://image-static.segmentfault.com/325/741/3257418281-5deefc525c34a_articlex  'Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目')![Test](https://image-static.segmentfault.com/325/741/3257418281-5deefc525c34a_articlex  'Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目') 
  
 ### template refs 
 这里的输入框拥有两个状态，一个是有输入框的状态和无输入框的状态，所以我们需要一个布尔值  ```java 
@@ -461,7 +461,7 @@ export default {
 };
   ```  
 然后配合  ```java 
-  v-bind:class
+  'v-bind':class
   ```  指令，让  ```java 
   weui-search-bar_focusing
   ```  类名根据  ```java 
@@ -485,7 +485,7 @@ export default {
   ref="inputElement"
 />
   ```  
- 
+![Test](https://image-static.segmentfault.com/325/741/3257418281-5deefc525c34a_articlex  'Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目') 
  
 ### watch 
  ```java 
@@ -498,7 +498,7 @@ export default {
   store
   ```  对象里面，方面后面和  ```java 
   Panel.vue
-  ```  列表组件进行数据通信： 
+  ```  列表��件进行数据通信： 
  ```java 
   import { reactive, watch } from "@vue/composition-api";
 import store from "../stores";
@@ -525,7 +525,7 @@ export default {
   ```  
  
 ### state management 
-在这里我们维护一份数据来��现共享状态管理，也就是说我们新建一个  ```java 
+在这里我们维护一份数据来实现共享状态管理，也就是说我们新建一个  ```java 
   store.js
   ```  暴露出一个  ```java 
   store
@@ -786,7 +786,7 @@ onMounted(() => {
   loadMore();
 });
   ```  
- 
+![Test](https://image-static.segmentfault.com/325/741/3257418281-5deefc525c34a_articlex  'Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目') 
  
 ### computed 
 接下来我们就使用另外一个属性  ```java 
@@ -811,7 +811,7 @@ let newsComputed = computed({
   }
 })
   ```  
- 
+![Test](https://image-static.segmentfault.com/325/741/3257418281-5deefc525c34a_articlex  'Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目') 
 这里我们使用可读可写计算属性去处理列表数据，还记得我们上一个组件  ```java 
   Search.vue
   ```  吗，我们可以结合用户在搜索框输入的检索值，配合  ```java 

@@ -4,16 +4,16 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 483
+top: 1849
 cover_picture: 'https://static.oschina.net/uploads/img/202004/20133512_t2LV.jpg'
 abbrlink: b9076a7
-date: 2021-04-14 07:56:10
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;在Java语言中，处理空指针往往是一件很头疼的事情，一不小心，说不定就搞出个线上Bug，让你的绩效考核拿到3.25。最近新出的Java14，相信大家都有所耳闻，那么今天就来看看，面对NullPointer...
 <!-- more -->
 
-                                                                                                                                                                                        ���Java���言中，处理空指针往往是一件很头疼的事情，一不小心，说不定就搞出个线上Bug，让你的绩效考核拿到3.25。最近新出的Java14，相信大家都有所耳闻，那么今天就来看看，面对NullPointerException，Java14有哪些更好的处理方式呢？ 
+                                                                                                                                                                                        在Java语言中，处理空指针往往是一件很头疼的事情，一不小心，说不定就搞出个线上Bug，让你的绩效考核拿到3.25。最近新出的Java14，相信大家都有所耳闻，那么今天就来看看，面对NullPointerException，Java14有哪些更好的处理方式呢？ 
 #### 1.传统的 NullPointerException 
 我们编码过程中呢，经常会使用链式调用的方式来写代码，这样写起来很方便，也很清晰，但是，一旦出现NullPointerException，那就头大了，因为你很难知道异常是在什么时候开始发生的。 举个简单的例子，就比如下面的代码，要找到公司某个员工的户籍所在地，我们这样来调用 
  ```java 
@@ -65,7 +65,7 @@ JVM由两部分组成详细的异常消息。第一部分表示失败的操作�
 employee.getName();
 
   ```  
-当执行以上代码时，异常信息中会打印本地变量名称： 
+当��行��上代码时，异常信息中会打印本地变量名称： 
  ```java 
   "com.developlee.java14.helpfulnullpointerexceptions.HelpfulNullPointerException$Employee.getName()"
 because "employee" is null
@@ -81,5 +81,5 @@ because "<local1>" is null
 JVM 打印编译器分配的变量索引，而不是本地变量名（employee）。 
 关于NullPointerException的处理到这里就结束了，通过Java14增强的NullPointerException，我们可以很快速的定位代码问题的原因所在，更快的调试代码，节约时间，提高效率。 
 已经安装了Java14的朋友可以试试看哦~ 
-叮叮叮！关注公众号： 锅外的大佬 ，加入锅外圈，不定时福利输出，hi~欢迎你的加入哦~ 私人博客地址： http://www.developlee.top 
+叮叮叮！关注公众号： 锅外的大佬 ，加入锅外圈，不定时福利输出，hi~欢迎你的加入哦~ 私人博客地址： http://www.developlee.top ![Test](https://oscimg.oschina.net/oscnet/up-8f78fab043be3f2dbf925143ebf2a8894c9.JPEG  'NullPointerException的处理新方式，Java14真的太香了')
                                         

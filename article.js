@@ -5,8 +5,8 @@ var datetime = require("silly-datetime");
 var cheerio = require('cheerio');
 var callDB = require('./callSqlite.js');
 
-//主域名
-var domain = 'https://www.oschina.net/blog/widgets/_blog_recommend_list?type=ajax&';
+//主域名 _blog_index_recommend_list
+var domain = 'https://www.oschina.net/blog/widgets/_blog_index_recommend_list?type=ajax&';
 var arcList = [];
 var newList = [];
 
@@ -33,7 +33,7 @@ function crawler(domain) {
                 //nextPage( html );
             });
         });
-    }while (i != 10)
+    }while (i != 15)
 }
 
 //解析html页面
@@ -46,10 +46,15 @@ function filterHtml(html) {
         var title = ele.find(".header").attr("title");
         var url = ele.find(".header").attr("href");
         var listTime = ele.find(".extra").find(".list").find(".item")[1].children[0].data;
-        var cover = ele.find(".image").children()[0].attribs.src;
+        //var cover = ele.find(".image").children()[0].attribs.src;
+        var cover = "";
+        if (null != ele.find(".image").html()){
+            cover = ele.find(".image")[0].children[1].attribs.src;
+        }
+
         var desc = ele.find(".line-clamp").text();
         //ele.find("small a").remove();
-        console.log(title);
+        console.log(title + "-- " + url);
         //特殊符号处理
         var reg=/\\|\/|\?|\？|\*|\"|\“|\”|\'|\‘|\’|\<|\>|\{|\}|\[|\]|\【|\】|\：|\:|\、|\^|\$|\!|\~|\`|\|/g;
         title = title.replace(reg,"-");
@@ -116,8 +121,13 @@ function filterContentHtml(title, html) {
     $("div.article-box__content").find(".content").find("h2").prepend("<span>#### </span>");
     $("div.article-box__content").find(".content").find("h3").prepend("<span>##### </span>");
     $("div.article-box__content").find(".content").find("h4").prepend("<span>###### </span>");
-    $("div.article-box__content").find(".content").find("code").prepend("<span> ```java \n  </span>");
-    $("div.article-box__content").find(".content").find("code").append("<span>\n  ``` </span>");
+    $("div.article-box__content").find(".content").find("code").prepend("<span> \n ```java \n  </span>");
+    $("div.article-box__content").find(".content").find("code").append("<span>\n  ``` \n </span>");
+    var image = $("div.article-box__content").find(".content").find("img");
+    if (null != image){
+        var imageUrl = image.attr("src");
+        $("div.article-box__content").find(".content").find("img").append("![Test]("+imageUrl +"  '" +title+"')");
+    }
 
     /* var aPost = $("#articleContent").find("img");
      aPost.each(function (index,item) {

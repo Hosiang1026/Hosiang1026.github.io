@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 750
+top: 1739
 cover_picture: 'https://static.oschina.net/uploads/img/202009/04143635_HytU.jpg'
 abbrlink: 9372984f
-date: 2021-04-14 07:56:10
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;松哥原创的 Spring Boot 视频教程已经杀青，感兴趣的小伙伴戳这里-->Spring Boot+Vue+微人事视频教程 上次有小伙伴建议，源码分析太枯燥了，要是能够结合设计模式一起来，这样更有助于大家理...
@@ -146,7 +146,7 @@ date: 2021-04-14 07:56:10
      
     
     
-      策略模式将造成产生很多策略类（可以通过使用享元模式在一定程度上减少对象的数量）。 
+      策略模式将造成产生很多策略类（可以通过使用享元模式在一定程度上减少对象的数��）。 
      
    
   Spring Security 中使用策略模式的地方也有好几个。 
@@ -156,7 +156,7 @@ date: 2021-04-14 07:56:10
   public class SecurityContextHolder { // ~ Static fields/initializers // ===================================================================================== public static final String MODE_THREADLOCAL = "MODE_THREADLOCAL"; public static final String MODE_INHERITABLETHREADLOCAL = "MODE_INHERITABLETHREADLOCAL"; public static final String MODE_GLOBAL = "MODE_GLOBAL"; public static final String SYSTEM_PROPERTY = "spring.security.strategy"; private static String strategyName = System.getProperty(SYSTEM_PROPERTY); private static SecurityContextHolderStrategy strategy;}
   ```  
   用户可以自行选择使用哪一种策略！具体参见：在 Spring Security 中，我就想从子线程获取用户登录信息，怎么办？ 
-  ��有��个就是 session 并发管理。 
+  还有一个就是 session 并发管理。 
   在 AbstractAuthenticationProcessingFilter#doFilter 方法中，有如下代码： 
    ```java 
   public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)  throws IOException, ServletException { //省略  sessionStrategy.onAuthentication(authResult, request, response); //省略}
@@ -173,7 +173,7 @@ date: 2021-04-14 07:56:10
      集群化部署，Spring Security 要如何处理 session 共享？ 
      
    
-  当然，这样的例子还有很多，我就不一一列举了。 
+  当然，这样的例子还有很多，我就��一一列举了。 
    
   #### 4.代理模式 
    
@@ -289,7 +289,7 @@ date: 2021-04-14 07:56:10
    
   在 Spring 框架中，观察者模式用于实现 ApplicationContext 的事件处理功能。Spring 为我们提供了 ApplicationEvent 类和 ApplicationListener 接口来启用事件处理。Spring 应用程序中的任何 Bean 实现 ApplicationListener 接口，都会接收到 ApplicationEvent 作为事件发布者推送的消息。在这里，事件发布者是主题(Subject) 和实现 ApplicationListener 的 Bean 的观察者(Observer)。 
   具体到 Spring Security 中，如登录成功事件发布，session 销毁事件等等，都算是观察者模式。 
-  例如 AbstractAuthenticationProcessingFilter#successfulAuthentication ���法： 
+  例如 AbstractAuthenticationProcessingFilter#successfulAuthentication 方法： 
    ```java 
   protected void successfulAuthentication(HttpServletRequest request,  HttpServletResponse response, FilterChain chain, Authentication authResult)  throws IOException, ServletException { if (logger.isDebugEnabled()) {  logger.debug("Authentication success. Updating SecurityContextHolder to contain: "    + authResult); } SecurityContextHolder.getContext().setAuthentication(authResult); rememberMeServices.loginSuccess(request, response, authResult); // Fire event if (this.eventPublisher != null) {  eventPublisher.publishEvent(new InteractiveAuthenticationSuccessEvent(    authResult, this.getClass())); } successHandler.onAuthenticationSuccess(request, response, authResult);}
   ```  
@@ -347,7 +347,7 @@ date: 2021-04-14 07:56:10
       
        
         
-         
+        ![Test](https://oscimg.oschina.net/oscnet/2bcfda4dba8f714bb95039b3f54aef1b0ef.jpg  '盘点 Spring Security 框架中的八大经典设计模式') 
         
        
          刚刚发表 

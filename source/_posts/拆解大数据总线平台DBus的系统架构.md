@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 853
+top: 1703
 cover_picture: 'https://static.oschina.net/uploads/img/201910/15113748_Am6C.jpg'
 abbrlink: 4bf38c05
-date: 2021-04-14 07:54:42
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;拓展阅读： 如何基于日志，同步实现数据的一致性和实时抽取? 快速部署DBus体验实时数据流计算 Dbus所支持两类数据源的实现原理与架构拆解。 大体来说，Dbus支持两类数据源： RDBMS数据源 日志...
@@ -22,7 +22,7 @@ Dbus所支持两类数据源的实现原理与架构拆解。
  RDBMS数据源 
  日志类数据源 
  
- 
+![Test](http://college.creditease.cn/resources/upload/image/20190718/1563419291924058005.png  '拆解大数据总线平台DBus的系统架构') 
 #### 一、RMDBMS类数据源的实现 
 以mysql为例子. 分为三个部分： 
  
@@ -36,7 +36,7 @@ mysql 日志抽取模块由两部分构成：
  canal server：负责从mysql中抽取增量日志。 
  mysql-extractor storm程序：负责将增量日志输出到kafka中，过滤不需要的表数据，保证at least one和高可用。 
  
-我们知道，虽然mysql innodb有自己的log，mysql主备同步是通过binlog来实现的。而binlog同步有三种模式：Row 模式，Statement 模式，Mixed模式。因为statement模式���各��限制，通常生产环境都使用row模式进行复制，使得读取全量日志成为可能。 
+我们知道，虽然mysql innodb有自己的log，mysql主备同步是通过binlog来实现的。而binlog同步有三种模式：Row 模式，Statement 模式，Mixed模式。因为statement模式有各种限制，通常生产环境都使用row模式进行复制，使得读取全量日志成为可能。 
 通常我们的mysql布局是采用 2个master主库（vip）+ 1个slave从库 + 1个backup容灾库 的解决方案，由于容灾库通常是用于异地容灾，实时性不高也不便于部署。 
 为了最小化对源端产生影响，我们读取binlog日志从slave从库读取。 
 读取binlog的方案比较多，DBus也是站在巨人的肩膀上，对于Mysql数据源使用阿里巴巴开源的Canal来读取增量日志。这样做的好处是： 
@@ -51,7 +51,7 @@ mysql 日志抽取模块由两部分构成：
 DBus日志抽取模块独立出来是为了兼容这些不同数据源的不同实现方式。 
 ##### 1.2 增量转换模块（Stream） 
 增量数据处理模块，根据不同的数据源类型的格式进行转换和处理。 
- 
+![Test](http://college.creditease.cn/resources/upload/image/20190718/1563419291924058005.png  '拆解大数据总线平台DBus的系统架构') 
 1）分发模块dispatcher 
  
  将来自数据源的日志按照不同的schema分发到不同topic上。这样做的目的 
@@ -68,15 +68,15 @@ DBus日志抽取模块独立出来是为了兼容这些不同数据源的不同�
  分发模块和转换模块都会相应相关reload通知事件从Mgr库和zk上进行加载配置操作。 
  
 ##### 1.3 全量拉取模块（FullPuller） 
- 
+![Test](http://college.creditease.cn/resources/upload/image/20190718/1563419291924058005.png  '拆解大数据总线平台DBus的系统架构') 
 全量拉取可用于初始化加载(Initial load), 数据重新加载，实现上我们借鉴了sqoop的思想。将全量过程分为了2 个部分： 
 1)数据分片 
 分片读取max，min，count等信息，根据片大小计算分片数，生成分片信息保存在split topic中。下面是具体的分片策略： 
- 
-以实际的经验，对于mysql InnDB，只有使用主键索引进行分片，才能高效。因为mysql innDB��主键列与数据存储顺序一致。 
+![Test](http://college.creditease.cn/resources/upload/image/20190718/1563419291924058005.png  '拆解大数据总线平台DBus的系统架构') 
+以实际的经验，对于mysql InnDB，只有使用主键索引进行分片，才能高效。因为mysql innDB的主键列与数据存储顺序一致。 
 2)实际拉取 
 每个分片代表一个小任务，由拉取转换模块通过多个并发度的方式连接slave从库进行拉取。 拉取完成情况写到zookeeper中，便于监控。 
- 
+![Test](http://college.creditease.cn/resources/upload/image/20190718/1563419291924058005.png  '拆解大数据总线平台DBus的系统架构') 
 全量拉取对源端数据库是有一定压力的，我们做法是： 
  
  从slave从库拉取数据 
@@ -85,15 +85,15 @@ DBus日志抽取模块独立出来是为了兼容这些不同数据源的不同�
  
 全量拉取不是经常发生的，一般做初始化拉取一次，或者在某种情况下需要全量时可以触发一次。 
 ##### 1.3 全量和增量的一致性 
-在整个数据传输中，为了尽量的保证日志消息的顺序性，kafka我们使用的是1个partition的方式。在一般情况下，基本上是顺序的和唯一的。 但如果出现写kafka异步写入部分失败， storm也用重做机制，因此，我们并不严格保证exactly once和完全的顺序性，但保证的是at least once。 
+在整个数据传输中，为了尽量的保证日志消息的顺序性，kafka我们使用的是1个partition的方式。在一般情况下，基��上是顺序的和唯一的。 但如果出现写kafka异步写入部分失败， storm也用重做机制，因此，我们并不严格保证exactly once和完全的顺序性，但保证的是at least once。 
 因此ums_id_变得尤为重要。 对于全量抽取，ums_id是一个值，该值为全量拉取event的ums_id号，表示该批次的所有数据是一批的，因为数据都是不同的可以共享一个ums_id_号。ums_uid_流水号从zk中生成，保证了数据的唯一性。 对于增量抽取，我们使用的是 mysql的日志文件号 + 日志偏移量作为唯一id。Id作为64位的long整数，高6位用于日志文件号，低13位作为日志偏移量。 例如：000103000012345678。 103 是日志文件号，12345678 是日志偏移量。 这样，从日志层面保证了物理唯一性（即便重做也这个id号也不变），同时也保证了顺序性（还能定位日志）。通过比较ums_id_就能知道哪条消息更新。 
 ums_ts_的价值在于从时间维度上可以准确知道event发生的时间。比如：如果想得到一个某时刻的快照数据。可以通过ums_ts 来知道截断时间点。 
 #### 二、日志类数据源的实现 
 业界日志收集、结构化、分析工具方案很多，例如：Logstash、Filebeat、Flume、Fluentd、Chukwa. scribe、Splunk等，各有所长。在结构化日志这个方面，大多采用配置正则表达式模板：用于提取日志中模式比较固定、通用的部分，例如日志时间、日志类型、行号等。对于真正的和业务比较相关的信息，这边部分是最重要的，称为message部分，我们希望使用可视化的方式来进行结构化。 
 例如：对于下面所示的类log4j的日志： 
- 
+![Test](http://college.creditease.cn/resources/upload/image/20190718/1563419291924058005.png  '拆解大数据总线平台DBus的系统架构') 
 如果用户想将上述数据转换为如下的结构化数据信息： 
- 
+![Test](http://college.creditease.cn/resources/upload/image/20190718/1563419291924058005.png  '拆解大数据总线平台DBus的系统架构') 
 我们称这样的日志为“数据日志” 
 DBUS设计的数据日志同步方案如下： 
  
@@ -103,7 +103,7 @@ DBUS设计的数据日志同步方案如下：
  将配置好的规则算子组运用到执行引擎中，对目标日志数据进行预处理，形成结构化数据，输出到Kafka，供下游数据使用方使用。 
  
 系统流程图如下所示： 
- 
+![Test](http://college.creditease.cn/resources/upload/image/20190718/1563419291924058005.png  '拆解大数据总线平台DBus的系统架构') 
 根据配置，我们支持同一条原始日志，能提取为一个表数据，或者可以提取为多个表数据。 
 每个表是结构化的，满足相同的schema。 
  
@@ -117,15 +117,15 @@ DBUS设计的数据日志同步方案如下：
  不符合的尝试下一个规则算子组。 
  都不符合的，进入unknown_table表。 
  
- 
+![Test](http://college.creditease.cn/resources/upload/image/20190718/1563419291924058005.png  '拆解大数据总线平台DBus的系统架构') 
 ##### 2.1 规则算子 
 规则算子是对数据进行过滤、加工、转换的基本单元。常见的规则算子如下： 
- 
+![Test](http://college.creditease.cn/resources/upload/image/20190718/1563419291924058005.png  '拆解大数据总线平台DBus的系统架构') 
 算子之间是独立的，通过组合不同的算子达到更复杂的功能，对算子进行迭代使用最终达到对任意数据进行加工的目的。 
 我们试图使得算子尽量满足正交性或易用性（虽然正则表达式很强大，但我们仍然开发一些简单算子例如trim算子来完成简单功能，以满足易用性）。 
 #### 三、UMS统一消息格式 
 无论是增量、全量还是日志，最终输出到结果kafka中的消息都是我们约定的统一消息格式,称为UMS(unified message schema)格式。如下图所示： 
- 
+![Test](http://college.creditease.cn/resources/upload/image/20190718/1563419291924058005.png  '拆解大数据总线平台DBus的系统架构') 
 ##### 3.1 Protocol 
 数据的类型，被UMS的版本号 
 ##### 3.2 schema 

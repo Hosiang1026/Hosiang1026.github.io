@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 719
+top: 1855
 cover_picture: 'https://static.oschina.net/uploads/img/201909/11111054_I39w.jpg'
 abbrlink: e979c12
-date: 2021-04-14 07:54:42
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;这是本系列文章的第二篇，在上篇文章中我们介绍了Kubernetes访问控制。在本文中，我们将通过上手实践的方式来进一步理解身份认证的概念。 在生产环境中，Kubernetes管理员使用命名空间来隔离...
@@ -102,8 +102,8 @@ User "bob" set.
 
   ```  
 打开~/.kube/config 文件确认凭据已经设置完成。 
- 
-让我们创建一个名为engineering的新命名空间，Bob是其管理员。 
+![Test](https://oscimg.oschina.net/oscnet/028790ba90522fc405dece51dc584822ffa.jpg  'Kubernetes身份认证和授权操作全攻略-上手操作Kubernetes身份认证') 
+让我们创建���个名为engineering的新命名空间，Bob是其管理员。 
  ```java 
   kubectl create namespace engineering
 namespace/engineering created

@@ -4,16 +4,16 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 847
+top: 1891
 cover_picture: 'https://static.oschina.net/uploads/img/202002/03143425_w5vI.jpg'
 abbrlink: 2ef4ab56
-date: 2021-04-14 07:54:42
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;最近 Git 2.25.0 发布，此次发布推出了 partial clones 功能，partial clones 即用户克隆远程存储库的时候，可以选择只下载自身所需的对象，而不是存储库的所有对像（或者特定 commit 所关联...
 <!-- more -->
 
-                                                                                                                                                                                         最近 Git 2.25.0 发布，此次发布推出了 partial clones 功能，partial clones 即用户克隆远程存储库的时候，可以选择只下载自身所需的对象，而不是存储库的所有对像（或者特定 commit 所关联的所有对像）。这和微软之前发布的 VFSForGit 原理有异曲同工之妙。使用部分克隆可以大大的减小用户克隆巨大存储库的耗时，也会减小网络数据传输。部分克隆完全依赖 Git Wire Protocol （v2 Protocol）。经过几行代码的适配和线上的批量更新，Gitee 目前已经支持部分克隆了，当你的 Git 版本大于等于 2.25.0，则可以使用如下的命令克隆特定的存储库： 
+                                                                                                                                                                                        ![Test](https://oscimg.oschina.net/oscnet/up-081b43f13c07751fb26d6a6f7911e3a7e23.JPEG  '码云目前已经初步支持 Git 部分克隆') 最近 Git 2.25.0 发布，此次发布推出了 partial clones 功能，partial clones 即用户克隆远程存储库的时候，可以��择只下载自身所需的对象，而不是存储库的所有对像（或者特定 commit 所关联的所有对像）。这和微软之前发布的 VFSForGit 原理有异曲同工之妙。使用部分克隆可以大大的减小用户克隆巨大存储库的耗时，也会减小网络数据传输。部分克隆完全依赖 Git Wire Protocol （v2 Protocol）。经过几行代码的适配和线上的批量更新，Gitee 目前已经支持部分克隆了，当你的 Git 版本大于等于 2.25.0，则可以使用如下的命令克隆特定的存储库： 
  ```java 
   git -c protocol.version=2 clone --filter=blob:none git@gitee.com:YOUR-COUNT/YOUR-REPO.git
 

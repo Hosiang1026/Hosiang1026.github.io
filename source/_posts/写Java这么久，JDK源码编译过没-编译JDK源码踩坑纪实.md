@@ -4,16 +4,16 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 885
+top: 1859
 cover_picture: 'https://static.oschina.net/uploads/img/202008/05162456_QbTv.jpg'
 abbrlink: 9b88203a
-date: 2021-04-14 07:56:10
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;好奇害死羊 很多小伙伴们做Java开发，天天写Java代码，肯定离不开Java基础环境：JDK，毕竟我们写好的Java代码也是跑在JVM虚拟机上。 一般来说，我们学Java之前，第一步就是安装JDK环境。这个...
 <!-- more -->
 
-                                                                                                                                                                                         
+                                                                                                                                                                                        ![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
  
  
 ### 好奇害死羊 
@@ -48,9 +48,9 @@ date: 2021-04-14 07:56:10
 记得之前不是出过一期关于《JDK源码阅读环境搭建》相关的视频以及文章嘛，细心的小伙伴，可能会发现一个很实际的问题： 
  
 当然那个视频的评论区，的确也有几个小伙伴提了这个问题： 
- 
- 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 原因也很简单，因为实际支撑调试运行的代码，并不是我们解压出来的那份 ```java 
   JDK
   ``` 源码，那个仅仅是做关联用，实际运行用到的 ```java 
@@ -69,7 +69,7 @@ date: 2021-04-14 07:56:10
 我们来盘点和梳理一下编译一个JDK需要哪些环境和工具： 
  
 #### 1、boot JDK 
-我们要想编译 ```java 
+我们要想编��� ```java 
   JDK
   ``` ，首先自己本机必须提前已经安装有一个 ```java 
   JDK
@@ -134,14 +134,14 @@ date: 2021-04-14 07:56:10
   C++/C
   ``` 写的，所以相关编译器也跑不掉。 
 一图胜千言，各平台上的编译器支持如下表所示，按平台选择即可： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
  
 #### 4、其他工具 
 典型的比如： 
  
    ```java 
   Autoconf
-  ``` ：软件源码包的自动配置工具  
+  ``` ：软件源码包的自动配置工���  
    ```java 
   Make
   ``` ：编译构建工具  
@@ -202,7 +202,7 @@ date: 2021-04-14 07:56:10
   ``` 一样，是另外一种代码管理工具，安装好之后就有一个 ```java 
   hg
   ``` 命令可用。 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 而 ```java 
   OpenJDK
   ``` 的源码已经提前托管到 ```java 
@@ -232,7 +232,7 @@ date: 2021-04-14 07:56:10
 下载地址： ```java 
   https://jdk.java.net/
   ```  
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 选择你想要的版本下载即可。 
  
  
@@ -250,21 +250,21 @@ date: 2021-04-14 07:56:10
   JDK 8
   ``` 时候完成时的样子： 
 配置JDK 8完成： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 配置JDK 11完成： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 注： 如果这一步出错，大概率是某个软件环境未装，或者即使装了，但版本不匹配，控制台打印日志里一般是会提醒的。 
 比如我在配置 ```java 
   JDK 8
   ``` 的时候，就遇到了一个 ```java 
   errof：GCC compiler is required
   ``` 的问题： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 明明系统里已经有编译器，但还是报这个错误。通过后来修改  ```java 
   jdk源码根目录/common/autoconf/generated-configure.sh
   ``` 文件，将相关的两行代码注释后就配置通过了 
- 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 配置完成，接下来开始执行真正的编译动作了！ 
  
  
@@ -280,9 +280,9 @@ date: 2021-04-14 07:56:10
   JDK
   ``` 源码就已经通过了，可以搞一杯咖啡庆祝一下了。 
 JDK 8编译完成： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 JDK 11编译完成： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 从两张图的对比可以看出，编译 ```java 
   JDK 8
   ``` 和 ```java 
@@ -317,7 +317,7 @@ JDK 11编译完成：
 进入该目录后，可以输入 ```java 
   ./java -version
   ``` 命令验证： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 其次，编译生成的成品 ```java 
   JDK
   ``` 套装，可以在目录 
@@ -326,7 +326,7 @@ JDK 11编译完成：
 
   ```  
 下找到，如图所示： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 其中： 
  
    ```java 
@@ -341,7 +341,7 @@ JDK 11编译完成：
   ``` 目录会发现，里面的内容和我们平时从网络上下载的成品 ```java 
   JDK
   ``` 内容一致。 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
  
 #### 2、JDK 11的编译输出 
  
@@ -359,7 +359,7 @@ JDK 11编译完成：
 下看到，进入该目录后，也可以输入 ```java 
   ./java -version
   ``` 命令验证： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 其次，编译生成的成品 ```java 
   JDK 11
   ``` 套装，可以在目录 
@@ -368,7 +368,7 @@ JDK 11编译完成：
 
   ```  
 下找到，如图所示： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 其中 ```java 
   jdk
   ``` 目录就是编译生成的成品 ```java 
@@ -387,16 +387,16 @@ JDK 11编译完成：
   ``` ，目的是把我们自己编译出的 ```java 
   JDK
   ``` 给用上。 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 我们点开 ```java 
   Project Structure
   ``` ，选到 ```java 
   SDKs
   ``` 选项，新添加上自己刚刚编译生成的JDK，并选为项目的JDK，看看是否能正常工作 
- 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 点击确定之后，我们运行之： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 可以看到我们自己编译出的JDK已经用上了。 
  
  
@@ -410,27 +410,27 @@ JDK 11编译完成：
   ``` 里将 ```java 
   JDK
   ``` 源码关联到自行下载的JDK源码路径上： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 这样方便我们对自己下载的 ```java 
   JDK源码
   ``` 进行阅读、调试、修改、以及在源码里随意做笔记和加注释。 
 举个最简单的例子，比如我们打开 ```java 
   System.out.println()
   ``` 这个函数的底层源码： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 我们随便给它修改一下，加两行简单的标记，像这样： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 为了使我们新加的代码行生效，我们必须要重新去JDK源码的根目录中再次执行  ```java 
   make images
   ``` 重新编译生成JDK方可生效： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 因为之前已经全量编译过了，所以再次 ```java 
   make
   ``` 的时候增量编译一般很快。 
 重新编译之后，我们再次运行 ```java 
   JdkTest
   ``` 项目，就可以看到改动的效果了： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
  
  
 ### 多行注释的问题 
@@ -444,12 +444,12 @@ JDK 11编译完成：
 比如，还是以上面例子中最简单的 ```java 
   System.out.println()
   ``` 源码为例，我们添加几行中文注释： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 这时候我们去JDK源码目录下编译会发现满屏类似这样的报错： 
  
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 顿时有点懵，毕竟仅仅是加了几行注释。对于我们来说，源码里写点多行的中文注释基本是刚需，然而编译竟会报错，这还能不能让人愉快的玩耍了... 当时后背有点发凉。 
-实不相瞒，就这个问题排查了一段时间，熬到了很晚。最终折腾了一番，通过如下这种方式解决了，顺便分享给小伙伴们，大家如果遇到了这个问题，可以参考着解决一下。 
+实不相瞒，就这个问题排查了一段时间，熬到了很晚。最终折腾了一番，通过如下这种方式解决了���顺便分享给小伙伴们，大家如果遇到了这个问题，可以参考着解决一下。 
 因为从控制台的报错可以很明显的看出，肯定是字符编码相关的问题导致的，而且都指向了 ```java 
   ascii
   ``` 这种编码方式。 
@@ -461,17 +461,17 @@ JDK 11编译完成：
   ``` 文件中有两处指定了 ```java 
   ascii
   ``` 相关的编码方式： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 于是尝试将这两处 ```java 
   -encoding ascii
   ``` 的均替换成 ```java 
   -encoding utf-8
   ``` ： 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 然后再次执行 ```java 
   make images
   ``` 编译，编译顺利通过！ 
- 
+![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 
 至此大功告成！ 
 这样后面不管是阅读、调试还是定制 ```java 
   JDK

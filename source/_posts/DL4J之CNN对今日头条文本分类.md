@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 850
+top: 1733
 cover_picture: 'https://static.oschina.net/uploads/img/201909/29122119_FTgB.jpg'
 abbrlink: a0ca7576
-date: 2021-04-14 07:54:42
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;一、数据集介绍 数据来源：今日头条客户端 数据格式如下： 6551700932705387022_!_101_!_news_culture_!_京城最值得你来场文化之旅的博物馆_!_保利集团,马未都,中国科学技术馆,博物馆,新中国...
@@ -85,11 +85,11 @@ news_entertainment       0.86      0.86      0.86      8078
    下面我们就来用deeplearning4j来实现一个卷积结构对该数据集进行分类，看能不能得到更好的结果。 
 二、卷积网络可以用于文本处理的原因 
     CNN非常适合处理图像数据，前面一篇文章《deeplearning4j——卷积神经网络对验证码进行识别》介绍了CNN对验证码进行识别。本篇博客将利用CNN对文本进行分类，在开始之前我们先来直观的说说卷积运算在做的本质事情是什么。卷积运算，本质上可以看做两个向量的点积，两个向量越同向，点积就越大，经过relu和MaxPooling之后，本质上是提取了与卷积核最同向的结构，这个“结构”实际上是图片上的一些线条。 
-    那么文本可以用CNN来处理吗？答案是肯定的，文本每个词用向量表示之后，��次排开，就变成了一张二维图，如下图，沿着红色箭头的方向（也就是文本的方向）看，两个句子用一幅图表示之后，会出现相同的单元，也就可以用CNN来处理。 
-     
+    那么文本可以用CNN来处理吗？答案是肯定的，文本每个词用向量表示之后，依次排开，就变成了一张二维图，如下图，沿着红色箭头的方向（也就是文本的方向）看，两个句子用一幅图表示之后，会出现相同的单元，也就可以用CNN来处理。 
+    ![Test](https://oscimg.oschina.net/oscnet/c943ed94cdf1c2572c9a16245ff8b781d60.jpg  'DL4J之CNN对今日头条文本分类') 
 三、文本处理的卷积结构 
     那么，怎么设计这个CNN网络结构呢？如下图：（论文地址：https://arxiv.org/abs/1408.5882） 
-     
+    ![Test](https://oscimg.oschina.net/oscnet/c943ed94cdf1c2572c9a16245ff8b781d60.jpg  'DL4J之CNN对今日头条文本分类') 
    注意点： 
    1、卷积核移动的方向必须为句子的方向 
    2、每个卷积核提取的特征为N行1列的向量 
@@ -98,7 +98,7 @@ news_entertainment       0.86      0.86      0.86      8078
 四、数据的预处理与词向量 
     1、分词工具：HanLP 
     2、处理后的数据格式如下：（类别code_!_词，其中，词与词之间用空格隔开，_!_为分割符） 
-    
+   ![Test](https://oscimg.oschina.net/oscnet/c943ed94cdf1c2572c9a16245ff8b781d60.jpg  'DL4J之CNN对今日头条文本分类') 
     数据预处理代码如下： 
  ```java 
   public static void main(String[] args) throws Exception {
@@ -130,7 +130,7 @@ news_entertainment       0.86      0.86      0.86      8078
     1、one-hot 
     用正交的向量来表示每一个词，这样表示无法反应词与词之间的关系，那么两句话中，要想复用同一个卷积核，那么必须出现一模一样的词才可以，实际上，我们要求模型可以举一反三，连相似的结构也可以提取，那么word2vec可以解决这个问题。 
     2、word2vec 
-    word2vec可以充分考虑词与词之间的关系，相似的词，肯定有某些维度靠的比较近。那么也就考虑了词的语句之间的关系，训练word2vec有两种，skipgram和cbow，下面我们用cbow来训练词向量，结果会持久化下来，就得到了toutiao.vec的文件，下次变可重新加载该文件获得词的向量表示，代码如下： 
+    word2vec可以充分考虑词与词之间的关系，相似的词，肯定有某些维度靠的比较近。那么也就考虑了词的语句之间的���系，训练word2vec有两种，skipgram和cbow，下面我们用cbow来训练词向量，结果会持久化下来，就得到了toutiao.vec的文件，下次变可重新加载该文件获得词的向量表示，代码如下： 
  ```java 
   String filePath = new ClassPathResource("toutiao_data_word.txt").getFile().getAbsolutePath();
 		SentenceIterator iter = new BasicLineIterator(filePath);
@@ -151,7 +151,7 @@ news_entertainment       0.86      0.86      0.86      8078
   ```  
 六、CNN网络结构 
     CNN网络结构如下： 
- 
+![Test](https://oscimg.oschina.net/oscnet/c943ed94cdf1c2572c9a16245ff8b781d60.jpg  'DL4J之CNN对今日头条文本分类') 
     说明： 
     1、cnn3、cnn4、cnn5、cnn6卷积核大小为（3，vectorSize）、（4，vectorSize）、（5，vectorSize）、（6，vectorSize），步幅为1，也就是分别读取3、4、5、6个词，提取特征 
     2、cnn3-stride2、cnn4-stride2、cnn5-stride2、cnn6-stride2卷积核大小为（3，vectorSize）、（4，vectorSize）、（5，vectorSize）、（6，vectorSize）,步幅为2 
@@ -190,7 +190,7 @@ news_entertainment       0.86      0.86      0.86      8078
 	public static void main(String[] args) throws Exception {
 
 		List<String> trainLabelList = new ArrayList<>();// 训练集label
-		List<String> trainSentences = new ArrayList<>();// 训练集文本集合
+		List<String> trainSentences = new ArrayList<>();// 训练��文本集合
 		List<String> testLabelList = new ArrayList<>();// 测试集label
 		List<String> testSentences = new ArrayList<>();//// 测试集文本集合
 		Map<String, List<String>> map = new HashMap<>();
@@ -350,7 +350,7 @@ out (OutputLayer)                  200,15     3015          W:{200,15}, b:{1,15}
   ```  
  DL4J的UIServer界面如下，这里我给定的端口号为9001，打开web界面可以看到平均loss的详情，梯度更新的详情等 
 http://localhost:9001/train/overview 
- 
+![Test](https://oscimg.oschina.net/oscnet/c943ed94cdf1c2572c9a16245ff8b781d60.jpg  'DL4J之CNN对今日头条文本分类') 
  七、掩模 
     句子有长有短，CNN将如何处理呢？ 
     处理的办法其实很暴力，将一个minibatch中的最长句子找到，new出最大长度的张量，多余值用掩模掩掉即可，废话不多说，直接上代码 
@@ -377,7 +377,7 @@ http://localhost:9001/train/overview
                     }
                 }
   ```  
-    这里为什么有个if呢？生成句子张量的时候，可以任意指定句子的方向，可以沿着矩阵中height的方向，也可以是width的方向，方向不同，填掩模的那一维也就不���。 
+    这里为什么有个if呢？生成句子张量的时候，可以任意指定句子的方向，可以沿着矩阵中height的方向，也可以是width的方向，方向不同，填掩模的那一维也就不同。 
 八、结果 
     运行了10个Epoch结果如下： 
  ```java 

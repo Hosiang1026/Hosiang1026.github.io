@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 856
+top: 1736
 cover_picture: 'https://static.oschina.net/uploads/img/202008/05162516_mIGa.jpg'
 abbrlink: bb98e2f8
-date: 2021-04-14 07:54:42
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;【飞桨开发者说】李睿，北京邮电大学学生，人工智能和移动开发爱好者。 随着桌面端Electron技术逐步崛起，基于Electron开发的代码编辑器、聊天软件、游戏等层出不穷。 对于习惯使用Node.js进...
@@ -50,7 +50,7 @@ pip install -f https://paddlepaddle.org.cn/pip/oschina/gpu paddlepaddle-gpu
 
   ```  
  
-执行上面步骤后我们可以得到转化后的模型文件：mobilenetv1_opt.nb 
+执行上面步骤��我们可以得到转化后的模型文件：mobilenetv1_opt.nb 
 3. 在Node.js中进行推理： 
  
   ```java 
@@ -64,7 +64,7 @@ addon.infer_float(arr,[1, 3, 224, 224])
   ```  
  
 这里我们输入全1的数组进行模拟，set_model_file方法直接对应Paddle Lite中的set_model_from_file，infer_float的第一个参数是我们要传入的数据，第二个是传入数据的尺寸。如果各个元素乘积大小和传入数据的大小不同，将会抛出一个错误。之后我们会得到一个1001维的数组： 
- 
+![Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9zS2lhMUZLRmlhZmdoVWV5VGQ4aWF5cTZzUGM4VjdCOHpWamljejNkNUg5aWI3Rld1a2ZEaEtBOUNDNjRGd3JYaHJWaWIxVm5ZamNYY3JoNGp3UUZPZmQzOTVpY0EvNjQw?x-oss-process=image/format,png  '在 Node.js 上接入 Paddle Lite，让你的网站具备 AI 推理能力') 
 其中0号元素为结果向量的大小，方便进行遍历，其他元素即为模型本身的输出。 
  
 ##### 手动编译 
@@ -125,7 +125,7 @@ addon.infer_float(arr,[1, 3, 224, 224])
 还有一些函数大体作用相同，仅仅作为转换作用。 
  
 ##### 写在最后 
-飞桨已经推出的Paddle.js支持直接在浏览器中进行推理。而本文介绍的Paddle Node项目从另一个角度为Node.js提供可能。飞桨的中文生态给国内开发者和入���者提供了非常大的便利，大大降低了大家的学习成本。希望飞桨能够做得越来越好，进一步降低用户使用门槛，非常感谢。 
+飞桨已经推出的Paddle.js支持直接在浏览器中进行推理。而本文介绍的Paddle Node项目从另一个角度为Node.js提供可能。飞桨的中文生态给国内开发者和入门者提供了非常大的便利，大大降低了大家的学习成本。希望飞桨能够做得越来越好，进一步降低用户使用门槛，非常感谢。 
 下载安装命令
 
 ## CPU版本安装命令

@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 849
+top: 1746
 cover_picture: 'https://static.oschina.net/uploads/img/202002/03143102_Tafb.jpg'
 abbrlink: 5f0f95f4
-date: 2021-04-14 07:54:42
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;从linux源码看socket(tcp)的timeout 前言 网络编程中超时时间是一个重要但又容易被忽略的问题,对其的设置需要仔细斟酌。在经历了数次物理机宕机之后,笔者详细的考察了在网络编程(tcp)中的各种...
@@ -36,7 +36,7 @@ C语言:
 			|->sock->ops->connect
 
   ```  
-由于我们考察的是tcp的connect,其socket的内部结构如下图所示:  最终调用的是tcp_connect,代码如下所示: 
+由于我们考察的是tcp的connect,其socket的内部结构如下图所示: ![Test](https://oscimg.oschina.net/oscnet/up-59900e9bb1796ee054b0a28e52e6684e9fe.png  '从linux源码看socket(tcp)的timeout') 最终调用的是tcp_connect,代码如下所示: 
  ```java 
   int tcp_connect(struct sock *sk) {
 	......
@@ -77,14 +77,14 @@ sock_error:
 }
 
   ```  
-由上面代码可见，可以采用设置SO_SNDTIMEO来控制connect系统调用的超时,如下所示: 
+由上面代码��见��可以采用设置SO_SNDTIMEO来控制connect系统调用的超时,如下所示: 
  ```java 
   setsockopt(sockfd, SOL_SOCKET, SO_SNDTIMEO, &timeout, len);
 
   ```  
 ###### 不设置SO_SNDTIMEO 
 如果不设置SO_SNDTIMEO,那么会由tcp重传定时器在重传超过设置的时候后超时,如下图所示: 
- 这个syn重传的次数由: 
+![Test](https://oscimg.oschina.net/oscnet/up-59900e9bb1796ee054b0a28e52e6684e9fe.png  '从linux源码看socket(tcp)的timeout') 这个syn重传的次数由: 
  ```java 
   cat /proc/sys/net/ipv4/tcp_syn_retries 笔者机器上是5 
 
@@ -121,7 +121,7 @@ out:;
 
   ```  
 只不过在connect时刻，重传的计算以TCP_TIMEOUT_INIT为单位进行计算。而ESTABLISHED(read/write)时刻，重传以TCP_RTO_MIN进行计算。那么根据这段重传逻辑，我们就可以计算出不同tcp_syn_retries最终表现的超时时间。如下图所示: 
- 那么整理下表格，对于系统调用，connect的超时时间为: 
+![Test](https://oscimg.oschina.net/oscnet/up-59900e9bb1796ee054b0a28e52e6684e9fe.png  '从linux源码看socket(tcp)的timeout') 那么整理下表格，对于系统调用，connect的超时时间为: 
  
   
    
@@ -220,7 +220,7 @@ static inline bool retransmits_timed_out(struct sock *sk,
 }
 
   ```  
-其和connect系统调用的不同点是，在timeout为0的时候，走默认的系统调用不设置超时时间的逻辑。在timeout>0时，将socket设置为非阻塞，然后用select系统调用去模拟超时,而没有走linux本身的超时逻辑，如下图所示:  由于没有java并没有设置so_sndtimeo的选项，所以在timeout为0的时候，直接就通过重传次数来控制超时时间。而在调用connect时设置了timeout(不为0)的时候,超时时间如下表格所示: 
+其和connect系统调用的不同点是，在timeout为0的时候，走默认的系统调用不设置超时时间的逻辑。在timeout>0时，将socket设置为非阻塞，然后用select系统调用去模拟超时,而没有走linux本身的超时逻辑，如下图所示: ![Test](https://oscimg.oschina.net/oscnet/up-59900e9bb1796ee054b0a28e52e6684e9fe.png  '从linux源码看socket(tcp)的timeout') 由于没有java并没有设置so_sndtimeo的选项，所以在timeout为0的时候，直接就通过重传次数来控制超时时间。而在调用connect时设置了timeout(不为0)的时候,超时时间如下表格所示: 
  
   
    
@@ -303,7 +303,7 @@ out_err:
 
 
   ```  
-从上面的内核代码看出，如果socket的write buffer依旧有空间的时候，会立马返回，并不会有timeout。但是write buffer不够的时候，会等待SO_SNDTIMEO的时间(nonblock时候为0)。但是如果SO_SNDTIMEO没有设置的时候,默认初始化为MAX_SCHEDULE_TIMEOUT,可以认为其超时时间为无限。那么其超时时间会有��一个条件来决定，我们看下sk_stream_wait_memory的源码: 
+从上面的内核代码看出，如果socket的write buffer依旧有空间的时候，会立马返回，并不会有timeout。但是write buffer不够的时��，会等待SO_SNDTIMEO的时间(nonblock时候为0)。但是如果SO_SNDTIMEO没有设置的时候,默认初始化为MAX_SCHEDULE_TIMEOUT,可以认为其超时时间为无限。那么其超时时间会有另一个条件来决定，我们看下sk_stream_wait_memory的源码: 
  ```java 
   int sk_stream_wait_memory(struct sock *sk, long *timeo_p){
 		// 等待socket shutdown或者socket出现err
@@ -329,7 +329,7 @@ tcp_retries2的设置位置为:
 ###### SO_SNDTIMEO不设置,write buffer满之后对端不消费，导致buffer一直满的情况 
 和上面ack超时有些许不一样的是，一个逻辑是用TCP_RTO_MIN通过tcp_retries2计算出来的时间。另一个是真的通过重传超过tcp_retries2次数来time_out，两者的区别和rto的动态计算有关。但是可以大致认为是一致的。 
 #### 上述逻辑如下图所示: 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-59900e9bb1796ee054b0a28e52e6684e9fe.png  '从linux源码看socket(tcp)的timeout') 
 ##### write_timeout表格 
  
   
@@ -406,14 +406,14 @@ socket的read系统调用最终调用的是tcp_recvmsg, 其源码如下:
 			/* Do not sleep, just process backlog. */
 			release_sock(sk);
 			lock_sock(sk);
-		} else /* 如果没有读到target自己数(和水位有关,可以暂认为是1)，则等待SO_RCVTIMEO的时间 */
+		} else /* 如果没��读到target自己数(和水位有关,可以暂认为是1)，则等待SO_RCVTIMEO的时间 */
 			sk_wait_data(sk, &timeo);	
 	} while (len > 0);
 	......
 }
 
   ```  
-上面的逻辑如下图所示:  重传以及探测定时器timeout事件的触发时机如下图所示:  如果内核层面ack正常返回而且对端窗口不为0，仅仅应用层不返回任何数据,那么就会无限等待，直到对端有数据或者socket close/shutdown为止，如下图所示:  很多应用就是基于这个无限超时来设计的,例如activemq的消费者逻辑。 
+上面的逻辑如下图所示: ![Test](https://oscimg.oschina.net/oscnet/up-59900e9bb1796ee054b0a28e52e6684e9fe.png  '从linux源码看socket(tcp)的timeout') 重传以及探测定时器timeout事件的触发时机如下图所示: ![Test](https://oscimg.oschina.net/oscnet/up-59900e9bb1796ee054b0a28e52e6684e9fe.png  '从linux源码看socket(tcp)的timeout') 如果内核层面ack正常返回而且对端窗口不为0，仅仅应用层不返回任何数据,那么就会无限等待，直到对端有数据或者socket close/shutdown为止，如下图所示: ![Test](https://oscimg.oschina.net/oscnet/up-59900e9bb1796ee054b0a28e52e6684e9fe.png  '从linux源码看socket(tcp)的timeout') 很多应用就是基于这个无限超时来设计的,例如activemq的消费者逻辑。 
 ##### java的SocketInputStream的sockRead0超时时间 
 java的超时时间由SO_TIMOUT决定，而linux的socket并没有这个选项。其sockRead0和上面的java connect一样，在SO_TIMEOUT>0的时候依旧是由nonblock socket模拟,在此就不再赘述了。 
 ##### ReadTimeout超时表格 
@@ -465,7 +465,7 @@ Java系统调用
 ##### 对端物理机宕机后还依旧有数据发送 
 对端物理机宕机时对端内核也gg了(不会发出任何包通知宕机)，那么本端发送任何数据给对端都不会有响应。其超时时间就由上面讨论的 min(设置的socket超时[例如SO_TIMEOUT],内核内部的定时器超时来决定)。 
 ##### 对端物理机宕机后没有数据发送，但在read等待 
-这时候如果设置了超时时间timeout，则在timeout后返回。但是，如果仅仅是在read等待，由于底层没有数据交互，那么其无法知道对端是否宕机，所以会一直等待。但是，内核会在一个socket两个小时都没有数据交互情况下(可设置)启动keepalive定时器来探测对端的socket。如下图所示:  大概是2小时11分钟之后会超时返回。keepalive的设置由内核参数指定： 
+这时候如果设置了超时时间timeout，则在timeout后返回。但是，如果仅仅是在read等待，由于底层没有数据交互，那么其无法知道对端是否宕机，所以会一直等待。但是，内核会在一个socket两个小时都没有数据交互情况下(可设置)启动keepalive定时器来探测对端的socket。如下图所示: ![Test](https://oscimg.oschina.net/oscnet/up-59900e9bb1796ee054b0a28e52e6684e9fe.png  '从linux源码看socket(tcp)的timeout') 大概是2小时11分钟之后会超时返回。keepalive的设置由内核参数指定： 
  ```java 
   cat /proc/sys/net/ipv4/tcp_keepalive_time 7200 即两个小时后开始探测
 cat /proc/sys/net/ipv4/tcp_keepalive_intvl 75 即每次探测间隔为75s
@@ -476,13 +476,13 @@ cat /proc/sys/net/ipv4/tcp_keepalve_probes 9 即一共探测9次
 ##### 对端物理机宕机后没有数据发送，也没有read等待 
 和上面同理，也是在keepalive定时器超时之后，将连接close。所以我们可以看到一个不活跃的socket在对端物理机突然宕机之后,依旧是ESTABLISHED状态，过很长一段时间之后才会关闭。 
 #### 进程宕后的超时 
-如果仅仅是对端进程宕机的话(进程所在内核会close其所拥有的所有socket)，由于fin包的发送，本端内核可以立刻知道当前socket的状态。如果socket是阻塞的，那么将会在当前或者下一次write/read系统调用的时候返回给应用层相应的错误。如果是nonblock，那么会在select/epoll中触发出对应的事件通知应用层去处理。 如果fin包没发送到对端，那么在下一次write/read的时候内核会发送reset包作为回应。 
+如果仅仅是对端进程宕机的话(进程所在内核会close其���拥���的所有socket)，由于fin包的发送，本端内核可以立刻知道当前socket的状态。如果socket是阻塞的，那么将会在当前或者下一次write/read系统调用的时候返回给应用层相应的错误。如果是nonblock，那么会在select/epoll中触发出对应的事件通知应用层去处理。 如果fin包没发送到对端，那么在下一次write/read的时候内核会发送reset包作为回应。 
 #### nonblock 
 设置为nonblock=true后，由于read/write都是立刻返回，且通过select/epoll等处理重传超时/probe超时/keep alive超时/socket close等事件，所以根据应用层代码决定其超时特性。定时器超时事件发生的时间如上面几小节所述，和是否nonblock无关。nonblock的编程模式可以让应用层对这些事件做出响应。 
 ### 总结 
 网络编程中超时时间是个重要但又容易被忽略的问题，这个问题只有在遇到物理机宕机等平时遇不到的现象时候才会凸显。笔者在经历数次物理机宕机之后才好好的研究了一番，希望本篇文章可以对读者在以后遇到类似超时问题时有所帮助。 
 #### 公众号 
-关注笔者公众号，获取更多干货文章:  
+关注笔者公众号，获取更多干货文章: ![Test](https://oscimg.oschina.net/oscnet/up-59900e9bb1796ee054b0a28e52e6684e9fe.png  '从linux源码看socket(tcp)的timeout') 
 ### 原文链接 
-https://my.oschina.net/alchemystar/blog/3154409 
+https://my.oschina.net/alchemystar/blog/3154409 ![Test](https://oscimg.oschina.net/oscnet/up-59900e9bb1796ee054b0a28e52e6684e9fe.png  '从linux源码看socket(tcp)的timeout')
                                         

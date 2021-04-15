@@ -1,0 +1,356 @@
+---
+title: 推荐系列-面经手册 · 第28篇《你说，怎么把Bean塞到Spring容器-》
+categories: 热门文章
+tags:
+  - Popular
+author: OSChina
+top: 1542
+cover_picture: 'https://oscimg.oschina.net/oscnet/5b9ad40a-9ed9-4a62-9f51-603d6675ca7c.jpg'
+abbrlink: 838fb5c0
+date: 2021-04-15 09:26:24
+---
+
+&emsp;&emsp;持续坚持原创输出，点击蓝字关注我吧 作者：小傅哥 博客：https://bugstack.cn ❝ 沉淀、分享、成长，让自己和他人都能有所收获！😜 ❞ 目录 一、前言 二、面试题 三、代理Bean注册到Sprin...
+<!-- more -->
+
+                                                                                                                                                                                         
+  
+   
+  ##### 持续坚持原创输出，点击蓝字关注我吧 
+  ![Test](https://oscimg.oschina.net/oscnet/5b9ad40a-9ed9-4a62-9f51-603d6675ca7c.jpg  '面经手册 · 第28篇《你说，怎么把Bean塞到Spring容器-》') 
+  作者：小傅哥博客：https://bugstack.cn 
+   
+  
+  
+   
+  ### 目录 
+   
+   
+   一、前言 
+   二、面试题 
+   三、代理Bean注册到Spring容器 
+    
+    1. 定义接口 
+    2. 类代理实现 
+    3. 实现Bean工厂 
+    4. Bean 注册 
+    
+   四、测试验证 
+    
+    1. 定义 spring-config.xml 
+    2. 单元测试 
+    
+   五、总结 
+   六、系列推荐 
+   
+   
+   
+  #### 一、前言 
+   
+ ```java 
+  小傅哥，你是怎么学习的？
+  ``` 
+  
+  有很多初学编程或者码了几年CRUD砖的小伙伴问我，该怎么学编程？感觉什么都不会怎么办？感觉目前的公司没有核心业务学到不东西呀！ 
+  其实我可能和很大一部分的粉丝读者都有类似的经历，在传统类似外包的行业待过、从C#语言两年开发再面Java岗、新到互联网职场感觉太多不会的技术栈等等。 
+  但可能最让我在学习编程上受益的就是不断的折腾这些技术： 
+   
+    
+     
+     「关于外包」：在外包2年时还是C#开发，时而搞搞中继器、IO板卡、PLC。但我仍旧喜欢大学时期学的Java语言，那么每天5:30下班回家后，就不断的用Java语言把公司接触到的C#工程做翻新。差不多1年的时间，把几乎我接触到的项目翻新了个遍，就是那个时候知道的Java还能做串口通信，还是蛮有意思的。 
+     
+    
+     
+     「关于场景」：其实很多程序员在一个相对较小的公司时，学习的最大瓶颈是眼界问题，不知道有什么技术、不知道有什么场景，更不知道自己不会啥。其实很多时候这都跟 
+      
+ ```java 
+  懒
+  ``` 
+ 有关系，公司是没有这样的场景，但是你可以看博客、看论坛、看视频，加各类技术群。如果遇到哪些发广告的就退了，哪些好的留下，认识一些人脉，相知一些基友，这在个过程总能有所收获，你会随着时间的推移嗅到各类技术栈、项目、经验、心得、面试等等，当你武装好了自己，再出去面试也就没那么难了。 
+     
+    
+     
+     「关于开始」：时间少、要学的多，感觉自己就是一把 
+      
+ ```java 
+  小铁锹
+  ``` 
+ ，要去挖苏伊士运河，不知道能从哪开始。这个时候建议不要盲目的收藏几个T的资料和视频，先打开xmind，选个好看的主题，开始梳理自己的技术栈，看看自己会什么不会什么，在从这些不会的内容里选出你最想学的，把要学的内容在梳理出相应的资料库。好，那么这个时候你就可以开始了，记住开始是从一点点深入的，不要总想着一口吃个胖子。 
+     
+   
+   
+ ```java 
+  方向对了，快是最大的障碍！
+  ``` 
+ ，很多时候只要你能平心静气日积月累的学习，其实就没有什么不能克服的问题。编程里又有什么非常难的东西吗，大部分知识都是不知道就不会而已，知道了就很简单。 
+   
+  #### 二、面试题 
+   
+ ```java 
+  谢飞机，小记！
+  ``` 
+ ，简历上我都写精通了，要个20K没问题，等着吧！ 
+  「面试官」：谢飞机，技术不错呀，都是精通，哦，有一个vb了解，没事我们不用vb 
+  「谢飞机」：还行，我学的多，你问吧。 
+  「面试官」：嗯，自信了不少。那我们聊聊 Spring，你这个也写的精通。 
+  「谢飞机」：来吧！ 
+  「面试官」：你说，怎么把Bean塞到Spring容器？能说说它的过程吗，你有过相关技术的使用吗，应用了什么场景？ 
+  「谢飞机」：嗯！？嗯，，好像，没用过。我都是精通使用API，@Resource 
+  「面试官」：哦，@Resource，注解是Spring哪个模块提供的？ 
+  「谢飞机」：我，，，再见！ヾ(￣▽￣) 
+   
+  #### 三、代理Bean注册到Spring容器 
+   
+   ![Test](https://oscimg.oschina.net/oscnet/5b9ad40a-9ed9-4a62-9f51-603d6675ca7c.jpg  '面经手册 · 第28篇《你说，怎么把Bean塞到Spring容器-》') 
+    
+    Bean注册 
+    
+   
+   
+    
+    
+      关于Bean注册的技术场景，在我们日常用到的技术框架中，MyBatis 是最为常见的。通过在使用 MyBatis 时都只是定义一个接口不需要写实现类，但是这个接口却可以和配置的 SQL 语句关联，执行相应的数据库操作时可以返回对应的结果。那么这个接口与数据库的操作就用到的 Bean 的代理和注册。 
+     
+    
+    
+      我们都知道类的调用是不能直接调用没有实现的接口的，所以需要通过代理的方式给接口生成对应的实现类。接下来再通过把代理类放到 Spring 的 FactoryBean 的实现中，最后再把这个 FactoryBean 实现类注册到 Spring 容器。那么现在你的代理类就已经被注册到 Spring 容器了，接下来就可以通过注解的方式注入到属性中。 
+     
+   
+  按照这个实现方式，我们来操作一下，看看一个 Bean 的注册过程在代码中是如何实现的。 
+   
+  ##### 1. 定义接口 
+   
+ ```java 
+  public interface IUserDao {    String queryUserInfo();}
+  ``` 
+  
+   
+    
+    
+      先定义一个类似 DAO 的接口，基本这样的接口在使用 MyBatis 时还是非常常见的。后面我们会对这个接口做代理和注册。 
+     
+   
+   
+  ##### 2. 类代理实现 
+   
+ ```java 
+  ClassLoader classLoader = Thread.currentThread().getContextClassLoader();Class<?>[] classes = {IUserDao.class};    InvocationHandler handler = (proxy, method, args) -> "你被代理了 " + method.getName();IUserDao userDao = (IUserDao) Proxy.newProxyInstance(classLoader, classes, handler); String res = userDao.queryUserInfo();logger.info("测试结果：{}", res);
+  ``` 
+  
+   
+    
+    
+      Java 本身的代理方式使用起来还是比较简单的，用法也很固定。 
+     
+    
+    
+      InvocationHandler 是个接口类，它对应的实现内容就是代理对象的具体实现。 
+     
+    
+    
+      最后就是把代理交给 Proxy 创建代理对象， 
+      
+ ```java 
+  Proxy.newProxyInstance
+  ``` 
+ 。 
+     
+   
+   
+  ##### 3. 实现Bean工厂 
+   
+ ```java 
+  public class ProxyBeanFactory implements FactoryBean {    @Override    public Object getObject() throws Exception {        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();        Class[] classes = {IUserDao.class};        InvocationHandler handler = (proxy, method, args) -> "你被代理了 " + method.getName();        return Proxy.newProxyInstance(classLoader, classes, handler);    }    @Override    public Class<?> getObjectType() {        return IUserDao.class;    } }
+  ``` 
+  
+   
+    
+    
+      FactoryBean 在 spring 起到着二当家的地位，它将近有70多个小弟(实现它的接口定义)，那么它有三个方法； 
+     
+    
+     
+     
+       T getObject() throws Exception; 返回bean实例对象 
+      
+     
+     
+       Class<?> getObjectType(); 返回实例类类型 
+      
+     
+     
+       boolean isSingleton(); 判断是否单例，单例会放到Spring容器中单实例缓存池中 
+      
+    
+    
+    
+      在这里我们把上面使用Java代理的对象放到了 getObject() 方法中，那么现在再从 Spring 中获取到的对象，就是我们的代理对象了。 
+     
+   
+   
+  ##### 4. Bean 注册 
+   
+ ```java 
+  public class RegisterBeanFactory implements BeanDefinitionRegistryPostProcessor {    @Override    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {        GenericBeanDefinition beanDefinition = new GenericBeanDefinition();        beanDefinition.setBeanClass(ProxyBeanFactory.class);        BeanDefinitionHolder definitionHolder = new BeanDefinitionHolder(beanDefinition, "userDao");        BeanDefinitionReaderUtils.registerBeanDefinition(definitionHolder, registry);    }}
+  ``` 
+  
+  在 Spring 的 Bean 管理中，所有的 Bean 最终都会被注册到类 DefaultListableBeanFactory 中，以上这部分代码主要的内容包括： 
+   
+    
+    
+      实现 BeanDefinitionRegistryPostProcessor.postProcessBeanDefinitionRegistry方法，获取 Bean 注册对象。 
+     
+    
+    
+      定义 Bean，GenericBeanDefinition，这里主要设置了我们的代理类工厂。 
+     
+    
+    
+      创建 Bean 定义处理类，BeanDefinitionHolder，这里需要的主要参数；定义 Bean 和名称 
+      
+ ```java 
+  setBeanClass(ProxyBeanFactory.class)
+  ``` 
+ 。 
+     
+    
+    
+      最后将我们自己的bean注册到spring容器中去，registry.registerBeanDefinition() 
+     
+   
+   
+  #### 四、测试验证 
+  在上面我们已经把自定义代理的 Bean 注册到了 Spring 容器中，接下来我们来测试下这个代理的 Bean 被如何调用。 
+   
+  ##### 1. 定义 spring-config.xml 
+   
+ ```java 
+  <bean id="userDao" class="org.itstack.interview.bean.RegisterBeanFactory"/>
+  ``` 
+  
+   
+    
+    
+      这里我们把 RegisterBeanFactory 配置到 spring 的 xml 配置中，便于启动时加载。 
+     
+   
+   
+  ##### 2. 单元测试 
+   
+ ```java 
+  @Testpublic void test_IUserDao() {    BeanFactory beanFactory = new ClassPathXmlApplicationContext("spring-config.xml");    IUserDao userDao = beanFactory.getBean("userDao", IUserDao.class);    String res = userDao.queryUserInfo();    logger.info("测试结果：{}", res);}
+  ``` 
+  
+  「测试结果」 
+   
+ ```java 
+  22:53:14.759 [main] DEBUG o.s.c.e.PropertySourcesPropertyResolver - Could not find key 'spring.liveBeansView.mbeanDomain' in any property source22:53:14.760 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'userDao'22:53:14.796 [main] INFO  org.itstack.interview.test.ApiTest - 测试结果：你被代理了 queryUserInfoProcess finished with exit code 0
+  ``` 
+  
+   
+    
+    
+      从测试结果可以看到，我们已经可以通过注入到Spring的代理Bean对象，实现我们的预期结果。 
+     
+    
+    
+      其实这个过程也是很多框架中用到的方式，尤其是在一些中间件开发，类似的 ORM 框架都需要使用到。 
+     
+   
+   
+  #### 五、总结 
+   
+    
+    
+      本章节的内容相对来说非常并不复杂，只不过这一块的代码是我们从源码的学习中提取出来的最核心流程，因为在大部分框架中也基本都是这样的进行处理的。如果这样的地方不了解，那么很难读懂诸如此类的框架源码，也很难理解它是怎么调用的。 
+     
+    
+    
+      在本文中主要涉及到的技术点包括；代理、对象、注册，以及相应的使用。尤其是 Bean 的定义 
+      
+ ```java 
+  BeanDefinitionHolder
+  ``` 
+  和 Bean 的注册 
+      
+ ```java 
+  BeanDefinitionReaderUtils.registerBeanDefinition
+  ``` 
+ 。 
+     
+    
+    
+      如果你还能把此类技术联想的更多，可以尝试把代理的对象替换成数据库的查询对象，也就是对 JDBC 的操作，当你完成以后也就实现了一个简单的 ORM 框架。其实很多技术实现都是由小做大，但最开始的那部分是整个代码实现的核心。 
+     
+   
+   
+  #### 六、系列推荐 
+   
+    
+     
+     认知自己的技术栈盲区 
+     
+    
+     
+     LinkedList插入速度比ArrayList快？你确定吗？ 
+     
+    
+     
+     除了JDK、CGLIB，还有3种类代理方式？面试又卡住！ 
+     
+    
+     
+     ReentrantLock之AQS原理分析和实践使用 
+     
+    
+     
+     咋嘞？你的IDEA过期了吧！加个Jar包就破解了，为什么？ 
+     
+   
+  
+  
+  - END - 
+   
+  下方扫码关注 bugstack虫洞栈，与小傅哥一起学习成长、共同进步，做一个码场最贵Coder！ 
+   
+    
+     
+     回复【设计模式】，下载《重学Java设计模式》，这是一本互联网真实案例的实践书籍，从实际业务中抽离出，交易、营销、秒杀、中间件、源码等众多场景进行学习代码设计。 
+     
+    
+     
+     回复【面经手册】，下载《面经手册 • 拿大厂Offer》，这是一本有深度的Java核心内容，从数据结构、算法、并发编程以及JVM系8不断深入讲解，让懂了就是真的懂。 
+     
+   
+  ![Test](https://oscimg.oschina.net/oscnet/5b9ad40a-9ed9-4a62-9f51-603d6675ca7c.jpg  '面经手册 · 第28篇《你说，怎么把Bean塞到Spring容器-》') 
+   
+   你好，我是小傅哥。一线互联网 
+    
+ ```java 
+  java
+  ``` 
+  
+   工程师、架构师，开发过交易&营销、写过运营&活动、设计过中间件也倒腾过中继器、IO板卡。不只是写Java语言，也搞过C#、PHP，是一个技术活跃的折腾者。 
+    
+   
+   
+   2020年写了一本PDF 
+   《重学Java设计模式》 
+   ，全网下载量30万+，帮助很多同学成长。同年 github 的两个项目， 
+    
+ ```java 
+  CodeGuide
+  ``` 
+  
+   、 
+    
+ ```java 
+  itstack-demo-design
+  ``` 
+  
+   ，持续霸榜 Trending，成为全球热门项目。 
+   
+  
+ 
+本文分享自微信公众号 - bugstack虫洞栈（bugstack）。如有侵权，请联系 support@oschina.cn 删除。本文参与“OSC源创计划”，欢迎正在阅读的你也加入，一起分享。
+                                        

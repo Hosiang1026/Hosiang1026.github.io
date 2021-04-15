@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 722
+top: 2001
 cover_picture: 'https://static.oschina.net/uploads/img/202007/06103939_hkrn.jpg'
 abbrlink: a21b8c79
-date: 2021-04-14 07:54:42
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;本系列文章主要介绍HTAP数据库BaikalDB的技术实现细节。 作者介绍：罗小兵，百度商业平台研发部高级研发工程师，主要负责BaikalDB事务能力，全局二级索引等方向的研发工作。 欢迎关注 Star g...
@@ -17,7 +17,7 @@ date: 2021-04-14 07:54:42
 #### 一、概述 
 ##### BaikalDB系统简介 
 BaikalDB是一个分布式可扩展的存储系统，兼容MySQL协议，整个系统的架构如下图所示： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-8cc601c19e76981d413234886d167df69e8.png  'BaikalDB技术实现内幕（一）-- 分布式事务实现') 
  
  BaikalStore 负责数据存储，数据分区按region组织，三个Store的三个region形成一个 Raft-group 实现三副本，多实例部署，Store实例宕机可以自动迁移 Region数据； 
  BaikalMeta 负责元信息管理，包括分区，容量，权限，均衡等， Raft 保障的3副本部署，Meta 宕机只影响数据无法扩容迁移，不影响数据读写； 
@@ -26,7 +26,7 @@ BaikalDB是一个分布式可扩展的存储系统，兼容MySQL协议，整个�
 ##### 分布式事务 
 BaikalDB将数据按照range进行切分，每个分区称为region，连续的region组成了数据的整个区间。不同的region位于不同的BaikalStore实例，在不同的机器上，那么当一个SQL语句涉及多个region的更新时，如何保证所有的更新，要么全部成功，要么全部失败呢，这就需要分布式事务。讲到事务，我们先回顾一下事务的ACID特性： 
  
- Atomicity（原子性）：一个事务（transaction）中的所有操作，要么全部完成，要么全部失败，不会出现中间状态。事务在执行过程中发生错误，会被 回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样； 
+ Atomicity（原子性）：一个事务（transaction）中的所有操作，要么全部完成，要么全部失败，不会���现��间状态。事务在执行过程中发生错误，会被 回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样； 
  Consistency（一致性）：数据库在事务执行之前和执行之后处于一致性状态，完整性没有被破坏； 
  Isolation（隔离性）：数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致； 
  Durability（持久性）：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。 
@@ -39,10 +39,10 @@ BaikalDB将数据按照range进行切分，每个分区称为region，连续的r
  设置自动提交状态SET AUTOCOMMIT=0/1 
  
 #### 二、分布式事务实现 
-BaikalDB通过两阶段提交协议（2PC），借助RocksDB的Pessimistic事务和Savepoint机制实现分布式事务。下面逐步介绍BaikalDB的分布式事务实现，���然，分布式事务非常复杂，BaikalDB的分布式事务还在不断的迭代开发。 
+BaikalDB通过两阶段提交协议（2PC），借助RocksDB的Pessimistic事务和Savepoint机制实现分布式事务。下面逐步介绍BaikalDB的分布式事务实现，当然，分布式事务非常复杂，BaikalDB的分布式事务还在不断的迭代开发。 
 ##### 两阶段提交协议（2PC） 
 二阶段提交协议（Two-phase Commit，即2PC）是常用的分布式事务原子提交的解决办法，它有一个协调者（coordinator）和多个参与者（participant），可以保证在分布式事务中，要么所有参与者要么都提交事务，要么都取消事务，交互流程如图所示： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-8cc601c19e76981d413234886d167df69e8.png  'BaikalDB技术实现内幕（一）-- 分布式事务实现') 
 协调者的提交过程分两个步骤分别与参与者交互： 
  
  第一阶段：发送prepare请求给所有参与者 ，询问是否可能提交。 
@@ -97,7 +97,7 @@ BaikalDB与BaikalStore事务交互的message为：
 
   ```  
 下面举例说明多语句事务整个两阶段提交示意图： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-8cc601c19e76981d413234886d167df69e8.png  'BaikalDB技术实现内幕（一）-- 分布式事务实现') 
 整个多语句事务语句执行的序列为BEGIN，D1，D2，D3，D4，P，C。 
  
  BaikalDB充当协调者的角色，执行BEGIN / START TRANSACTION后创建BEGION(seq_id=1)并缓存在cache_plans，D1(seq_id=2)涉及到region1和region2，将BEGIN和D1一起发送到region1和region2执行； 
@@ -174,18 +174,18 @@ BaikalDB与BaikalStore事务交互的message为：
    
   
  
-整个_save_point_seq的变化如下表所示： 
- 
+整个_save_point_seq的变化如下��所��： 
+![Test](https://oscimg.oschina.net/oscnet/up-8cc601c19e76981d413234886d167df69e8.png  'BaikalDB技术实现内幕（一）-- 分布式事务实现') 
 #### 三、异常宕机处理 
 两阶段提交协议的缺点是在整个交互过程中，所有节点都处于阻塞状态，RocksDB的Pessimistic事务在未提交之前key都处于锁定状态。 
 当协调者发生故障后，参与者会一直阻塞下去，更严重的是在二阶段提交的阶段二中，当协调者向参与者发送commit请求之后，发生了局部网络异常或者在发送commit请求过程中协调者发生了故障，这回导致只有一部分参与者接受到了commit请求，导致数据不一致。 
 本节将介绍BiakalDB如何处理阻塞、协调者单点以及数据不一致的问题。 
 ###### BaikalDB异常处理 
 BaikalDB充当着两阶段提交的协调者角色，如果事务执行过程中BaikalDB宕机可能会对整个系统之后的操作产生影响，参与者将处于不确定状态，如图所示，不同参与者状态不一致了。 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-8cc601c19e76981d413234886d167df69e8.png  'BaikalDB技术实现内幕（一）-- 分布式事务实现') 
 下面对不同阶段BaikalDB宕机可能产生的影响总结如下： 
- 
-BaikalDB宕机可能导致事务残留，残留事务除了阻塞后续写请��外��如上表所示最坏的情况可能会导致数据不一致，这里要解决的问题有两个： 
+![Test](https://oscimg.oschina.net/oscnet/up-8cc601c19e76981d413234886d167df69e8.png  'BaikalDB技术实现内幕（一）-- 分布式事务实现') 
+BaikalDB宕机可能导致事务残留，残留事务除了阻塞后续写请求外，如上表所示最坏的情况可能会导致数据不一致，这里要解决的问题有两个： 
  
  残留事务如何清除； 
  部分commit导致数据不一致如何处理。 
@@ -237,7 +237,7 @@ BaikalDB宕机可能导致事务残留，残留事务除了阻塞后续写请�
    
   
  
- 
+![Test](https://oscimg.oschina.net/oscnet/up-8cc601c19e76981d413234886d167df69e8.png  'BaikalDB技术实现内幕（一）-- 分布式事务实现') 
 说明： 
  
  BEGIN实际会和每个region的第一条DML1一起打包执行，执行时随机指定一个region作为primary region； 
@@ -271,7 +271,7 @@ BaikalStore作为存储层，也是2PC的参与者，需要保证高可用。Bai
   
  
 BaikalStore可能得宕机时刻如下图所示，下面说明在不同时刻宕机重启事务的恢复流程。 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-8cc601c19e76981d413234886d167df69e8.png  'BaikalDB技术实现内幕（一）-- 分布式事务实现') 
  
  ① 或②时宕机，此时之前的语句都在leader上执行，宕机后Raft重新选主，之后请求发送到新leader时根据请求的start_seq_id判断让BaikalDB重新发送之前的语句来恢复事务状态(region第一次执行事务时start_seq_id都会置为1，如果请求的start_seq_id>1但BaikalStore重启后因为没有执行过事务，记录的seq_id为0，需要重传之前的语句)； 
  ③或④时宕机，此时PREPARE执行成功，语句已经通过Raft复制到整个Raft组。在重启时通过RocksDB的GetAllPreparedTransactions拿到已经prepare的事务txn_id，再根据write_meta_before_prepared记录的log_index+txn_id，拿到执行过prepare事务的log_index，根据log_index读取Raft日志恢复事务状态； 
@@ -284,7 +284,7 @@ BaikalStore可能得宕机时刻如下图所示，下面说明在不同时刻宕
 事务功能上线运行的过程中，我们发现了很多可以优化的地方，本节简单介绍两点。 
 ##### 多语句Raft复制优化 
 如前所述，事务执行流程为，先在leader执行，并将指令缓存在leader，待prepare时通过Raft复制将所以指令复制给follower。因为leader已经在Raft外部执行完成，在日志应用(on_apply)时leader不再执行，而follower从begin到prepare所有指令全部在on_apply中执行，根据Raft语义，on_apply为串行执行，所以导致follower执行缓慢效率低。优化为leader执行一条指令成功后立即通过raft复制给follower执行，提高follower的并发度。 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-8cc601c19e76981d413234886d167df69e8.png  'BaikalDB技术实现内幕（一）-- 分布式事务实现') 
 实现要点： 
  
  DML语句在leader上执行是在Raft外，在执行成功后再提交一条Raft log，follower的DML语句是在Raft状态机内执行，这样一来状态机不会被卡住； 

@@ -4,16 +4,16 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 888
+top: 1793
 cover_picture: 'https://static.oschina.net/uploads/img/202002/20113317_XAfF.jpeg'
 abbrlink: 1cf6514a
-date: 2021-04-14 07:56:10
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;概述 容器化技术在当前云计算、微服务等体系下大行其道，而 Docker 便是容器化技术的典型，对于容器化典型的技术，我们有必要弄懂它，所以这篇文章，我会来分析下 Docker 是如何实现隔离技术...
 <!-- more -->
 
-                                                                                                                                                                                         
+                                                                                                                                                                                        ![Test](https://cdn.pixabay.com/photo/2015/01/15/14/51/wal-600387_1280.png  'Docker是如何实现隔离的') 
 #### 概述 
 容器化技术在当前云计算、微服务等体系下大行其道，而 Docker 便是容器化技术的典型，对于容器化典型的技术，我们有必要弄懂它，所以这篇文章，我会来分析下 Docker 是如何实现隔离技术的，Docker 与虚拟机又有哪些区别呢？接下来，我们开始逐渐揭开它的面纱。 
 #### 从运行一个容器开始 
@@ -202,7 +202,7 @@ Storage Driver: overlay2
   overlay2
   ``` ,不同的存储驱动在 Docker 中表现不一样，但是原理类似，我们来看看 Docker 如何借助 ```java 
   overlay2
-  ``` 来变出这么多文件夹的。我们前面提到过，Docker都是通过mount 去挂载的,我们先找到我们的容器实例id. 
+  ``` 来变出这么多文件夹的。我们前面提到过，Docker都是通过mount 去挂载的,���们先找到我们的容器实例id. 
 执行 ```java 
   docker ps -a |grep demo_docker
   ```  
@@ -219,7 +219,7 @@ Storage Driver: overlay2
   ```  
 这里出现了一个挂载信息，但是这个记录不是我们的重点，我们需要找到 ```java 
   overlay2
-  ``` 的挂载信息，所以这里我们还需要执行一个命令: ```java 
+  ``` 的挂载信息，所以这里我们���需要执行一个命令: ```java 
   cat /proc/mounts | grep system_u:object_r:container_file_t:s0:c740,c923
   ```  
  ```java 
@@ -241,7 +241,7 @@ shm /var/lib/docker/containers/c0afd574aea716593ceb4466943bbd13e3a081bf84da0779e
 bin  dev  etc  home  proc  root  run  sys  tmp  usr  var
 
   ```  
-我们发现这个和我们容器的目录是一致的，我们在这个目录下创建一个新的目录，然后看看容器内部是不是会出现新的目录。  
+我们发现这个和我们容器的目录是一致的，我们在这个目录下创建一个新的目录，然后看看容器内部是不是会出现新的目录。 ![Test](https://cdn.pixabay.com/photo/2015/01/15/14/51/wal-600387_1280.png  'Docker是如何实现隔离的') 
 上面的图片验证了容器内部的文件内容和挂载的 ```java 
   /var/lib/docker/overlay2/ID/merged
   ``` 下是一致的，这就是Docker文件系统隔离的基本原理。 
@@ -282,7 +282,7 @@ cgroup on /sys/fs/cgroup/cpuset type cgroup (rw,nosuid,nodev,noexec,relatime,sec
 这个命令表示我们需要启动一个容器，这个容器一直产生随机数进行md5计算来消耗CPU， ```java 
   --cpu-period=100000 --cpu-quota=20000
   ``` 表示限制 CPU 使用率在20%，关于这两个参数的详细说明可以点击这里 
- 
+![Test](https://cdn.pixabay.com/photo/2015/01/15/14/51/wal-600387_1280.png  'Docker是如何实现隔离的') 
 我们查看进程消耗情况发现 刚刚启动的容器资源确实被限制在20%，说明 Docker 的CPU限制参数起作用了，那对应在我们的 ```java 
   cgroup
   ```  文件夹下面是怎么设置的呢？ 同样，这里的配置肯定是和容器实例id挂钩的，我的文件路径是在 ```java 
@@ -303,7 +303,7 @@ cgroup on /sys/fs/cgroup/cpuset type cgroup (rw,nosuid,nodev,noexec,relatime,sec
   ```  下。 
 #### 与传统虚拟机技术的区别 
 经过前面的进程、文件系统、资源限制分析，详细各位已经对 Docker 的隔离原理有了基本的认识，那么它和传统的虚拟机技术有和区别呢？这里贴一个网上的Docker和虚拟机区别的图 
- 
+![Test](https://cdn.pixabay.com/photo/2015/01/15/14/51/wal-600387_1280.png  'Docker是如何实现隔离的') 
 这张图应该可以清晰的展示了虚拟机技术和 Docker 技术的区别了，虚拟机技术是完全虚拟出一个单独的系统，有这个系统去处理应用的各种运行请求，所以它实际上对于性能来说是有影响的。而 Docker 技术 完全是依赖 Linux 内核特性 Namespace 和Cgroup 技术来实现的，本质来说：你运行在容器的应用在宿主机来说还是一个普通的进程，还是直接由宿主机来调度的，相对来说，性能的损耗就很少，这也是 Docker 技术的重要优势。 
 Docker 技术由于 还是一个普通的进程，所以隔离不是很彻底，还是共用宿主机的内核，在隔离级别和安全性上没有虚拟机高，这也是它的一个劣势。 
 #### 总结 

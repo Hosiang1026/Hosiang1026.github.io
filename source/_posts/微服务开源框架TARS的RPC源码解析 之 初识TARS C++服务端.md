@@ -4,16 +4,16 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 852
+top: 1827
 cover_picture: 'https://static.oschina.net/uploads/img/202008/20142119_roC2.jpg'
 abbrlink: f6f18459
-date: 2021-04-14 07:54:42
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;作者：Cony 导语：微服务开源框架TARS的RPC调用包含客户端与服务端，《微服务开源框架TARS的RPC源码解析》系列文章将从初识客户端、客户端的同步及异步调用、初识服务端、服务端的工作流程四...
 <!-- more -->
 
-                                                                                                                                                                                         
+                                                                                                                                                                                        ![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 作者：Cony 
 导语：微服务开源框架TARS的RPC调用包含客户端与服务端，《微服务开源框架TARS的RPC源码解析》系列文章将从初识客户端、客户端的同步及异步调用、初识服务端、服务端的工作流程四部分，以C++语言为载体，深入浅出地带你了解TARS RPC调用的原理。 
 #### 什么是TARS 
@@ -39,7 +39,7 @@ TC_EpollServer才是真正的服务端，如果把Application比作风扇，那�
 代表一个RPC服务实体，在配置文件中的/tars/application/server下面的xxxAdapter就是对BindAdapter的配置，一个BindAdapter代表一个服务实体，看其配置就知道BindAdapter的作用是什么了，其代表一个RPC服务对外的监听套接字，还声明了连接的最大数量，接收队列的大小，业务线程数，RPC服务名，所使用的协议等。 
 BindAdapter本身可以认为是一个服务的实例，能建立真实存在的监听socket并对外服务，与网络模块NetThread以及业务模块HandleGroup都有关联，例如，多个NetThread的第一个线程负责对BindAdapter的listen socket进行监听，有客户连接到BindAdapter的listen socket就随机在多个NetThread中选取一个，将连接放进被选中的NetThread的ConnectionList中。BindAdapter则通常会与一组HandleGroup进行关联，该HandleGroup里面的业务线程就执行BindAdapter对应的服务。可见，BindAdapter与网络模块以及业务模块都有所关联。 
 好了，介绍完这几个类之后，通过类图看看他们之间的关系： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 服务端TC_EpollServer管理类图中左侧的网络模块与右侧的业务模块，前者负责建立与管理服务端的网络关系，后者负责执行服务端的业务代码，两者通过BindAdapter构成一个整体，对外进行RPC服务。 
 #### 初始化 
 与客户端一样，服务端也需要进行初始化，来构建上面所说的整体，按照上面的介绍，可以将初始化分为两模块——网络模块的初始化与业务模块的初始化。初始化的所有代码在Application的void main()以及void waitForQuit()中，初始化包括屏蔽pipe信号，读取配置文件等，这些将忽略不讲，主要看看其如何通过epoll与建立listen socket来构建网络部分，以及如何设置业务线程组构建业务部分。 
@@ -81,7 +81,7 @@ BindAdapter本身可以认为是一个服务的实例，能建立真实存在的
 好了，TC_EpollServer被构建之后，如何给他安排左（网络模块）右（业务模块）护法呢？ 
 ##### 网络模块初始化 
 在讲解网络模块之前，再认真地看看网络模块的相关类图： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 先看看Application中哪些代码与网络模块的初始化有关吧： 
  ```java 
   void Application::main(int argc, char *argv[])
@@ -102,7 +102,7 @@ void Application::waitForShutdown()
 
   ```  
 网络部分的初始化，离不开建立各RPC服务的监听端口（socket，bind，listen），接收客户端的连接（accept），建立epoll等。那么何时何地调用这些函数呢？大致过程如下图所示： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ###### 1. 创建服务实体的listen socket 
 首先在Application::main()中，调用： 
  ```java 
@@ -181,7 +181,7 @@ _epollServer->bind(bindAdapter);
 
   ```  
 下图是对创建服务实体的listen socket的流程总结 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ###### 2.创建epoll 
 代码回到Application::main()中，通过执行： 
  ```java 
@@ -205,13 +205,13 @@ _epollServer->bind(bindAdapter);
 
   ```  
 代码来到NetThread::createEpoll(uint32_t iIndex)，这个函数可以作为网络线程NetThread的初始化函数，在函数里面建立了网络线程的内存池，创建了epoll，还将上面创建的listen socket加入epoll中，当然只有第一条网络线程才有listen socket，此外还初始化了连接管理链表ConnectionList _list。看下图对本流程的总结： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ###### 3.启动网络线程 
 由于NetThread是线程，需要执行其start()函数才能启动线程。而这个工作不是在Application::main()中完成，而是在Application::waitForShutdown()中的Application::waitForQuit()完成，跟着下面的流程图看代码，就清楚明白了： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ##### 业务模块的初始化 
 同样，与网络模块一样，在讲解业务模块之前，先认真地看看业务模块的相关类图： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 在业务模块初始化中，我们需要理清楚两个问题：业务模块如何与用户填充实现的XXXServantImp建立联系，从而使请求到来的时候，Handle能够调用用户定义好的RPC方法？业务线程在何时何地被启动，如何等待着请求的到达？ 
 看看Application中哪些代码与业务模块的初始化有关吧： 
  ```java 
@@ -255,7 +255,7 @@ _epollServer->bind(bindAdapter);
 在bindAdapter(adapters)与initialize()中解决了前面提到的第一个问题，剩下的代码实现了handle业务线程组的创建与启动。 
 ###### 1.将BindAdapter与用户定义的方法关联起来 
 如何进行关联？先看看下面的代码流程图： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 如何让业务线程能够调用用户自定义的代码？这里引入了ServantHelperManager，先简单剧透一下，通过ServantHelperManager作为桥梁，业务线程可以通过BindAdapter的ID索引到服务ID，然后通过服务ID索引到用户自定义的XXXServantImp类的生成器，有了生成器，业务线程就可以生成XXXServantImp类并调用里面的方法了。下面一步一步分析。 
 在Application::main()调用的Application::bindAdapter()中看到有下面的代码： 
  ```java 
@@ -345,7 +345,7 @@ struct ServantCreation : public ServantHelperCreation
 以上就是通过服务ID生成相应XXXServantImp类的简单反射技术，业务线程组里面的业务线程只需要获取到所需执行的业务的BindAdapter的ID，就可以通过ServantHelperManager获得服务ID，有了服务ID就可以获取XXXServantImp类的生成器从而生成XXXServantImp类执行里面由用户定义好的RPC方法。现在重新看图（2-8）就大致清楚整个流程了。 
 ###### 2.Handle业务线程的启动 
 剩下的部分就是HandleGroup的创建，并将其与BindAdapter进行相互绑定关联，同时也需要绑定到TC_EpollServer中，随后创建/启动HandleGroup下面的Handle业务线程，启动Handle的过程涉及上文“将BindAdapter与用户定义的方法关联起来”提到的获取服务类生成器。先看看大致的代码流程图： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 在这里分两部分，第一部分是在Application::main()中执行下列代码： 
  ```java 
   //设置HandleGroup分组，启动线程
@@ -418,9 +418,9 @@ template<class T> void setHandleGroup(const string& groupName, int32_t handleNum
 
   ```  
 在这里，可以看到业务线程组的创建：HandleGroupPtr hg = new HandleGroup()；业务线程的创建：HandlePtr handle = new T()（T是ServantHandle）；建立关系，例如BindAdapter与HandleGroup的相互关联：it->second->adaptersadapter->getName() = adapter和adapter->_handleGroup = it->second。执行完上面的代码，就可以得到下面的类图了： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 这里再通过函数流程图简单复习一下上述代码的流程，主要内容均在TC_EpollServer:: setHandleGroup()中： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 随着函数的层层退出，代码重新来到Application::main()中，随后执行： 
  ```java 
   //启动业务处理线程
@@ -458,7 +458,7 @@ _epollServer->startHandle();
 }
 
   ```  
-ServantHandle::initialize()的主要作用是取得用户实现的RPC方法，其实现原理与上文（“2.2.3业务模块的初始化”中的第1小点“将BindAdapter与用户定义的方法关联起来”）提及的一样，借助与其关联的BindAdapter的ID号，以及ServantHelpManager，来查找到用户填充实现的XXXServantImp类的生成器并生成XXXServantImp类的实例，将这个实例与服务名构成pair <string, ServantPtr>变量，放进map<string, ServantPtr> ServantHandle:: _servants中，等待业务线程Handle需要执行用户���定���方法的时候，从map<string, ServantPtr> ServantHandle:: _servants中查找： 
+ServantHandle::initialize()的主要作用是取得用户实现的RPC方法，其实现原理与上文（“2.2.3业务模块的初始化”中的第1小点“将BindAdapter与用户定义的方法关联起来”）提及的一样，借助与其关联的BindAdapter的ID号，以及ServantHelpManager，来查找到用户填充实现的XXXServantImp类的生成器并生成XXXServantImp类的实例，将这个实例与服务名构成pair <string, ServantPtr>变量，放进map<string, ServantPtr> ServantHandle:: _servants中，等待业务线程Handle需要执行用户自定义方法的时候，从map<string, ServantPtr> ServantHandle:: _servants中查找： 
  ```java 
   void ServantHandle::initialize()
 {
@@ -508,15 +508,15 @@ ServantHandle::initialize()的主要作用是取得用户实现的RPC方法，�
 
   ```  
 Handle线程通过条件变量来让所有业务线程阻塞等待被唤醒 ，因为本章是介绍初始化，因此代码解读到这里先告一段落，稍后再详解服务端中的业务线程Handle被唤醒后，如何通过map<string, ServantPtr> ServantHandle:: _servants查找并执行业务。现在通过函数流程图复习一下上述的代码流程： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 #### 服务端的工作 
 经过了初始化工作后，服务端就进入工作状态了，服务端的工作线程分为两类，正如前面所介绍的网络线程与业务线程，网络线程负责接受客户端的连接与收发数据，而业务线程则只关注执行用户所定义的PRC方法，两种线程在初始化的时候都已经执行start()启动了。 
 大部分服务器都是按照accept()->read()->write()->close()的流程执行的，大致工作流程图如下图所示： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 TARS的服务端也不例外。 
 判定逻辑采用Epoll IO复用模型实现，每一条网络线程NetThread都有一个TC_Epoller来做事件的收集、侦听、分发。 
 正如前面所介绍，只有第一条网络线程会执行连接的监听工作，接受新的连接之后，就会构造一个Connection实例，并选择处理这个连接的网络线程。 
-请求被读入后，将暂存在接收队列中，并通知业务线程进行处理，在这里，业务线程终于登场了，处理完请求后，将结果放到发送队列。 
+请求被读入后，将���存��接收队列中，并通知业务线程进行处理，在这里，业务线程终于登场了，处理完请求后，将结果放到发送队列。 
 发送队列有数据，自然需要通知网络线程进行发送，接收到发送通知的网络线程会将响应发往客户端。 
 TARS服务器的工作流程大致就是如此，如上图所示的普通服务器工作流程没有多大的区别，下面将按着接受客户端连接，读入RPC请求，处理RPC请求，发送RPC响应四部分逐一介绍介绍服务端的工作。 
 ##### 接受客户端连接 
@@ -569,10 +569,10 @@ TARS服务器的工作流程大致就是如此，如上图所示的普通服务�
 
   ```  
 而ret = accept(ev.data.u32)的整个函数流程如下图所示（ev.data.u32就是被激活的BindAdapter对应的监听socket的fd）： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 在讲解之前，先复习一下网络线程相关类图，以及通过图解对accept有个大致的印象： 
- 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 好了，跟着图（2-14），现在从NetThread::run()的NetThread::accept(int fd)讲起。 
 ###### 1.accept 获取客户端socket 
 进入NetThread::accept(int fd)，可以看到代码执行了： 
@@ -592,9 +592,9 @@ cs.setCloseWaitDefault();
 
   ```  
 到此，对应图（2-16）的第一步——接受客户端连接（流程如下图所示），已经完成。 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ###### 2.为客户端socket创建Connection 
-接下来是为新来的客户端socket创建一个Connection，在NetThread::accept(int fd)中，创建Connection的代码如下： 
+接下来是为新来的客户端socket创建一个Connection，在NetThread::accept(int fd)中，创建Connection的代��如��： 
  ```java 
   int timeout = _listeners[fd]->getEndpoint().getTimeout()/1000;
  
@@ -611,8 +611,8 @@ Connection::Connection(TC_EpollServer::BindAdapter *pBindAdapter, int lfd, int t
 }
 
   ```  
-那么关联TC_Socket之���，通过Connection实例就可以操作的客户端socket了。至此，对应图（2-16）的第二步——为客户端socket创建Connection就完成了（流程如下图所示）。 
- 
+那么关联TC_Socket之后，通过Connection实例就可以操作的客户端socket了。至此，对应图（2-16）的第二步——为客户端socket创建Connection就完成了（流程如下图所示）。 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ###### 3.为Connection选择一条网络线程 
 最后，就是为这个Connection选择一个网络线程，将其加入网络线程对应的ConnectionList，在NetThread::accept(int fd)中，执行： 
  ```java 
@@ -647,7 +647,7 @@ TC_EpollServer::addConnection()的代码如下所示：
   ```  
 接着调用被选中线程的NetThread::addTcpConnection()方法（或者 
 NetThread::addUdpConnection()，这里只介绍TCP的方法），将Connection加入被选中网络线程的ConnectionList中，最后会执行_epoller.add(cPtr->getfd(), cPtr->getId(), EPOLLIN | EPOLLOUT)将客户端socket的fd加入本网络线程的TC_Epoller中，让本网络线程负责对本客户端的数据收发。至此对应图（28）的第三步就执行完毕了（具体流程如下图所示）。 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ##### 接收RPC请求 
 讨论服务器接收RPC请求，同样从网络线程的NetThread::run()开始分析，上面是进入switch中的case ET_LISTEN分支来接受客户端的连接，那么现在就是进入case ET_NET分支了，为什么是case ET_NET分支呢？因为上面提到，将客户端socket的fd加入TC_Epoller来监听其读写，采用的是_epoller.add(cPtr->getfd(), cPtr->getId(), EPOLLIN | EPOLLOUT)，传递给函数的第二个参数是32位的整形cPtr->getId()，而函数的第二个参数要求必须是64位的整型，因此，这个参数将会是高32位是0，低32位是cPtr->getId()的64位整形。而第二个参数的作用是当该注册的事件引起epoll_wait()退出的时候，会作为激活事件epoll_event 结构体中的64位联合体epoll_data_t data返回给用户。因此，看下面NetThread::run()代码： 
  ```java 
@@ -679,7 +679,7 @@ NetThread::addUdpConnection()，这里只介绍TCP的方法），将Connection�
 
   ```  
 代码中的h是64位联合体epoll_data_t data的高32位，经过上面分析，客户端socket若因为接收到数据而引起epoll_wait()退出的话，epoll_data_t data的高32位是0，低32位是cPtr->getId()，因此h将会是0。而ET_NET就是0，因此客户端socket有数据来到的话，会执行case ET_NET分支。下面看看执行case ET_NET分支的函数流程图。 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ###### 1.获取激活了的连接Connection 
 收到RPC请求，进入到NetThread::processNet()，服务器需要知道是哪一个客户端socket被激活了，因此在NetThread::processNet()中执行： 
  ```java 
@@ -693,7 +693,7 @@ NetThread::addUdpConnection()，这里只介绍TCP的方法），将Connection�
 
   ```  
 正如上面说的，epoll_data_t data的高32位是0，低32位是cPtr->getId()，那么获取到uid之后，通过NetThread::getConnectionPtr()就可以从ConnectionList中返回此时此刻所需要读取RPC请求的Connection了。之后对获取的Connection进行简单的检查工作，并看看epoll_event::events是否是EPOLLERR或者EPOLLHUP（具体流程如下图所示）。 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ###### 2.接收客户端请求，放进线程安全队列中 
 接着，就需要接收客户端的请求数据了，有数据接收意味着epoll_event::events是EPOLLIN，看下面代码，主要是NetThread::recvBuffer()读取RPC请求数据，以及以及Connection:: insertRecvQueue()唤醒业务线程发送数据。 
  ```java 
@@ -749,7 +749,7 @@ o.push_back(recv);
 
   ```  
 到此，RPC请求数据已经被完全获取并放置在线程安全队列中（具体过程如下图所示）。 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ###### 3.线程安全队列非空，唤醒业务线程发送 
 代码运行至此，线程安全队列里面终于有RPC请求包数据了，可以唤醒业务线程Handle进行处理了，代码回到NetThread::processNet()，只要线程安全队列非空，就执行Connection:: insertRecvQueue()： 
  ```java 
@@ -782,11 +782,11 @@ o.push_back(recv);
 
   ```  
 现在，服务端的网络线程在接收RPC请求数据后，终于唤醒了业务线程（具体流程看下图所示），接下来轮到业务模块登场，看看如何处理RPC请求了。 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ##### 处理RPC请求 
 与前文接收到请求数据后，唤醒业务线程组HandleGroup（就是刚刚才介绍完的_handleGroup->monitor.notify()）遥相呼应的地方是在“2.2.3业务模块的初始化”第2小点“Handle业务线程的启动”中提到的，在Handle::handleImp()函数中的_handleGroup->monitor.timedWait(_iWaitTime)。通过条件变量，业务线程组HandleGroup里面的业务线程一起阻塞等待着网络线程对其发起唤醒。现在，终于对条件变量发起通知了，接下来将会如何处理请求呢？在这里，需要先对2.2.3节进行复习，了解到ServantHandle::_servants里面究竟承载着什么。 
 好了，处理RPC请求分为三步：构造请求上下文，调用用户实现的方法处理请求，将响应数据包push到线程安全队列中并通知网络线程，具体函数流程如下图所示，现在进一步分析： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ###### 1.获取请求数据构造请求上下文 
 当业务线程从条件变量上被唤醒之后，从其负责的BindAdapter中获取请求数据：adapter->waitForRecvQueue(recv, 0)，在BindAdapter::waitForRecvQueue()中，将从线程安全队列recv_queue BindAdapter::_ rbuffer中获取数据： 
  ```java 
@@ -818,7 +818,7 @@ o.push_back(recv);
 
   ```  
 在ServantHandle::createCurrent()中，先new出TarsCurrent实例，然后调用其initialize()方法，在TarsCurrent::initialize(const TC_EpollServer::tagRecvData &stRecvData, int64_t beginTime)中，将RPC请求包的内容放进请求上下文TarsCurrentPtr current中，后续只需关注这个请求上下文即可。另外可以稍微关注一下，若采用TARS协议会使用TarsCurrent::initialize(const string &sRecvBuffer)将请求包的内容放进请求上下文中，否则直接采用memcpy()系统调用来拷贝内容。下面稍微总结一下这小节的流程： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ###### 2.处理请求（只介绍TARS协议） 
 当获取到请求上下文之后，就需要对其进行处理了。 
  ```java 
@@ -841,7 +841,7 @@ o.push_back(recv);
 
   ```  
 本RPC框架支持TARS协议与非TARS协议，下面只会介绍对TARS协议的处理，对于非TARS协议，分析流程也是差不多，对非TARS协议协议感兴趣的读者可以对比着来分析非TARS协议部分。在介绍之前，先看看服务相关的继承体系，下面不要混淆这三个类了： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 好了，现在重点放在ServantHandle::handleTarsProtocol(const TarsCurrentPtr ¤t)函数上面。先贴代码： 
  ```java 
   void ServantHandle::handleTarsProtocol(const TarsCurrentPtr &current)
@@ -923,13 +923,13 @@ XXXServant类就是执行Tars2Cpp的时候生成的，会依据用户定义的ta
  5.return tars::TARSSERVERSUCCESS。 
  
 上述步骤是按照默认的服务端自动回复的思路去阐述，在实际中，用户可以关闭自动回复功能（如：current->setResponse(false)），并自行发送回复（如：servant->async_response_XXXAsync(current, ret, rStr)）。到此，服务端已经执行了RPC方法，下面稍微总结一下本小节的内容： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ###### 3.将响应数据包push到线程安全队列中并通知网络线程 
 处理完RPC请求，执行完RPC方法之后，需要将结果（下面代码中的buffer）回送给客户端： 
  ```java 
   void ServantHandle::handleTarsProtocol(const TarsCurrentPtr &current)
 {
-    // 1-对请���上下文current进行预处理
+    // 1-对请求上下文current进行预处理
     // 2-寻找合适的服务servant
     //3-业务逻辑处理
 //回送响应，本节分析
@@ -941,7 +941,7 @@ XXXServant类就是执行Tars2Cpp的时候生成的，会依据用户定义的ta
 
   ```  
 由于业务与网络是独立开来的，网络线程收到请求包之后利用条件变量来通知业务线程，而业务线程才有什么方式来通知网络线程呢？由前面可知，网络线程是阻塞在epoll中的，因此需要利用epoll来通知网络线程。这次先看图解总结，再分析代码： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 在ServantHandle::handleTarsProtocol()中，最后的一步就是回送响应包。数据包的回送经历的步骤是：编码响应信息——找出与接收请求信息的网络线程，因为我们需要通知他来干活——将响应包放进该网络线程的发送队列——利用epoll的特性唤醒网络线程，我们重点看看NetThread::send(): 
  ```java 
   void TC_EpollServer::NetThread::send(uint32_t uid, const string &s, const string &ip, uint16_t port)
@@ -998,12 +998,12 @@ send->port = port;
 
   ```  
 在NetThread::processPipe()中，先从线程安全队列中取响应信息包：_sBufQueue.dequeue(sendp, false)，这里与“2.3.3处理RPC请求”的第3小点“将响应数据包push到线程安全队列中并通知网络线程”遥相呼应。然后从响应信息中取得与请求信息相对应的那个Connection的uid，利用uid获取Connection：Connection *cPtr = getConnectionPtr(sendp->uid)。由于Connection是聚合了TC_Socket的，后续通过Connection将响应数据回送给客户端，具体流程如下图所示： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ##### 服务端工作总结 
 这里用图解总结一下服务端的工作过程： 
- 
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ##### 总结 
-TARS可以在考虑到易用性和高性能的同时快速构建系统并自动生成代码，帮助开发人员和企业以微服务的方式快速构建自己稳定可靠的分布式应用，从而令开发人员只关注业务逻辑，提高运营效率。多语言、敏捷研发、高可用和高效运营的特性使 TARS 成为企业级��品。 
+TARS可以在考虑到易用性和高性能的同时快速构建系统并自动生成代码，帮助开发人员和企业以微服务的方式快速构建自己稳定可靠的分布式应用，从而令开发人员只关注业务逻辑，提高运营效率。多语言、敏捷研发、高可用和高效运营的特性使 TARS 成为企业级产品。 
 《微服务开源框架TARS的RPC源码解析》系列文章分上下两篇，对RPC调用部分进行源码解析。本文是下篇，我们带大家了解了一下TARS的服务端。欢迎阅读上篇《初识TARS C++客户端》 
  
 TARS微服务助您数字化转型，欢迎访问： 
@@ -1011,5 +1011,5 @@ TARS官网：https://TarsCloud.org
 TARS源码：https://github.com/TarsCloud 
 获取《TARS官方培训电子书》：https://wj.qq.com/s2/6570357/3adb/ 
 或扫码获取： 
-
+![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端')
                                         

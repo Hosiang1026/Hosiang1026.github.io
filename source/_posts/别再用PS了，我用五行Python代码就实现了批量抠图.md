@@ -4,10 +4,10 @@ categories: 热门文章
 tags:
   - Popular
 author: OSChina
-top: 650
+top: 1729
 cover_picture: 'https://static.oschina.net/uploads/img/202004/20133412_KRiv.jpg'
 abbrlink: fa27462a
-date: 2021-04-14 07:56:10
+date: 2021-04-15 09:19:21
 ---
 
 &emsp;&emsp;对于会PhotoShop的人来说，抠图是非常简单的操作了，有时候几秒钟就能扣好一张图。不过对于一些比较复杂的图，有时候还是需要花点时间的，今天就给大家带了一个非常快速简单的办法，用Pytho...
@@ -17,7 +17,7 @@ date: 2021-04-14 07:56:10
 效果展示 
 刚开始，我也不看好什么自动抠图，总觉得不够精确，抠不出满意的图。下面我就直接展示一下效果图吧。 
 我们先看看原图 ： 
-​ 
+![Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy91eUhWNkVWTm94bEdvQVB1Tm82NDREME5ZQ3Q1cmpPWmRnbVI2YWljZFA2MGlhOU9DYWlhaWF1eFFNODNWQkVwbjVZSVZ2QTFjTmpLaWFMVGt2SE9JZXAyaWJudy82NDA?x-oss-process=image/format,png  '别再用PS了，我用五行Python代码就实现了批量抠图')​ 
   
   
   
@@ -25,7 +25,7 @@ date: 2021-04-14 07:56:10
   
   
 这张图片背景是纯色，我们平时用PhotoShop抠起来也比较简单，对我们计算机来说也不是什么难题，下面是效果图： 
-​ 
+![Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy91eUhWNkVWTm94bEdvQVB1Tm82NDREME5ZQ3Q1cmpPWmRnbVI2YWljZFA2MGlhOU9DYWlhaWF1eFFNODNWQkVwbjVZSVZ2QTFjTmpLaWFMVGt2SE9JZXAyaWJudy82NDA?x-oss-process=image/format,png  '别再用PS了，我用五行Python代码就实现了批量抠图')​ 
   
   
   
@@ -33,9 +33,9 @@ date: 2021-04-14 07:56:10
   
   
 因为本身是PNG图片，而且原图是白色背景，所以看不出什么区别。为了显示效果，我把原图和抠好的图放到一张黄色背景图片上： 
- 
+![Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy91eUhWNkVWTm94bEdvQVB1Tm82NDREME5ZQ3Q1cmpPWmRnbVI2YWljZFA2MGlhOU9DYWlhaWF1eFFNODNWQkVwbjVZSVZ2QTFjTmpLaWFMVGt2SE9JZXAyaWJudy82NDA?x-oss-process=image/format,png  '别再用PS了，我用五行Python代码就实现了批量抠图') 
 这样一看效果明显多了，感觉抠图效果还是非常好的。但是，抠这种简单的图片，不怎么过瘾，我们再来看看复杂一点的图片： 
-​ 
+![Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy91eUhWNkVWTm94bEdvQVB1Tm82NDREME5ZQ3Q1cmpPWmRnbVI2YWljZFA2MGlhOU9DYWlhaWF1eFFNODNWQkVwbjVZSVZ2QTFjTmpLaWFMVGt2SE9JZXAyaWJudy82NDA?x-oss-process=image/format,png  '别再用PS了，我用五行Python代码就实现了批量抠图')​ 
   
   
   
@@ -46,7 +46,7 @@ date: 2021-04-14 07:56:10
   
   
 这张图片背景色比之前复杂一些，而且有渐变，我们来看看抠图后的效果如何： 
-​ 
+![Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy91eUhWNkVWTm94bEdvQVB1Tm82NDREME5ZQ3Q1cmpPWmRnbVI2YWljZFA2MGlhOU9DYWlhaWF1eFFNODNWQkVwbjVZSVZ2QTFjTmpLaWFMVGt2SE9JZXAyaWJudy82NDA?x-oss-process=image/format,png  '别再用PS了，我用五行Python代码就实现了批量抠图')​ 
   
   
   
@@ -55,7 +55,7 @@ date: 2021-04-14 07:56:10
   
 这个原图背景不是白色，我就不弄黄色背景了，感觉这个效果也还算满意。 
 那么，对于多人物的图片，效果如何呢？我们再看看下面这张图片： 
-​ 
+![Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy91eUhWNkVWTm94bEdvQVB1Tm82NDREME5ZQ3Q1cmpPWmRnbVI2YWljZFA2MGlhOU9DYWlhaWF1eFFNODNWQkVwbjVZSVZ2QTFjTmpLaWFMVGt2SE9JZXAyaWJudy82NDA?x-oss-process=image/format,png  '别再用PS了，我用五行Python代码就实现了批量抠图')​ 
   
   
   
@@ -63,7 +63,7 @@ date: 2021-04-14 07:56:10
   
   
 这里有三个人，我们看看程序能不能自动抠出来： 
-​ 
+![Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy91eUhWNkVWTm94bEdvQVB1Tm82NDREME5ZQ3Q1cmpPWmRnbVI2YWljZFA2MGlhOU9DYWlhaWF1eFFNODNWQkVwbjVZSVZ2QTFjTmpLaWFMVGt2SE9JZXAyaWJudy82NDA?x-oss-process=image/format,png  '别再用PS了，我用五行Python代码就实现了批量抠图')​ 
   
   
   
@@ -72,9 +72,9 @@ date: 2021-04-14 07:56:10
   
 虽然是有点瑕疵，不过还是很不错了。 
 下面我们看看最后一个例子： 
- 
+![Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy91eUhWNkVWTm94bEdvQVB1Tm82NDREME5ZQ3Q1cmpPWmRnbVI2YWljZFA2MGlhOU9DYWlhaWF1eFFNODNWQkVwbjVZSVZ2QTFjTmpLaWFMVGt2SE9JZXAyaWJudy82NDA?x-oss-process=image/format,png  '别再用PS了，我用五行Python代码就实现了批量抠图') 
 这个比前面的图都复杂的多，那么效果如何呢，我们来看看： 
- 
+![Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy91eUhWNkVWTm94bEdvQVB1Tm82NDREME5ZQ3Q1cmpPWmRnbVI2YWljZFA2MGlhOU9DYWlhaWF1eFFNODNWQkVwbjVZSVZ2QTFjTmpLaWFMVGt2SE9JZXAyaWJudy82NDA?x-oss-process=image/format,png  '别再用PS了，我用五行Python代码就实现了批量抠图') 
 哈哈，不仅识别出了人，还把火炬识别出来并抠了出来。总的来说，在完成人物抠图方面是没有什么问题的。 
 这是如何实现的？ 
 看完效果，你肯定想问这是如何实现的呢？这就需要用到飞桨了，飞桨是一个开源的深度学习平台，使用其工具仅用十几行代码就能实现迁移学习。 
@@ -108,14 +108,14 @@ https://www.paddlepaddle.org.cn/install/quick
 
   ```  
  
-如果控制台显示Your Paddle is installed successfully! Let's start deep Learning with Paddle now，就代表我们���经��装成功了。另外我们还需要安装PaddleHub： 
+如果控制台显示Your Paddle is installed successfully! Let's start deep Learning with Paddle now，就代表我们已经安装成功了。另外我们还需要安装PaddleHub： 
  
   ```java 
   pip install -i https://mirror.baidu.com/pypi/simple paddlehub
 
   ```  
  
-下面我们就可以开始写代码了。 
+下面我们就���以开始写代码了。 
 开始抠图 
 实现抠图的代码很简单，大概分为下面几个步骤： 
  

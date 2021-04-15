@@ -53,10 +53,11 @@ function filterHtml(html) {
         }
 
         var desc = ele.find(".line-clamp").text();
+        desc = desc.substring(desc.lastIndexOf("公众号")+3,desc.length);
         //ele.find("small a").remove();
         //特殊符号处理
         var reg=/\\|\/|\?|\？|\*|\"|\“|\”|\'|\‘|\’|\<|\>|\{|\}|\[|\]|\【|\】|\：|\:|\、|\^|\$|\!|\~|\`|\|/g;
-        title = title.replaceAll(reg,"-");
+        title = title.replace(reg,"-");
         console.log(title + "-- " + url);
 
         arcList.push({
@@ -69,7 +70,9 @@ function filterHtml(html) {
         });
     });
 
-    crawlerContent();
+    setTimeout( function(){
+        crawlerContent();
+    }, 5000 );
 }
 
 //抓取文章内容
@@ -81,7 +84,6 @@ function crawlerContent() {
         var protocol = (new URL(url).protocol == 'https:' ? https : http);
         protocol.encoding = 'utf-8';
         protocol.get(url, function (res) {
-
             var html = '';
             var contentText = '';
 
@@ -124,10 +126,16 @@ function filterContentHtml(title, html) {
     $("div.article-box__content").find(".content").find("h4").prepend("<span>###### </span>");
     $("div.article-box__content").find(".content").find("code").prepend("<span> \n ```java \n  </span>");
     $("div.article-box__content").find(".content").find("code").append("<span>\n  ``` \n </span>");
-    var image = $("div.article-box__content").find(".content").find("img");
-    if (null != image){
-        var imageUrl = image.attr("src");
-        $("div.article-box__content").find(".content").find("img").append("![Test]("+imageUrl +"  '" +title+"')");
+
+    var imageList = $("div.article-box__content").find(".content").find("img");
+    if (null != imageList.html()){
+        imageList.each(function(index,item) {
+            var imageUrl = item.attribs.src;
+            var imgsText = "![Test](" + imageUrl + "  '" + title + "')";
+            item.after(imgsText);
+            //$("div.article-box__content").find(".content").find("img").append("![Test]("+imageUrl +"  '" +title+"')");
+            //$("div.article-box__content").find(".content").find("img")[index] =  "![Test](" + imageUrl + "  '" + title + "')";
+        });
     }
 
     /* var aPost = $("#articleContent").find("img");
@@ -160,8 +168,8 @@ function insertArrData() {
     newList.forEach(function(item,index){
         //写入文件
         if ('' != item.content){
-            var htmlData = [[null, item.title, item.url, item.desc, item.content, item.times]];
-            var sql = "replace into article(id, title, url, desc, content, times) values(?, ?, ?, ?, ?, ?)";
+            var htmlData = [[null, item.title, item.url, item.cover, item.desc, item.content,  item.times ]];
+            var sql = "replace into article(id, title, url, cover, desc, content, times) values(?, ?, ?, ?, ?, ?)";
             callDB.insertDatas(sql,htmlData);
             writeFiles(index+1, item.title, item.cover, item.desc, item.content);
         }

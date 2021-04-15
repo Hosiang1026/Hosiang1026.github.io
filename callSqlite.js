@@ -16,7 +16,7 @@ var sqliteDB = new SqliteDB(file);
 
 /// create table.
 function createTables(tableName) {
-    var createTableSql = "create table if not exists "+tableName+"(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, url TEXT, desc BLOB, content BLOB, image BLOB, times TEXT);";
+    var createTableSql = "create table if not exists "+tableName+"(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, url TEXT, cover BLOB,  desc BLOB, content BLOB, times TEXT);";
     sqliteDB.createTable(createTableSql);
 }
 

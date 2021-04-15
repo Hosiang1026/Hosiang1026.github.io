@@ -10,11 +10,8 @@ abbrlink: '81793302'
 date: 2021-04-15 09:53:06
 ---
 
-&emsp;&emsp;点击python编程从入门到实践，置顶 公众号重磅 python入门资料，第一时间送达 还是牛 读完需要 14 分钟 速读仅需 5 分钟 / python 生产实战 安全认证的那些事儿 / 系统安全可能往往是被大家所...
+&emsp;&emsp; python 生产实战 安全认证的那些事儿 / 系统安全可能往往是被大家所...
 <!-- more -->
-
-                                                                                                                                                                                         
- 点击python编程从入门到实践，置顶 公众号重磅 python入门资料，第一时间送达 
   
  ![Test](https://oscimg.oschina.net/oscnet/df64a9c2-8ff3-476f-82dc-31f6d000287e.jpg  '15分钟详解 Python 安全认证的那些事儿～') 
   
@@ -570,11 +567,3 @@ date: 2021-04-15 09:53:06
        
      
     
-   
-  
-  
-  
-  
- 
-本文分享自微信公众号 - python编程军火库（PythonCoder1024）。如有侵权，请联系 support@oschina.cn 删除。本文参与“OSC源创计划”，欢迎正在阅读的你也加入，一起分享。
-                                        

@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 873
-cover_picture: 'https://test-dennis.oss-cn-hangzhou.aliyuncs.com/QRCode/QR1270.png'
+cover_picture: 'https://api.ixiaowai.cn/gqapi/gqapi.php'
 abbrlink: e520488c
 date: 2021-04-15 10:16:57
 ---
@@ -136,6 +136,5 @@ o -> r
  
 文章的最后，感谢你花费宝贵的时间阅读本文，如果本文给了你一点点帮助或者启发，请不要吝啬你的赞和GitHub小星星，你的支持是作者持续创作的动力。 
 “前端进阶知识”系列文章及示例源码： https://github.com/dennis-jiang/Front-End-Knowledges 
-欢迎关注我的公众号进击的大前端第一时间获取高质量原创~ 
-![Test](https://test-dennis.oss-cn-hangzhou.aliyuncs.com/QRCode/QR1270.png  'RSA初探，聊聊怎么破解HTTPS')
+欢迎关注我的公众号进击的大前端第一时间获取高质量原创~
                                         

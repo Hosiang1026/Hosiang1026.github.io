@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 812
-cover_picture: 'https://oscimg.oschina.net/oscnet/421207aa-b21f-4036-b434-51225084ad61.png'
+cover_picture: 'https://api.ixiaowai.cn/gqapi/gqapi.php'
 abbrlink: 2d9e8424
 date: 2021-04-15 10:16:57
 ---
@@ -27,7 +27,7 @@ date: 2021-04-15 10:16:57
     关注我们吧～ 
    
    
-  ![Test](https://oscimg.oschina.net/oscnet/421207aa-b21f-4036-b434-51225084ad61.png  '手把手教你用 Github Actions 部署前端项目') 
+  ![Test](https://api.ixiaowai.cn/gqapi/gqapi.php  '手把手教你用 Github Actions 部署前端项目') 
    
   ### 为什么使用 Github Actions ？ 
   众所周知，前端部署无非就是把打包之后的代码丢到 nginx html 目录下就完事了，但是每逢产品频繁改需求，甚至只是让你改线上一个字的时候，你总要重复一遍以下动作：修改，打包，登录服务器，上传代码，重启服务器。久而久之，别说是你受不了了，搁我旁边看着都受不了。这个时候，有没有想过有个机器人，能帮我们完成以上这些重复又没技术含量的活。没错，你猜对了，Github Actions 就是我们需要的那个机器人。 
@@ -35,11 +35,11 @@ date: 2021-04-15 10:16:57
   ### Github Actions 是什么？ 
   大家知道，持续集成 (https://www.ruanyifeng.com/blog/2015/09/continuous-integration.html?fileGuid=1PWJAvQBtLA5IGh3) 由很多操作组成，比如拉取最新代码、运行测试、登录服务器、部署服务器等，GitHub 把这些操作统一称为 Actions。 
    
-   ![Test](https://oscimg.oschina.net/oscnet/421207aa-b21f-4036-b434-51225084ad61.png  '手把手教你用 Github Actions 部署前端项目') 
+   ![Test](https://api.ixiaowai.cn/gqapi/gqapi.php  '手把手教你用 Github Actions 部署前端项目') 
    
   我们再梳理下正常需求的开发流程（如上图），以上操作是可重复利用的，利用这一概念，Github 集成了 Actions 市场，允许开发者把操作写成独立的脚本，发布到 Actions 市场，允许所有开发者使用，这里有点像 Npm 和 VSCode 中的插件。 
    
-   ![Test](https://oscimg.oschina.net/oscnet/421207aa-b21f-4036-b434-51225084ad61.png  '手把手教你用 Github Actions 部署前端项目') 
+   ![Test](https://api.ixiaowai.cn/gqapi/gqapi.php  '手把手教你用 Github Actions 部署前端项目') 
    
   Github 给我们提供了一个以下配置的服务器来运行我们配置对应的 Actions： 
    
@@ -63,17 +63,17 @@ date: 2021-04-15 10:16:57
   #### 1、选择 Github 项目仓库 
   这里我选择了很久以前刚开始学习 Vue 时模仿 bilibili 做的项目 bilibili-vue (https://github.com/zlyyyy/bilibili-vue?fileGuid=1PWJAvQBtLA5IGh3)，进入项目仓库，可以看到对应的 Actions 标签，点击进入。 
    
-   ![Test](https://oscimg.oschina.net/oscnet/421207aa-b21f-4036-b434-51225084ad61.png  '手把手教你用 Github Actions 部署前端项目') 
+   ![Test](https://api.ixiaowai.cn/gqapi/gqapi.php  '手把手教你用 Github Actions 部署前端项目') 
    
    
   #### 2、新建工作流，配置 Actions 
   进入 Actions 后可以看到很多推荐的工作流模版，这里可以根据需要自行选择的模版，或者跳过模版，自行设置。 
    
-   ![Test](https://oscimg.oschina.net/oscnet/421207aa-b21f-4036-b434-51225084ad61.png  '手把手教你用 Github Actions 部署前端项目') 
+   ![Test](https://api.ixiaowai.cn/gqapi/gqapi.php  '手把手教你用 Github Actions 部署前端项目') 
    
   这里因为我是纯前端项目，所以我选择 Node.js 模版。 
    
-   ![Test](https://oscimg.oschina.net/oscnet/421207aa-b21f-4036-b434-51225084ad61.png  '手把手教你用 Github Actions 部署前端项目') 
+   ![Test](https://api.ixiaowai.cn/gqapi/gqapi.php  '手把手教你用 Github Actions 部署前端项目') 
    
   点击 Node.js 模版，会自动在项目  
  ```java 
@@ -143,18 +143,18 @@ date: 2021-04-15 10:16:57
   初次打开需要开通服务，配置登录密码（记下来，后面要用）。 
    
   ###### 4.3.2 第二步 
-  然后创建命名空间，再创建我们的镜像仓库，这里如果不想别人下载你的镜像的话就可以选择私有。然后点击下一步配置代码源，这里我选择了本地仓库，一方面是为了日志统一，可以在 Github Actions 看到所有日志，一方面是可以通过命令行直接推送镜像到镜像仓库，自由度比较高。![Test](https://oscimg.oschina.net/oscnet/421207aa-b21f-4036-b434-51225084ad61.png  '手把手教你用 Github Actions 部署前端项目') 
+  然后创建命名空间，再创建我们的镜像仓库，这里如果不想别人下载你的镜像的话就可以选择私有。然后点击下一步配置代码源，这里我选择了本地仓库，一方面是为了日志统一，可以在 Github Actions 看到所有日志，一方面是可以通过命令行直接推送镜像到镜像仓库，自由度比较高。![Test](https://api.ixiaowai.cn/gqapi/gqapi.php  '手把手教你用 Github Actions 部署前端项目') 
    
   ###### 4.3.3 第三步 
-  之后就可以在页面看到我们创建的仓库，点击仓库名称进入，可以看到仓库的基本信息和操作指南，这个时候一个镜像仓库就完全创建成功了。![Test](https://oscimg.oschina.net/oscnet/421207aa-b21f-4036-b434-51225084ad61.png  '手把手教你用 Github Actions 部署前端项目') 
+  之后就可以在页面看到我们创建的仓库，点击仓库名称进入，可以看到仓库的基本信息和操作指南，这个时候一个镜像仓库就完全创建成功了。![Test](https://api.ixiaowai.cn/gqapi/gqapi.php  '手把手教你用 Github Actions 部署前端项目') 
    
-   ![Test](https://oscimg.oschina.net/oscnet/421207aa-b21f-4036-b434-51225084ad61.png  '手把手教你用 Github Actions 部署前端项目') 
+   ![Test](https://api.ixiaowai.cn/gqapi/gqapi.php  '手把手教你用 Github Actions 部署前端项目') 
    
    
   ##### 4.4 如何跟 Actions 联动 
   我们只用在 Actions 中 build 镜像后登录阿里云 Registry 实例就好了，但是这个时候如果明文直接写在 yml 中肯定是不行的，Github 早就帮我们考虑到了这点，回到 Github 项目中，依次点击 Settings => Secrets => New repository secret ，设置 secret，配置上述容器镜像账号的用户名（阿里云用户名）和密码（上述配置容器镜像服务时设置的登录密码）。 
    
-   ![Test](https://oscimg.oschina.net/oscnet/421207aa-b21f-4036-b434-51225084ad61.png  '手把手教你用 Github Actions 部署前端项目') 
+   ![Test](https://api.ixiaowai.cn/gqapi/gqapi.php  '手把手教你用 Github Actions 部署前端项目') 
    
    
   #### 5、完整的 Actions 
@@ -173,11 +173,11 @@ date: 2021-04-15 10:16:57
   #### 6、测试流程，查看日志 
   我们推送一次代码测试，打开 Actions 后可以看到自动运行的实时 workflow 结果，以及每步的日志信息。 
    
-   ![Test](https://oscimg.oschina.net/oscnet/421207aa-b21f-4036-b434-51225084ad61.png  '手把手教你用 Github Actions 部署前端项目') 
+   ![Test](https://api.ixiaowai.cn/gqapi/gqapi.php  '手把手教你用 Github Actions 部署前端项目') 
    
    
-   ![Test](https://oscimg.oschina.net/oscnet/421207aa-b21f-4036-b434-51225084ad61.png  '手把手教你用 Github Actions 部署前端项目') 
-    
+   ![Test](https://api.ixiaowai.cn/gqapi/gqapi.php  '手把手教你用 Github Actions 部署前端项目') 
+    R
    
   总结 
   ###  
@@ -203,7 +203,7 @@ date: 2021-04-15 10:16:57
   ``` 
   
    
-   ![Test](https://oscimg.oschina.net/oscnet/421207aa-b21f-4036-b434-51225084ad61.png  '手把手教你用 Github Actions 部署前端项目') 
+   ![Test](https://api.ixiaowai.cn/gqapi/gqapi.php  '手把手教你用 Github Actions 部署前端项目') 
    
   
   

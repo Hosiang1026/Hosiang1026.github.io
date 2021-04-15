@@ -1,9 +1,9 @@
 // https://github.com/chriskempson/tomorrow-theme
-highlight-background = #f6f8fa
+highlight-background = #4a4949
 highlight-current-line = #393939
 highlight-selection = #515151
-highlight-foreground = #24292e
-highlight-comment = #999999
+highlight-foreground = #fcfafa
+highlight-comment = #f3f2f2
 highlight-red = #f2777a
 highlight-orange = #f99157
 highlight-yellow = #ffcc66
@@ -22,9 +22,10 @@ $code-block
   overflow: auto
   color: highlight-foreground
   line-height: font-size * line-height
+  word-break: break-all;
 
 $line-numbers
-  color: #666
+  color: #f5f0f0
   font-size: 0.85em
 
 .article-entry
@@ -32,15 +33,16 @@ $line-numbers
     font-family: font-mono
     font-size: 1em
   code
-    color: #c7254e
-    line-height: 1
+    color: #f5f0f0
+    white-space: normal
+    line-height: 2
     margin: 0 4px
     font-size: 85%
     padding: 2px 4px
-    border: 1px solid #eee
+    border: 1px solid #0c0c0c
     border-radius: 2px
     word-wrap: break-word
-    background-color: #f9f2f4
+    background-color: #060606
   .code
     font: 14px "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace
   pre

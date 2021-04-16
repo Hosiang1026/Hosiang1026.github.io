@@ -5,8 +5,9 @@ tags:
   - Popular
 author: csdn
 top: 3
-date: 2021-04-15 08:14:57
 cover_picture: 'https://profile.csdnimg.cn/8/5/0/3_qq_14996421'
+abbrlink: '39872641'
+date: 2021-04-15 08:14:57
 ---
 
 &emsp;&emsp;想要学习JVM调优，我们必须提前知道他们的一些参数，这样才方便我们更好的去使用他们JVM常用命令行参数JVM的命令行参数参考： https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html1. 查看参数列表虚拟机参数分为基本和扩展两类，在命令行中输入 JAVA_HOME\bin\java就可得到基本参数列表。在命令行输入 JAVA_HOME\bin\java –X就可得到扩展参数列表。2. 基本参数说明：-clien

@@ -5,8 +5,9 @@ tags:
   - Popular
 author: csdn
 top: 1
-date: 2021-04-15 08:14:57
 cover_picture: 'https://profile.csdnimg.cn/2/A/B/3_weixin_40986713'
+abbrlink: 5916c477
+date: 2021-04-15 08:14:57
 ---
 
 &emsp;&emsp;前言：原本想使用AutoGenerator 是 MyBatis-Plus 的官方代码生成器，尝试了一下，竟然报错，原因可能是MyBatis-Plus和mybatis-plus-generator 的版本不一致，因为我用的MyBatis-Plus 的版本是3.42 ，但是mybatis-plus-generator的3.4.2不知道怎么了，下载不下来，只能下载3.4.1，发现运行起来老是报错，还有一堆配置说明要看，于是自己手写生成代码的工具类，觉得更简单些。分享给大家，请多多指教。pom文件引入ja.

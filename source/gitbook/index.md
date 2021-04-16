@@ -16,11 +16,11 @@
 
 <iframe id="mainiframe" 
       frameborder="no"
-      scrolling="no"
+      scrolling="auto"
       width="100%" 
       height="100%" 
       align="center"
-      src="https://Hosiang1026.coding.me/gitbook-site" >
+      src="https://snailclimb.gitee.io/javaguide/#/?id=java" >
 </iframe>
 
 <script type="text/javascript">

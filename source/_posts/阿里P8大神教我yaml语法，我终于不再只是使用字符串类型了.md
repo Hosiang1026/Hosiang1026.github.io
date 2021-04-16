@@ -5,8 +5,9 @@ tags:
   - Popular
 author: csdn
 top: 10
-date: 2021-04-15 08:14:57
 cover_picture: 'https://profile.csdnimg.cn/2/7/2/3_chenlixiao007'
+abbrlink: ec86e976
+date: 2021-04-15 08:14:57
 ---
 
 &emsp;&emsp;文章目录什么是YAML基本语法数据类型标量对象数组文本块显示指定类型引用单文件多配置什么是YAMLYAML是"YAML Ain’t a Markup Language"（YAML不是一种标记语言）的递归缩写。YAML的意思其实是：“Yet Another Markup Language”（仍是一种标记语言）。主要强度这种语音是以数据为中心，而不是以标记语音为重心，例如像xml语言就会使用大量的标记。YAML是一个可读性高，易于理解，用来表达数据序列化的格式。它的语法和其他高级语言类似，并且可以简单表达

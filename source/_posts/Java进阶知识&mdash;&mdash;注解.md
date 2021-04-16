@@ -5,8 +5,9 @@ tags:
   - Popular
 author: csdn
 top: 7
-date: 2021-04-15 08:14:57
 cover_picture: 'https://profile.csdnimg.cn/8/9/0/3_mydesss'
+abbrlink: ef3d616
+date: 2021-04-15 08:14:57
 ---
 
 &emsp;&emsp;Java进阶知识——注解（自我总结，希望能给大家带来帮助）一、注解的概念1、注解官方解释2、注解与注释的区别二、内置注解与元注解1、常用的内置注解2、常用的元注解三、自定义注解1、自定义注解基础知识2、演示自定义注解的使用4、演示注解在程序中的作用

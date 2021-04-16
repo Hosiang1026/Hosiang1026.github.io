@@ -5,8 +5,9 @@ tags:
   - Popular
 author: csdn
 top: 5
-date: 2021-04-15 08:14:57
 cover_picture: 'https://profile.csdnimg.cn/B/5/1/3_shishilunhui'
+abbrlink: 2bc3b515
+date: 2021-04-15 08:14:57
 ---
 
 &emsp;&emsp;ArrayList集合底层扩容原理前言概述对象创建扩容操作第一章 前言概述第01节 概述底层说明ArrayList是List的实现类，它的底层是用Object数组存储，线程不安全后期应用适合用于频繁的查询工作，因为底层是数组，可以快速通过数组下标进行查找第02节 区别区别方向Array集合LinkedList集合线程安全不安全不安全底层原理Object类型数组双向链表随机访问支持（实现 RandomAccess接口）不支持

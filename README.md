@@ -56,7 +56,7 @@
     gulp-uglify // 混淆js
     gulp-imagemin // 压缩图片
 
-
+    > npm run hexo 一键启动
     > hexo clean //先清除public目录
     > hexo g     //生成发布文件
     > gulp       //压缩代码

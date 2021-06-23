@@ -43,13 +43,23 @@
     
 ## 静态资源压缩
 
-    $ npm install gulp -g
-    $ npm install gulp-minify-css gulp-uglify gulp-htmlmin gulp-htmlclean gulp --save
+    $ npm install gulp
+    $ npm install gulp-htmlclean gulp-htmlmin gulp-minify-css gulp-uglify gulp-imagemin --save
+
+    gulp-htmlclean // 清理html
+    gulp-htmlmin // 压缩html
+    gulp-minify-css // 压缩css
+    gulp-uglify // 混淆js
+    gulp-imagemin // 压缩图片
+
 
     > hexo clean //先清除public目录
     > hexo g     //生成发布文件
     > gulp       //压缩代码
     > hexo d     //发布
+
+    修复
+    $ npm audit fix
 
      https://www.gitpod.io/ 
      

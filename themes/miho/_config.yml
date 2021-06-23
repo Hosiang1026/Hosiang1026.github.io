@@ -75,6 +75,11 @@ menu:
     url: /collection
     target: false
 
+  heart:
+    title: 恋爱
+    url: /love
+    target: false
+
   user:
     title: 关于
     url: /about

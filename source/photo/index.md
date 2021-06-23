@@ -67,7 +67,6 @@
     $(document).ready(function () {
         // Isotope for Gallery
         if ( $('.iso-box-wrapper').length > 0 ) { 
-
             var $container  = $('.iso-box-wrapper'), 
             $imgs = $('.iso-box img');
 
@@ -154,9 +153,7 @@
         // Update the current year in copyright
         $('.tm-current-year').text(new Date().getFullYear());          
     });
-</script>   
-
-  
-<script>
 
 </script>
+
+</div>

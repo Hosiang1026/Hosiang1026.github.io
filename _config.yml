@@ -105,24 +105,32 @@ live2d:
 #压缩静态文件 github.com/chenzhutian/hexo-all-minifier
 all_minifier: true
 
+# html压缩
 html_minifier:
   enable: true
   ignore_error: false
   exclude:
 
+# css压缩
 css_minifier:
   enable: true
   exclude:
     - '*.min.css'
 
+# js压缩
 js_minifier:
   enable: true
   mangle: true
-  output:
   compress:
   exclude:
     - '*.min.js'
+js_concator:
+  enable: false
+  bundle_path: '/js/bundle.js'
+  front: false
+  silent: false
 
+# 图片优化
 image_minifier:
   enable: true
   interlaced: false
@@ -130,6 +138,31 @@ image_minifier:
   optimizationLevel: 2
   pngquant: false
   progressive: false
+
+
+
+# hexo-neat
+# 博文压缩
+neat_enable: true
+# 压缩html
+neat_html:
+  enable: true
+  exclude:
+# 压缩css
+neat_css:
+  enable: true
+  exclude:
+    - '**/*.min.css'
+# 压缩js
+neat_js:
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude:
+    - '**/*.min.js'
+    - '**/jquery.fancybox.pack.js'
+    - '**/index.js'
 
 # 生成站点地图文件
 Plugins:

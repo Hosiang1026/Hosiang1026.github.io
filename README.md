@@ -43,8 +43,12 @@
     
 ## 静态资源压缩
 
-    $ npm install gulp
-    $ npm install gulp-htmlclean gulp-htmlmin gulp-minify-css gulp-uglify gulp-imagemin --save
+    $ npm install hexo-neat --save
+
+    $ cnpm install hexo-all-minifier --save
+
+    $ npm install gulp --save
+    $ npm install gulp gulp-htmlclean gulp-htmlmin gulp-clean-css gulp-uglify-es gulp-imagemin del gulp-minify-inline-json --save-dev
 
     gulp-htmlclean // 清理html
     gulp-htmlmin // 压缩html

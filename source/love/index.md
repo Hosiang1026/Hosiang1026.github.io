@@ -46,10 +46,8 @@
           <p>七七</p>
       </div>
   </div>
-
-  <div id="music">
-      <embed loop="loop" hidden="true">
-  </div>
 </div>
 
 <script src="/love/js/clock.js"></script>
+
+<iframe allow = "autoplay" hidden />

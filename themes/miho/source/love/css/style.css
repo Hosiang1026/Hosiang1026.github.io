@@ -120,13 +120,6 @@ footer {
     margin-top: 1.2rem;
 }
 
-#music {
-    grid-column: 2;
-    position: relative;
-    z-index: 1000;
-    opacity: .4;
-}
-
 #mask {
     background-image: linear-gradient(to top, #6d44cc5d 0%, #f09cd880 100%);
     opacity: .42;

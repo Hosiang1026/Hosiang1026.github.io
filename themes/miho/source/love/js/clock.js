@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     olock();
     var timer = setInterval(function() { olock() }, 1000);
-    document.querySelector("embed ").setAttribute("src", `/love/audio/${music[Math.floor(Math.random()*music.length)]}.mp3`);
+    document.querySelector("iframe").setAttribute("src", `/love/audio/${music[Math.floor(Math.random()*music.length)]}.mp3`);
 
     document.getElementsByTagName("body")[0].insertAdjacentHTML(
         "beforeend",

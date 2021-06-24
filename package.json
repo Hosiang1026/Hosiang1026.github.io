@@ -64,7 +64,8 @@
     "sync": "yuque-hexo sync",
     "clean": "yuque-hexo clean",
     "deploy": "npm run sync && node deploy.js",
-    "start": "hexo clean && hexo g && hexo s"
+    "dev": "hexo clean && hexo g && hexo s",
+    "prod": "hexo clean && hexo g && hexo d"
   },
   "devDependencies": {
     "del": "^6.0.0",

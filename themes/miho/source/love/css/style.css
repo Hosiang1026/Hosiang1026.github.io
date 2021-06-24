@@ -5,10 +5,6 @@ body {
     padding: 0;
 }
 
-img {
-    max-width: 100%;
-}
-
 body {
     display: contents;
     font-family: "Segoe UI", sans-serif;
@@ -18,12 +14,6 @@ body {
     text-shadow: 0.4px 0.4px 0.4px rgba(0, 0, 0, .2);
 }
 
-h1 {
-    font-weight: lighter;
-    grid-column: span 3;
-    text-align: center;
-    color: #ec407a;
-}
 
 #wrapper {
     display: grid;
@@ -110,14 +100,6 @@ anni {
 #info .two {
     grid-column: 9;
     text-align: center;
-}
-
-footer {
-    grid-column: span 3;
-    text-align: center;
-    font-size: 1.6rem;
-    font-weight: lighter;
-    margin-top: 1.2rem;
 }
 
 #mask {

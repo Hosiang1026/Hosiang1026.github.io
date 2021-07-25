@@ -1,0 +1,795 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-手把手教你用 Github Actions 部署前端项目 | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;👆 这是第 96 篇不掺水的原创，想要了解更多，请戳上方蓝色字体：政采云前端团队 关注我们吧～ 本文首发于政采云前端团队博客：手把手教你用 Github Actions 部署前端项目终稿 https://ww...">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-手把手教你用 Github Actions 部署前端项目">
+<meta property="og:url" content="https://www.hosiang.cn/2d9e8424/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;👆 这是第 96 篇不掺水的原创，想要了解更多，请戳上方蓝色字体：政采云前端团队 关注我们吧～ 本文首发于政采云前端团队博客：手把手教你用 Github Actions 部署前端项目终稿 https://ww...">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+<meta property="og:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+<meta property="og:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+<meta property="og:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+<meta property="og:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+<meta property="og:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+<meta property="og:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+<meta property="og:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+<meta property="og:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+<meta property="og:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+<meta property="og:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+<meta property="og:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+<meta property="og:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+<meta property="og:updated_time" content="2021-07-23T15:43:07.007Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-手把手教你用 Github Actions 部署前端项目">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;👆 这是第 96 篇不掺水的原创，想要了解更多，请戳上方蓝色字体：政采云前端团队 关注我们吧～ 本文首发于政采云前端团队博客：手把手教你用 Github Actions 部署前端项目终稿 https://ww...">
+<meta name="twitter:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-手把手教你用 Github Actions 部署前端项目" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-手把手教你用 Github Actions 部署前端项目
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 3.3k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 13分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;👆 这是第 96 篇不掺水的原创，想要了解更多，请戳上方蓝色字体：政采云前端团队 关注我们吧～ 本文首发于政采云前端团队博客：手把手教你用 Github Actions 部署前端项目终稿 <a href="https://ww.." rel="external nofollow noopener noreferrer" target="_blank">https://ww..</a>.<br><a id="more"></a></p>
+<p>   👆<br>    这是第<br>   96<br>    篇<br>   不掺水的原创<br>   ，想要了解更多<br>   ，请戳上方蓝色字体：<br>   政采云前端团队<br>    关注我们吧～ </p>
+<p>  <img src="https://api.ixiaowai.cn/gqapi/gqapi.php" alt="Test" title="手把手教你用 Github Actions 部署前端项目"> </p>
+<h3 id="为什么使用-Github-Actions-？"><a href="#为什么使用-Github-Actions-？" class="headerlink" title="为什么使用 Github Actions ？"></a>为什么使用 Github Actions ？</h3><p>  众所周知，前端部署无非就是把打包之后的代码丢到 nginx html 目录下就完事了，但是每逢产品频繁改需求，甚至只是让你改线上一个字的时候，你总要重复一遍以下动作：修改，打包，登录服务器，上传代码，重启服务器。久而久之，别说是你受不了了，搁我旁边看着都受不了。这个时候，有没有想过有个机器人，能帮我们完成以上这些重复又没技术含量的活。没错，你猜对了，Github Actions 就是我们需要的那个机器人。 </p>
+<h3 id="Github-Actions-是什么？"><a href="#Github-Actions-是什么？" class="headerlink" title="Github Actions 是什么？"></a>Github Actions 是什么？</h3><p>  大家知道，持续集成 (<a href="https://www.ruanyifeng.com/blog/2015/09/continuous-integration.html?fileGuid=1PWJAvQBtLA5IGh3" rel="external nofollow noopener noreferrer" target="_blank">https://www.ruanyifeng.com/blog/2015/09/continuous-integration.html?fileGuid=1PWJAvQBtLA5IGh3</a>) 由很多操作组成，比如拉取最新代码、运行测试、登录服务器、部署服务器等，GitHub 把这些操作统一称为 Actions。 </p>
+<p>   <img src="https://api.ixiaowai.cn/gqapi/gqapi.php" alt="Test" title="手把手教你用 Github Actions 部署前端项目"> </p>
+<p>  我们再梳理下正常需求的开发流程（如上图），以上操作是可重复利用的，利用这一概念，Github 集成了 Actions 市场，允许开发者把操作写成独立的脚本，发布到 Actions 市场，允许所有开发者使用，这里有点像 Npm 和 VSCode 中的插件。 </p>
+<p>   <img src="https://api.ixiaowai.cn/gqapi/gqapi.php" alt="Test" title="手把手教你用 Github Actions 部署前端项目"> </p>
+<p>  Github 给我们提供了一个以下配置的服务器来运行我们配置对应的 Actions： </p>
+<pre><code>2-core CPU 
+
+
+
+7 GB of RAM memory 
+
+
+
+14 GB of SSD disk space 
+</code></pre><p>  这个配置足够我们使用了，当然，如果你有网络时延的需求，（比如推送及拉取镜像时产生的网络时延），你也可以自建服务器 (<a href="https://docs.github.com/cn/actions/hosting-your-own-runners?fileGuid=1PWJAvQBtLA5IGh3)。" rel="external nofollow noopener noreferrer" target="_blank">https://docs.github.com/cn/actions/hosting-your-own-runners?fileGuid=1PWJAvQBtLA5IGh3)。</a> </p>
+<h3 id="部署自己的前端项目"><a href="#部署自己的前端项目" class="headerlink" title="部署自己的前端项目"></a>部署自己的前端项目</h3><h4 id="1、选择-Github-项目仓库"><a href="#1、选择-Github-项目仓库" class="headerlink" title="1、选择 Github 项目仓库"></a>1、选择 Github 项目仓库</h4><p>  这里我选择了很久以前刚开始学习 Vue 时模仿 bilibili 做的项目 bilibili-vue (<a href="https://github.com/zlyyyy/bilibili-vue?fileGuid=1PWJAvQBtLA5IGh3)，进入项目仓库，可以看到对应的" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/zlyyyy/bilibili-vue?fileGuid=1PWJAvQBtLA5IGh3)，进入项目仓库，可以看到对应的</a> Actions 标签，点击进入。 </p>
+<p>   <img src="https://api.ixiaowai.cn/gqapi/gqapi.php" alt="Test" title="手把手教你用 Github Actions 部署前端项目"> </p>
+<h4 id="2、新建工作流，配置-Actions"><a href="#2、新建工作流，配置-Actions" class="headerlink" title="2、新建工作流，配置 Actions"></a>2、新建工作流，配置 Actions</h4><p>  进入 Actions 后可以看到很多推荐的工作流模版，这里可以根据需要自行选择的模版，或者跳过模版，自行设置。 </p>
+<p>   <img src="https://api.ixiaowai.cn/gqapi/gqapi.php" alt="Test" title="手把手教你用 Github Actions 部署前端项目"> </p>
+<p>  这里因为我是纯前端项目，所以我选择 Node.js 模版。 </p>
+<p>   <img src="https://api.ixiaowai.cn/gqapi/gqapi.php" alt="Test" title="手把手教你用 Github Actions 部署前端项目"> </p>
+<p>  点击 Node.js 模版，会自动在项目  </p>
+<pre><code class="java">.github/workflows 目录下生成 node.js.yml
+</code></pre>
+<p>  文件，我们可以把文件名字改成我们工作流的名称。当然，这里可以设置并存在很多工作流  </p>
+<pre><code class="java">yml
+</code></pre>
+<p>  文件，例如 deploy.yml、test.yml、gh-page.yml 等。 </p>
+<pre><code class="java"># workflow名称。省略的话，默认为当前workflow文件名name: Node.js CI# 触发workflow的条件，on:push:# 只有master分支发生push事件时，才会触发workflowbranches: [ master ]pull_request:branches: [ master ]# jobs表示执行的一项或多项任务jobs:# 任务的job_id，具体名称自定义，这里build代表打包build:# runs-on字段指定运行所需要的虚拟机环境。注意：这个是必填字段runs-on: ubuntu-latest# 用于配置当前workflow的参数strategy:matrix:node-version: [10.x, 12.x, 14.x, 15.x]# See supported Node.js release schedule at https://nodejs.org/en/about/releases/# steps字段指定每个job的运行步骤，可以包含一个或多个步骤，每个步骤都可以配置指定字段steps:# 切代码到 runner- uses: actions/checkout@v2# 在当前操作系统安装node- name: Use Node.js ${{ matrix.node-version }}uses: actions/setup-node@v1with:node-version: ${{ matrix.node-version }}# 该运行的命令或者action# 安装依赖、运行测试、打包    - run: npm install    - run: npm test    - run: npm run build
+</code></pre>
+<h4 id="3、常见的-Actions-配置"><a href="#3、常见的-Actions-配置" class="headerlink" title="3、常见的 Actions 配置"></a>3、常见的 Actions 配置</h4><h5 id="打版本标签-Create-Tag-Release"><a href="#打版本标签-Create-Tag-Release" class="headerlink" title="打版本标签 Create Tag Release"></a>打版本标签 Create Tag Release</h5><pre><code class="java">on:  push:    # Sequence of patterns matched against refs/tags    tags:      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10name: Create Releasejobs:  build:    name: Create Release    runs-on: ubuntu-latest    steps:      - name: Checkout code        uses: actions/checkout@master      - name: Create Release        id: create_release        uses: actions/create-release@latest        env:          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token        with:          tag_name: ${{ github.ref }}          release_name: Release ${{ github.ref }}          body: |            Changes in this Release            - First Change            - Second Change          draft: false          prerelease: false
+</code></pre>
+<h5 id="创建-Github-Pages-站点"><a href="#创建-Github-Pages-站点" class="headerlink" title="创建 Github Pages 站点"></a>创建 Github Pages 站点</h5><pre><code class="java">name: github pages on:   push:     branches:       - master # default branch jobs:   deploy:     runs-on: ubuntu-18.04     steps:       - uses: actions/checkout@v2       - run: npm install       - run: npm run docs:build       - name: Deploy         uses: peaceiris/actions-gh-pages@v3         with:           github_token: ${{ secrets.GITHUB_TOKEN }}           publish_dir: ./docs-dist
+</code></pre>
+<h5 id="多人协作开发，云端代码检测"><a href="#多人协作开发，云端代码检测" class="headerlink" title="多人协作开发，云端代码检测"></a>多人协作开发，云端代码检测</h5><pre><code class="java">name: Test  on: [push, pull_request]  jobs:   lint:     runs-on: ubuntu-latest     steps:     - uses: actions/checkout<span class="meta">@v</span>2     - uses: actions/setup-node<span class="meta">@v</span>1       with:         node-version: <span class="string">'12.x'</span>      - name: Install dependencies       uses: bahmutov/npm-install<span class="meta">@v</span>1      - name: Run linter       run: npm run lint    test:     runs-on: ubuntu-latest     steps:     - uses: actions/checkout<span class="meta">@v</span>2     - uses: actions/setup-node<span class="meta">@v</span>1       with:         node-version: <span class="string">'12.x'</span>      - name: Install dependencies       uses: bahmutov/npm-install<span class="meta">@v</span>1      - name: Run test       run: npm test    build:     runs-on: ubuntu-latest     steps:     - uses: actions/checkout<span class="meta">@v</span>2     - uses: actions/setup-node<span class="meta">@v</span>1       with:         node-version: <span class="string">'12.x'</span>      - name: Install dependencies       uses: bahmutov/npm-install<span class="meta">@v</span>1      - name: Build       run: npm run build
+</code></pre>
+<p>  以上是 Github 中常见的一些配置，更多 Actions 配置(<a href="https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions?fileGuid=1PWJAvQBtLA5IGh3" rel="external nofollow noopener noreferrer" target="_blank">https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions?fileGuid=1PWJAvQBtLA5IGh3</a>) 可以参考官网。 </p>
+<h4 id="4、搭配-Docker"><a href="#4、搭配-Docker" class="headerlink" title="4、搭配 Docker"></a>4、搭配 Docker</h4><p>  没有 Docker 之前，我是使用 Webhook 实现自动部署，但后面遇到了服务器到期更换服务器的时候，就只能一个个重复操作来做迁移，而且文件目录管理混乱，项目变多时，维护成本也会越来越高。再看 Docker 五大优势：持续集成、版本控制、可移植性、隔离性和安全性，是不是就是用来解决我们上述遇到的问题的。举例：bilibili-vue (<a href="https://github.com/zlyyyy/bilibili-vue?fileGuid=1PWJAvQBtLA5IGh3)，不明白的同学可以参考我的配置。" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/zlyyyy/bilibili-vue?fileGuid=1PWJAvQBtLA5IGh3)，不明白的同学可以参考我的配置。</a> </p>
+<h5 id="4-1-项目根目录新建-Nginx-配置"><a href="#4-1-项目根目录新建-Nginx-配置" class="headerlink" title="4.1 项目根目录新建 Nginx 配置"></a>4.1 项目根目录新建 Nginx 配置</h5><p>  项目根目录新建 Nginx 配置文件命名 vhost.nginx.conf（名字随便定，跟后面 Dockerfile 中引用一致即可）供后续使用，例： </p>
+<pre><code class="java">server {listen <span class="number">80</span>;server_name localhost;location / {  root /usr/share/nginx/html;  index index.html index.htm;  proxy_set_header Host $host;  <span class="keyword">if</span> (!-f $request_filename) {    rewrite ^.*$ /index.html <span class="keyword">break</span>;  }}error_page <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /<span class="number">50</span>x.html;location = /<span class="number">50</span>x.html {    root /usr/share/nginx/html;  }}
+</code></pre>
+<h5 id="4-2-项目根目录新建-Dockerfile-文件"><a href="#4-2-项目根目录新建-Dockerfile-文件" class="headerlink" title="4.2 项目根目录新建 Dockerfile 文件"></a>4.2 项目根目录新建 Dockerfile 文件</h5><p>  项目根目录新建 Dockerfile 文件，构建镜像包使用，例： </p>
+<pre><code class="java">FROM nginxCOPY ./dist/ /usr/share/nginx/html/# 第一步nginx配置文件名称  COPY ./vhost.nginx.conf /etc/nginx/conf.d/bilibili-vue.confEXPOSE 80
+</code></pre>
+<h5 id="4-3-配置容器镜像服务"><a href="#4-3-配置容器镜像服务" class="headerlink" title="4.3 配置容器镜像服务"></a>4.3 配置容器镜像服务</h5><p>  这里我选择了阿里云的容器镜像服务 (<a href="https://www.aliyun.com/product/acr?fileGuid=1PWJAvQBtLA5IGh3)，为什么不使用国外的" rel="external nofollow noopener noreferrer" target="_blank">https://www.aliyun.com/product/acr?fileGuid=1PWJAvQBtLA5IGh3)，为什么不使用国外的</a> dockhub (<a href="https://hub.docker.com/?fileGuid=1PWJAvQBtLA5IGh3" rel="external nofollow noopener noreferrer" target="_blank">https://hub.docker.com/?fileGuid=1PWJAvQBtLA5IGh3</a>) 呢，因为这样使用起来速度快一点，而且有免费的个人版足够我们使用。 </p>
+<h6 id="4-3-1-第一步"><a href="#4-3-1-第一步" class="headerlink" title="4.3.1 第一步"></a>4.3.1 第一步</h6><p>  初次打开需要开通服务，配置登录密码（记下来，后面要用）。 </p>
+<h6 id="4-3-2-第二步"><a href="#4-3-2-第二步" class="headerlink" title="4.3.2 第二步"></a>4.3.2 第二步</h6><p>  然后创建命名空间，再创建我们的镜像仓库，这里如果不想别人下载你的镜像的话就可以选择私有。然后点击下一步配置代码源，这里我选择了本地仓库，一方面是为了日志统一，可以在 Github Actions 看到所有日志，一方面是可以通过命令行直接推送镜像到镜像仓库，自由度比较高。<img src="https://api.ixiaowai.cn/gqapi/gqapi.php" alt="Test" title="手把手教你用 Github Actions 部署前端项目"> </p>
+<h6 id="4-3-3-第三步"><a href="#4-3-3-第三步" class="headerlink" title="4.3.3 第三步"></a>4.3.3 第三步</h6><p>  之后就可以在页面看到我们创建的仓库，点击仓库名称进入，可以看到仓库的基本信息和操作指南，这个时候一个镜像仓库就完全创建成功了。<img src="https://api.ixiaowai.cn/gqapi/gqapi.php" alt="Test" title="手把手教你用 Github Actions 部署前端项目"> </p>
+<p>   <img src="https://api.ixiaowai.cn/gqapi/gqapi.php" alt="Test" title="手把手教你用 Github Actions 部署前端项目"> </p>
+<h5 id="4-4-如何跟-Actions-联动"><a href="#4-4-如何跟-Actions-联动" class="headerlink" title="4.4 如何跟 Actions 联动"></a>4.4 如何跟 Actions 联动</h5><p>  我们只用在 Actions 中 build 镜像后登录阿里云 Registry 实例就好了，但是这个时候如果明文直接写在 yml 中肯定是不行的，Github 早就帮我们考虑到了这点，回到 Github 项目中，依次点击 Settings =&gt; Secrets =&gt; New repository secret ，设置 secret，配置上述容器镜像账号的用户名（阿里云用户名）和密码（上述配置容器镜像服务时设置的登录密码）。 </p>
+<p>   <img src="https://api.ixiaowai.cn/gqapi/gqapi.php" alt="Test" title="手把手教你用 Github Actions 部署前端项目"> </p>
+<h4 id="5、完整的-Actions"><a href="#5、完整的-Actions" class="headerlink" title="5、完整的 Actions"></a>5、完整的 Actions</h4><pre><code class="java">name: Docker Image CI # Actions名称on: [push] # 执行时机jobs:# 这里我使用的是yarn，想用npm的同学将yarn命令修改为npm命令即可build:runs-on: ubuntu-lateststeps:- name: checkoutuses: actions/checkout@master# 安装依赖- name: installrun: yarn# 打包- name: build projectrun: yarn run build# 打包镜像推送到阿里云容器镜像服务- name: Build the Docker imagerun: |docker login --username=${{ secrets.DOCKER_USERNAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.DOCKER_PASSWORD }}docker build -t bilibili-vue:latest .docker tag bilibili-vue registry.cn-hangzhou.aliyuncs.com/zlyyyy/bilibili-vue:latestdocker push registry.cn-hangzhou.aliyuncs.com/zlyyyy/bilibili-vue:latest # 推送- name: ssh docker login # 使用appleboy/ssh-action@master登录服务器执行拉取镜像脚本，服务器ip、用户名、密码配置方式同容器镜像服务配置方式一样uses: appleboy/ssh-action@masterwith:        host: ${{ secrets.SSH_HOST }} username: ${{ secrets.SSH_USERNAME }}password: ${{ secrets.SSH_PASSWORD }}script: cd ~ &amp;&amp; sh bilibili-vue-deploy.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
+</code></pre>
+<p>  最后一步登录服务器后，我执行了一个脚本来拉取云端最新镜像，并删除旧镜像，启动新镜像。脚本内容如下。 </p>
+<pre><code class="java">echo -e <span class="string">"---------docker Login--------"</span>docker login --username=$<span class="number">1</span> registry.cn-hangzhou.aliyuncs.com --password=$<span class="number">2</span>echo -e <span class="string">"---------docker Stop--------"</span>docker stop bilibili-vueecho -e <span class="string">"---------docker Rm--------"</span>docker rm bilibili-vuedocker rmi registry.cn-hangzhou.aliyuncs.com/zlyyyy/bilibili-vue:latestecho -e <span class="string">"---------docker Pull--------"</span>docker pull registry.cn-hangzhou.aliyuncs.com/zlyyyy/bilibili-vue:latestecho -e <span class="string">"---------docker Create and Start--------"</span>docker run --rm -d -p <span class="number">8081</span>:<span class="number">80</span> --name bilibili-vue registry.cn-hangzhou.aliyuncs.com/zlyyyy/bilibili-vue:latestecho -e <span class="string">"---------deploy Success--------"</span>
+</code></pre>
+<h4 id="6、测试流程，查看日志"><a href="#6、测试流程，查看日志" class="headerlink" title="6、测试流程，查看日志"></a>6、测试流程，查看日志</h4><p>  我们推送一次代码测试，打开 Actions 后可以看到自动运行的实时 workflow 结果，以及每步的日志信息。 </p>
+<p>   <img src="https://api.ixiaowai.cn/gqapi/gqapi.php" alt="Test" title="手把手教你用 Github Actions 部署前端项目"> </p>
+<p>   <img src="https://api.ixiaowai.cn/gqapi/gqapi.php" alt="Test" title="手把手教你用 Github Actions 部署前端项目"><br>    R</p>
+<p>  总结 </p>
+<h3 id><a href="#" class="headerlink" title=" "></a> </h3><p>  到此我们自动化部署成功，再也不要每次修改代码，手动更新线上了，后面迁移也会更方便，当然还有更多的自动化部署方式，比如直接使用 Github + 阿里云镜像仓库的触发器一样可以做到，容器服务也不仅限于阿里云，腾讯云等其他云服务厂商同样也是一样的使用方式。以上是我个人使用 Actions 的一些总结，如有错误，劳烦指正修改。当然对更多 Actions 玩法感兴趣的同学欢迎一起交流学习。当然这个仅限于个人的项目玩法，公司内部的项目有更加成熟完善的自动化方案，比如我们内部所使用的云��系统，就是解决此类问题的，具体云长做了些什么，后续会有详细文章输出，敬请期待。 </p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p>  GitHub Actions 入门教程 (<a href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html?fileGuid=1PWJAvQBtLA5IGh3" rel="external nofollow noopener noreferrer" target="_blank">http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html?fileGuid=1PWJAvQBtLA5IGh3</a>)<br>  持续集成是什么？(<a href="https://www.ruanyifeng.com/blog/2015/09/continuous-integration.html?fileGuid=1PWJAvQBtLA5IGh3" rel="external nofollow noopener noreferrer" target="_blank">https://www.ruanyifeng.com/blog/2015/09/continuous-integration.html?fileGuid=1PWJAvQBtLA5IGh3</a>) </p>
+<h4 id="看完两件事"><a href="#看完两件事" class="headerlink" title="看完两件事"></a>看完两件事</h4><p>  如果你觉得这篇内容对你挺有启发，我想邀请你帮我两件小事<br>  1.点个「在看」，让更多人也能看到这篇内容（点了「在看」，bug -1 😊） </p>
+<pre><code>2.关注公众号「 
+</code></pre><p>   政采云前端团队」，持续为你推送精选好文 </p>
+<h4 id="招贤纳士"><a href="#招贤纳士" class="headerlink" title="招贤纳士"></a>招贤纳士</h4><p>  政采云前端团队（ZooTeam），一个年轻富有激情和创造力的前端团队，隶属于政采云产品研发部，Base 在风景如画的杭州。团队现有 40 余个前端小伙伴，平均年龄 27 岁，近 3 成是全栈工程师，妥妥的青年风暴团。成员构成既有来自于阿里、网易的“老”兵，也有浙大、中科大、杭电等校的应届新人。团队在日常的业务对接之外，还在物料体系、工程平台、搭建平台、性能体验、云端应用、数据分析及可视化等方向进行技术探索和实战，推动并落地了一系列的内部技术产品，持续探索前端技术体系的新边界。<br>  如果你想改变一直被事折腾，希望开始能折腾事；如果你想改变一直被告诫需要多些想法，却无从破局；如果你想改变你有能力去做成那个结果，却不需要你；如果你想改变你想做成的事需要一个团队去支撑，但没你带人的位置；如果你想改变既定的节奏，将会是“5 年工作时间 3 年工作经验”；如果你想改变本来悟性不错，但总是有那一层窗户纸的模糊… 如果你相信相信的力量，相信平凡人能成就非凡事，相信能遇到更好的自己。如果你希望参与到随着业务腾飞的过程，亲手推动一个有着深入的业务理解、完善的技术体系、技术创造价值、影响力外溢的前端团队的成长历程，我觉得我们该聊聊。任何时间，等着你写点什么，发给  </p>
+<pre><code class="java">ZooTeam<span class="meta">@cai</span>-inc.com
+</code></pre>
+<p>   <img src="https://api.ixiaowai.cn/gqapi/gqapi.php" alt="Test" title="手把手教你用 Github Actions 部署前端项目"> </p>
+<p>本文分享自微信公众号 - 政采云前端团队（Zoo-Team）。如有侵权，请联系 <a href="mailto:support@oschina.cn" rel="external nofollow noopener noreferrer" target="_blank">support@oschina.cn</a> 删除。本文参与“OSC源创计划”，欢迎正在阅读的你也加入，一起分享。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-手把手教你用 Github Actions 部署前端项目</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 10:16</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/2d9e8424/" title="推荐系列-手把手教你用 Github Actions 部署前端项目">https://www.hosiang.cn/2d9e8424/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/2d9e8424/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-手把手教你用 Github Actions 部署前端项目》 — 狂欢马克思&url=https://www.hosiang.cn/2d9e8424/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/2d9e8424/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/2d9e8424/&title=《推荐系列-手把手教你用 Github Actions 部署前端项目》 — 狂欢马克思&source=&emsp;&emsp;👆 这是第 96 篇不掺水的原创，想要了解更多，请戳上方蓝色字体：政采云前端团队 关注我们吧～ 本文首发于政采云前端团队博客：手..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/2d9e8424/&title=《推荐系列-手把手教你用 Github Actions 部署前端项目》 — 狂欢马克思&pic=https://api.ixiaowai.cn/gqapi/gqapi.php" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/2d9e8424/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么使用-Github-Actions-？"><span class="post-toc-text">为什么使用 Github Actions ？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Github-Actions-是什么？"><span class="post-toc-text">Github Actions 是什么？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#部署自己的前端项目"><span class="post-toc-text">部署自己的前端项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、选择-Github-项目仓库"><span class="post-toc-text">1、选择 Github 项目仓库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、新建工作流，配置-Actions"><span class="post-toc-text">2、新建工作流，配置 Actions</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3、常见的-Actions-配置"><span class="post-toc-text">3、常见的 Actions 配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#打版本标签-Create-Tag-Release"><span class="post-toc-text">打版本标签 Create Tag Release</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#创建-Github-Pages-站点"><span class="post-toc-text">创建 Github Pages 站点</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#多人协作开发，云端代码检测"><span class="post-toc-text">多人协作开发，云端代码检测</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4、搭配-Docker"><span class="post-toc-text">4、搭配 Docker</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-1-项目根目录新建-Nginx-配置"><span class="post-toc-text">4.1 项目根目录新建 Nginx 配置</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-2-项目根目录新建-Dockerfile-文件"><span class="post-toc-text">4.2 项目根目录新建 Dockerfile 文件</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-3-配置容器镜像服务"><span class="post-toc-text">4.3 配置容器镜像服务</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#4-3-1-第一步"><span class="post-toc-text">4.3.1 第一步</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#4-3-2-第二步"><span class="post-toc-text">4.3.2 第二步</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#4-3-3-第三步"><span class="post-toc-text">4.3.3 第三步</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-4-如何跟-Actions-联动"><span class="post-toc-text">4.4 如何跟 Actions 联动</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5、完整的-Actions"><span class="post-toc-text">5、完整的 Actions</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6、测试流程，查看日志"><span class="post-toc-text">6、测试流程，查看日志</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#null"><span class="post-toc-text"> </span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考文献"><span class="post-toc-text">参考文献</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#看完两件事"><span class="post-toc-text">看完两件事</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#招贤纳士"><span class="post-toc-text">招贤纳士</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/ca6be9f4/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-华为预测服务的构建原理及模型训练方法
+        
+      </span>
+    </a>
+  
+  
+    <a href="/c7d95772/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-逐行解读Spring- 没人比我更懂循环依赖</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

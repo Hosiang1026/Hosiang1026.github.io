@@ -1,0 +1,1053 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-LiteOS内核源码分析-任务LOS_Schedule | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;摘要：调度，Schedule也称为Dispatch，是操作系统的一个重要模块，它负责选择系统要处理的下一个任务。调度模块需要协调处于就绪状态的任务对资源的竞争，按优先级策略从就绪队列中获取高优先…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-LiteOS内核源码分析-任务LOS_Schedule">
+<meta property="og:url" content="https://www.hosiang.cn/d064fabf/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;摘要：调度，Schedule也称为Dispatch，是操作系统的一个重要模块，它负责选择系统要处理的下一个任务。调度模块需要协调处于就绪状态的任务对资源的竞争，按优先级策略从就绪队列中获取高优先…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-431e6d77184fe8b624a6ed9aea5b4ac8_720w.jpg">
+<meta property="og:updated_time" content="2021-07-23T15:43:06.919Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-LiteOS内核源码分析-任务LOS_Schedule">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;摘要：调度，Schedule也称为Dispatch，是操作系统的一个重要模块，它负责选择系统要处理的下一个任务。调度模块需要协调处于就绪状态的任务对资源的竞争，按优先级策略从就绪队列中获取高优先…">
+<meta name="twitter:image" content="https://pic1.zhimg.com/80/v2-431e6d77184fe8b624a6ed9aea5b4ac8_720w.jpg">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-LiteOS内核源码分析-任务LOS_Schedule" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-LiteOS内核源码分析-任务LOS_Schedule
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 4k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 16分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;摘要：调度，Schedule也称为Dispatch，是操作系统的一个重要模块，它负责选择系统要处理的下一个任务。调度模块需要协调处于就绪状态的任务对资源的竞争，按优先级策略从就绪队列中获取高优先…<br><a id="more"></a></p>
+<p>本文分享自华为云社区《LiteOS内核源码分析系列六 -任务及调度（5）-任务LOS_Schedule》，原文作者：zhushy 。<br>本文我们来一起学习下LiteOS调度模块的源代码，文中所涉及的源代码， 均可以在 </p>
+<pre><code class="java">LiteOS
+</code></pre>
+<p> 开源站点<a href="https://gitee.com/LiteOS/LiteOS" rel="external nofollow noopener noreferrer" target="_blank">https://gitee.com/LiteOS/LiteOS</a> 获取。 调度源代码分布如下： </p>
+<p> LiteOS内核调度源代码 </p>
+<p>包括调度模块的私有头文件kernel\base\include\los_sched_pri.h、C源代码文件kernel\base\sched\sched_sq\los_sched.c，这个对应单链表就绪队列。还有个`调度源代码文件kernel\base\sched\sched_mq\los_sched.c，对应多链表就绪队列。本文主要剖析对应单链表就绪队列的调度文件代码，使用多链表就绪队列的调度代码类似。 </p>
+<p> 调度模块汇编实现代码 </p>
+<p>调度模块的汇编函数有OsStartToRun、OsTaskSchedule等，根据不同的CPU架构，分布在下述文件里： arch\arm\cortex_m\src\dispatch.S、arch\arm\cortex_a_r\src\dispatch.S、arch\arm64\src\dispatch.S。<br>本文以STM32F769IDISCOVERY为例，分析一下Cortex-M核的调度模块的源代码。我们先看看调度头文件kernel\base\include\los_sched_pri.h中定义的宏函数、枚举、和内联函数。 </p>
+<h4 id="1、调度模块宏函数和内联函数"><a href="#1、调度模块宏函数和内联函数" class="headerlink" title="1、调度模块宏函数和内联函数"></a>1、调度模块宏函数和内联函数</h4><p>kernel\base\include\los_sched_pri.h定义的宏函数、枚举、内联函数。 </p>
+<h5 id="1-1-宏函数和枚举"><a href="#1-1-宏函数和枚举" class="headerlink" title="1.1 宏函数和枚举"></a>1.1 宏函数和枚举</h5><p>UINT32 g_taskScheduled是kernel\base\los_task.c定义的全局变量，标记内核是否开启调度，��一位代表不同的CPU核的调度开启状态。<br>⑴处定义的宏函数OS_SCHEDULER_SET(cpuid)开启cpuid核的调度。⑵处宏函数OS_SCHEDULER_CLR(cpuid)是前者的反向操作，关闭cpuid核的调度。⑶处宏判断当前核是否开启调度。⑷处的枚举用于标记是否发起了请求调度。当需要调度，又暂不具备调度条件的时候，标记下状态，等具备调度的条件时，再去调度。 </p>
+<pre><code class="java">  ⑴  #define OS_SCHEDULER_SET(cpuid) do {     \
+        g_taskScheduled |= (<span class="number">1</span>U &lt;&lt; (cpuid));  \
+    } <span class="keyword">while</span> (<span class="number">0</span>);
+
+⑵  #define OS_SCHEDULER_CLR(cpuid) do {     \
+        g_taskScheduled &amp;= ~(<span class="number">1</span>U &lt;&lt; (cpuid)); \
+    } <span class="keyword">while</span> (<span class="number">0</span>);
+
+⑶  #define OS_SCHEDULER_ACTIVE (g_taskScheduled &amp; (1U &lt;&lt; ArchCurrCpuid()))
+
+⑷  typedef <span class="keyword">enum</span> {
+        INT_NO_RESCH = <span class="number">0</span>,   <span class="comment">/* no needs to schedule */</span>
+        INT_PEND_RESCH,     <span class="comment">/* pending schedule flag */</span>
+    } SchedFlag;
+</code></pre>
+<h5 id="1-2-内联函数"><a href="#1-2-内联函数" class="headerlink" title="1.2 内联函数"></a>1.2 内联函数</h5><p>有2个内联函数用于检查是否可以调度，即函数STATIC INLINE BOOL OsPreemptable(VOID)和STATIC INLINE BOOL OsPreemptableInSched(VOID)。区别是，前者判断是否可以抢占调度时，先关中断，避免当前的任务迁移到其他核，返回错误的是否可以抢占调度状态。 </p>
+<h6 id="1-2-1-内联函数STATIC-INLINE-BOOL-OsPreemptable-VOID"><a href="#1-2-1-内联函数STATIC-INLINE-BOOL-OsPreemptable-VOID" class="headerlink" title="1.2.1 内联函数STATIC INLINE BOOL OsPreemptable(VOID)"></a>1.2.1 内联函数STATIC INLINE BOOL OsPreemptable(VOID)</h6><p>我们看下BOOL OsPreemptable(VOID)函数的源码。⑴、⑶属于关闭、开启中断，保护检查抢占状态的操作。⑵处判断是否可抢占调度，如果不能调度，则标记下是否需要调度标签为INT_PEND_RESCH。 </p>
+<pre><code class="java">  <span class="function">STATIC INLINE BOOL <span class="title">OsPreemptable</span><span class="params">(VOID)</span></span>
+<span class="function"></span>{
+⑴  UINT32 intSave = LOS_IntLock();
+⑵    BOOL preemptable = (OsPercpuGet()-&gt;taskLockCnt == <span class="number">0</span>);
+    <span class="keyword">if</span> (!preemptable) {
+        OsPercpuGet()-&gt;schedFlag = INT_PEND_RESCH;
+    }
+⑶  LOS_IntRestore(intSave);
+    <span class="keyword">return</span> preemptable;
+}
+</code></pre>
+<h6 id="1-2-2-内联函数STATIC-INLINE-BOOL-OsPreemptableInSched-VOID"><a href="#1-2-2-内联函数STATIC-INLINE-BOOL-OsPreemptableInSched-VOID" class="headerlink" title="1.2.2 内联函数STATIC INLINE BOOL OsPreemptableInSched(VOID)"></a>1.2.2 内联函数STATIC INLINE BOOL OsPreemptableInSched(VOID)</h6><p>函数STATIC INLINE BOOL OsPreemptableInSched(VOID)检查是否可以抢占调度，检查的方式是判断OsPercpuGet()-&gt;taskLockCnt的计数，见⑴、⑵处代码。如果不能调度，则执行⑶标记下是否需要调度标签为INT_PEND_RESCH。对于SMP多核，是否可以调度的检查方式，稍有不同，因为调度持有自旋锁，计数需要加1，见代码。 </p>
+<pre><code class="java">  <span class="function">STATIC INLINE BOOL <span class="title">OsPreemptableInSched</span><span class="params">(VOID)</span></span>
+<span class="function"></span>{
+    BOOL preemptable = FALSE;
+
+#ifdef LOSCFG_KERNEL_SMP
+⑴  preemptable = (OsPercpuGet()-&gt;taskLockCnt == <span class="number">1</span>);
+#else
+⑵  preemptable = (OsPercpuGet()-&gt;taskLockCnt == <span class="number">0</span>);
+#endif
+    <span class="keyword">if</span> (!preemptable) {
+⑶      OsPercpuGet()-&gt;schedFlag = INT_PEND_RESCH;
+    }
+
+    <span class="keyword">return</span> preemptable;
+}
+</code></pre>
+<h6 id="1-2-3-内联函数STATIC-INLINE-VOID-LOS-Schedule-VOID"><a href="#1-2-3-内联函数STATIC-INLINE-VOID-LOS-Schedule-VOID" class="headerlink" title="1.2.3 内联函数STATIC INLINE VOID LOS_Schedule(VOID)"></a>1.2.3 内联函数STATIC INLINE VOID LOS_Schedule(VOID)</h6><p>函数STATIC INLINE VOID LOS_Schedule(VOID)用于触发触发调度。⑴处代码表示，如果系统正在处理中断，标记下是否需要调度标签为INT_PEND_RESCH，等待合适时机再调度。然后调用VOID OsSchedPreempt(VOID)函数，下午会分析该函数。二者的区别就是多个检查，判断是否系统是否正在处理中断。 </p>
+<pre><code class="java">  <span class="function">STATIC INLINE VOID <span class="title">LOS_Schedule</span><span class="params">(VOID)</span></span>
+<span class="function"></span>{
+    <span class="keyword">if</span> (OS_INT_ACTIVE) {
+⑴      OsPercpuGet()-&gt;schedFlag = INT_PEND_RESCH;
+        <span class="keyword">return</span>;
+    }
+    OsSchedPreempt();
+}
+</code></pre>
+<h4 id="2、调度模块常用接口"><a href="#2、调度模块常用接口" class="headerlink" title="2、调度模块常用接口"></a>2、调度模块常用接口</h4><p>这一小节，我们看看kernel\base\sched\sched_sq\los_sched.c定义的���度接口，包含VOID OsSchedPreempt(VOID)、VOID OsSchedResched(VOID)两个主要的调度接口。两者的区别是，前者需要把当前任务放入就绪队列内，再调用后者触发调用。后者直接从就绪队列里获取下一个任务，然后触发调度去运行下一个任务。这2个接口都是内部接口，对外提供的调度接口是上一小节分析过的STATIC INLINE VOID LOS_Schedule(VOID)，三者有调用关系STATIC INLINE VOID LOS_Schedule(VOID)—&gt;VOID OsSchedPreempt(VOID)—&gt;VOID OsSchedResched(VOID)。<br>我们分析下这些调度接口的源代码。 </p>
+<h5 id="2-1-抢占调度函数VOID-OsSchedResched-VOID"><a href="#2-1-抢占调度函数VOID-OsSchedResched-VOID" class="headerlink" title="2.1 抢占调度函数VOID OsSchedResched(VOID)"></a>2.1 抢占调度函数VOID OsSchedResched(VOID)</h5><p>抢占调度函数VOID OsSchedResched(VOID)，我们分析下源代码。<br>⑴验证需要持有任务模块的自旋锁。⑵处判断是否支持调度，如果不具备调度的条件，则暂不调度。⑶获取当前运行任务，从就绪队列中获取下一个高优先级的任务。验证下一个任务newTask不能为空，并更改其状态为非就绪状态。⑷处判断当前任务和下一个任务不能为同一个，否则返回。这种情况不会发生，当前任务肯定会从优先级队列中移除的，二者不可能是同一个。⑸更改2个任务的运行状态，当前任务设置为非运行状态，下一个任务设置为运行状态。⑹处如果支持多核，则更改任务的运行在哪个核。紧接着的一些代码属于调度维测信息，暂时不管。⑺处如果支持时间片调度，并且下一个新任务的时间片为0，设置为时间片超时时间的最大值LOSCFG_BASE_CORE_TIMESLICE_TIMEOUT。⑻设置下一个任务newTask为当前运行任务，会更新全局变量g_runTask。然后调用汇编函数OsTaskSchedule(newTask, runTask)执行调度，后文分析该汇编函数的实现代码。 </p>
+<pre><code class="java">  <span class="function">VOID <span class="title">OsSchedResched</span><span class="params">(VOID)</span></span>
+<span class="function"></span>{
+    LosTaskCB *runTask = NULL;
+    LosTaskCB *newTask = NULL;
+
+⑴  LOS_ASSERT(LOS_SpinHeld(&amp;g_taskSpin));
+
+⑵  <span class="keyword">if</span> (!OsPreemptableInSched()) {
+        <span class="keyword">return</span>;
+    }
+
+⑶  runTask = OsCurrTaskGet();
+    newTask = OsGetTopTask();
+    LOS_ASSERT(newTask != NULL);
+    newTask-&gt;taskStatus &amp;= ~OS_TASK_STATUS_READY;
+
+⑷  <span class="keyword">if</span> (runTask == newTask) {
+        <span class="keyword">return</span>;
+    }
+
+⑸  runTask-&gt;taskStatus &amp;= ~OS_TASK_STATUS_RUNNING;
+    newTask-&gt;taskStatus |= OS_TASK_STATUS_RUNNING;
+
+#ifdef LOSCFG_KERNEL_SMP
+⑹  runTask-&gt;currCpu = OS_TASK_INVALID_CPUID;
+    newTask-&gt;currCpu = ArchCurrCpuid();
+#endif
+
+    OsTaskTimeUpdateHook(runTask-&gt;taskId, LOS_TickCountGet());
+
+#ifdef LOSCFG_KERNEL_CPUP
+    OsTaskCycleEndStart(newTask);
+#endif
+
+#ifdef LOSCFG_BASE_CORE_TSK_MONITOR
+    OsTaskSwitchCheck(runTask, newTask);
+#endif
+
+    LOS_TRACE(TASK_SWITCH, newTask-&gt;taskId, runTask-&gt;priority, runTask-&gt;taskStatus, newTask-&gt;priority,
+        newTask-&gt;taskStatus);
+
+#ifdef LOSCFG_DEBUG_SCHED_STATISTICS
+    OsSchedStatistics(runTask, newTask);
+#endif
+
+    PRINT_TRACE(<span class="string">"cpu%u (%s) status: %x -&gt; (%s) status:%x\n"</span>, ArchCurrCpuid(),
+                runTask-&gt;taskName, runTask-&gt;taskStatus,
+                newTask-&gt;taskName, newTask-&gt;taskStatus);
+
+#ifdef LOSCFG_BASE_CORE_TIMESLICE
+    <span class="keyword">if</span> (newTask-&gt;timeSlice == <span class="number">0</span>) {
+⑺      newTask-&gt;timeSlice = LOSCFG_BASE_CORE_TIMESLICE_TIMEOUT;
+    }
+#endif
+
+⑻  OsCurrTaskSet((VOID*)newTask);
+    OsTaskSchedule(newTask, runTask);
+}
+</code></pre>
+<h5 id="2-2-抢占调度函数VOID-OsSchedPreempt-VOID"><a href="#2-2-抢占调度函数VOID-OsSchedPreempt-VOID" class="headerlink" title="2.2 抢占调度函数VOID OsSchedPreempt(VOID)"></a>2.2 抢占调度函数VOID OsSchedPreempt(VOID)</h5><p>抢占调度函数VOID OsSchedPreempt(VOID)，把当前任务放入就绪队列，从队列中获取高优先级任务，然后尝试调度。当锁调度，或者没有更高优先级任务时，调度不会发生。⑴处判断是否支持调度，如果不具备调度的条件��则暂不调度。⑵获取当前任务，更改其状态为非就绪状态。<br>如果开启时间片调度并且当前任务时间片为0，则执行⑶把当前任务放入就绪队列的尾部，否则执行⑷把当前任务放入就绪队列的头部，同等优先级下可以更早的运行。⑸调用函数OsSchedResched()去调度。 </p>
+<pre><code class="java">  <span class="function">VOID <span class="title">OsSchedPreempt</span><span class="params">(VOID)</span></span>
+<span class="function"></span>{
+    LosTaskCB *runTask = NULL;
+    UINT32 intSave;
+
+⑴  <span class="keyword">if</span> (!OsPreemptable()) {
+        <span class="keyword">return</span>;
+    }
+
+    SCHEDULER_LOCK(intSave);
+
+⑵  runTask = OsCurrTaskGet();
+    runTask-&gt;taskStatus |= OS_TASK_STATUS_READY;
+
+#ifdef LOSCFG_BASE_CORE_TIMESLICE
+    <span class="keyword">if</span> (runTask-&gt;timeSlice == <span class="number">0</span>) {
+⑶      OsPriQueueEnqueue(&amp;runTask-&gt;pendList, runTask-&gt;priority);
+    } <span class="keyword">else</span> {
+#endif
+⑷      OsPriQueueEnqueueHead(&amp;runTask-&gt;pendList, runTask-&gt;priority);
+#ifdef LOSCFG_BASE_CORE_TIMESLICE
+    }
+#endif
+
+⑸  OsSchedResched();
+
+    SCHEDULER_UNLOCK(intSave);
+}
+</code></pre>
+<h5 id="2-3-时间片检查函数VOID-OsTimesliceCheck-VOID"><a href="#2-3-时间片检查函数VOID-OsTimesliceCheck-VOID" class="headerlink" title="2.3 时间片检查函数VOID OsTimesliceCheck(VOID)"></a>2.3 时间片检查函数VOID OsTimesliceCheck(VOID)</h5><p>函数VOID OsTimesliceCheck(VOID)在支持时间片调度时才生效，该函数在tick中断函数VOID OsTickHandler(VOID)里调用。如果当前运行函数的时间片使用完毕，则触发调度。⑴处获取当前运行任务，⑵判断runTask-&gt;timeSlice时间片是否为0，不为0则减1。如果减1后为0，则执行⑶调用LOS_Schedule()触发调度。 </p>
+<pre><code class="java">  #ifdef LOSCFG_BASE_CORE_TIMESLICE
+<span class="function">LITE_OS_SEC_TEXT VOID <span class="title">OsTimesliceCheck</span><span class="params">(VOID)</span></span>
+<span class="function"></span>{
+⑴  LosTaskCB *runTask = OsCurrTaskGet();
+⑵  <span class="keyword">if</span> (runTask-&gt;timeSlice != <span class="number">0</span>) {
+        runTask-&gt;timeSlice--;
+        <span class="keyword">if</span> (runTask-&gt;timeSlice == <span class="number">0</span>) {
+⑶          LOS_Schedule();
+        }
+    }
+}
+#endif
+</code></pre>
+<h4 id="3、调度模块汇编函数"><a href="#3、调度模块汇编函数" class="headerlink" title="3、调度模块汇编函数"></a>3、调度模块汇编函数</h4><p>文件arch\arm\cortex_m\src\dispatch.S定义了调度的汇编函数，我们分析下这些调度接口的源代码。汇编文件中定义了如下几个宏，见注释。 </p>
+<pre><code class="java">  .equ OS_NVIC_INT_CTRL,           <span class="number">0xE000ED04</span>     ; Interrupt Control State Register，ICSR 中断控制状态寄存器
+.equ OS_NVIC_SYSPRI2,            <span class="number">0xE000ED20</span>     ; System Handler Priority Register 系统优先级寄存器
+.equ OS_NVIC_PENDSV_PRI,         <span class="number">0xF0F00000</span>     ; PendSV异常优先级
+.equ OS_NVIC_PENDSVSET,          <span class="number">0x10000000</span>     ; ICSR寄存器的PENDSVSET位置<span class="number">1</span>时，会触发PendSV异常
+.equ OS_TASK_STATUS_RUNNING,     <span class="number">0x0010</span>         ; los_task_pri.h中的同名宏定义，数值也一样，表示任务运行状态，
+</code></pre>
+<h5 id="3-1-OsStartToRun汇编函数"><a href="#3-1-OsStartToRun汇编函数" class="headerlink" title="3.1 OsStartToRun汇编函数"></a>3.1 OsStartToRun汇编函数</h5><p>函数OsStartToRun在文件kernel\init\los_init.c中的运行函数VOID OsStart(VOID)启动系统阶段调用，传入的参数为就绪队列中最高优秀级的LosTaskCB <em>taskCB。我们接下来分析下该函数的汇编代码。<br>⑴处设置PendSV异常优先级为OS_NVIC_PENDSV_PRI，PendSV异常一般设置为最低。全局变量g_oldTask、g_runTask定义在arch\arm\cortex_m\src\task.c文件内，分别记录上一次运行的任务、和当前运行的任务。⑵处代码把函数OsStartToRun的入参LosTaskCB </em>taskCB赋值给这2个全局变量。<br>⑶处往控制寄存器CONTROL写入二进制的10，表示使用PSP栈，特权级的线程模式。UINT16 taskStatus是LosTaskCB结构体的第二个成员变量，⑷处[r0 , #4]获取任务状态，此时寄存器r7数值为0x4，即就绪状态OS_TASK_STATUS_READY。然后把任务状态改为运行状态OS_TASK_STATUS_RUNNING。<br>⑸处把[r0]的值即任务的栈指针taskCB-&gt;stackPointer��载��寄存器R12，现在R12指向任务栈的栈指针，任务栈现在保存的是上下文，对应定义在arch\arm\cortex_m\include\arch\task.h中的结构体TaskContext。往后2行代码把R12加36+64=100，共25个4字节长度，其中包含S16到S31共16个4字节，R4到R11及PriMask共9个4字节的长度，当前R12指向任务栈中上下文的UINT32 R0位置，如图。<br><img src="https://pic1.zhimg.com/80/v2-431e6d77184fe8b624a6ed9aea5b4ac8_720w.jpg" alt="Test" title="LiteOS内核源码分析-任务LOS_Schedule"><br>⑹处代码把任务栈上下文中的UINT32 R0; UINT32 R1; UINT32 R2; UINT32 R3; UINT32 R12; UINT32 LR; UINT32 PC; UINT32 xPSR;的分别加载到寄存器R0-R7，其中R5对应UINT32 LR，R6对应UINT32 PC，此时寄存器R12指向任务栈上下文的UINT32 xPSR。执行⑺处指令，指针继续加18个4字节长度，即对应S0到S15及UINT32 FPSCR; UINT32 NO_NAME等上下文的18个成员。此时，寄存器R12指向任务栈的栈底，紧接着把寄存器R12写入寄存器psp。<br>最后，执行⑻处指令，把R5写入lr寄存器，开中断，然后跳转到R6对应的上下文的PC对应的函数VOID OsTaskEntry(UINT32 taskId)，去执行任务的入口函数。 </p>
+<pre><code class="java">  .type OsStartToRun, %function
+.global OsStartToRun
+OsStartToRun:
+    .fnstart
+    .cantunwind
+⑴  ldr     r4, =OS_NVIC_SYSPRI2
+    ldr     r5, =OS_NVIC_PENDSV_PRI
+    str     r5, [r4]
+
+⑵  ldr     r1, =g_oldTask
+    str     r0, [r1]
+
+    ldr     r1, =g_runTask
+    str     r0, [r1]
+#if defined(LOSCFG_ARCH_CORTEX_M0)
+    movs    r1, #2
+    msr     CONTROL, r1
+    ldrh    r7, [r0 , #4]
+    movs    r6,  #OS_TASK_STATUS_RUNNING
+    strh    r6,  [r0 , #4]
+    ldr     r3, [r0]
+    adds    r3, r3, #36
+    ldmfd   r3!, {r0-r2}
+    adds    r3, r3, #4
+    ldmfd   r3!, {R4-R7}
+    msr     psp, r3
+    subs    r3, r3, #20
+    ldr     r3,  [r3]
+#else
+⑶  mov     r1, #2
+    msr     CONTROL, r1
+
+⑷  ldrh    r7, [r0 , #4]
+    mov     r8,  #OS_TASK_STATUS_RUNNING
+    strh    r8,  [r0 , #4]
+
+⑸  ldr     r12, [r0]
+    ADD     r12, r12, #36
+#if !defined(LOSCFG_ARCH_CORTEX_M3)
+    ADD     r12, r12, #64
+#endif
+
+⑹  ldmfd   r12!, {R0-R7}
+#if !defined(LOSCFG_ARCH_CORTEX_M3)
+⑺  add     r12, r12, #72
+#endif
+    msr     psp, r12
+#if !defined(LOSCFG_ARCH_CORTEX_M3)
+    vpush   {s0};
+    vpop    {s0};
+#endif
+#endif
+
+⑻  mov     lr, r5
+    cpsie   I
+    bx      r6
+    .fnend
+</code></pre>
+<h5 id="3-2-OsTaskSchedule汇编函数"><a href="#3-2-OsTaskSchedule汇编函数" class="headerlink" title="3.2 OsTaskSchedule汇编函数"></a>3.2 OsTaskSchedule汇编函数</h5><p>汇编函数OsTaskSchedule实现新老任务的切换调度。从上文分析抢占调度函数VOID OsSchedResched(VOID)时可以知道，传入了2个参数，分别是新任务LosTaskCB <em>newTask和当前运行的任务LosTaskCB </em>runTask，对于Cortex-M核，这2个参数在该汇编函数中没有使用到。在执行汇编函数OsTaskSchedule前，全局变量g_runTask被赋值为要切换运行的新任务LosTaskCB *newTask。<br>我们看看这个汇编函数的源代码，首先往中断控制状态寄存器OS_NVIC_INT_CTRL中的OS_NVIC_PENDSVSET位置1，触发PendSV异常。执行完毕osTaskSchedule函数，返回上层函数抢占调度函数VOID OsSchedResched(VOID)。PendSV异常的回调函数是osPendSV汇编函数，下文会分析此函数。汇编函数OsTaskSchedule如下： </p>
+<pre><code class="java">  .type OsTaskSchedule, %function
+.global OsTaskSchedule
+OsTaskSchedule:
+    .fnstart
+    .cantunwind
+    ldr     r2, =OS_NVIC_INT_CTRL
+    ldr     r3, =OS_NVIC_PENDSVSET
+    str     r3, [r2]
+    bx      lr
+    .fnend
+</code></pre>
+<h5 id="3-3-osPendSV汇编函数"><a href="#3-3-osPendSV汇编函数" class="headerlink" title="3.3 osPendSV汇编函数"></a>3.3 osPendSV汇编函数</h5><p>接下来，我们分析下osPendSV汇编函数的源代码。⑴处把寄存器PRIMASK数值写入寄存器r12，备份中断的开关状态，然后执行指令cpsid I屏蔽全局中断。⑵处把当前任务栈的栈指针加载到寄存器r0。⑶处把寄存器r4-r12的数值压入当前任务栈，执行⑷把寄存器d8-d15的数值压入当前任务栈，r0为任务栈指针。<br>⑸处指令把g_oldTask指针地址加载到r5寄存器，然后下一条指令把g_oldTask指针指向的内存地址值加载到寄存器r1，然后使用寄存器r0数值更新g_oldTask任务的栈指针。<br>⑹处指令把g_runTask指针地址加载到r0寄存器，然后下一条指令把g_runTask指针指向的内存地址值加载到寄存器r0。此时，r5为上一个任务g_oldTask的指针地址，执行⑺处指令后，g_oldTask、g_runTask都指向新任务。<br>执行⑻处指令把g_runTask指针指向的内存地址值加载到寄存器r1，此时r1寄存器为新任务g_runTask的栈指针。⑼处指令把新任务栈中的数据加载到寄存器d8-d15寄存器，继续执行后续指令继续加载数据到r4-r12寄存器，然后执行⑽处指令更新psp任务栈指针。⑾处指令恢复中断状态，然后执行跳转指令，后续继续执行C代码VOID OsTaskEntry(UINT32 taskId)进入任务执行入口函数。 </p>
+<pre><code class="java">  .type osPendSV, %function
+.global osPendSV
+osPendSV:
+    .fnstart
+    .cantunwind
+⑴  mrs     r12, PRIMASK
+    cpsid   I
+
+TaskSwitch:
+⑵   mrs     r0, psp
+
+#if defined(LOSCFG_ARCH_CORTEX_M0)
+    subs    r0, #36
+    stmia   r0!, {r4-r7}
+    mov     r3, r8
+    mov     r4, r9
+    mov     r5, r10
+    mov     r6, r11
+    mov     r7, r12
+    stmia   r0!, {r3 - r7}
+
+    subs    r0, #36
+#else
+⑶   stmfd   r0!, {r4-r12}
+#if !defined(LOSCFG_ARCH_CORTEX_M3)
+⑷   vstmdb  r0!, {d8-d15}
+#endif
+#endif
+⑸  ldr     r5, =g_oldTask
+    ldr     r1, [r5]
+    str     r0, [r1]
+
+⑹  ldr     r0, =g_runTask
+    ldr     r0, [r0]
+    <span class="comment">/* g_oldTask = g_runTask */</span>
+⑺  str     r0, [r5]
+⑻  ldr     r1, [r0]
+
+#if !defined(LOSCFG_ARCH_CORTEX_M3) &amp;&amp; !defined(LOSCFG_ARCH_CORTEX_M0)
+��  vldmia  r1!, {d8-d15}
+#endif
+#if defined(LOSCFG_ARCH_CORTEX_M0)
+    adds    r1,   #16
+    ldmfd   r1!, {r3-r7}
+
+    mov     r8, r3
+    mov     r9, r4
+    mov     r10, r5
+    mov     r11, r6
+    mov     r12, r7
+    subs    r1,  #36
+    ldmfd   r1!, {r4-r7}
+
+    adds    r1,   #20
+#else
+    ldmfd   r1!, {r4-r12}
+#endif
+⑽  msr     psp,  r1
+
+⑾  msr     PRIMASK, r12
+    bx      lr
+    .fnend
+</code></pre>
+<h5 id="3-4-开关中断汇编函数"><a href="#3-4-开关中断汇编函数" class="headerlink" title="3.4 开关中断汇编函数"></a>3.4 开关中断汇编函数</h5><p>分析中断源代码的时候，提到过开关中断函数UINT32 LOS_IntLock(VOID)、UINT32 LOS_IntUnLock(VOID)、VOID LOS_IntRestore(UINT32 intSave)调用了汇编函数，这些汇编函数分别是本文要分析的ArchIntLock、ArchIntUnlock、ArchIntRestore。我们看下这些汇编代码，PRIMASK寄存器是单一bit的寄存器，置为1后，就关掉所有可屏蔽异常，只剩下NMI和硬Fault异常可以响应。默认值是0，表示没有关闭中断。汇编指令cpsid I会设置PRIMASK=1，关闭中断，指令cpsie I设置PRIMASK=0，开启中断。<br>⑴处ArchIntLock函数把寄存器PRIMASK数值返回并关闭中断。⑵处ArchIntUnlock函数把寄存器PRIMASK数值返回并开启中断。两个函数的返回结果可以传递给⑶处ArchIntRestore函数，把寄存器状态数值写入寄存器PRIMASK，用于恢复之前的中断状态。不管是ArchIntLock还是ArchIntUnlock，都可以和ArchIntRestore配对使用。 </p>
+<pre><code class="java">      .type ArchIntLock, %function
+    .global ArchIntLock
+⑴  ArchIntLock:
+        .fnstart
+        .cantunwind
+        mrs     r0, PRIMASK
+        cpsid   I
+        bx      lr
+        .fnend
+
+    .type ArchIntUnlock, %function
+    .global ArchIntUnlock
+⑵  ArchIntUnlock:
+        .fnstart
+        .cantunwind
+        mrs     r0, PRIMASK
+        cpsie   I
+        bx      lr
+        .fnend
+
+    .type ArchIntRestore, %function
+    .global ArchIntRestore
+⑶  ArchIntRestore:
+        .fnstart
+        .cantunwind
+        msr     PRIMASK, r0
+        bx      lr
+        .fnend
+</code></pre>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>本文带领大家一起剖析了LiteOS调度模块的源代码，包含调用接口及底层的汇编函数实现。感谢阅读，如有任何问题、建议， 都可以留言给我们： <a href="https://gitee.com/LiteOS/LiteOS/issues" rel="external nofollow noopener noreferrer" target="_blank">https://gitee.com/LiteOS/LiteOS/issues</a> 。<br>点击关注，第一时间了解华为云新鲜技术~</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-LiteOS内核源码分析-任务LOS_Schedule</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 09:46</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/d064fabf/" title="推荐系列-LiteOS内核源码分析-任务LOS_Schedule">https://www.hosiang.cn/d064fabf/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/d064fabf/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-LiteOS内核源码分析-任务LOS_Schedule》 — 狂欢马克思&url=https://www.hosiang.cn/d064fabf/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/d064fabf/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/d064fabf/&title=《推荐系列-LiteOS内核源码分析-任务LOS_Schedule》 — 狂欢马克思&source=&emsp;&emsp;摘要：调度，Schedule也称为Dispatch，是操作系统的一个重要模块，它负责选择系统要处理的下一个任务。调度模块需要协调处..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/d064fabf/&title=《推荐系列-LiteOS内核源码分析-任务LOS_Schedule》 — 狂欢马克思&pic=https://pic1.zhimg.com/80/v2-431e6d77184fe8b624a6ed9aea5b4ac8_720w.jpg" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/d064fabf/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、调度模块宏函数和内联函数"><span class="post-toc-text">1、调度模块宏函数和内联函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-1-宏函数和枚举"><span class="post-toc-text">1.1 宏函数和枚举</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-2-内联函数"><span class="post-toc-text">1.2 内联函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#1-2-1-内联函数STATIC-INLINE-BOOL-OsPreemptable-VOID"><span class="post-toc-text">1.2.1 内联函数STATIC INLINE BOOL OsPreemptable(VOID)</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#1-2-2-内联函数STATIC-INLINE-BOOL-OsPreemptableInSched-VOID"><span class="post-toc-text">1.2.2 内联函数STATIC INLINE BOOL OsPreemptableInSched(VOID)</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#1-2-3-内联函数STATIC-INLINE-VOID-LOS-Schedule-VOID"><span class="post-toc-text">1.2.3 内联函数STATIC INLINE VOID LOS_Schedule(VOID)</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、调度模块常用接口"><span class="post-toc-text">2、调度模块常用接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-1-抢占调度函数VOID-OsSchedResched-VOID"><span class="post-toc-text">2.1 抢占调度函数VOID OsSchedResched(VOID)</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-2-抢占调度函数VOID-OsSchedPreempt-VOID"><span class="post-toc-text">2.2 抢占调度函数VOID OsSchedPreempt(VOID)</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-3-时间片检查函数VOID-OsTimesliceCheck-VOID"><span class="post-toc-text">2.3 时间片检查函数VOID OsTimesliceCheck(VOID)</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3、调度模块汇编函数"><span class="post-toc-text">3、调度模块汇编函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-1-OsStartToRun汇编函数"><span class="post-toc-text">3.1 OsStartToRun汇编函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-2-OsTaskSchedule汇编函数"><span class="post-toc-text">3.2 OsTaskSchedule汇编函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-3-osPendSV汇编函数"><span class="post-toc-text">3.3 osPendSV汇编函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-4-开关中断汇编函数"><span class="post-toc-text">3.4 开关中断汇编函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小结"><span class="post-toc-text">小结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/c266e7f5/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-Linux 三剑客之 awk 实战详解教程
+        
+      </span>
+    </a>
+  
+  
+    <a href="/b351a9d2/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-NetCore的缓存使用详例</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

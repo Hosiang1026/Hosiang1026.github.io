@@ -1,0 +1,863 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一) | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;前言 Flutter 作为目前通用的业界跨平台解决方案，开辟了一套全新的设计理念，通过自研的 UI 框架，支持高效构建多端平台上的应用，同时保持着原生应用一样的高性能。 在Flutter项目开发过程…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)">
+<meta property="og:url" content="https://www.hosiang.cn/18f6ffe6/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;前言 Flutter 作为目前通用的业界跨平台解决方案，开辟了一套全新的设计理念，通过自研的 UI 框架，支持高效构建多端平台上的应用，同时保持着原生应用一样的高性能。 在Flutter项目开发过程…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0502845844684f60821bcb1029e409b1~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0502845844684f60821bcb1029e409b1~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0502845844684f60821bcb1029e409b1~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0502845844684f60821bcb1029e409b1~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0502845844684f60821bcb1029e409b1~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:updated_time" content="2021-07-23T15:43:07.045Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;前言 Flutter 作为目前通用的业界跨平台解决方案，开辟了一套全新的设计理念，通过自研的 UI 框架，支持高效构建多端平台上的应用，同时保持着原生应用一样的高性能。 在Flutter项目开发过程…">
+<meta name="twitter:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0502845844684f60821bcb1029e409b1~tplv-k3u1fbpfcp-watermark.image">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 2.3k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 9分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;前言 Flutter 作为目前通用的业界跨平台解决方案，开辟了一套全新的设计理念，通过自研的 UI 框架，支持高效构建多端平台上的应用，同时保持着原生应用一样的高性能。 在Flutter项目开发过程…<br><a id="more"></a></p>
+<pre><code>#### 前言 
+</code></pre><p>Flutter 作为目前通用的业界跨平台解决方案，开辟了一套全新的设计理念，通过自研的 UI 框架，支持高效构建多端平台上的应用，同时保持着原生应用一样的高性能。 在Flutter项目开发过程中，对插件的开发和复用能够提高开发效率，降低工程的耦合度。Flutter开发者可以引入对应插件就可以为项目快速集成相关能力，从而专注于具体业务功能的实现。 而在Flutter项目开发过程中面对通用业务逻辑拆分、或者需要对原生能力封装等场景时，开发者需要开发新的组件。<br>为减少开发者同时开发Android和iOS应用的成本，提升开发效率，降低集成地图SDK的门槛，腾讯位置服务团队也计划于业务实践中基于原生地图SDK能力封装一套地图Flutter插件，支持Flutter开发者跨平台调用地图SDK接口。 笔者在2019年实习期间，曾基于当时的最新版本4.2.4的Android地图SDK，将地图SDK中一些常用的基础的地图操作功能封装，构建了一套Android端的地图SDK Flutter插件。<br>现如今，地图SDK已经迭代到了4.4.0版本，笔者也将地图Flutter插件进行了一次相关版本升级。 本篇文章将介绍地图Flutter插件项目的构建、地图实例的加载以及demo示例呈现。对于地图基础操作的功能封装细节将在后续文章中进行详细讲解说明。 </p>
+<h4 id="地图Flutter插件项目的构建"><a href="#地图Flutter插件项目的构建" class="headerlink" title="地图Flutter插件项目的构建"></a>地图Flutter插件项目的构建</h4><h5 id="地图Flutter插件项目结构"><a href="#地图Flutter插件项目结构" class="headerlink" title="地图Flutter插件项目结构"></a>地图Flutter插件项目结构</h5><p>地图Flutter插件项目构架的整体结构如下图所示：<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0502845844684f60821bcb1029e409b1~tplv-k3u1fbpfcp-watermark.image" alt="Test" title="腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)"><br>android/ios目录：原生代码。对应为Android/iOS Flutter插件目录。<br> lib目录：Dart 代码。Flutter开发者将会使用这里的Flutter插件实现的接口。<br> example目录：地图SDK的demo程序。用于验证Flutter插件的可用性的使用示例。 </p>
+<h5 id="地图Flutter插件依赖配置项"><a href="#地图Flutter插件依赖配置项" class="headerlink" title="地图Flutter插件依赖配置项"></a>地图Flutter插件依赖配置项</h5><p>Android端的Flutter插件配置项与官网关于Android地图SDK的配置说明类似，需要配置android目录下的两个文件：build.gradle、AndroidManifest.xml。 其中Android端的Flutter插件的包名为com.tencent.tencentmap，AndroidManifest.xml文件配置如下： </p>
+<pre><code class="java">  &lt;manifest xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span>
+  <span class="keyword">package</span>=<span class="string">"com.tencent.tencentmap"</span>&gt;
+    &lt;!-- 腾讯地图 sdk 要求的权限(开始) --&gt;
+    &lt;!-- 访问网络获取地图服务 --&gt;
+    &lt;uses-permission android:name=<span class="string">"android.permission.INTERNET"</span> /&gt;
+    &lt;!-- 检查网络可用性 --&gt;
+    &lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_NETWORK_STATE"</span> /&gt;
+    &lt;!-- 访问WiFi状态 --&gt;
+    &lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_WIFI_STATE"</span> /&gt;
+    &lt;!-- 需要外部存储写权限用于保存地图缓存 --&gt;
+    &lt;uses-permission android:name=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span> /&gt;
+    &lt;!-- 获取 device id 辨别设备 --&gt;
+    &lt;uses-permission android:name=<span class="string">"android.permission.READ_PHONE_STATE"</span> /&gt;
+    &lt;!-- 获取日志读取权限，帮助我们提高地图 sdk 稳定性 --&gt;
+    &lt;uses-permission android:name=<span class="string">"android.permission.READ_LOGS"</span> /&gt;
+    &lt;!-- 腾讯地图 sdk 要求的权限(结束) --&gt;
+
+
+    &lt;!-- 腾讯定位 sdk 要求的权限  (开始) --&gt;
+    &lt;!-- 通过GPS得到精确位置 --&gt;
+    &lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_FINE_LOCATION"</span> /&gt;
+    &lt;!-- 通过网络得到粗略位置 --&gt;
+    &lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_COARSE_LOCATION"</span> /&gt;
+    &lt;!-- 访问网络. 某些位置信息需要从网络服务器获取 --&gt;
+    &lt;uses-permission android:name=<span class="string">"android.permission.INTERNET"</span> /&gt;
+    &lt;!-- 访问WiFi状态. 需要WiFi信息用于网络定位 --&gt;
+    &lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_WIFI_STATE"</span> /&gt;
+    &lt;!-- 修改WiFi状态. 发起WiFi扫描, 需要WiFi信息用于网络定位 --&gt;
+    &lt;uses-permission android:name=<span class="string">"android.permission.CHANGE_WIFI_STATE"</span> /&gt;
+    &lt;!-- 访问网络状态, 检测网络的可用性. 需要网络运营商相关信息用于网络定位 --&gt;
+    &lt;uses-permission android:name=<span class="string">"android.permission.ACCESS_NETWORK_STATE"</span> /&gt;
+    &lt;!-- 访问网络的变化, 需要某些信息用于网络定位 --&gt;
+    &lt;uses-permission android:name=<span class="string">"android.permission.CHANGE_NETWORK_STATE"</span> /&gt;
+    &lt;!-- 访问手机当前状态, 需要device id用于网络定位 --&gt;
+    &lt;uses-permission android:name=<span class="string">"android.permission.READ_PHONE_STATE"</span> /&gt;
+
+    &lt;!-- 腾讯定位 sdk 要求的权限 (结束) --&gt;
+    &lt;application&gt;
+
+        &lt;!-- 如果您key确认无误，却依然授权没有通过，请检查您的key的白名单配置 --&gt;
+        &lt;meta-data
+            android:name=<span class="string">"TencentMapSDK"</span>
+            android:value=<span class="string">"Your key"</span>/&gt;
+    &lt;/application&gt;
+&lt;/manifest&gt;
+
+</code></pre>
+<p>本文使用的Android端地图SDK版本为4.4.0。同时，本文Flutter插件的实现语言是基于Kotlin实现。build.gradle的依赖配置项如下： </p>
+<pre><code class="java">  dependencies {
+    implementation <span class="string">'com.android.support:appcompat-v7:27.1.1'</span>
+    implementation <span class="string">'com.tencent.map:tencent-map-vector-sdk:4.4.0'</span>
+    implementation <span class="string">"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"</span>
+    compile <span class="string">"org.jetbrains.kotlin:kotlin-script-runtime:1.2.71"</span>
+}
+
+
+</code></pre>
+<h4 id="地图Flutter插件加载地图实例"><a href="#地图Flutter插件加载地图实例" class="headerlink" title="地图Flutter插件加载地图实例"></a>地图Flutter插件加载地图实例</h4><p>Flutter插件在上层UI Dart端与底层Native SDK端之间起到了一层桥接的作用。 Flutter端与Native端之间通信的流程如下图所示：<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0502845844684f60821bcb1029e409b1~tplv-k3u1fbpfcp-watermark.image" alt="Test" title="腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)"><br>Flutter 跟Native代码可以通过 MethodChannel 进行通信。客户端通过 MethodChannel 将方法调用和参数发生给服务端，服务端也通过 MethodChannel 接收相关的数据。 因此，在Flutter插件开发中，MethodChannel与EventChannel是两个不可避免用到的类。 用比较通俗的语言来解释这两个类的功能： </p>
+<p>后续文章将详细讲解MethodChannel与EventChannel在地图SDK插件中的使用。 言归正传，本文重点要讲解使用PlatformView对地图实例进行加载的流程。 PlatformView的使用方式是与MethodChannel的使用方式类似的，具体的加载地图实例流程如下：<br>（1）Native端创建TencentMapView<br>TencentMapView继承自PlatformView。 PlatformView为Flutter 1.0版本中的通用组件，区分为Android和iOS。在Android平台上叫做 AndroidView组件，在iOS平台，叫UIKitView组件。 因此利用PlatformView构建加载Native SDK中的地图实例并在PlatformView中维护地图实例的生命周期。 TencentMapView中也加入了MethodChannel与EventChannel的注册逻辑，主要用于地图的接口进行双端交互，对于这两部分的说明将在后续文章中进行详细介绍。 Android端的TencentMapView实现如下： </p>
+<pre><code class="java">  class TencentMapView(context: Context, private val id: Int, private val activityState: AtomicInteger, tencentMapOptions: TencentMapOptions) : PlatformView, Application.ActivityLifecycleCallbacks{
+
+    <span class="comment">// 加载构建地图实例</span>
+    <span class="keyword">private</span> val mapView = MapView(context, tencentMapOptions)
+    <span class="keyword">private</span> val registrarActivityHashCode: Int = TencentmapPlugin.registrar.activity().hashCode()
+
+    <span class="comment">// 维护地图实例生命周期</span>
+    <span class="function">fun <span class="title">setup</span><span class="params">()</span></span>{
+        when(activityState.get()){
+            STOPPED -&gt; {
+                mapView.onStop()
+            }
+            RESUMED -&gt; {
+                mapView.onResume()
+            }
+            CREATED -&gt; {
+                mapView.onStart()
+            }
+            DESTROYED -&gt; {
+                mapView.onDestroy()
+            }
+        }
+
+        <span class="comment">// flutter端调用地图native SDK相关功能的MethodChannel</span>
+        val mapChannel = MethodChannel(registrar.messenger(), <span class="string">"$mapChannelName$id"</span>)
+        mapChannel.setMethodCallHandler { methodCall, result -&gt;
+            MAP_METHOD_HANDLER[methodCall.method]
+                    ?.with(mapView.map)
+                    ?.onMethodCall(methodCall, result) ?: result.notImplemented()
+        }
+
+        <span class="comment">// native SDK通知flutter层相关消息的EventChannel</span>
+        val mapEventChannel = EventChannel(registrar.messenger(), <span class="string">"$mapChannelName$id"</span>)
+
+    }
+}
+
+</code></pre>
+<p>（2）在插件Native层的入口文件TencentmapPlugin.kt中注册刚写好的TencentMapView实例tencentMapView： </p>
+<pre><code class="java"><span class="meta">@JvmStatic</span>
+  <span class="function">fun <span class="title">registerWith</span><span class="params">(registrar: PluginRegistry.Registrar)</span></span>{
+  <span class="comment">//将TencentMapView实例注册到插件中</span>
+  registrar.platformViewRegistry().registerViewFactory(<span class="string">"com.tencentmap/map"</span>, tencentMapView)
+  }
+
+</code></pre>
+<p>（3）在Flutter端的dart代码使用AndroidView，将AndroidView嵌入到TencentMapView中： </p>
+<pre><code class="java">  <span class="class"><span class="keyword">class</span> <span class="title">TencentMapView</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span></span>{
+  <span class="function"><span class="keyword">const</span> <span class="title">TencentMapView</span><span class="params">({</span></span>
+<span class="function"><span class="params">    <span class="keyword">this</span>.onTencentMapViewCreated,</span></span>
+<span class="function"><span class="params">})</span></span>;
+  <span class="keyword">final</span> MapCreatedCallback onTencentMapViewCreated;
+  <span class="meta">@override</span>
+  <span class="function">Widget <span class="title">build</span><span class="params">(BuildContext context)</span> </span>{
+    <span class="keyword">if</span> (defaultTargetPlatform == TargetPlatform.android) {
+      <span class="keyword">return</span> AndroidView(
+          viewType: <span class="string">'com.tencentmap/map'</span>,
+          onPlatformViewCreated: _onViewCreated,
+          creationParams: {
+
+          },
+          creationParamsCodec: <span class="function"><span class="keyword">const</span> <span class="title">StandardMessageCodec</span><span class="params">()</span>,</span>
+<span class="function">      )</span>;
+    }
+  }
+}
+
+</code></pre>
+<p>这里要注意的一点是，在Android端和Flutter端注册的viewType中的字符串值必须保持一致，用于唯一标识。在本文中的标识字符串为’com.tencentmap/map’，将Flutter端的AndroidView与Native端的TencentMapView建立了关联。 </p>
+<h4 id="Flutter插件对应Demo示例呈现"><a href="#Flutter插件对应Demo示例呈现" class="headerlink" title="Flutter插件对应Demo示例呈现"></a>Flutter插件对应Demo示例呈现</h4><h5 id="Demo示例"><a href="#Demo示例" class="headerlink" title="Demo示例"></a>Demo示例</h5><p>demo UI采用了Flutter自支持的Material Design风格的一套UI组件。 Flutter demo调用地图SDK展示地图实例的界面如图所示：<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0502845844684f60821bcb1029e409b1~tplv-k3u1fbpfcp-watermark.image" alt="Test" title="腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)"><br>demo中还实现了地图基础操作的相关功能性接口，例如相关覆盖物的绘制等，示例如下图所示：<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0502845844684f60821bcb1029e409b1~tplv-k3u1fbpfcp-watermark.image" alt="Test" title="腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)"><br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0502845844684f60821bcb1029e409b1~tplv-k3u1fbpfcp-watermark.image" alt="Test" title="腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)"> </p>
+<h5 id="版本升级过程中遇到的小坑"><a href="#版本升级过程中遇到的小坑" class="headerlink" title="版本升级过程中遇到的小坑"></a>版本升级过程中遇到的小坑</h5><p>在实际版本升级过程中，原有项目的demo运行起来是白屏，控制台打印出如下信息： </p>
+<pre><code class="java">  [VERBOSE-<span class="number">2</span>:ui_dart_state.cc(<span class="number">157</span>)] Unhandled Exception: ServicesBinding.defaultBinaryMessenger was accessed before the binding was initialized.
+If you<span class="string">'re running an application and need to access the binary messenger before `runApp()` has been called (for example, during plugin initialization), then you need to explicitly call the `WidgetsFlutterBinding.ensureInitialized()` first.</span>
+<span class="string">If you'</span>re running a test, you can call the `TestWidgetsFlutterBinding.ensureInitialized()` as the first line in your test<span class="string">'s `main()` method to initialize the binding.</span>
+<span class="string">#0      defaultBinaryMessenger.&lt;anonymous closure&gt; (package:flutter/src/services/binary_messenger.dart:76:7)</span>
+<span class="string">#1      defaultBinaryMessenger (package:flutter/src/services/binary_messenger.dart:89:4)</span>
+<span class="string">#2      MethodChannel.binaryMessenger (package:flutter/src/services/platform_channel.dart:140:62)</span>
+<span class="string">#3      MethodChannel.invokeMethod (package:flutter/src/services/platform_channel.dart:314:35)</span>
+<span class="string">#4      MethodChannel.invokeMapMethod (package:flutter/src/services/platfo&lt;…&gt;</span>
+<span class="string"></span>
+</code></pre>
+<p>根据控制台的输出信息，经过查阅相关资料后找到了原因：该问题由Flutter版本升级导致的重大更改引起的：<a href="https://groups.google.com/g/flutter-announce/c/sHAL2fBtJ1Y/m/mGjrKH3dEwAJ" rel="external nofollow noopener noreferrer" target="_blank">https://groups.google.com/g/flutter-announce/c/sHAL2fBtJ1Y/m/mGjrKH3dEwAJ</a> 具体解决方法为：在main.dart文件中的main方法中，需要在runApp()前显式调用如下代码： </p>
+<pre><code class="java">WidgetsFlutterBinding.ensureInitialized();
+
+</code></pre>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>本文主要介绍了腾讯地图SDK Flutter插件项目的构建、地图实例加载、demo呈现，对地图基础功能性接口的封装细节，将会在后续文章持续讲解。 </p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 09:53</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/18f6ffe6/" title="推荐系列-腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)">https://www.hosiang.cn/18f6ffe6/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/18f6ffe6/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)》 — 狂欢马克思&url=https://www.hosiang.cn/18f6ffe6/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/18f6ffe6/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/18f6ffe6/&title=《推荐系列-腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)》 — 狂欢马克思&source=&emsp;&emsp;前言 Flutter 作为目前通用的业界跨平台解决方案，开辟了一套全新的设计理念，通过自研的 UI 框架，支持高效构建多端平台上的..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/18f6ffe6/&title=《推荐系列-腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)》 — 狂欢马克思&pic=https://api.ixiaowai.cn/gqapi/gqapi.php" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/18f6ffe6/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#地图Flutter插件项目的构建"><span class="post-toc-text">地图Flutter插件项目的构建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#地图Flutter插件项目结构"><span class="post-toc-text">地图Flutter插件项目结构</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#地图Flutter插件依赖配置项"><span class="post-toc-text">地图Flutter插件依赖配置项</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#地图Flutter插件加载地图实例"><span class="post-toc-text">地图Flutter插件加载地图实例</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Flutter插件对应Demo示例呈现"><span class="post-toc-text">Flutter插件对应Demo示例呈现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Demo示例"><span class="post-toc-text">Demo示例</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#版本升级过程中遇到的小坑"><span class="post-toc-text">版本升级过程中遇到的小坑</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/72de3e5/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-百度 Serverless 函数计算引擎 EasyFaaS 正式开源
+        
+      </span>
+    </a>
+  
+  
+    <a href="/7cb18fbc/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-集群通信-从心跳说起</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

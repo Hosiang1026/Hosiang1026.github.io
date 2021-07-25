@@ -1,0 +1,1118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-并发容器与并发控制 - JUC | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;摘要 为什么没见人用Vector和Hashtable了？HashMap它又线程不安全在哪里？ ConcurrentHashMap的进化与骚操作有哪些？ Copy-On-Write是个啥思想？有哪些例子？ 为什么需要并发队列？又有哪些我…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-并发容器与并发控制 - JUC">
+<meta property="og:url" content="https://www.hosiang.cn/6bf59c72/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;摘要 为什么没见人用Vector和Hashtable了？HashMap它又线程不安全在哪里？ ConcurrentHashMap的进化与骚操作有哪些？ Copy-On-Write是个啥思想？有哪些例子？ 为什么需要并发队列？又有哪些我…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-07-23T15:43:06.993Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-并发容器与并发控制 - JUC">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;摘要 为什么没见人用Vector和Hashtable了？HashMap它又线程不安全在哪里？ ConcurrentHashMap的进化与骚操作有哪些？ Copy-On-Write是个啥思想？有哪些例子？ 为什么需要并发队列？又有哪些我…">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-并发容器与并发控制 - JUC" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-并发容器与并发控制 - JUC
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 3.7k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 14分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;摘要 为什么没见人用Vector和Hashtable了？HashMap它又线程不安全在哪里？ ConcurrentHashMap的进化与骚操作有哪些？ Copy-On-Write是个啥思想？有哪些例子？ 为什么需要并发队列？又有哪些我…<br><a id="more"></a></p>
+<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>   为什么没见人用 </p>
+<pre><code class="java">Vector
+</code></pre>
+<p> 和 </p>
+<pre><code class="java">Hashtable
+</code></pre>
+<p> 了？ </p>
+<pre><code class="java">HashMap
+</code></pre>
+<p> 它又线程不安全在哪里？ </p>
+<pre><code class="java">ConcurrentHashMap
+</code></pre>
+<p> 的进化与骚操作有哪些？<br>   Copy-On-Write是个啥思想？有哪些例子？<br>   为什么需要并发队列？又有哪些我们视而不见的并发的队列？<br>   当我们想控制线程的先来后到时该咋办？一个个去讲道理吗？ </p>
+<h3 id="并发容器"><a href="#并发容器" class="headerlink" title="并发容器"></a>并发容器</h3><p>  先总览一下这些并发容器都在整什么幺蛾子 </p>
+<pre><code class="java">  <span class="number">1</span>. Concurrent*  大部分是通过CAS实现并发
+<span class="number">2</span>. CopyOnWrite*  复制一份原数据
+<span class="number">3</span>. Blocking*  通过AQS实现
+复制代码
+</code></pre>
+<h4 id="一、为什么Vector和Hashtable被留在了历史的长河中？"><a href="#一、为什么Vector和Hashtable被留在了历史的长河中？" class="headerlink" title="一、为什么Vector和Hashtable被留在了历史的长河中？"></a>一、为什么Vector和Hashtable被留在了历史的长河中？</h4><p>  很简单，别想太多，就是因为性能不好。 </p>
+<h5 id="那为什么性能不好呢？它性能丢失在哪儿？"><a href="#那为什么性能不好呢？它性能丢失在哪儿？" class="headerlink" title="那为什么性能不好呢？它性能丢失在哪儿？"></a>那为什么性能不好呢？它性能丢失在哪儿？</h5><p>  我们先看一看 </p>
+<pre><code class="java">Vector
+</code></pre>
+<p> 的 </p>
+<pre><code class="java">get
+</code></pre>
+<p> 方法： </p>
+<pre><code>![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+</code></pre><p>   look, look, 这个 </p>
+<pre><code class="java"><span class="keyword">synchronized</span>
+</code></pre>
+<p> 是直接修饰在方法上的，如果你上下翻翻，就可以发现基本上这个类的所有方法都是 </p>
+<pre><code class="java"><span class="keyword">synchronized</span>
+</code></pre>
+<p> 修饰的。<br>  那有人可能问了，为什么锁方法就性能差？因为这个锁粒度是实例对象呀 </p>
+<pre><code class="java">Hashtable
+</code></pre>
+<p> 也是如此。 </p>
+<h4 id="二、为什么HashMap是线程不安全的？"><a href="#二、为什么HashMap是线程不安全的？" class="headerlink" title="二、为什么HashMap是线程不安全的？"></a>二、为什么HashMap是线程不安全的？</h4><pre><code>同时put碰撞导致数据丢失 比如两个线程都放数据，使用同样的key，那么它们计算出来的hash值是一样的并放在同一位置，这必然会导致一个数据丢失  
+同时put扩容导致数据丢失 同时扩容时，只会保留一个扩容的数组。 
+
+
+
+   ![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+
+
+
+
+
+死循环造成CPU100% 多线程同时扩容，可能会造成循环链表导致CPU100%。但是这个问题本身追究并无意义（Sun官方也是这么认为的，他觉得你就不应该用hashMap来解决并发场景，这本身就有问题不是吗？）。如果着实有兴趣可以瞅瞅这个 coolshell.cn/articles/96…  
+</code></pre><h4 id="三、ConcurrentHashMap-1-7与1-8的差别是什么？"><a href="#三、ConcurrentHashMap-1-7与1-8的差别是什么？" class="headerlink" title="三、ConcurrentHashMap 1.7与1.8的差别是什么？"></a>三、ConcurrentHashMap 1.7与1.8的差别是什么？</h4><pre><code>数据结构 1.7时的结构（Segment + HashEntry + Unsafe）： 
+
+
+
+   ![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+
+
+
+
+ 1.8时的结构（移除Segment，使锁的粒度更小，Synchronized + CAS + Node + Unsafe）： 
+
+
+
+   ![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+
+
+
+
+
+Hash碰撞 将原本的拉链法变为如果节点数超过8个以后就变换为红黑树。 这里有一个小问题，为什么超过8就转为红黑树？为什么是8？为什么不一开始就使用红黑树？ 
+
+ 红黑树每个节点占用空间是链表的两倍。 
+ 作者用泊松分布的概率计算，到8的时候概率也就是极小了。 
+
+
+
+
+   ![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+
+
+
+
+
+保证并发安全 1.7使用分段锁Segment(extends ReentreenLock)来保证16个段的安全（段不可动态增加）；1.8使用 
+</code></pre><pre><code class="java">CAS
+</code></pre>
+<ul>
+<li><pre><code class="java"><span class="keyword">synchronized</span>
+</code></pre>
+来保证，粒度为每个Node。 </li>
+</ul>
+<pre><code>   ![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+
+
+
+
+
+查询复杂度 当冲突超过8个时也能保证查询效率，由原来的拉链法的 
+</code></pre><pre><code class="java">O(n)
+</code></pre>
+<p> 变为红黑树的 </p>
+<pre><code class="java">O(logn)
+</code></pre>
+<h4 id="四、ConcurrentHashMap-如何实现如a-这样的组合操作？"><a href="#四、ConcurrentHashMap-如何实现如a-这样的组合操作？" class="headerlink" title="四、ConcurrentHashMap 如何实现如a++这样的组合操作？"></a>四、ConcurrentHashMap 如何实现如a++这样的组合操作？</h4><p>  显然， </p>
+<pre><code class="java">ConcurrentHashMap
+</code></pre>
+<p> 是保证了同时put的并发安全性，但是并没有说，你同时执行 </p>
+<pre><code class="java">a++
+</code></pre>
+<p> 时也是线程安全的： </p>
+<pre><code class="java">  <span class="keyword">int</span> a = map.get(key);
+<span class="keyword">int</span> b = a+<span class="number">1</span>;
+map.put(key, b);
+复制代码
+</code></pre>
+<p>  那让我们来想想，咋解决这个问题呢？<br>  把这段用 </p>
+<pre><code class="java"><span class="keyword">synchronized</span>
+</code></pre>
+<p> 包起来吗？<br>  那使用 </p>
+<pre><code class="java">ConcurrentHashMap
+</code></pre>
+<p> 还有什么意义呢？我们来看看这样一个方法：replace </p>
+<pre><code class="java">  <span class="comment">// 利用CAS的思想，去循环的判断并进行++的操作，直到成功为止</span>
+<span class="comment">// replace保证了并发修改的安全性</span>
+<span class="keyword">while</span> (<span class="keyword">true</span>) {
+    <span class="keyword">int</span> ori = map.get(<span class="string">"key"</span>);
+    <span class="keyword">int</span> tar = ori + <span class="number">1</span>;
+    <span class="keyword">boolean</span> isSuccess = map.replace(<span class="string">"key"</span>, ori, tar);
+    <span class="keyword">if</span> (isSuccess) {
+        <span class="keyword">break</span>;
+    }
+}
+复制代码
+</code></pre>
+<p>  再看一个组合操作，用于解决相同key的put覆盖问题： </p>
+<pre><code class="java">putIfAbsent
+</code></pre>
+<pre><code class="java">  <span class="comment">// 核心思想如下表示</span>
+<span class="keyword">if</span> (!map.contains(<span class="string">"key"</span>)){
+    <span class="keyword">return</span> map.put(<span class="string">"key"</span>, <span class="string">"value"</span>);
+}<span class="keyword">else</span> {
+    <span class="keyword">return</span> map.get(<span class="string">"key"</span>);
+}
+复制代码
+</code></pre>
+<h4 id="五、CopyOnWriteArrayList适用场景有哪些？"><a href="#五、CopyOnWriteArrayList适用场景有哪些？" class="headerlink" title="五、CopyOnWriteArrayList适用场景有哪些？"></a>五、CopyOnWriteArrayList适用场景有哪些？</h4><h5 id="我们先想想为什么会有这个玩意？"><a href="#我们先想想为什么会有这个玩意？" class="headerlink" title="我们先想想为什么会有这个玩意？"></a>我们先想想为什么会有这个玩意？</h5><p>   用来代替 </p>
+<pre><code class="java">Vector
+</code></pre>
+<p> 和 </p>
+<pre><code class="java">SynchronizedList
+</code></pre>
+<p> ，就和 </p>
+<pre><code class="java">ConcurrentHashMap
+</code></pre>
+<p> 代替 </p>
+<pre><code class="java">SynchronizedMap
+</code></pre>
+<p> 的原因一样 </p>
+<pre><code class="java">Vector
+</code></pre>
+<p> 和 </p>
+<pre><code class="java">SynchronizedList
+</code></pre>
+<p> 的锁的粒度太大，并发效率相比较低，并且在遍历时无法修改。<br>   Copy-On-Write容器还包括 </p>
+<pre><code class="java">CopyOnWriteArraySet
+</code></pre>
+<p> ，用于替代同步的 </p>
+<pre><code class="java">Set
+</code></pre>
+<h5 id="好了，现在我们来说说适用场景"><a href="#好了，现在我们来说说适用场景" class="headerlink" title="好了，现在我们来说说适用场景"></a>好了，现在我们来说说适用场景</h5><pre><code>读多写少 读操作需要尽可能的快，而写操作哪怕慢一些也无伤大雅，例如：黑名单场景。  
+写入实时性要求不高 就是说，我的修改不是说非得立即生效，哪怕是有那么一小会，还是在读之前的数据，也没关系。  
+</code></pre><h5 id="CopyOnWriteArrayList的读写规则是什么？"><a href="#CopyOnWriteArrayList的读写规则是什么？" class="headerlink" title="CopyOnWriteArrayList的读写规则是什么？"></a>CopyOnWriteArrayList的读写规则是什么？</h5><pre><code>读读同步、读写同步、写写互斥  
+看起来是不是和读写锁的规则贼像？但是不一样哦。这里有一个升级，就是你即便在写，我也是可以读的。  
+我们来看一下写入的时候 
+
+
+
+   ![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+
+
+
+
+ 上来先锁住，然后整一个新的数组出来，把新元素怼进去，再改一下原地址，解锁，一气呵成。 
+读取的时候呢？ 
+
+
+
+   ![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+
+
+
+
+ 啥保护措施都没有的，读就完事了。 
+</code></pre><h5 id="实现原理是什么？"><a href="#实现原理是什么？" class="headerlink" title="实现原理是什么？"></a>实现原理是什么？</h5><p>   CopyOnWrite原理：写入时会先搞一个副本出来，写好以后改地址<br>   “不变性”原理：每个list都相当于一个不可变的集合，没有修改操作在上面进行 </p>
+<h5 id="那有何缺点呢？"><a href="#那有何缺点呢？" class="headerlink" title="那有何缺点呢？"></a>那有何缺点呢？</h5><p>   数据一致性：只能保证最终数据的一致性，不能保证实时一致性。<br>   内存占用：副本可是占用一倍的内存的哦。 </p>
+<h4 id="六、并发队列又是什么？"><a href="#六、并发队列又是什么？" class="headerlink" title="六、并发队列又是什么？"></a>六、并发队列又是什么？</h4><p>  就是保证了并发安全的队列，分为阻塞队列（如下图）和非阻塞队列，阻塞与非阻塞的区别就是，你放入（或者取出）元素时，在队列已满（或者已空）的情况下会不会阻塞。 </p>
+<pre><code>![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+</code></pre><p>   阻塞队列最典型的应用就是生产者消费者。 </p>
+<pre><code>![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+</code></pre><p>  那上图的这些队列有何特点呢？我们一一道来 </p>
+<pre><code class="java">ArrayBlockingQueue
+</code></pre>
+<p> : 有界、可指定容量、底层由数组实现、可设置公平与否 </p>
+<pre><code>  ![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+
+
+
+
+我们可以看到在放入元素那一步使用了可重入锁的锁住（可打断）的方法。 
+</code></pre><pre><code class="java">PriorityBlockingQueue
+</code></pre>
+<p> : 支持优先级设置（依据对象的自然排序顺序或者是构造函数所带的Comparator）、队列的出入顺序是设置的顺序（不是先进先出）、无界队列、 </p>
+<pre><code class="java">PriorityQueue
+</code></pre>
+<p> 的线程安全版本。  </p>
+<pre><code class="java">LinkedBlockingQueue
+</code></pre>
+<p> : 默认无界(容量为Integer.MAX_VALUE，容量可指定）、内部结构为一个Node数组+两把锁、一般情况下性能优于 </p>
+<pre><code class="java">ArrayBlockingQueue
+</code></pre>
+<p> （锁粒度更小） </p>
+<pre><code>  ![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+
+
+
+
+这里使用的是 
+</code></pre><pre><code class="java">Condition
+</code></pre>
+<ul>
+<li><pre><code class="java">ReentrantLock
+</code></pre>
+，其实就相当于  <pre><code class="java"><span class="keyword">synchronized</span>
+</code></pre>
+</li>
+<li><pre><code class="java">Object.wait()
+</code></pre>
+</li>
+<li><pre><code class="java">Object.notify()
+</code></pre>
+，这是一个适用于生产者消费者的绝佳队列，如果想看原生实现可以瞅瞅我在并发原理中利用 wait + notify 实现的生产者消费者。 </li>
+</ul>
+<pre><code>  ![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+
+
+
+
+我们看这个放入元素的方法就可以理解到：如果队列已满，则阻塞，否则就放一个元素，如果还可以继续放，则唤醒在notFull中等待的线程，如果放之前队列为空，则唤醒在notEmpty上等待的线程。 
+</code></pre><pre><code class="java">SynchronousQueue
+</code></pre>
+<p> : 容量为0不是1、线程池 </p>
+<pre><code class="java">Executors.newCacheThreadPool()
+</code></pre>
+<p> 使用的阻塞队列 </p>
+<pre><code>  ![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+
+
+
+
+它没有实际的容量，任意线程（生��者��程或者消费者线程，生产类型的操作比如put，offer，消费类型的操作比如poll，take）都会等待知道获得数据或者交付完成数据才会返回，一个生产者线程的使命是将线程附着着的数据交付给一个消费者线程，而一个消费者线程则是等待一个生产者线程的数据。 
+</code></pre><pre><code class="java">ConcurrentLinkedQueue
+</code></pre>
+<p> : 并发包中唯一一个非阻塞的队列，内部由链表实现、核心思想也是CAS。 </p>
+<pre><code>![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+</code></pre><pre><code class="java">DelayQueue
+</code></pre>
+<p> : 延迟队列（根据延迟时间排序）、元素需实现 </p>
+<pre><code class="java">Delayed
+</code></pre>
+<p> 接口（规定排序规则）  </p>
+<h3 id="控制并发流程"><a href="#控制并发流程" class="headerlink" title="控制并发流程"></a>控制并发流程</h3><p>  先瞅瞅都有哪些可以控制并发流程 </p>
+<pre><code>![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+</code></pre><h4 id="七、CountDownLatch有哪些典型的适用场景？"><a href="#七、CountDownLatch有哪些典型的适用场景？" class="headerlink" title="七、CountDownLatch有哪些典型的适用场景？"></a>七、CountDownLatch有哪些典型的适用场景？</h4><pre><code>一个线程等多个线程执行完成 在媒体处理中，拼接命令需要等所有待拼接的任务下载完成后才执行。  
+多个线程等一个线程执行完 压测场景下，所有线程等一声令下立马向服务器施加压力，而不是还去慢悠悠的创建线程。  
+多等多  
+</code></pre><p>  下面举一个小栗子，模拟运动员跑步的场景，所有运动员等枪响后开跑，待运动员都到达终点后裁判才宣布比赛结束。 </p>
+<pre><code class="java">  CountDownLatch begin = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);
+CountDownLatch end = <span class="keyword">new</span> CountDownLatch(<span class="number">10</span>);
+ExecutorService service = Executors.newFixedThreadPool(<span class="number">5</span>);
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) {
+    <span class="keyword">final</span> <span class="keyword">int</span> no = i + <span class="number">1</span>;
+    Runnable runnable = () -&gt; {
+        System.out.println(<span class="string">"No."</span> + no + <span class="string">"准备完毕，等待枪响"</span>);
+        <span class="keyword">try</span> {
+            begin.await();
+            System.out.println(<span class="string">"No."</span> + no + <span class="string">"开始冲刺了"</span>);
+            Thread.sleep((<span class="keyword">long</span>) (Math.random() * <span class="number">10000</span>));
+            System.out.println(<span class="string">"No."</span> + no + <span class="string">"跑到终点了"</span>);
+        } <span class="keyword">catch</span> (InterruptedException e) {
+            e.printStackTrace();
+        } <span class="keyword">finally</span> {
+            end.countDown();
+        }
+    };
+    service.submit(runnable);
+}
+<span class="comment">//裁判员搞一些准备工作...</span>
+Thread.sleep(<span class="number">5000</span>);
+System.out.println(<span class="string">"枪响，比赛开始！"</span>);
+begin.countDown();
+
+end.await();
+System.out.println(<span class="string">"所有人到达终点，比赛结束！"</span>);
+复制代码
+</code></pre>
+<p>  这个类不能重用，即不可以重新计数。如果需要重用，考虑CyclicBarrier和建新的实例。 </p>
+<h4 id="八、Semaphore有哪些适用场景？"><a href="#八、Semaphore有哪些适用场景？" class="headerlink" title="八、Semaphore有哪些适用场景？"></a>八、Semaphore有哪些适用场景？</h4><p>  需要控制并发的线程数时。<br>  例如：在媒体处理的场景中，一台机器的CPU性能是有限的，我们最多只能允许3个转码任务同时进行，这个时候就需要控制执行转码的线程数量了。<br>  我们用一张图来理解一下： </p>
+<pre><code>![Test](https://user-gold-cdn.xitu.io/2020/6/18/172c548d124a472f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1  &apos;并发容器与并发控制 - JUC&apos;) 
+</code></pre><p>   ���下���看一个小Demo </p>
+<pre><code class="java">  <span class="keyword">static</span> Semaphore semaphore = <span class="keyword">new</span> Semaphore(<span class="number">3</span>, <span class="keyword">true</span>);
+
+<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+    ExecutorService service = Executors.newFixedThreadPool(<span class="number">50</span>);
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) {
+        service.submit(<span class="keyword">new</span> Task());
+    }
+    service.shutdown();
+}
+
+<span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Task</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>{
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+        <span class="keyword">try</span> {
+            semaphore.acquire();
+            <span class="comment">// 这里需要设置请求的数量</span>
+            <span class="comment">//semaphore.acquire(2);</span>
+        } <span class="keyword">catch</span> (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(Thread.currentThread().getName() + <span class="string">"拿到了许可证"</span>);
+        <span class="keyword">try</span> {
+            Thread.sleep(<span class="number">2000</span>);
+        } <span class="keyword">catch</span> (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(Thread.currentThread().getName() + <span class="string">"释放了许可证"</span>);
+        semaphore.release();
+        <span class="comment">// 也可以设置释放的数量</span>
+        <span class="comment">//semaphore.release(2);</span>
+    }
+}
+复制代码
+</code></pre>
+<p>  注意点： </p>
+<p>   获取和释放的数量必须一致（比如你请求的是3个，但是你却每次只释放2个，那这个许可证岂不是就越用越少了，这玩意并没有在类的层面进行限制，所以需要编码时候注意）。<br>   公平性一般设置为true比较合理（因为信号量一般用在控制慢服务，如果你还设置不公平，就很容易导致饥饿）。<br>   并不是必须由请求的线程去释放，也可以由其他线程去释放（可以是线程A获取了2个，线程B没有获取，只去释放2个）。 </p>
+<h4 id="九、CyclicBarrier与CountDownLatch的区别是什么？"><a href="#九、CyclicBarrier与CountDownLatch的区别是什么？" class="headerlink" title="九、CyclicBarrier与CountDownLatch的区别是什么？"></a>九、CyclicBarrier与CountDownLatch的区别是什么？</h4><pre><code>作用不同： 
+</code></pre><pre><code class="java">CyclicBarrier
+</code></pre>
+<p> 需要等待固定数量的线程到达栅栏后才能继续执行，而 </p>
+<pre><code class="java">CountDownLatch
+</code></pre>
+<p> 只需要计数到0即可。也就是说， </p>
+<pre><code class="java">CountDownLatch
+</code></pre>
+<p> 用于事件， </p>
+<pre><code class="java">CyclicBarrier
+</code></pre>
+<p> 用于线程。 来看一个 </p>
+<pre><code class="java">CyclicBarrier
+</code></pre>
+<p> 的Demo：  </p>
+<pre><code class="java">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+    CyclicBarrier cyclicBarrier = <span class="keyword">new</span> CyclicBarrier(<span class="number">5</span>, () -&gt; System.out.println(<span class="string">"所有人都到场了， 大家统一出发！"</span>));
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) {
+        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Task(i, cyclicBarrier)).start();
+    }
+}
+
+<span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Task</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>{
+    <span class="keyword">private</span> <span class="keyword">int</span> id;
+    <span class="keyword">private</span> CyclicBarrier cyclicBarrier;
+
+    <span class="function"><span class="keyword">public</span> <span class="title">Task</span><span class="params">(<span class="keyword">int</span> id, CyclicBarrier cyclicBarrier)</span> </span>{
+        <span class="keyword">this</span>.id = id;
+        <span class="keyword">this</span>.cyclicBarrier = cyclicBarrier;
+    }
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+        System.out.println(<span class="string">"线程"</span> + id + <span class="string">"现在前往集合地点"</span>);
+        <span class="keyword">try</span> {
+            Thread.sleep((<span class="keyword">long</span>) (Math.random()*<span class="number">10000</span>));
+            System.out.println(<span class="string">"线程"</span>+id+<span class="string">"到了集合地点，开始等待其他人到达"</span>);
+            cyclicBarrier.await();
+            System.out.println(<span class="string">"线程"</span>+id+<span class="string">"出发了"</span>);
+        } <span class="keyword">catch</span> (InterruptedException | BrokenBarrierException e) {
+            e.printStackTrace();
+        }
+    }
+}
+复制代码
+</code></pre>
+<p>   可重用性不同： </p>
+<pre><code class="java"><span class="keyword">new</span> CyclicBarrier(<span class="number">5</span>)
+</code></pre>
+<p> 等5个线程到了后执行 </p>
+<pre><code class="java">run
+</code></pre>
+<p> ，还可以继续等接下来的5个线程到。 </p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>  呼呼，总算说完了花里胡哨的并发容器，现在知道了可以用CopyOnWrite去解决读多写少的场景；用阻塞队列去实现生产者消费者模型；用 </p>
+<pre><code class="java">CountDownLatch
+</code></pre>
+<p> 来驯服一个个溜得贼快的线程。<br>  下一章我们搞个大事情，并发界的总统山： </p>
+<pre><code class="java">AQS
+</code></pre>
+<p> 。尝试着利用 </p>
+<pre><code class="java">AQS
+</code></pre>
+<p> 去实现一个我们自己的并发工具。 </p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-并发容器与并发控制 - JUC</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 09:48</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/6bf59c72/" title="推荐系列-并发容器与并发控制 - JUC">https://www.hosiang.cn/6bf59c72/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/6bf59c72/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-并发容器与并发控制 - JUC》 — 狂欢马克思&url=https://www.hosiang.cn/6bf59c72/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/6bf59c72/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/6bf59c72/&title=《推荐系列-并发容器与并发控制 - JUC》 — 狂欢马克思&source=&emsp;&emsp;摘要 为什么没见人用Vector和Hashtable了？HashMap它又线程不安全在哪里？ ConcurrentHashMap的..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/6bf59c72/&title=《推荐系列-并发容器与并发控制 - JUC》 — 狂欢马克思&pic=https://api.ixiaowai.cn/gqapi/gqapi.php" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/6bf59c72/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#摘要"><span class="post-toc-text">摘要</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#并发容器"><span class="post-toc-text">并发容器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一、为什么Vector和Hashtable被留在了历史的长河中？"><span class="post-toc-text">一、为什么Vector和Hashtable被留在了历史的长河中？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#那为什么性能不好呢？它性能丢失在哪儿？"><span class="post-toc-text">那为什么性能不好呢？它性能丢失在哪儿？</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#二、为什么HashMap是线程不安全的？"><span class="post-toc-text">二、为什么HashMap是线程不安全的？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#三、ConcurrentHashMap-1-7与1-8的差别是什么？"><span class="post-toc-text">三、ConcurrentHashMap 1.7与1.8的差别是什么？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#四、ConcurrentHashMap-如何实现如a-这样的组合操作？"><span class="post-toc-text">四、ConcurrentHashMap 如何实现如a++这样的组合操作？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#五、CopyOnWriteArrayList适用场景有哪些？"><span class="post-toc-text">五、CopyOnWriteArrayList适用场景有哪些？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#我们先想想为什么会有这个玩意？"><span class="post-toc-text">我们先想想为什么会有这个玩意？</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#好了，现在我们来说说适用场景"><span class="post-toc-text">好了，现在我们来说说适用场景</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#CopyOnWriteArrayList的读写规则是什么？"><span class="post-toc-text">CopyOnWriteArrayList的读写规则是什么？</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#实现原理是什么？"><span class="post-toc-text">实现原理是什么？</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#那有何缺点呢？"><span class="post-toc-text">那有何缺点呢？</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#六、并发队列又是什么？"><span class="post-toc-text">六、并发队列又是什么？</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#控制并发流程"><span class="post-toc-text">控制并发流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#七、CountDownLatch有哪些典型的适用场景？"><span class="post-toc-text">七、CountDownLatch有哪些典型的适用场景？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#八、Semaphore有哪些适用场景？"><span class="post-toc-text">八、Semaphore有哪些适用场景？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#九、CyclicBarrier与CountDownLatch的区别是什么？"><span class="post-toc-text">九、CyclicBarrier与CountDownLatch的区别是什么？</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/addfafe7/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-如何从 0 到 1 构建埋点体系
+        
+      </span>
+    </a>
+  
+  
+    <a href="/3cca5588/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-极速精简 Go 版 Logstash</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

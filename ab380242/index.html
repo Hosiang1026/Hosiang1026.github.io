@@ -1,0 +1,1368 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目 | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;本项目综合运用了 Vue3.0 的新特性。 基于 Composition API 即 Function-based API 进行改造，配合 Vue Cli，优先体验 Vue3 特性 使用单例对象模式进行组件通信 使用 axios 库进行网络请求，…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目">
+<meta property="og:url" content="https://www.hosiang.cn/ab380242/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;本项目综合运用了 Vue3.0 的新特性。 基于 Composition API 即 Function-based API 进行改造，配合 Vue Cli，优先体验 Vue3 特性 使用单例对象模式进行组件通信 使用 axios 库进行网络请求，…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-07-23T15:43:06.935Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;本项目综合运用了 Vue3.0 的新特性。 基于 Composition API 即 Function-based API 进行改造，配合 Vue Cli，优先体验 Vue3 特性 使用单例对象模式进行组件通信 使用 axios 库进行网络请求，…">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 3.8k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 17分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;本项目综合运用了 Vue3.0 的新特性。 基于 Composition API 即 Function-based API 进行改造，配合 Vue Cli，优先体验 Vue3 特性 使用单例对象模式进行组件通信 使用 axios 库进行网络请求，…<br><a id="more"></a></p>
+<pre><code>本项目综合运用了  ```java 
+</code></pre><p>  Vue3.0</p>
+<pre><code class="的新特性。">
+ ��于  ```java 
+  Composition API
+  ```  即  ```java 
+  Function-based API
+  ```  进行改造，配合  ```java 
+  Vue Cli
+  ``` ，优先体验  ```java 
+  Vue3
+  ```  特性 
+ 使用单例对象模式进行组件通信 
+ 使用  ```java 
+  axios
+  ```  库进行网络请求， ```java 
+  weui
+  ```  库实现 UI 界面 
+
+ ```java 
+  # 安装依赖
+npm install
+# 在浏览器打开localhost:8080查看页面，并实时热更新
+npm run serve
+# 发布项目
+npm run build
+</code></pre>
+<p>建议配合 Visual Studio Code 和 Vue 3 Snippets 代码插件 </p>
+<h3 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h3><p>以下是项目运用到的依赖， <code>java 
+  @vue/composition-api</code>  配合  <code>java 
+  vue</code>  模块让我们  <code>java 
+  Vue2.0</code>  版本可以抢先体验  <code>java 
+  Vue3.0</code>  的新特性， <code>java 
+  axios</code>  是辅助我们发送网络请求得到数据的工具库， <code>`</code>java<br>  weui</p>
+<pre><code class="是一套与微信原生视觉一致的基础样式库，方便我们快速搭建项目页面。"> ```java 
+  &quot;@vue/composition-api&quot;: &quot;^0.3.4&quot;,
+&quot;axios&quot;: &quot;^0.19.0&quot;,
+&quot;core-js&quot;: &quot;^3.4.3&quot;,
+&quot;vue&quot;: &quot;^2.6.10&quot;,
+&quot;weui&quot;: &quot;^2.1.3&quot;
+</code></pre>
+<h3 id="Directory-Structure"><a href="#Directory-Structure" class="headerlink" title="Directory Structure"></a>Directory Structure</h3><pre><code class="java">  ├── src
+│   ├── App.vue                          # 组件入口
+│   ├── assets                           # 资源目录
+│   ├── stores/index.js                  # 状态管理
+│   ├── components                       # 组件目录
+│   │   ├── Header.vue                   # 头部组件
+│   │   ├── Search.vue                   # 搜索框组件
+│   │   ├── Panel.vue                    # 列表组件
+│   ├── main.js                          # 项目入口
+├── public                               # 模板文件
+├── vue.config.js                        # 脚手架配置文件
+├── screenshot                           # 程序截图
+</code></pre>
+<h3 id="Composition-API"><a href="#Composition-API" class="headerlink" title="Composition API"></a>Composition API</h3><pre><code class="java">npm install <span class="meta">@vue</span>/composition-api --save
+</code></pre>
+<p>使用  <code>java 
+  npm</code>  命令下载了  <code>java 
+  @vue/composition-api</code>  插件以后，引入该模块后，需要显式调用  <code>java 
+  Vue.use(VueCompositionApi)</code>  ，按照文档在  <code>java 
+  main.js</code>  引用便开启了  <code>`</code>java<br>  Composition API</p>
+<pre><code class="的能力。"> ```java 
+  // main.js
+import Vue from &apos;vue&apos;
+import App from &apos;./App.vue&apos;
+// 1.引入Composition API模块
+import VueCompositionApi from &apos;@vue/composition-api&apos;
+
+Vue.config.productionTip = false
+// 2.不要漏了显式调用 VueCompositionApi
+Vue.use(VueCompositionApi)
+
+new Vue({
+  render: h =&gt; h(App),
+}).$mount(&apos;#app&apos;)
+</code></pre>
+<pre><code class="java">npm install weui --save
+</code></pre>
+<p>我们同样使用  <code>java 
+  npm</code>  安装  <code>java 
+  weui</code>  模块，然后在  <code>java 
+  main.js</code>  中引入  <code>`</code>java<br>  weui</p>
+<pre><code class="的基础样式库，方便我们可以在全局使用微信基础样式构建项目页面。"> ```java 
+  // main.js
+import Vue from &apos;vue&apos;
+import App from &apos;./App.vue&apos;
+// 全局引入 `weui` 的基础样式库
+import &apos;weui&apos;
+import VueCompositionApi from &apos;@vue/composition-api&apos;
+
+Vue.config.productionTip = false
+Vue.use(VueCompositionApi)
+
+new Vue({
+  render: h =&gt; h(App),
+}).$mount(&apos;#app&apos;)
+</code></pre>
+<p>回到  <code>java 
+  App.vue</code> ，保留  <code>java 
+  components</code>  属性值清空  <code>java 
+  &lt;template&gt;</code>  模板的内容，删除  <code>`</code>java<br>  <style></p>
+<pre><code class="模板，等待重新引入新的组件。"> ```java 
+  &lt;template&gt;
+  &lt;div id=&quot;app&quot;&gt;
+    Hello World
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  name: &quot;app&quot;,
+  components: {}
+};
+&lt;/script&gt;
+</code></pre>
+<p>在  <code>java 
+  src/components</code>  目录下新建第一个组件，取名为  <code>`</code>java<br>  Header.vue</p>
+<pre><code class="写入以下代码："> ```java 
+  &lt;template&gt;
+  &lt;header :style=&quot;{
+    backgroundColor: color?color:defaultColor
+  }&quot;&gt;{{title}}&lt;/header&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { reactive } from &quot;@vue/composition-api&quot;;
+export default {
+  // 父组件传递进来更改该头部组件的属性值
+  props: {
+    // 标题
+    title: String,
+    // 颜色
+    color: String
+  },
+  setup() {
+    const state = reactive({
+      defaultColor: &quot;red&quot;
+    });
+    return {
+      ...state
+    };
+  }
+};
+&lt;/script&gt;
+&lt;style scoped&gt;
+header {
+  height: 50px;
+  width: 100%;
+  line-height: 50px;
+  text-align: center;
+  color: white;
+}
+&lt;/style&gt;
+</code></pre>
+<h3 id="setup"><a href="#setup" class="headerlink" title="setup"></a>setup</h3><p>这里运用了一个全新的属性  <code>java 
+  setup</code>  ，这是一个组件的入口，让我们可以运用  <code>java 
+  Vue3.0</code>  暴露的新接口，它运行在组件被实例化时候， <code>java 
+  props</code>  属性被定义之后，实际上等价于  <code>java 
+  Vue2.0</code>  版本的  <code>java 
+  beforeCreate</code>  和  <code>java 
+  Created</code>  这两个生命周期， <code>java 
+  setup</code>  返回的是一个对象，里面的所有被返回的属性值，都会被合并到  <code>java 
+  Vue2.0</code>  的  <code>java 
+  render</code>  渲染函数里面，在单文件组件中，它将配合  <code>java 
+  &lt;template&gt;</code>  模板的内容，完成  <code>java 
+  Model</code>  到  <code>java 
+  View</code>  之间的绑定，在未来版本中应该还会支持返回  <code>`</code>java<br>  JSX</p>
+<pre><code class="代码片段。"> ```java 
+  &lt;template&gt;
+  &lt;!-- View --&gt;
+  &lt;div&gt;{{name}}&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { reactive } from &apos;@vue/composition-api&apos;
+export default {
+  setup() {
+    const state = reactive({ name: &apos;Eno Yao&apos; });
+    // return 暴露到 template 中
+    return {
+      // Model
+      ...state
+    }
+  }
+}
+&lt;/script&gt;
+</code></pre>
+<h3 id="reactive"><a href="#reactive" class="headerlink" title="reactive"></a>reactive</h3><p>在  <code>java 
+  setup</code>  函数里面， 我们适应了 Vue3.0 的第一个新接口  <code>java 
+  reactive</code>  它主要是处理你的对象让它经过  <code>java 
+  Proxy</code>  的加工变为一个响应式的对象，类似于  <code>java 
+  Vue2.0</code>  版本的  <code>`</code>java<br>  data</p>
+<pre><code class="属性，需要注意的是加工后的对象跟原对象是不相等的，并且加工后的对象属于深度克隆的对象。">```java 
+ const state = reactive({ name: &apos;Eno Yao&apos; })
+</code></pre>
+<h3 id="props"><a href="#props" class="headerlink" title="props"></a>props</h3><p>在  <code>java 
+  Vue2.0</code>  中我们可以使用  <code>java 
+  props</code>  属性值完成父子通信，在这里我们需要定义  <code>java 
+  props</code>  属性去定义接受值的类型，然后我们可以利用  <code>java 
+  setup</code>  的第一个参数获取  <code>`</code>java<br>  props</p>
+<pre><code class="使用。"> ```java 
+  export default {
+  props: {
+    // 标题
+    title: String,
+    // 颜色
+    color: String
+  },
+  setup(props) {
+    // 这里可以使用父组件传过来的 props 属性值
+  }
+};
+</code></pre>
+<p>我们在  <code>java 
+  App.vue</code>  里面就可以使用该头部组件，有了上面的  <code>`</code>java<br>  props</p>
+<pre><code class="我们可以根据传进来的值，让这个头部组件呈现不同的状态。"> ```java 
+  &lt;template&gt;
+  &lt;div id=&quot;app&quot;&gt;
+    &lt;!-- 复用组件，并传入 props 值，让组件呈现对应的状态 --&gt;
+    &lt;Header title=&quot;Eno&quot; color=&quot;red&quot; /&gt;
+    &lt;Header title=&quot;Yao&quot; color=&quot;blue&quot; /&gt;
+    &lt;Header title=&quot;Wscats&quot; color=&quot;yellow&quot; /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import Header from &quot;./components/Header.vue&quot;;
+export default {
+  name: &quot;app&quot;,
+  components: {
+    Header,
+  }
+};
+&lt;/script&gt;
+</code></pre>
+<p><img src="https://image-static.segmentfault.com/325/741/3257418281-5deefc525c34a_articlex" alt="Test" title="Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目"> </p>
+<h3 id="context"><a href="#context" class="headerlink" title="context"></a>context</h3><pre><code class="java">  setup
+  ```  函数的第二个参数是一个上下文对象，这个上下文对象中包含了一些有用的属性，这些属性在  ```java 
+  Vue2<span class="number">.0</span>
+  ```  中需要通过  ```java 
+  <span class="keyword">this</span>
+  ```  才能访问到，在  ```java 
+  vue3<span class="number">.0</span>
+  ```  中，访问他们变成以下形式： 
+ ```java 
+  setup(props, ctx) {
+  console.log(ctx) <span class="comment">// 在 setup() 函数中无法访问到 this</span>
+  console.log(<span class="keyword">this</span>) <span class="comment">// undefined</span>
+}
+</code></pre>
+<p>具体能访问到以下有用的属性： </p>
+<p> root<br> parent<br> refs<br> attrs<br> listeners<br> isServer<br> ssrContext<br> emit </p>
+<p>完成上面的  <code>java 
+  Header.vue</code>  我们就编写  <code>java 
+  Search.vue</code>  搜索框组件，继续再  <code>java 
+  src/components</code>  文件夹下面新建  <code>`</code>java<br>  Search.vue</p>
+<pre><code class="文件，点击查看源代码。"> ```java 
+  &lt;template&gt;
+  &lt;div :class=&quot;[&apos;weui-search-bar&apos;, {&apos;weui-search-bar_focusing&apos; : isFocus}]&quot; id=&quot;searchBar&quot;&gt;
+    &lt;form class=&quot;weui-search-bar__form&quot;&gt;
+      &lt;div class=&quot;weui-search-bar__box&quot;&gt;
+        &lt;i class=&quot;weui-icon-search&quot;&gt;&lt;/i&gt;
+        &lt;input
+          v-model=&quot;searchValue&quot;
+          ref=&quot;inputElement&quot;
+          type=&quot;search&quot;
+          class=&quot;weui-search-bar__input&quot;
+          id=&quot;searchInput&quot;
+          placeholder=&quot;搜索&quot;
+          required
+        /&gt;
+        &lt;a href=&quot;javascript:&quot; class=&quot;weui-icon-clear&quot; id=&quot;searchClear&quot;&gt;&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;label @click=&quot;toggle&quot; class=&quot;weui-search-bar__label&quot; id=&quot;searchText&quot;&gt;
+        &lt;i class=&quot;weui-icon-search&quot;&gt;&lt;/i&gt;
+        &lt;span&gt;搜索&lt;/span&gt;
+      &lt;/label&gt;
+    &lt;/form&gt;
+    &lt;a @click=&quot;toggle&quot; href=&quot;javascript:&quot; class=&quot;weui-search-bar__cancel-btn&quot; id=&quot;searchCancel&quot;&gt;取消&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { reactive, toRefs, watch } from &quot;@vue/composition-api&quot;;
+import store from &quot;../stores&quot;;
+export default {
+  // setup相当于2.x版本的beforeCreate生命周期
+  setup() {
+    // reactive() 函数接收一个普通对象，返回一个响应式的数据对象
+    const state = reactive({
+      searchValue: &quot;&quot;,
+      // 搜索框两个状态，聚焦和非聚焦
+      isFocus: false,
+      inputElement: null
+    });
+    // 切换搜索框状态的方法
+    const toggle = () =&gt; {
+      // 让点击搜索后出现的输入框自动聚焦
+      state.inputElement.focus();
+      state.isFocus = !state.isFocus;
+    };
+    // 监听搜索框的值
+    watch(
+      () =&gt; {
+        return state.searchValue;
+      },
+      () =&gt; {
+        // 存储输入框到状态 store 中心，用于组件通信
+        store.setSearchValue(state.searchValue);
+        // window.console.log(state.searchValue);
+      }
+    );
+    return {
+      // 将 state 上的每个属性，都转化为 ref 形式的响应式数据
+      ...toRefs(state),
+      toggle
+    };
+  }
+};
+&lt;/script&gt;
+</code></pre>
+<h3 id="toRefs"><a href="#toRefs" class="headerlink" title="toRefs"></a>toRefs</h3><p>可以看到我们上面用了很多的新属性，我们先介绍  <code>java 
+  toRefs</code>  ，函数可以将  <code>java 
+  reactive()</code>  创建出来的响应式对象，转换为普通的对象，只不过，这个对象上的每个属性节点，都是  <code>java 
+  ref()</code>  类型的响应式数据，配合  <code>`</code>java<br>  v-model</p>
+<pre><code class="指令能完成数据的双向绑定，在开发中非常高效。"> ```java 
+  import { reactive, toRefs } from &quot;@vue/composition-api&quot;;
+export default {
+  setup() {
+    const state = reactive({ name: &apos;Eno Yao&apos; })
+  }
+  return {
+    // 直接返回 state 那么数据会是非响应式的， MV 单向绑定
+    // ...state,
+    // toRefs 包装后返回 state 那么数据会是响应式的， MVVM 双向绑定
+    ...toRefs(state),
+  };
+}
+</code></pre>
+<p><img src="https://image-static.segmentfault.com/325/741/3257418281-5deefc525c34a_articlex" alt="Test" title="Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目"><img src="https://image-static.segmentfault.com/325/741/3257418281-5deefc525c34a_articlex" alt="Test" title="Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目"> </p>
+<h3 id="template-refs"><a href="#template-refs" class="headerlink" title="template refs"></a>template refs</h3><p>这里的输入框拥有两个状态，一个是有输入框的状态和无输入框的状态，所以我们需要一个布尔值  <code>java 
+  isFocus</code>  来控制状态，封装了一个  <code>java 
+  toggle</code>  方法，让  <code>`</code>java<br>  isFocus</p>
+<pre><code class="值切换真和假两个状态。"> ```java 
+  const toggle = () =&gt; {
+  // isFocus 值取反
+  state.isFocus = !state.isFocus;
+};
+</code></pre>
+<p>然后配合  <code>java 
+  &#39;v-bind&#39;:class</code>  指令，让  <code>java 
+  weui-search-bar_focusing</code>  类名根据  <code>`</code>java<br>  isFocus</p>
+<pre><code class="值决定是否出现，从而更改搜索框的状态。">```java 
+ &lt;div :class=&quot;[&apos;weui-search-bar&apos;, {&apos;weui-search-bar_focusing&apos; : isFocus}]&quot; id=&quot;searchBar&quot;&gt;
+</code></pre>
+<p>这里的搜索输入框放入了  <code>java 
+  v-model</code>  指令，用于接收用户的输入信息，方便后面配合列表组件执行检索逻辑，还放入了  <code>java 
+  ref</code>  属性，用于获取该  <code>java 
+  &lt;input/&gt;</code>  标签的元素节点，配合 <code>`</code>java<br>  state.inputElement.focus()</p>
+<pre><code class="原生方法，在切换搜索框状态的时候光标自动聚焦到输入框，增强用户体验。"> ```java 
+  &lt;input
+  v-model=&quot;searchValue&quot;
+  ref=&quot;inputElement&quot;
+/&gt;
+</code></pre>
+<p><img src="https://image-static.segmentfault.com/325/741/3257418281-5deefc525c34a_articlex" alt="Test" title="Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目"> </p>
+<h3 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h3><pre><code class="java">  watch()
+  ```  函数用来监视某些数据项的变化，从而触发某些特定的操作，使用之前还是需要按需导入，监听  ```java 
+  searchValue
+  ```  的变化，然后触发回调函数里面的逻辑，也就是监听用户输入的检索值，然后触发回调函数的逻辑把  ```java 
+  searchValue
+  ```  值存进我们创建  ```java 
+  store
+  ```  对象里面，方面后面和  ```java 
+  Panel.vue
+  ```  列表��件进行数据通信： 
+ ```java 
+  <span class="keyword">import</span> { reactive, watch } from <span class="string">"@vue/composition-api"</span>;
+<span class="keyword">import</span> store from <span class="string">"../stores"</span>;
+export <span class="keyword">default</span> {
+  setup() {
+    <span class="keyword">const</span> state = reactive({
+      searchValue: <span class="string">""</span>,
+    });
+    <span class="comment">// 监听搜索框的值</span>
+    watch(
+      () =&gt; {
+        <span class="keyword">return</span> state.searchValue;
+      },
+      () =&gt; {
+        <span class="comment">// 存储输入框到状态 store 中心，用于组件通信</span>
+        store.setSearchValue(state.searchValue);
+      }
+    );
+    <span class="keyword">return</span> {
+      ...toRefs(state)
+    };
+  }
+};
+</code></pre>
+<h3 id="state-management"><a href="#state-management" class="headerlink" title="state management"></a>state management</h3><p>在这里我们维护一份数据来实现共享状态管理，也就是说我们新建一个  <code>java 
+  store.js</code>  暴露出一个  <code>java 
+  store</code>  对象共享  <code>java 
+  Panel</code>  和  <code>java 
+  Search</code>  组件的  <code>java 
+  searchValue</code>  值，当  <code>java 
+  Search.vue</code>  组件从输入框接受到  <code>java 
+  searchValue</code>  检索值，就放到  <code>java 
+  store.js</code>  的  <code>java 
+  store</code>  对象中，然后把该对象注入到  <code>java 
+  Search</code>  组件中，那么两个组件都可以共享  <code>java 
+  store</code>  对象中的值，为了方便调试我们还分别封装了  <code>java 
+  setSearchValue</code>  和  <code>java 
+  getSearchValue</code>  来去操作该  <code>`</code>java<br>  store</p>
+<pre><code class="对象，这样我们就可以跟踪状态的改变。"> ```java 
+  // store.js
+export default {
+    state: {
+        searchValue: &quot;&quot;
+    },
+    // 设置搜索框的值
+    setSearchValue(value) {
+        this.state.searchValue = value
+    },
+    // 获取搜索框的值
+    getSearchValue() {
+        return this.state.searchValue
+    }
+}
+</code></pre>
+<p>完成上面的  <code>java 
+  Search.vue</code>  我们紧接着编写  <code>java 
+  Panel.vue</code>  搜索框组件，继续再  <code>java 
+  src/components</code>  文件夹下面新建  <code>`</code>java<br>  Panel.vue</p>
+<pre><code class="文件。"> ```java 
+  &lt;template&gt;
+  &lt;div class=&quot;weui-panel weui-panel_access&quot;&gt;
+    &lt;div v-for=&quot;(n,index) in newComputed&quot; :key=&quot;index&quot; class=&quot;weui-panel__bd&quot;&gt;
+      &lt;a href=&quot;javascript:void(0);&quot; class=&quot;weui-media-box weui-media-box_appmsg&quot;&gt;
+        &lt;div class=&quot;weui-media-box__hd&quot;&gt;
+          &lt;img class=&quot;weui-media-box__thumb&quot; :src=&quot;n.author.avatar_url&quot; alt /&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;weui-media-box__bd&quot;&gt;
+          &lt;h4 class=&quot;weui-media-box__title&quot; v-text=&quot;n.title&quot;&gt;&lt;/h4&gt;
+          &lt;p class=&quot;weui-media-box__desc&quot; v-text=&quot;n.author.loginname&quot;&gt;&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div @click=&quot;loadMore&quot; class=&quot;weui-panel__ft&quot;&gt;
+      &lt;a href=&quot;javascript:void(0);&quot; class=&quot;weui-cell weui-cell_access weui-cell_link&quot;&gt;
+        &lt;div class=&quot;weui-cell__bd&quot;&gt;查看更多&lt;/div&gt;
+        &lt;span class=&quot;weui-cell__ft&quot;&gt;&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import { reactive, toRefs, onMounted, computed } from &quot;@vue/composition-api&quot;;
+import axios from &quot;axios&quot;;
+import store from &quot;../stores&quot;;
+export default {
+  setup() {
+    const state = reactive({
+      // 页数
+      page: 1,
+      // 列表数据
+      news: [],
+      // 通过搜索框的值去筛选劣列表数据
+      newComputed: computed(() =&gt; {
+        // 判断是否输入框是否输入了筛选条件，如果没有返回原始的 news 数组
+        if (store.state.searchValue) {
+          return state.news.filter(item =&gt; {
+            if (item.title.indexOf(store.state.searchValue) &gt;= 0) {
+              return item;
+            }
+          });
+        } else {
+          return state.news;
+        }
+      }),
+      searchValue: store.state
+    });
+    // 发送 ajax 请求获取列表数据
+    const loadMore = async () =&gt; {
+      // 获取列表数据
+      let data = await axios.get(&quot;https://cnodejs.org/api/v1/topics&quot;, {
+        params: {
+          // 每一页的主题数量
+          limit: 10,
+          // 页数
+          page: state.page
+        }
+      });
+      // 叠加页数
+      state.page += 1;
+      state.news = [...state.news, ...data.data.data];
+    };
+    onMounted(() =&gt; {
+      // 首屏加载的时候触发请求
+      loadMore();
+    });
+    return {
+      // 让数据保持响应式
+      ...toRefs(state),
+      // 查看更多事件
+      loadMore
+    };
+  }
+};
+&lt;/script&gt;
+</code></pre>
+<h3 id="lifecycle-hooks"><a href="#lifecycle-hooks" class="headerlink" title="lifecycle hooks"></a>lifecycle hooks</h3><pre><code class="java">  Vue3<span class="number">.0</span>
+  ```  的生命周期钩子和之前不一样，新版本都是以  ```java 
+  onXxx()
+  ```  函数注册使用，同样需要局部引入生命周期的对应模块： 
+ ```java 
+  <span class="keyword">import</span> { onMounted, onUpdated, onUnmounted } from <span class="string">"@vue/composition-api"</span>;
+export <span class="keyword">default</span> {
+  setup() {
+    <span class="keyword">const</span> loadMore = () =&gt; {};
+    onMounted(() =&gt; {
+      loadMore();
+    });
+    onUpdated(() =&gt; {
+      console.log(<span class="string">'updated!'</span>)
+    })
+    onUnmounted(() =&gt; {
+      console.log(<span class="string">'unmounted!'</span>)
+    })
+    <span class="keyword">return</span> {
+      loadMore
+    };
+  }
+};
+</code></pre>
+<p>以下是新旧版本生命周期的对比： </p>
+<p> <s> <code>java 
+  beforeCreate</code> </s> -&gt; use  <code>`</code>java<br>  setup()</p>
+<pre><code>&lt;s&gt; ```java 
+ created
+ ``` &lt;/s&gt; -&gt; use  ```java 
+ setup()
+</code></pre><pre><code class="java">beforeMount
+```  -&gt;  ```java 
+onBeforeMount
+</code></pre>
+<pre><code class="java">mounted
+```  -&gt;  ```java 
+onMounted
+</code></pre>
+<pre><code class="java">beforeUpdate
+```  -&gt;  ```java 
+onBeforeUpdate
+</code></pre>
+<pre><code class="java">updated
+```  -&gt;  ```java 
+onUpdated
+</code></pre>
+<pre><code class="java">beforeDestroy
+```  -&gt;  ```java 
+onBeforeUnmount
+</code></pre>
+<pre><code class="java">destroyed
+```  -&gt;  ```java 
+onUnmounted
+</code></pre>
+<pre><code class="java">errorCaptured
+```  -&gt;  ```java 
+onErrorCaptured
+</code></pre>
+<p>同时新版本还提供了两个全新的生命周期帮助我们去调试代码： </p>
+<p> onRenderTracked<br> onRenderTriggered </p>
+<p>在  <code>java 
+  Panel</code>  列表组件中，我们注册  <code>java 
+  onMounted</code>  生命周期，并在里面触发请求方法  <code>java 
+  loadMore</code>  以便从后端获取数据到数据层，这里我们使用的是  <code>`</code>java<br>  axios</p>
+<pre><code class="网络请求库，所以我们需要安装该模块：">```java 
+ npm install axios --save
+</code></pre>
+<p>封装了一个请求列表数据方法，接口指向的是  <code>java 
+  Cnode</code>  官网提供的  <code>java 
+  API</code>  ，由于  <code>java 
+  axios</code>  返回的是  <code>java 
+  Promise</code>  ，所以配合  <code>java 
+  async</code>  和  <code>java 
+  await</code>  可以完美的编写异步逻辑，然后结合 <code>`</code>java<br>  onMounted</p>
+<pre><code class="生命周期触发，并将方法绑定到视图层的查看更多按钮上，就可以完成列表首次的加载和点击查看更多的懒加载功能。"> ```java 
+  // 发送 ajax 请求获取列表数据
+const loadMore = async () =&gt; {
+  // 获取列表数据
+  let data = await axios.get(&quot;https://cnodejs.org/api/v1/topics&quot;, {
+    params: {
+      // 每一页的主题数量
+      limit: 10,
+      // 页数
+      page: state.page
+    }
+  });
+  // 叠加页数
+  state.page += 1;
+  // 合并列表数据
+  state.news = [...state.news, ...data.data.data];
+};
+onMounted(() =&gt; {
+  // 首屏加载的时候触发请求
+  loadMore();
+});
+</code></pre>
+<p><img src="https://image-static.segmentfault.com/325/741/3257418281-5deefc525c34a_articlex" alt="Test" title="Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目"> </p>
+<h3 id="computed"><a href="#computed" class="headerlink" title="computed"></a>computed</h3><p>接下来我们就使用另外一个属性  <code>java 
+  computed</code>  计算属性，跟  <code>`</code>java<br>  Vue2.0</p>
+<pre><code class="的使用方式很相近，同样需要按需导入该模块：">```java 
+ import { computed } from &apos;@vue/composition-api&apos;;
+</code></pre>
+<p>计算属性分两种，只读计算属性和可读可写计算属性： </p>
+<pre><code class="java">  <span class="comment">// 只读计算属性</span>
+let newsComputed = computed(() =&gt; news.value + <span class="number">1</span>)
+<span class="comment">// 可读可写</span>
+let newsComputed = computed({
+  <span class="comment">// 取值函数</span>
+  get: () =&gt; news.value + <span class="number">2</span>,
+  <span class="comment">// 赋值函数</span>
+  set: val =&gt; {
+    news.value = news.value - <span class="number">3</span>
+  }
+})
+</code></pre>
+<p><img src="https://image-static.segmentfault.com/325/741/3257418281-5deefc525c34a_articlex" alt="Test" title="Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目"><br>这里我们使用可读可写计算属性去处理列表数据，还记得我们上一个组件  <code>java 
+  Search.vue</code>  吗，我们可以结合用户在搜索框输入的检索值，配合  <code>java 
+  computed</code>  计算属性来筛选对我们用户有用列表数据，所以我们首先从  <code>java 
+  store</code>  的共享实例里面拿到  <code>java 
+  Search.vue</code>  搜索框共享的  <code>java 
+  searchValue</code>  ，然后利用原生字符串方法  <code>java 
+  indexOf</code>  和 数组方法  <code>java 
+  filter</code>  来过滤列表的数据，然后重新返回新的列表数据  <code>java 
+  newsComputed</code> ，并在视图层上配合  <code>java 
+  v-for</code>  指令去渲染新的列表数据，这样做既可以在没搜索框检索值的时候返回原列表数据  <code>java 
+  news</code>  ，而在有搜索框检索值的时候返回新列表数据  <code>`</code>java<br>  newsComputed</p>
+<pre><code class="。"> ```java 
+  import store from &quot;../stores&quot;;
+export default {
+  setup() {
+    const state = reactive({
+      // 原列表数据
+      news: [],
+      // 通过搜索框的值去筛选后的新列表数据
+      newsComputed: computed(() =&gt; {
+        // 判断是否输入框是否输入了筛选条件，如果没有返回原始的 news 数组
+        if (store.state.searchValue) {
+          return state.news.filter(item =&gt; {
+            if (item.title.indexOf(store.state.searchValue) &gt;= 0) {
+              return item;
+            }
+          });
+        } else {
+          return state.news;
+        }
+      }),
+      searchValue: store.state
+    });
+  }
+}
+</code></pre>
+<h3 id="项目源码"><a href="#项目源码" class="headerlink" title="项目源码"></a>项目源码</h3><p> <a href="https://github.com/Wscats/vue-cli">https://github.com/Wscats/vue-cli</a> </p>
+<h4 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h4><p>在使用开源框架时不要忘了，我们之所以能免费试用他，靠的维护者投入的大量精力。希望我们多去发现它带来的优点和作者想通过它传递的编程思想。最后期待 Vue3.0 正式版本的早日到来。</p>
+</style></p>
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 09:19</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/ab380242/" title="推荐系列-Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目">https://www.hosiang.cn/ab380242/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/ab380242/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目》 — 狂欢马克思&url=https://www.hosiang.cn/ab380242/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/ab380242/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/ab380242/&title=《推荐系列-Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目》 — 狂欢马克思&source=&emsp;&emsp;本项目综合运用了 Vue3.0 的新特性。 基于 Composition API 即 Function-based API 进行改..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/ab380242/&title=《推荐系列-Vue3.0 新特性全面探索 - 基于 Composition Api 快速构建实战项目》 — 狂欢马克思&pic=https://static.oschina.net/uploads/img/202001/09181210_9HGN.jpg" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/ab380242/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Dependencies"><span class="post-toc-text">Dependencies</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Directory-Structure"><span class="post-toc-text">Directory Structure</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Composition-API"><span class="post-toc-text">Composition API</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/196eb9a7/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-TCP 和 UDP，哪个更胜一筹
+        
+      </span>
+    </a>
+  
+  
+    <a href="/17766e5e/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-iOS开发APP瘦身之PDF图片资源加载框架</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

@@ -1,0 +1,1276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-CSS3中Flex布局-弹性盒子-弹性元素 | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;CSS3中的 flex 属性，在布局方面做了非常大的改进，使得我们对多个元素之间的布局排列变得十分灵活，适应性非常强。其强大的伸缩性和自适应性，在网页开中可以发挥极大的作用。 Flex布局初体…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-CSS3中Flex布局-弹性盒子-弹性元素">
+<meta property="og:url" content="https://www.hosiang.cn/c76bb171/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;CSS3中的 flex 属性，在布局方面做了非常大的改进，使得我们对多个元素之间的布局排列变得十分灵活，适应性非常强。其强大的伸缩性和自适应性，在网页开中可以发挥极大的作用。 Flex布局初体…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-458c0e15734cc9d95787e4906585b9a6518.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-458c0e15734cc9d95787e4906585b9a6518.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-458c0e15734cc9d95787e4906585b9a6518.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-458c0e15734cc9d95787e4906585b9a6518.png">
+<meta property="og:updated_time" content="2021-07-23T15:43:06.892Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-CSS3中Flex布局-弹性盒子-弹性元素">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;CSS3中的 flex 属性，在布局方面做了非常大的改进，使得我们对多个元素之间的布局排列变得十分灵活，适应性非常强。其强大的伸缩性和自适应性，在网页开中可以发挥极大的作用。 Flex布局初体…">
+<meta name="twitter:image" content="https://oscimg.oschina.net/oscnet/up-458c0e15734cc9d95787e4906585b9a6518.png">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-CSS3中Flex布局-弹性盒子-弹性元素" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-CSS3中Flex布局-弹性盒子-弹性元素
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 2.9k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 14分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;CSS3中的 flex 属性，在布局方面做了非常大的改进，使得我们对多个元素之间的布局排列变得十分灵活，适应性非常强。其强大的伸缩性和自适应性，在网页开中可以发挥极大的作用。 Flex布局初体…<br><a id="more"></a></p>
+<pre><code>![Test](https://oscimg.oschina.net/oscnet/up-458c0e15734cc9d95787e4906585b9a6518.png  &apos;CSS3中Flex布局-弹性盒子-弹性元素&apos;) 
+</code></pre><p>CSS3中的 flex 属性，在布局方面做了非常大的改进，使得我们对多个元素之间的布局排列变得十分灵活，适应性非常强。其强大的伸缩性和自适应性，在网页开中可以发挥极大的作用。 </p>
+<p>默认文档流中，在一个父容器里放置多个块级的子元素，那么，这些子元素会默认从上往下排列 <img src="https://oscimg.oschina.net/oscnet/up-458c0e15734cc9d95787e4906585b9a6518.png" alt="Test" title="CSS3中Flex布局-弹性盒子-弹性元素"><br>在此基础之上，如果我给父容器仅仅加一个  </p>
+<pre><code class="java">display: flex
+</code></pre>
+<p> 属性，此时，这些子元素的布局会摇身一变：<br><img src="https://oscimg.oschina.net/oscnet/up-458c0e15734cc9d95787e4906585b9a6518.png" alt="Test" title="CSS3中Flex布局-弹性盒子-弹性元素"><br>子元素们会在水平方向上，从左至右排列，到此为止，你已经掌握了关于 flex 的一半的知识。 </p>
+<p>1、flex 布局的子元素不会脱离文档流，很好地遵从了“流的特性”。<br>但你如果用 float 来做布局，float 属性的元素会脱离文档流，而且会涉及到各种 BFC、清除浮动的问题。浮动相关的问题，比较麻烦，所以也成了面试必问的经典题目。但有了 flex 布局之后，这些问题都不存在的。<br>2、flex 是一种现代的布局方式，是 W3C 第一次提供真正用于布局的 CSS 规范。 flex 非常提供了丰富的属性，非常灵活，让布局的实现更佳多样化，且方便易用。 </p>
+<p>flex 唯一的缺点就在于，它不支持低版本的 IE 浏览器。<br><img src="https://oscimg.oschina.net/oscnet/up-458c0e15734cc9d95787e4906585b9a6518.png" alt="Test" title="CSS3中Flex布局-弹性盒子-弹性元素"> </p>
+<p> flex 布局不支持 IE9 及以下的版本；<br> IE10及以上也只是部分支持。 </p>
+<p>如果你的页面不需要处理 IE浏览器的兼容性问题，则可以放心大胆地使用 flex 布局。<br>但是，比如网易新闻、淘宝这样的大型网站，���对的是海量用户，即便使用低版本浏览器的用户比例很少，但绝对基数仍然是很庞大的。因此，这些网站为了兼容低版本的 IE 浏览器，暂时还不敢尝试使用 flex 布局。 </p>
+<p>在讲 flex 的知识点之前，我们事先约定两个概念： </p>
+<p>  弹性盒子：指的是使用  </p>
+<pre><code class="java">display:flex
+</code></pre>
+<p>  或  </p>
+<pre><code class="java">display:inline-flex
+</code></pre>
+<p>  声明的父容器。<br>  子元素/弹性元素：指的是父容器里面的子元素们（父容器被声明为 flex 盒子的情况下）。  </p>
+<p>弹性盒子里面的子元素们，默认是从左至右排列的，这个方向，代表的就是主轴的方向。<br>在此，我们引入主轴和侧轴的概念。<br><img src="https://oscimg.oschina.net/oscnet/up-458c0e15734cc9d95787e4906585b9a6518.png" alt="Test" title="CSS3中Flex布局-弹性盒子-弹性元素"><br>如上图所示： </p>
+<p>  主轴：flex容器的主轴，默认是水平方向，从左向右。<br>  侧轴：与主轴垂直的轴称作侧轴，默认是垂直方向，从上往下。  </p>
+<p>PS：主轴和侧轴并不是固定不变的，可以通过  </p>
+<pre><code class="java">flex-direction
+</code></pre>
+<p>  更换方向，我们在后面会讲到。 </p>
+<h5 id="声明定义"><a href="#声明定义" class="headerlink" title="声明定义"></a>声明定义</h5><p>使用  </p>
+<pre><code class="java">display:flex
+</code></pre>
+<p>  或  </p>
+<pre><code class="java">display:inline-flex
+</code></pre>
+<p>  声明一个父容器为弹性盒子。此时，这个父容器里的子元素们，会遵循弹性布局。<br>备注：一般是用  </p>
+<pre><code class="java">display:flex
+</code></pre>
+<p> 这个属性。 </p>
+<pre><code class="java">display:inline-flex
+</code></pre>
+<p> 用得较少。 </p>
+<h5 id="flex-direction-属性"><a href="#flex-direction-属性" class="headerlink" title="flex-direction 属性"></a>flex-direction 属性</h5><pre><code class="java">flex-direction
+</code></pre>
+<p> ：用于设置盒子中子元素的排列方向。属性值可以是： </p>
+<p>   属性值<br>   描述 </p>
+<p>   row<br>   从左到右水平排列子元素（默认值） </p>
+<p>   column<br>   从上到下垂直排列子元素 </p>
+<p>   row-reverse<br>   从右向左排列子元素 </p>
+<p>   column-reverse<br>   从下到上垂直排列子元素 </p>
+<p>备注：如果我们不给父容器写 </p>
+<pre><code class="java">flex-direction
+</code></pre>
+<p> 这个属性，那么，子元素默认就是从左到右排列的。<br>代码演示： </p>
+<pre><code class="java">  &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span class="string">"en"</span>&gt;
+    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;style&gt;
+        *{
+            margin: <span class="number">0</span>;
+            padding: <span class="number">0</span>;
+            list-style: none;
+        }
+       body{
+           background-color: #eee;
+           font-family: <span class="string">"Microsoft Yahei"</span>;
+           font-size:<span class="number">22</span>px;
+       }
+
+        h3{
+            font-weight: normal;
+        }
+        section{
+            width: <span class="number">1000</span>px;
+
+            margin:<span class="number">40</span>px auto;
+        }
+
+        ul{
+            background-color: #fff;
+            border: 1px solid #ccc;
+
+        }
+
+        ul li{
+            width: <span class="number">200</span>px;
+            height: <span class="number">200</span>px;
+            background-color: pink;
+            margin:<span class="number">10</span>px;
+        }
+        section:nth-child(<span class="number">1</span>) ul{
+            overflow: hidden; <span class="comment">/* 清除浮动 */</span>
+        }
+        section:nth-child(<span class="number">1</span>) ul li{
+            <span class="keyword">float</span>: left;
+        }
+        <span class="comment">/* 设置伸缩盒子*/</span>
+        section:nth-child(<span class="number">2</span>) ul{
+            display: flex;
+        }
+
+        section:nth-child(<span class="number">3</span>) ul{
+            <span class="comment">/* 设置伸缩布局*/</span>
+            display: flex;
+            <span class="comment">/* 设置主轴方向*/</span>
+            flex-direction: row;
+        }
+
+        section:nth-child(<span class="number">4</span>) ul{
+            <span class="comment">/* 设置伸缩布局*/</span>
+            display: flex;
+            <span class="comment">/* 设置主轴方向 :水平翻转*/</span>
+            flex-direction: row-reverse;
+        }
+
+        section:nth-child(<span class="number">5</span>) ul{
+            <span class="comment">/* 设置伸缩布局*/</span>
+            display: flex;
+            <span class="comment">/* 设置主轴方向 :垂直*/</span>
+            flex-direction: column;
+        }
+
+        section:nth-child(<span class="number">6</span>) ul{
+            <span class="comment">/* 设置伸缩布局*/</span>
+            display: flex;
+            <span class="comment">/* 设置主轴方向 :垂直*/</span>
+            flex-direction: column-reverse;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;section&gt;
+        &lt;h3&gt;传统布局&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;1&lt;/li&gt;
+            &lt;li&gt;2&lt;/li&gt;
+            &lt;li&gt;3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+        &lt;h3&gt;伸缩布局 display:flex&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;1&lt;/li&gt;
+            &lt;li&gt;2&lt;/li&gt;
+            &lt;li&gt;3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+        &lt;h3&gt;主轴方向 flex-direction:row&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;1&lt;/li&gt;
+            &lt;li&gt;2&lt;/li&gt;
+            &lt;li&gt;3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+        &lt;h3&gt;主轴方向 flex-direction:row-reverse&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;1&lt;/li&gt;
+            &lt;li&gt;2&lt;/li&gt;
+            &lt;li&gt;3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+        &lt;h3&gt;主轴方向 flex-direction:column&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;1&lt;/li&gt;
+            &lt;li&gt;2&lt;/li&gt;
+            &lt;li&gt;3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+        &lt;h3&gt;主轴方向 flex-direction:column-reverse&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;1&lt;/li&gt;
+            &lt;li&gt;2&lt;/li&gt;
+            &lt;li&gt;3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h5 id="flex-wrap-属性"><a href="#flex-wrap-属性" class="headerlink" title="flex-wrap 属性"></a>flex-wrap 属性</h5><pre><code class="java">flex-wrap
+</code></pre>
+<p> ：控制子元素溢出时的换行处理。 </p>
+<h5 id="justify-content-属性"><a href="#justify-content-属性" class="headerlink" title="justify-content 属性"></a>justify-content 属性</h5><pre><code class="java">justify-content
+</code></pre>
+<p> ：控制子元素在主轴上的排列方式。 </p>
+<h5 id="justify-content-属性-1"><a href="#justify-content-属性-1" class="headerlink" title="justify-content 属性"></a>justify-content 属性</h5><pre><code class="java">justify-content: flex-start;
+</code></pre>
+<p>  设置子元素在主轴上的对齐方式。属性值可以是： </p>
+<pre><code class="java">flex-start
+</code></pre>
+<p>  从主轴的起点对齐（默认值） </p>
+<pre><code class="java">flex-end
+</code></pre>
+<p>  从主轴的终点对齐 </p>
+<pre><code class="java">center
+</code></pre>
+<p>  居中对齐 </p>
+<pre><code class="java">space-around
+</code></pre>
+<p>  在父盒子里平分 </p>
+<pre><code class="java">space-between
+</code></pre>
+<p>  两端对齐 平分 </p>
+<p>代码演示：（在浏览器中打开看效果） </p>
+<pre><code class="java">  &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span class="string">"en"</span>&gt;
+    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;style&gt;
+        *{
+            margin: <span class="number">0</span>;
+            padding: <span class="number">0</span>;
+            list-style:none;}
+        body{
+            background-color: #eee;
+            font-family: <span class="string">"Microsoft Yahei"</span>;
+
+        }
+        section{
+            width: <span class="number">1000</span>px;
+            margin:<span class="number">50</span>px auto;
+        }
+        section h3{
+            font-size:<span class="number">22</span>px;
+            font-weight: normal;
+        }
+
+        ul{
+            border: 1px solid #999;
+            background-color: #fff;
+            display: flex;
+
+        }
+
+        ul li{
+            width: <span class="number">200</span>px;
+            height: <span class="number">200</span>px;
+            background: pink;
+            margin:<span class="number">10</span>px;
+
+        }
+
+        section:nth-child(<span class="number">1</span>) ul{
+            <span class="comment">/* 主轴对齐方式：从主轴开始的方向对齐*/</span>
+            justify-content: flex-start;
+        }
+
+        section:nth-child(<span class="number">2</span>) ul{
+            <span class="comment">/* 主轴对齐方式：从主轴结束的方向对齐*/</span>
+            justify-content: flex-end;
+        }
+
+        section:nth-child(<span class="number">3</span>) ul{
+            <span class="comment">/* 主轴对齐方式：居中对��*/</span>
+            justify-content: center;
+        }
+
+        section:nth-child(<span class="number">4</span>) ul{
+            <span class="comment">/* 主轴对齐方式：在父盒子中平分*/</span>
+            justify-content: space-around;
+
+           }
+
+        section:nth-child(<span class="number">5</span>) ul{
+            <span class="comment">/* 主轴对齐方式：两端对齐 平分*/</span>
+            justify-content: space-between;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;section&gt;
+        &lt;h3&gt;主轴的对齐方式：justify-content:flex-start&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;1&lt;/li&gt;
+            &lt;li&gt;2&lt;/li&gt;
+            &lt;li&gt;3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+        &lt;h3&gt;主轴的对齐方式：justify-content:flex-end&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;1&lt;/li&gt;
+            &lt;li&gt;2&lt;/li&gt;
+            &lt;li&gt;3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+        &lt;h3&gt;主轴的对齐方式：justify-content:center&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;1&lt;/li&gt;
+            &lt;li&gt;2&lt;/li&gt;
+            &lt;li&gt;3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+        &lt;h3&gt;主轴的对齐方式：justify-content:space-round&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;1&lt;/li&gt;
+            &lt;li&gt;2&lt;/li&gt;
+            &lt;li&gt;3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+        &lt;h3&gt;主轴的对齐方式：justify-content:space-bettwen&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;1&lt;/li&gt;
+            &lt;li&gt;2&lt;/li&gt;
+            &lt;li&gt;3&lt;/li&gt;
+            &lt;li&gt;4&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h5 id="align-items-属性"><a href="#align-items-属性" class="headerlink" title="align-items 属性"></a>align-items 属性</h5><pre><code class="java">align-items
+</code></pre>
+<p> ：设置子元素在侧轴上的对齐方式。属性值可以是： -  </p>
+<pre><code class="java">flex-start
+</code></pre>
+<p>  从侧轴开始的方向对齐 -  </p>
+<pre><code class="java">flex-end
+</code></pre>
+<p>  从侧轴结束的方向对齐 -  </p>
+<pre><code class="java">baseline
+</code></pre>
+<p>  基线 默认同flex-start -  </p>
+<pre><code class="java">center
+</code></pre>
+<p>  中间对齐 -  </p>
+<pre><code class="java">stretch
+</code></pre>
+<p>  拉伸<br>代码演示： </p>
+<pre><code class="java">  &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span class="string">"en"</span>&gt;
+    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;style&gt;
+        *{
+            margin: <span class="number">0</span>;
+            padding: <span class="number">0</span>;
+            list-style:none;
+        }
+        body{
+            background-color: #eee;
+            font-family: <span class="string">"Microsoft Yahei"</span>;
+
+        }
+        section{
+            width: <span class="number">1000</span>px;
+            margin:<span class="number">50</span>px auto;
+        }
+        section h3{
+            font-size:<span class="number">22</span>px;
+            font-weight: normal;
+        }
+
+        ul{
+            border: 1px solid #999;
+            background-color: #fff;
+            display: flex;
+            height:<span class="number">500</span>px;
+
+        }
+
+        ul li{
+            width: <span class="number">200</span>px;
+            height: <span class="number">200</span>px;
+            background: pink;
+            margin:<span class="number">10</span>px;
+
+        }
+
+        section:nth-child(<span class="number">1</span>) ul{
+            <span class="comment">/* 侧轴对齐方式 ：从侧轴开始的方向对齐*/</span>
+            align-items:flex-start;
+        }
+
+        section:nth-child(<span class="number">2</span>) ul{
+            <span class="comment">/* 侧轴对齐方式 ：从侧轴结束的方向对齐*/</span>
+            align-items:flex-end;
+        }
+
+        section:nth-child(<span class="number">3</span>) ul{
+            <span class="comment">/* 侧轴对齐方式 ：居中*/</span>
+            align-items:center;
+        }
+
+        section:nth-child(<span class="number">4</span>) ul{
+            <span class="comment">/* 侧轴对齐方式 ：基线 默认同flex-start*/</span>
+            align-items:baseline;
+        }
+
+        section:nth-child(<span class="number">5</span>) ul{
+            <span class="comment">/* 侧轴对齐方式 ：拉伸*/</span>
+            align-items:stretch;
+
+        }
+
+        section:nth-child(<span class="number">5</span>) ul li{
+            height:auto;
+        }
+
+
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;section&gt;
+    &lt;h3&gt;侧轴的对齐方式:align-items ：flex-start&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;1&lt;/li&gt;
+        &lt;li&gt;2&lt;/li&gt;
+        &lt;li&gt;3&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+    &lt;h3&gt;侧轴的对齐方式：align-items:flex-end&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;1&lt;/li&gt;
+        &lt;li&gt;2&lt;/li&gt;
+        &lt;li&gt;3&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+    &lt;h3&gt;侧轴的对齐方式：align-items:center&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;1&lt;/li&gt;
+        &lt;li&gt;2&lt;/li&gt;
+        &lt;li&gt;3&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+    &lt;h3&gt;侧轴的对齐方式：align-itmes:baseline&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;1&lt;/li&gt;
+        &lt;li&gt;2&lt;/li&gt;
+        &lt;li&gt;3&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+    &lt;h3&gt;侧轴的对齐方式：align-itmes: stretch&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;1&lt;/li&gt;
+        &lt;li&gt;2&lt;/li&gt;
+        &lt;li&gt;3&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h5 id><a href="#" class="headerlink" title=" "></a> </h5><pre><code class="java">flex
+</code></pre>
+<p> 属性：设置子盒子的权重<br>代码演示： </p>
+<pre><code class="java">  &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span class="string">"en"</span>&gt;
+    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;style&gt;
+        *{
+            margin: <span class="number">0</span>;
+            padding: <span class="number">0</span>;
+            list-style:none;
+        }
+        body{
+            background-color: #eee;
+            font-family: <span class="string">"Microsoft Yahei"</span>;
+
+        }
+        section{
+            width: <span class="number">1000</span>px;
+            margin:<span class="number">50</span>px auto;
+        }
+        section h3{
+            font-size:<span class="number">22</span>px;
+            font-weight: normal;
+        }
+
+        ul{
+            border: 1px solid #999;
+            background-color: #fff;
+            display: flex;
+
+        }
+
+        ul li{
+            width: <span class="number">200</span>px;
+            height: <span class="number">200</span>px;
+            background: pink;
+            margin:<span class="number">10</span>px;
+
+        }
+
+        section:nth-child(<span class="number">1</span>) ul li:nth-child(<span class="number">1</span>){
+            flex:<span class="number">1</span>;
+        }
+
+        section:nth-child(<span class="number">1</span>) ul li:nth-child(<span class="number">2</span>){
+            flex:<span class="number">1</span>;
+        }
+
+        section:nth-child(<span class="number">1</span>) ul li:nth-child(<span class="number">3</span>){
+            flex:<span class="number">8</span>;
+        }
+
+        section:nth-child(<span class="number">2</span>) ul li:nth-child(<span class="number">1</span>){
+
+        }
+
+        section:nth-child(<span class="number">2</span>) ul li:nth-child(<span class="number">2</span>){
+            flex:<span class="number">1</span>;
+        }
+
+        section:nth-child(<span class="number">2</span>) ul li:nth-child(<span class="number">3</span>){
+           flex:<span class="number">4</span>;
+        }
+
+
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;section&gt;
+    &lt;h3&gt;伸缩比例:flex&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;1&lt;/li&gt;
+        &lt;li&gt;2&lt;/li&gt;
+        &lt;li&gt;3&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+    &lt;h3&gt;伸缩比例:flex&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;1&lt;/li&gt;
+        &lt;li&gt;2&lt;/li&gt;
+        &lt;li&gt;3&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/section&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<p>  【英文原版】 CSS Flexbox Fundamentals Visual Guide：<a href="https://medium.com/swlh/css-flexbox-fundamentals-visual-guide-1c467f480dac" rel="external nofollow noopener noreferrer" target="_blank">https://medium.com/swlh/css-flexbox-fundamentals-visual-guide-1c467f480dac</a><br>  【中文翻译】CSS Flexbox 可视化手册：<a href="https://zhuanlan.zhihu.com/p/56046851" rel="external nofollow noopener noreferrer" target="_blank">https://zhuanlan.zhihu.com/p/56046851</a>  </p>
+<h5 id="flex-相关的推荐文章"><a href="#flex-相关的推荐文章" class="headerlink" title="flex 相关的推荐文章"></a>flex 相关的推荐文章</h5><p>  flex 效果在线演示：<a href="https://demos.scotch.io/visual-guide-to-css3-flexbox-flexbox-playground/demos/" rel="external nofollow noopener noreferrer" target="_blank">https://demos.scotch.io/visual-guide-to-css3-flexbox-flexbox-playground/demos/</a><br>  CSS3 Flexbox 布局完全指南 | 中文翻译：<a href="https://www.html.cn/archives/8629" rel="external nofollow noopener noreferrer" target="_blank">https://www.html.cn/archives/8629</a>  </p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-CSS3中Flex布局-弹性盒子-弹性元素</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 09:46</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/c76bb171/" title="推荐系列-CSS3中Flex布局-弹性盒子-弹性元素">https://www.hosiang.cn/c76bb171/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/c76bb171/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-CSS3中Flex布局-弹性盒子-弹性元素》 — 狂欢马克思&url=https://www.hosiang.cn/c76bb171/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/c76bb171/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/c76bb171/&title=《推荐系列-CSS3中Flex布局-弹性盒子-弹性元素》 — 狂欢马克思&source=&emsp;&emsp;CSS3中的 flex 属性，在布局方面做了非常大的改进，使得我们对多个元素之间的布局排列变得十分灵活，适应性非常强。其强大的伸缩..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/c76bb171/&title=《推荐系列-CSS3中Flex布局-弹性盒子-弹性元素》 — 狂欢马克思&pic=https://oscimg.oschina.net/oscnet/up-458c0e15734cc9d95787e4906585b9a6518.png" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/c76bb171/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#声明定义"><span class="post-toc-text">声明定义</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#flex-direction-属性"><span class="post-toc-text">flex-direction 属性</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#flex-wrap-属性"><span class="post-toc-text">flex-wrap 属性</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#justify-content-属性"><span class="post-toc-text">justify-content 属性</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#justify-content-属性-1"><span class="post-toc-text">justify-content 属性</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#align-items-属性"><span class="post-toc-text">align-items 属性</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#null"><span class="post-toc-text"> </span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#flex-相关的推荐文章"><span class="post-toc-text">flex 相关的推荐文章</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/542f44b8/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-Android 系统开发做什么-
+        
+      </span>
+    </a>
+  
+  
+    <a href="/437520b8/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-DolphinDB内存表详解</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

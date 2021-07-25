@@ -1,0 +1,881 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;Dataway介绍 Dataway 是基于 DataQL 服务聚合能力，为应用提供的一个接口配置工具。使得使用者无需开发任何代码就配置一个满足需求的接口。 整个接口配置、测试、冒烟、发布。一站式都通过 …">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper">
+<meta property="og:url" content="https://www.hosiang.cn/35bba72e/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;Dataway介绍 Dataway 是基于 DataQL 服务聚合能力，为应用提供的一个接口配置工具。使得使用者无需开发任何代码就配置一个满足需求的接口。 整个接口配置、测试、冒烟、发布。一站式都通过 …">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-aa9b52ddde3ce466cb08e4bbb7fe9183117.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-aa9b52ddde3ce466cb08e4bbb7fe9183117.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-aa9b52ddde3ce466cb08e4bbb7fe9183117.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-aa9b52ddde3ce466cb08e4bbb7fe9183117.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-aa9b52ddde3ce466cb08e4bbb7fe9183117.png">
+<meta property="og:updated_time" content="2021-07-23T15:43:07.042Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;Dataway介绍 Dataway 是基于 DataQL 服务聚合能力，为应用提供的一个接口配置工具。使得使用者无需开发任何代码就配置一个满足需求的接口。 整个接口配置、测试、冒烟、发布。一站式都通过 …">
+<meta name="twitter:image" content="https://oscimg.oschina.net/oscnet/up-aa9b52ddde3ce466cb08e4bbb7fe9183117.png">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 2.5k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 12分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;Dataway介绍 Dataway 是基于 DataQL 服务聚合能力，为应用提供的一个接口配置工具。使得使用者无需开发任何代码就配置一个满足需求的接口。 整个接口配置、测试、冒烟、发布。一站式都通过 …<br><a id="more"></a></p>
+<h3 id="Dataway介绍"><a href="#Dataway介绍" class="headerlink" title="Dataway介绍"></a>Dataway介绍</h3><p> Dataway 是 Hasor 生态中的一员，因此在  Spring 中使用 Dataway 首先要做的就是打通两个生态。根据官方文档中推荐的方式我们将 Hasor 和 Spring Boot 整合起来。这里是原文：<a href="https://www.hasor.net/web/extends/spring/for_boot.html" rel="external nofollow noopener noreferrer" target="_blank">https://www.hasor.net/web/extends/spring/for_boot.html</a> </p>
+<h3 id="第一步：引入相关依赖"><a href="#第一步：引入相关依赖" class="headerlink" title="第一步：引入相关依赖"></a>第一步：引入相关依赖</h3><pre><code class="java">  &lt;dependency&gt;
+    &lt;groupId&gt;net.hasor&lt;/groupId&gt;
+    &lt;artifactId&gt;hasor-spring&lt;/artifactId&gt;
+    &lt;version&gt;4.1.6&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;net.hasor&lt;/groupId&gt;
+    &lt;artifactId&gt;hasor-dataway&lt;/artifactId&gt;
+    &lt;version&gt;4.1.6&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>hasor-spring 负责 Spring 和 Hasor 框架之间的整合。 hasor-dataway 是工作在 Hasor 之上，利用 hasor-spring 我们就可以使用 dataway了。 </p>
+<h3 id="第二步：配置-Dataway，并初始化数据表"><a href="#第二步：配置-Dataway，并初始化数据表" class="headerlink" title="第二步：配置 Dataway，并初始化数据表"></a>第二步：配置 Dataway，并初始化数据表</h3><p>dataway 会提供一个界面让我们配置接口，这一点类似 Swagger 只要jar包集成就可以实现接口配置。找到我们 springboot 项目的配置文件 application.properties </p>
+<pre><code class="java">  # 是否启用 Dataway 功能（必选：默认false）
+HASOR_DATAQL_DATAWAY=<span class="keyword">true</span>
+
+# 是否开启 Dataway 后台管理界面（必选：默认false）
+HASOR_DATAQL_DATAWAY_ADMIN=<span class="keyword">true</span>
+
+# dataway  API工作路径（可选，默认：/api/）
+HASOR_DATAQL_DATAWAY_API_URL=/api/
+
+# dataway-ui 的工作路径（可选，默认：/interface-ui/）
+HASOR_DATAQL_DATAWAY_UI_URL=/<span class="class"><span class="keyword">interface</span>-<span class="title">ui</span>/</span>
+<span class="class"></span>
+<span class="class"># <span class="title">SQL</span>执行器方言设置（可选，建议设置）</span>
+<span class="class"><span class="title">HASOR_DATAQL_FX_PAGE_DIALECT</span></span>=mysql
+</code></pre>
+<p>Dataway 一共涉及到 5个可以配置的配置项，但不是所有配置都是必须的。<br>其中 HASOR_DATAQL_DATAWAY、HASOR_DATAQL_DATAWAY_ADMIN 两个配置是必须要打开的，默认情况下 Datawaty 是不启用的。<br>Dataway 需要两个数据表才能工作，下面是这两个数据表的简表语句。下面这个 SQL 可以在 dataway的依赖 jar 包中 “META-INF/hasor-framework/mysql” 目录下面找到，建表语句是用 mysql 语法写的。<br>其它数据库的建表语句请参看官方说明手册：<a href="https://www.hasor.net/web/dataway/for_boot.html#mysql" rel="external nofollow noopener noreferrer" target="_blank">https://www.hasor.net/web/dataway/for_boot.html#mysql</a> </p>
+<pre><code class="java">  CREATE TABLE `interface_info` (
+    `api_id`          <span class="keyword">int</span>(<span class="number">11</span>)      NOT NULL AUTO_INCREMENT   COMMENT <span class="string">'ID'</span>,
+    `api_method`      varchar(<span class="number">12</span>)  NOT NULL                  COMMENT <span class="string">'HttpMethod：GET、PUT、POST'</span>,
+    `api_path`        varchar(<span class="number">512</span>) NOT NULL                  COMMENT <span class="string">'拦截路径'</span>,
+    `api_status`      <span class="keyword">int</span>(<span class="number">2</span>)       NOT NULL                  COMMENT <span class="string">'状态：0草稿，1发布，2有变更，3禁用'</span>,
+    `api_comment`     varchar(<span class="number">255</span>)     NULL                  COMMENT <span class="string">'注释'</span>,
+    `api_type`        varchar(<span class="number">24</span>)  NOT NULL                  COMMENT <span class="string">'脚本类型：SQL、DataQL'</span>,
+    `api_script`      mediumtext   NOT NULL                  COMMENT <span class="string">'查询脚本：xxxxxxx'</span>,
+    `api_schema`      mediumtext       NULL                  COMMENT <span class="string">'接口的请求/响应数据结构'</span>,
+    `api_sample`      mediumtext       NULL                  COMMENT <span class="string">'请求/响应/请求头样本数据'</span>,
+    `api_option`      mediumtext       NULL                  COMMENT <span class="string">'扩展配置信息'</span>,
+    `api_create_time` datetime     DEFAULT CURRENT_TIMESTAMP COMMENT <span class="string">'创建时间'</span>,
+    `api_gmt_time`    datetime     DEFAULT CURRENT_TIMESTAMP COMMENT <span class="string">'修改时间'</span>,
+    <span class="function">PRIMARY <span class="title">KEY</span> <span class="params">(`api_id`)</span></span>
+<span class="function">) ENGINE</span>=InnoDB AUTO_INCREMENT=<span class="number">0</span> DEFAULT CHARSET=utf8mb4 COMMENT=<span class="string">'Dataway 中的API'</span>;
+
+CREATE TABLE `interface_release` (
+    `pub_id`          <span class="keyword">int</span>(<span class="number">11</span>)      NOT NULL AUTO_INCREMENT   COMMENT <span class="string">'Publish ID'</span>,
+    `pub_api_id`      <span class="keyword">int</span>(<span class="number">11</span>)      NOT NULL                  COMMENT <span class="string">'所属API ID'</span>,
+    `pub_method`      varchar(<span class="number">12</span>)  NOT NULL                  COMMENT <span class="string">'HttpMethod：GET、PUT、POST'</span>,
+    `pub_path`        varchar(<span class="number">512</span>) NOT NULL                  COMMENT <span class="string">'拦截路径'</span>,
+    `pub_status`      <span class="keyword">int</span>(<span class="number">2</span>)       NOT NULL                  COMMENT <span class="string">'状态：0有效，1无效（可能被下线）'</span>,
+    `pub_type`        varchar(<span class="number">24</span>)  NOT NULL                  COMMENT <span class="string">'脚本类型：SQL、DataQL'</span>,
+    `pub_script`      mediumtext   NOT NULL                  COMMENT <span class="string">'查询脚本：xxxxxxx'</span>,
+    `pub_script_ori`  mediumtext   NOT NULL                  COMMENT <span class="string">'原始查询脚本，仅当类型为SQL时不同'</span>,
+    `pub_schema`      mediumtext       NULL                  COMMENT <span class="string">'接口的请求/响应数据结构'</span>,
+    `pub_sample`      mediumtext       NULL                  COMMENT <span class="string">'请求/响应/请求头样本数据'</span>,
+    `pub_option`      mediumtext       NULL                  COMMENT <span class="string">'扩展配置信息'</span>,
+    `pub_release_time`datetime     DEFAULT CURRENT_TIMESTAMP COMMENT <span class="string">'发布时间（下线不更新）'</span>,
+    <span class="function">PRIMARY <span class="title">KEY</span> <span class="params">(`pub_id`)</span></span>
+<span class="function">) ENGINE</span>=InnoDB AUTO_INCREMENT=<span class="number">0</span> DEFAULT CHARSET=utf8mb4 COMMENT=<span class="string">'Dataway API 发布历史。'</span>;
+
+<span class="function">create index idx_interface_release on <span class="title">interface_release</span> <span class="params">(pub_api_id)</span></span>;
+</code></pre>
+<h3 id="第三步：配置数据源"><a href="#第三步：配置数据源" class="headerlink" title="第三步：配置数据源"></a>第三步：配置数据源</h3><p>作为 Spring Boot 项目有着自己完善的数据库方面工具支持。我们这次采用 druid + mysql + spring-boot-starter-jdbc 的方式。<br>首先引入依赖 </p>
+<pre><code class="java">  &lt;dependency&gt;
+    &lt;groupId&gt;mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+    &lt;version&gt;5.1.30&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+    &lt;artifactId&gt;druid&lt;/artifactId&gt;
+    &lt;version&gt;1.1.21&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+    &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;1.1.10&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>然后增加数据源的配置 </p>
+<pre><code class="java">  # db
+spring.datasource.url=jdbc:mysql:<span class="comment">//xxxxxxx:3306/example</span>
+spring.datasource.username=xxxxx
+spring.datasource.password=xxxxx
+spring.datasource.driver-<span class="class"><span class="keyword">class</span>-<span class="title">name</span></span>=com.mysql.jdbc.Driver
+spring.datasource.type:com.alibaba.druid.pool.DruidDataSource
+# druid
+spring.datasource.druid.initial-size=<span class="number">3</span>
+spring.datasource.druid.min-idle=<span class="number">3</span>
+spring.datasource.druid.max-active=<span class="number">10</span>
+spring.datasource.druid.max-wait=<span class="number">60000</span>
+spring.datasource.druid.stat-view-servlet.login-username=admin
+spring.datasource.druid.stat-view-servlet.login-password=admin
+spring.datasource.druid.filter.stat.log-slow-sql=<span class="keyword">true</span>
+spring.datasource.druid.filter.stat.slow-sql-millis=<span class="number">1</span>
+</code></pre>
+<p>如果项目已经集成了自己的数据源，那么可以忽略第三步。 </p>
+<h3 id="第四步：把数据源设置到-Hasor-容器中"><a href="#第四步：把数据源设置到-Hasor-容器中" class="headerlink" title="第四步：把数据源设置到 Hasor 容器中"></a>第四步：把数据源设置到 Hasor 容器中</h3><p>Spring Boot 和 Hasor 本是两个独立的容器框架，我们做整合之后为了使用 Dataway 的能力需要把 Spring 中的数据源设置到 Hasor 中。<br>首先新建一个 Hasor 的 模块，并且将其交给 Spring 管理。然后把数据源通过 Spring 注入进来。 </p>
+<pre><code class="java">  <span class="meta">@DimModule</span>
+<span class="meta">@Component</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleModule</span> <span class="keyword">implements</span> <span class="title">SpringModule</span> </span>{
+    <span class="meta">@Autowired</span>
+    <span class="keyword">private</span> DataSource dataSource = <span class="keyword">null</span>;
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadModule</span><span class="params">(ApiBinder apiBinder)</span> <span class="keyword">throws</span> Throwable </span>{
+        <span class="comment">// .DataSource form Spring boot into Hasor</span>
+        apiBinder.installModule(<span class="keyword">new</span> JdbcModule(Level.Full, <span class="keyword">this</span>.dataSource));
+    }
+}
+</code></pre>
+<p>Hasor 启动的时候会调用 loadModule 方法，在这里再把 DataSource 设置到 Hasor 中。 </p>
+<h3 id="第五步：在SprintBoot-中启用-Hasor"><a href="#第五步：在SprintBoot-中启用-Hasor" class="headerlink" title="第五步：在SprintBoot 中启用 Hasor"></a>第五步：在SprintBoot 中启用 Hasor</h3><pre><code class="java">  <span class="meta">@EnableHasor</span>()
+<span class="meta">@EnableHasorWeb</span>()
+<span class="meta">@SpringBootApplication</span>(scanBasePackages = { <span class="string">"net.example.hasor"</span> })
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleApplication</span> </span>{
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+        SpringApplication.run(ExampleApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;
+    }
+}
+</code></pre>
+<p>这一步非常简单，只需要在 Spring 启动类上增加两个注解即可。 </p>
+<h3 id="第六步：启动应用"><a href="#第六步：启动应用" class="headerlink" title="第六步：启动应用"></a>第六步：启动应用</h3><p>应用在启动过程中会看到 Hasor Boot 的欢迎信息 </p>
+<pre><code class="java">   _    _                        ____              _
+| |  | |                      |  _             | |
+| |__| | __ _ ___  ___  _ __  | |_) | ___   ___ | |_
+|  __  |/ _` / __|/ _ | <span class="string">'__| |  _ &lt; / _  / _ | __|</span>
+<span class="string">| |  | | (_| __  (_) | |    | |_) | (_) | (_) | |_</span>
+<span class="string">|_|  |_|__,_|___/___/|_|    |____/ ___/ ___/ __|</span>
+</code></pre>
+<p>在后面的日志中还可以看到类似下面这些日志。 </p>
+<pre><code class="java">  <span class="number">2020</span>-<span class="number">04</span>-<span class="number">14</span> <span class="number">13</span>:<span class="number">52</span>:<span class="number">59.696</span> [main] INFO  n.h.core.context.TemplateAppContext - loadModule <span class="class"><span class="keyword">class</span> <span class="title">net</span>.<span class="title">hasor</span>.<span class="title">dataway</span>.<span class="title">config</span>.<span class="title">DatawayModule</span></span>
+2020-04-14 13:52:59.697 [main] INFO  n.hasor.dataway.config.DatawayModule - dataway api workAt /api/
+<span class="number">2020</span>-<span class="number">04</span>-<span class="number">14</span> <span class="number">13</span>:<span class="number">52</span>:<span class="number">59.697</span> [main] INFO  n.h.c.e.AbstractEnvironment - <span class="keyword">var</span> -&gt; HASOR_DATAQL_DATAWAY_API_URL = /api/.
+<span class="number">2020</span>-<span class="number">04</span>-<span class="number">14</span> <span class="number">13</span>:<span class="number">52</span>:<span class="number">59.704</span> [main] INFO  n.hasor.dataway.config.DatawayModule - dataway admin workAt /<span class="class"><span class="keyword">interface</span>-<span class="title">ui</span>/</span>
+2020-04-14 13:52:59.716 [main] INFO  net.hasor.core.binder.ApiBinderWrap - mapingTo[901d38f22faa419a8593bb349905ed0e] -&gt; bindType ‘class net.hasor.dataway.web.ApiDetailController’ mappingTo: ‘[/interface-ui/api/api-detail]’.
+2020-04-14 13:52:59.716 [main] INFO  net.hasor.core.binder.ApiBinderWrap - mapingTo[c6eb9f3b3d4c4c8d8a4f807435538172] -&gt; bindType ‘class net.hasor.dataway.web.ApiHistoryListController’ mappingTo: ‘[/interface-ui/api/api-history]’.
+2020-04-14 13:52:59.717 [main] INFO  net.hasor.core.binder.ApiBinderWrap - mapingTo[eb841dc72ad54023957233ef602c4327] -&gt; bindType ‘class net.hasor.dataway.web.ApiInfoController’ mappingTo: ‘[/interface-ui/api/api-info]’.
+2020-04-14 13:52:59.717 [main] INFO  net.hasor.core.binder.ApiBinderWrap - mapingTo[96aebb46265245459ae21d558e530921] -&gt; bindType ‘class net.hasor.dataway.web.ApiListController’ mappingTo: ‘[/interface-ui/api/api-list]’.
+2020-04-14 13:52:59.718 [main] INFO  net.hasor.core.binder.ApiBinderWrap - mapingTo[7467c07f160244df8f228321f6262d3d] -&gt; bindType ‘class net.hasor.dataway.web.ApiHistoryGetController’ mappingTo: ‘[/interface-ui/api/get-history]’.
+2020-04-14 13:52:59.719 [main] INFO  net.hasor.core.binder.ApiBinderWrap - mapingTo[97d8da5363c741ba99d87c073a344412] -&gt; bindType ‘class net.hasor.dataway.web.DisableController’ mappingTo: ‘[/interface-ui/api/disable]’.
+2020-04-14 13:52:59.720 [main] INFO  net.hasor.core.binder.ApiBinderWrap - mapingTo[8ddc3316ef2642dfa4395ca8ac0fff04] -&gt; bindType ‘class net.hasor.dataway.web.SmokeController’ mappingTo: ‘[/interface-ui/api/smoke]’.
+2020-04-14 13:52:59.720 [main] INFO  net.hasor.core.binder.ApiBinderWrap - mapingTo[cc06c5fb343b471aacedc58fb2fe7bf8] -&gt; bindType ‘class net.hasor.dataway.web.SaveApiController’ mappingTo: ‘[/interface-ui/api/save-api]’.
+2020-04-14 13:52:59.720 [main] INFO  net.hasor.core.binder.ApiBinderWrap - mapingTo[7915b2b1f89a4e73891edab0264c9bd4] -&gt; bindType ‘class net.hasor.dataway.web.PublishController’ mappingTo: ‘[/interface-ui/api/publish]’.
+2020-04-14 13:52:59.721 [main] INFO  net.hasor.core.binder.ApiBinderWrap - mapingTo[0cfa34586455414591bdc389bff23ccb] -&gt; bindType ‘class net.hasor.dataway.web.PerformController’ mappingTo: ‘[/interface-ui/api/perform]’.
+2020-04-14 13:52:59.721 [main] INFO  net.hasor.core.binder.ApiBinderWrap - mapingTo[37fe4af3e2994acb8deb72d21f02217c] -&gt; bindType ‘class net.hasor.dataway.web.DeleteController’ mappingTo: ‘[/interface-ui/api/delete]’.
+</code></pre>
+<p>当看到 “dataway api workAt /api/” 、 dataway admin workAt /interface-ui/ 信息时，就可以确定 Dataway 的配置已经生效了。 </p>
+<h3 id="第七步：访问接口管理页面进行接口配置"><a href="#第七步：访问接口管理页面进行接口配置" class="headerlink" title="第七步：访问接口管理页面进行接口配置"></a>第七步：访问接口管理页面进行接口配置</h3><p>在浏览器中输入 “<a href="http://127.0.0.1:8080/interface-ui/”" rel="external nofollow noopener noreferrer" target="_blank">http://127.0.0.1:8080/interface-ui/”</a> 就可以看到期待已久的界面了。<br><img src="https://oscimg.oschina.net/oscnet/up-aa9b52ddde3ce466cb08e4bbb7fe9183117.png" alt="Test" title="绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper"> </p>
+<h3 id="第八步：新建一个接口"><a href="#第八步：新建一个接口" class="headerlink" title="第八步：新建一个接口"></a>第八步：新建一个接口</h3><p>Dataway 提供了2中语言模式，我们可以使用强大的 DataQL 查询语言，也可以直接使用 SQL 语言（在 Dataway 内部 SQL 语言也会被转换为 DataQL 的形式执行。）<br><img src="https://oscimg.oschina.net/oscnet/up-aa9b52ddde3ce466cb08e4bbb7fe9183117.png" alt="Test" title="绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper"><br>首先我们在 SQL 模式下尝试执行一条 select 查询，立刻就可以看到这条 SQL 的查询结果。<br><img src="https://oscimg.oschina.net/oscnet/up-aa9b52ddde3ce466cb08e4bbb7fe9183117.png" alt="Test" title="绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper"><br>同样的方式我们使用 DataQL 的方式需要这样写： </p>
+<pre><code class="java">  <span class="keyword">var</span> query = @<span class="meta">@sql</span>()&lt;%
+    select * from interface_info
+%&gt;
+<span class="keyword">return</span> query()
+</code></pre>
+<p>其中 var query = @@sql()&lt;% … %&gt; 是用来定义SQL外部代码块，并将这个定义存入 query 变量名中。 &lt;% %&gt; 中间的就是 SQL 语句。<br>最后在 DataQL 中���用这个代码块，并返回查询结果。<br>当接口写好之后就可以保存发布了，为了测试方便，我选用 GET 方式。<br><img src="https://oscimg.oschina.net/oscnet/up-aa9b52ddde3ce466cb08e4bbb7fe9183117.png" alt="Test" title="绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper"><br>接口发布之后我们直接请求：<a href="http://127.0.0.1:8080/api/demos，就看到期待已久的接口返回值了。" rel="external nofollow noopener noreferrer" target="_blank">http://127.0.0.1:8080/api/demos，就看到期待已久的接口返回值了。</a><br><img src="https://oscimg.oschina.net/oscnet/up-aa9b52ddde3ce466cb08e4bbb7fe9183117.png" alt="Test" title="绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper"> </p>
+<h3 id="最后总结"><a href="#最后总结" class="headerlink" title="最后总结"></a>最后总结</h3><p>经过上面的几个步骤我们介绍了如何基于 Spring Boot 项目使用 Dataway 来简单的配置接口。Dataway 的方式确实给人耳目一新，一个接口竟然可以如此简单的配置出来无需开发任何一行代码，也不需要做任何 Mapping 实体映射绑定。<br>后面会有更多 Dataway 的文章推出也欢迎大家继续关注，大家在使用过程中遇到什么问题可以在评论区留言，或者加入 Hasor 线下交流群一起讨论（群号请到 Hasor 官网上查阅，这里就卖个关子）<br>最后放几个有用的连接： </p>
+<ul>
+<li>Dataway 官方手册：<a href="https://www.hasor.net/web/dataway/about.html" rel="external nofollow noopener noreferrer" target="_blank">https://www.hasor.net/web/dataway/about.html</a> - Dataway 在 OSC 上的项目地址，欢迎收藏：<a href="https://www.oschina.net/p/dataway" rel="external nofollow noopener noreferrer" target="_blank">https://www.oschina.net/p/dataway</a> - DataQL 手册地址：<a href="https://www.hasor.net/web/dataql/what_is_dataql.html" rel="external nofollow noopener noreferrer" target="_blank">https://www.hasor.net/web/dataql/what_is_dataql.html</a> - Hasor 项目的首页：<a href="https://www.hasor.net/web/index.html" rel="external nofollow noopener noreferrer" target="_blank">https://www.hasor.net/web/index.html</a> </li>
+</ul>
+<p>后续：《Dataway 配置数据接口时和前端进行参数对接》 <a href="https://my.oschina.net/ta8210/blog/3236659" rel="external nofollow noopener noreferrer" target="_blank">https://my.oschina.net/ta8210/blog/3236659</a> 后续：《通过 Dataway 配置一个带有分页查询的接口》<a href="https://my.oschina.net/ta8210/blog/3277320" rel="external nofollow noopener noreferrer" target="_blank">https://my.oschina.net/ta8210/blog/3277320</a> 后续：《Dataway 4.1.5 以上版本升级指南》<a href="https://my.oschina.net/ta8210/blog/4275154" rel="external nofollow noopener noreferrer" target="_blank">https://my.oschina.net/ta8210/blog/4275154</a> 后续：《完美兼容老项目！Dataway 4.1.6 返回结构的全面控制》<a href="https://my.oschina.net/ta8210/blog/4275216" rel="external nofollow noopener noreferrer" target="_blank">https://my.oschina.net/ta8210/blog/4275216</a> 后续：《无需代码！通过 Dataway 配置一个带有分页查询的接口》<a href="https://my.oschina.net/ta8210/blog/3277320" rel="external nofollow noopener noreferrer" target="_blank">https://my.oschina.net/ta8210/blog/3277320</a></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 09:19</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/35bba72e/" title="推荐系列-绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper">https://www.hosiang.cn/35bba72e/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/35bba72e/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper》 — 狂欢马克思&url=https://www.hosiang.cn/35bba72e/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/35bba72e/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/35bba72e/&title=《推荐系列-绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper》 — 狂欢马克思&source=&emsp;&emsp;Dataway介绍 Dataway 是基于 DataQL 服务聚合能力，为应用提供的一个接口配置工具。使得使用者无需开发任何代码就..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/35bba72e/&title=《推荐系列-绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper》 — 狂欢马克思&pic=https://static.oschina.net/uploads/img/202004/20133452_5IA7.jpg" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/35bba72e/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Dataway介绍"><span class="post-toc-text">Dataway介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第一步：引入相关依赖"><span class="post-toc-text">第一步：引入相关依赖</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第二步：配置-Dataway，并初始化数据表"><span class="post-toc-text">第二步：配置 Dataway，并初始化数据表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第三步：配置数据源"><span class="post-toc-text">第三步：配置数据源</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第四步：把数据源设置到-Hasor-容器中"><span class="post-toc-text">第四步：把数据源设置到 Hasor 容器中</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第五步：在SprintBoot-中启用-Hasor"><span class="post-toc-text">第五步：在SprintBoot 中启用 Hasor</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第六步：启动应用"><span class="post-toc-text">第六步：启动应用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第七步：访问接口管理页面进行接口配置"><span class="post-toc-text">第七步：访问接口管理页面进行接口配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第八步：新建一个接口"><span class="post-toc-text">第八步：新建一个接口</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最后总结"><span class="post-toc-text">最后总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/3cbf5b29/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-突破CRUD - 万能树工具类封装
+        
+      </span>
+    </a>
+  
+  
+    <a href="/5df72b45/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-编码规范 - Java函数优雅之道（上）</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

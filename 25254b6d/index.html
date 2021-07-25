@@ -1,0 +1,1035 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-ES 终于可以搜到-悟空哥-了！ | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;zhi’ci回复 PDF 领取资料 这是悟空的第 90 篇原创文章 作者 | 悟空聊架构 来源 | 悟空聊架构（ID：PassJava666） 转载请联系授权（微信ID：PassJava） Elasticsearch（简称 ES）的搜索引擎内…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-ES 终于可以搜到-悟空哥-了！">
+<meta property="og:url" content="https://www.hosiang.cn/25254b6d/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;zhi’ci回复 PDF 领取资料 这是悟空的第 90 篇原创文章 作者 | 悟空聊架构 来源 | 悟空聊架构（ID：PassJava666） 转载请联系授权（微信ID：PassJava） Elasticsearch（简称 ES）的搜索引擎内…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png">
+<meta property="og:updated_time" content="2021-07-23T15:43:06.900Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-ES 终于可以搜到-悟空哥-了！">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;zhi’ci回复 PDF 领取资料 这是悟空的第 90 篇原创文章 作者 | 悟空聊架构 来源 | 悟空聊架构（ID：PassJava666） 转载请联系授权（微信ID：PassJava） Elasticsearch（简称 ES）的搜索引擎内…">
+<meta name="twitter:image" content="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-ES 终于可以搜到-悟空哥-了！" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-ES 终于可以搜到-悟空哥-了！
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 2.4k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 10分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;zhi’ci回复 PDF 领取资料 这是悟空的第 90 篇原创文章 作者 | 悟空聊架构 来源 | 悟空聊架构（ID：PassJava666） 转载请联系授权（微信ID：PassJava） Elasticsearch（简称 ES）的搜索引擎内…<br><a id="more"></a></p>
+<p> zhi’ci回复 PDF 领取资料<br> <img src="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png" alt="Test" title="ES 终于可以搜到-悟空哥-了！"><br> 这是悟空的第 90 篇原创文章<br> 作者 | 悟空聊架构<br> 来源 | 悟空聊架构（ID：PassJava666） </p>
+<p>  转载请联系授权（微信ID：PassJava） </p>
+<p>  Elasticsearch（简称 ES）的搜索引擎内置了很多种分词器，但是对 </p>
+<pre><code class="java">中文分词
+</code></pre>
+<p> 不友好，比如搜索悟空哥，是搜不到的，所以我们需要借助第三方中文分词工具包。<br>  悟空哥专门研究了下  </p>
+<pre><code class="java">ik
+</code></pre>
+<p>  中文分词工具包该怎么玩，希望对大家有所帮助。<br>  本文主要内容如下： </p>
+<p>   <img src="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png" alt="Test" title="ES 终于可以搜到-悟空哥-了！"> </p>
+<pre><code>主要内容 
+</code></pre><h4 id="1-ES-中的分词的原理"><a href="#1-ES-中的分词的原理" class="headerlink" title="1 ES 中的分词的原理"></a>1 ES 中的分词的原理</h4><h5 id="1-1-ES-的分词器概念"><a href="#1-1-ES-的分词器概念" class="headerlink" title="1.1 ES 的分词器概念"></a>1.1 ES 的分词器概念</h5><p>  ES 的一个分词器 ( tokenizer ) 接收一个字符流，将其分割为独立的词元 ( tokens ) ，然后输出词元流。<br>  ES 提供了很多内置的分词器，可以用来构建自定义分词器 ( custom ananlyzers ) </p>
+<h5 id="1-2-标准分词器原理"><a href="#1-2-标准分词器原理" class="headerlink" title="1.2 标准分词器原理"></a>1.2 标准分词器原理</h5><p>  比如 stadard tokenizer 标准分词器，遇到空格进行分词。该分词器还负责记录各个词条 ( term ) 的顺序或 position 位置 ( 用于 phrase 短语和 word proximity 词近邻查询 ) 。每个单词的字符偏移量 ( 用于高亮显示搜索的内容 ) 。 </p>
+<h5 id="1-3-英文和标点符号分词示例"><a href="#1-3-英文和标点符号分词示例" class="headerlink" title="1.3 英文和标点符号分词示例"></a>1.3 英文和标点符号分词示例</h5><p>  查询示例如下： </p>
+<pre><code class="java">POST _analyze{  <span class="string">"analyzer"</span>: <span class="string">"standard"</span>,  <span class="string">"text"</span>: <span class="string">"Do you know why I want to study ELK? 2 3 33..."</span>}
+</code></pre>
+<p>  查询结果： </p>
+<pre><code class="java"><span class="keyword">do</span>, you, know, why, i, want, to, study, elk, <span class="number">2</span>,<span class="number">3</span>,<span class="number">33</span>
+</code></pre>
+<p>  从查询结果可以看到：<br>  （1）标点符号没有分词。<br>  （2）数字会进行分词。 </p>
+<p>   <img src="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png" alt="Test" title="ES 终于可以搜到-悟空哥-了！"> </p>
+<pre><code>英文句子分词 
+</code></pre><h5 id="1-4-中文分词示例"><a href="#1-4-中文分词示例" class="headerlink" title="1.4 中文分词示例"></a>1.4 中文分词示例</h5><p>  但是这种分词器对中文的分词支持不友好，会将词语分词为单独的汉字。比如下面的示例会将  </p>
+<pre><code class="java">悟空聊架构
+</code></pre>
+<p>  分词为  </p>
+<pre><code class="java">悟
+</code></pre>
+<p> , </p>
+<pre><code class="java">空
+</code></pre>
+<p> , </p>
+<pre><code class="java">聊
+</code></pre>
+<p> , </p>
+<pre><code class="java">架
+</code></pre>
+<p> , </p>
+<pre><code class="java">构
+</code></pre>
+<p> ，期望分词为  </p>
+<pre><code class="java">悟空
+</code></pre>
+<p> ， </p>
+<pre><code class="java">聊
+</code></pre>
+<p> ， </p>
+<pre><code class="java">架构
+</code></pre>
+<p> 。 </p>
+<pre><code class="java">POST _analyze{  <span class="string">"analyzer"</span>: <span class="string">"standard"</span>,  <span class="string">"text"</span>: <span class="string">"悟空聊架构"</span>}
+</code></pre>
+<p>   <img src="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png" alt="Test" title="ES 终于可以搜到-悟空哥-了！"> </p>
+<pre><code>中文分词悟空聊架构 
+</code></pre><p>  我们可以安装 ik 分词器来更加友好的支持中文分词。 </p>
+<h4 id="2-安装-ik-分词器"><a href="#2-安装-ik-分词器" class="headerlink" title="2  安装 ik 分词器"></a>2  安装 ik 分词器</h4><h5 id="2-1-ik-分词器地址"><a href="#2-1-ik-分词器地址" class="headerlink" title="2.1 ik 分词器地址"></a>2.1 ik 分词器地址</h5><p>  ik 分词器地址： </p>
+<pre><code class="java">https:<span class="comment">//github.com/medcl/elasticsearch-analysis-ik/releases</span>
+</code></pre>
+<p>  先检查 ES 版本，我安装的版本是  </p>
+<pre><code class="java"><span class="number">7.4</span><span class="number">.2</span>
+</code></pre>
+<p> ，所以我们安装 ik 分词器的版本也选择 7.4.2 </p>
+<pre><code class="java">http:<span class="comment">//192.168.56.10:9200/{  "name" : "8448ec5f3312",  "cluster_name" : "elasticsearch",  "cluster_uuid" : "xC72O3nKSjWavYZ-EPt9Gw",  "version" : {    "number" : "7.4.2",    "build_flavor" : "default",    "build_type" : "docker",    "build_hash" : "2f90bbf7b93631e52bafb59b3b049cb44ec25e96",    "build_date" : "2019-10-28T20:40:44.881551Z",    "build_snapshot" : false,    "lucene_version" : "8.2.0",    "minimum_wire_compatibility_version" : "6.8.0",    "minimum_index_compatibility_version" : "6.0.0-beta1"  },  "tagline" : "You Know, for Search"}</span>
+</code></pre>
+<p>   <img src="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png" alt="Test" title="ES 终于可以搜到-悟空哥-了！"> </p>
+<pre><code>选择 ik 分词器 
+</code></pre><h5 id="2-2-安装-ik-分词器的方式"><a href="#2-2-安装-ik-分词器的方式" class="headerlink" title="2.2 安装 ik 分词器的方式"></a>2.2 安装 ik 分词器的方式</h5><h6 id="2-2-1-方式一：容器内安装-ik-分词器"><a href="#2-2-1-方式一：容器内安装-ik-分词器" class="headerlink" title="2.2.1 方式一：容器内安装 ik 分词器"></a>2.2.1 方式一：容器内安装 ik 分词器</h6><pre><code>进入 es 容器内部 plugins 目录 
+</code></pre><pre><code class="java">docker exec -it &lt;容器 id&gt; /bin/bash
+</code></pre>
+<pre><code>获取 ik 分词器压缩包 
+</code></pre><pre><code class="java">wget https:<span class="comment">//github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.4.2/elasticsearch-analysis-ik-7.4.2.zip</span>
+</code></pre>
+<pre><code>解压缩 ik 压缩包 
+</code></pre><pre><code class="java">unzip 压缩包
+</code></pre>
+<pre><code>删除下载的压缩包 
+</code></pre><pre><code class="java">rm -rf *.zip
+</code></pre>
+<h5 id="2-2-2-方式二：映射文件安装-ik-分词器"><a href="#2-2-2-方式二：映射文件安装-ik-分词器" class="headerlink" title="2.2.2 方式二：映射文件安装 ik 分词器"></a>2.2.2 方式二：映射文件安装 ik 分词器</h5><p>  进入到映射文件夹 </p>
+<pre><code class="java">cd /mydata/elasticsearch/plugins
+</code></pre>
+<p>  下载安装包 </p>
+<pre><code class="java">wget https:<span class="comment">//github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.4.2/elasticsearch-analysis-ik-7.4.2.zip</span>
+</code></pre>
+<pre><code>解压缩 ik 压缩包 
+</code></pre><pre><code class="java">unzip 压缩包
+</code></pre>
+<pre><code>删除下载的压缩包 
+</code></pre><pre><code class="java">rm -rf *.zip
+</code></pre>
+<h6 id="2-2-3-方式三：Xftp-上传压缩包到映射目录"><a href="#2-2-3-方式三：Xftp-上传压缩包到映射目录" class="headerlink" title="2.2.3 方式三：Xftp 上传压缩包到映射目录"></a>2.2.3 方式三：Xftp 上传压缩包到映射目录</h6><p>  先用 XShell 工具连接虚拟机 ( 操作步骤可以参考之前写的文章 02. 快速搭建 Linux 环境-运维必备) ，然后用 Xftp 将下载好的安装包复制到虚拟机。 </p>
+<p>   <img src="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png" alt="Test" title="ES 终于可以搜到-悟空哥-了！"> </p>
+<pre><code>Xftp 上传压缩包 
+</code></pre><h4 id="3-解压-ik-分词器到容器中"><a href="#3-解压-ik-分词器到容器中" class="headerlink" title="3 解压 ik 分词器到容器中"></a>3 解压 ik 分词器到容器中</h4><pre><code>如果没有安装 unzip 解压工具，则安装 unzip 解压工具。 
+</code></pre><pre><code class="java">apt install unzip
+</code></pre>
+<pre><code>解压 ik 分词器到当前目录的 ik 文件夹下。 
+</code></pre><p>  命令格式：unzip <ik 分词器压缩包><br>  实例： </ik></p>
+<pre><code class="java">unzip ELK-IKv7<span class="number">.4</span><span class="number">.2</span>.zip -d ./ik
+</code></pre>
+<p>   <img src="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png" alt="Test" title="ES 终于可以搜到-悟空哥-了！"> </p>
+<pre><code>解压 ik 分词器 
+
+
+
+
+
+ 修改文件夹权限为可读可写。 
+</code></pre><pre><code class="java">chmod -R <span class="number">777</span> ik/
+</code></pre>
+<pre><code>删除 ik 分词器压缩包 
+</code></pre><pre><code class="java">rm ELK-IKv7<span class="number">.4</span><span class="number">.2</span>.zip
+</code></pre>
+<h4 id="4-检查-ik-分词器安装"><a href="#4-检查-ik-分词器安装" class="headerlink" title="4 检查 ik 分词器安装"></a>4 检查 ik 分词器安装</h4><pre><code>进入到容器中 
+</code></pre><pre><code class="java">docker exec -it &lt;容器 id&gt; /bin/bash
+</code></pre>
+<pre><code>查看 Elasticsearch 的插件 
+</code></pre><pre><code class="java">elasticsearch-plugin list
+</code></pre>
+<p>  结果如下，说明 ik 分词器安装好了。是不是很简单。 </p>
+<pre><code class="java">ik
+</code></pre>
+<p>   <img src="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png" alt="Test" title="ES 终于可以搜到-悟空哥-了！"> </p>
+<pre><code>ik 分词器插件 
+</code></pre><p>  然后退出 Elasticsearch 容器，并重启 Elasticsearch 容器 </p>
+<pre><code class="java">exitdocker restart elasticsearch
+</code></pre>
+<h4 id="5-使用-ik-中文分词器"><a href="#5-使用-ik-中文分词器" class="headerlink" title="5 使用 ik 中文分词器"></a>5 使用 ik 中文分词器</h4><p>  ik 分词器有两种模式 </p>
+<pre><code>智能分词模式 ( ik_smart ) 
+
+
+
+最大组合分词模式 ( ik_max_word ) 
+</code></pre><p>  我们先看下  </p>
+<pre><code class="java">智能分词
+</code></pre>
+<p>  模式的效果。比如对于  </p>
+<pre><code class="java">一颗小星星
+</code></pre>
+<p>  进行中文分词，得到的两个词语： </p>
+<pre><code class="java">一颗
+</code></pre>
+<p> 、 </p>
+<pre><code class="java">小星星
+</code></pre>
+<p>  我们在 Dev Tools Console 输入如下查询 </p>
+<pre><code class="java">POST _analyze{  <span class="string">"analyzer"</span>: <span class="string">"ik_smart"</span>,  <span class="string">"text"</span>: <span class="string">"一颗小星星"</span>}
+</code></pre>
+<p>  得到如下结果，被分词为 一颗和小星星。 </p>
+<p>   <img src="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png" alt="Test" title="ES 终于可以搜到-悟空哥-了！"> </p>
+<pre><code>一颗小星星分词结果 
+</code></pre><p>  再来看下  </p>
+<pre><code class="java">最大组合分词模式
+</code></pre>
+<p> 。输入如下查询语句。 </p>
+<pre><code class="java">POST _analyze{  <span class="string">"analyzer"</span>: <span class="string">"ik_max_word"</span>,  <span class="string">"text"</span>: <span class="string">"一颗小星星"</span>}
+</code></pre>
+<pre><code class="java">一颗小星星
+</code></pre>
+<p>  被分成了 6 个词语：一颗、一、颗、小星星、小星、星星。 </p>
+<p>   <img src="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png" alt="Test" title="ES 终于可以搜到-悟空哥-了！"> </p>
+<pre><code>一颗小星星分词结果 
+</code></pre><p>  我们再来看下另外一个中文分词。比如搜索悟空哥聊架构，期望结果：悟空哥、聊、架构三个词语。<br>  实际结果：悟、空哥、聊、架构四个词语。ik 分词器将悟空哥分词了，认为  </p>
+<pre><code class="java">空哥
+</code></pre>
+<p>  是一个词语。所以需要让 ik 分词器知道  </p>
+<pre><code class="java">悟空哥
+</code></pre>
+<p>  是一个词语，不需要拆分。那怎么办做呢？ </p>
+<p>   <img src="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png" alt="Test" title="ES 终于可以搜到-悟空哥-了！"> </p>
+<pre><code>悟空哥聊架构分词 
+</code></pre><h4 id="6-自定义分词词库"><a href="#6-自定义分词词库" class="headerlink" title="6 自定义分词词库"></a>6 自定义分词词库</h4><h5 id="6-1-自定义词库的方案"><a href="#6-1-自定义词库的方案" class="headerlink" title="6.1 自定义词库的方案"></a>6.1 自定义词库的方案</h5><pre><code>方案 
+新建一个词库文件，然后在 ik 分词器的配置文件中指定分词词库文件的路径。可以指定本地路径，也可以指定远程服务器文件路径。这里我们使用远程服务器文件的方案，因为这种方案可以支持热更新 ( 更新服务器文件，ik 分词词库也会重新加载 ) 。 
+
+
+
+修改配置文件 
+</code></pre><p>  ik 分词器的配置文件在容器中的路径： </p>
+<pre><code class="java">/usr/share/elasticsearch/plugins/ik/config/IKAnalyzer.cfg.xml。
+</code></pre>
+<p>  修改这个文件可以通过修改映射文件，文件路径： </p>
+<pre><code class="java">/mydata/elasticsearch/plugins/ik/config/IKAnalyzer.cfg.xml
+</code></pre>
+<p>  编辑配置文件： </p>
+<pre><code class="java">vim /mydata/elasticsearch/plugins/ik/config/IKAnalyzer.cfg.xml
+</code></pre>
+<p>  配置文件内容如下所示： </p>
+<pre><code class="java">&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd"&gt;&lt;properties&gt;    &lt;comment&gt;IK Analyzer 扩展配置&lt;/comment&gt;    &lt;!--用户可以在这里配置自己的扩展字典 --&gt;    &lt;entry key="ext_dict"&gt;custom/mydict.dic;custom/single_word_low_freq.dic&lt;/entry&gt;     &lt;!--用户可以在这里配置自己的扩展停止词字典--&gt;    &lt;entry key="ext_stopwords"&gt;custom/ext_stopword.dic&lt;/entry&gt;     &lt;!--用户可以在这里配置远程扩展字典 --&gt;    &lt;entry key="remote_ext_dict"&gt;location&lt;/entry&gt;     &lt;!--用户可以在这里配置远程扩展停止词字典--&gt;    &lt;entry key="remote_ext_stopwords"&gt;http://xxx.com/xxx.dic&lt;/entry&gt;&lt;/properties&gt;
+</code></pre>
+<p>  修改配置  </p>
+<pre><code class="java">remote_ext_dict
+</code></pre>
+<p>  的属性值，指定一个 远程网站文件的路径，比如 <a href="http://www.xxx.com/ikwords.text。" rel="external nofollow noopener noreferrer" target="_blank">http://www.xxx.com/ikwords.text。</a><br>  这里我们可以自己搭建一套 nginx 环境，然后把 ikwords.text 放到 nginx 根目录。 </p>
+<h5 id="6-2-搭建-nginx-环境"><a href="#6-2-搭建-nginx-环境" class="headerlink" title="6.2 搭建 nginx 环境"></a>6.2 搭建 nginx 环境</h5><p>  方案：首先获取 nginx 镜像，然后启动一个 nginx 容器，然后将 nginx 的配置文件拷贝到根目录，再删除原 nginx 容器，再用映射文件夹的方式来重新启动 nginx 容器。 </p>
+<pre><code>通过 docker 容器安装 nginx 环境。 
+</code></pre><pre><code class="java">docker run -p <span class="number">80</span>:<span class="number">80</span> --name nginx -d nginx:<span class="number">1.10</span>
+</code></pre>
+<pre><code>拷贝 nginx 容器的配置文件到 mydata 目录的 conf 文件夹 
+</code></pre><pre><code class="java">cd /mydatadocker container cp nginx:/etc/nginx ./conf
+</code></pre>
+<pre><code>mydata 目录 里面创建 nginx 目录 
+</code></pre><pre><code class="java">mkdir nginx
+</code></pre>
+<pre><code>移动 conf 文件夹到 nginx 映射文件夹 
+</code></pre><pre><code class="java">mv conf nginx/
+</code></pre>
+<pre><code>终止并删除原 nginx 容器 
+</code></pre><pre><code class="java">docker stop nginxdocker rm &lt;容器 id&gt;
+</code></pre>
+<pre><code>启动新的容器 
+</code></pre><pre><code class="java">docker run -p <span class="number">80</span>:<span class="number">80</span> --name nginx \-v /mydata/nginx/html:/usr/share/nginx/html \-v /mydata/nginx/logs:/<span class="keyword">var</span>/log/nginx \-v /mydata/nginx/conf:/etc/nginx \-d nginx:<span class="number">1.10</span>
+</code></pre>
+<pre><code>访问 nginx 服务 
+</code></pre><pre><code class="java"><span class="number">192.168</span><span class="number">.56</span><span class="number">.10</span>
+</code></pre>
+<p>  报 403 Forbidden, nginx/1.10.3 则表示 nginx 服务正常启动。403 异常的原因是 nginx 服务下没有文件。 </p>
+<pre><code>nginx 目录新建一个 html 文件 
+</code></pre><pre><code class="java">cd /mydata/nginx/htmlvim index.htmlhello passjava
+</code></pre>
+<pre><code>再次访问 nginx 服务 
+浏览器打印 hello passjava。说明访问 nginx 服务的页面没有问题。 
+
+
+
+创建 ik 分词词库文件 
+</code></pre><pre><code class="java">cd /mydata/nginx/htmlmkdir ikcd ikvim ik.txt
+</code></pre>
+<p>  填写  </p>
+<pre><code class="java">悟空哥
+</code></pre>
+<p> ，并保存文件。 </p>
+<pre><code>访问词库文件 
+</code></pre><pre><code class="java">http:<span class="comment">//192.168.56.10/ik/ik.txt</span>
+</code></pre>
+<p>  浏览器会输出一串乱码，可以先忽略乱码问题。说明词库文件可以访问到。 </p>
+<pre><code>修改 ik 分词器配置 
+</code></pre><pre><code class="java">cd /mydata/elasticsearch/plugins/ik/configvim IKAnalyzer.cfg.xml
+</code></pre>
+<p>   <img src="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png" alt="Test" title="ES 终于可以搜到-悟空哥-了！"> </p>
+<pre><code>修改 ik 分词器配置 
+
+
+
+
+
+ 重启 elasticsearch 容器并设置每次重启机器后都启动 elasticsearch 容器。 
+</code></pre><pre><code class="java">docker restart elasticsearchdocker update elasticsearch --restart=always
+</code></pre>
+<pre><code>再次查询分词结果 
+</code></pre><p>  可以看到  </p>
+<pre><code class="java">悟空哥聊架构
+</code></pre>
+<p>  被拆分为  </p>
+<pre><code class="java">悟空哥
+</code></pre>
+<p> 、 </p>
+<pre><code class="java">聊
+</code></pre>
+<p> 、 </p>
+<pre><code class="java">架构
+</code></pre>
+<p>  三个词语，说明自定义词库中的  </p>
+<pre><code class="java">悟空哥
+</code></pre>
+<p>  有作用。 </p>
+<p>   <img src="https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png" alt="Test" title="ES 终于可以搜到-悟空哥-了！"> </p>
+<pre><code>‍ 
+‍ 
+‍ 
+‍ 
+‍ 
+‍ 
+‍ 
+‍ 
+‍ 
+‍ 
+‍终于可以搜到 
+悟空哥 了~ 
+‍‍‍‍‍‍‍‍‍‍‍‍‍‍ 
+</code></pre><ul>
+<li>END - </li>
+</ul>
+<pre><code>   写了两本 PDF， 
+   回复  
+   分布式 
+    或  
+   PDF  
+   下 
+   载。 
+
+
+   我的 JVM 专栏已上架，回复  
+   JVM  
+   领取 
+   。 
+
+
+    ��人网站： 
+   www.passjava.cn 
+
+
+
+
+
+
+
+
+
+![Test](https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png  &apos;ES 终于可以搜到-悟空哥-了！&apos;) 
+![Test](https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png  &apos;ES 终于可以搜到-悟空哥-了！&apos;) 
+
+ 我是悟空，努力变强，变身超级赛亚人！ 
+</code></pre><p>本文分享自微信公众号 - 悟空聊架构（PassJava666）。如有侵权，请联系 <a href="mailto:support@oschina.cn" rel="external nofollow noopener noreferrer" target="_blank">support@oschina.cn</a> 删除。本文参与“OSC源创计划”，欢迎正在阅读的你也加入，一起分享。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-ES 终于可以搜到-悟空哥-了！</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 10:04</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/25254b6d/" title="推荐系列-ES 终于可以搜到-悟空哥-了！">https://www.hosiang.cn/25254b6d/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/25254b6d/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-ES 终于可以搜到-悟空哥-了！》 — 狂欢马克思&url=https://www.hosiang.cn/25254b6d/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/25254b6d/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/25254b6d/&title=《推荐系列-ES 终于可以搜到-悟空哥-了！》 — 狂欢马克思&source=&emsp;&emsp;zhi’ci回复 PDF 领取资料 这是悟空的第 90 篇原创文章 作者 | 悟空聊架构 来源 | 悟空聊架构（ID：PassJa..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/25254b6d/&title=《推荐系列-ES 终于可以搜到-悟空哥-了！》 — 狂欢马克思&pic=https://oscimg.oschina.net/oscnet/2a13562c-348c-44e5-8aed-903a5678ffb6.png" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/25254b6d/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-ES-中的分词的原理"><span class="post-toc-text">1 ES 中的分词的原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-1-ES-的分词器概念"><span class="post-toc-text">1.1 ES 的分词器概念</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-2-标准分词器原理"><span class="post-toc-text">1.2 标准分词器原理</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-3-英文和标点符号分词示例"><span class="post-toc-text">1.3 英文和标点符号分词示例</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-4-中文分词示例"><span class="post-toc-text">1.4 中文分词示例</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-安装-ik-分词器"><span class="post-toc-text">2  安装 ik 分词器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-1-ik-分词器地址"><span class="post-toc-text">2.1 ik 分词器地址</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-2-安装-ik-分词器的方式"><span class="post-toc-text">2.2 安装 ik 分词器的方式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#2-2-1-方式一：容器内安装-ik-分词器"><span class="post-toc-text">2.2.1 方式一：容器内安装 ik 分词器</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-2-2-方式二：映射文件安装-ik-分词器"><span class="post-toc-text">2.2.2 方式二：映射文件安装 ik 分词器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#2-2-3-方式三：Xftp-上传压缩包到映射目录"><span class="post-toc-text">2.2.3 方式三：Xftp 上传压缩包到映射目录</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-解压-ik-分词器到容器中"><span class="post-toc-text">3 解压 ik 分词器到容器中</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-检查-ik-分词器安装"><span class="post-toc-text">4 检查 ik 分词器安装</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-使用-ik-中文分词器"><span class="post-toc-text">5 使用 ik 中文分词器</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-自定义分词词库"><span class="post-toc-text">6 自定义分词词库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#6-1-自定义词库的方案"><span class="post-toc-text">6.1 自定义词库的方案</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#6-2-搭建-nginx-环境"><span class="post-toc-text">6.2 搭建 nginx 环境</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/e3bc6272/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列--鸿蒙学院-鸿蒙IDE迎来重大更新，新特性足以让你尖叫
+        
+      </span>
+    </a>
+  
+  
+    <a href="/f94a552f/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-Spring Ioc容器-Bean（一）</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

@@ -1,0 +1,983 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-NetCore的缓存使用详例 | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;关于我 作者博客|文章首发 缓存基础知识 缓存可以减少生成内容所需的工作，从而显著提高应用程序的性能和可伸缩性。 缓存最适用于不经常更改的 数据，生成 成本很高。 通过缓存，可以比从数据…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-NetCore的缓存使用详例">
+<meta property="og:url" content="https://www.hosiang.cn/b351a9d2/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;关于我 作者博客|文章首发 缓存基础知识 缓存可以减少生成内容所需的工作，从而显著提高应用程序的性能和可伸缩性。 缓存最适用于不经常更改的 数据，生成 成本很高。 通过缓存，可以比从数据…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://gitee.com/happlyfox/img/raw/master/qrcode_8cm.jpg">
+<meta property="og:updated_time" content="2021-07-23T15:43:06.920Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-NetCore的缓存使用详例">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;关于我 作者博客|文章首发 缓存基础知识 缓存可以减少生成内容所需的工作，从而显著提高应用程序的性能和可伸缩性。 缓存最适用于不经常更改的 数据，生成 成本很高。 通过缓存，可以比从数据…">
+<meta name="twitter:image" content="https://gitee.com/happlyfox/img/raw/master/qrcode_8cm.jpg">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-NetCore的缓存使用详例" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-NetCore的缓存使用详例
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 1.7k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 7分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;关于我 作者博客|文章首发 缓存基础知识 缓存可以减少生成内容所需的工作，从而显著提高应用程序的性能和可伸缩性。 缓存最适用于不经常更改的 数据，生成 成本很高。 通过缓存，可以比从数据…<br><a id="more"></a></p>
+<pre><code>### 关于我 
+</code></pre><p>作者博客|文章首发 </p>
+<h3 id="缓存基础知识"><a href="#缓存基础知识" class="headerlink" title="缓存基础知识"></a>缓存基础知识</h3><p>缓存可以减少生成内容所需的工作，从而显著提高应用程序的性能和可伸缩性。 缓存最适用于不经常更改的 数据，生成 成本很高。 通过缓存，可以比从数据源返回的数据的副本速度快得多。 应该对应用进行编写和测试，使其 永不 依赖于缓存的数据。<br>ASP.NET Core 支持多个不同的缓存。 最简单的缓存基于 IMemoryCache。  </p>
+<pre><code class="java">IMemoryCache
+</code></pre>
+<p>  表示存储在 web 服务器的内存中的缓存。 在服务器场上运行的应用 (多台服务器) 应确保会话在使用内存中缓存时处于粘滞状态。 粘滞会话确保来自客户端的后续请求都将发送到相同的服务器。<br>内存中缓存可以存储任何对象。 分布式缓存接口仅限  </p>
+<pre><code class="java"><span class="keyword">byte</span>[]
+</code></pre>
+<p>  。 内存中和分布式缓存将缓存项作为键值对。 </p>
+<h3 id="缓存指南"><a href="#缓存指南" class="headerlink" title="缓存指南"></a>缓存指南</h3><p> 代码应始终具有回退选项，以获取数据，而 不是依赖于可用的缓存值。<br> 缓存使用稀有资源内存,限制缓存增长： </p>
+<p>   不要 使用外部 输入作为缓存键。<br>   使用过期限制缓存增长。<br>   使用 SetSize、Size 和 SizeLimit 限制缓存大小]。 ASP.NET Core 运行时不会根据内存 压力限制缓存 大小。 开发人员需要限制缓存大小。 </p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="DI注入"><a href="#DI注入" class="headerlink" title="DI注入"></a>DI注入</h4><p>创建一个NetCore控制台项目，进行缓存的项目演示。<br>控制台项目只有一个初始化的Program.cs文件。基于NetCore进行项目编码，每一步就是创建一个基础模板，使用依赖注入的方式。 </p>
+<pre><code class="java">nuget install Microsoft.Extensions.Hosting
+
+</code></pre>
+<pre><code class="java"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Program</span></span>
+<span class="class"></span>{
+    <span class="function"><span class="keyword">static</span> async <span class="keyword">void</span> <span class="title">Main</span><span class="params">(string[] args)</span></span>
+<span class="function">    </span>{
+       <span class="keyword">var</span> builder = <span class="keyword">new</span> HostBuilder().ConfigureServices((context, service) =&gt;
+        {
+
+        });
+
+       await builder.RunConsoleAsync();
+    }
+}
+
+</code></pre>
+<p>注入缓存服务,控制台需要下载库 Microsoft.Extensions.Caching.Memory </p>
+<pre><code class="java">nuget install Microsoft.Extensions.Caching.Memory
+
+</code></pre>
+<pre><code class="java"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Program</span></span>
+<span class="class"></span>{
+    <span class="function"><span class="keyword">static</span> async <span class="keyword">void</span> <span class="title">Main</span><span class="params">(string[] args)</span></span>
+<span class="function">    </span>{
+       <span class="keyword">var</span> builder = <span class="keyword">new</span> HostBuilder().ConfigureServices((context, service) =&gt;
+        {
+            service.AddMemoryCache();
+
+          service.AddScoped&lt;CacheService&gt;();<span class="comment">//实际测试服务</span>
+
+          service.AddHostedService&lt;BackgroundJob&gt;();<span class="comment">//后台执行方法</span>
+        });
+
+       await builder.RunConsoleAsync();
+    }
+}
+
+</code></pre>
+<p>后台服务 </p>
+<pre><code class="java">public class BackgroundJob : IHostedService
+  {
+      <span class="keyword">private</span> readonly CacheService _cacheService;
+
+      <span class="function"><span class="keyword">public</span> <span class="title">BackgroundJob</span><span class="params">(CacheService cacheService)</span></span>
+<span class="function">      </span>{
+          _cacheService = cacheService;
+      }
+
+      <span class="function"><span class="keyword">public</span> Task <span class="title">StartAsync</span><span class="params">(CancellationToken cancellationToken)</span></span>
+<span class="function">      </span>{
+          _cacheService.Action();
+
+          <span class="keyword">return</span> Task.CompletedTask;
+      }
+
+      <span class="function"><span class="keyword">public</span> Task <span class="title">StopAsync</span><span class="params">(CancellationToken cancellationToken)</span></span>
+<span class="function">      </span>{
+          <span class="keyword">return</span> Task.CompletedTask;
+      }
+  }
+
+</code></pre>
+<h4 id="MemoryCache使用总结"><a href="#MemoryCache使用总结" class="headerlink" title="MemoryCache使用总结"></a>MemoryCache使用总结</h4><p>通过构造函数自动注入IMemoryCache </p>
+<pre><code class="java">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CacheService</span></span>
+<span class="class"></span>{
+    <span class="keyword">private</span> readonly IMemoryCache _memoryCache;
+
+    <span class="function"><span class="keyword">public</span> <span class="title">CacheService</span><span class="params">(IMemoryCache memoryCache)</span></span>
+<span class="function">    </span>{
+            _memoryCache = memoryCache;
+    }
+}
+
+</code></pre>
+<h4 id="最基本的使用"><a href="#最基本的使用" class="headerlink" title="最基本的使用"></a>最基本的使用</h4><p>Set方法根据Key设置缓存，默认缓存不过期<br>Get方法根据Key取出缓存 </p>
+<pre><code class="java">  <span class="comment">/// &lt;summary&gt;</span>
+<span class="comment">/// 缓存设置</span>
+<span class="comment">/// &lt;/summary&gt;</span>
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">BaseCache</span><span class="params">()</span></span>
+<span class="function"></span>{
+    string cacheKey = <span class="string">"timestamp"</span>;
+    <span class="comment">//set cache</span>
+    _memoryCache.Set(cacheKey, DateTime.Now.ToString());
+
+    <span class="comment">//get cache</span>
+    Console.WriteLine(_memoryCache.Get(cacheKey));
+}
+
+</code></pre>
+<p>IMemoryCache提供一些好的语法糖供开发者使用，具体内容看下方文档 </p>
+<pre><code class="java">  <span class="comment">/// &lt;summary&gt;</span>
+<span class="comment">/// 特殊方法的使用</span>
+<span class="comment">/// &lt;/summary&gt;</span>
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ActionUse</span><span class="params">()</span></span>
+<span class="function"></span>{
+    <span class="comment">//场景-如果缓存存在，取出。如果缓存不存在，写入</span>
+    <span class="comment">//原始写法</span>
+    string cacheKey = <span class="string">"timestamp"</span>;
+    <span class="keyword">if</span> (_memoryCache.Get(cacheKey) != <span class="keyword">null</span>)
+    {
+        _memoryCache.Set(cacheKey, DateTime.Now.ToString());
+    }
+    <span class="keyword">else</span>
+    {
+        Console.WriteLine(_memoryCache.Get(cacheKey));
+    }
+
+    <span class="comment">//新写法</span>
+    <span class="keyword">var</span> dataCacheValue = _memoryCache.GetOrCreate(cacheKey, entry =&gt;
+     {
+         <span class="keyword">return</span> DateTime.Now.ToString();
+     });
+    Console.WriteLine(dataCacheValue);
+
+    <span class="comment">//删除缓存</span>
+    _memoryCache.Remove(cacheKey);
+
+    <span class="comment">//场景 判断缓存是否存在的同时取出缓存数据</span>
+    _memoryCache.TryGetValue(cacheKey, out string cacheValue);
+    Console.WriteLine(cacheValue);
+
+}
+
+</code></pre>
+<h5 id="缓存过期策略"><a href="#缓存过期策略" class="headerlink" title="缓存过期策略"></a>缓存过期策略</h5><p>设置缓存常用的方式主要是以下二种 </p>
+<p> 绝对到期（指定在一个固定的时间点到期）<br> 滑动到期（在一个时间长度内没有被命中则过期）<br> 组合过期 (绝对过期+滑动过期） </p>
+<h6 id="绝对到期"><a href="#绝对到期" class="headerlink" title="绝对到期"></a>绝对到期</h6><p>过期策略 5秒后过期 </p>
+<pre><code class="java">  <span class="comment">//set absolute cache</span>
+string cacheKey = <span class="string">"absoluteKey"</span>;
+_memoryCache.Set(cacheKey, DateTime.Now.ToString(), TimeSpan.FromSeconds(<span class="number">5</span>));
+
+<span class="comment">//get absolute cache</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)
+{
+    Console.WriteLine(_memoryCache.Get(cacheKey));
+    Thread.Sleep(<span class="number">1000</span>);
+}
+
+</code></pre>
+<h6 id="滑动到期"><a href="#滑动到期" class="headerlink" title="滑动到期"></a>滑动到期</h6><p>过期策略 2秒的滑动过期时间，如果2秒内有访问，过期时间延后。当2秒的区间内没有访问，缓存过期 </p>
+<pre><code class="java">  <span class="comment">//set slibing cache</span>
+string cacheSlibingKey = <span class="string">"slibingKey"</span>;
+MemoryCacheEntryOptions options = <span class="keyword">new</span> MemoryCacheEntryOptions();
+options.SlidingExpiration = TimeSpan.FromSeconds(<span class="number">2</span>);
+
+_memoryCache.Set(cacheSlibingKey, DateTime.Now.ToString(), options);
+
+<span class="comment">//get slibing cache</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++)
+{
+    Console.WriteLine(_memoryCache.Get(cacheSlibingKey));
+    Thread.Sleep(<span class="number">1000</span>);
+}
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++)
+{
+    Thread.Sleep(<span class="number">2000</span>);
+    Console.WriteLine(_memoryCache.Get(cacheSlibingKey));
+}
+
+</code></pre>
+<h6 id="组合过期"><a href="#组合过期" class="headerlink" title="组合过期"></a>组合过期</h6><p>过期策略<br>6秒绝对过期+2秒滑动过期<br>满足任意一个缓存都将失效 </p>
+<pre><code class="java">  string cacheCombineKey = <span class="string">"combineKey"</span>;
+MemoryCacheEntryOptions combineOptions = <span class="keyword">new</span> MemoryCacheEntryOptions();
+combineOptions.SlidingExpiration = TimeSpan.FromSeconds(<span class="number">2</span>);
+combineOptions.AbsoluteExpiration = DateTime.Now.AddSeconds(<span class="number">6</span>);
+
+_memoryCache.Set(cacheCombineKey, DateTime.Now.ToString(), combineOptions);
+
+<span class="comment">//get slibing cache</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++)
+{
+    Console.WriteLine(_memoryCache.Get(cacheCombineKey));
+    Thread.Sleep(<span class="number">1000</span>);
+}
+
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)
+{
+    Thread.Sleep(<span class="number">2000</span>);
+    Console.WriteLine(i+<span class="string">"|"</span> + _memoryCache.Get(cacheCombineKey));
+}
+
+Console.WriteLine(<span class="string">"------------combineKey End----------------"</span>);
+
+</code></pre>
+<h4 id="缓存状态变化事件"><a href="#缓存状态变化事件" class="headerlink" title="缓存状态变化事件"></a>缓存状态变化事件</h4><p>当缓存更新、删除时触发一个回调事件，记录缓存变化的内容。 </p>
+<pre><code class="java">  <span class="comment">/// &lt;summary&gt;</span>
+<span class="comment">/// cache状态变化回调</span>
+<span class="comment">/// &lt;/summary&gt;</span>
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CacheStateCallback</span><span class="params">()</span></span>
+<span class="function"></span>{
+    MemoryCacheEntryOptions options = <span class="keyword">new</span> MemoryCacheEntryOptions();
+    options.AbsoluteExpiration = DateTime.Now.AddSeconds(<span class="number">3</span>
+        );
+    options.RegisterPostEvictionCallback(MyCallback, <span class="keyword">this</span>);
+
+    <span class="comment">//show callback console</span>
+    string cacheKey = <span class="string">"absoluteKey"</span>;
+    _memoryCache.Set(cacheKey, DateTime.Now.ToString(), options);
+
+    Thread.Sleep(<span class="number">500</span>);
+    _memoryCache.Set(cacheKey, DateTime.Now.ToString(), options);
+
+    _memoryCache.Remove(cacheKey);
+
+}
+
+<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">MyCallback</span><span class="params">(object key, object value, EvictionReason reason, object state)</span></span>
+<span class="function"></span>{
+    <span class="keyword">var</span> message = $<span class="string">"Cache entry state change:{key} {value} {reason} {state}"</span>;
+    ((CacheService)state)._memoryCache.Set(<span class="string">"callbackMessage"</span>, message);
+
+    Console.WriteLine(message);
+}
+
+</code></pre>
+<h4 id="缓存依赖策略"><a href="#缓存依赖策略" class="headerlink" title="缓存依赖策略"></a>缓存依赖策略</h4><pre><code class="java">  <span class="comment">/// &lt;summary&gt;</span>
+<span class="comment">/// 缓存依赖策略</span>
+<span class="comment">/// &lt;/summary&gt;</span>
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CacheDependencyPolicy</span><span class="params">()</span></span>
+<span class="function"></span>{
+    string DependentCTS = <span class="string">"DependentCTS"</span>;
+    string cacheKeyParent = <span class="string">"CacheKeys.Parent"</span>;
+    string cacheKeyChild = <span class="string">"CacheKeys.Child"</span>;
+
+    <span class="keyword">var</span> cts = <span class="keyword">new</span> CancellationTokenSource();
+    _memoryCache.Set(DependentCTS, cts);
+
+    <span class="comment">//创建一个cache策略</span>
+    using (<span class="keyword">var</span> entry = _memoryCache.CreateEntry(cacheKeyParent))
+    {
+        <span class="comment">//当前key对应的值</span>
+        entry.Value = <span class="string">"parent"</span> + DateTime.Now;
+
+        <span class="comment">//当前key对应的回调事件</span>
+        entry.RegisterPostEvictionCallback(MyCallback, <span class="keyword">this</span>);
+
+        <span class="comment">//基于些key创建一个依赖缓存</span>
+        _memoryCache.Set(cacheKeyChild, <span class="string">"child"</span> + DateTime.Now, <span class="keyword">new</span> CancellationChangeToken(cts.Token));
+    }
+
+    string ParentCachedTime = _memoryCache.Get&lt;string&gt;(cacheKeyParent);
+    string ChildCachedTime = _memoryCache.Get&lt;string&gt;(cacheKeyChild);
+    string callBackMsg = _memoryCache.Get&lt;string&gt;(<span class="string">"callbackMessage"</span>);
+    Console.WriteLine(<span class="string">"第一次获取"</span>);
+    Console.WriteLine(ParentCachedTime + <span class="string">"|"</span> + ChildCachedTime + <span class="string">"|"</span> + callBackMsg);
+
+    <span class="comment">//移除parentKey</span>
+    _memoryCache.Get&lt;CancellationTokenSource&gt;(DependentCTS).Cancel();
+    Thread.Sleep(<span class="number">1000</span>);
+
+    ParentCachedTime = _memoryCache.Get&lt;string&gt;(cacheKeyParent);
+    ChildCachedTime = _memoryCache.Get&lt;string&gt;(cacheKeyChild);
+    callBackMsg = _memoryCache.Get&lt;string&gt;(<span class="string">"callbackMessage"</span>);
+    Console.WriteLine(<span class="string">"第二次获取"</span>);
+    Console.WriteLine(ParentCachedTime + <span class="string">"|"</span> + ChildCachedTime + <span class="string">"|"</span> + callBackMsg);
+}
+
+</code></pre>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>AspNetCore中的缓存内存<br>.NetCore缓存篇之MemoryCache<br>Asp.Net Core 轻松学-在.Net Core 使用缓存和配置依赖策略<br>拥抱.NET Core系列：MemoryCache 缓存过期<br>推荐阅读<br>Redis��具收费后新的开源已出现<br>GitHub上Star最高的工程师技能图谱<br>中国程序员最容易发错的单词<br>推荐!!! Markdown图标索引网站 </p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>本文到此结束，希望对你有帮助 😃<br>如果还有什么疑问或者建议，可以多多交流，原创文章，文笔有限，才疏学浅，文中若有不正之处，万望告知。<br>更多精彩技术文章汇总在我的 公众号【程序员工具集】，持续更新，欢迎关注订阅收藏。<br><img src="https://gitee.com/happlyfox/img/raw/master/qrcode_8cm.jpg" alt="Test" title="NetCore的缓存使用详例"></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-NetCore的缓存使用详例</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 09:46</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/b351a9d2/" title="推荐系列-NetCore的缓存使用详例">https://www.hosiang.cn/b351a9d2/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/b351a9d2/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-NetCore的缓存使用详例》 — 狂欢马克思&url=https://www.hosiang.cn/b351a9d2/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/b351a9d2/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/b351a9d2/&title=《推荐系列-NetCore的缓存使用详例》 — 狂欢马克思&source=&emsp;&emsp;关于我 作者博客|文章首发 缓存基础知识 缓存可以减少生成内容所需的工作，从而显著提高应用程序的性能和可伸缩性。 缓存最适用于不经..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/b351a9d2/&title=《推荐系列-NetCore的缓存使用详例》 — 狂欢马克思&pic=https://gitee.com/happlyfox/img/raw/master/qrcode_8cm.jpg" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/b351a9d2/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#缓存基础知识"><span class="post-toc-text">缓存基础知识</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#缓存指南"><span class="post-toc-text">缓存指南</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用"><span class="post-toc-text">使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#DI注入"><span class="post-toc-text">DI注入</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#MemoryCache使用总结"><span class="post-toc-text">MemoryCache使用总结</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#最基本的使用"><span class="post-toc-text">最基本的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#缓存过期策略"><span class="post-toc-text">缓存过期策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#绝对到期"><span class="post-toc-text">绝对到期</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#滑动到期"><span class="post-toc-text">滑动到期</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#组合过期"><span class="post-toc-text">组合过期</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#缓存状态变化事件"><span class="post-toc-text">缓存状态变化事件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#缓存依赖策略"><span class="post-toc-text">缓存依赖策略</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考资料"><span class="post-toc-text">参考资料</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最后"><span class="post-toc-text">最后</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/d064fabf/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-LiteOS内核源码分析-任务LOS_Schedule
+        
+      </span>
+    </a>
+  
+  
+    <a href="/f4a35f5f/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-LiteOS内核源码分析-任务栈信息</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

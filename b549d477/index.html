@@ -1,0 +1,1390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-前端如何做测试驱动开发-vue版 | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;最近和测试杠上了，写了的文章都和测试相关。当然，这里的「测试」并不是具体的某个角色，而是验证程序正确性的工作。曾经，前端如何 TDD 困扰了我很久，随着时间的推移，前端框架开始成熟，…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-前端如何做测试驱动开发-vue版">
+<meta property="og:url" content="https://www.hosiang.cn/b549d477/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;最近和测试杠上了，写了的文章都和测试相关。当然，这里的「测试」并不是具体的某个角色，而是验证程序正确性的工作。曾经，前端如何 TDD 困扰了我很久，随着时间的推移，前端框架开始成熟，…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg">
+<meta property="og:updated_time" content="2021-07-23T15:43:06.973Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-前端如何做测试驱动开发-vue版">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;最近和测试杠上了，写了的文章都和测试相关。当然，这里的「测试」并不是具体的某个角色，而是验证程序正确性的工作。曾经，前端如何 TDD 困扰了我很久，随着时间的推移，前端框架开始成熟，…">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-前端如何做测试驱动开发-vue版" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-前端如何做测试驱动开发-vue版
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 5k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 22分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;最近和测试杠上了，写了的文章都和测试相关。当然，这里的「测试」并不是具体的某个角色，而是验证程序正确性的工作。曾经，前端如何 TDD 困扰了我很久，随着时间的推移，前端框架开始成熟，…<br><a id="more"></a></p>
+<pre><code>![Test](https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg  &apos;前端如何做测试驱动开��-vue版&apos;) 
+</code></pre><p>最近和测试杠上了，写了的文章都和测试相关。当然，这里的「测试」并不是具体的某个角色，而是验证程序正确性的工作。曾经，前端如何 TDD 困扰了我很久，随着时间的推移，前端框架开始成熟，我对前端测试有了更深刻的理解，把我做前端 TDD 的方法分享给大家。 </p>
+<h3 id="理论篇"><a href="#理论篇" class="headerlink" title="理论篇"></a>理论篇</h3><p>测试驱动开发，英文全称 Test-Driven Development（简称 TDD），是由Kent Beck 先生在极限编程（XP）中倡导的开发方法。以其倡导先写测试程序，然后编码实现其功能得名。<br>TDD 能从技术的角度帮我们提高代码质量，使代码执行结果正确，容易理解。由于有测试的保障，开发者可以更放心的重构自己的代码。<br>当有变更时，测试同学最关心变更的影响范围，然而开发者也很难精准确定变更所带来的影响。虽然我们不追求测试覆盖率，但足够的测试覆盖总是能够给我们更多的信心，TDD 则是增加测试覆盖的唯一途径。<br>在面对一个完全没有思路的算法的时候，TDD 则变成了测试驱动设计（Test-Driven Design）。选一个最简单的用例，用最简单的代码通过测试。逐渐增加测试 Case、通过测试 、重构来驱动出设计。 </p>
+<h5 id="TDD-的步骤"><a href="#TDD-的步骤" class="headerlink" title="TDD 的步骤"></a>TDD 的步骤</h5><p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg" alt="Test" title="前端如何做测试驱动开��-vue版"> </p>
+<p> 写一个失败的测试<br> 写一个刚好让测试通过的代码<br> 重构上面的代码 </p>
+<p>每一个步骤都是带上一个角色的帽子🎩 ，让你更专注当下这个角色应该做的事。 </p>
+<h5 id="TDD-的三原则"><a href="#TDD-的三原则" class="headerlink" title="TDD 的三原则"></a>TDD 的三原则</h5><p> 没有测试之前不要写任何功能代码<br> 一次只写一个刚好失败的测试，作为新加功能的描述<br> 不写任何多余的产品代码，除⾮它刚好能让失败的测试通过 </p>
+<p>TDD 写出的代码的验证逻辑针对的是独立的代码块，可能不是系统中的业务完整功能。用测试先行的方法写出的漂亮的代码也可能做出的功能不是客户想要的（因为需求理解的错误所导致）。因此，使用 「验收驱动测试开发(ATDD)」是很有必要。 </p>
+<h5 id="验收驱动测试开发——ATDD-Acceptance-Test-Driven-Development"><a href="#验收驱动测试开发——ATDD-Acceptance-Test-Driven-Development" class="headerlink" title="验收驱动测试开发——ATDD(Acceptance Test Driven Development)"></a>验收驱动测试开发——ATDD(Acceptance Test Driven Development)</h5><p>ATDD 通���名��就可以看出和 TDD 有着某种神秘的联系， ATDD 是 TDD 的延伸。<br>在传统做法中，要给系统添加新的特性，开发人员会按照文档开发，测试，最后交给客户验收。ATDD 则有些不同：在编码前先明确新特性的验收标准，将验收标准转换成测试用例（代码），再编写代码让测试通过，当所有的验收条件被满足，也就意味着这个功能完整的实现。<br>2003 年左右的时候 Kent Beck 曾对 ATDD 提出质疑，时间太早不好查证，我个人猜测原因是 验收条件做为一个 测试 Case 在某些时候会比较大。<br>举个例子： </p>
+<blockquote>
+<p>如果用户购物车里勾选了可以购买的商品，当用户点击下单，则系统为其创建了一个包含勾选商品的一个订单。<br>可以看出这个验收条件可能要写上一大堆的功能点（如：锁定库存、创建订单等等）才能满足，开发人员必须将 Case 再进行拆分。<br>创建订单的伪代码：<br> <code>`</code>java<br>  public Order create(List<product> products) {<br>  // 锁定库存<br>  // 创建订单<br>  // 创建定时任务(以便超时支付，而取消订单、释放库存)<br>  // …<br>  return null;<br>}</product></p>
+</blockquote>
+<pre><code>将注释的地方写出相应的函数，如： ```java 
+  lockStock()
+  ``` 、 ```java 
+  createOrder()
+  ``` 、 ```java 
+  createOrderTimeoutTask() 
+  ``` ...并为这些函数编写单元测试再去实现。当然，你并不需要一次全部完成，而是一次只实现一个任务。 
+尽管 Kent Beck 曾对 ATDD 提出过质疑，但却为 2012 年出版的《ATDD by Example》 写了推荐序，ATDD 也早成为公认的做法。相比后端，前端更适合使用 ATDD。 
+###### 测试条件格式 
+测试条件通常遵循以下形式： 
+&gt;Given (如果) &gt;​ 指定的状态，通常是给出的条件； &gt;When (当) &gt;​ 触发一个动作或者事件； &gt;Then (则) &gt;​ 对期望结果的验证； 
+写 JavaScript 同学要比 Java 同学幸福很多，不需要把函数名写的老长： 
+ ```java 
+  it(&apos;Given a = 1 And b = 2，When execute add()，Then result is 3&apos;, () =&amp;gt; {
+  // ...
+});
+
+// 如果团队更习惯用中文，可以这样：
+it(&apos;如果： a = 1 并且 b = 2，当：执行 add()，则：结果是 3&apos;, () =&amp;gt; {
+  // ...
+});
+
+</code></pre><h3 id="实践篇"><a href="#实践篇" class="headerlink" title="实践篇"></a>实践篇</h3><p>以往的示例都是拿算法来实践，搞的同学们以为 TDD 只适合做一些算法题，所以这次我们不拿算法来做实例，使用一个相对真实且简单的需求——登录。 </p>
+<h4 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h4><pre><code class="java">vue create vue-tdd-demo
+
+</code></pre>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg" alt="Test" title="前端如何做测试驱动开��-vue版"><br><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg" alt="Test" title="前端如何做测试驱动开��-vue版"><br>勾选 Unit Testing （单元测试），后面按照自己喜好来选择。<br><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg" alt="Test" title="前端如何做测试驱动开��-vue版"><br>这里选择 Jest 作为测试框架。 </p>
+<h5 id="验证环境"><a href="#验证环境" class="headerlink" title="验证环境"></a>验证环境</h5><p>安装好之后运行  <code>`</code>java<br>  npm run test:unit</p>
+<pre><code class="，刚安装的项目就会报错，真让人惆怅！看看如何解决：">![Test](https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg  &apos;前端如何做测试驱动开��-vue版&apos;) 
+jest.config.js 或者 package.json 中找到  ```java 
+  transformIgnorePatterns
+  ```  这个配置 
+ ```java 
+  // ...
+transformIgnorePatterns: [
+    &apos;/node_modules/&apos;,
+    &apos;/node_modules/(?!vue-awesome)&apos;, // 添加此行
+],
+
+</code></pre>
+<p>再运行  <code>`</code>java<br>  npm run test:unit</p>
+<pre><code>![Test](https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg  &apos;前端如何做测试驱动开��-vue版&apos;) 
+#### 演练实例 
+##### 需求 
+![Test](https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg  &apos;前端如何做测试驱动开��-vue版&apos;) 
+&gt; 页面包含用户名、密码输入框和提交按钮，提交之后成功服务端返回状态为 200 然后跳转到 Home 首页，失败则  ```java 
+  alert()
+  ```  文字提示。 &gt; &gt; 在用户名密码为空时不能提交。 
+通常前端功能可分为两部分，一部分是接口、另一部分是页面。 
+我们先来实现接口部分： 
+##### 接口 Service 测试 
+请求模块使用 axios ，axios-mock-adapter 是一个辅助模块，帮助我们验证接口调用是否正确。 
+###### 任务拆分 
+&gt; 登录 Service.login 方法，接受 user 对象(username、password) ，使用 axios 发送请求，URL 为  ```java 
+  /users/tokens
+  ``` ，使用  ```java 
+  POST
+  ```  方式，返回一个Response 的 Promise 对象； &gt; &gt; 当输入调用  ```java 
+  Service.login({username: &apos;谢小呆&apos;, password: &apos;123&apos;});
+  ```  ，则 axios post 的数据则与参数相同； 
+###### 安装依赖 
+ ```java 
+  npm install axios
+npm install axios-mock-adapter --save-dev
+# or
+yarn add axios
+yarn add axios-mock-adapter -D
+
+</code></pre><h6 id="编写测试"><a href="#编写测试" class="headerlink" title="编写测试"></a>编写测试</h6><pre><code class="java">  <span class="keyword">import</span> axios from <span class="string">'axios'</span>;
+<span class="keyword">import</span> MockAdapter from <span class="string">'axios-mock-adapter'</span>;
+<span class="keyword">import</span> Service from <span class="string">'@/login/service'</span>;
+
+describe(<span class="string">'Login service'</span>, () =&amp;gt; {
+  it(<span class="string">'Given 登录信息为 谢小呆,123, When 执行 Service.login() 时，Then 请求参数为 谢小呆,123 的用户'</span>, async () =&amp;gt; {
+    <span class="keyword">const</span> mock = <span class="keyword">new</span> MockAdapter(axios);
+    <span class="keyword">const</span> expectedResult = { username: <span class="string">'谢小呆'</span>, password: <span class="string">'123'</span> };
+    mock.onPost(<span class="string">'/users/token'</span>).reply(<span class="number">200</span>);
+
+    await Service.login(expectedResult);
+    expect(mock.history.post.length).toBe(<span class="number">1</span>);
+    expect(mock.history.post[<span class="number">0</span>].data).toBe(JSON.stringify(expectedResult));
+  });
+});
+
+
+</code></pre>
+<p>这里验证了传入的「参数」与  <code>`</code>java<br>  POST </p>
+<pre><code class="的数据是否一致，我们并没有真正去发网络请求，也没有必要。毕竟我们并不关心接口「此时」是否能通，只要后端按照我们的接口约定给出特定的返回即可。对单元测试不了解的同学可以参考这里。">此时运行  ```java 
+  yarn run test:unit
+  ```  缺少 service.js 文件。 
+创建 src/login/service.js 文件 
+ ```java 
+  import axios from &apos;axios&apos;;
+
+const login = user =&amp;gt; axios.post(&apos;/users/token&apos;, user);
+
+export default {
+  login,
+};
+
+
+</code></pre>
+<p>再次运行  <code>`</code>java<br>  yarn run test:unit</p>
+<pre><code class="，测试通过！">##### 页面、组件测试 
+对于 Vue 来说页面和组件是同一个东西，Vue 提供了一个很方便的单元测试工具 vue-test-units ，这里就不过多赘述其用法，参考官方文档即可。 
+任务：当用户访问页面时可以看到用户名、密码输入框和提交按钮，所以页面中只要包含这 3 个元素即可。 
+ ```java 
+  import { mount } from &apos;@vue/test-utils&apos;;
+import Login from &apos;@/login/index.vue&apos;;
+
+describe(&apos;Login Page&apos;, () =&amp;gt; {
+  it(&apos;When 用户访问登录页面，Then 看到用户名、密码输入框和提交按钮&apos;, () =&amp;gt; {
+    const wrapper = mount(Login);
+    expect(wrapper.find(&apos;input.username&apos;).exists()).toBeTruthy();
+    expect(wrapper.find(&apos;input.password&apos;).exists()).toBeTruthy();
+    expect(wrapper.find(&apos;button.submit&apos;).exists()).toBeTruthy();
+  });
+});
+
+
+</code></pre>
+<p>运行测试报错，缺少  <code>`</code>java<br>  @/login/index.vue</p>
+<pre><code class="文件"> ```java 
+  &lt;template&gt;
+  &lt;ul&gt;
+    &lt;li&gt;用户名：&lt;input type=&quot;text&quot; class=&quot;username&quot; v-model=&quot;user.username&quot;&gt;&lt;/li&gt;
+    &lt;li&gt;密码：&lt;input type=&quot;text&quot; class=&quot;password&quot; v-model=&quot;user.password&quot;&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button class=&quot;submit&quot; @click=&quot;onSubmit&quot;&gt;提交&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/template&gt;
+
+
+</code></pre>
+<p>再次运行  <code>java 
+  yarn run test:unit</code> ，通过！添加新的 case。<br>任务：实现双向绑定，在input 中输入用户名为 谢小呆，密码为 123，vue 的 vm.user 为 {username: ‘谢小呆’, password: ‘123’}; </p>
+<pre><code class="java">  <span class="keyword">import</span> { mount } from <span class="string">'@vue/test-utils'</span>;
+<span class="keyword">import</span> Login from <span class="string">'@/login/index.vue'</span>;
+
+describe(<span class="string">'Login Page'</span>, () =&amp;gt; {
+  it(<span class="string">'When 用户访问登录页面，Then 看到用户名、密码输入框和提交按钮'</span>, () =&amp;gt; {
+    <span class="keyword">const</span> wrapper = mount(Login);
+    expect(wrapper.find(<span class="string">'input.username'</span>).exists()).toBeTruthy();
+    expect(wrapper.find(<span class="string">'input.password'</span>).exists()).toBeTruthy();
+    expect(wrapper.find(<span class="string">'button.submit'</span>).exists()).toBeTruthy();
+  });
+
+  it(<span class="string">'Given 用户访问登录页面，When 用户输入用户名为 谢小呆, 密码为 123，Then 页面中的 user 为 {username: "谢小呆", password: "123"}'</span>, () =&amp;gt; {
+    <span class="keyword">const</span> wrapper = mount(Login);
+    wrapper.find(<span class="string">'input.username'</span>).setValue(<span class="string">'谢小呆'</span>);
+    wrapper.find(<span class="string">'input.password'</span>).setValue(<span class="string">'123'</span>);
+
+    <span class="keyword">const</span> expectedResult = { username: <span class="string">'谢小呆'</span>, password: <span class="string">'123'</span> };
+    expect(wrapper.vm.user).toEqual(expectedResult);
+  });
+});
+
+
+</code></pre>
+<p>运行测试，报错： </p>
+<pre><code class="java">  Expected value to equal:
+    {<span class="string">"password"</span>: <span class="string">"123"</span>, <span class="string">"username"</span>: <span class="string">"谢小呆"</span>}
+Received:
+    undefined
+
+</code></pre>
+<p>来添加需要绑定的对象： </p>
+<pre><code class="java">  &lt;template&gt;
+  &lt;ul&gt;
+    &lt;li&gt;用户名：&lt;input type="text" class="username" v-model="user.username"&gt;&lt;/li&gt;
+    &lt;li&gt;密码：&lt;input type="text" class="password" v-model="user.password"&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button class="submit" @click="onSubmit"&gt;提交&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export <span class="keyword">default</span> {
+  data: () =&gt; ({
+    user: {
+      username: <span class="string">''</span>,
+      password: <span class="string">''</span>,
+    },
+  }),
+};
+&lt;/script&gt;
+
+
+</code></pre>
+<p>测试通过！<br>任务：事件绑定，点击提交按钮，调用 onSubmit 方法，验证 onSubmit 是否被调用。<br>验证方法被调用需要使用 sinon 库。 </p>
+<pre><code class="java">  npm install sinon --save-dev
+# or
+yarn add sinon -D
+
+</code></pre>
+<pre><code class="java">  <span class="keyword">import</span> sinon from <span class="string">'sinon'</span>;
+<span class="keyword">import</span> { mount } from <span class="string">'@vue/test-utils'</span>;
+<span class="keyword">import</span> Login from <span class="string">'@/login/index.vue'</span>;
+
+describe(<span class="string">'Login Page'</span>, () =&amp;gt; {
+  <span class="comment">// ...</span>
+
+  it(<span class="string">'Given 用户访问登录页面，When 用户点击 submit，Then onSubmit 方法被调用'</span>, () =&amp;gt; {
+    <span class="keyword">const</span> wrapper = mount(Login);
+    <span class="keyword">const</span> onSubmit = sinon.fake();
+    wrapper.setMethods({ onSubmit });
+    wrapper.find(<span class="string">'button.submit'</span>).trigger(<span class="string">'click'</span>);
+
+    expect(onSubmit.called).toBeTruthy();
+  });
+});
+
+
+
+</code></pre>
+<p>trigger 点击事件后调用  <code>java 
+  onSubmit</code>  方法。通过 sinon 制作了一个替身，通过 setMethods 方法，替换了 vm 的 onSubmit 函数。<br>运行测试，报错： </p>
+<pre><code class="java"> FAIL  tests/unit/login/index.spec.js
+● Login Page › Given 用户访问登录页面，When 用户点击 submit，Then onSubmit 方法被调用
+
+  expect(received).toBeTruthy()
+
+  Received: <span class="keyword">false</span>
+
+    <span class="number">26</span> |     wrapper.find(<span class="string">'button.submit'</span>).trigger(<span class="string">'click'</span>);
+    <span class="number">27</span> | 
+  &amp;gt; <span class="number">28</span> |     expect(onSubmit.called).toBeTruthy();
+       |                             ^
+    <span class="number">29</span> |   });
+    <span class="number">30</span> | });
+    <span class="number">31</span> | 
+
+    at Object.toBeTruthy (tests/unit/login/index.spec.js:<span class="number">28</span>:<span class="number">29</span>)
+
+</code></pre>
+<p>修改代码，添加绑定事件和函数： </p>
+<pre><code class="java">  &lt;template&gt;
+  &lt;ul&gt;
+    &lt;li&gt;用户名：&lt;input type="text" class="username" v-model="user.username"&gt;&lt;/li&gt;
+    &lt;li&gt;密码：&lt;input type="text" class="password" v-model="user.password"&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button class="submit" @click="onSubmit"&gt;提交&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export <span class="keyword">default</span> {
+  data: () =&gt; ({
+    user: {
+      username: <span class="string">''</span>,
+      password: <span class="string">''</span>,
+    },
+  }),
+  methods: {
+    onSubmit() {
+
+    },
+  },
+};
+&lt;/script&gt;
+
+
+</code></pre>
+<p>运行测试，通过！<br>任务：增加验证，当用户名、密码为空时，提交按钮为 disabled 状态 </p>
+<pre><code class="java">  <span class="keyword">import</span> sinon from <span class="string">'sinon'</span>;
+<span class="keyword">import</span> { mount } from <span class="string">'@vue/test-utils'</span>;
+<span class="keyword">import</span> Login from <span class="string">'@/login/index.vue'</span>;
+
+describe(<span class="string">'Login Page'</span>, () =&amp;gt; {
+  <span class="comment">// ...</span>
+
+  it(<span class="string">'Given 用户访问登录页面，When 用户点击 submit，Then onSubmit 方法被调用'</span>, () =&amp;gt; {
+    <span class="keyword">const</span> wrapper = mount(Login);
+    <span class="keyword">const</span> onSubmit = sinon.fake();
+    wrapper.setMethods({ onSubmit });
+    wrapper.find(<span class="string">'button.submit'</span>).trigger(<span class="string">'click'</span>);
+
+    expect(onSubmit.called).toBeTruthy();
+  });
+
+  it(<span class="string">'Given 用户访问登录页面，When 用户未输入登录信息，Then submit 按钮为 disabled And 点击 submit 不会调用 onSubmit'</span>, () =&amp;gt; {
+    <span class="keyword">const</span> wrapper = mount(Login);
+    <span class="keyword">const</span> onSubmit = sinon.fake();
+    wrapper.setMethods({ onSubmit });
+    <span class="keyword">const</span> submitBtn = wrapper.find(<span class="string">'button.submit'</span>);
+    submitBtn.trigger(<span class="string">'click'</span>);
+
+    expect(submitBtn.attributes(<span class="string">'disabled'</span>)).toEqual(<span class="string">'disabled'</span>);
+    expect(onSubmit.called).toBeFalsy();
+  });
+});
+
+
+</code></pre>
+<p>运行测试，报错： </p>
+<pre><code class="java">● Login Page › Given 用户访问登录页面，When 用户未输入登录信息，Then submit 按钮为 disabled And 点击 submit 不会调用 onSubmit
+
+  expect(received).toEqual(expected)
+
+  Expected value to equal:
+    <span class="string">"disabled"</span>
+  Received:
+    undefined
+
+  Difference:
+
+    Comparing two different types of values. Expected string but received undefined.
+
+    <span class="number">36</span> |     submitBtn.trigger(<span class="string">'click'</span>);
+    <span class="number">37</span> | 
+  &amp;gt; <span class="number">38</span> |     expect(submitBtn.attributes(<span class="string">'disabled'</span>)).toEqual(<span class="string">'disabled'</span>);
+       |                                              ^
+    <span class="number">39</span> |     expect(onSubmit.called).toBeFalsy();
+    <span class="number">40</span> |   });
+    <span class="number">41</span> | });
+
+    at Object.toEqual (tests/unit/login/index.spec.js:<span class="number">38</span>:<span class="number">46</span>)
+
+</code></pre>
+<p>修改代码，使测试通过： </p>
+<pre><code class="java">  &lt;template&gt;
+  &lt;ul&gt;
+    &lt;li&gt;用户名：&lt;input type="text" class="username" v-model="user.username"&gt;&lt;/li&gt;
+    &lt;li&gt;密码：&lt;input type="text" class="password" v-model="user.password"&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button class="submit" @click="onSubmit" :disabled="!validate"&gt;提交&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export <span class="keyword">default</span> {
+  data: () =&gt; ({
+    user: {
+      username: <span class="string">''</span>,
+      password: <span class="string">''</span>,
+    },
+  }),
+  computed: {
+    validate() {
+      <span class="keyword">return</span> <span class="keyword">this</span>.user.username &amp;&amp; <span class="keyword">this</span>.user.password;
+    },
+  },
+  methods: {
+    onSubmit() {
+
+    },
+  },
+};
+&lt;/script&gt;
+
+
+</code></pre>
+<p>运行！ </p>
+<pre><code class="java"> FAIL  tests/unit/login/index.spec.js
+● Login Page › Given 用户访问登录页面，When 用户点击 submit，Then onSubmit 方法被调用
+
+  expect(received).toBeTruthy()
+
+  Received: <span class="keyword">false</span>
+
+    <span class="number">26</span> |     wrapper.find(<span class="string">'button.submit'</span>).trigger(<span class="string">'click'</span>);
+    <span class="number">27</span> | 
+  &amp;gt; <span class="number">28</span> |     expect(onSubmit.called).toBeTruthy();
+       |                             ^
+    <span class="number">29</span> |   });
+    <span class="number">30</span> | 
+    <span class="number">31</span> |   it(<span class="string">'Given 用户访问登录页面，When 用户未输入登录信息，Then submit 按钮为 disabled And 点击 submit 不会调用 onSubmit'</span>, () =&amp;gt; {
+
+    at Object.toBeTruthy (tests/unit/login/index.spec.js:<span class="number">28</span>:<span class="number">29</span>)
+
+</code></pre>
+<p>唉？又报错了！报错的 case 不是刚刚的这个，而是上一个 case 报错了。因添加了 validate 验证之后，在没有数据的情况下，点击按钮不会调用 onSubmit 方法。<br>修改 case ，添加登录信息： </p>
+<pre><code class="java">it(<span class="string">'Given 用户访问登录页面 And 用户输入用户名、密码，When 点击 submit，Then onSubmit 方法被调用'</span>, () =&amp;gt; {
+  <span class="keyword">const</span> wrapper = mount(Login);
+  <span class="keyword">const</span> onSubmit = sinon.fake();
+  wrapper.setMethods({ onSubmit });
+  wrapper.find(<span class="string">'input.username'</span>).setValue(<span class="string">'谢小呆'</span>);
+  wrapper.find(<span class="string">'input.password'</span>).setValue(<span class="string">'123'</span>);
+  wrapper.find(<span class="string">'button.submit'</span>).trigger(<span class="string">'click'</span>);
+
+  expect(onSubmit.called).toBeTruthy();
+});
+
+</code></pre>
+<p>再运行，测试通过！<br>任务：用户输入登录信息后提交，返回状态应该为 200，并且调用 loginSuccess() 方法。<br>由于我们之前已经测试过 Service.login，所以我们这里不再进行测试，而是将 Service.login 制作一个替身，让它返回 200。 </p>
+<pre><code class="java">  <span class="keyword">import</span> Vue from <span class="string">'vue'</span>;
+<span class="keyword">import</span> sinon from <span class="string">'sinon'</span>;
+<span class="keyword">import</span> { mount } from <span class="string">'@vue/test-utils'</span>;
+<span class="keyword">import</span> Login from <span class="string">'@/login/index.vue'</span>;
+<span class="keyword">import</span> Service from <span class="string">'@/login/service'</span>;
+
+describe(<span class="string">'Login Page'</span>, () =&amp;gt; {
+  <span class="comment">// ...</span>
+
+  it(<span class="string">'Given 用户访问登录页面 And 用户输入用户名、密码，When 点击 submit，Then 调用 Service.login() 后返回 200 And 调用 loginSuccess 方法'</span>, async () =&amp;gt; {
+    <span class="keyword">const</span> stub = sinon.stub(Service, <span class="string">'login'</span>);
+    stub.resolves({ status: <span class="number">200</span> });
+
+    <span class="keyword">const</span> wrapper = mount(Login);
+    <span class="keyword">const</span> loginSuccess = sinon.fake();
+    wrapper.setMethods({ loginSuccess });
+
+    <span class="keyword">const</span> expectedUser = { username: <span class="string">'谢小呆'</span>, password: <span class="string">'123'</span> };
+    wrapper.find(<span class="string">'input.username'</span>).setValue(expectedUser.username);
+    wrapper.find(<span class="string">'input.password'</span>).setValue(expectedUser.password);
+    wrapper.find(<span class="string">'button.submit'</span>).trigger(<span class="string">'click'</span>);
+
+    await Vue.nextTick();
+
+    expect(loginSuccess.called).toBeTruthy();
+    expect(stub.alwaysCalledWith(expectedUser)).toBeTruthy();
+    stub.restore();
+  });
+});
+
+
+</code></pre>
+<p>因为是异步请求，所以需要  <code>java 
+  Vue.nextTick</code>  来等待堆栈处理完成，再进行验证。断言验证 loginSuccess 这个函数是否调用，以及期望的的登录信息与我们输入的信息相同。<br>运行测试，失败！篇幅关系就不再贴失败结果。<br>修改代码： </p>
+<pre><code class="java">  &lt;template&gt;
+  &lt;ul&gt;
+    &lt;li&gt;用户名：&lt;input type="text" class="username" v-model="user.username"&gt;&lt;/li&gt;
+    &lt;li&gt;密码：&lt;input type="text" class="password" v-model="user.password"&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button class="submit" @click="onSubmit" :disabled="!validate"&gt;提交&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+<span class="keyword">import</span> Service from <span class="string">'./service'</span>;
+
+export <span class="keyword">default</span> {
+  data: () =&gt; ({
+    user: {
+      username: <span class="string">''</span>,
+      password: <span class="string">''</span>,
+    },
+  }),
+  computed: {
+    validate() {
+      <span class="keyword">return</span> <span class="keyword">this</span>.user.username &amp;&amp; <span class="keyword">this</span>.user.password;
+    },
+  },
+  methods: {
+    <span class="function">async <span class="title">onSubmit</span><span class="params">()</span> </span>{
+      <span class="keyword">const</span> response = await Service.login(<span class="keyword">this</span>.user);
+      <span class="keyword">if</span> (response.status === <span class="number">200</span>) {
+        <span class="keyword">this</span>.loginSuccess();
+      }
+    },
+    loginSuccess() {
+      <span class="keyword">this</span>.$router.push({ name: <span class="string">'home'</span> });
+    },
+  },
+};
+&lt;/script&gt;
+
+
+</code></pre>
+<p>添加完整的功能，运行测试，通过！<br>任务：用户登录提交后返回错误状态，调用 loginFailure() 方法。 </p>
+<pre><code class="java">  <span class="keyword">import</span> Vue from <span class="string">'vue'</span>;
+<span class="keyword">import</span> sinon from <span class="string">'sinon'</span>;
+<span class="keyword">import</span> { mount } from <span class="string">'@vue/test-utils'</span>;
+<span class="keyword">import</span> Login from <span class="string">'@/login/index.vue'</span>;
+<span class="keyword">import</span> Service from <span class="string">'@/login/service'</span>;
+
+describe(<span class="string">'Login Page'</span>, () =&amp;gt; {
+  <span class="comment">// ...</span>
+
+  it(<span class="string">'Given 用户访问登录页面 And 用户输入用户名、密码，When 点击 submit，Then 调用 Service.login() 后返回不等于 200 And 调用 loginFailure 方法'</span>, async () =&amp;gt; {
+    <span class="keyword">const</span> stub = sinon.stub(Service, <span class="string">'login'</span>);
+    stub.resolves({ status: <span class="number">404</span> });
+
+    <span class="keyword">const</span> wrapper = mount(Login);
+    <span class="keyword">const</span> loginFailure = sinon.fake();
+    wrapper.setMethods({ loginFailure });
+
+    <span class="keyword">const</span> user = { username: <span class="string">'谢小呆'</span>, password: <span class="string">'123'</span> };
+    wrapper.find(<span class="string">'input.username'</span>).setValue(user.username);
+    wrapper.find(<span class="string">'input.password'</span>).setValue(user.password);
+    wrapper.find(<span class="string">'button.submit'</span>).trigger(<span class="string">'click'</span>);
+
+    await Vue.nextTick();
+
+    expect(loginFailure.called).toBeTruthy();
+    stub.restore();
+  });
+});
+
+
+</code></pre>
+<p>运行测试，失败！<br>修改代码： </p>
+<pre><code class="java">  &lt;template&gt;
+  &lt;ul&gt;
+    &lt;li&gt;用户名：&lt;input type="text" class="username" v-model="user.username"&gt;&lt;/li&gt;
+    &lt;li&gt;密码：&lt;input type="text" class="password" v-model="user.password"&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button class="submit" @click="onSubmit" :disabled="!validate"&gt;提交&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+<span class="keyword">import</span> Service from <span class="string">'./service'</span>;
+
+export <span class="keyword">default</span> {
+  data: () =&gt; ({
+    user: {
+      username: <span class="string">''</span>,
+      password: <span class="string">''</span>,
+    },
+  }),
+  computed: {
+    validate() {
+      <span class="keyword">return</span> <span class="keyword">this</span>.user.username &amp;&amp; <span class="keyword">this</span>.user.password;
+    },
+  },
+  methods: {
+    <span class="function">async <span class="title">onSubmit</span><span class="params">()</span> </span>{
+      <span class="keyword">const</span> response = await Service.login(<span class="keyword">this</span>.user);
+      <span class="keyword">if</span> (response.status === <span class="number">200</span>) {
+        <span class="keyword">this</span>.loginSuccess();
+        <span class="keyword">return</span>;
+      }
+      <span class="keyword">this</span>.loginFailure();
+    },
+    loginSuccess() {
+      <span class="keyword">this</span>.$router.push({ name: <span class="string">'home'</span> });
+    },
+    loginFailure() {
+      alert(<span class="string">'用户名、密码错误，请稍后再试！'</span>);
+    },
+  },
+};
+&lt;/script&gt;
+
+
+</code></pre>
+<p>再运行测试，通过！<br>我们完成了主要功能的测试覆盖，但是 loginSuccess 和 loginFailure 方法并没有测试，原因是这部分调用了 路由，通常不会出错，所以测试的意义不大。<br>当然，如果要测试仍然可以。<br>任务：当执行 loginSuccess 时，路由应为首页，即：’/‘。 </p>
+<pre><code class="java">  <span class="keyword">import</span> Vue from <span class="string">'vue'</span>;
+<span class="keyword">import</span> sinon from <span class="string">'sinon'</span>;
+<span class="keyword">import</span> VueRouter from <span class="string">'vue-router'</span>;
+<span class="keyword">import</span> { createLocalVue, mount } from <span class="string">'@vue/test-utils'</span>;
+<span class="keyword">import</span> Login from <span class="string">'@/login/index.vue'</span>;
+<span class="keyword">import</span> Service from <span class="string">'@/login/service'</span>;
+<span class="keyword">import</span> router from <span class="string">'@/router'</span>;
+
+describe(<span class="string">'Login Page'</span>, () =&amp;gt; {
+  <span class="comment">// ...</span>
+
+  it(<span class="string">'When 执行 loginSuccess()，Then $route.path 为 /'</span>, async () =&amp;gt; {
+    <span class="keyword">const</span> localVue = createLocalVue();
+    localVue.use(VueRouter);
+
+    <span class="keyword">const</span> wrapper = mount(Login, {
+      localVue,
+      router,
+    });
+
+    wrapper.vm.loginSuccess();
+    expect(wrapper.vm.$route.path).toEqual(<span class="string">'/'</span>);
+  });
+});
+
+
+</code></pre>
+<p>这里需要对默认的 router.js 做改造： </p>
+<pre><code class="java">  - <span class="keyword">import</span> Vue from <span class="string">'vue'</span>;
+<span class="keyword">import</span> Router from <span class="string">'vue-router'</span>;
+<span class="keyword">import</span> Home from <span class="string">'./views/Home.vue'</span>;
+
+- Vue.use(Router);
+
+<span class="function">export <span class="keyword">default</span> new <span class="title">Router</span><span class="params">({</span></span>
+<span class="function"><span class="params">  mode: <span class="string">'history'</span>,</span></span>
+<span class="function"><span class="params">  base: process.env.BASE_URL,</span></span>
+<span class="function"><span class="params">  routes: [</span></span>
+<span class="function"><span class="params">    {</span></span>
+<span class="function"><span class="params">      path: <span class="string">'/'</span>,</span></span>
+<span class="function"><span class="params">      name: <span class="string">'home'</span>,</span></span>
+<span class="function"><span class="params">      component: Home,</span></span>
+<span class="function"><span class="params">    },</span></span>
+<span class="function"><span class="params">    {</span></span>
+<span class="function"><span class="params">      path: <span class="string">'/about'</span>,</span></span>
+<span class="function"><span class="params">      name: <span class="string">'about'</span>,</span></span>
+<span class="function"><span class="params">      // route level code-splitting</span></span>
+<span class="function"><span class="params">      // <span class="keyword">this</span> generates a separate chunk (about.[hash].js)</span> <span class="keyword">for</span> <span class="keyword">this</span> route</span>
+<span class="function">      <span class="comment">// which is lazy-loaded when the route is visited.</span></span>
+<span class="function">      component: <span class="params">()</span> </span>=&amp;gt; <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "about" */</span> <span class="string">'./login/index.vue'</span>),
+    },
+  ],
+});
+
+
+</code></pre>
+<p>接着修改 main.js </p>
+<pre><code class="java">  <span class="keyword">import</span> Vue from <span class="string">'vue'</span>;
++ <span class="keyword">import</span> Router from <span class="string">'vue-router'</span>;
+<span class="keyword">import</span> App from <span class="string">'./App.vue'</span>;
+<span class="keyword">import</span> router from <span class="string">'./router'</span>;
+
+Vue.config.productionTip = <span class="keyword">false</span>;
++ Vue.use(Router);
+
+<span class="keyword">new</span> Vue({
+  router,
+  render: h =&amp;gt; h(App),
+}).$mount(<span class="string">'#app'</span>);
+
+
+</code></pre>
+<p>运行测试通过！<br>虽然测试覆盖率不是我们所追求的，但是知道覆盖率是在上升还是在下降可以反应团队在这期间的质量关注度。 </p>
+<h5 id="测试覆盖率"><a href="#测试覆盖率" class="headerlink" title="测试覆盖率"></a>测试覆盖率</h5><p>修改配置 jest.config.js 或者 package.json<br>主要关注  <code>`</code>java<br>  coverage</p>
+<pre><code class="这几个配置的修改："> ```java 
+  module.exports = {
+  moduleFileExtensions: [
+    &apos;js&apos;,
+    &apos;jsx&apos;,
+    &apos;json&apos;,
+    &apos;vue&apos;,
+  ],
+  transform: {
+    &apos;^.+\\.vue$&apos;: &apos;vue-jest&apos;,
+    &apos;.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$&apos;: &apos;jest-transform-stub&apos;,
+    &apos;^.+\\.jsx?$&apos;: &apos;babel-jest&apos;,
+  },
+  transformIgnorePatterns: [
+    &apos;/node_modules/&apos;,
+    &apos;/node_modules/(?!vue-awesome)&apos;,
+  ],
+  moduleNameMapper: {
+    &apos;^@/(.*)$&apos;: &apos;&lt;rootdir&gt;/src/$1&apos;,
+  },
+  snapshotSerializers: [
+    &apos;jest-serializer-vue&apos;,
+  ],
+  testMatch: [
+    &apos;**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)&apos;,
+  ],
+  testURL: &apos;http://localhost/&apos;,
+  watchPlugins: [
+    &apos;jest-watch-typeahead/filename&apos;,
+    &apos;jest-watch-typeahead/testname&apos;,
+  ],
++  collectCoverage: true,
++  collectCoverageFrom: [
++    &apos;**/*.{js,vue}&apos;,
++    &apos;!**/node_modules/**&apos;,
++    &apos;!**/App.vue&apos;,
++    &apos;!**/main.js&apos;,
++    &apos;!**/router.js&apos;,
++    &apos;!*.config.js&apos;,
++    &apos;!.eslintrc.js&apos;,
++  ],
++  coverageReporters: [
++    &apos;html&apos;,
++    &apos;text-summary&apos;,
++  ],
++  coveragePathIgnorePatterns: [
++    &apos;&lt;rootdir&gt;/coverage&apos;,
++    &apos;&lt;rootdir&gt;/tests&apos;,
++    &apos;babel.config.js&apos;,
++  ],
+};
+
+
+</code></pre>
+<p>运行测试：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg" alt="Test" title="前端如何做测试驱动开��-vue版"><br>Html 报告：<br><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g79m0kb3gkj318g0hu7oo.jpg" alt="Test" title="前端如何做测试驱动开��-vue版"><br>点开可以看到每一个文件的覆盖，以及是否有逻辑分支忘记测试。<br>注意：添加测试报告之后运行测试的速度会变慢。 </p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>经过上面的练习，相信大家能对前端如何做 TDD 有一个基本的掌握。即便不使用 TDD，前端的测试也仍然有意义。当然，相信会有一部分同学会对本文产生质疑，国内写前端测试的人 (或者公司) 都很少，更不要说前端 TDD，这样做很花时间，真的值得吗？写完页面让测试同学点一遍不就可以了？为什么一定要去写这么多代码来去验证呢？<br>本文并不打算去说服你去写测试，以往的工作中没有写过测试，很难通过一篇文章就能让你心动。这如同人们知道健身对自己有好处，但都懒得锻炼。只能采用逼迫方式，让自己动起来，直到有一天发现自己精神饱满、身材健硕，还能 1 个打 8 个👊，这时才能体会到健身给自己带来的好处。TDD 亦是如此，唯有不断的练习，让行为改变思维，在这个过程中发现它的价值，胜过无数的文章。 </p>
+<h4 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h4><p><a href="https://www.agilealliance.org/glossary/atdd/" rel="external nofollow noopener noreferrer" target="_blank">https://www.agilealliance.org/glossary/atdd/</a><br>《测试驱动开发的艺术》</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-前端如何做测试驱动开发-vue版</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 09:19</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/b549d477/" title="推荐系列-前端如何做测试驱动开发-vue版">https://www.hosiang.cn/b549d477/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/b549d477/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-前端如何做测试驱动开发-vue版》 — 狂欢马克思&url=https://www.hosiang.cn/b549d477/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/b549d477/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/b549d477/&title=《推荐系列-前端如何做测试驱动开发-vue版》 — 狂欢马克思&source=&emsp;&emsp;最近和测试杠上了，写了的文章都和测试相关。当然，这里的「测试」并不是具体的某个角色，而是验证程序正确性的工作。曾经，前端如何 TD..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/b549d477/&title=《推荐系列-前端如何做测试驱动开发-vue版》 — 狂欢马克思&pic=https://static.oschina.net/uploads/img/201910/31104612_dVoo.jpg" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/b549d477/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#理论篇"><span class="post-toc-text">理论篇</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#TDD-的步骤"><span class="post-toc-text">TDD 的步骤</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#TDD-的三原则"><span class="post-toc-text">TDD 的三原则</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#验收驱动测试开发——ATDD-Acceptance-Test-Driven-Development"><span class="post-toc-text">验收驱动测试开发——ATDD(Acceptance Test Driven Development)</span></a></li></ol></li></ol><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实践篇"><span class="post-toc-text">实践篇</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#安装环境"><span class="post-toc-text">安装环境</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#验证环境"><span class="post-toc-text">验证环境</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#编写测试"><span class="post-toc-text">编写测试</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#测试覆盖率"><span class="post-toc-text">测试覆盖率</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#资料"><span class="post-toc-text">资料</span></a></li></ol></li>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/8eb96f49/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-前端 Docker 镜像体积优化
+        
+      </span>
+    </a>
+  
+  
+    <a href="/46da75db/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-动手实现 LRU 算法，以及  Caffeine 和 Redis 中的缓存淘汰策略</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

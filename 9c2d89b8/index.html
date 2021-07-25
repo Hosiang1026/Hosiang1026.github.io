@@ -1,0 +1,1098 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-数据结构与算法的实际应用——根据表关系构建SQL语句 | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;背景需求 最近在项目中有一个场景，根据前端可视化模式传入的参数构建一组SQL语句，应用在Spark Streaming应用的数据同步中。这其实是一个已有的功能，但是发现原先的代码实现发现有较严重的…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-数据结构与算法的实际应用——根据表关系构建SQL语句">
+<meta property="og:url" content="https://www.hosiang.cn/9c2d89b8/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;背景需求 最近在项目中有一个场景，根据前端可视化模式传入的参数构建一组SQL语句，应用在Spark Streaming应用的数据同步中。这其实是一个已有的功能，但是发现原先的代码实现发现有较严重的…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-ad374c7f0532171add44d6e2141ace62855.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-ad374c7f0532171add44d6e2141ace62855.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-ad374c7f0532171add44d6e2141ace62855.png">
+<meta property="og:updated_time" content="2021-07-23T15:43:07.013Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-数据结构与算法的实际应用——根据表关系构建SQL语句">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;背景需求 最近在项目中有一个场景，根据前端可视化模式传入的参数构建一组SQL语句，应用在Spark Streaming应用的数据同步中。这其实是一个已有的功能，但是发现原先的代码实现发现有较严重的…">
+<meta name="twitter:image" content="https://oscimg.oschina.net/oscnet/up-ad374c7f0532171add44d6e2141ace62855.png">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-数据结构与算法的实际应用——根据表关系构建SQL语句" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-数据结构与算法的实际应用——根据表关系构建SQL语句
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 2.7k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 12分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;背景需求 最近在项目中有一个场景，根据前端可视化模式传入的参数构建一组SQL语句，应用在Spark Streaming应用的数据同步中。这其实是一个已有的功能，但是发现原先的代码实现发现有较严重的…<br><a id="more"></a></p>
+<pre><code>#### 背景需求 
+</code></pre><p>最近在项目中有一个场景，根据前端可视化模式传入的参数构建一组SQL语句，应用在Spark Streaming应用的数据同步中。这其实是一个已有的功能，但是发现原先的代码实现发现有较严重的问题，导致该功能在有关联查询时不可用，我经过调研之后决定重新实现。<br>这些SQL由普通的Lookup SQL和Spark SQL组成，Lookup SQL用于查询关联数据，SparkSQL则用于输出结果，核心问题在于如何合理组织这些表的关联关系。<br>PS：实现代码为Scala语言。 </p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>其中前端传入的参数为 </p>
+<pre><code class="java"><span class="function"><span class="keyword">case</span> class <span class="title">UpdateTask</span><span class="params">(</span></span>
+<span class="function"><span class="params">                    @BeanProperty id: Option[Long],</span></span>
+<span class="function"><span class="params">                    @BeanProperty taskName: Option[String],</span></span>
+<span class="function"><span class="params">                    @BeanProperty taskDesc: Option[String],</span></span>
+<span class="function"><span class="params">                    @BeanProperty sourceInstance: Option[String],</span></span>
+<span class="function"><span class="params">                    @BeanProperty targetInstance: Option[Long],</span></span>
+<span class="function"><span class="params">                    @BeanProperty eventInstance: Option[Long],</span></span>
+<span class="function"><span class="params">                    @BeanProperty sourceTree: Option[Seq[Long]],</span></span>
+<span class="function"><span class="params">                    @BeanProperty selectSourceTree: Option[Seq[Long]],</span></span>
+<span class="function"><span class="params">                    @BeanProperty targetTree: Option[Long],</span></span>
+<span class="function"><span class="params">                    @BeanProperty eventTable: Option[Long],</span></span>
+<span class="function"><span class="params">                    @BeanProperty tableRelation: Option[Seq[TableRelation]],</span></span>
+<span class="function"><span class="params">                    @BeanProperty filterCondition: Option[String],</span></span>
+<span class="function"><span class="params">                    @BeanProperty targetCalculateTableName: Option[String],</span></span>
+<span class="function"><span class="params">                    @BeanProperty targetCalculate: Option[Seq[TargetCalculate]],</span></span>
+<span class="function"><span class="params">                    @BeanProperty sourceTableField: Option[Seq[TableColumnInfo]],</span></span>
+<span class="function"><span class="params">                    @BeanProperty sqlType: Option[Int],</span></span>
+<span class="function"><span class="params">                    @BeanProperty classicSql: Option[String],</span></span>
+<span class="function"><span class="params">                    @BeanProperty sinkConfig: Option[String],</span></span>
+<span class="function"><span class="params">                    @BeanProperty targetPrimaryKey: Option[Seq[String]]</span></span>
+<span class="function"><span class="params">                   )</span> extends SimpleBaseEntity</span>
+<span class="function"></span>
+</code></pre>
+<p>所需要用的参数为 </p>
+<pre><code class="java">eventTable
+</code></pre>
+<p>  : 触发表  </p>
+<pre><code class="java">tableRelation
+</code></pre>
+<p>  : 表关联关系列表，其中 </p>
+<pre><code class="java">TableRelation
+</code></pre>
+<p>  的结��为  </p>
+<pre><code class="java"><span class="function"><span class="keyword">case</span> class <span class="title">TableRelation</span><span class="params">(@BeanProperty leftTableSelect: Long,</span></span>
+<span class="function"><span class="params">                       @BeanProperty rightTableSelect: Long,</span></span>
+<span class="function"><span class="params">                       @BeanProperty leftColumnSelect: String,</span></span>
+<span class="function"><span class="params">                       @BeanProperty rightColumnSelect: String)</span></span>
+<span class="function"></span>
+</code></pre>
+<pre><code class="java">targetCalculate
+</code></pre>
+<p>  : 输出结果的计算表达式，其中  </p>
+<pre><code class="java">TargetCalculate
+</code></pre>
+<p>  的结构为  </p>
+<pre><code class="java"><span class="function"><span class="keyword">case</span> class <span class="title">TargetCalculate</span><span class="params">(@BeanProperty columnName: String,</span></span>
+<span class="function"><span class="params">                         @BeanProperty config: String)</span></span>
+<span class="function"></span>
+</code></pre>
+<pre><code class="java">selectSourceTree
+</code></pre>
+<p>  : 所用到的源表  </p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>当没有关联关系的时候，比较简单，不在此讨论。当有多个关联关系时，应该先查询出被关联的表数据，再查询下一级的表，以此类推，实际场景下可能一般只有一两个表关联，但是毕竟还是需要考虑极端情况，原先的实现只考虑了简单的关联，复杂一点的关联则无法处理，经过一段时间思考后，决定基于树这种数据结构去实现此功能。<br>假设传入了如下一些表关系，并且A表为源表（触发表）： </p>
+<pre><code class="java">  A &lt;-&gt; B
+A &lt;-&gt; C
+A &lt;-&gt; D
+B &lt;-&gt; E
+B &lt;-&gt; F
+E &lt;-&gt; G
+C &lt;-&gt; H
+C &lt;-&gt; I
+
+</code></pre>
+<p>则经过处理后，可以生成如下一个树 </p>
+<pre><code class="java">               --&gt; E &lt;--&gt; G
+    --&gt; B &lt;--|
+    |        --&gt; F
+    |
+A &lt;----&gt; D
+    |
+    |        --&gt; H
+    --&gt; C &lt;--|
+             --&gt; I
+
+</code></pre>
+<p>在此需要说明，不需要考虑左右顺序问题，例如 A <-> B 等价于 B <-> A，在后面对此问题会有说明。<br>当传入了多个相同的表关联关系时，需要做一个聚合，因为前端的参数中，每一个关联关系只包含一组关联字段，所以当有多个关联字段时，就传入了多个相同的关联关系，但是关联字段不同。<br>得到这个树形关系后，也同时得到了表之间的依赖关系，但是还有一个前提， 每个表只能依赖一个表，假设如下关系： </-></-></p>
+<pre><code class="java">               --&gt; E &lt;--&gt; G
+    --&gt; B &lt;--|
+    |        --&gt; F
+    |
+A &lt;----&gt; D
+    |
+    |        --&gt; H
+    --&gt; G &lt;--|
+             --&gt; I
+
+</code></pre>
+<p>此时，G表既可以由A得到，又可以由E得到，假设从A表得到G表，那么从G表又可以得到E表……产生了歧义，并由此产生一个了有环图。但是我们需求中目前没有这种关联关系（因为前端配置页面中，没有标识关联的方向性，即目前可视化模式传入的关联关系都是双向，对于一组关系，既可以从A得到B，也可以从B得到A，也就是前面的：A <-> B 等价于 B <-> A），所以不考虑这种情况，出现时给予报错，提示依赖关系产生了环。如果有方向性的话，我们生成树的算法会更简单一些，直接DFS即可，但是对于重复出现的表，需要做额外处理，例如给重复表起别名，保证结果集不会出现重名字段，否则Spark在处理过程中会产生异常。<br>在得到这个依赖关系后，后面的事情就好办了，我们从根节点开始层序遍历（也即为BFS广度优先遍历），逐层构建SQL语句，也可以采用树的先序遍历（DFS深度优先），只要保证子节点在父节点后面遍历即可，保证后面的SQL语句用到的关联参数在前面的SQL中已经查询到。<br>在生成SQL的过程中，为了避免不同库表有相同的表名或字段名，除了最后一句输出结果的Spark SQL，前面的SQL查询字段均需要起一个别名，在此沿用之前旧代码的方案：使用  </-></-></p>
+<pre><code class="java">{字段名} AS {库名}__{表名}__{字段名}
+</code></pre>
+<p>  的形式保证字段名不会重复 </p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><h5 id="数据结构类定义"><a href="#数据结构类定义" class="headerlink" title="数据结构类定义"></a>数据结构类定义</h5><p>有了思路之后，便开始着手实现此功能，首先��义一个树节点的case类： </p>
+<pre><code class="java"><span class="function"><span class="keyword">case</span> class <span class="title">TableRelationTreeNode</span><span class="params">(value: Long, // 当前节点的表id</span></span>
+<span class="function"><span class="params">                               parentRelation: LinkRelation, // 和父节点的关联关系</span></span>
+<span class="function"><span class="params">                               childs: ListBuffer[TableRelationTreeNode]  // 子节点</span></span>
+<span class="function"><span class="params">                               )</span></span>
+<span class="function"></span>
+</code></pre>
+<pre><code class="java">LinkRelation
+</code></pre>
+<p>  描述了两个表之间的关联关系，是对前端传入的 </p>
+<pre><code class="java">TableRelation
+</code></pre>
+<p> 聚合后的结果： </p>
+<pre><code class="java"><span class="function"><span class="keyword">case</span> class <span class="title">LinkRelation</span><span class="params">(leftTable: Long, // 左表id</span></span>
+<span class="function"><span class="params">                      rightTable: Long, // 右表id</span></span>
+<span class="function"><span class="params">                      linkFields: Seq[(String, String)</span>] <span class="comment">// 关联字段, 元组的两个参数分别为左表字段、右表字段</span></span>
+<span class="function">                      )</span>
+<span class="function"></span>
+</code></pre>
+<h5 id="关联关系树的构建"><a href="#关联关系树的构建" class="headerlink" title="关联关系树的构建"></a>关联关系树的构建</h5><pre><code class="java">  <span class="comment">/**</span>
+<span class="comment"> * <span class="doctag">@param</span> parentNode      父节点</span>
+<span class="comment"> * <span class="doctag">@param</span> remainRelations 剩余关联关系</span>
+<span class="comment"> */</span>
+<span class="function">def <span class="title">buildRelationTree</span><span class="params">(parentNode: TableRelationTreeNode, remainRelations: ListBuffer[LinkRelation])</span>: Any </span>= {
+  <span class="keyword">if</span> (remainRelations.isEmpty) <span class="keyword">return</span>
+  val parentTableId = parentNode.value;
+  <span class="comment">// 找出关联关系中包含父节点的表id</span>
+  val childRelation = remainRelations.filter(e =&gt; e.leftTable == parentTableId || e.rightTable == parentTableId)
+  <span class="keyword">if</span> (childRelation.isEmpty) <span class="keyword">return</span>
+  <span class="comment">// 将关联关系中父节点的关联信息置于左侧，方便后续操作</span>
+  childRelation
+    .map(e =&gt; <span class="keyword">if</span> (e.leftTable == parentTableId) <span class="function">e <span class="keyword">else</span> <span class="title">LinkRelation</span><span class="params">(e.rightTable, e.leftTable, e.linkFields.map(e =&gt; (e._2, e._1)</span>)))</span>
+<span class="function">    .foreach</span>{e =&gt; parentNode.childs += TableRelationTreeNode(e.rightTable, e, <span class="keyword">new</span> ListBuffer())}
+    <span class="comment">// 移除已经使用过的关联关系</span>
+  remainRelations --= childRelation
+  parentNode.childs foreach {buildRelationTree(_, remainRelations)}
+}
+
+</code></pre>
+<h5 id="SQL语句生成的核心代码"><a href="#SQL语句生成的核心代码" class="headerlink" title="SQL语句生成的核心代码"></a>SQL语句生成的核心代码</h5><pre><code class="java"><span class="function">def <span class="title">buildTransSQL</span><span class="params">(task: UpdateTask)</span>: Seq[String] </span>= {
+      <span class="comment">// 存储所有用到的表（namespace为表的信息）</span>
+  val namespacesRef = mutable.HashMap[Long, Namespace]()
+  task.selectSourceTree.get.foreach(i =&gt; namespacesRef += (kv = (i, Await.result(namespaceDal.findById(i), minTimeOut).get)))
+  val targetTableId = task.targetTree.get
+      <span class="comment">// 目标表</span>
+  val targetNamespace = Await.result(namespaceDal.findById(targetTableId), minTimeOut).head
+  namespacesRef.put(targetTableId, targetNamespace)
+  val eventTableId = task.eventTable.get
+      <span class="comment">// 事件表（源/触发表）</span>
+  val eventNamespace = namespacesRef(eventTableId)
+      <span class="comment">// 没有计算逻辑，当做镜像同步，直接SELECT * ...</span>
+  <span class="keyword">if</span> (task.targetCalculate.isEmpty)
+    <span class="keyword">return</span> Seq.newBuilder.+=(s<span class="string">"spark_sql= select * from ${eventNamespace.nsTable};"</span>).result()
+
+  val transSqlList = <span class="keyword">new</span> ListBuffer[String]
+
+  <span class="comment">// 先将触发表的所有字段查询出来</span>
+  transSqlList += s<span class="string">"spark_sql= select ${</span>
+<span class="string">    sourceDataDal.getSourceDataTableField(eventTableId).filter(_ != "</span>ums_active_<span class="string">").map(e =&gt; {</span>
+<span class="string">      s"</span>$e AS ${eventNamespace.nsDatabase}__${eventNamespace.nsTable}__$e<span class="string">"</span>
+<span class="string">    }).mkString("</span>, <span class="string">")</span>
+<span class="string">  } from ${eventNamespace.nsTable}"</span>
+
+  <span class="keyword">if</span> (task.getTableRelation.nonEmpty) {
+
+    val remainLinks = <span class="keyword">new</span> ListBuffer[LinkRelation]()
+    <span class="comment">// 聚合重复的表关联关系</span>
+    task.getTableRelation.getOrElse(Seq.empty)
+      .map(e =&gt; {
+        <span class="keyword">if</span> (e.leftTableSelect &gt; e.rightTableSelect) {
+          TableRelation(
+            leftTableSelect = e.rightTableSelect,
+            rightTableSelect = e.leftTableSelect,
+            leftColumnSelect = e.rightColumnSelect,
+            rightColumnSelect = e.leftColumnSelect
+          )
+        } <span class="keyword">else</span> e
+      })
+      .groupBy(e =&gt; s<span class="string">"${e.leftTableSelect}-${e.rightTableSelect}"</span>)
+      .map(e =&gt; {
+        LinkRelation(
+          leftTable = e._2.head.leftTableSelect,
+          rightTable = e._2.head.rightTableSelect,
+          linkFields = e._2.map(e =&gt; (e.leftColumnSelect, e.rightColumnSelect))
+        )
+      }) foreach {
+      remainLinks += _
+    }
+
+          <span class="comment">// 根结点</span>
+    val rootTreeNode = TableRelationTreeNode(
+      eventTableId,
+      <span class="keyword">null</span>,
+      <span class="keyword">new</span> ListBuffer[TableRelationTreeNode]
+    )
+    <span class="comment">// 构建关系树</span>
+    buildRelationTree(rootTreeNode, remainLinks)
+
+    <span class="comment">// 如果有剩余的关系未被使用，则说明有无法连接到根节点的关系，抛出异常</span>
+    <span class="keyword">if</span> (remainLinks.nonEmpty) {
+      <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(s<span class="string">"游离的关联关系：${</span>
+<span class="string">        remainLinks.map(e =&gt; {</span>
+<span class="string">          val leftNs = namespacesRef(e.leftTable)</span>
+<span class="string">          val rightNs = namespacesRef(e.rightTable)</span>
+<span class="string">          s"</span>${leftNs.nsDatabase}.${leftNs.nsTable} &lt;-&gt; ${rightNs.nsDatabase}.${rightNs.nsTable}<span class="string">"</span>
+<span class="string">        }).toString</span>
+<span class="string">      }\n无法与根节点(${eventNamespace.nsDatabase}.${eventNamespace.nsTable})建立关系"</span>)
+    }
+
+    val queue = <span class="keyword">new</span> mutable.Queue[TableRelationTreeNode]
+    queue.enqueue(rootTreeNode)
+    <span class="comment">// 广度优先遍历，逐层构建SQL语句，保证依赖顺序</span>
+    <span class="keyword">while</span> (queue.nonEmpty) {
+      val len = queue.size
+      <span class="keyword">for</span> (i &lt;- <span class="number">0</span> until len) {
+        val node = queue.dequeue
+        <span class="keyword">if</span> (node.value != eventTableId) {
+          val relation = node.parentRelation
+          <span class="comment">// 当前节点表</span>
+          val curNs = namespacesRef(node.value)
+          <span class="comment">// 父节点表</span>
+          val parNs = namespacesRef(relation.leftTable)
+          val curTableName = s<span class="string">"${curNs.nsDatabase}.${curNs.nsTable}"</span>
+          val fields = sourceDataDal.getSourceDataTableField(node.value)
+          val fieldAliasPrefix = s<span class="string">"${curNs.nsDatabase}__${curNs.nsTable}__"</span>
+          <span class="comment">// 构建lookup SQL</span>
+          transSqlList += s<span class="string">"pushdown_sql left join with ${curNs.nsSys}.${curNs.nsInstance}.${curNs.nsDatabase}=select ${</span>
+<span class="string">            fields.map(f =&gt; s"</span>$f as $fieldAliasPrefix$f<span class="string">").mkString("</span>, <span class="string">")</span>
+<span class="string">          } from $curTableName where (${</span>
+<span class="string">            relation.linkFields.map(_._2.replaceAll("</span>.*\\.<span class="string">", "</span><span class="string">")).mkString("</span>,<span class="string">")</span>
+<span class="string">          }) in (${relation.linkFields.map(_._1.replace("</span>.<span class="string">","</span>__<span class="string">")).map(e =&gt; "</span>${<span class="string">" + e + "</span>}<span class="string">").mkString("</span>,<span class="string">")})"</span>;
+        }
+        node.childs foreach { queue.enqueue(_) }
+      }
+    }
+  }
+  <span class="comment">// 输出最终结果集的SparkSQL</span>
+  transSqlList += s<span class="string">"spark_sql= select ${</span>
+<span class="string">    task.targetCalculate.get.map { e =&gt;</span>
+<span class="string">      s"</span>${e.config.replaceAll(<span class="string">"(\\w+)\\.(\\w+)\\.(\\w+)"</span>, <span class="string">"$1__$2__$3"</span>)} as ${e.columnName}<span class="string">"</span>
+<span class="string">    }.mkString("</span>, <span class="string">")</span>
+<span class="string">  } from ${eventNamespace.nsTable} where ${if (task.filterCondition.getOrElse("</span><span class="string">") == "</span><span class="string">") "</span><span class="number">1</span>=<span class="number">1</span><span class="string">" else task.filterCondition.get}"</span>
+
+  transSqlList.toSeq
+}
+
+</code></pre>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>我新建了几张测试表，并使用小程序向库中随机生成了一些数据，然后又新建了一个目标表，以此来测试该功能，过程如下 </p>
+<h5 id="前端配置"><a href="#前端配置" class="headerlink" title="前端配置"></a>前端配置</h5><p>关联关系<br><img src="https://oscimg.oschina.net/oscnet/up-ad374c7f0532171add44d6e2141ace62855.png" alt="Test" title="数据结构与算法的实际应用——根据表关系构建SQL语句"><br>计算逻辑<br><img src="https://oscimg.oschina.net/oscnet/up-ad374c7f0532171add44d6e2141ace62855.png" alt="Test" title="数据结构与算法的实际应用——根据表关系构建SQL语句"><br>抽象出的关联关系应为： </p>
+<pre><code class="java">                                           ------&gt; customer_transaction
+                                         |
+customer &lt;---&gt; customer_account_info &lt;----
+                                         |
+                                         ------&gt; customer_seller_relation  &lt;-----&gt; seller_info
+
+</code></pre>
+<h5 id="后台生成的SQL："><a href="#后台生成的SQL：" class="headerlink" title="后台生成的SQL："></a>后台生成的SQL：</h5><pre><code class="java">  spark_sql =
+select
+  address AS adp_mock_spr_mirror__customer__address,
+  company AS adp_mock_spr_mirror__customer__company,
+  gender AS adp_mock_spr_mirror__customer__gender,
+  id AS adp_mock_spr_mirror__customer__id,
+  id_card AS adp_mock_spr_mirror__customer__id_card,
+  mobile AS adp_mock_spr_mirror__customer__mobile,
+  real_name AS adp_mock_spr_mirror__customer__real_name,
+  ums_id_ AS adp_mock_spr_mirror__customer__ums_id_,
+  ums_op_ AS adp_mock_spr_mirror__customer__ums_op_,
+  ums_ts_ AS adp_mock_spr_mirror__customer__ums_ts_
+from
+  customer;
+
+pushdown_sql
+  left join with tidb.spr_ods_department.adp_mock_spr_mirror =
+select
+  account_bank as adp_mock_spr_mirror__customer_account_info__account_bank,
+  account_level as adp_mock_spr_mirror__customer_account_info__account_level,
+  account_no as adp_mock_spr_mirror__customer_account_info__account_no,
+  customer_id as adp_mock_spr_mirror__customer_account_info__customer_id,
+  entry_time as adp_mock_spr_mirror__customer_account_info__entry_time,
+  id as adp_mock_spr_mirror__customer_account_info__id,
+  loc_seller as adp_mock_spr_mirror__customer_account_info__loc_seller,
+  risk_level as adp_mock_spr_mirror__customer_account_info__risk_level,
+  risk_test_date as adp_mock_spr_mirror__customer_account_info__risk_test_date,
+  ums_active_ as adp_mock_spr_mirror__customer_account_info__ums_active_,
+  ums_id_ as adp_mock_spr_mirror__customer_account_info__ums_id_,
+  ums_op_ as adp_mock_spr_mirror__customer_account_info__ums_op_,
+  ums_ts_ as adp_mock_spr_mirror__customer_account_info__ums_ts_
+from
+  adp_mock_spr_mirror.customer_account_info
+where
+  (id) in ($ { adp_mock_spr_mirror__customer__id });
+
+pushdown_sql
+  left join with tidb.spr_ods_department.adp_mock_spr_mirror =
+select
+  customer_id as adp_mock_spr_mirror__customer_seller_relation__customer_id,
+  id as adp_mock_spr_mirror__customer_seller_relation__id,
+  relation_type as adp_mock_spr_mirror__customer_seller_relation__relation_type,
+  seller_id as adp_mock_spr_mirror__customer_seller_relation__seller_id,
+  ums_active_ as adp_mock_spr_mirror__customer_seller_relation__ums_active_,
+  ums_id_ as adp_mock_spr_mirror__customer_seller_relation__ums_id_,
+  ums_op_ as adp_mock_spr_mirror__customer_seller_relation__ums_op_,
+  ums_ts_ as adp_mock_spr_mirror__customer_seller_relation__ums_ts_,
+  wechat_relation as adp_mock_spr_mirror__customer_seller_relation__wechat_relation
+from
+  adp_mock_spr_mirror.customer_seller_relation
+where
+  (customer_id) in (
+    $ { adp_mock_spr_mirror__customer_account_info__id }
+  );
+
+pushdown_sql
+  left join with tidb.spr_ods_department.adp_mock_spr_mirror =
+select
+  balance as adp_mock_spr_mirror__customer_transaction__balance,
+  borrow_loan as adp_mock_spr_mirror__customer_transaction__borrow_loan,
+  comment as adp_mock_spr_mirror__customer_transaction__comment,
+  customer_account_id as adp_mock_spr_mirror__customer_transaction__customer_account_id,
+  customer_id as adp_mock_spr_mirror__customer_transaction__customer_id,
+  deal_abstract_code as adp_mock_spr_mirror__customer_transaction__deal_abstract_code,
+  deal_account_type_code as adp_mock_spr_mirror__customer_transaction__deal_account_type_code,
+  deal_code as adp_mock_spr_mirror__customer_transaction__deal_code,
+  deal_partner_account as adp_mock_spr_mirror__customer_transaction__deal_partner_account,
+  deal_partner_name as adp_mock_spr_mirror__customer_transaction__deal_partner_name,
+  deal_partner_ogr_name as adp_mock_spr_mirror__customer_transaction__deal_partner_ogr_name,
+  deal_partner_org_num as adp_mock_spr_mirror__customer_transaction__deal_partner_org_num,
+  id as adp_mock_spr_mirror__customer_transaction__id,
+  subject as adp_mock_spr_mirror__customer_transaction__subject,
+  transaction_amount as adp_mock_spr_mirror__customer_transaction__transaction_amount,
+  transaction_time as adp_mock_spr_mirror__customer_transaction__transaction_time,
+  ums_active_ as adp_mock_spr_mirror__customer_transaction__ums_active_,
+  ums_id_ as adp_mock_spr_mirror__customer_transaction__ums_id_,
+  ums_op_ as adp_mock_spr_mirror__customer_transaction__ums_op_,
+  ums_ts_ as adp_mock_spr_mirror__customer_transaction__ums_ts_
+from
+  adp_mock_spr_mirror.customer_transaction
+where
+  (customer_id, customer_account_id) in (
+    $ { adp_mock_spr_mirror__customer_account_info__id },
+    $ { adp_mock_spr_mirror__customer_account_info__account_no }
+  );
+
+pushdown_sql
+  left join with tidb.spr_ods_department.adp_mock_spr_mirror =
+select
+  current_bank as adp_mock_spr_mirror__seller_info__current_bank,
+  department_id as adp_mock_spr_mirror__seller_info__department_id,
+  email as adp_mock_spr_mirror__seller_info__email,
+  entry_time as adp_mock_spr_mirror__seller_info__entry_time,
+  id as adp_mock_spr_mirror__seller_info__id,
+  id_card as adp_mock_spr_mirror__seller_info__id_card,
+  leader_id as adp_mock_spr_mirror__seller_info__leader_id,
+  mobile as adp_mock_spr_mirror__seller_info__mobile,
+  name as adp_mock_spr_mirror__seller_info__name,
+  position as adp_mock_spr_mirror__seller_info__position,
+  tenant_id as adp_mock_spr_mirror__seller_info__tenant_id,
+  ums_active_ as adp_mock_spr_mirror__seller_info__ums_active_,
+  ums_id_ as adp_mock_spr_mirror__seller_info__ums_id_,
+  ums_op_ as adp_mock_spr_mirror__seller_info__ums_op_,
+  ums_ts_ as adp_mock_spr_mirror__seller_info__ums_ts_
+from
+  adp_mock_spr_mirror.seller_info
+where
+  (id) in (
+    $ { adp_mock_spr_mirror__customer_seller_relation__seller_id }
+  );
+
+spark_sql =
+select
+  adp_mock_spr_mirror__customer_account_info__id as id,
+  adp_mock_spr_mirror__customer__real_name as name,
+  IF(adp_mock_spr_mirror__customer__gender = <span class="number">0</span>, <span class="string">"0"</span>, <span class="string">"1"</span>) as sex,
+  adp_mock_spr_mirror__seller_info__department_id as age,
+  adp_mock_spr_mirror__customer__mobile as phone,
+  adp_mock_spr_mirror__seller_info__entry_time as born,
+  adp_mock_spr_mirror__customer__address as address,
+  IF(
+    adp_mock_spr_mirror__customer_transaction__borrow_loan = <span class="number">1</span>,
+    <span class="string">"1"</span>,
+    <span class="string">"0"</span>
+  ) as married,
+  NOW() as create_time,
+  NOW() as update_time,
+  <span class="string">'P'</span> as zodiac
+from
+  customer
+where
+  <span class="number">1</span> = <span class="number">1</span>;
+
+</code></pre>
+<h5 id="同步结果"><a href="#同步结果" class="headerlink" title="同步结果"></a>同步结果</h5><p><img src="https://oscimg.oschina.net/oscnet/up-ad374c7f0532171add44d6e2141ace62855.png" alt="Test" title="数据结构与算法的实际应用——根据表关系构建SQL语句"><br>从Spark后台日志中可以看到，数据已经正常插入目标表。 </p>
+<h4 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h4><p>以上是树和BFS在实际开发场景中的一个应用，代码实现其实较为简单，重点是实现的思路，当然解决问题的方法并不是唯一的，在此问题中，也可以在构建树的过程中直接构建SQL语句，省去后续的BFS过程，但是我考虑到后续可能增加的需求，还是将此处拆成了两步，方便后续在扩展，根据实际场景选择方案即可。另外，计算逻辑中缺少字段强校验，当用户输入错误字段时在运行期间才能察觉到，考虑后期再增加此功能。<br>有不对的地方欢迎指正，希望本文对大家有所帮助。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-数据结构与算法的实际应用——根据表关系构建SQL语句</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 09:46</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/9c2d89b8/" title="推荐系列-数据结构与算法的实际应用——根据表关系构建SQL语句">https://www.hosiang.cn/9c2d89b8/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/9c2d89b8/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-数据结构与算法的实际应用——根据表关系构建SQL语句》 — 狂欢马克思&url=https://www.hosiang.cn/9c2d89b8/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/9c2d89b8/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/9c2d89b8/&title=《推荐系列-数据结构与算法的实际应用——根据表关系构建SQL语句》 — 狂欢马克思&source=&emsp;&emsp;背景需求 最近在项目中有一个场景，根据前端可视化模式传入的参数构建一组SQL语句，应用在Spark Streaming应用的数据同..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/9c2d89b8/&title=《推荐系列-数据结构与算法的实际应用——根据表关系构建SQL语句》 — 狂欢马克思&pic=https://oscimg.oschina.net/oscnet/up-ad374c7f0532171add44d6e2141ace62855.png" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/9c2d89b8/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#参数"><span class="post-toc-text">参数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#解决方案"><span class="post-toc-text">解决方案</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码实现"><span class="post-toc-text">代码实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#数据结构类定义"><span class="post-toc-text">数据结构类定义</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#关联关系树的构建"><span class="post-toc-text">关联关系树的构建</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#SQL语句生成的核心代码"><span class="post-toc-text">SQL语句生成的核心代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#测试"><span class="post-toc-text">测试</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#前端配置"><span class="post-toc-text">前端配置</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#后台生成的SQL："><span class="post-toc-text">后台生成的SQL：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#同步结果"><span class="post-toc-text">同步结果</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#结语"><span class="post-toc-text">结语</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/628ad5bd/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-数据加密-你应该知道的数仓安全
+        
+      </span>
+    </a>
+  
+  
+    <a href="/4fe84162/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-文字识别-关键信息提取的3种探索方法</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

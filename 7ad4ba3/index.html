@@ -1,0 +1,1672 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-带你彻底搞懂执行上下文 | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;执行上下文 执行上下文 可以理解为当前代码的执行环境，同一个函数在不同的环境中执行，会因为访问数据的不同产生不一样的结果。 执行上下文分为三种： 全局执行上下文：只有一个，程序首次运…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-带你彻底搞懂执行上下文">
+<meta property="og:url" content="https://www.hosiang.cn/7ad4ba3/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;执行上下文 执行上下文 可以理解为当前代码的执行环境，同一个函数在不同的环境中执行，会因为访问数据的不同产生不一样的结果。 执行上下文分为三种： 全局执行上下文：只有一个，程序首次运…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2021-07-23T15:43:06.992Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-带你彻底搞懂执行上下文">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;执行上下文 执行上下文 可以理解为当前代码的执行环境，同一个函数在不同的环境中执行，会因为访问数据的不同产生不一样的结果。 执行上下文分为三种： 全局执行上下文：只有一个，程序首次运…">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-带你彻底搞懂执行上下文" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-带你彻底搞懂执行上下文
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 6.7k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 25分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;执行上下文 执行上下文 可以理解为当前代码的执行环境，同一个函数在不同的环境中执行，会因为访问数据的不同产生不一样的结果。 执行上下文分为三种： 全局执行上下文：只有一个，程序首次运…<br><a id="more"></a></p>
+<pre><code>#### 执行上下文 
+</code></pre><p>执行上下文分为三种： </p>
+<p> 全局执行上下文：只有一个，程序首次运行时创建，它会在浏览器中创建一个全局对象（ </p>
+<pre><code class="java">window
+</code></pre>
+<p> 对象），使 </p>
+<pre><code class="java"><span class="keyword">this</span>
+</code></pre>
+<p> 指向这个全局对象<br> 函数执行上下文：函数被调用时创建，每次调用都会为该函数创建一个新的执行上下文<br> Eval 函数执行上下文：运行 </p>
+<pre><code class="java">eval
+</code></pre>
+<p> 函数中的代码时创建的执行上下文，少用且不建议使用 </p>
+<h4 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h4><p>执行上下文栈（Execution context stack，ECS），也叫函数调用栈( </p>
+<pre><code class="java">call stack
+</code></pre>
+<p> )，是一种拥有  </p>
+<pre><code class="java">LIFO
+</code></pre>
+<p> （后进先出）数据结构的栈，用于存储代码执行时创建的执行上下文<br>由于JS是单线程的，每次只能做一件事情，通过这种机制，我们能够追踪到哪个函数正在执行，其他函数在调用栈中排队等待执行。<br>JS引擎第一次执行脚本时，会创建一个全局执行上下文压到栈顶，然后随着每次函数的调用都会创建一个新的执行上下文放入到栈顶中，随着函数执行完毕后被执行上下文栈顶弹出，直到回到全局的执行上下文中。<br>代码实例 </p>
+<pre><code class="java">  <span class="keyword">var</span> color = <span class="string">'blue'</span>;
+
+<span class="function">function <span class="title">changeColor</span><span class="params">()</span> </span>{
+  <span class="keyword">var</span> anotherColor = <span class="string">'red'</span>;
+
+  <span class="function">function <span class="title">swapColors</span><span class="params">()</span> </span>{
+    <span class="keyword">var</span> tempColor = anotherColor;
+    anotherColor = color;
+    color = tempColor;
+  }
+
+  swapColors();
+}
+
+changeColor();
+
+console.log(color); <span class="comment">// red</span>
+
+</code></pre>
+<p>执行过程可以在  </p>
+<pre><code class="java">devTool
+</code></pre>
+<p>  的  </p>
+<pre><code class="java">call stack
+</code></pre>
+<p>  中看到，其中  </p>
+<pre><code class="java">anonyomus
+</code></pre>
+<p>  为全局上下文栈；其余为函数上下文栈<br><img src="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Test" title="带你彻底搞懂执行上下文"><br>图解： <img src="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Test" title="带你彻底搞懂执行上下文"><br>执行过程： </p>
+<p> 首先创建了 </p>
+<pre><code class="java">全局执行上下文
+</code></pre>
+<p> ，压入执行栈，其中的可执行代码开始执行。<br> 然后调用  </p>
+<pre><code class="java">changeColor
+</code></pre>
+<p>  函数，JS引擎停止执行全局执行上下文，激活函数  </p>
+<pre><code class="java">changeColor
+</code></pre>
+<p>  创建它自己的执行上下文，且把该函数上下文放入执行上下文栈顶，其中的可执行代码开始执行。 </p>
+<pre><code class="java">changeColor
+</code></pre>
+<p>  调用了  </p>
+<pre><code class="java">swapColors
+</code></pre>
+<p>  函数，此时暂停了  </p>
+<pre><code class="java">changeColor
+</code></pre>
+<p>  的执行上下文，创建了  </p>
+<pre><code class="java">swapColors
+</code></pre>
+<p>  函数的新执行上下文，且把该函数执行上下文放入执行上下文栈顶。<br> 当  </p>
+<pre><code class="java">swapColors
+</code></pre>
+<p>  函数执行完后，其执行上下文从栈顶出栈，回到了  </p>
+<pre><code class="java">changeColor
+</code></pre>
+<p>  执行上下文中继续执行。 </p>
+<pre><code class="java">changeColor
+</code></pre>
+<p>  没有可执行代码，也没有再遇到其他执行上下文了，将其执行上下文从栈顶出栈，回到了  </p>
+<pre><code class="java">全局执行上下文
+</code></pre>
+<p>  中继续执行。<br> 一旦所有代码执行完毕，JS引擎将从当前栈中移除  </p>
+<pre><code class="java">全局执行上下文
+</code></pre>
+<p> 。 </p>
+<pre><code class="java">注意：函数中，遇到<span class="keyword">return</span>能直接终止可执行代码的执行，因此会直接将当前上下文弹出栈。
+
+</code></pre>
+<p>使用  </p>
+<pre><code class="java">ECStack
+</code></pre>
+<p>  来模拟调用栈： </p>
+<pre><code class="java">ECStack=[]
+
+</code></pre>
+<p>JS第一次执行代码时就会遇到全局代码，执行上下文栈会压入一个全局上下文，我们用  </p>
+<pre><code class="java">globalContext
+</code></pre>
+<p>  表示它，只有当整个应用程序结束的时候， </p>
+<pre><code class="java">ECStack
+</code></pre>
+<p>  才会被清空，所以  </p>
+<pre><code class="java">ECStack
+</code></pre>
+<p>  最底部永远有个  </p>
+<pre><code class="java">globalContext
+</code></pre>
+<p> ： </p>
+<pre><code class="java">ECStack.push(globalContext)
+
+</code></pre>
+<p>使用伪代码模拟上述代码行为： </p>
+<pre><code class="java">  ECStack.push(&lt;changeColor&gt; functionContext);
+ECStack.push(&lt;swapColors&gt; functionContext);
+
+<span class="comment">// swapColors出栈</span>
+ECStack.pop();
+<span class="comment">// changeColor出栈</span>
+ECStack.pop();
+
+</code></pre>
+<p>为了巩固一下执行上下文的理解，我们再来绘制一个例子的演变过程，这是一个简单的闭包例子。 </p>
+<pre><code class="java">  <span class="function">function <span class="title">f1</span><span class="params">()</span> </span>{
+  <span class="keyword">var</span> n = <span class="number">999</span>;
+  <span class="function">function <span class="title">f2</span><span class="params">()</span> </span>{
+    console.log(n);
+  }
+  <span class="keyword">return</span> f2;
+}
+f1()() <span class="comment">// 999</span>
+
+</code></pre>
+<p>使用伪代码模拟上述代码行为： </p>
+<pre><code class="java">  ECStack.push(&lt;f1&gt; functionContext);
+<span class="comment">// f1出栈</span>
+ECStack.pop();
+
+ECStack.push(&lt;f2&gt; functionContext);
+<span class="comment">// f2出栈</span>
+ECStack.pop();
+
+</code></pre>
+<p>因为f1中的函数f2在f1的可执行代码中，并没有被调用执行，因此执行f1时，f2不会创建新的上下文，而直到f2执行时，才创建了一个新的。具体演变过程如下。<br><img src="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Test" title="带你彻底搞懂执行上下文"> </p>
+<h4 id="es3版本"><a href="#es3版本" class="headerlink" title="es3版本"></a>es3版本</h4><p>es3版本执行上下文内有三个重要属性： </p>
+<p> 变量对象 VO（variable object）<br> 作用域链（scope chain）<br> this </p>
+<p>可以将每个执行上下文抽象为一个对象。<br>执行上下文的组成代码示例： </p>
+<pre><code class="java">  executionContextObj = {
+  scopeChain: { <span class="comment">/* 变量对象（variableObject）+ 所有父执行上下文的变量对象*/</span> },
+  [variableObject | activationObject]: {
+    <span class="comment">/*函数 arguments/参数，内部变量和函数声明 */</span>
+    arguments,
+    ...
+  },
+  <span class="keyword">this</span>: {}
+}
+
+</code></pre>
+<p><img src="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Test" title="带你彻底搞懂执行上下文"> </p>
+<h5 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h5><p>变量对象 是与执行上下文相联的数据作用域，用来存储上下文中定义的变量和函数声明。<br>不同执行上下文中的变量对象也不一样： </p>
+<p> 全局上下文 中的变量对象就是全局对象，在浏览器中就是 window 对象。在顶层 JavaScript 代码中，可以用关键字 this 引用全局对象。所有的全局变量和函数都是作为 window 的属性和方法存在。 </p>
+<pre><code class="java">  console.log(<span class="keyword">this</span>) <span class="comment">//window</span>
+<span class="keyword">var</span> a=<span class="number">1</span> <span class="comment">//挂到window上的属性</span>
+console.log(window.a) <span class="comment">//1</span>
+console.log(<span class="keyword">this</span>.a) <span class="comment">//1</span>
+
+</code></pre>
+<p> 函数执行上下文 中我们用活动对象 AO (activation object) 来表示变量对象，因为变量对象是规范上的或者说是引擎实现上的，在 JavaScript 环境中是不能被直接访问的，只有当函数被调用时，变量对象被激活为活动对象时，我们才能访问到其中的属性和方法。 </p>
+<pre><code class="java">活动对象就是变量对象，只不过处于不同的状态和阶段而已。
+
+</code></pre>
+<h5 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h5><p>对于  </p>
+<pre><code class="java">JavaScript
+</code></pre>
+<p>  来说作用域及作用域链的变量查询是通过存储在浏览器内存中的执行上下文实现的。当查找变量时，首先从当前上下文中的变量对象查找，如果没有就会往上查找父级作用域中的变量对象，最终找到全局上下文的变量对象，如果没有就报错。这样由多个执行上下文的变量对象构成的链表就叫做作用域链。<br>那么有同学就有疑问了，作用域和执行上下文有什么 区别 呢 ：<br>函数执行上下文是在调用函数时, 函数体代码执行之前创建，函数调用结束时就会自动释放。因为不同的调用可能有不同的参数： </p>
+<pre><code class="java">  <span class="keyword">var</span> a = <span class="number">10</span>;
+<span class="function">function <span class="title">fn</span><span class="params">(x)</span> </span>{
+  <span class="keyword">var</span> a = <span class="number">20</span>;
+  console.log(arguments)
+  console.log(x)
+}
+fn(<span class="number">20</span>)
+fn(<span class="number">10</span>) <span class="comment">// 不同的调用可能有不同的参数</span>
+
+</code></pre>
+<p>而JavaScript采用的是词法作用域，fn 函数创建的作用域在函数定义时就已经确定了；<br><img src="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Test" title="带你彻底搞懂执行上下文"><br><strong>关联 </strong>：<br>作用域只是一个“地盘”，其中没有变量，要通过作用域对应的执行上下文环境来获取变量的值，所以作用域是静态观念的，而执行上下文环境是动态的。也就是说，作用域只是用于划分你在这个作用域里面定义的变量的有效范围，出了这个作用域就无效。<br>同一个作用域下，对同一个函数的不同的调用会产生不同的执行上下文环境，继而产生不同的变量的值，所以，作用域中变量的值是在执行过程中确定的，而作用域是在函数创建时就确定的。 </p>
+<h5 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h5><p>执行上下文的生命周期有三个阶段，分别是： </p>
+<p> 创建阶段 </p>
+<p>   生成变量对象 </p>
+<pre><code>创建arguments 
+扫描函数声明 
+扫描变量声明 
+</code></pre><p>   建立作用域链<br>   确定this的指向 </p>
+<p> 执行阶段 </p>
+<p>   变量赋值<br>   函数的引用<br>   执行其他代码 </p>
+<p> 销毁阶段 </p>
+<h6 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h6><p><strong>生成变量对象 </strong> </p>
+<p> 创建arguments：如果是函数上下文，首先会创建  </p>
+<pre><code class="java">arguments
+</code></pre>
+<p>  对象，给变量对象添加形参名称和值。<br> 扫描函数声明：对于找到的函数声明，将函数名和函数引用（指针）存入  </p>
+<pre><code class="java">VO
+</code></pre>
+<p>  中，如果  </p>
+<pre><code class="java">VO
+</code></pre>
+<p>  中已经有同名函数，那么就进行覆盖（重写引用指针）。<br> 扫描变量声明：对于找到的每个变量声明，将变量名存入  </p>
+<pre><code class="java">VO
+</code></pre>
+<p>  中，并且将变量的值初始化为 </p>
+<pre><code class="java">undefined
+</code></pre>
+<p>  。如果变量的名字已经在变量对象里存在，不会进行任何操作并继续扫描。 </p>
+<p>让我们举一个栗子来说明 ： </p>
+<pre><code class="java">  <span class="function">function <span class="title">person</span><span class="params">(age)</span> </span>{
+  console.log(typeof name); <span class="comment">// function</span>
+  console.log(typeof getName); <span class="comment">// undefined</span>
+  <span class="keyword">var</span> name = <span class="string">'abby'</span>;
+  <span class="keyword">var</span> hobby = <span class="string">'game'</span>;
+  <span class="keyword">var</span> getName = <span class="function">function <span class="title">getName</span><span class="params">()</span> </span>{
+    <span class="keyword">return</span> <span class="string">'Lucky'</span>;
+  };
+  <span class="function">function <span class="title">name</span><span class="params">()</span> </span>{
+    <span class="keyword">return</span> <span class="string">'Abby'</span>;
+  }
+  <span class="function">function <span class="title">getAge</span><span class="params">()</span> </span>{
+    <span class="keyword">return</span> age;
+  }
+  console.log(typeof name); <span class="comment">// string</span>
+  console.log(typeof getName); <span class="comment">// function</span>
+  name = function () {};
+  console.log(typeof name); <span class="comment">// function</span>
+}
+person(<span class="number">20</span>);
+
+</code></pre>
+<p>在调用person(20)的时候，但是代码还没执行的时候，创建的状态是这样: </p>
+<pre><code class="java">  personContext = {
+    scopeChain: { ... },
+    activationObject: {
+        arguments: {
+            <span class="number">0</span>: <span class="number">20</span>,
+            length: <span class="number">1</span>
+        },
+        age: <span class="number">20</span>,
+        name: pointer, <span class="comment">// reference to function name(),</span>
+        getAge: pointer, <span class="comment">// reference to function getAge(),</span>
+        hobby: undefined,
+        getName : undefined,
+    },
+    <span class="keyword">this</span>: { ... }
+}
+
+</code></pre>
+<p>函数在执行之前，会先创建一个函数执行上下文，首先是指出函数的引用，然后按顺序对变量进行定义，初始化为  </p>
+<pre><code class="java">undefined
+</code></pre>
+<p> 存入到  </p>
+<pre><code class="java">VO
+</code></pre>
+<p>  之中，在扫描到变量  </p>
+<pre><code class="java">name
+</code></pre>
+<p>  时发现在  </p>
+<pre><code class="java">VO
+</code></pre>
+<p>  之中存在同名的属性（函数声明变量），因此忽略。 </p>
+<pre><code class="java">全局执行上下文的创建没有创建 arguments 这一步
+
+</code></pre>
+<p>建立作用域链<br>在执行期上下文的创建阶段，作用域链是在变量对象之后创建的。作用域链本身包含变量对象。 </p>
+<p> 当书写一段函数代码时，就会创建一个词法作用域，这个作用域是函数内部的属性，我们用 </p>
+<pre><code class="java">[[scope]]
+</code></pre>
+<p> 表示，它里面保存父变量对象，所以 </p>
+<pre><code class="java">[[scope]]
+</code></pre>
+<p> 就是一条层级链。 </p>
+<pre><code class="java">  person.[[scope]] = [
+     globalContext.variableObject
+]
+
+</code></pre>
+<p> 当函数调用，就意味着函数被激活了，此时创建函数上下文并压入执行栈，然后复制函数 [[scope]] 属性创建作用域链： </p>
+<pre><code class="java">  personContext = {
+     scopeChain:person.[[scope]]
+}
+
+</code></pre>
+<p> 创建活动对象（前面的���成变量对象步骤），然后将活动对象(AO)推到作用域链的前端。 </p>
+<pre><code class="java">  personContext = {
+    activationObject: {
+        arguments: {
+            <span class="number">0</span>: <span class="number">20</span>,
+            length: <span class="number">1</span>
+        },
+        age: <span class="number">20</span>,
+        name: pointer, <span class="comment">// reference to function name(),</span>
+        getAge: pointer, <span class="comment">// reference to function getAge(),</span>
+        hobby: undefined,
+        getName : undefined,
+    },
+    scopeChain:[activationObject,[[scope]]]
+}
+
+</code></pre>
+<p>确定this的指向<br>如果当前函数被作为对象方法调用或使用  </p>
+<pre><code class="java">bind
+</code></pre>
+<p> 、 </p>
+<pre><code class="java">call
+</code></pre>
+<p> 、 </p>
+<pre><code class="java">apply
+</code></pre>
+<p>  等  </p>
+<pre><code class="java">API
+</code></pre>
+<p>  进行委托调用，则将当前代码块的调用者信息（this value）存入当前执行上下文，否则默认为全局对象调用。 </p>
+<h6 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h6><p>此时代码从上到下执行的时候激活阶段的过程是: </p>
+<p> 第一次执行  </p>
+<pre><code class="java">console.log
+</code></pre>
+<p> ; 此时  </p>
+<pre><code class="java">name
+</code></pre>
+<p>  在  </p>
+<pre><code class="java">VO
+</code></pre>
+<p>  中是函数。 </p>
+<pre><code class="java">getName
+</code></pre>
+<p>  未指定值在  </p>
+<pre><code class="java">VO
+</code></pre>
+<p>  中的值是  </p>
+<pre><code class="java">undefined
+</code></pre>
+<p> 。<br> 执行到赋值代码， </p>
+<pre><code class="java">getName
+</code></pre>
+<p>  被赋值成函数表达式， </p>
+<pre><code class="java">name
+</code></pre>
+<p>  被赋值为  </p>
+<pre><code class="java">abby
+</code></pre>
+<p> 第二次执行  </p>
+<pre><code class="java">console.log
+</code></pre>
+<p> ; 此时的  </p>
+<pre><code class="java">name
+</code></pre>
+<p>  由于函数被字符串赋值覆盖因此是  </p>
+<pre><code class="java">string
+</code></pre>
+<p>  类型 </p>
+<pre><code class="java">getName
+</code></pre>
+<p>  是  </p>
+<pre><code class="java">function
+</code></pre>
+<p>  类型。<br> 第三次执行  </p>
+<pre><code class="java">console.log
+</code></pre>
+<p> ; 此时的  </p>
+<pre><code class="java">name
+</code></pre>
+<p>  由于又被覆盖因此是  </p>
+<pre><code class="java">function
+</code></pre>
+<p>  类型 </p>
+<p>因此理解执行上下文之后很好解释了变量提升（Hoisting）：实际上变量和函数声明在代码里的位置是不会改变的，而是在编译阶段被JavaScript引擎放入内存中<br>这就解释了为什么我们能在  </p>
+<pre><code class="java">name
+</code></pre>
+<p>  声明之前访问它，为什么之后的  </p>
+<pre><code class="java">name
+</code></pre>
+<p>  的类型值发生了变化，为什么  </p>
+<pre><code class="java">getName
+</code></pre>
+<p>  第一次打印的时候是  </p>
+<pre><code class="java">undefined
+</code></pre>
+<p>  等等问题了。<br>ES6 引入了  </p>
+<pre><code class="java">let
+</code></pre>
+<p>  和  </p>
+<pre><code class="java"><span class="keyword">const</span>
+</code></pre>
+<p>  关键字，从而使 JavaScript 也能像其他语言一样拥有了块级作用域，很好解决了变量提升带来的一系列问题。<br>最后执行 console 时候的函数执行上下文： </p>
+<pre><code class="java">  personContext = {
+    scopeChain: { ... },
+    activationObject: {
+        arguments: {
+            <span class="number">0</span>: <span class="number">20</span>,
+            length: <span class="number">1</span>
+        },
+        age: <span class="number">20</span>,
+        name: pointer, <span class="comment">// reference to function name(),</span>
+        getAge: pointer, <span class="comment">// reference to function getAge(),</span>
+        hobby: <span class="string">'game'</span>,
+        getName:pointer, <span class="function">pointer to function <span class="title">getName</span><span class="params">()</span>,</span>
+<span class="function">    },</span>
+<span class="function">    <span class="keyword">this</span>: </span>{ ... }
+}
+
+
+</code></pre>
+<h6 id="销毁阶段"><a href="#销毁阶段" class="headerlink" title="销毁阶段"></a>销毁阶段</h6><p>一般来讲当函数执行完成后，当前执行上下文（局部环境）会被弹出执行上下文栈并且等待虚拟机回收，控制权被重新交给执行栈上一层的执行上下文。<br><img src="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Test" title="带你彻底搞懂执行上下文"> </p>
+<h5 id="完整示例"><a href="#完整示例" class="headerlink" title="完整示例"></a>完整示例</h5><p>示例一： </p>
+<pre><code class="java">  <span class="keyword">var</span> scope = <span class="string">"global scope"</span>;
+<span class="function">function <span class="title">checkscope</span><span class="params">()</span></span>{
+    <span class="keyword">var</span> scope = <span class="string">"local scope"</span>;
+    <span class="function">function <span class="title">f</span><span class="params">()</span></span>{
+        <span class="keyword">return</span> scope;
+    }
+    <span class="keyword">return</span> f();
+}
+checkscope();
+
+</code></pre>
+<p>1、执行全局代码，生成全局上下文，并且压入执行栈 </p>
+<pre><code class="java">  ECStack=[
+     globalContext
+]
+复制代码
+
+</code></pre>
+<p>2、全局上下文初始化 </p>
+<pre><code class="java">  globalContext={
+     variableObject:[global,scope,checkscope],
+     <span class="keyword">this</span>:globalContext.variableObject,
+     scopeChain:[globalContext.variableObject]
+}
+
+</code></pre>
+<p>3、创建 checkscope 函数时生成内部属性 [[scope]],并将全局上下文作用域链存入其中 </p>
+<pre><code class="java">  checkscope.[[scope]] = [
+     globalContext.variableObject
+]
+
+</code></pre>
+<p>4、调用 checkscope 函数，创建函数上下文，压栈 </p>
+<pre><code class="java">  ECStack=[
+     globalContext,
+     checkscopeContext
+]
+
+</code></pre>
+<p>5、此时 checkscope 函数还未执行，进入执行上下文 </p>
+<p> 复制函数 [[scope]] 属性创建作用域链<br> 用 arguments 属性创建活动对象<br> 初始化变量对象，加入变量声明、函数声明、形参<br> 活动对象压入作用域链顶端 </p>
+<pre><code class="java">  checkscopeContext = {
+    activationObject: {
+        arguments: {
+            length: <span class="number">0</span>
+        },
+        scope: undefined,
+        f: pointer, <span class="comment">// reference to function f(),</span>
+    },
+    scopeChain: [activationObject, globalContext.variableObject],
+    <span class="keyword">this</span>: undefined
+}
+
+</code></pre>
+<p>6、checkscope 函数执行，对变量 scope 设值 </p>
+<pre><code class="java">  checkscopeContext = {
+    activationObject: {
+        arguments: {
+            length: <span class="number">0</span>
+        },
+        scope: <span class="string">'local scope'</span>,
+        f: pointer, <span class="comment">// reference to function f(),</span>
+    },
+    scopeChain: [activationObject, globalContext.variableObject],
+    <span class="keyword">this</span>: undefined
+}
+
+</code></pre>
+<p>f 函数被创建生成 [[scope]] 属性，并保存父作用域的作用域链 </p>
+<pre><code class="java">  f.[[scope]]=[
+     checkscopeContext.activationObject,
+     globalContext.variableObject
+]
+
+</code></pre>
+<p>7、f 函数调用，生成 f 函数上下文，压栈 </p>
+<pre><code class="java">  ECStack=[
+     globalContext,
+     checkscopeContext,
+     fContext
+] 
+
+</code></pre>
+<p>8、此时 f 函数还未执行，初始化执行上下文 </p>
+<p> 复制函数 [[scope]] 属性创建作用域链<br> 用 arguments 属性创建活动对象<br> 初始化变量对象，加入变量声明、函数声明、形参<br> 活动对象压入作用域链顶端 </p>
+<pre><code class="java">fContext = {
+   activationObject: {
+          arguments: {
+              length: <span class="number">0</span>
+          },
+      },
+      scopeChain: [fContext.activationObject, checkscopeContext.activationObject, globalContext.variableObject],
+      <span class="keyword">this</span>: undefined
+  }
+
+</code></pre>
+<p>9、f 函数执行，沿着作用域链查找 scope 值，返回 scope 值<br>10、f 函数执行完毕，f函数上下文从执行上下文栈中弹出 </p>
+<pre><code class="java">  ECStack=[
+     globalContext,
+     checkscopeContext
+]
+
+</code></pre>
+<p>11、checkscope 函数执行完毕，checkscope 执行上下文从执行上下文栈中弹出 </p>
+<pre><code class="java">  ECStack=[
+     globalContext
+]
+
+</code></pre>
+<p>示例二： </p>
+<pre><code class="java">  <span class="keyword">var</span> scope = <span class="string">"global scope"</span>;
+<span class="function">function <span class="title">checkscope</span><span class="params">()</span></span>{
+    <span class="keyword">var</span> scope = <span class="string">"local scope"</span>;
+    <span class="function">function <span class="title">f</span><span class="params">()</span></span>{
+        <span class="keyword">return</span> scope;
+    }
+    <span class="keyword">return</span> f;
+}
+checkscope()();
+
+</code></pre>
+<p> 执行全局代码，生成全局上下文，并且压入执行栈<br> 全局上下文初始化<br> 创建  </p>
+<pre><code class="java">checkscope
+</code></pre>
+<p>  函数时生成内部属性  </p>
+<pre><code class="java">[[scope]]
+</code></pre>
+<p> ,并将全局上下文作用域链存入其中<br> 调用  </p>
+<pre><code class="java">checkscope
+</code></pre>
+<p>  函数，创建函数上下文，压栈<br> 此时  </p>
+<pre><code class="java">checkscope
+</code></pre>
+<p>  函数还未执行，进入执行上下文 </p>
+<p>   复制函数  </p>
+<pre><code class="java">[[scope]]
+</code></pre>
+<p>  属性创建作用域链<br>   用  </p>
+<pre><code class="java">arguments
+</code></pre>
+<p>  属性创建活动对象<br>   初始化变量对象，加入变量声明、函数声明、形参<br>   活动对象压入作用域链顶端 </p>
+<pre><code class="java">checkscope
+</code></pre>
+<p>  函数执行，对变量  </p>
+<pre><code class="java">scope
+</code></pre>
+<p>  设值， </p>
+<pre><code class="java">f
+</code></pre>
+<p>  函数被创建生成  </p>
+<pre><code class="java">[[scope]]
+</code></pre>
+<p>  属性，并保存父作用域的作用域链<br> 返回函数f，此时 checkscope 函数执行完成，弹栈 </p>
+<pre><code class="java">f
+</code></pre>
+<p>  函数调用，生成  </p>
+<pre><code class="java">f
+</code></pre>
+<p>  函数上下文，压栈<br> 此时  </p>
+<pre><code class="java">f
+</code></pre>
+<p>  函数还未执行，初始化执行上下文 </p>
+<p>   复制函数  </p>
+<pre><code class="java">[[scope]]
+</code></pre>
+<p>  属性创建作用域链<br>   用  </p>
+<pre><code class="java">arguments
+</code></pre>
+<p>  属性创建活动对象<br>   初始化变量对象，加入变量声明、函数声明、形参<br>   活动对象压入作用域链顶端 </p>
+<pre><code class="java">f
+</code></pre>
+<p>  函数执行，沿着作用域链查找  </p>
+<pre><code class="java">scope
+</code></pre>
+<p>  值，返回  </p>
+<pre><code class="java">scope
+</code></pre>
+<p>  值 </p>
+<pre><code class="java">f
+</code></pre>
+<p>  函数执行完毕， </p>
+<pre><code class="java">f
+</code></pre>
+<p>  函数上下文从执行上下文栈中弹出 </p>
+<p>可以看到和前面唯一的区别就是  </p>
+<pre><code class="java">checkScope
+</code></pre>
+<p>  函数执行完先出栈了，之后再执行  </p>
+<pre><code class="java">f
+</code></pre>
+<p>  函数，���骤与示例一一致 </p>
+<pre><code class="java">  fContext = {
+    scopeChain: [activationObject, checkscopeContext.activationObject, globalContext.variableObject],
+}
+
+</code></pre>
+<p>这里在  </p>
+<pre><code class="java">checkscopeContext
+</code></pre>
+<p>  函数执行完销毁后， </p>
+<pre><code class="java">f
+</code></pre>
+<p>  函数依然可以读取到  </p>
+<pre><code class="java">checkscopeContext.AO
+</code></pre>
+<p>  的值，也就是说  </p>
+<pre><code class="java">checkscopeContext.AO
+</code></pre>
+<p>  依然活在内存中， </p>
+<pre><code class="java">f
+</code></pre>
+<p>  函数依然可以通过  </p>
+<pre><code class="java">f
+</code></pre>
+<p>  函数的作用域链找到它。而为什么  </p>
+<pre><code class="java">checkscopeContext.AO
+</code></pre>
+<p>  没有被销毁，正是因为  </p>
+<pre><code class="java">f
+</code></pre>
+<p>  函数引用了  </p>
+<pre><code class="java">checkscopeContext.AO
+</code></pre>
+<p>  中的值，又正是因为JS实现了在子上下文引用父上下文的变量的时候，不会销毁这些变量的效果实现了闭包 这个概念！ </p>
+<h4 id="es5版本"><a href="#es5版本" class="headerlink" title="es5版本"></a>es5版本</h4><p>ES5 规范去除了 ES3 中变量对象和活动对象，以 词法环境组件（ LexicalEnvironment component） 和 变量环境组件（ VariableEnvironment component） 替代。 </p>
+<h5 id="生命周期-1"><a href="#生命周期-1" class="headerlink" title="生命周期"></a>生命周期</h5><p>es5 执行上下文的生命周期也包括三个阶段：创建阶段 → 执行阶段 → 回收阶段 </p>
+<h6 id="创建阶段-1"><a href="#创建阶段-1" class="headerlink" title="创建阶段"></a>创建阶段</h6><p>创建阶段做了三件事： </p>
+<p>  确定 this 的值，也被称为 This Binding<br>  LexicalEnvironment（词法环境） 组件被创建<br>  VariableEnvironment（变量环境） 组件被创建  </p>
+<p>伪代码大概如下： </p>
+<pre><code class="java">  ExecutionContext = {  
+  ThisBinding = &lt;<span class="keyword">this</span> value&gt;,     <span class="comment">// 确定this </span>
+  LexicalEnvironment = { ... },   <span class="comment">// 词法环境</span>
+  VariableEnvironment = { ... },  <span class="comment">// 变量环境</span>
+}
+
+</code></pre>
+<p>This Binding </p>
+<pre><code class="java">ThisBinding
+</code></pre>
+<p>  是和执行上下文绑定的，也就是说每个执行上下文中都有一个  </p>
+<pre><code class="java"><span class="keyword">this</span>
+</code></pre>
+<p> ，与  </p>
+<pre><code class="java">es3
+</code></pre>
+<p>  的 </p>
+<pre><code class="java"><span class="keyword">this</span>
+</code></pre>
+<p>  并没有什么区别， </p>
+<pre><code class="java"><span class="keyword">this</span>
+</code></pre>
+<p>  的值是在执行的时候才能确认，定义的时候不能确认<br>创建词法环境<br>词法环境的结构如下： </p>
+<pre><code class="java">  GlobalExectionContext = {  <span class="comment">// 全局执行上下文</span>
+  LexicalEnvironment: {       <span class="comment">// 词法环境</span>
+    EnvironmentRecord: {     <span class="comment">// 环境记录</span>
+      Type: <span class="string">"Object"</span>,           <span class="comment">// 全局环境</span>
+      <span class="comment">// 标识符绑定在这里 </span>
+      outer: &lt;<span class="keyword">null</span>&gt;           <span class="comment">// 对外部环境的引用</span>
+  }  
+}
+
+FunctionExectionContext = { <span class="comment">// 函数执行上下文</span>
+  LexicalEnvironment: {     <span class="comment">// 词法环境</span>
+    EnvironmentRecord: {    <span class="comment">// 环境记录</span>
+      Type: <span class="string">"Declarative"</span>,      <span class="comment">// 函数环境</span>
+      <span class="comment">// 标识符绑定在这里      // 对外部环境的引用</span>
+      outer: &lt;Global or outer function environment reference&gt;  
+  }  
+}
+
+</code></pre>
+<p>可以看到词法环境有两种类型 ： </p>
+<p> 全局环境：是一个没有外部环境的词法环境，其外部环境引用为  </p>
+<pre><code class="java"><span class="keyword">null</span>
+</code></pre>
+<p> 。拥有一个全局对象（window 对象）及其关联的方法和属性（例如数组方法）以及任何用户自定义的全局变量， </p>
+<pre><code class="java"><span class="keyword">this</span>
+</code></pre>
+<p>  的值指向这个全局对象。<br> 函数环境：用户在函数中定义的变量被���储��环境记录中，包含了  </p>
+<pre><code class="java">arguments
+</code></pre>
+<p>  对象。对外部环境的引用可以是全局环境，也可以是包含内部函数的外部函数环境。 </p>
+<p>词法环境有两个组件 ： </p>
+<p> 环境记录器 ：存储变量和函数声明的实际位置。<br> 外部环境的引用 ：它指向作用域链的下一个对象，可以访问其父级词法环境（作用域），作用与 es3 的作用域链相似 </p>
+<p>环境记录器也有两种类型 ： </p>
+<p> 在函数环境中使用 声明式环境记录器，用来存储变量、函数和参数。<br> 在全局环境中使用 对象环境记录器，用来定义出现在全局上下文中的变量和函数的关系。 </p>
+<p>因此： </p>
+<p> 创建全局上下文的词法环境使用 对象环境记录器 , </p>
+<pre><code class="java">outer
+</code></pre>
+<p>  值为  </p>
+<pre><code class="java"><span class="keyword">null</span>
+</code></pre>
+<p> ;<br> 创建函数上下文的词法环境时使用 声明式环境记录器 , </p>
+<pre><code class="java">outer
+</code></pre>
+<p>  值为全局对象，或者为父级词法环境（作用域） </p>
+<p>创建变量环境<br>变量环境也是一个词法环境，因此它具有上面定义的词法环境的所有属性。<br>在 ES6 中，词法环境和 变量环境的区别在于前者用于存储函数声明和变量（  </p>
+<pre><code class="java">let
+</code></pre>
+<p> 和 </p>
+<pre><code class="java"><span class="keyword">const</span>
+</code></pre>
+<p> 关键字）绑定，而后者仅用于存储变量（  </p>
+<pre><code class="java"><span class="keyword">var</span>
+</code></pre>
+<p>  ）绑定，因此变量环境实现函数级作用域，通过词法环境在函数作用域的基础上实现块级作用域。<br>🚨 使用  </p>
+<pre><code class="java">let
+</code></pre>
+<p>  /  </p>
+<pre><code class="java"><span class="keyword">const</span>
+</code></pre>
+<p>  声明的全局变量，会被绑定到  </p>
+<pre><code class="java">Script
+</code></pre>
+<p>  对象而不是  </p>
+<pre><code class="java">Window
+</code></pre>
+<p>  对象，不能以 </p>
+<pre><code class="java">Window.xx
+</code></pre>
+<p>  的形式使用；使用  </p>
+<pre><code class="java"><span class="keyword">var</span>
+</code></pre>
+<p>  声明的全局变量会被绑定���  </p>
+<pre><code class="java">Window
+</code></pre>
+<p>  对象；使用  </p>
+<pre><code class="java"><span class="keyword">var</span>
+</code></pre>
+<p>  /  </p>
+<pre><code class="java">let
+</code></pre>
+<p>  /  </p>
+<pre><code class="java"><span class="keyword">const</span>
+</code></pre>
+<p>  声明的局部变量都会被绑定到  </p>
+<pre><code class="java">Local
+</code></pre>
+<p>  对象。注： </p>
+<pre><code class="java">Script
+</code></pre>
+<p>  对象、 </p>
+<pre><code class="java">Window
+</code></pre>
+<p>  对象、 </p>
+<pre><code class="java">Local
+</code></pre>
+<p>  对象三者是平行并列关系。 </p>
+<pre><code class="java">箭头函数没有自己的上下文，没有arguments，也不存在变量提升
+
+</code></pre>
+<p>使用例子进行介绍 </p>
+<pre><code class="java">  let a = <span class="number">20</span>;  
+<span class="keyword">const</span> b = <span class="number">30</span>;  
+<span class="keyword">var</span> c;
+
+<span class="function">function <span class="title">multiply</span><span class="params">(e, f)</span> </span>{  
+ <span class="keyword">var</span> g = <span class="number">20</span>;  
+ <span class="keyword">return</span> e * f * g;  
+}
+
+c = multiply(<span class="number">20</span>, <span class="number">30</span>);
+
+</code></pre>
+<p>遇到调用函数  </p>
+<pre><code class="java">multiply
+</code></pre>
+<p>  时，函数执行上下文开始被创建： </p>
+<pre><code class="java">  GlobalExectionContext = {
+
+  ThisBinding: &lt;Global Object&gt;,
+
+  LexicalEnvironment: {  
+    EnvironmentRecord: {  
+      Type: <span class="string">"Object"</span>,  
+      <span class="comment">// 标识符绑定在这里  </span>
+      a: &lt; uninitialized &gt;,  
+      b: &lt; uninitialized &gt;,  
+      multiply: &lt; func &gt;  
+    }  
+    outer: &lt;<span class="keyword">null</span>&gt;  
+  },
+
+  VariableEnvironment: {  
+    EnvironmentRecord: {  
+      Type: <span class="string">"Object"</span>,  
+      <span class="comment">// 标识符绑定在这里  </span>
+      c: undefined,  
+    }  
+    outer: &lt;<span class="keyword">null</span>&gt;  
+  }  
+}
+
+FunctionExectionContext = {  
+
+  ThisBinding: &lt;Global Object&gt;,
+
+  LexicalEnvironment: {  
+    EnvironmentRecord: {  
+      Type: <span class="string">"Declarative"</span>,  
+      <span class="comment">// 标识符绑定在这里  </span>
+      Arguments: {<span class="number">0</span>: <span class="number">20</span>, <span class="number">1</span>: <span class="number">30</span>, length: <span class="number">2</span>},  
+    },  
+    outer: &lt;GlobalLexicalEnvironment&gt;  
+  },
+
+  VariableEnvironment: {  
+    EnvironmentRecord: {  
+      Type: <span class="string">"Declarative"</span>,  
+      <span class="comment">// 标识符绑定在这里  </span>
+      g: undefined  
+    },  
+    outer: &lt;GlobalLexicalEnvironment&gt;  
+  }  
+}
+
+</code></pre>
+<p>变量提升的原因：在创建阶段，函数声明存储在环境中，而变量会被设置为  </p>
+<pre><code class="java">undefined
+</code></pre>
+<p> （在 var 的情况下）或保持未初始化  </p>
+<pre><code class="java">uninitialized
+</code></pre>
+<p> （在 let 和 const 的情况下）。所以这就是为什么可以在声明之前访问 var 定义的变量（尽管是 undefined ），但如果在声明之前访问 let 和 const 定义的变量就会提示引用错误的原因。这就是所谓的变量提升。<br>图解变量提升： </p>
+<pre><code class="java">  <span class="keyword">var</span> myname = <span class="string">"极客时间"</span>
+<span class="function">function <span class="title">showName</span><span class="params">()</span></span>{
+  console.log(myname);
+  <span class="keyword">if</span>(<span class="number">0</span>){
+   <span class="keyword">var</span> myname = <span class="string">"极客邦"</span>
+  }
+  console.log(myname);
+}
+showName()
+
+</code></pre>
+<p><img src="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Test" title="带你彻底搞懂执行上下文"><br>在 showName 内部查找 myname 时会先使用当前函数执行上下文里面的变量 myname ，由于 </p>
+<pre><code class="java">变量提升
+</code></pre>
+<p> ，当前的执行上下文中就包含了变量 myname，而值是 undefined，所以获取到的 myname 的值就是 undefined。 </p>
+<h6 id="执行阶段-1"><a href="#执行阶段-1" class="headerlink" title="执行阶段"></a>执行阶段</h6><p>在此阶段，完成对所有这些变量的分配，最后执行代码，如果  </p>
+<pre><code class="java">JavaScript
+</code></pre>
+<p>  引擎不能在源码中声明的实际位置找到  </p>
+<pre><code class="java">let
+</code></pre>
+<p>  变量的值，它会被赋值为  </p>
+<pre><code class="java">undefined
+</code></pre>
+<h6 id="回收阶段"><a href="#回收阶段" class="headerlink" title="回收阶段"></a>回收阶段</h6><p>执行上下文出栈等待虚拟机回收执行上下文 </p>
+<h6 id="过程总结"><a href="#过程总结" class="headerlink" title="过程总结"></a>过程总结</h6><p> 创建阶段 首先创建全局上下文的词法环境：首先创建  </p>
+<pre><code class="java">对象环境记录器
+</code></pre>
+<p> ，接着创建他的外部环境引用  </p>
+<pre><code class="java">outer
+</code></pre>
+<p> ，值为 null<br> 创建全局上下文的语法环境：过程同上<br> 确定 this 值为全局对象（以浏览器为例，就是 window ）<br> 函数被调用，创建函数上下文的词法环境：首先创建  </p>
+<pre><code class="java">声明式环境记录器
+</code></pre>
+<p> ，接着创建他的外部环境引用  </p>
+<pre><code class="java">outer
+</code></pre>
+<p> ，值为 null，值为全局对象，或者为父级词法环境<br> 创建函数上下文的变量环境：过程同上<br> 确定 this 值<br> 进入函数执行上下文的 执行阶段<br> 执行完成后进入 回收阶段 </p>
+<h5 id="实例讲解"><a href="#实例讲解" class="headerlink" title="实例讲解"></a>实例讲解</h5><p>将词法环境中  </p>
+<pre><code class="java">outer
+</code></pre>
+<p>  抽离出来，执行上下文结构如下：<br><img src="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Test" title="带你彻底搞懂执行上下文"><br>下面我们以如下示例来分析执行上下文的创建及执行过程： </p>
+<pre><code class="java">  <span class="function">function <span class="title">foo</span><span class="params">()</span></span>{
+  <span class="keyword">var</span> a = <span class="number">1</span>
+  let b = <span class="number">2</span>
+  {
+    let b = <span class="number">3</span>
+    <span class="keyword">var</span> c = <span class="number">4</span>
+    let d = <span class="number">5</span>
+    console.log(a)
+    console.log(b)
+  }
+  console.log(b) 
+  console.log(c)
+  console.log(d)
+}   
+foo()
+
+</code></pre>
+<p>第一步： 调用  </p>
+<pre><code class="java">foo
+</code></pre>
+<p>  函数前先编译并创建执行上下文，在编译阶段将  </p>
+<pre><code class="java"><span class="keyword">var</span>
+</code></pre>
+<p>  声明的变量存放到变量环境中， </p>
+<pre><code class="java">let
+</code></pre>
+<p>  声明的变量存放到词法环境中，需要注意的是此时在函数体内部块作用域中  </p>
+<pre><code class="java">let
+</code></pre>
+<p>  声明的变量不会被存放到词法环境中，如下图所示 ：<br><img src="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Test" title="带你彻底搞懂执行上下文"><br>第二步： 继续执行代码，当执行到代码块里面时，变量环境中的 a 的值已经被设置为1，词法环境中 b 的值已经被设置成了2，此时函数的执行上下文如图所示：<br><img src="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Test" title="带你彻底搞懂执行上下文"><br>从图中就可以看出，当进入函数的作用域块时，作用域块中通过  </p>
+<pre><code class="java">let
+</code></pre>
+<p>  声明的变量，会被存放在词法环境的一个单独的区域中，这个区域中的变量并不影响作用域块外面的变量，因此示例中在函数体内块作用域中声明的变量的 b 与函数作用域中声明的变量 b 都是独立的存在。<br>在词法环境内部，实际上维护了一个小型栈结构，栈底是函数最外层的变量，进入一个作用域块后，就会把该作用域内部的变量压到栈顶；当该块级作用域执行完成之后，该作用域的信息就会从栈顶弹出，这就是词法环境的结构。<br>第三步： 当代码执行到作用域块中的  </p>
+<pre><code class="java">console.log(a)
+</code></pre>
+<p>  时，就需要在词法环境和变量环境中查找变量 a 的值了，具体查找方式是：沿着词法环境的栈顶向下查询，如果在词法环境中的某个块中查找到了，就直接返回给 JavaScript 引擎，如果没有查找到，那么继续在变量环境中查找。<br>这样一个变量查找过程就完成了，你可以参考下图：<br><img src="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Test" title="带你彻底搞懂执行上下文"><br>第四步： 当函数体内块作用域执行结束之后，其内部变量就会从词法环境的栈顶弹出，此时执行上下文如下图所示：<br><img src="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Test" title="带你彻底搞懂执行上下文"><br>第五步： 当foo函数执行完毕后执行栈将foo函数的执行上下文弹出。<br>所以，块级作用域就是通过词法环境的栈结构来实现的，而变量提升是通过变量环境来实现，通过这两者的结合，JavaScript 引擎也就同时支持了变量提升和块级作用域了。 </p>
+<h5 id="outer引用"><a href="#outer引用" class="headerlink" title="outer引用"></a>outer引用</h5><pre><code class="java">  <span class="function">function <span class="title">bar</span><span class="params">()</span> </span>{
+  console.log(myName)
+}
+<span class="function">function <span class="title">foo</span><span class="params">()</span> </span>{
+  <span class="keyword">var</span> myName = <span class="string">" 极客邦 "</span>
+  bar()
+}
+<span class="keyword">var</span> myName = <span class="string">" 极客时间 "</span>
+foo()
+
+</code></pre>
+<p>当一段代码使用了一个变量时，JavaScript 引擎首先会在“当前的执行上下文”中查找该变量， 比如上面那段代码在查找 myName 变量时，如果在当前的变量环境中没有查找到，那么 JavaScript 引擎会继续在 outer 所指向的��行上下文中查找。为了直观理解，你可以看下面这张图：<br><img src="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Test" title="带你彻底搞懂执行上下文"><br>从图中可以看出，bar 函数和 foo 函数的 outer 都是指向全局上下文的，这也就意味着如果在 bar 函数或者 foo 函数中使用了外部变量，那么 JavaScript 引擎会去全局执行上下文中查找。我们把这个查找的链条就称为作用域链。 现在你知道变量是通过作用域链来查找的了，不过还有一个疑问没有解开，foo 函数调用的 bar 函数，那为什么 bar 函数的外部引用是全局执行上下文，而不是 foo 函数的执行上下文？ </p>
+<p>结合变量环境、词法环境以及作用域链，我们看下下面的代码： </p>
+<pre><code class="java">  <span class="function">function <span class="title">bar</span><span class="params">()</span> </span>{
+  <span class="keyword">var</span> myName = <span class="string">" 极客世界 "</span>
+  let test1 = <span class="number">100</span>
+  <span class="keyword">if</span> (<span class="number">1</span>) {
+    let myName = <span class="string">"Chrome 浏览器 "</span>
+    console.log(test)
+  }
+}
+<span class="function">function <span class="title">foo</span><span class="params">()</span> </span>{
+  <span class="keyword">var</span> myName = <span class="string">" 极客邦 "</span>
+  let test = <span class="number">2</span>
+  {
+    let test = <span class="number">3</span>
+    bar()
+  }
+}
+<span class="keyword">var</span> myName = <span class="string">" 极客时间 "</span>
+let myAge = <span class="number">10</span>
+let test = <span class="number">1</span>
+foo()
+
+</code></pre>
+<p>对于上面这段代码，当执行到 bar 函数内部的 if 语句块时，其调用栈的情况如下图所示：<br><img src="https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Test" title="带你彻底搞懂执行上下文"><br>解释下这个过程。首先是在 bar 函数的执行上下文中查找，但因为 bar 函数的执行上下文中没有定义 test 变量，所以根据词法作用域的规则，下一步就在 bar 函数的外部作用域中查找，也就是全局作用域。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-带你彻底搞懂执行上下文</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 09:46</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/7ad4ba3/" title="推荐系列-带你彻底搞懂执行上下文">https://www.hosiang.cn/7ad4ba3/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/7ad4ba3/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-带你彻底搞懂执行上下文》 — 狂欢马克思&url=https://www.hosiang.cn/7ad4ba3/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/7ad4ba3/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/7ad4ba3/&title=《推荐系列-带你彻底搞懂执行上下文》 — 狂欢马克思&source=&emsp;&emsp;执行上下文 执行上下文 可以理解为当前代码的执行环境，同一个函数在不同的环境中执行，会因为访问数据的不同产生不一样的结果。 执行上..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/7ad4ba3/&title=《推荐系列-带你彻底搞懂执行上下文》 — 狂欢马克思&pic=https://upload-images.jianshu.io/upload_images/24944724-0dd601c110cd144a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/7ad4ba3/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#执行上下文栈"><span class="post-toc-text">执行上下文栈</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#es3版本"><span class="post-toc-text">es3版本</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#变量对象"><span class="post-toc-text">变量对象</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#作用域链"><span class="post-toc-text">作用域链</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#生命周期"><span class="post-toc-text">生命周期</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#创建阶段"><span class="post-toc-text">创建阶段</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#执行阶段"><span class="post-toc-text">执行阶段</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#销毁阶段"><span class="post-toc-text">销毁阶段</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#完整示例"><span class="post-toc-text">完整示例</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#es5版本"><span class="post-toc-text">es5版本</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#生命周期-1"><span class="post-toc-text">生命周期</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#创建阶段-1"><span class="post-toc-text">创建阶段</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#执行阶段-1"><span class="post-toc-text">执行阶段</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#回收阶段"><span class="post-toc-text">回收阶段</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#过程总结"><span class="post-toc-text">过程总结</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#实例讲解"><span class="post-toc-text">实例讲解</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#outer引用"><span class="post-toc-text">outer引用</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/f9c6bb47/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-实战案例丨分布式系统中如何用python实现Paxos
+        
+      </span>
+    </a>
+  
+  
+    <a href="/56f7a6ec/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-干掉前端！3分钟纯 Java 注解搭个管理系统，我直接好家伙</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

@@ -417,7 +417,7 @@ body {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  background-image: url("https://uploadbeta.com/api/pictures/random"), url("../photo/album/system/system_001.jpg");
+  background-image: url("https://unsplash.it/1920/1080?random"), url("https://uploadbeta.com/api/pictures/random"), url("../photo/album/system/system_001.jpg");
   z-index: -1;
 }
 #header-row {
@@ -1741,36 +1741,37 @@ body {
 }
 .article-entry pre,
 .article-entry .highlight {
-  background: #f6f8fa;
+  background: #4a4949;
   margin: 8px -15px;
   padding: 15px 15px;
   border-style: solid;
   border-color: #ddd;
   border-width: 1px 0;
   overflow: auto;
-  color: #24292e;
+  color: #fcfafa;
   line-height: 22.400000000000002px;
+  word-break: break-all;
 }
 .article-entry .highlight .gutter pre,
 .article-entry .gist .gist-file .gist-data .line-numbers {
-  color: #666;
+  color: #f5f0f0;
   font-size: 0.85em;
 }
 .article-entry pre,
 .article-entry code {
   font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
-  font-size: 1em;
+  font-size: 1.3em;
 }
 .article-entry code {
-  color: #c7254e;
-  line-height: 1;
+  color: #f5f0f0;
+  white-space: normal;
+  line-height: 2;
   margin: 0 4px;
   font-size: 85%;
   padding: 2px 4px;
-  border: 1px solid #eee;
   border-radius: 2px;
   word-wrap: break-word;
-  background-color: #f9f2f4;
+  background-color: #060606;
 }
 .article-entry .code {
   font: 14px "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
@@ -1804,7 +1805,7 @@ body {
 }
 .article-entry .highlight figcaption {
   font-size: 0.85em;
-  color: #999;
+  color: #f3f2f2;
   line-height: 1em;
   margin-bottom: 1em;
 }
@@ -1834,7 +1835,7 @@ body {
   border-style: solid;
   border-color: #ddd;
   border-width: 1px 0;
-  background: #f6f8fa;
+  background: #4a4949;
   padding: 15px 15px 15px 0;
 }
 .article-entry .gist .gist-file {
@@ -1860,8 +1861,8 @@ body {
   border: none;
 }
 .article-entry .gist .gist-file .gist-meta {
-  background: #f6f8fa;
-  color: #999;
+  background: #4a4949;
+  color: #f3f2f2;
   font: 0.85em "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-shadow: 0 0;
   padding: 0;
@@ -1877,7 +1878,7 @@ body {
 }
 pre .comment,
 pre .title {
-  color: #999;
+  color: #f3f2f2;
 }
 pre .variable,
 pre .attribute,
@@ -2399,6 +2400,7 @@ pre .javascript .function {
 }
 .search-wrap #search-submit i {
   font-size: 20px;
+  padding-top: 8px;
 }
 .search-wrap .search-submit:hover {
   opacity: 0.8;

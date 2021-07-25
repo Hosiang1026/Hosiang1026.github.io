@@ -1,0 +1,790 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-最全的Markdown语法 | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;最全的Markdown语法 Markdown是Github最常见的文档说明。Markdown的语法简洁明了、学习容易。按照官方Markdown Cheat Sheet逐个操作一遍自然就会了。 [TOC]这个语法在markdown工具里能够识别…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-最全的Markdown语法">
+<meta property="og:url" content="https://www.hosiang.cn/f72d1f77/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;最全的Markdown语法 Markdown是Github最常见的文档说明。Markdown的语法简洁明了、学习容易。按照官方Markdown Cheat Sheet逐个操作一遍自然就会了。 [TOC]这个语法在markdown工具里能够识别…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-abdef724184cacc384fc609e044cf17bc76.png">
+<meta property="og:updated_time" content="2021-07-23T15:43:07.019Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-最全的Markdown语法">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;最全的Markdown语法 Markdown是Github最常见的文档说明。Markdown的语法简洁明了、学习容易。按照官方Markdown Cheat Sheet逐个操作一遍自然就会了。 [TOC]这个语法在markdown工具里能够识别…">
+<meta name="twitter:image" content="https://oscimg.oschina.net/oscnet/up-abdef724184cacc384fc609e044cf17bc76.png">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-最全的Markdown语法" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-最全的Markdown语法
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 1.7k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 7分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;最全的Markdown语法 Markdown是Github最常见的文档说明。Markdown的语法简洁明了、学习容易。按照官方Markdown Cheat Sheet逐个操作一遍自然就会了。 [TOC]这个语法在markdown工具里能够识别…<br><a id="more"></a></p>
+<pre><code>### 最全的Markdown语法 
+</code></pre><p>Markdown是Github最常见的文档说明。Markdown的语法简洁明了、学习容易。按照官方Markdown Cheat Sheet逐个操作一遍自然就会了。<br><img src="https://oscimg.oschina.net/oscnet/up-abdef724184cacc384fc609e044cf17bc76.png" alt="Test" title="最全的Markdown语法"><br>[TOC]这个语法在markdown工具里能够识别，但是在这里不能识别。 </p>
+<h4 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h4><p> 代码： </p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">  [TOC]</span><br><span class="line">[MENU]</span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line"> 效果显示如上 </span><br><span class="line"> </span><br><span class="line">#### 多级标题 </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  # 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">##### 多级标题</span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line">  效果 ### 一级标题 #### 二级标题 多级标题  </span><br><span class="line"> </span><br><span class="line">#### 引用与注释 </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  &gt; 一级引用</span><br><span class="line">&gt;&gt; 二级引用</span><br><span class="line">&gt;&gt;&gt;&gt;&gt; n级引用</span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line">  效果 </span><br><span class="line">    </span><br><span class="line"> </span><br><span class="line">#### 插入代码 </span><br><span class="line">##### 行内代码 </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  `行内代码`</span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line"> 效果 </span><br><span class="line"> ```java </span><br><span class="line">  行内代码</span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line">##### 代码段 </span><br><span class="line">这是代码 </span><br><span class="line"> ```java </span><br><span class="line">  <span class="comment">//代码中无视markdown语法，所以本文中所有展示markdown原始文本的部分都是用代码段包起来的。</span></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  这是代码</span><br><span class="line">​```javascript</span><br><span class="line"><span class="keyword">var</span> s = <span class="string">"JavaScript syntax highlighting"</span>;</span><br><span class="line">alert(s);</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+<p>​<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"Python syntax highlighting"</span></span><br><span class="line"><span class="keyword">print</span> s</span><br><span class="line">​</span><br></pre></td></tr></table></figure></p>
+<p>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 一级引用</span><br><span class="line">&gt;&gt; 二级引用</span><br><span class="line">&gt;&gt;&gt;&gt;&gt; n级引用</span><br><span class="line">​</span><br></pre></td></tr></table></figure></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">#### 多级列表 </span><br><span class="line">##### 无序列表 </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  //-*+三个符号在无序列表中地位平等</span><br><span class="line">- 第一项</span><br><span class="line">* 第二项</span><br><span class="line">    * 第二项//前面加一个空格或tab就表示下一级</span><br><span class="line">        * 这又是一级</span><br><span class="line">+ 第三项</span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line"> 效果 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  第一项  </span><br><span class="line">  第二项 </span><br><span class="line">   </span><br><span class="line">   第二项//前面加一个空格或tab就表示下一级 </span><br><span class="line">     </span><br><span class="line">     这又是一级 </span><br><span class="line">      </span><br><span class="line">    </span><br><span class="line">  第三项  </span><br><span class="line"> </span><br><span class="line">##### 有序列表 </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  //数字加.加空格表示一个有序列表项，tab或空格触发下一级</span><br><span class="line">1. 这是有序的</span><br><span class="line">	1. 这是有序的</span><br><span class="line">2. 这是有序的</span><br><span class="line">	1. 这是有序的</span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line"> 这是有序的 </span><br><span class="line">   </span><br><span class="line">   这是有序的 </span><br><span class="line">    </span><br><span class="line"> 这是有序的 </span><br><span class="line">   </span><br><span class="line">   这是有序的 </span><br><span class="line">    </span><br><span class="line"> </span><br><span class="line">#### 超链接 </span><br><span class="line">##### 行内超链接 </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  [百度](baidu.com)</span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line"> 效果 </span><br><span class="line"> </span><br><span class="line">百度 </span><br><span class="line">##### 参数式超链接 </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  声明：[百度]:baidu.com</span><br><span class="line">使用：进入[百度]</span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line">#### 字体 </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  *斜体*</span><br><span class="line">**粗体**</span><br><span class="line">***斜体加粗***</span><br><span class="line">~~删除线~~</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line"> 效果 </span><br><span class="line"> </span><br><span class="line">斜体 粗体 斜体加粗 删除线 </span><br><span class="line">#### 表格 </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  | Tables        | Are           | Cool  |</span><br><span class="line">| ------------- |:-------------:| -----:|</span><br><span class="line">| col 3 is      | right-aligned | $1600 |</span><br><span class="line">| col 2 is      | centered      |   $12 |</span><br><span class="line">| zebra stripes | are neat      |    $1 |</span><br><span class="line"></span><br><span class="line">注释：</span><br><span class="line">-----: 表示右对齐</span><br><span class="line">:----- 表示左对齐</span><br><span class="line">:----: 表示居中对齐</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line"> 效果 </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">   </span><br><span class="line">   Tables </span><br><span class="line">   Are </span><br><span class="line">   Cool </span><br><span class="line">   </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">   </span><br><span class="line">   col 3 is </span><br><span class="line">   right-aligned </span><br><span class="line">   $1600 </span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   col 2 is </span><br><span class="line">   centered </span><br><span class="line">   $12 </span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   zebra stripes </span><br><span class="line">   are neat </span><br><span class="line">   $1 </span><br><span class="line">   </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line">#### 图片 </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  ![图片](图片地址)</span><br><span class="line">//注意，默认图片格式是原始尺寸，如果想自定义图像大小，要用img标签：</span><br><span class="line"></span><br><span class="line">Inline-style: </span><br><span class="line">![alt text](https://gitee.com/msntec/work-notes/raw/master/Markdown/pic/markdown_flag.png &quot;Logo Title Text 1&quot;)</span><br><span class="line"></span><br><span class="line">Reference-style: </span><br><span class="line">![alt text][logo]</span><br><span class="line"></span><br><span class="line">[logo]: https://gitee.com/msntec/work-notes/raw/master/Markdown/pic/markdown_flag.png &quot;Logo Title Text 2&quot;</span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line">Inline-style: ![Test](https://oscimg.oschina.net/oscnet/up-abdef724184cacc384fc609e044cf17bc76.png  &apos;最全的Markdown语法&apos;) </span><br><span class="line">Reference-style: ![Test](https://oscimg.oschina.net/oscnet/up-abdef724184cacc384fc609e044cf17bc76.png  &apos;最全的Markdown语法&apos;) </span><br><span class="line">##### 设置图片大小 </span><br><span class="line">###### Markdown自带功能 </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  ![loading.png](https://upload-images.jianshu.io/upload_images/6967706-0b0037793a690aeb.png?imageMogr2/auto-orient/strip|imageView2/2/w/512/format/webp?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">![loading.png](https://upload-images.jianshu.io/upload_images/6967706-0b0037793a690aeb.png?imageMogr2/auto-orient/strip|imageView2/2/w/512/format/webp?imageMogr2/auto-orient/strip%7CimageView2/2/w/200)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line"> 效果显示 </span><br><span class="line"> </span><br><span class="line">![Test](https://oscimg.oschina.net/oscnet/up-abdef724184cacc384fc609e044cf17bc76.png  &apos;最全的Markdown语法&apos;) </span><br><span class="line">![Test](https://oscimg.oschina.net/oscnet/up-abdef724184cacc384fc609e044cf17bc76.png  &apos;最全的Markdown语法&apos;) </span><br><span class="line">###### 使用HTML &lt;img&gt;标签并设置width和height和比例放缩 </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  &lt;img src=&quot;https://gitee.com/msntec/work-notes/raw/master/Markdown/pic/markdown_flag.png&quot; alt=&quot;图片替换文本&quot; width=&quot;500&quot; height=&quot;313&quot; align=&quot;bottom&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;img src=&quot;https://gitee.com/msntec/work-notes/raw/master/Markdown/pic/markdown_flag.png&quot; alt=&quot;图片替换文本&quot; width=60% /&gt;</span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line"> 效果显示 </span><br><span class="line"> </span><br><span class="line">&lt;img src=&quot;https://gitee.com/msntec/work-notes/raw/master/Markdown/pic/markdown_flag.png&quot; alt=&quot;图片替换文本&quot; width=&quot;500&quot; height=&quot;313&quot; align=&quot;bottom&quot; /&gt;  </span><br><span class="line">&lt;img src=&quot;https://gitee.com/msntec/work-notes/raw/master/Markdown/pic/markdown_flag.png&quot; alt=&quot;图片替换文本&quot; width=25% /&gt; </span><br><span class="line">#### 多选框 </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  - [x] A</span><br><span class="line">- [ ] B</span><br><span class="line">- [x] 已选中</span><br><span class="line">- [ ] 未选中</span><br><span class="line"></span><br><span class="line">- [ ] 支持以 PDF 格式导出文稿</span><br><span class="line">- [ ] 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率</span><br><span class="line">- [x] 新增 Todo 列表功能</span><br><span class="line">- [x] 修复 LaTex 公式渲染问题</span><br><span class="line">- [x] 新增 LaTex 公式编号功能</span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line">  效果显示  </span><br><span class="line">  [x] A  </span><br><span class="line">  [ ] B  </span><br><span class="line">  [x] 已选中  </span><br><span class="line">  [ ] 未选中  </span><br><span class="line">  [ ] 支持以 PDF 格式导出文稿  </span><br><span class="line">  [ ] 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率  </span><br><span class="line">  [x] 新增 Todo 列表功能  </span><br><span class="line">  [x] 修复 LaTex 公式渲染问题  </span><br><span class="line">  [x] 新增 LaTex 公式编号功能  </span><br><span class="line"> </span><br><span class="line">#### 脚注 (footnote) </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  文章正文某处[^脚注id]文章正文</span><br><span class="line">[^脚注id]: 脚注内容</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line"> 效果显示 </span><br><span class="line"> </span><br><span class="line">文章正文某处^脚注id文章正文 </span><br><span class="line">#### 流程图 </span><br><span class="line"> </span><br><span class="line"> 代码： </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> ```java </span><br><span class="line">  ​```flow</span><br><span class="line">st=&gt;start: Start :&gt;https://amwiki.xf09.net[blank]</span><br><span class="line">e=&gt;end: End :&gt;https://amwiki.xf09.net[blank]</span><br><span class="line">op1=&gt;operation: My Operation</span><br><span class="line">op2=&gt;operation: Stuff</span><br><span class="line">sub1=&gt;subroutine: My Subroutine</span><br><span class="line">cond=&gt;condition: Yes or No? :&gt;https://amwiki.xf09.net[blank]</span><br><span class="line">c2=&gt;condition: Good idea</span><br><span class="line">io=&gt;inputoutput: catch something...</span><br><span class="line"></span><br><span class="line">st-&gt;op1(right)-&gt;cond</span><br><span class="line">cond(yes, right)-&gt;c2</span><br><span class="line">cond(no)-&gt;sub1(left)-&gt;op1</span><br><span class="line">c2(yes)-&gt;io-&gt;e</span><br><span class="line">c2(no)-&gt;op2-&gt;e</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+<pre><code>
+
+ 效果显示 
+
+![Test](https://oscimg.oschina.net/oscnet/up-abdef724184cacc384fc609e044cf17bc76.png  &apos;最全的Markdown语法&apos;) 
+##### 流程图语法介绍 
+流程图语法分两个部分，一个是声明元素，一个是定义流程 
+###### 声明元素 
+语法： 
+
+ ```java 
+  tag=&gt;type: content :&gt;url
+
+</code></pre><pre><code class="java">tag
+</code></pre>
+<p>  设置元素名称 </p>
+<pre><code class="java">=&gt;
+</code></pre>
+<p>  元素定义符 </p>
+<pre><code class="java">type
+</code></pre>
+<p> : 设置元素类型，共分6种： </p>
+<p> start：开始，圆角矩形<br> end：结束，圆角矩形<br> operation：操作/行动方案，普通矩形<br> subroutine：子主题/模块，双边线矩形<br> condition：条件判断/问题审核，菱形<br> inputoutput：输入输出，平行四边形 </p>
+<pre><code class="java">content
+</code></pre>
+<p>  设置元素显示内容，中英均可  </p>
+<pre><code class="java">:&gt;url
+</code></pre>
+<p>  设置元素连接，可选，后接 [blank] 可以新建窗口打开  </p>
+<p>提示：注意空格， </p>
+<pre><code class="java">=&gt;
+</code></pre>
+<p>  前后都不能接空格； </p>
+<pre><code class="java">type:
+</code></pre>
+<p>  后必须接空格； </p>
+<pre><code class="java">:&gt;
+</code></pre>
+<p>  是语法标记，中间不能有空格 </p>
+<h6 id="定义流程"><a href="#定义流程" class="headerlink" title="定义流程"></a>定义流程</h6><p>语法： </p>
+<pre><code class="java">tag1(branch,direction)-&gt;tag2
+
+</code></pre>
+<pre><code class="java">-&gt;
+</code></pre>
+<p>  流程定义符，连接两个元素 </p>
+<pre><code class="java">branch
+</code></pre>
+<p>  设置  </p>
+<pre><code class="java">condition
+</code></pre>
+<p>  类型元素的两个分支，有 yes/no 两个值，其他元素无效 </p>
+<pre><code class="java">direction
+</code></pre>
+<p>  定义流程走线方向，有 left/right/top/bottom 四个值，所有元素有效，此项配置可选 （PS: 此属性目前有一定几率触发图形错位，刷新即可） </p>
+<p>小提示： </p>
+<p>  继续注意空格， </p>
+<pre><code class="java">-&gt;
+</code></pre>
+<p>  前后都不能有空格<br>  由于  </p>
+<pre><code class="java">condition
+</code></pre>
+<p>  类型有两个分支，我们一般遇到  </p>
+<pre><code class="java">condition
+</code></pre>
+<p>  元素就换行书写，比如：  </p>
+<pre><code class="java">  st-&gt;op1-c2
+c2(yes)-&gt;io-&gt;e
+c2(no)-&gt;op2-&gt;e
+
+
+</code></pre>
+<p>由于OSCHINA社区Markdow支持功能有限，有些命令无法在这里显示。我用的是typora编辑markdown文档，这个markdown工具是免费的。 这里附上我的README.md和生成后的pdf文档how_to_use_markdown.pdf。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-最全的Markdown语法</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 09:53</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/f72d1f77/" title="推荐系列-最全的Markdown语法">https://www.hosiang.cn/f72d1f77/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/f72d1f77/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-最全的Markdown语法》 — 狂欢马克思&url=https://www.hosiang.cn/f72d1f77/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/f72d1f77/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/f72d1f77/&title=《推荐系列-最全的Markdown语法》 — 狂欢马克思&source=&emsp;&emsp;最全的Markdown语法 Markdown是Github最常见的文档说明。Markdown的语法简洁明了、学习容易。按照官方Ma..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/f72d1f77/&title=《推荐系列-最全的Markdown语法》 — 狂欢马克思&pic=https://oscimg.oschina.net/oscnet/up-abdef724184cacc384fc609e044cf17bc76.png" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/f72d1f77/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#目录"><span class="post-toc-text">目录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#定义流程"><span class="post-toc-text">定义流程</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/dfe4ea36/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-数栈SQL优化案例-OR条件优化
+        
+      </span>
+    </a>
+  
+  
+    <a href="/3ad6854d/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-浅谈Netty和Python中的事件驱动</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

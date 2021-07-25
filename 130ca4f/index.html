@@ -1,0 +1,1313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-初入项目，JS可能遇到的问题优化以及处理方法 | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;简介： 在刚进入项目时候，很可能遇到一些问题，我这里分成了三个模块，第一个模块是ES6的一些方法的妙用，整理了一些可能会被人忽略的函数以及一些参数的使用；第二个模块是有关if else的一…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-初入项目，JS可能遇到的问题优化以及处理方法">
+<meta property="og:url" content="https://www.hosiang.cn/130ca4f/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;简介： 在刚进入项目时候，很可能遇到一些问题，我这里分成了三个模块，第一个模块是ES6的一些方法的妙用，整理了一些可能会被人忽略的函数以及一些参数的使用；第二个模块是有关if else的一…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-07-23T15:43:06.972Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-初入项目，JS可能遇到的问题优化以及处理方法">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;简介： 在刚进入项目时候，很可能遇到一些问题，我这里分成了三个模块，第一个模块是ES6的一些方法的妙用，整理了一些可能会被人忽略的函数以及一些参数的使用；第二个模块是有关if else的一…">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-初入项目，JS可能遇到的问题优化以及处理方法" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-初入项目，JS可能遇到的问题优化以及处理方法
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 5k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 22分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;简介： 在刚进入项目时候，很可能遇到一些问题，我这里分成了三个模块，第一个模块是ES6的一些方法的妙用，整理了一些可能会被人忽略的函数以及一些参数的使用；第二个模块是有关if else的一…<br><a id="more"></a></p>
+<pre><code>简介： 在刚进入项目时候，很可能遇到一些问题，我这里分成了三个模块，第一个模块是ES6的一些方法的妙用，整理了一些可能会被人忽略的函数以及一些参数的使用；第二个模块是有关if else的一些技巧，说来也是刚到阿里园区受到一位老哥影响，做了一些学习，对一些使用做了下整理；最后一个模块是有关react hook的入门，对于hook来说，最常用的一些地方就是组件传值以及组件传方法，在这里我对这部分所涉及的各种情况做了一些整理，希望对大家有所帮助，当然我也是能力有限，一些笔误或者使用上不够规范的欢迎留言或私我讨论。 
+</code></pre><h3 id="ES6篇"><a href="#ES6篇" class="headerlink" title="ES6篇"></a>ES6篇</h3><h3 id="1-Array-from"><a href="#1-Array-from" class="headerlink" title="1.Array.from()"></a>1.Array.from()</h3><p>为什么先提到Array.from()，在开发中发现数组才是最常见的一种格式，不仅是在渲染列表，表格，还是在数据请求上，都有着重要的意义。<br>首先，先看看Array.from()定义，它可以将一个类数组或可遍历对象转成一个真实的数组。所谓类数组，就是我们在非箭头函数中所属的arguments类型等等；可遍历对象，便如Map类型等等。<br>使用规则为 </p>
+<pre><code class="java">  Array.from(arrayLike, mapFn, thisArg)
+<span class="comment">/*</span>
+<span class="comment">arrayLike: 必选，1、类数组(argumentg)2、可迭代对象(set,map)。</span>
+<span class="comment">mapFn: 可选，相当于Array.from(arrayLike).map(mapFn, thisArg)。</span>
+<span class="comment">thisArg: 可选，执行回调函数mapFn时候的this对象。非常有用，利于解耦。可以把被处理的数据和对象分离，thisArg中定义处理函数handle，用来在mapFn中返回调用handle之后的结果。</span>
+<span class="comment">*/</span>
+</code></pre>
+<p>功能上他能实现什么呢？ </p>
+<h3 id="1-将string类型转为数组"><a href="#1-将string类型转为数组" class="headerlink" title="1.将string类型转为数组"></a>1.将string类型转为数组</h3><pre><code class="java">  <span class="keyword">const</span> str = <span class="string">'wangjingyu'</span>;
+<span class="keyword">const</span> arr = Array.from(str);
+console.log(arr);
+<span class="comment">// (10) ["w", "a", "n", "g", "j", "i", "n", "g", "y", "u"]</span>
+</code></pre>
+<h3 id="2-将Set类型转为数组"><a href="#2-将Set类型转为数组" class="headerlink" title="2.将Set类型转为数组"></a>2.将Set类型转为数组</h3><pre><code class="java">  <span class="keyword">const</span> set = <span class="keyword">new</span> Set([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]);
+<span class="keyword">const</span> arr = Array.from(set);
+console.log(arr);
+<span class="comment">// (3) [1, 2, 3]</span>
+</code></pre>
+<h3 id="3-��Map类型转为数组"><a href="#3-��Map类型转为数组" class="headerlink" title="3.��Map类型转为数组"></a>3.��Map类型转为数组</h3><pre><code class="java">  <span class="keyword">const</span> map = <span class="keyword">new</span> Map([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]]);
+<span class="keyword">const</span> arr = Array.from(map);
+console.log(arr);
+<span class="comment">// [ [ 1, 2, 3 ], [ 4, 5, 6 ] ]</span>
+</code></pre>
+<h3 id="4-将类数组arguments转为数组"><a href="#4-将类数组arguments转为数组" class="headerlink" title="4.将类数组arguments转为数组"></a>4.将类数组arguments转为数组</h3><pre><code class="java">  <span class="keyword">const</span> fun = function(a,b,c){
+    <span class="keyword">const</span> args = Array.from(arguments);
+    console.log(args)
+}
+fun(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)
+<span class="comment">// [ 1, 2, 3 ]</span>
+</code></pre>
+<h3 id="5-使用第二个参数构造函数返回新数组"><a href="#5-使用第二个参数构造函数返回新数组" class="headerlink" title="5.使用第二个参数构造函数返回新数组"></a>5.使用第二个参数构造函数返回新数组</h3><pre><code class="java">  <span class="keyword">const</span> newArr = Array.from([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], value =&gt; value * value);
+console.log(newArr);
+<span class="comment">// [ 1, 4, 9 ]</span>
+<span class="keyword">const</span> lenArr = Array.from({length: <span class="number">10</span>}, (v, i) =&gt; i + <span class="number">10</span>);
+console.log(lenArr);  
+<span class="comment">// [10, 11, 12, 13, 14,15, 16, 17, 18, 19]</span>
+</code></pre>
+<h3 id="6-数组去重合并"><a href="#6-数组去重合并" class="headerlink" title="6.数组去重合并"></a>6.数组去重合并</h3><pre><code class="java">  <span class="keyword">const</span> arr_a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];
+<span class="keyword">const</span> arr_b = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];
+<span class="keyword">const</span> arr_c = [<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];
+<span class="keyword">const</span> combine = function(a,b,c){
+    <span class="keyword">const</span> arrAll = [].concat.apply([],arguments);
+    console.log(Array.from(<span class="keyword">new</span> Set(arrAll)))
+}
+combine(arr_a,arr_b,arr_c);
+<span class="comment">// [ 1, 2, 3, 4, 5 ]</span>
+</code></pre>
+<h3 id="7-获取数组对象中的某指定属性的所有值"><a href="#7-获取数组对象中的某指定属性的所有值" class="headerlink" title="7.获取数组对象中的某指定属性的所有值"></a>7.获取数组对象中的某指定属性的所有值</h3><pre><code class="java">  <span class="keyword">const</span> cities = [
+    { name: <span class="string">'Paris'</span>, visited: <span class="string">'no'</span> },
+    { name: <span class="string">'Lyon'</span>, visited: <span class="string">'no'</span> },  
+    { name: <span class="string">'Marseille'</span>, visited: <span class="string">'yes'</span> },  
+    { name: <span class="string">'Rome'</span>, visited: <span class="string">'yes'</span> },  
+    { name: <span class="string">'Milan'</span>, visited: <span class="string">'no'</span> },  
+    { name: <span class="string">'Palermo'</span>, visited: <span class="string">'yes'</span> },  
+    { name: <span class="string">'Genoa'</span>, visited: <span class="string">'yes'</span> },  
+    { name: <span class="string">'Berlin'</span>, visited: <span class="string">'no'</span> },  
+    { name: <span class="string">'Hamburg'</span>, visited: <span class="string">'yes'</span> },  
+    { name: <span class="string">'New York'</span>, visited: <span class="string">'yes'</span> }
+ ];
+console.log(Array.from(cities, ({name}) =&gt; name))
+<span class="comment">// (10) ["Paris", "Lyon", "Marseille", "Rome", "Milan", "Palermo", "Genoa", "Berlin", "Hamburg", "New York"]</span>
+</code></pre>
+<h3 id="8-采用第三个参数进行数据和对象抽离"><a href="#8-采用第三个参数进行数据和对象抽离" class="headerlink" title="8.采用第三个参数进行数据和对象抽离"></a>8.采用第三个参数进行数据和对象抽离</h3><pre><code class="java">  <span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];
+<span class="keyword">const</span> obj = {
+    <span class="keyword">double</span>: x =&gt; x * <span class="number">2</span>,
+    triple: x =&gt; x * <span class="number">3</span>,
+    sqrt: x =&gt; x * x,
+}
+console.log(Array.from(arr, function(x){ <span class="keyword">return</span> <span class="keyword">this</span>.triple(x) }, obj))
+<span class="comment">// [ 3, 6, 9, 12, 15 ]</span>
+</code></pre>
+<p>通过Array.from()方法，我们可以使用更少的代码完成我们需要做到的功能。 </p>
+<h3 id="2-解构原始数据"><a href="#2-解构原始数据" class="headerlink" title="2.解构原始数据"></a>2.解构原始数据</h3><p>我们大多数在使用对象时候，会将一个大对象分出小的属性，属性值来使用，其中，我们可能会觉得某一个对象里面的属性值太多，而我们只需要其中的若干个，这里我们就可以使用这种方法来做解构。 </p>
+<pre><code class="java">  <span class="keyword">const</span> rawUser = {  
+    name: <span class="string">'WangJingyu'</span>,
+    surname: <span class="string">'Jack'</span>,  
+    email: <span class="string">'wangjingyu@gmail.com'</span>,  
+    displayName: <span class="string">'WhmJack'</span>,  
+    joined: <span class="string">'2021-03-04'</span>,  
+    image: <span class="string">'github'</span>,  
+    followers: <span class="number">1000</span>
+}
+let user = {}, userDetails = {};
+({name:user.name,surname:user.surname,...userDetails} = rawUser)
+console.log(user,userDetails)
+<span class="comment">// { name: 'WangJingyu', surname: 'Jack' }  </span>
+<span class="comment">// {</span>
+<span class="comment">//   email: 'wangjingyu@gmail.com',</span>
+<span class="comment">//   displayName: 'WhmJack',</span>
+<span class="comment">//   joined: '2021-03-04',</span>
+<span class="comment">//   image: 'github',</span>
+<span class="comment">//   followers: 1000</span>
+<span class="comment">// }</span>
+</code></pre>
+<p>这样我们就可以把自己需要的某几个对象属性取出来来使用了。 </p>
+<h3 id="3-动态属性名"><a href="#3-动态属性名" class="headerlink" title="3.动态属性名"></a>3.动态属性名</h3><p>在ES5时代，我们获取属性一般有两种方式，要不是直接.xxx，要不就是定义变量名去通过[]获取： </p>
+<pre><code class="java">  <span class="keyword">const</span> person = {
+    name : <span class="string">'wjy'</span>,
+    age : <span class="number">23</span>,
+}
+<span class="keyword">const</span> attName = <span class="string">'name'</span>;
+console.log(person[attName],person.name)  
+<span class="comment">// wjy wjy</span>
+</code></pre>
+<p>我们可以把attName作为变量名，但是只能在对象之外对他做赋值操作，并不能做到让person对象的属性动态变化。可能有的人要说，那我把那么当成一个变量就好了，就比如： </p>
+<pre><code class="java">  <span class="keyword">const</span> attName = <span class="string">'name'</span>;
+<span class="keyword">const</span> person = {
+    attName : <span class="string">'wjy'</span>,
+    age : <span class="number">23</span>,
+}
+console.log(person[attName],person.attName)  
+<span class="comment">// undefined wjy</span>
+</code></pre>
+<p>好像不太行的样子，我们来看看原因，person.attName获取的属性就是字符串attName，所以可以获取到，而person[attName]获取的则是person.name，但是我们的attName在person对象里只是一个字符串，并不是一个变量，所以获取不到，那么怎么办呢？ </p>
+<p>ES6中提出了把属性名用[]包起来的方法，在括号中就可以使用前面定义的变量了。就是： </p>
+<pre><code class="java">  <span class="keyword">const</span> attName = <span class="string">'sex'</span>;
+<span class="keyword">const</span> person = {
+    name : <span class="string">'wjy'</span>,
+    [attName] : <span class="string">'male'</span>,
+    age : <span class="number">23</span>,
+}
+console.log(person[attName])
+<span class="comment">// male</span>
+</code></pre>
+<p>这样我们就可以动态设定对象的属性名了。   </p>
+<h3 id="4-symbol的对象使用"><a href="#4-symbol的对象使用" class="headerlink" title="4.symbol的对象使用"></a>4.symbol的对象使用</h3><p>作为ES6新提出的变量类型，虽然symbol属性已经出来很久了，但是很多时候我们还是很少使用它，这里提到一种小小的用法，仅仅作为抛砖，更多的方法等着各位dalao来补充扩展。 </p>
+<p>对于一个已经存在的对象，里面可能存在一个属性key，名字暂且为’id’,在多人开发时候可能会有其他人也对此对象做了内部属性命名为id���操作，或者说他继承了这个对象，并且对这个对象做了重写，那么这样会导致这个对象的id被覆盖。从而出现一些问题。这个时候就可以让symbol大显身手了。 </p>
+<pre><code class="java">  <span class="keyword">const</span> custId = Symbol.<span class="keyword">for</span>(<span class="string">'id'</span>);
+<span class="keyword">const</span> obj = {
+    [custId] : <span class="string">'0100110100'</span>,
+    <span class="string">'id'</span> : <span class="string">'23322232'</span>,
+    <span class="string">'iq'</span> : <span class="string">'150'</span>,
+};
+console.log(obj);
+<span class="comment">// { id: '23322232', iq: '150', [Symbol(id)]: '0100110100' }</span>
+</code></pre>
+<p>那么问题来了，我们怎么把他取出来呢，如果采用常规的for循环，结果是这样的： </p>
+<pre><code class="java">  <span class="keyword">for</span>(let [key,value] of Object.entries(obj)){
+    console.log(<span class="string">'let of'</span>,key,value)
+}
+<span class="comment">// let of id 23322232</span>
+<span class="comment">// let of iq 150</span>
+</code></pre>
+<p>确实不太行，我们可以用symbol的api去获取： </p>
+<pre><code class="java">  Object.getOwnPropertySymbols(obj).forEach((item) =&gt; {
+    console.log(obj[item])
+})
+<span class="comment">// 0100110100</span>
+</code></pre>
+<p>确实是可以的，但是如果我们想for循环整体obj呢，这时候可以使用反射Reflect的相关api： </p>
+<pre><code class="java">  Reflect.ownKeys(obj).forEach(item =&gt; {
+    console.log(obj[item])
+})
+<span class="comment">// 23322232</span>
+<span class="comment">// 150</span>
+<span class="comment">// 0100110100</span>
+</code></pre>
+<p>这样我们就可以把值取出来了，并且达到了我们的效果。 </p>
+<h3 id="分支优化篇"><a href="#分支优化篇" class="headerlink" title="分支优化篇"></a>分支优化篇</h3><p>这一块主要是针对if else做的一个优化方法策略的整理总结，在做项目中，难免会出现越来越多的判断情况，而我们也需要根据这些判断数值来做选择，两个三个分支选择还好，如果选择多了起来，那么我们可能就会出现这样的情况： </p>
+<pre><code class="java">  <span class="keyword">const</span> ifOperation = (status) =&gt; {
+  <span class="keyword">if</span>(status === <span class="number">1</span>){
+    consoleLog(<span class="string">'one'</span>);
+    consoleRun(<span class="string">'oneEvent'</span>);
+  } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">2</span>){
+    consoleLog(<span class="string">'two'</span>);
+    consoleRun(<span class="string">'TwoEvent'</span>);
+  } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">222</span>){
+    consoleLog(<span class="string">'two'</span>);
+    consoleRun(<span class="string">'TwoEvent'</span>);
+  } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">3</span>){
+    consoleLog(<span class="string">'three'</span>);
+    consoleRun(<span class="string">'ThreeEvent'</span>);
+  } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">4</span>){
+    consoleLog(<span class="string">'four'</span>);
+    consoleRun(<span class="string">'FourEvent'</span>);
+  } <span class="keyword">else</span> {
+    consoleLog(<span class="string">'other'</span>);
+    consoleRun(<span class="string">'OtherEvent'</span>);
+  }
+}
+</code></pre>
+<p>虽然只有六个分支，但是已经看起来臃肿不堪了，可能我们可以把某一个else if变得厚重一下？ </p>
+<pre><code class="java">  <span class="keyword">const</span> ifOperation = (status) =&gt; {
+  <span class="keyword">if</span>(status === <span class="number">1</span>){
+    consoleLog(<span class="string">'one'</span>);
+    consoleRun(<span class="string">'oneEvent'</span>);
+  } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">2</span> || status === <span class="number">222</span>){
+    consoleLog(<span class="string">'two'</span>);
+    consoleRun(<span class="string">'TwoEvent'</span>);
+  } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">3</span>){
+    consoleLog(<span class="string">'three'</span>);
+    consoleRun(<span class="string">'ThreeEvent'</span>);
+  } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">4</span>){
+    consoleLog(<span class="string">'four'</span>);
+    consoleRun(<span class="string">'FourEvent'</span>);
+  } <span class="keyword">else</span> {
+    consoleLog(<span class="string">'other'</span>);
+    consoleRun(<span class="string">'OtherEvent'</span>);
+  }
+}
+</code></pre>
+<p>看起来可能好一些，不过更多的人应该会选择switch case，那么它就会变成： </p>
+<pre><code class="java">  <span class="keyword">const</span> switchOperation = (status) =&gt; {
+  <span class="keyword">switch</span>(status){
+    <span class="keyword">case</span> <span class="number">1</span>:
+      consoleLog(<span class="string">'one'</span>);
+      consoleRun(<span class="string">'oneEvent'</span>);
+      <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">2</span>:
+    <span class="keyword">case</span> <span class="number">222</span>:
+      consoleLog(<span class="string">'two'</span>);
+      consoleRun(<span class="string">'TwoEvent'</span>);
+      <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">3</span>:
+      conosleLog(<span class="string">'three'</span>);
+      consoleRun(<span class="string">'ThreeEvent'</span>);
+      <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">4</span>:
+      consoleLog(<span class="string">'four'</span>);
+      consoleRun(<span class="string">'FourEvent'</span>);
+      <span class="keyword">break</span>;
+    <span class="keyword">default</span>:
+      consoleLog(<span class="string">'other'</span>);
+      consoleRun(<span class="string">'OtherEvent'</span>);
+      <span class="keyword">break</span>;
+  }
+}
+</code></pre>
+<p>在工作中其实这种已经是我们的常态了，不过我们可以更进一步，借助其他数据类型帮助我们简化代码，比如用个对象存储if else的各种情况： </p>
+<pre><code class="java">  <span class="keyword">const</span> obj = {
+  <span class="number">1</span> : [<span class="string">'one'</span>,<span class="string">'oneEvent'</span>],
+  <span class="number">2</span> : [<span class="string">'two'</span>,<span class="string">'TwoEvent'</span>],
+  <span class="number">3</span> : [<span class="string">'three'</span>,<span class="string">'ThreeEvent'</span>],
+  <span class="number">4</span> : [<span class="string">'four'</span>,<span class="string">'FourEvent'</span>],
+  <span class="number">222</span> : [<span class="string">'two'</span>,<span class="string">'TwoEvent'</span>],
+  <span class="string">'default'</span> : [<span class="string">'other'</span>, <span class="string">'OtherEvent'</span>]
+}
+<span class="keyword">const</span> consoleLog = (status) =&gt; {
+  console.log(status);
+}
+<span class="keyword">const</span> consoleRun = (status) =&gt; {
+  console.log(status);
+}
+<span class="keyword">const</span> objOperation = (status) =&gt; {
+  let operation = obj[status] || obj[<span class="string">'default'</span>];
+  consoleLog(operation[<span class="number">0</span>]);
+  consoleRun(operation[<span class="number">1</span>])
+}
+objOperation(<span class="string">'222'</span>)
+</code></pre>
+<p>这样就清爽很多了，比如我在做播放录音点击修改倍速时候可以写得更加精简，比如： </p>
+<pre><code class="java">  <span class="comment">// 设置点击修改倍速条件</span>
+<span class="keyword">const</span> obj = {
+    <span class="number">1</span>: [<span class="number">1.5</span>],
+    <span class="number">1.5</span>: [<span class="number">2</span>],
+    <span class="number">2</span>: [<span class="number">0.5</span>],
+    <span class="number">0.5</span>: [<span class="number">1</span>],
+};
+<span class="keyword">const</span> objOperation = (status) =&gt; {
+    <span class="keyword">const</span> operation = obj[status];
+    <span class="keyword">const</span> speedChoose = operation[<span class="number">0</span>];
+    setSpeed(speedChoose);
+};
+objOperation(speed);
+</code></pre>
+<p>当然，如果你不想用Object表示，你还可以用Map来表示呀： </p>
+<pre><code class="java">  <span class="keyword">const</span> map = <span class="keyword">new</span> Map([
+  [<span class="number">1</span> , [<span class="string">'one'</span>,<span class="string">'oneEvent'</span>]],
+  [<span class="number">2</span> , [<span class="string">'two'</span>,<span class="string">'TwoEvent'</span>]],
+  [<span class="number">3</span> , [<span class="string">'three'</span>,<span class="string">'ThreeEvent'</span>]],
+  [<span class="number">4</span> , [<span class="string">'four'</span>,<span class="string">'FourEvent'</span>]],
+  [<span class="number">222</span> , [<span class="string">'two'</span>,<span class="string">'TwoEvent'</span>]],
+  [<span class="string">'default'</span> , [<span class="string">'other'</span>, <span class="string">'OtherEvent'</span>]]
+])
+<span class="keyword">const</span> consoleLog = (status) =&gt; {
+  console.log(status);
+}
+<span class="keyword">const</span> consoleRun = (status) =&gt; {
+  console.log(status);
+}
+<span class="keyword">const</span> mapOperation = (status) =&gt; {
+  let operation = map.get(status) || map.get(<span class="string">'default'</span>);
+  consoleLog(operation[<span class="number">0</span>]);
+  consoleRun(operation[<span class="number">1</span>])
+}
+mapOperation(<span class="number">222</span>)
+</code></pre>
+<p>不过，在Object对象和Map对象都能使用的情况下，我们优先选择哪种呢？ </p>
+<p>现在我们可能需要做更多的事情，比如我们现在有两层判断了，不仅仅需要判断条件a，还要判断条件b，比如： </p>
+<pre><code class="java">  <span class="comment">/*</span>
+<span class="comment"> * param {number} status 表示状态</span>
+<span class="comment"> * param {string} roommate 表示舍友名称</span>
+<span class="comment">*/</span>
+<span class="keyword">const</span> ifOperation = (status,roommate) =&gt; {
+    <span class="keyword">if</span>(roommate === <span class="string">'ly'</span>){
+        <span class="keyword">if</span>(status === <span class="number">1</span>){
+            consoleLog(<span class="string">'lyone'</span>);
+        } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">2</span>){
+            consoleLog(<span class="string">'lytwo'</span>);
+        } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">3</span>){
+            consoleLog(<span class="string">'lythree'</span>);
+        } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">4</span>){
+            consoleLog(<span class="string">'lyfour'</span>);
+        } <span class="keyword">else</span> {
+            consoleLog(<span class="string">'sbother'</span>);
+        }
+    } <span class="keyword">else</span> <span class="keyword">if</span>(roommate === <span class="string">'wjy'</span>){
+        <span class="keyword">if</span>(status === <span class="number">1</span>){
+            consoleLog(<span class="string">'wjyone'</span>);
+        } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">2</span>){
+            consoleLog(<span class="string">'wjytwo'</span>);
+        } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">3</span>){
+            consoleLog(<span class="string">'wjythree'</span>);
+        } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">4</span>){
+            consoleLog(<span class="string">'wjyfour'</span>);
+        } <span class="keyword">else</span> {
+            consoleLog(<span class="string">'sbother'</span>);
+        }
+    } <span class="keyword">else</span> {
+        consoleLog(<span class="string">'sbother'</span>);
+    }
+}
+</code></pre>
+<p>这。。。看起来也太长了，如果说单层判断还可以接受，那么这种长度的判断，看起来确实有点难受，不过这种情况也很普遍，可能我遇到了这样的问题，也会首先采用这种模式去进行代码的编写。但是我们要知道，一旦判断层级多了一级，那么我们增加的条件就是2(n)倍，这时候要怎么去写呢？我们仍然可以采用map或者object去处理： </p>
+<pre><code class="java">  <span class="keyword">const</span> map = <span class="keyword">new</span> Map([
+    [<span class="string">'ly_1'</span>, () =&gt; {consoleLog(<span class="string">'lyone'</span>);consoleRun(<span class="string">'ly_1'</span>)}],
+    [<span class="string">'ly_2'</span>, () =&gt; {consoleLog(<span class="string">'lytwo'</span>);consoleRun(<span class="string">'ly_2'</span>)}],
+    [<span class="string">'ly_3'</span>, () =&gt; {consoleLog(<span class="string">'lythree'</span>);consoleRun(<span class="string">'ly_3'</span>)}],
+    [<span class="string">'ly_4'</span>, () =&gt; {consoleLog(<span class="string">'lyfour'</span>);consoleRun(<span class="string">'ly_4'</span>)}],
+    [<span class="string">'wjy_1'</span>, () =&gt; {consoleLog(<span class="string">'wjyone'</span>);consoleRun(<span class="string">'wjy_1'</span>)}],
+    [<span class="string">'wjy_2'</span>, () =&gt; {consoleLog(<span class="string">'wjytwo'</span>);consoleRun(<span class="string">'wjy_2'</span>)}],
+    [<span class="string">'wjy_3'</span>, () =&gt; {consoleLog(<span class="string">'wjythree'</span>);consoleRun(<span class="string">'wjy_3'</span>)}],
+    [<span class="string">'wjy_4'</span>, () =&gt; {consoleLog(<span class="string">'wjyfour'</span>);consoleRun(<span class="string">'wjy_4'</span>)}],    
+    [<span class="string">'default'</span>, () =&gt; {consoleLog(<span class="string">'sbother'</span>);consoleRun(<span class="string">'other roommate'</span>)}],
+])
+<span class="keyword">const</span> mapOperation = (status,roommate)=&gt;{
+  let mapAction = map.get(`${roommate}_${status}`) || map.get(<span class="string">'default'</span>)
+  mapAction.call(<span class="keyword">this</span>)
+}
+mapOperation(<span class="number">1</span>,<span class="string">'wjy'</span>)
+<span class="comment">// wjyone</span>
+<span class="comment">// wjy_1</span>
+</code></pre>
+<p>用Object来写也是一样，如下： </p>
+<pre><code class="java">  <span class="keyword">const</span> obj = {
+    <span class="string">'ly_1'</span>: () =&gt; {consoleLog(<span class="string">'lyone'</span>);consoleRun(<span class="string">'ly_1'</span>)},
+    <span class="string">'ly_2'</span>: () =&gt; {consoleLog(<span class="string">'lytwo'</span>);consoleRun(<span class="string">'ly_2'</span>)},
+    <span class="string">'ly_3'</span>: () =&gt; {consoleLog(<span class="string">'lythree'</span>);consoleRun(<span class="string">'ly_3'</span>)},
+    <span class="string">'ly_4'</span>: () =&gt; {consoleLog(<span class="string">'lyfour'</span>);consoleRun(<span class="string">'ly_4'</span>)},
+    <span class="string">'wjy_1'</span>: () =&gt; {consoleLog(<span class="string">'wjyone'</span>);consoleRun(<span class="string">'wjy_1'</span>)},
+    <span class="string">'wjy_2'</span>: () =&gt; {consoleLog(<span class="string">'wjytwo'</span>);consoleRun(<span class="string">'wjy_2'</span>)},
+    <span class="string">'wjy_3'</span>: () =&gt; {consoleLog(<span class="string">'wjythree'</span>);consoleRun(<span class="string">'wjy_3'</span>)},
+    <span class="string">'wjy_4'</span>: () =&gt; {consoleLog(<span class="string">'wjyfour'</span>);consoleRun(<span class="string">'wjy_4'</span>)},  
+    <span class="string">'default'</span>: () =&gt; {consoleLog(<span class="string">'sbother'</span>);consoleRun(<span class="string">'other roommate'</span>)},
+}
+<span class="keyword">const</span> objOperation = (status,roommate)=&gt;{
+  let objAction = obj[`${roommate}_${status}`] || obj[<span class="string">'default'</span>]
+  objAction.call(<span class="keyword">this</span>)
+}
+objOperation(<span class="number">1</span>,<span class="string">'wjy'</span>)
+<span class="comment">// wjyone</span>
+<span class="comment">// wjy_1</span>
+</code></pre>
+<p>这类方法的核心就是把两个条件拼接成一个unique的字符串，然后将拼接的字符串作为主键，来进行对应的函数处理，从原理上讲，条件层级越多，这个方法就越简单越省事。当然，可能有些同学觉得这样不够规范，觉得下划线不正规，也可以采用对象方式。 </p>
+<pre><code class="java">  <span class="keyword">const</span> map = <span class="keyword">new</span> Map([
+    [{status:<span class="string">'1'</span>,roommate:<span class="string">'ly'</span>}, () =&gt; {consoleLog(<span class="string">'lyone'</span>);consoleRun(<span class="string">'ly_1'</span>)}],
+    [{status:<span class="string">'2'</span>,roommate:<span class="string">'ly'</span>}, () =&gt; {consoleLog(<span class="string">'lytwo'</span>);consoleRun(<span class="string">'ly_2'</span>)}],
+    [{status:<span class="string">'3'</span>,roommate:<span class="string">'ly'</span>}, () =&gt; {consoleLog(<span class="string">'lythree'</span>);consoleRun(<span class="string">'ly_3'</span>)}],
+    [{status:<span class="string">'4'</span>,roommate:<span class="string">'ly'</span>}, () =&gt; {consoleLog(<span class="string">'lyfour'</span>);consoleRun(<span class="string">'ly_4'</span>)}],
+    [{status:<span class="string">'1'</span>,roommate:<span class="string">'wjy'</span>}, () =&gt; {consoleLog(<span class="string">'wjyone'</span>);consoleRun(<span class="string">'wjy_1'</span>)}],
+    [{status:<span class="string">'2'</span>,roommate:<span class="string">'wjy'</span>}, () =&gt; {consoleLog(<span class="string">'wjytwo'</span>);consoleRun(<span class="string">'wjy_2'</span>)}],
+    [{status:<span class="string">'3'</span>,roommate:<span class="string">'wjy'</span>}, () =&gt; {consoleLog(<span class="string">'wjythree'</span>);consoleRun(<span class="string">'wjy_3'</span>)}],
+    [{status:<span class="string">'4'</span>,roommate:<span class="string">'wjy'</span>}, () =&gt; {consoleLog(<span class="string">'wjyfour'</span>);consoleRun(<span class="string">'wjy_4'</span>)}],    
+    [<span class="string">'default'</span>, () =&gt; {consoleLog(<span class="string">'sbother'</span>);consoleRun(<span class="string">'other roommate'</span>)}],
+])
+<span class="keyword">const</span> mapOperation = (status,roommate)=&gt;{
+  let mapAction = [...map].filter(([key,value])=&gt;(key.roommate === roommate &amp;&amp; key.status === status))
+  <span class="keyword">if</span>(mapAction.length === <span class="number">0</span>){
+    mapAction = map.get(<span class="string">'default'</span>);
+    mapAction.call(<span class="keyword">this</span>);
+  } <span class="keyword">else</span> {
+    mapAction.forEach(([key,value])=&gt;value.call(<span class="keyword">this</span>))      
+  }
+}
+</code></pre>
+<p>这样我们就可以看到Object和Map的一个主要区别了，在使用Map类型时候我们可以选择通过对象来作为key值。当然还有可能出现这种情况，比如同一个方法在某几个条件中都被同时使用，并且传了相同的参数比如： </p>
+<pre><code class="java">  <span class="keyword">const</span> map = <span class="keyword">new</span> Map([
+    [{status:<span class="string">'1'</span>,roommate:<span class="string">'ly'</span>}, () =&gt; {consoleRun(<span class="string">'ly'</span>)}],
+    [{status:<span class="string">'2'</span>,roommate:<span class="string">'ly'</span>}, () =&gt; {consoleRun(<span class="string">'ly'</span>)}],
+    [{status:<span class="string">'3'</span>,roommate:<span class="string">'ly'</span>}, () =&gt; {consoleRun(<span class="string">'ly'</span>)}],
+    [{status:<span class="string">'4'</span>,roommate:<span class="string">'ly'</span>}, () =&gt; {consoleRun(<span class="string">'ly4'</span>)}],
+    [<span class="string">'default'</span>, () =&gt; {consoleRun(<span class="string">'other roommate'</span>)}],
+])
+</code></pre>
+<p>这个时候就可以采用正则去进行了，把前四条作为一个整体去匹配正则，比如： </p>
+<pre><code class="java">  <span class="keyword">const</span> map = () =&gt; {
+    <span class="keyword">return</span> <span class="keyword">new</span> Map([
+        [/^ly_[<span class="number">1</span>,<span class="number">4</span>]$/, () =&gt; consoleRun(<span class="string">'ly'</span>)],
+        [/^<span class="keyword">default</span>$/, () =&gt; {consoleLog(<span class="string">'sbother'</span>);consoleRun(<span class="string">'other roommate'</span>)}],
+    ])  
+}
+</code></pre>
+<p>通过正则去做匹配，当然这也是由于Map类型可以将各种类型作为key。下面举一个更为具体的小例子，由于本人能力有限可能有很多没想到的地方，所以写出的代码可能还是有些冗余，欢迎大家提意见，先看看古老的if else方式： </p>
+<pre><code class="java">  <span class="keyword">const</span> ifOperation = (status,roommate) =&gt; {
+    <span class="keyword">if</span>(roommate === <span class="string">'ly'</span>){
+        <span class="keyword">if</span>(status === <span class="number">1</span>){
+            consoleLog(<span class="string">'lyone'</span>);
+        } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">2</span>){
+            consoleLog(<span class="string">'lytwo'</span>);
+        } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">3</span>){
+            consoleLog(<span class="string">'lythree'</span>);
+        } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">4</span>){
+            consoleLog(<span class="string">'lyfour'</span>);
+        } <span class="keyword">else</span> {
+            consoleLog(<span class="string">'lyother'</span>);
+        }
+    } <span class="keyword">else</span> <span class="keyword">if</span>(roommate === <span class="string">'wjy'</span>){
+        <span class="keyword">if</span>(status === <span class="number">1</span>){
+            consoleLog(<span class="string">'wjyone'</span>);
+        } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">2</span>){
+            consoleLog(<span class="string">'wjytwo'</span>);
+        } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">3</span>){
+            consoleLog(<span class="string">'wjythree'</span>);
+        } <span class="keyword">else</span> <span class="keyword">if</span>(status === <span class="number">4</span>){
+            consoleLog(<span class="string">'wjyfour'</span>);
+        } <span class="keyword">else</span> {
+            consoleLog(<span class="string">'wjyother'</span>);
+        }
+    } <span class="keyword">else</span> {
+        consoleLog(<span class="string">'sbother'</span>);
+    }
+}
+</code></pre>
+<p>这里可以发现，和前面只有一点不同，就是三个else分别是三个不同的条件，这样用default处理就要分成三部分，这里采用正则试试看咯： </p>
+<pre><code class="java">  <span class="keyword">const</span> map = () =&gt; {
+    <span class="keyword">return</span> <span class="keyword">new</span> Map([
+        [/^ly_1$/, () =&gt; consoleLog(<span class="string">'lyone'</span>)],
+        [/^ly_2$/, () =&gt; consoleLog(<span class="string">'lytwo'</span>)],
+        [/^ly_3$/, () =&gt; consoleLog(<span class="string">'lythree'</span>)],
+        [/^ly_4$/, () =&gt; consoleLog(<span class="string">'lyfour'</span>)],
+        [/^ly_.*$/, () =&gt; consoleLog(<span class="string">'lyother'</span>)],
+        [/^wjy_1$/, () =&gt; consoleLog(<span class="string">'wjyone'</span>)],
+        [/^wjy_2$/, () =&gt; consoleLog(<span class="string">'wjytwo'</span>)],
+        [/^wjy_3$/, () =&gt; consoleLog(<span class="string">'wjythree'</span>)],
+        [/^wjy_4$/, () =&gt; consoleLog(<span class="string">'wjyfour'</span>)],    
+        <span class="comment">// [/^ly_((?![1-4]{1}[\S]{0}).)*|^ly_[1-4]{2,}$/g, () =&gt; consoleLog('lyother')],</span>
+        [/^wjy_.*$/, () =&gt; consoleLog(<span class="string">'wjyother'</span>)],
+        [/^.*.*$/, () =&gt; consoleLog(<span class="string">'sbother'</span>)],
+    ])
+}
+<span class="keyword">const</span> mapArray = <span class="keyword">new</span> Map([
+    [<span class="number">2</span>, (operation) =&gt; operation.pop()],
+    [<span class="number">3</span>, (operation) =&gt; {
+        <span class="comment">// console.log(operation);</span>
+        operation.pop();    
+        operation.pop();
+    }],
+    [<span class="string">'default'</span>, () =&gt; {}],
+])
+<span class="keyword">const</span> mapOperation = (status,roommate) =&gt; {
+    let operation = [...map()].filter(([key,value]) =&gt; {
+        <span class="keyword">if</span>(key.test(`${roommate}_${status}`)){
+            <span class="keyword">return</span> value;            
+        }
+    });
+    let operationArr = mapArray.get(operation.length) || mapArray.get(<span class="string">'default'</span>);
+    operationArr.call(<span class="keyword">this</span>,operation);
+    operation.forEach(([key,value]) =&gt; value.call(<span class="keyword">this</span>))
+}
+mapOperation(<span class="number">10000</span>,<span class="string">'ly1'</span>)
+</code></pre>
+<p>原理很简单，这里我使用了两层判断逻辑，首先是进行正则表达式的编写，由于有三个else，所以可能我们需要三个default，从正则角度来说就是任意字符了，这里匹配会出现三种可能性，如果没有匹配到，那么只会存在一种可能为<code>[ [ /^.*.*$/, [Function (anonymous)] ] ]</code>，如果roommate正确匹配，而status没有正确匹配，那么会出现两种情况，我将一定匹配的可能在数组存在最后就可以将其弹出，就可以获得真实匹配正则，另外如果完全正确，那么三个正则都会成功匹配，我们就需要弹出最后两个，只取第一个。而弹出正则又是一个if else，我就放到了另一个map中，从而实现需求。 </p>
+<h3 id="React-hook篇"><a href="#React-hook篇" class="headerlink" title="React hook篇"></a>React hook篇</h3><p>来到公司一开始做了一个前后端联调的小项目，首先使用的就是React hook，那个时候还是不够熟悉，后来参加其他项目又用了16.8之前的生命周期函数，最近重归hook，发现项目中很多人都把组件的状态存在了model里，不过我还是觉得父子组件传值传函数这类基础要拿出来整理一下，恰巧最近事情不多，就整理一下。<br>整体上分成四类： </p>
+<h3 id="1-父组件传值给子组件"><a href="#1-父组件传值给子组件" class="headerlink" title="1.父组件传值给子组件"></a>1.父组件传值给子组件</h3><p>最简单的最常用的就是父组件传值给子组件，一般采用props传值，我写了一个最基本的例子：<br>父组件： </p>
+<pre><code class="java">  <span class="keyword">import</span> React,{useState} from <span class="string">'react'</span>;
+<span class="keyword">import</span> {Button} from <span class="string">'antd'</span>;
+<span class="keyword">import</span> styles from <span class="string">'./HomePage.less'</span>;
+<span class="keyword">import</span> Children from <span class="string">'./components/Children'</span>;
+<span class="keyword">const</span> HomePage = () =&gt; {
+  <span class="keyword">const</span> [value,setValue] = useState(<span class="string">'first'</span>);
+  <span class="keyword">return</span> (
+    &lt;div className={styles.root}&gt;
+      &lt;Button onClick={() =&gt; {
+        setValue(<span class="string">'second'</span>)
+      }}&gt;change&lt;/Button&gt;
+      &lt;Children value={value} /&gt;
+    &lt;/div&gt;
+  )
+}
+export <span class="keyword">default</span> HomePage;
+</code></pre>
+<p>子组件: </p>
+<pre><code class="java">  <span class="keyword">import</span> React from <span class="string">"react"</span>;
+<span class="keyword">import</span> PropTypes from <span class="string">"prop-types"</span>;
+<span class="keyword">import</span> styles from <span class="string">"./Children.less"</span>;
+<span class="keyword">const</span> Children = (props) =&gt; {
+  <span class="keyword">const</span> { value } = props;
+  <span class="keyword">return</span> (
+    &lt;div className={`${styles.root}`} &gt;
+      {value}
+    &lt;/div&gt;
+  );
+};
+Children.propTypes = {
+  value:PropTypes.string
+};
+Children.defaultProps = {
+  value:<span class="string">''</span>
+};
+export <span class="keyword">default</span> Children;
+</code></pre>
+<p>这是最简单的，也是最常用的，基本任何一个项目都会用到，也是我们一般抽出业务组件最基本的类型。 </p>
+<h3 id="2-父组件传方法给子组件-子组件传值给父组件"><a href="#2-父组件传方法给子组件-子组件传值给父组件" class="headerlink" title="2.父组件传方法给子组件/子组件传值给父组件"></a>2.父组件传方法给子组件/子组件传值给父组件</h3><p>个人理解这两类其实是一类，只是一个大的集合和一个小的集合的区别，就是说父组件传方法给子组件是一个大的模块，而恰巧这个模块中囊括了子组件传值给父组件这��个功能。举个例子：<br>父组件： </p>
+<pre><code class="java">  <span class="keyword">import</span> React,{useState} from <span class="string">'react'</span>;
+<span class="keyword">import</span> styles from <span class="string">'./HomePage.less'</span>;
+<span class="keyword">import</span> Children from <span class="string">'./components/Children'</span>;
+<span class="keyword">const</span> HomePage = () =&gt; {
+  <span class="keyword">const</span> [value, setvalue] = useState(<span class="string">''</span>)
+  <span class="keyword">const</span> method = (val) =&gt; {
+    setvalue(val);
+  }
+  <span class="keyword">return</span> (
+    &lt;div className={styles.root}&gt;
+      &lt;Children method={method} /&gt;
+      {value}
+    &lt;/div&gt;
+  )
+}
+export <span class="keyword">default</span> HomePage;
+</code></pre>
+<p>子组件： </p>
+<pre><code class="java">  <span class="keyword">import</span> React from <span class="string">"react"</span>;
+<span class="keyword">import</span> PropTypes from <span class="string">"prop-types"</span>;
+<span class="keyword">import</span> {Button} from <span class="string">'antd'</span>;
+<span class="keyword">import</span> styles from <span class="string">"./Children.less"</span>;
+<span class="keyword">const</span> Children = (props) =&gt; {
+  <span class="keyword">const</span> { method } = props;
+  <span class="keyword">return</span> (
+    &lt;div className={`${styles.root}`} &gt;
+      &lt;Button onClick={() =&gt; {
+        method(<span class="string">'children'</span>)
+      }}&gt;children&lt;/Button&gt;
+    &lt;/div&gt;
+  );
+};
+Children.propTypes = {
+  method:PropTypes.func
+};
+Children.defaultProps = {
+  method:() =&gt; {}
+};
+export <span class="keyword">default</span> Children;
+</code></pre>
+<p>这里的例子我写的最基本，从子组件传值给父组件的角度上讲，就是子组件传了一个value给父组件，让父组件带它去做他该做的事。那么，从父组件传方法给子组件上讲，就是父组件传了一个叫做method的方法给了子组件，这个方法里，父组件想干什么就干什么，只需要子组件去调用就好了。当然，他们最天衣无缝的配合就是父组件已经把方法写好了，只需要子组件传值来让父组件方法正常运转就好了，perfect！ </p>
+<h3 id="3-子组件传方法给父组件"><a href="#3-子组件传方法给父组件" class="headerlink" title="3.子组件传方法给父组件"></a>3.子组件传方法给父组件</h3><p>其实掌握了前面两种基础方法，在大多数项目已经够用了，简单的组件传值用props，以及基于他的派生策略，复杂的可以在model里存值去做传递，不过偶尔我们也需要在父组件中调用子组件的方法。我之前就遇到了这么个问题，写了一个大组件内容过多，我需要把他提出来，然后发现我使用了太多的useState，而且把子组件提出来后，发现事件是父组件的事件，但是需要修改子组件的state状态，于是我就把修改子组件state的地方封装成一个函数，供父组件去调用就好了。这里举个最简单的例子： </p>
+<p>父组件： </p>
+<pre><code class="java">  <span class="keyword">import</span> React,{useRef} from <span class="string">'react'</span>;
+<span class="keyword">import</span> styles from <span class="string">'./HomePage.less'</span>;
+<span class="keyword">import</span> {Button} from <span class="string">'antd'</span>;
+<span class="keyword">import</span> Children from <span class="string">'./components/Children'</span>;
+<span class="keyword">const</span> HomePage = () =&gt; {
+  <span class="keyword">const</span> childRef = useRef&lt;any&gt;();
+  <span class="keyword">return</span> (
+    &lt;div className={styles.root}&gt;
+      &lt;Children cRef={childRef} /&gt;
+      &lt;Button onClick={() =&gt; {
+        childRef.current.childrenMethod();
+      }}&gt;click&lt;/Button&gt;
+    &lt;/div&gt;
+  )
+}
+export <span class="keyword">default</span> HomePage;
+</code></pre>
+<p>子组件 </p>
+<pre><code class="java">  <span class="keyword">import</span> React,{useImperativeHandle,useState} from <span class="string">"react"</span>;
+<span class="keyword">import</span> PropTypes from <span class="string">"prop-types"</span>;
+<span class="keyword">import</span> {Button} from <span class="string">'antd'</span>;
+<span class="keyword">import</span> styles from <span class="string">"./Children.less"</span>;
+<span class="keyword">const</span> Children = (props) =&gt; {
+  <span class="keyword">const</span> { cRef } = props;
+  <span class="keyword">const</span> [value, setvalue] = useState(<span class="string">''</span>)
+  useImperativeHandle(cRef,() =&gt; ({
+      childrenMethod:() =&gt; {
+        setvalue(<span class="string">'children'</span>);
+      }
+    }),
+  );
+  <span class="keyword">return</span> (
+    &lt;div className={`${styles.root}`} &gt;
+      {value}
+    &lt;/div&gt;
+  );
+};
+Children.propTypes = {
+  cRef:PropTypes.object
+};
+Children.defaultProps = {
+  cRef:{}
+};
+export <span class="keyword">default</span> Children;
+</code></pre>
+<p>说起来useRef也是很神奇的，在这里，我们的子组件暴露给父组件的方法是childrenMethod，并且做了一个指代，父组件通过这个指代获取到子组件方法，从而进行调用。当然这里我只是针对hook做的分析，如果是类组件里，就要使用createRef了。需要了解的也可以看看这个文章，个人感觉还不错：<a href="https://zhuanlan.zhihu.com/p/269580627" rel="external nofollow noopener noreferrer" target="_blank">https://zhuanlan.zhihu.com/p/269580627</a><br>到这里，对于父子组件传值，传函数都做了一个介绍和描述，作为新上手项目的同学来说，可以从我这个基础例子出发，去感受React编程更为神秘的地方。 </p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>之前在分享React生命周期之后，就想对JS一些我用到的以及一些想要在接下来项目中用到的小知识点做一些整理，当然我接触项目时间也不久，暂时就统计到了这些，后续有新的收获，还会持续统计更新。<br><a href="https://developer.aliyun.com/article/783279?utm_content=g_1000259721" rel="external nofollow noopener noreferrer" target="_blank">https://developer.aliyun.com/article/783279?utm_content=g_1000259721</a><br>本文为阿里云原创内容，未经允许不得转载。 </p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-初入项目，JS可能遇到的问题优化以及处理方法</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 09:48</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/130ca4f/" title="推荐系列-初入项目，JS可能遇到的问题优化以及处理方法">https://www.hosiang.cn/130ca4f/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/130ca4f/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-初入项目，JS可能遇到的问题优化以及处理方法》 — 狂欢马克思&url=https://www.hosiang.cn/130ca4f/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/130ca4f/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/130ca4f/&title=《推荐系列-初入项目，JS可能遇到的问题优化以及处理方法》 — 狂欢马克思&source=&emsp;&emsp;简介： 在刚进入项目时候，很可能遇到一些问题，我这里分成了三个模块，第一个模块是ES6的一些方法的妙用，整理了一些可能会被人忽略的..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/130ca4f/&title=《推荐系列-初入项目，JS可能遇到的问题优化以及处理方法》 — 狂欢马克思&pic=https://api.ixiaowai.cn/gqapi/gqapi.php" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/130ca4f/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ES6篇"><span class="post-toc-text">ES6篇</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-Array-from"><span class="post-toc-text">1.Array.from()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-将string类型转为数组"><span class="post-toc-text">1.将string类型转为数组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-将Set类型转为数组"><span class="post-toc-text">2.将Set类型转为数组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-��Map类型转为数组"><span class="post-toc-text">3.��Map类型转为数组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-将类数组arguments转为数组"><span class="post-toc-text">4.将类数组arguments转为数组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-使用第二个参数构造函数返回新数组"><span class="post-toc-text">5.使用第二个参数构造函数返回新数组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-数组去重合并"><span class="post-toc-text">6.数组去重合并</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-获取数组对象中的某指定属性的所有值"><span class="post-toc-text">7.获取数组对象中的某指定属性的所有值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-采用第三个参数进行数据和对象抽离"><span class="post-toc-text">8.采用第三个参数进行数据和对象抽离</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-解构原始数据"><span class="post-toc-text">2.解构原始数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-动态属性名"><span class="post-toc-text">3.动态属性名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-symbol的对象使用"><span class="post-toc-text">4.symbol的对象使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分支优化篇"><span class="post-toc-text">分支优化篇</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#React-hook篇"><span class="post-toc-text">React hook篇</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-父组件传值给子组件"><span class="post-toc-text">1.父组件传值给子组件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-父组件传方法给子组件-子组件传值给父组件"><span class="post-toc-text">2.父组件传方法给子组件/子组件传值给父组件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-子组件传方法给父组件"><span class="post-toc-text">3.子组件传方法给父组件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结语"><span class="post-toc-text">结语</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/49b09df1/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-免费正版 IntelliJ IDEA license 详细指南
+        
+      </span>
+    </a>
+  
+  
+    <a href="/d8c30f85/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-别再面向 for 循环编程了，Spring 自带的观察者模式就很香！</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

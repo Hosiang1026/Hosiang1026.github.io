@@ -1,0 +1,1002 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
+  <script type="text/javascript">
+    //统计耗时开始
+    var start_time = (new Date()).getTime();
+  </script>
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0">
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="RYlYHsgO7Y">
+  <!-- SouGou SEO -->
+  <meta name="sogou_site_verification" content="MSmrTj7lHV">
+  <!-- ShenMa SEO -->
+  <meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"> 
+  <!-- Baidu Union -->
+  <meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be">
+  
+  <title>推荐系列-Redux 中间件 到底怎么工作的呢- | 狂欢马克思</title>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+  
+    <meta name="keywords" content="分享技术经验与交流">
+  
+  <meta name="description" content="&amp;emsp;&amp;emsp;中间件其实不仅仅是Redux专利，在Node框架中也有应用，比如koa，这里我们简单的默认为Redux 中间件，在进入正题前，先了解一下面向切面编程���中��件的关系 一、中间件与面向切面编程(AOP) 面…">
+<meta name="keywords" content="Popular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系列-Redux 中间件 到底怎么工作的呢-">
+<meta property="og:url" content="https://www.hosiang.cn/f696668e/index.html">
+<meta property="og:site_name" content="狂欢马克思">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;中间件其实不仅仅是Redux专利，在Node框架中也有应用，比如koa，这里我们简单的默认为Redux 中间件，在进入正题前，先了解一下面向切面编程���中��件的关系 一、中间件与面向切面编程(AOP) 面…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-5c4a6b4fe5984b704e3479898fe3091c3d9.png">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-5c4a6b4fe5984b704e3479898fe3091c3d9.png">
+<meta property="og:updated_time" content="2021-07-23T15:43:06.925Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系列-Redux 中间件 到底怎么工作的呢-">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;中间件其实不仅仅是Redux专利，在Node框架中也有应用，比如koa，这里我们简单的默认为Redux 中间件，在进入正题前，先了解一下面向切面编程���中��件的关系 一、中间件与面向切面编程(AOP) 面…">
+<meta name="twitter:image" content="https://oscimg.oschina.net/oscnet/up-5c4a6b4fe5984b704e3479898fe3091c3d9.png">
+  
+  
+    <link rel="icon" href="/images/favicon.ico">
+  
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Baidu Analytics -->
+
+<script>
+	//百度统计
+	var _hmt = _hmt || [];
+	(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+  
+
+  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
+  <!-- Baidu seo -->
+
+<script>
+//百度SEO-自动推送
+(function() {
+	var bp = document.createElement('script');
+	var curProtocol = window.location.protocol.split(':')[0];
+	if (curProtocol === 'https') {
+	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+	} else {
+	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	}
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(bp, s);
+});
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/pace.min.js"></script>
+<script src="/js/crypto-js.js"></script>
+<script src="/js/cookie.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/festival.js"></script>
+
+<script>
+    //获取节日名称和日期
+    getFestival();
+</script>
+
+
+<body>
+    <script>
+        //耗时统计结束
+        window.onload = function(){
+          document.getElementById("TimeShow").innerHTML = "本站耗时 "+ (new Date().getTime()-start_time)/1000 +" 秒 ";
+        }	
+    </script>
+  <div id="container">
+      <header id="header">
+   <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">狂欢马克思</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="/ " rel="external nofollow">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives " rel="external nofollow">
+                        <i class="fa fa-archive"></i>
+                        <span>归档</span>
+                    </a>
+                    
+                    <a href="/gitbook " rel="external nofollow">
+                        <i class="fa fa-columns"></i>
+                        <span>笔记</span>
+                    </a>
+                    
+                    <a href="/music?id=91451362 " rel="external nofollow">
+                        <i class="fa fa-music"></i>
+                        <span>音乐</span>
+                    </a>
+                    
+                    <a href="/photo " rel="external nofollow">
+                        <i class="fa fa-picture-o"></i>
+                        <span>相册</span>
+                    </a>
+                    
+                    <a href="/love " rel="external nofollow">
+                        <i class="fa fa-heart"></i>
+                        <span>恋爱</span>
+                    </a>
+                    
+                    <a href="/collection " rel="external nofollow">
+                        <i class="fa fa-envira"></i>
+                        <span>收藏</span>
+                    </a>
+                    
+                    <a href="/about " rel="external nofollow">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/../images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        狂欢马克思
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注Web开发
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Hosiang1026 " rel="external nofollow">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes " rel="external nofollow">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969 " rel="external nofollow">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+      
+
+<!-- 诗词接口暂时不用-->
+<!-- <span id='jinrishici-sentence'>-->
+<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+ 
+<!-- 滚动公告 -->
+<div id="noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
+    <marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+    </marquee>
+</div>
+<script type="text/javascript">
+
+$(function(){
+    browserRedirect(); 
+    //获取周末
+    //getWeekend();
+    
+    //var arr = [1, 2];
+    //var bol = arr[Math.floor(Math.random()*arr.length)];
+    //if(bol == 1){
+      //获取一言
+      if($("#hitokoto").length>0){
+         getHitokoto();
+      }
+    //}
+    
+    //if(bol == 2){
+     //获取疫情数据
+     //if($("#YQData").length>0){
+      //getYQData();
+     //}
+   // }
+});
+
+/**
+ * 检测PC端与移动端访问
+ */
+function browserRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+    var contentHtml = "";
+    var fontColor = randomColor();
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    
+       $("#noticeId").css({"line-height":"1.6em"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+            
+           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+
+    } else {
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
+       contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
+            
+           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+             
+           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+    }
+    
+    $("#noticeMar").html(contentHtml);
+
+}
+
+//随机生成十六进制颜色值
+function randomColor(){
+    //定义字符串变量colorValue存放可以构成十六进制颜色值的值
+    var colorValue="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";
+    //以","为分隔符，将colorValue字符串分割为字符数组["0","1",...,"f"]
+    var colorArray = colorValue.split(",");
+    var color="#";//定义一个存放十六进制颜色值的字符串变量，先将#存放进去
+    //使用for循环语句生成剩余的六位十六进制值
+    for(var i=0;i<6;i++){
+        // 由16个元素组成的colorArray的某一个值，然后将其加在color中，
+        //字符串相加后，得出的仍是字符串
+        color+=colorArray[Math.floor(Math.random()*16)];
+    }
+    return color;
+}
+</script>
+
+
+
+
+
+    </div>
+</header>
+
+<script>
+//重写live2D的console打印
+console.log=function(){};
+</script>
+
+
+      <!-- 悬浮音乐播放器 -->
+      <!--<script id="ilt" src=/player/js/player.js></script>-->
+      <div class="outer">
+          <section id="main" class="body-wrap"><article id="post-Redux 中间件 到底怎么工作的呢-" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      推荐系列-Redux 中间件 到底怎么工作的呢-
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/热门文章/">热门文章</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2021-04-15
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+        <li>
+        <span class="post-count">字数统计: 1.7k字</span>
+        </li>
+        <li>
+        <span class="post-count">阅读时长: 6分钟</span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>&emsp;&emsp;中间件其实不仅仅是Redux专利，在Node框架中也有应用，比如koa，这里我们简单的默认为Redux 中间件，在进入正题前，先了解一下面向切面编程���中��件的关系 一、中间件与面向切面编程(AOP) 面…<br><a id="more"></a></p>
+<pre><code>中间件其实不仅仅是 
+</code></pre><pre><code class="java">Redux
+</code></pre>
+<p> 专利，在 </p>
+<pre><code class="java">Node
+</code></pre>
+<p> 框架中也有应用，比如 </p>
+<pre><code class="java">koa
+</code></pre>
+<p> ，这里我们简单的默认为 </p>
+<pre><code class="java">Redux
+</code></pre>
+<p>  中间件，在进入正题前，先了解一下面向切面编程与中间件的关系 </p>
+<h4 id="一、中间件与面向切面编程-AOP"><a href="#一、中间件与面向切面编程-AOP" class="headerlink" title="一、中间件与面向切面编程(AOP)"></a>一、中间件与面向切面编程(AOP)</h4><p>面向切面编程(AOP)的存在，解决了我们熟悉的面向对象(OOP)的局限性，可以将其看作是OOP的补充。比如当我们要为某几个类新增一段共同的逻辑，在OOP模式下，即可通过修改它们共同的父类来实现，但这无疑使得公共类越来越臃肿。那如果换成AOP，则可将 扩展逻辑在工作流中的执行节点视为一个单独“切点”，形成一个可以拦截前序逻辑的“切面”。<br>假设一个通用性很强，业务性很弱的日志追溯需求：要求在每个 </p>
+<pre><code class="java">Action
+</code></pre>
+<p> 被派发后，打出一个 </p>
+<pre><code class="java">console.log
+</code></pre>
+<p> 记录这个动作，面向切面编程(AOP)会如何处理？ <img src="https://oscimg.oschina.net/oscnet/up-5c4a6b4fe5984b704e3479898fe3091c3d9.png" alt="Test" title="Redux 中间件 到底怎么工作的呢-"><br>可见，“切面”与业务逻辑是分离的，通过“即插即用”的方式自由的组织自己想要扩展的功能（异步工作流、性能打点、日志追溯等），它是典型的“非侵入式”的逻辑扩展思路，提升了组织逻辑的灵活度与干净度，规避逻辑冗余、逻辑耦合的问题。 </p>
+<h4 id="二、中间件的引入"><a href="#二、中间件的引入" class="headerlink" title="二、中间件的引入"></a>二、中间件的引入</h4><p>通过分析了Redux源码的主流程，我们可以肯定 </p>
+<pre><code class="java">redux
+</code></pre>
+<p> 源码只有同步操作，也就是当 </p>
+<pre><code class="java">dispatch action
+</code></pre>
+<p>  时， </p>
+<pre><code class="java">state
+</code></pre>
+<p> 会被立即更新。若需要引入异步数据流，Redux官方则建议使用中间件来增强 </p>
+<pre><code class="java">createStore
+</code></pre>
+<p> 的能力，它对外暴露了 </p>
+<pre><code class="java">applyMiddleware
+</code></pre>
+<p> 函数，接受任意个中间件作为入参，返回作为 </p>
+<pre><code class="java">createStore
+</code></pre>
+<p> 的入参的值 </p>
+<pre><code class="java">  <span class="comment">// 引入 redux</span>
+<span class="keyword">import</span> { createStore } from <span class="string">'redux'</span>
+<span class="comment">// 创建 store</span>
+<span class="keyword">const</span> store = createStore(
+    reducer,
+    initial_state,
+    applyMiddleware(middleware1, middleware2, ...)
+);
+
+</code></pre>
+<h4 id="三、中间件的机制"><a href="#三、中间件的机制" class="headerlink" title="三、中间件的机制"></a>三、中间件的机制</h4><p> 我们顺着中间件引入的角度，简单提取一下 </p>
+<pre><code class="java">applyMiddleware
+</code></pre>
+<p> 源码框架，更加深刻的理解  </p>
+<pre><code class="java">applyMiddleware
+</code></pre>
+<p>  是如何与  </p>
+<pre><code class="java">createStore
+</code></pre>
+<p>  配合工作的？ </p>
+<pre><code class="java">  <span class="comment">// 使用“...”运算符将入参收敛为一个数组</span>
+<span class="function">function <span class="title">applyMiddleware</span><span class="params">(...middlewares)</span> </span>{
+
+  <span class="comment">// createStore 对应的是 createStore 函数本身，而 args 入参则对应的是 createStore 函数 约定的入参 reducer 和 preloadedState</span>
+  <span class="keyword">return</span> createStore =&gt; (...args) =&gt; {
+
+      <span class="comment">// 调用 `createStore`，创建一个 `store`</span>
+      <span class="keyword">const</span> store = createStore(...args)
+      <span class="comment">// 避免在接下来中间件的串联过程中，dispatch 被调用，即 不允许在构建中间件时进行调度</span>
+      let dispatch = () =&gt; {
+          <span class="keyword">throw</span> <span class="keyword">new</span> Error(`Dispatching <span class="keyword">while</span> constructing your middleware is not allowed. ` + `Other middleware would not be applied to <span class="keyword">this</span> dispatch.`)
+      }
+
+      ......下面代码依次放在此处......
+
+  }
+}
+
+</code></pre>
+<p> 当 </p>
+<pre><code class="java">dispatch action
+</code></pre>
+<p>  时， </p>
+<pre><code class="java">action
+</code></pre>
+<p>  必须是一个普通对象，但使用过中间件的同学会发现  </p>
+<pre><code class="java">action
+</code></pre>
+<p>  是允许为函数的，这背后 </p>
+<pre><code class="java">applyMiddleware
+</code></pre>
+<p>  是如何改写 </p>
+<pre><code class="java">dispatch
+</code></pre>
+<p> 函数的？ </p>
+<p>1、以  </p>
+<pre><code class="java">middlewareAPI
+</code></pre>
+<p>  作为中间件的入参，逐个调用传入的中间件，获取一个由“内层函数”组成的数组  </p>
+<pre><code class="java">chain
+</code></pre>
+<pre><code class="java">  <span class="keyword">const</span> middlewareAPI = {
+  getState: store.getState,
+  dispatch: (...args) =&gt; dispatch(...args)
+}
+
+<span class="keyword">const</span> chain = middlewares.map(middleware =&gt; middleware(middlewareAPI))
+
+</code></pre>
+<p>2、调用  </p>
+<pre><code class="java">compose
+</code></pre>
+<p>  函数，将  </p>
+<pre><code class="java">chain
+</code></pre>
+<p>  中的 “内层函数” 逐个组合起来，并调用最终组合出来的函数，传入  </p>
+<pre><code class="java">dispatch
+</code></pre>
+<p>  作为入参 </p>
+<pre><code class="java">dispatch = compose(...chain)(store.dispatch)
+
+</code></pre>
+<p>3、返回一个新的  </p>
+<pre><code class="java">store
+</code></pre>
+<p>  对象，这个  </p>
+<pre><code class="java">store
+</code></pre>
+<p>  对象的  </p>
+<pre><code class="java">dispatch
+</code></pre>
+<p>  已经被改写过了 </p>
+<pre><code class="java">  <span class="keyword">return</span> {
+  ...store,
+  dispatch
+}
+
+</code></pre>
+<p> 最后，我们深剖一下函数式编程中一个通用的概念，函数合成（ </p>
+<pre><code class="java">compose
+</code></pre>
+<p>  函数） </p>
+<pre><code class="java">  <span class="comment">// 利用 ... 运算符将入参收敛为数组格式</span>
+<span class="function">function <span class="title">compose</span><span class="params">(...funcs)</span> </span>{
+  <span class="comment">// 处理数组为空的边界情况</span>
+  <span class="keyword">if</span> (funcs.length === <span class="number">0</span>) {
+    <span class="keyword">return</span> arg =&gt; arg
+  }
+  <span class="comment">// 若只有一个函数，也就谈不上组合，直接返回</span>
+  <span class="keyword">if</span> (funcs.length === <span class="number">1</span>) {
+    <span class="keyword">return</span> funcs[<span class="number">0</span>]
+  }
+  <span class="comment">// 若有多个函数，那么调用 reduce 方法来实现函数的组合</span>
+  <span class="keyword">return</span> funcs.reduce((a, b) =&gt; (...args) =&gt; a(b(...args)))
+}
+
+</code></pre>
+<pre><code class="java">reduce
+</code></pre>
+<p>  会将数组中的每个元素执行指定的逻辑，并将结果汇总为单个返回值，假设有这样一个  </p>
+<pre><code class="java">compose
+</code></pre>
+<p>  调用 </p>
+<pre><code class="java">compose(f1,f2,f3,f4)
+
+</code></pre>
+<p>函数会被组合成这样的形式 </p>
+<pre><code class="java">(...args) =&gt; f1(f2(f3(f4(...args))))
+
+</code></pre>
+<p>即 </p>
+<pre><code class="java">f1,f2,f3,f4
+</code></pre>
+<p> 这4个中间件的内层逻辑会被组合到一个函数中去，当这个函数被调用时，中间件会依次被调用 </p>
+<h4 id="四、中间件的工作模式"><a href="#四、中间件的工作模式" class="headerlink" title="四、中间件的工作模式"></a>四、中间件的工作模式</h4><p>从中间件的机制中，我们知道 任何的中间件都可以用自己的方式解析 </p>
+<pre><code class="java">dispatch
+</code></pre>
+<p> 的内容，并继续传递 </p>
+<pre><code class="java">actions
+</code></pre>
+<p>  给下一个中间件。但注意：当最后一个中间件开始  </p>
+<pre><code class="java">dispatch action
+</code></pre>
+<p>  时， </p>
+<pre><code class="java">action
+</code></pre>
+<p>  必须是一个普通对象，因为这是同步式的  </p>
+<pre><code class="java">Redux
+</code></pre>
+<p>  数据流 开始的地方。 </p>
+<h5 id="1、redux-thunk源码解析"><a href="#1、redux-thunk源码解析" class="headerlink" title="1、redux-thunk源码解析"></a>1、redux-thunk源码解析</h5><p>我们以为例，探究下中间件的工作模式 接下来，我们透过redux-thunk中间件的源码分析，验证上面的结论： </p>
+<pre><code class="java">  <span class="function">function <span class="title">createThunkMiddleware</span><span class="params">(extraArgument)</span> </span>{
+  <span class="comment">// 返回值是一个 thunk，它是一个函数</span>
+  <span class="keyword">return</span> ({ dispatch, getState }) =&gt; (next) =&gt; (action) =&gt; {
+
+    <span class="comment">// thunk 若感知到 action 是一个函数，就会执行 action</span>
+    <span class="keyword">if</span> (typeof action === <span class="string">'function'</span>) {
+      <span class="keyword">return</span> action(dispatch, getState, extraArgument);
+    }
+
+    <span class="comment">// 若 action 不是一个函数，则不处理，直接放过</span>
+    <span class="keyword">return</span> next(action);
+  };
+}
+
+<span class="keyword">const</span> thunk = createThunkMiddleware(); <span class="comment">// 创建 thunk</span>
+thunk.withExtraArgument = createThunkMiddleware;
+
+export <span class="keyword">default</span> thunk;
+
+</code></pre>
+<p>从 </p>
+<pre><code class="java">redux-thunk
+</code></pre>
+<p> 源码层面可知道，它主要做的一件事就是 拦截到 </p>
+<pre><code class="java">action
+</code></pre>
+<p> 后，检查它是否是一个函数 </p>
+<p> 若是函数，则执行它并返回执行的结果<br> 若不是函数，则直接调用 </p>
+<pre><code class="java">next
+</code></pre>
+<p> ，工作流继续往下走 </p>
+<h5 id="2、redux-thunk-模拟付款请求"><a href="#2、redux-thunk-模拟付款请求" class="headerlink" title="2、redux-thunk 模拟付款请求"></a>2、redux-thunk 模拟付款请求</h5><p>现在，我们假设有这样一个需求：我们需要感知每一次付款请求的发送和响应，并处理请求的结果 </p>
+<p> 引入 </p>
+<pre><code class="java">  <span class="keyword">import</span> axios from <span class="string">'axios'</span> 
+<span class="keyword">import</span> { createStore, applyMiddleware } from <span class="string">'redux'</span>;
+<span class="keyword">import</span> thunk from <span class="string">'redux-thunk'</span>;
+<span class="keyword">import</span> reducer from <span class="string">'./reducers'</span>;
+
+<span class="keyword">const</span> store = createStore(
+  reducer,
+  applyMiddleware(thunk)
+);
+
+</code></pre>
+<p> dispatch 一个 action，action 是一个函数 </p>
+<pre><code class="java">store.dispatch(payMoney(payInfo));
+
+</code></pre>
+<p> payMoney 的返回值是一个函数 </p>
+<pre><code class="java">  <span class="comment">// 支付信息</span>
+<span class="keyword">const</span> payInfo = {
+  userName: huamu,
+  password: xxx,
+  count: <span class="number">1000000</span>
+}
+
+<span class="keyword">const</span> payMoney = (payInfo) =&gt; (dispatch) =&gt; {
+  <span class="comment">// 付款前发出准备信号</span>
+  dispatch({ type: <span class="string">'payStart'</span> })
+
+  fetch().then(res =&gt; { dispatch()})
+
+  <span class="keyword">return</span> axios.post(<span class="string">'/api/payMoney'</span>, {payInfo})
+      .then(function (response) {
+        console.log(response);
+        <span class="comment">// 付款成功信号</span>
+        dispatch({ type: <span class="string">'paySuccess'</span> })
+      })
+      .<span class="keyword">catch</span>(function (error) {
+        console.log(error);
+        <span class="comment">// 付款失败信号</span>
+        dispatch({ type: <span class="string">'payError'</span> })
+      });
+}
+
+</code></pre>
+<h5 id="3、"><a href="#3、" class="headerlink" title="3、"></a>3、</h5><pre><code class="java">Redux
+</code></pre>
+<p> 的工作流<br><img src="https://oscimg.oschina.net/oscnet/up-5c4a6b4fe5984b704e3479898fe3091c3d9.png" alt="Test" title="Redux 中间件 到底怎么工作的呢-"><br>结合上面的分析，中间件的工作模式有如下两点可掌握 </p>
+<p> 中间件的执行时机：在 </p>
+<pre><code class="java">action
+</code></pre>
+<p> 被分发之后、 </p>
+<pre><code class="java">reducer
+</code></pre>
+<p> 触发之前<br> 中间件的执行前提： </p>
+<pre><code class="java">applyMiddleware
+</code></pre>
+<p> 函数对 </p>
+<pre><code class="java">dispatch
+</code></pre>
+<p> 函数进行改写，使得 </p>
+<pre><code class="java">dispatch
+</code></pre>
+<p> 触发 </p>
+<pre><code class="java">reducer
+</code></pre>
+<p> 之前，执行 </p>
+<pre><code class="java">Redux
+</code></pre>
+<p> 中间件的链式调用。 </p>
+
+            <div class="post-copyright">
+    <div class="content">
+        
+          <p>本文标题： 推荐系列-Redux 中间件 到底怎么工作的呢-</p>
+        
+        
+          <p>本文作者： OSChina</p>
+        
+        <p>发布时间： 2021年04月15日 10:08</p>
+        <p>最后更新： 2021年07月23日 23:43</p>
+        <p>原始链接： <a class="post-url" href="/f696668e/" title="推荐系列-Redux 中间件 到底怎么工作的呢-">https://www.hosiang.cn/f696668e/</a></p>
+        <p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p>
+        <footer>
+            <a href="https://www.hosiang.cn">
+                <img src="/../images/logo.png" alt="Howe Hsiang">
+                Howe Hsiang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喜欢就赞赏一下呗！
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt" style="padding-top: 11px !important;"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/f696668e/" data-title="Facebook" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-facebook" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-Redux 中间件 到底怎么工作的呢-》 — 狂欢马克思&url=https://www.hosiang.cn/f696668e/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-twitter" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/f696668e/" data-title="Google+" rel="external nofollow noopener noreferrer">
+              <i class="fa fa-google-plus" style="padding-top: 9px !important;"></i>
+            </a>
+          </li>
+            <li>
+                <a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/f696668e/&title=《推荐系列-Redux 中间件 到底怎么工作的呢-》 — 狂欢马克思&source=&emsp;&emsp;中间件其实不仅仅是Redux专利，在Node框架中也有应用，比如koa，这里我们简单的默认为Redux 中间件，在进入正题前，先了..." data-title="QQ" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-qq" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信">
+                    <i class="fa fa-weixin" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+            <li>
+                <a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/f696668e/&title=《推荐系列-Redux 中间件 到底怎么工作的呢-》 — 狂欢马克思&pic=https://oscimg.oschina.net/oscnet/up-5c4a6b4fe5984b704e3479898fe3091c3d9.png" data-title="微博" rel="external nofollow noopener noreferrer">
+                    <i class="fa fa-weibo" style="padding-top: 9px !important;"></i>
+                </a>
+            </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/f696668e/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Popular/" class="color3">Popular</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一、中间件与面向切面编程-AOP"><span class="post-toc-text">一、中间件与面向切面编程(AOP)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#二、中间件的引入"><span class="post-toc-text">二、中间件的引入</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#三、中间件的机制"><span class="post-toc-text">三、中间件的机制</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#四、中间件的工作模式"><span class="post-toc-text">四、中间件的工作模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1、redux-thunk源码解析"><span class="post-toc-text">1、redux-thunk源码解析</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2、redux-thunk-模拟付款请求"><span class="post-toc-text">2、redux-thunk 模拟付款请求</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3、"><span class="post-toc-text">3、</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/deb1c29e/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          推荐系列-DolphinDB内存管理详解
+        
+      </span>
+    </a>
+  
+  
+    <a href="/330deab5/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">推荐系列-分享GitHub上的7个热门TypeScript项目</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="gitalk"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+      repo: 'bolg-comment',
+      owner: 'Hosiang1026',
+      admin: 'Hosiang1026',
+      clientID:  '37a2dd4473e8970cecc2',
+      clientSecret: 'e30efa17d86d9de4f4ab810872dc62a7b2e7e634',
+      pagerDirection: 'last',
+      distractionFreeMode: true,
+      createIssueManually: false
+    });
+gitalk.render('gitalk');
+</script>
+      
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <script id="_wau78w">var _wau = _wau || []; _wau.push(["small", "5dnguv4c2n", "78w"]);</script>
+      <script async src="//waust.at/s.js"></script>
+      <p>
+        <!-- Hosted by <a href="https://pages.coding.me" style="font-weight: bold" rel="external nofollow">Coding Pages</a> 
+        <a>Howe Hsiang</a>
+        <br>-->
+        
+    <span id="busuanzi_container_site_uv" style="display:none">
+     <span class="post-count">
+        总字数：<span>1241.2k</span>
+     </span>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+  <br>
+
+
+         <span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+         <br>
+        Copyright&copy; 2018 - 2021 狂欢马克思
+        <a href="http://www.beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">
+          京ICP备17060439号</a>
+      </p>
+    </div>
+  </div>
+  <script>
+      var now = new Date();
+      function createtime() {
+          //此处修改你的建站时间或者网站上线时间
+          var grt= new Date("2017/09/18");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+   setInterval("createtime()",800);
+  </script>
+</footer>
+
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+<script>
+  var mihoConfig = {
+      root: "https://www.hosiang.cn",
+      animate: "true",
+      isHome: "false",
+      share: "true",
+      reward:" 1"
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/兴趣爱好/">兴趣爱好</a><a class="category-link" href="/categories/其他开发/">其他开发</a><a class="category-link" href="/categories/前沿开发/">前沿开发</a><a class="category-link" href="/categories/前端开发/">前端开发</a><a class="category-link" href="/categories/升级版本/">升级版本</a><a class="category-link" href="/categories/博客教程/">博客教程</a><a class="category-link" href="/categories/后端开发/">后端开发</a><a class="category-link" href="/categories/操作系统/">操作系统</a><a class="category-link" href="/categories/日常记录/">日常记录</a><a class="category-link" href="/categories/热门文章/">热门文章</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+    <a href="javascript:" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">导航</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>归档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/gitbook">
+                    <i class="fa fa-columns"></i><span>笔记</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/music?id=91451362">
+                    <i class="fa fa-music"></i><span>音乐</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/photo">
+                    <i class="fa fa-picture-o"></i><span>相册</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/love">
+                    <i class="fa fa-heart"></i><span>恋爱</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/collection">
+                    <i class="fa fa-envira"></i><span>收藏</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">标签</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/AliGenie/" style="font-size: 10px;">AliGenie</a> <a href="/tags/Alipay/" style="font-size: 10px;">Alipay</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Blockchain/" style="font-size: 17.5px;">Blockchain</a> <a href="/tags/CQRS/" style="font-size: 10px;">CQRS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Guitar/" style="font-size: 10px;">Guitar</a> <a href="/tags/Hackintosh/" style="font-size: 12.5px;">Hackintosh</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 10px;">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/Kali-Linux/" style="font-size: 10px;">Kali Linux</a> <a href="/tags/Life/" style="font-size: 17.5px;">Life</a> <a href="/tags/Mac-OS/" style="font-size: 12.5px;">Mac OS</a> <a href="/tags/MultiThread/" style="font-size: 10px;">MultiThread</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/Popular/" style="font-size: 20px;">Popular</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SaaS/" style="font-size: 10px;">SaaS</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spring/" style="font-size: 17.5px;">Spring</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"log":false});</script></body>
+

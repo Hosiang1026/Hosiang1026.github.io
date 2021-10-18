@@ -14,9 +14,9 @@
  
 ### 导航网站
 
-<a href="http://byr.wiki" target="bank">北邮人导航</a>  | <a href="https://tongji.baidu.com/web/welcome/ico?s=3cd8fa109426bf3f10bd5c362175bace" target="bank">网站统计</a> 
+<a href="http://byr.wiki" target="bank">北邮人导航</a>  | <a href="http://wanyouw.com" target="bank">万有导航</a> 
    ---|---|---
-<a href="http://lackar.com/aa/" target="bank">AnywhereAnything</a> | <a href="https://whos.amung.us/stats/readers/5dnguv4c2n" target="bank">在线统计</a> 
+<a href="http://lackar.com/aa/" target="bank">AnywhereAnything</a> |  <a href="https://tongji.baidu.com/web/welcome/ico?s=3cd8fa109426bf3f10bd5c362175bace" target="bank">网站统计</a>
   
 ### 影视网站
 

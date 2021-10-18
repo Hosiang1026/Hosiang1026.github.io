@@ -21,11 +21,11 @@
 
 
 <div id="wrapper">
-  <span class="title" >LOVE  💕  DAYS</span>
+  <!-- <span class="title" >LOVE  💕  DAYS</span> -->
 
   <div id="clock-box">
       <div id="clock">
-          <date></date> 
+           <date></date>
           <time>00:00:00</time>
       </div>
   </div>

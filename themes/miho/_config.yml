@@ -53,12 +53,7 @@ menu:
     #title: 云盘
     #url: http://hosiang.ccaeo.com/skydrive
     #target: true
-
-  #film:
-    #title: 影视
-    #url: http://hosiang.ccaeo.com
-    #target: true
-
+    
   music:
     title: 音乐
     url: /music?id=91451362    
@@ -78,7 +73,12 @@ menu:
     title: 收藏
     url: /collection
     target: false
-
+    
+  gamepad:
+    title: 游戏
+    url: https://www.yikm.net
+    target: true
+    
   user:
     title: 关于
     url: /about

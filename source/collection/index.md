@@ -33,13 +33,13 @@
 ### 软件网站
 
    <a href="https://osx.cx" target="bank">黑苹果社区</a> | <a href="http://bbs.pcbeta.com" target="bank">远景论坛</a> | <a href="https://www.macw.cn" target="bank">麦克坞</a> 
-     ---|---|---
+   ---|---|---
    <a href="https://imac.hk" target="bank">黑苹果乐园</a> | <a href="https://www.appinn.com" target="bank">小众软件</a> | <a href="#" target="bank">-</a> 
     
  ### 教学网站
 
    <a href="https://www.51zxw.net" target="bank">我要自学网</a> | <a href="https://www.imooc.com" target="bank">慕课网</a> | <a href="https://www.w3cschool.cn/" target="bank">w3cschool</a> 
-      ---|---|---
+   ---|---|---
    <a href="http://www.16xx8.com" target="bank">PS教程自学网</a> | <a href="https://open.163.com" target="bank">网易公开课</a> | <a href="#" target="bank">-</a> 
      
  ### 技术网站
@@ -50,7 +50,7 @@
   
  ### 技术博客
 
-   <a href="https://tech.meituan.com" target="bank">美团技术团队博客</a> | <a href="https://www.liaoxuefeng.com" target="bank">廖雪峰网站</a>  | <a href="https://wangwei.one" target="bank">维新工坊</a>  | <a href="http://www.ityouknow.com" target="bank">纯洁的微笑</a>  | <a href="https://www.fangzhipeng.com" target="bank">方志朋博客</a>  
-      ---|---|---|---|---
-   <a href="#" target="bank">-</a> | <a href="http://www.ruanyifeng.com" target="bank">阮一峰网站</a> | <a href="http://blog.didispace.com" target="bank">程序猿DD</a>  | <a href="http://www.iocoder.cn" target="bank">芋道源码</a> | <a href="#" target="bank">-</a> 
+   <a href="https://tech.meituan.com" target="bank">美团技术团队博客</a> | <a href="https://www.liaoxuefeng.com" target="bank">廖雪峰网站</a>  | <a href="https://wangwei.one" target="bank">维新工坊</a>  | <a href="http://www.ityouknow.com" target="bank">纯洁的微笑</a> 
+   ---|---|---|---
+   <a href="http://www.ruanyifeng.com" target="bank">阮一峰网站</a> | <a href="http://blog.didispace.com" target="bank">程序猿DD</a>  | <a href="http://www.iocoder.cn" target="bank">芋道源码</a> | <a href="https://www.fangzhipeng.com" target="bank">方志朋博客</a> 
 

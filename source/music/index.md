@@ -14,13 +14,9 @@
 </script>      
 
 
-<iframe id="mainiframe" 
-      frameborder="no"
-      scrolling="no"
-      width="100%" 
-      height="100%" 
-      align="center"
-      src="https://www.postgraduate.top/app.php/music?id=91451362" >
+<iframe id="mainiframe" frameborder="no" scrolling="no" width="100%" height="100%" align="center"
+sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
+src="https://www.postgraduate.top/app.php/music?id=91451362" >
 </iframe>
 
 <script type="text/javascript">

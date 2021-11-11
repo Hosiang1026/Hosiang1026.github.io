@@ -16,21 +16,21 @@ $(function(){
     //获取周末
     //getWeekend();
     
-    //var arr = [1, 2];
-    //var bol = arr[Math.floor(Math.random()*arr.length)];
-    //if(bol == 1){
+    var arr = [1, 2];
+    var bol = arr[Math.floor(Math.random()*arr.length)];
+    if(bol == 1){
       //获取一言
       if($("#hitokoto").length>0){
          getHitokoto();
       }
-    //}
+    }
     
-    //if(bol == 2){
+    if(bol == 2){
      //获取疫情数据
-     //if($("#YQData").length>0){
-      //getYQData();
-     //}
-   // }
+     if($("#YQData").length>0){
+      getYQData();
+     }
+   }
 });
 
 /**

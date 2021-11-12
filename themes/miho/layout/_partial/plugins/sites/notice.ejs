@@ -16,8 +16,13 @@ $(function(){
     //获取周末
     //getWeekend();
     
-    var arr = [1, 2];
-    var bol = arr[Math.floor(Math.random()*arr.length)];
+    //获取一言
+    if($("#hitokoto").length>0){
+     getHitokoto();
+    }
+              
+/*     var arr = [1, 2];
+    var bol = arr[Math.floor(Math.random()*arr.length)];     
     if(bol == 1){
       //获取一言
       if($("#hitokoto").length>0){
@@ -30,7 +35,7 @@ $(function(){
      if($("#YQData").length>0){
       getYQData();
      }
-   }
+   } */
 });
 
 /**

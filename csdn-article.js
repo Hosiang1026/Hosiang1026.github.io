@@ -12,7 +12,7 @@ var arcList = [];
 var newList = [];
 
 //创建表
-callDB.createTables("article");
+//callDB.createTables("article");
 
 crawler(domain);
 
@@ -90,8 +90,8 @@ function crawlerContent() {
                 });
                 //console.log(newList);
                 if (arcList.length == num ){
-                    insertArrData();
-                    callDB.closeDB();
+                    //insertArrData();
+                    //callDB.closeDB();
                 }
                 //nextPage( html );
             });

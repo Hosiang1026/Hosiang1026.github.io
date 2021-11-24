@@ -11,7 +11,7 @@ var arcList = [];
 var newList = [];
 
 //创建表
-callDB.createTables("article");
+//callDB.createTables("article");
 
 crawler(domain);
 
@@ -101,8 +101,8 @@ function crawlerContent() {
                 });
                 //console.log(newList);
                 if (arcList.length == num ){
-                    insertArrData();
-                    callDB.closeDB();
+                    //insertArrData();
+                    //callDB.closeDB();
                 }
                 //nextPage( html );
             });
@@ -132,9 +132,9 @@ function filterContentHtml(title, html) {
         imageList.each(function(index,item) {
             var imageUrl = item.attribs.src;
             var imgsText = "![Test](" + imageUrl + "  '" + title + "')";
-            item.after(imgsText);
+            //item.after(imgsText);
             //$("div.article-box__content").find(".content").find("img").append("![Test]("+imageUrl +"  '" +title+"')");
-            //$("div.article-box__content").find(".content").find("img")[index] =  "![Test](" + imageUrl + "  '" + title + "')";
+            $("div.article-box__content").find(".content").find("img")[index] = imgsText;
         });
     }
 

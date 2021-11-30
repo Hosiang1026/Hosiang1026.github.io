@@ -16,7 +16,7 @@
 
 <iframe id="mainiframe" frameborder="no" scrolling="no" width="100%" height="100%" align="center"
 sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
-src="https://song.postgraduate.top" >
+src="https://song.postgraduate.top/#/music/toplist" >
 </iframe>
 
 <script type="text/javascript">

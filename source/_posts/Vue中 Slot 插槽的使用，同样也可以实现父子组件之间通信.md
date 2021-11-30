@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-「后端小伙伴来学前端了」Vue中 Slot 插槽的使用，同样也可以实现父子组件之间通信
+title: 推荐系列-Vue中 Slot 插槽的使用，同样也可以实现父子组件之间通信
 categories: 热门文章
 tags:
   - Popular

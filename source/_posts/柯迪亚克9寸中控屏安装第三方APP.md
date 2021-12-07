@@ -52,7 +52,7 @@ date: 2021-11-29 00:00:00
 ![Popular](/photo/album/image/image_159.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 
-### 四、问题
+### 三、问题
 
 1. 安装失败，提示INSTALL_FAILED_OLDER_SDK
 
@@ -68,7 +68,7 @@ APP需要Android 4.0以平台运行，而中控屏系统版本为1.3
 
 ![Popular](/photo/album/image/image_161.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
-### 五、参考
+### 四、参考
 
 集结一下相关可参考的帖子，adb文件，可以以帖子里载，或者百度下载一个
 
@@ -80,7 +80,7 @@ https://club.autohome.com.cn/bbs/thread/84fffc2a4d664764/86248552-1.html
 
 https://club.autohome.com.cn/bbs/thread/532d43b11f73ae35/81904759-1.html
 
-### 六、附件
+### 五、附件
 
 附件清单(链接待更新)
 

@@ -82,12 +82,16 @@ https://club.autohome.com.cn/bbs/thread/532d43b11f73ae35/81904759-1.html
 
 ### 五、附件
 
-附件清单(链接待更新)
+附件清单
 
-1.adb工具
-2.SkodaEQ
-3.电视家
-4.高德地图
-5.网易云音乐
+1.adb工具  [https://www.hosiang.cn/cheji/adb-tools.zip](https://www.hosiang.cn/cheji/adb-tools.zip)
+
+2.SkodaEQ [https://www.hosiang.cn/cheji/SkodaEQ.apk](https://www.hosiang.cn/cheji/SkodaEQ.apk)
+
+3.电视家   [https://www.hosiang.cn/cheji/dainshijia.apk](https://www.hosiang.cn/cheji/dainshijia.apk)
+
+4.高德地图 [https://www.hosiang.cn/cheji/gaode.apk](https://www.hosiang.cn/cheji/gaode.apk)
+
+5.酷我音乐 [https://www.hosiang.cn/cheji/kuwoMusic.apk](https://www.hosiang.cn/cheji/kuwoMusic.apk)
 
 

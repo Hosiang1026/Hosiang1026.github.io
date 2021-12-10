@@ -23,6 +23,9 @@
 
 ####  3. 添加畅言评论和音乐
 
+## 报错OpenSSL SSL_read: Connection was reset, errno 10054
+
+    git config --global http.sslVerify "false"
 
 ## 执行hexo server提示找不到该指令 
 

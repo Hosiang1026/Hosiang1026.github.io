@@ -23,6 +23,15 @@
 
 ####  3. 添加畅言评论和音乐
 
+## 自动更新
+
+    npm update //更新插件和Hexo版本
+    npm outdated //检查插件更新
+    npm install --save //开始更新
+    hexo version //查看当前版本号
+
+开始更新
+
 ## 报错OpenSSL SSL_read: Connection was reset, errno 10054
 
     git config --global http.sslVerify "false"
@@ -36,6 +45,7 @@
 
 安装此server后再试，问题解决。
 
+    npm install -g hexo-cli
     npm install hexo-deployer-git --save
     
     npm install hexo-renderer-ejs --save

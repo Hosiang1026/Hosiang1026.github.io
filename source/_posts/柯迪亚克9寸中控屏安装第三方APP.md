@@ -90,8 +90,3 @@ https://club.autohome.com.cn/bbs/thread/532d43b11f73ae35/81904759-1.html
 
 3.电视家   [https://www.hosiang.cn/cheji/dainshijia.apk](https://www.hosiang.cn/cheji/dainshijia.apk)
 
-4.高德地图 [https://www.hosiang.cn/cheji/gaode.apk](https://www.hosiang.cn/cheji/gaode.apk)
-
-5.酷我音乐 [https://www.hosiang.cn/cheji/kuwoMusic.apk](https://www.hosiang.cn/cheji/kuwoMusic.apk)
-
-

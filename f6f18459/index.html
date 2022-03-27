@@ -1,0 +1,694 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="Access-Control-Allow-Origin" content="*"><script type="text/javascript">var start_time=(new Date).getTime()</script><meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0"><meta name="baidu-site-verification" content="RYlYHsgO7Y"><meta name="sogou_site_verification" content="MSmrTj7lHV"><meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"><meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be"><title>推荐系列-微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端 | 狂欢马克思</title><meta name="keywords" content="分享技术经验与交流"><meta name="description" content="&amp;emsp;&amp;emsp;作者：Cony 导语：微服务开源框架TARS的RPC调用包含客户端与服务端，《微服务开源框架TARS的RPC源码解析》系列文章将从初识客户端、客户端的同步及异步调用、初识服务端、服务端的工作流程四…"><meta property="og:type" content="article"><meta property="og:title" content="推荐系列-微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"><meta property="og:url" content="https://www.hosiang.cn/f6f18459/index.html"><meta property="og:site_name" content="狂欢马克思"><meta property="og:description" content="&amp;emsp;&amp;emsp;作者：Cony 导语：微服务开源框架TARS的RPC调用包含客户端与服务端，《微服务开源框架TARS的RPC源码解析》系列文章将从初识客户端、客户端的同步及异步调用、初识服务端、服务端的工作流程四…"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><meta property="article:published_time" content="2021-04-15T01:19:21.000Z"><meta property="article:modified_time" content="2022-03-27T01:29:07.815Z"><meta property="article:author" content="Howe Hsiang"><meta property="article:tag" content="Popular"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG"><link rel="icon" href="/images/favicon.ico"><link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/style.css"><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script"),t=(e.src="https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace",document.getElementsByTagName("script")[0]);t.parentNode.insertBefore(e,t)}()</script><script></script><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 5.4.1"></head><script src="/js/jquery.min.js"></script><script src="/js/pace.min.js"></script><script src="/js/crypto-js.js"></script><script src="/js/cookie.js"></script><script src="/js/calendar.js"></script><script src="/js/festival.js"></script><script>getFestival()</script><body><script>window.onload=function(){document.getElementById("TimeShow").innerHTML="本站耗时 "+((new Date).getTime()-start_time)/1e3+" 秒 "}</script><div id="container"><header id="header"><div id="banner"></div><div id="header-outer"><div id="header-menu" class="header-menu-pos animated"><div class="header-menu-container"><a href="/" class="left"><span class="site-title">狂欢马克思</span></a><nav id="header-menu-nav" class="right"><a href="/" rel="external nofollow"><i class="fa fa-home"></i> <span>主页</span> </a><a href="/archives" rel="external nofollow"><i class="fa fa-archive"></i> <span>归档</span> </a><a href="/gitbook" rel="external nofollow"><i class="fa fa-columns"></i> <span>笔记</span> </a><a href="/photo" rel="external nofollow"><i class="fa fa-picture-o"></i> <span>相册</span> </a><a href="/love" rel="external nofollow"><i class="fa fa-heart"></i> <span>恋爱</span> </a><a href="/collection" rel="external nofollow"><i class="fa fa-envira"></i> <span>收藏</span> </a><a href="/about" rel="external nofollow"><i class="fa fa-user"></i> <span>关于</span></a></nav><a class="mobile-header-menu-button"><i class="fa fa-bars"></i></a></div></div><div id="header-row"><div id="logo"><a href="/"><img src="/../images/logo.png" alt="logo"></a></div><div class="header-info"><div id="header-title"><h2>狂欢马克思</h2></div><div id="header-description"><h3>专注Web开发</h3></div></div><nav class="header-nav"><div class="social"><a title="Github" target="_blank" href="//github.com/Hosiang1026" rel="external nofollow"><i class="fa fa-github fa-2x"></i></a> <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes" rel="external nofollow"><i class="fa fa-qq fa-2x"></i></a> <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969" rel="external nofollow"><i class="fa fa-weibo fa-2x"></i></a></div></nav></div><div id="noticeId" class="show" style="background:rgb(244,247,247,.3)"><marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop()" onmouseout="this.start()"></marquee></div><script type="text/javascript">function browserRedirect(){var i=navigator.userAgent.toLowerCase(),n="ipad"==i.match(/ipad/i),o="iphone os"==i.match(/iphone os/i),a="midp"==i.match(/midp/i),t="rv:1.2.3.4"==i.match(/rv:1.2.3.4/i),e="ucweb"==i.match(/ucweb/i),s="android"==i.match(/android/i),d="windows ce"==i.match(/windows ce/i),i="windows mobile"==i.match(/windows mobile/i),p="",r=randomColor(),p=n||o||a||t||e||s||d||i?($("#noticeId").css({"line-height":"1.6em"}),"<font style='color:"+r+"' face='新华宋体'  size='2'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='hitokoto'></span></span></span><span id='YQData'></font> "):($("#noticeId").css({"line-height":"3.6em","margin-top":"20px"}),"<font style='color:"+r+"' face='新华宋体'  size='6'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='hitokoto'></span></span><span id='YQData'></span></font> ");$("#noticeMar").html(p)}function randomColor(){for(var i="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f".split(","),n="#",o=0;o<6;o++)n+=i[Math.floor(16*Math.random())];return n}$(function(){browserRedirect(),0<$("#hitokoto").length&&getHitokoto()})</script></div></header><script>console.log=function(){}</script><div class="outer"><section id="main" class="body-wrap"><article id="post-微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端" class="article article-type-post" itemscope itemprop="blogPost"><div class="article-inner"><header class="article-header"><h1 class="post-title" itemprop="name">推荐系列-微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端</h1><div class="post-title-bar"><ul><li><i class="fa fa-book"></i> <a href="/categories/热门文章/">热门文章</a></li><li><i class="fa fa-calendar"></i> 2021-04-15</li><li><i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span></li><li><span class="post-count">字数统计: 9.6k字</span></li><li><span class="post-count">阅读时长: 39分钟</span></li></ul></div></header><div class="article-entry post-content" itemprop="articleBody"><p>&emsp;&emsp;作者：Cony 导语：微服务开源框架TARS的RPC调用包含客户端与服务端，《微服务开源框架TARS的RPC源码解析》系列文章将从初识客户端、客户端的同步及异步调用、初识服务端、服务端的工作流程四…<br><span id="more"></span></p><pre><code>![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  &apos;微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端&apos;) 
+</code></pre><p>作者：Cony<br>导语：微服务开源框架TARS的RPC调用包含客户端与服务端，《微服务开源框架TARS的RPC源码解析》系列文章将从初识客户端、客户端的同步及异步调用、初识服务端、服务端的工作流程四部分，以C++语言为载体，深入浅出地带你了解TARS RPC调用的原理。</p><h4 id="什么是TARS"><a href="#什么是TARS" class="headerlink" title="什么是TARS"></a>什么是TARS</h4><p>TARS是腾讯使用十年的微服务开发框架，目前支持C++、Java、PHP、Node.js、Go语言。该开源项目为用户提供了涉及到开发、运维、以及测试的一整套微服务平台PaaS解决方案，帮助一个产品或者服务快速开发、部署、测试、上线。目前该框架应用在腾讯各大核心业务，基于该框架部署运行的服务节点规模达到数十万。<br>TARS的通信模型中包含客户端和服务端。客户端服务端之间主要是利用RPC进行通信。本系列文章分上下两篇，对RPC调用部分进行源码解析。本文是下篇，我们将以C++语言为载体，带大家了解一下TARS的服务端。</p><h4 id="初识服务端"><a href="#初识服务端" class="headerlink" title="初识服务端"></a>初识服务端</h4><p>在使用TARS构建RPC服务端的时候，TARS会帮你生成一个XXXServer类，这个类是继承自Application类的，声明变量XXXServer g_app，以及调用函数：</p><pre><code class="java">  g_app.main(argc, argv);
+g_app.waitForShutdown();
+
+</code></pre><p>便可以开启TARS的RPC服务了。在开始剖析TARS的服务端代码之前，先介绍几个重要的类，让大家有一个大致的认识。</p><h5 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h5><p>正如前面所言，一个服务端就是一个Application，Application帮助用户读取配置文件，根据配置文件初始化代理（假如这个服务端需要调用其他服务，那么就需要初始化代理了）与服务，新建以及启动网络线程与业务线程。</p><h5 id="TC-EpollServer"><a href="#TC-EpollServer" class="headerlink" title="TC_EpollServer"></a>TC_EpollServer</h5><p>TC_EpollServer才是真正的服务端，如果把Application比作风扇，那么TC_EpollServer就是那个马达。TC_EpollServer掌管两大模块——网络模块与业务模块，就是下面即将介绍的两个类。</p><h5 id="NetThread"><a href="#NetThread" class="headerlink" title="NetThread"></a>NetThread</h5><p>代表着网络模块，内含TC_Epoller作为IO复用，TC_Socket建立socket连接，ConnectionList记录众多对客户端的socket连接。任何与网络相关的数据收发都与NetThread有关。在配置文件中，利用/tars/application/server 下的netthread配置NetThread的个数</p><h5 id="HandleGroup与Handle"><a href="#HandleGroup与Handle" class="headerlink" title="HandleGroup与Handle"></a>HandleGroup与Handle</h5><p>代表着业务模块，Handle是执行PRC服务的一个线程，而众多Handle组成的HandleGroup就是同一个RPC服务的一组业务线程了。业务线程负责调用用户定义好的服务代码，并将处理结果放到发送缓存中等待网络模块发送，下文将会详细讲解业务线程如何调用用户定义的代码的，这里用到了简单的C++反射，这点在很多资料中都没有被提及。在配置文件中，利用/tars/application/server/xxxAdapter 下的threads配置一个HandleGroup中的Handle（业务线程）的个数。</p><h5 id="BindAdapter"><a href="#BindAdapter" class="headerlink" title="BindAdapter"></a>BindAdapter</h5><p>代表一个RPC服务实体，在配置文件中的/tars/application/server下面的xxxAdapter就是对BindAdapter的配置，一个BindAdapter代表一个服务实体，看其配置就知道BindAdapter的作用是什么了，其代表一个RPC服务对外的监听套接字，还声明了连接的最大数量，接收队列的大小，业务线程数，RPC服务名，所使用的协议等。<br>BindAdapter本身可以认为是一个服务的实例，能建立真实存在的监听socket并对外服务，与网络模块NetThread以及业务模块HandleGroup都有关联，例如，多个NetThread的第一个线程负责对BindAdapter的listen socket进行监听，有客户连接到BindAdapter的listen socket就随机在多个NetThread中选取一个，将连接放进被选中的NetThread的ConnectionList中。BindAdapter则通常会与一组HandleGroup进行关联，该HandleGroup里面的业务线程就执行BindAdapter对应的服务。可见，BindAdapter与网络模块以及业务模块都有所关联。<br>好了，介绍完这几个类之后，通过类图看看他们之间的关系：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"><br>服务端TC_EpollServer管理类图中左侧的网络模块与右侧的业务模块，前者负责建立与管理服务端的网络关系，后者负责执行服务端的业务代码，两者通过BindAdapter构成一个整体，对外进行RPC服务。</p><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>与客户端一样，服务端也需要进行初始化，来构建上面所说的整体，按照上面的介绍，可以将初始化分为两模块——网络模块的初始化与业务模块的初始化。初始化的所有代码在Application的void main()以及void waitForQuit()中，初始化包括屏蔽pipe信号，读取配置文件等，这些将忽略不讲，主要看看其如何通过epoll与建立listen socket来构建网络部分，以及如何设置业务线程组构建业务部分。</p><h5 id="TC-EpollServer的初始化"><a href="#TC-EpollServer的初始化" class="headerlink" title="TC_EpollServer的初始化"></a>TC_EpollServer的初始化</h5><p>在初始化网络模块与业务模块之前，TC_EpollServer需要先初始化，主要代码在：</p><pre><code class="java">  <span class="keyword">void</span> Application::main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])
+&#123;
+    ......
+        <span class="comment">//初始化Server部分</span>
+        initializeServer();
+    ......
+&#125;
+
+</code></pre><p>在initializeServer()中会填充ServerConfig里面的各个静态成员变量，留待需要的时候取用。可以看到有_epollServer = new TC_EpollServer(iNetThreadNum)，服务端TC_EpollServer被创建出来，而且网络线程NetThread也被建立出来了：</p><pre><code class="java">  TC_EpollServer::TC_EpollServer(unsigned <span class="keyword">int</span> iNetThreadNum)
+&#123;
+    <span class="keyword">if</span>(_netThreadNum &lt; <span class="number">1</span>)
+    &#123;
+        _netThreadNum = <span class="number">1</span>;
+    &#125;
+    <span class="comment">//网络线程的配置数目不能15个</span>
+    <span class="keyword">if</span>(_netThreadNum &gt; <span class="number">15</span>)
+    &#123;
+        _netThreadNum = <span class="number">15</span>;
+    &#125;
+
+    <span class="keyword">for</span> (size_t i = <span class="number">0</span>; i &lt; _netThreadNum; ++i)
+    &#123;
+        TC_EpollServer::NetThread* netThreads = <span class="keyword">new</span> TC_EpollServer::NetThread(<span class="keyword">this</span>);
+        _netThreads.push_back(netThreads);
+    &#125;
+&#125;
+
+</code></pre><p>此后，其实有一个AdminAdapter被建立，但其与一般的RPC服务BindAdapter不同，这里不展开介绍。<br>好了，TC_EpollServer被构建之后，如何给他安排左（网络模块）右（业务模块）护法呢？</p><h5 id="网络模块初始化"><a href="#网络模块初始化" class="headerlink" title="网络模块初始化"></a>网络模块初始化</h5><p>在讲解网络模块之前，再认真地看看网络模块的相关类图：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"><br>先看看Application中哪些代码与网络模块的初始化有关吧：</p><pre><code class="java">  <span class="keyword">void</span> Application::main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])
+&#123;
+    ......
+        vector&lt;TC_EpollServer::BindAdapterPtr&gt; adapters;
+        <span class="comment">//绑定对象和端口</span>
+        bindAdapter(adapters);
+    ......
+        _epollServer-&gt;createEpoll();
+&#125;
+
+<span class="keyword">void</span> Application::waitForShutdown()
+&#123;
+    waitForQuit();
+    ......
+&#125;
+
+</code></pre><p>网络部分的初始化，离不开建立各RPC服务的监听端口（socket，bind，listen），接收客户端的连接（accept），建立epoll等。那么何时何地调用这些函数呢？大致过程如下图所示：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h6 id="1-创建服务实体的listen-socket"><a href="#1-创建服务实体的listen-socket" class="headerlink" title="1. 创建服务实体的listen socket"></a>1. 创建服务实体的listen socket</h6><p>首先在Application::main()中，调用：</p><pre><code class="java">  vector&lt;TC_EpollServer::BindAdapterPtr&gt; adapters;
+<span class="comment">//绑定对象和端口</span>
+bindAdapter(adapters);
+
+</code></pre><p>在Application::bindAdapter()建立一个个服务实体BindAdapter，通过读取配置文件中的/tars/application/server下面的xxxAdapter来确定服务实体BindAdapter的个数及不同服务实体的配置，然后再调用：</p><pre><code class="java">  BindAdapterPtr bindAdapter = <span class="keyword">new</span> BindAdapter(_epollServer.get());
+_epollServer-&gt;bind(bindAdapter);
+
+</code></pre><p>来确定服务实体的listen socket。可以看到，在TC_EpollServer::bind()中：</p><pre><code class="java">  <span class="keyword">int</span>  TC_EpollServer::bind(TC_EpollServer::BindAdapterPtr &amp;lsPtr)
+&#123;
+    <span class="keyword">int</span> iRet = <span class="number">0</span>;
+    <span class="keyword">for</span>(size_t i = <span class="number">0</span>; i &lt; _netThreads.size(); ++i)
+    &#123;
+        <span class="keyword">if</span>(i == <span class="number">0</span>)
+        &#123;
+            iRet = _netThreads[i]-&gt;bind(lsPtr);
+        &#125;
+        <span class="keyword">else</span>
+        &#123;
+            <span class="comment">//当网络线程中listeners没有监听socket时，list使用adapter中设置的最大连接数作为初始化</span>
+            _netThreads[i]-&gt;setListSize(lsPtr-&gt;getMaxConns());
+        &#125;
+    &#125;
+    <span class="keyword">return</span> iRet;
+&#125;
+
+</code></pre><p>将上文TC_EpollServer的初始化时创建的网络线程组中的第一条网络线程负责创建并监听服务实体的listen socket，那样就可以避免多线程监听同一个fd的惊群效应。<br>可以看到，接下来继续调用NetThread::bind(BindAdapterPtr &amp;lsPtr)，其负责做一些准备工作，实际创建socket的是在NetThread::bind(BindAdapterPtr &amp;lsPtr)中执行的NetThread::bind(const TC_Endpoint &amp;ep, TC_Socket &amp;s)：</p><pre><code class="java">  <span class="keyword">void</span> TC_EpollServer::NetThread::bind(<span class="keyword">const</span> TC_Endpoint &amp;ep, TC_Socket &amp;s)
+&#123;
+    <span class="keyword">int</span> type = ep.isUnixLocal()?AF_LOCAL:AF_INET;
+
+    <span class="keyword">if</span>(ep.isTcp())
+    &#123;
+        s.createSocket(SOCK_STREAM, type);
+    &#125;
+    <span class="keyword">else</span>
+    &#123;
+        s.createSocket(SOCK_DGRAM, type);
+    &#125;
+
+    <span class="keyword">if</span>(ep.isUnixLocal())
+    &#123;
+        s.bind(ep.getHost().c_str());
+    &#125;
+    <span class="keyword">else</span>
+    &#123;
+        s.bind(ep.getHost(), ep.getPort());
+    &#125;
+
+    <span class="keyword">if</span>(ep.isTcp() &amp;&amp; !ep.isUnixLocal())
+    &#123;
+        s.listen(<span class="number">1024</span>);
+        s.setKeepAlive();
+        s.setTcpNoDelay();
+        <span class="comment">//不要设置close wait否则http服务回包主动关闭连接会有问题</span>
+        s.setNoCloseWait();
+    &#125;
+    s.setblock(<span class="keyword">false</span>);
+&#125;
+
+</code></pre><p>执行到这里，已经创建了服务实体BindAdapter的listen socket了，代码退回到NetThread::bind(BindAdapterPtr &amp;lsPtr)后，还可以看到NetThread记录fd其所负责监听的BindAdapter：</p><pre><code class="java">_listeners[s.getfd()] = lsPtr;
+
+</code></pre><p>下图是对创建服务实体的listen socket的流程总结<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h6 id="2-创建epoll"><a href="#2-创建epoll" class="headerlink" title="2.创建epoll"></a>2.创建epoll</h6><p>代码回到Application::main()中，通过执行：</p><pre><code class="java">_epollServer-&gt;createEpoll();
+
+</code></pre><p>来让TC_EpollServer在其掌管的网络线程中建立epoll：</p><pre><code class="java">  <span class="keyword">void</span> TC_EpollServer::createEpoll()
+&#123;
+    <span class="keyword">for</span>(size_t i = <span class="number">0</span>; i &lt; _netThreads.size(); ++i)
+    &#123;
+        _netThreads[i]-&gt;createEpoll(i+<span class="number">1</span>);
+    &#125;
+    <span class="comment">//必须先等所有网络线程调用createEpoll()，初始化list后，才能调用initUdp()</span>
+    <span class="keyword">for</span>(size_t i = <span class="number">0</span>; i &lt; _netThreads.size(); ++i)
+    &#123;
+        _netThreads[i]-&gt;initUdp();
+    &#125;
+&#125;
+
+</code></pre><p>代码来到NetThread::createEpoll(uint32_t iIndex)，这个函数可以作为网络线程NetThread的初始化函数，在函数里面建立了网络线程的内存池，创建了epoll，还将上面创建的listen socket加入epoll中，当然只有第一条网络线程才有listen socket，此外还初始化了连接管理链表ConnectionList _list。看下图对本流程的总结：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h6 id="3-启动网络线程"><a href="#3-启动网络线程" class="headerlink" title="3.启动网络线程"></a>3.启动网络线程</h6><p>由于NetThread是线程，需要执行其start()函数才能启动线程。而这个工作不是在Application::main()中完成，而是在Application::waitForShutdown()中的Application::waitForQuit()完成，跟着下面的流程图看代码，就清楚明白了：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h5 id="业务模块的初始化"><a href="#业务模块的初始化" class="headerlink" title="业务模块的初始化"></a>业务模块的初始化</h5><p>同样，与网络模块一样，在讲解业务模块之前，先认真地看看业务模块的相关类图：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"><br>在业务模块初始化中，我们需要理清楚两个问题：业务模块如何与用户填充实现的XXXServantImp建立联系，从而使请求到来的时候，Handle能够调用用户定义好的RPC方法？业务线程在何时何地被启动，如何等待着请求的到达？<br>看看Application中哪些代码与业务模块的初始化有关吧：</p><pre><code class="java">  <span class="keyword">void</span> Application::main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])
+&#123;
+    ......
+
+        vector&lt;TC_EpollServer::BindAdapterPtr&gt; adapters;
+        bindAdapter(adapters);
+        <span class="comment">//业务应用的初始化</span>
+        initialize();
+
+
+        <span class="comment">//设置HandleGroup分组，启动线程</span>
+        <span class="keyword">for</span> (size_t i = <span class="number">0</span>; i &lt; adapters.size(); ++i)
+        &#123;
+            string name = adapters[i]-&gt;getName();
+
+            string groupName = adapters[i]-&gt;getHandleGroupName();
+
+            <span class="keyword">if</span>(name != groupName)
+            &#123;
+                TC_EpollServer::BindAdapterPtr ptr = _epollServer-&gt;getBindAdapter(groupName);
+
+                <span class="keyword">if</span> (!ptr)
+                &#123;
+                    <span class="keyword">throw</span> runtime_error(<span class="string">"[TARS][adater `"</span> + name + <span class="string">"` setHandle to group `"</span> + groupName + <span class="string">"` fail!"</span>);
+                &#125;
+
+            &#125;
+            setHandle(adapters[i]);
+        &#125;
+
+        <span class="comment">//启动业务处理线程</span>
+        _epollServer-&gt;startHandle();
+    ......
+
+&#125;
+
+</code></pre><p>在bindAdapter(adapters)与initialize()中解决了前面提到的第一个问题，剩下的代码实现了handle业务线程组的创建与启动。</p><h6 id="1-将BindAdapter与用户定义的方法关联起来"><a href="#1-将BindAdapter与用户定义的方法关联起来" class="headerlink" title="1.将BindAdapter与用户定义的方法关联起来"></a>1.将BindAdapter与用户定义的方法关联起来</h6><p>如何进行关联？先看看下面的代码流程图：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"><br>如何让业务线程能够调用用户自定义的代码？这里引入了ServantHelperManager，先简单剧透一下，通过ServantHelperManager作为桥梁，业务线程可以通过BindAdapter的ID索引到服务ID，然后通过服务ID索引到用户自定义的XXXServantImp类的生成器，有了生成器，业务线程就可以生成XXXServantImp类并调用里面的方法了。下面一步一步分析。<br>在Application::main()调用的Application::bindAdapter()中看到有下面的代码：</p><pre><code class="java">  <span class="keyword">for</span> (size_t i = <span class="number">0</span>; i &lt; adapterName.size(); i++)
+&#123;
+    ……
+     string servant = _conf.get(<span class="string">"/tars/application/server/"</span> + adapterName[i] + <span class="string">"&lt;servant&gt;"</span>);
+     checkServantNameValid(servant, sPrefix);
+
+     ServantHelperManager::getInstance()-&gt;setAdapterServant(adapterName[i], servant);
+    ……
+&#125;
+
+</code></pre><p>举个例子，adapterNamei为MyDemo.StringServer.StringServantAdapter，而servant为MyDemo.StringServer.StringServantObj，这些都是在配置文件中读取的，前者是BindAdapter的ID，而后者是服务ID。在ServantHelperManager:: setAdapterServant()中，仅仅是执行：</p><pre><code class="java">  <span class="keyword">void</span> ServantHelperManager::setAdapterServant(<span class="keyword">const</span> string &amp;sAdapter, <span class="keyword">const</span> string &amp;sServant)
+&#123;
+    _adapter_servant[sAdapter] = sServant;
+    _servant_adapter[sServant] = sAdapter;
+&#125;
+
+</code></pre><p>而这两个成员变量仅仅是：</p><pre><code class="java">      <span class="comment">/**</span>
+<span class="comment">     * Adapter包含的Servant(Adapter名称:servant名称)</span>
+<span class="comment">     */</span>
+    map&lt;string, string&gt;                     _adapter_servant;
+
+    <span class="comment">/**</span>
+<span class="comment">     * Adapter包含的Servant(Servant名称:Adapter名称)</span>
+<span class="comment">     */</span>
+map&lt;string, string&gt;                     _servant_adapter;
+
+</code></pre><p>在这里仅仅是作一个映射记录，后续可以通过BindAdapter的ID可以索引到服务的ID，通过服务的ID可以利用简单的C++反射得出用户实现的XXXServantImp类，从而得到用户实现的方法。<br>如何实现从服务ID到类的反射？同样需要通过ServantHelperManager的帮助。在Application::main()中，执行完Application::bindAdapter()会执行initialize()，这是一个纯虚函数，实际会执行派生类XXXServer的函数，类似：</p><pre><code class="java">  <span class="keyword">void</span>
+StringServer::initialize()
+&#123;
+    <span class="comment">//initialize application here:</span>
+    <span class="comment">//...</span>
+    addServant&lt;StringServantImp&gt;(ServerConfig::Application + <span class="string">"."</span> + ServerConfig::ServerName + <span class="string">".StringServantObj"</span>);
+&#125;
+
+</code></pre><p>代码最终会执行ServantHelperManager:: addServant<t>()：</t></p><pre><code class="java">      template&lt;typename T&gt;
+    <span class="function"><span class="keyword">void</span> <span class="title">addServant</span><span class="params">(<span class="keyword">const</span> string &amp;id,bool check = <span class="keyword">false</span>)</span></span>
+<span class="function">    </span>&#123;
+        <span class="keyword">if</span>(check &amp;&amp; _servant_adapter.end() == _servant_adapter.find(id))
+        &#123;
+            cerr&lt;&lt;<span class="string">"[TARS]ServantHelperManager::addServant "</span>&lt;&lt; id &lt;&lt;<span class="string">" not find adapter.(maybe not conf in the web)"</span>&lt;&lt;endl;
+            <span class="keyword">throw</span> runtime_error(<span class="string">"[TARS]ServantHelperManager::addServant "</span> + id + <span class="string">" not find adapter.(maybe not conf in the web)"</span>);
+        &#125;
+        _servant_creator[id] = <span class="keyword">new</span> ServantCreation&lt;T&gt;();
+&#125;
+
+</code></pre><p>其中参数const string&amp; id是服务ID，例如上文的MyDemo.StringServer.StringServantObj，T是用户填充实现的XXXServantImp类。<br>上面代码的_servant_creatorid = new ServantCreation<t>()是函数的关键，_servant_creator是map&lt;string, ServantHelperCreationPtr&gt;，可以通过服务ID索引到ServantHelperCreationPtr，而ServantHelperCreationPtr是什么？是帮助我们生成XXXServantImp实例的类生成器，这就是简单的C++反射：</t></p><pre><code class="java">  <span class="comment">/**</span>
+<span class="comment"> * Servant</span>
+<span class="comment"> */</span>
+class ServantHelperCreation : public TC_HandleBase
+&#123;
+<span class="keyword">public</span>:
+    <span class="function">virtual ServantPtr <span class="title">create</span><span class="params">(<span class="keyword">const</span> string &amp;s)</span> </span>= <span class="number">0</span>;
+&#125;;
+typedef TC_AutoPtr&lt;ServantHelperCreation&gt; ServantHelperCreationPtr;
+
+<span class="comment">//////////////////////////////////////////////////////////////////////////////</span>
+<span class="comment">/**</span>
+<span class="comment"> * Servant</span>
+<span class="comment"> */</span>
+template&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span>
+struct ServantCreation : public ServantHelperCreation
+&#123;
+    <span class="function">ServantPtr <span class="title">create</span><span class="params">(<span class="keyword">const</span> string &amp;s)</span> </span>&#123; T *p = <span class="keyword">new</span> T; p-&gt;setName(s); <span class="keyword">return</span> p; &#125;
+&#125;;
+
+</code></pre><p>以上就是通过服务ID生成相应XXXServantImp类的简单反射技术，业务线程组里面的业务线程只需要获取到所需执行的业务的BindAdapter的ID，就可以通过ServantHelperManager获得服务ID，有了服务ID就可以获取XXXServantImp类的生成器从而生成XXXServantImp类执行里面由用户定义好的RPC方法。现在重新看图（2-8）就大致清楚整个流程了。</p><h6 id="2-Handle业务线程的启动"><a href="#2-Handle业务线程的启动" class="headerlink" title="2.Handle业务线程的启动"></a>2.Handle业务线程的启动</h6><p>剩下的部分就是HandleGroup的创建，并将其与BindAdapter进行相互绑定关联，同时也需要绑定到TC_EpollServer中，随后创建/启动HandleGroup下面的Handle业务线程，启动Handle的过程涉及上文“将BindAdapter与用户定义的方法关联起来”提到的获取服务类生成器。先看看大致的代码流程图：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"><br>在这里分两部分，第一部分是在Application::main()中执行下列代码：</p><pre><code class="java">  <span class="comment">//设置HandleGroup分组，启动线程</span>
+<span class="keyword">for</span> (size_t i = <span class="number">0</span>; i &lt; adapters.size(); ++i)
+&#123;
+    string name = adapters[i]-&gt;getName();
+    string groupName = adapters[i]-&gt;getHandleGroupName();
+
+    <span class="keyword">if</span>(name != groupName)
+    &#123;
+        TC_EpollServer::BindAdapterPtr ptr = _epollServer-&gt;getBindAdapter(groupName);
+
+        <span class="keyword">if</span> (!ptr)
+        &#123;
+            <span class="keyword">throw</span> runtime_error(<span class="string">"[TARS][adater `"</span> + name + <span class="string">"` setHandle to group `"</span> + groupName + <span class="string">"` fail!"</span>);
+        &#125;
+
+    &#125;
+    setHandle(adapters[i]);
+&#125;
+
+</code></pre><p>遍历在配置文件中定义好的每一个BindAdapter（例如MyDemo.StringServer.StringServantAdapter），并为其设置业务线程组HandleGroup，让线程组的所有线程都可以执行该BindAdapter所对应的RPC方法。跟踪代码如下：</p><pre><code class="java">  <span class="keyword">void</span> Application::setHandle(TC_EpollServer::BindAdapterPtr&amp; adapter)
+&#123;
+    adapter-&gt;setHandle&lt;ServantHandle&gt;();
+&#125;
+
+</code></pre><p>注意，ServantHandle是Handle的派生类，就是业务处理线程类，随后来到：</p><pre><code class="java">  template&lt;typename T&gt; <span class="function"><span class="keyword">void</span> <span class="title">setHandle</span><span class="params">()</span></span>
+<span class="function"></span>&#123;
+    _pEpollServer-&gt;setHandleGroup&lt;T&gt;(_handleGroupName, _iHandleNum, <span class="keyword">this</span>);
+&#125;
+
+</code></pre><p>真正创建业务线程组HandleGroup以及组内的线程，并将线程组与BindAdapter，TC_EpollServer关联起来的代码在TC_EpollServer:: setHandleGroup()中：</p><pre><code class="java">  <span class="comment">/**</span>
+<span class="comment"> * 创建一个handle对象组，如果已经存在则直接返回</span>
+<span class="comment"> * <span class="doctag">@param</span> name</span>
+<span class="comment"> * <span class="doctag">@return</span> HandlePtr</span>
+<span class="comment"> */</span>
+template&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">void</span> <span class="title">setHandleGroup</span>(<span class="title">const</span> <span class="title">string</span>&amp; <span class="title">groupName</span>, <span class="title">int32_t</span> <span class="title">handleNum</span>, <span class="title">BindAdapterPtr</span> <span class="title">adapter</span>)</span>
+<span class="class"></span>&#123;
+    map&lt;string, HandleGroupPtr&gt;::iterator it = _handleGroups.find(groupName);
+
+    <span class="keyword">if</span> (it == _handleGroups.end())
+    &#123;
+        HandleGroupPtr hg = <span class="keyword">new</span> HandleGroup();
+        hg-&gt;name = groupName;
+        adapter-&gt;_handleGroup = hg;
+
+        <span class="keyword">for</span> (int32_t i = <span class="number">0</span>; i &lt; handleNum; ++i)
+        &#123;
+            HandlePtr handle = <span class="keyword">new</span> T();
+            handle-&gt;setEpollServer(<span class="keyword">this</span>);
+            handle-&gt;setHandleGroup(hg);
+            hg-&gt;handles.push_back(handle);
+        &#125;
+
+        _handleGroups[groupName] = hg;
+        it = _handleGroups.find(groupName);
+    &#125;
+    it-&gt;second-&gt;adapters[adapter-&gt;getName()] = adapter;
+    adapter-&gt;_handleGroup = it-&gt;second;
+&#125;
+
+</code></pre><p>在这里，可以看到业务线程组的创建：HandleGroupPtr hg = new HandleGroup()；业务线程的创建：HandlePtr handle = new T()（T是ServantHandle）；建立关系，例如BindAdapter与HandleGroup的相互关联：it-&gt;second-&gt;adaptersadapter-&gt;getName() = adapter和adapter-&gt;_handleGroup = it-&gt;second。执行完上面的代码，就可以得到下面的类图了：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"><br>这里再通过函数流程图简单复习一下上述代码的流程，主要内容均在TC_EpollServer:: setHandleGroup()中：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"><br>随着函数的层层退出，代码重新来到Application::main()中，随后执行：</p><pre><code class="java">  <span class="comment">//启动业务处理线程</span>
+_epollServer-&gt;startHandle();
+
+</code></pre><p>在TC_EpollServer::startHandle()中，遍历TC_EpollServer控制的业务模块HandleGroup中的所有业务线程组，并遍历组内的各个Handle，执行其start()方法进行线程的启动：</p><pre><code class="java">  <span class="keyword">void</span> TC_EpollServer::startHandle()
+&#123;
+    <span class="keyword">if</span> (!_handleStarted)
+    &#123;
+        _handleStarted = <span class="keyword">true</span>;
+
+        <span class="keyword">for</span> (auto&amp; kv : _handleGroups)
+        &#123;
+            auto&amp; hds = kv.second-&gt;handles;
+            <span class="keyword">for</span> (auto&amp; handle : hds)
+            &#123;
+                <span class="keyword">if</span> (!handle-&gt;isAlive())
+                    handle-&gt;start();
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+</code></pre><p>由于Handle是继承自TC_Thread的，在执行Handle::start()中，会执行虚函数Handle::run()，在Handle::run()中主要是执行两个函数，一个是ServantHandle::initialize()，另一个是Handle::handleImp()：</p><pre><code class="java">  <span class="keyword">void</span> TC_EpollServer::Handle::run()
+&#123;
+    initialize();
+
+    handleImp();
+&#125;
+
+</code></pre><p>ServantHandle::initialize()的主要作用是取得用户实现的RPC方法，其实现原理与上文（“2.2.3业务模块的初始化”中的第1小点“将BindAdapter与用户定义的方法关联起来”）提及的一样，借助与其关联的BindAdapter的ID号，以及ServantHelpManager，来查找到用户填充实现的XXXServantImp类的生成器并生成XXXServantImp类的实例，将这个实例与服务名构成pair &lt;string, ServantPtr&gt;变量，放进map&lt;string, ServantPtr&gt; ServantHandle:: _servants中，等待业务线程Handle需要执行用户自定义方法的时候，从map&lt;string, ServantPtr&gt; ServantHandle:: _servants中查找：</p><pre><code class="java">  <span class="keyword">void</span> ServantHandle::initialize()
+&#123;
+    map&lt;string, TC_EpollServer::BindAdapterPtr&gt;::iterator adpit;
+    <span class="comment">// 获取本Handle所关联的BindAdapter</span>
+    map&lt;string, TC_EpollServer::BindAdapterPtr&gt;&amp; adapters = _handleGroup-&gt;adapters;
+    <span class="comment">// 遍历所有BindAdapter</span>
+    <span class="keyword">for</span> (adpit = adapters.begin(); adpit != adapters.end(); ++adpit)
+    &#123;
+        <span class="comment">// 借助ServantHelperManager来获取服务指针——XXXServantImp类的指针</span>
+        ServantPtr servant = ServantHelperManager::getInstance()-&gt;create(adpit-&gt;first);
+        <span class="comment">// 将指针放进map&lt;string, ServantPtr&gt; ServantHandle:: _servants中</span>
+        <span class="keyword">if</span> (servant)
+        &#123;
+            _servants[servant-&gt;getName()] = servant;
+        &#125;
+        <span class="keyword">else</span>
+        &#123;
+            TLOGERROR(<span class="string">"[TARS]ServantHandle initialize createServant ret null, for adapter `"</span> + adpit-&gt;first + <span class="string">"`"</span> &lt;&lt; endl);
+        &#125;
+    &#125;
+
+    ......
+&#125;
+
+</code></pre><p>而Handle::handleImp()的主要作用是使业务线程阻塞在等待在条件变量上，在这里，可以看到_handleGroup-&gt;monitor.timedWait(_iWaitTime)函数，阻塞等待在条件变量上：</p><pre><code class="java">  <span class="keyword">void</span> TC_EpollServer::Handle::handleImp()
+&#123;
+    ......
+    struct timespec ts;
+
+    <span class="keyword">while</span> (!getEpollServer()-&gt;isTerminate())
+    &#123;
+        &#123;
+            TC_ThreadLock::<span class="function">Lock <span class="title">lock</span><span class="params">(_handleGroup-&gt;monitor)</span></span>;
+
+            <span class="keyword">if</span> (allAdapterIsEmpty() &amp;&amp; allFilterIsEmpty())
+            &#123;
+                _handleGroup-&gt;monitor.timedWait(_iWaitTime);
+            &#125;
+        &#125;
+&#125;
+......
+&#125;
+
+</code></pre><p>Handle线程通过条件变量来让所有业务线程阻塞等待被唤醒 ，因为本章是介绍初始化，因此代码解读到这里先告一段落，稍后再详解服务端中的业务线程Handle被唤醒后，如何通过map&lt;string, ServantPtr&gt; ServantHandle:: _servants查找并执行业务。现在通过函数流程图复习一下上述的代码流程：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h4 id="服务端的工作"><a href="#服务端的工作" class="headerlink" title="服务端的工作"></a>服务端的工作</h4><p>经过了初始化工作后，服务端就进入工作状态了，服务端的工作线程分为两类，正如前面所介绍的网络线程与业务线程，网络线程负责接受客户端的连接与收发数据，而业务线程则只关注执行用户所定义的PRC方法，两种线程在初始化的时候都已经执行start()启动了。<br>大部分服务器都是按照accept()-&gt;read()-&gt;write()-&gt;close()的流程执行的，大致工作流程图如下图所示：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"><br>TARS的服务端也不例外。<br>判定逻辑采用Epoll IO复用模型实现，每一条网络线程NetThread都有一个TC_Epoller来做事件的收集、侦听、分发。<br>正如前面所介绍，只有第一条网络线程会执行连接的监听工作，接受新的连接之后，就会构造一个Connection实例，并选择处理这个连接的网络线程。<br>请求被读入后，将���存��接收队列中，并通知业务线程进行处理，在这里，业务线程终于登场了，处理完请求后，将结果放到发送队列。<br>发送队列有数据，自然需要通知网络线程进行发送，接收到发送通知的网络线程会将响应发往客户端。<br>TARS服务器的工作流程大致就是如此，如上图所示的普通服务器工作流程没有多大的区别，下面将按着接受客户端连接，读入RPC请求，处理RPC请求，发送RPC响应四部分逐一介绍介绍服务端的工作。</p><h5 id="接受客户端连接"><a href="#接受客户端连接" class="headerlink" title="接受客户端连接"></a>接受客户端连接</h5><p>讨论服务器接受请求，很明显是从网络线程（而且是网络线程组的第一条网络线程）的NetThread::run()开始分析，在上面说到的创建TC_Epoller并将监听fd放进TC_Epoller的时候，执行的是：</p><pre><code class="java">_epoller.add(kv.first, H64(ET_LISTEN) | kv.first, EPOLLIN);
+
+</code></pre><p>那么从epoll_wait()返回的时候，epoll_event中的联合体epoll_data将会是(ET_LISTEN | listen socket’fd)，从中获取高32位，就是ET_LISTEN，然后执行下面switch中case ET_LISTEN的分支</p><pre><code class="java">  <span class="keyword">try</span>
+&#123;
+    <span class="keyword">const</span> epoll_event &amp;ev = _epoller.get(i);
+    uint32_t h = ev.data.u64 &gt;&gt; <span class="number">32</span>;
+
+    <span class="keyword">switch</span>(h)
+    &#123;
+    <span class="keyword">case</span> ET_LISTEN:
+        &#123;
+            <span class="comment">//监听端口有请求</span>
+            auto it = _listeners.find(ev.data.u32);
+            <span class="keyword">if</span>( it != _listeners.end())
+            &#123;
+                <span class="keyword">if</span>(ev.events &amp; EPOLLIN)
+                &#123;
+                    bool ret;
+                    <span class="keyword">do</span>
+                    &#123;
+                        ret = accept(ev.data.u32);
+                    &#125;<span class="keyword">while</span>(ret);
+                &#125;
+            &#125;
+        &#125;
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> ET_CLOSE:
+        <span class="comment">//关闭请求</span>
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> ET_NOTIFY:
+        <span class="comment">//发送通知</span>
+        ......
+        <span class="keyword">break</span>;
+     <span class="keyword">case</span> ET_NET:
+        <span class="comment">//网络请求</span>
+         ......
+        <span class="keyword">break</span>;
+      <span class="keyword">default</span>:
+         <span class="keyword">assert</span>(<span class="keyword">true</span>);
+      &#125;
+&#125;
+
+</code></pre><p>而ret = accept(ev.data.u32)的整个函数流程如下图所示（ev.data.u32就是被激活的BindAdapter对应的监听socket的fd）：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"><br>在讲解之前，先复习一下网络线程相关类图，以及通过图解对accept有个大致的印象：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"><br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"><br>好了，跟着图（2-14），现在从NetThread::run()的NetThread::accept(int fd)讲起。</p><h6 id="1-accept-获取客户端socket"><a href="#1-accept-获取客户端socket" class="headerlink" title="1.accept 获取客户端socket"></a>1.accept 获取客户端socket</h6><p>进入NetThread::accept(int fd)，可以看到代码执行了：</p><pre><code class="java">  <span class="comment">//接收连接</span>
+TC_Socket s;
+s.init(fd, <span class="keyword">false</span>, AF_INET);
+<span class="keyword">int</span> iRetCode = s.accept(cs, (struct sockaddr *) &amp;stSockAddr, iSockAddrSize);
+
+</code></pre><p>通过TC_Socket::accept()，调用系统函数accept()接受了客户端的辛辛苦苦三次握手来的socket连接，然后对客户端的IP与端口进行打印以及检查，并分析对应的BindAdapter是否过载，过载则关闭连接。随后对客户端socket进行设置：</p><pre><code class="java">  cs.setblock(<span class="keyword">false</span>);
+cs.setKeepAlive();
+cs.setTcpNoDelay();
+cs.setCloseWaitDefault();
+
+</code></pre><p>到此，对应图（2-16）的第一步——接受客户端连接（流程如下图所示），已经完成。<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h6 id="2-为客户端socket创建Connection"><a href="#2-为客户端socket创建Connection" class="headerlink" title="2.为客户端socket创建Connection"></a>2.为客户端socket创建Connection</h6><p>接下来是为新来的客户端socket创建一个Connection，在NetThread::accept(int fd)中，创建Connection的代��如��：</p><pre><code class="java">  <span class="keyword">int</span> timeout = _listeners[fd]-&gt;getEndpoint().getTimeout()/<span class="number">1000</span>;
+
+Connection *cPtr = <span class="keyword">new</span> Connection(_listeners[fd].get(), fd, (timeout &lt; <span class="number">2</span> ? <span class="number">2</span> : timeout), cs.getfd(), ip, port);
+
+</code></pre><p>构造函数中的参数依次是，这次新客户端所对应的BindAdapter指针，BindAdapter对应的listen socket的fd，超时时间，客户端socket的fd，客户端的ip以及端口。在Connection的构造函数中，通过fd也关联其TC_Socket：</p><pre><code class="java">  <span class="comment">// 服务连接</span>
+Connection::Connection(TC_EpollServer::BindAdapter *pBindAdapter, <span class="keyword">int</span> lfd, <span class="keyword">int</span> timeout, <span class="keyword">int</span> fd, <span class="keyword">const</span> string&amp; ip, uint16_t port)
+&#123;
+    ......
+    _sock.init(fd, <span class="keyword">true</span>, AF_INET);
+&#125;
+
+</code></pre><p>那么关联TC_Socket之后，通过Connection实例就可以操作的客户端socket了。至此，对应图（2-16）的第二步——为客户端socket创建Connection就完成了（流程如下图所示）。<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h6 id="3-为Connection选择一条网络线程"><a href="#3-为Connection选择一条网络线程" class="headerlink" title="3.为Connection选择一条网络线程"></a>3.为Connection选择一条网络线程</h6><p>最后，就是为这个Connection选择一个网络线程，将其加入网络线程对应的ConnectionList，在NetThread::accept(int fd)中，执行：</p><pre><code class="java">  <span class="comment">//addTcpConnection(cPtr);</span>
+_epollServer-&gt;addConnection(cPtr, cs.getfd(), TCP_CONNECTION);
+
+</code></pre><p>TC_EpollServer::addConnection()的代码如下所示：</p><pre><code class="java">  <span class="keyword">void</span> TC_EpollServer::addConnection(TC_EpollServer::NetThread::Connection * cPtr, <span class="keyword">int</span> fd, <span class="keyword">int</span> iType)
+&#123;
+    TC_EpollServer::NetThread* netThread = getNetThreadOfFd(fd);
+
+    <span class="keyword">if</span>(iType == <span class="number">0</span>)
+    &#123;
+        netThread-&gt;addTcpConnection(cPtr);
+    &#125;
+    <span class="keyword">else</span>
+    &#123;
+        netThread-&gt;addUdpConnection(cPtr);
+    &#125;
+&#125;
+
+</code></pre><p>看到，先为Connection* cPtr选择网络线程，在流程图中，被选中的网络线程称为Chosen_NetThread。选网络线程的函数是TC_EpollServer::getNetThreadOfFd(int fd)，根据客户端socket的fd求余数得到，具体代码如下：</p><pre><code class="java">  NetThread* getNetThreadOfFd(<span class="keyword">int</span> fd)
+&#123;
+    <span class="keyword">return</span> _netThreads[fd % _netThreads.size()];
+&#125;
+
+</code></pre><p>接着调用被选中线程的NetThread::addTcpConnection()方法（或者<br>NetThread::addUdpConnection()，这里只介绍TCP的方法），将Connection加入被选中网络线程的ConnectionList中，最后会执行_epoller.add(cPtr-&gt;getfd(), cPtr-&gt;getId(), EPOLLIN | EPOLLOUT)将客户端socket的fd加入本网络线程的TC_Epoller中，让本网络线程负责对本客户端的数据收发。至此对应图（28）的第三步就执行完毕了（具体流程如下图所示）。<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h5 id="接收RPC请求"><a href="#接收RPC请求" class="headerlink" title="接收RPC请求"></a>接收RPC请求</h5><p>讨论服务器接收RPC请求，同样从网络线程的NetThread::run()开始分析，上面是进入switch中的case ET_LISTEN分支来接受客户端的连接，那么现在就是进入case ET_NET分支了，为什么是case ET_NET分支呢？因为上面提到，将客户端socket的fd加入TC_Epoller来监听其读写，采用的是_epoller.add(cPtr-&gt;getfd(), cPtr-&gt;getId(), EPOLLIN | EPOLLOUT)，传递给函数的第二个参数是32位的整形cPtr-&gt;getId()，而函数的第二个参数要求必须是64位的整型，因此，这个参数将会是高32位是0，低32位是cPtr-&gt;getId()的64位整形。而第二个参数的作用是当该注册的事件引起epoll_wait()退出的时候，会作为激活事件epoll_event 结构体中的64位联合体epoll_data_t data返回给用户。因此，看下面NetThread::run()代码：</p><pre><code class="java">  <span class="keyword">try</span>
+&#123;
+    <span class="keyword">const</span> epoll_event &amp;ev = _epoller.get(i);
+    uint32_t h = ev.data.u64 &gt;&gt; <span class="number">32</span>;
+
+    <span class="keyword">switch</span>(h)
+    &#123;
+    <span class="keyword">case</span> ET_LISTEN:
+        ……
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> ET_CLOSE:
+        <span class="comment">//关闭请求</span>
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> ET_NOTIFY:
+        <span class="comment">//发送通知</span>
+        ......
+        <span class="keyword">break</span>;
+     <span class="keyword">case</span> ET_NET:
+        <span class="comment">//网络请求</span>
+        processNet(ev);
+        <span class="keyword">break</span>;
+      <span class="keyword">default</span>:
+         <span class="keyword">assert</span>(<span class="keyword">true</span>);
+      &#125;
+&#125;
+
+</code></pre><p>代码中的h是64位联合体epoll_data_t data的高32位，经过上面分析，客户端socket若因为接收到数据而引起epoll_wait()退出的话，epoll_data_t data的高32位是0，低32位是cPtr-&gt;getId()，因此h将会是0。而ET_NET就是0，因此客户端socket有数据来到的话，会执行case ET_NET分支。下面看看执行case ET_NET分支的函数流程图。<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h6 id="1-获取激活了的连接Connection"><a href="#1-获取激活了的连接Connection" class="headerlink" title="1.获取激活了的连接Connection"></a>1.获取激活了的连接Connection</h6><p>收到RPC请求，进入到NetThread::processNet()，服务器需要知道是哪一个客户端socket被激活了，因此在NetThread::processNet()中执行：</p><pre><code class="java">  <span class="keyword">void</span> TC_EpollServer::NetThread::processNet(<span class="keyword">const</span> epoll_event &amp;ev)
+&#123;
+    uint32_t uid = ev.data.u32;
+
+    Connection *cPtr = getConnectionPtr(uid);
+    ......
+&#125;
+
+</code></pre><p>正如上面说的，epoll_data_t data的高32位是0，低32位是cPtr-&gt;getId()，那么获取到uid之后，通过NetThread::getConnectionPtr()就可以从ConnectionList中返回此时此刻所需要读取RPC请求的Connection了。之后对获取的Connection进行简单的检查工作，并看看epoll_event::events是否是EPOLLERR或者EPOLLHUP（具体流程如下图所示）。<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h6 id="2-接收客户端请求，放进线程安全队列中"><a href="#2-接收客户端请求，放进线程安全队列中" class="headerlink" title="2.接收客户端请求，放进线程安全队列中"></a>2.接收客户端请求，放进线程安全队列中</h6><p>接着，就需要接收客户端的请求数据了，有数据接收意味着epoll_event::events是EPOLLIN，看下面代码，主要是NetThread::recvBuffer()读取RPC请求数据，以及以及Connection:: insertRecvQueue()唤醒业务线程发送数据。</p><pre><code class="java">  <span class="keyword">if</span>(ev.events &amp; EPOLLIN)               <span class="comment">//有数据需要读取</span>
+&#123;
+    recv_queue::queue_type vRecvData;
+    <span class="keyword">int</span> ret = recvBuffer(cPtr, vRecvData);
+
+    <span class="keyword">if</span>(ret &lt; <span class="number">0</span>)
+    &#123;
+        delConnection(cPtr,<span class="keyword">true</span>,EM_CLIENT_CLOSE);
+        <span class="keyword">return</span>;
+    &#125;
+
+    <span class="keyword">if</span>(!vRecvData.empty())
+    &#123;
+        cPtr-&gt;insertRecvQueue(vRecvData);
+    &#125;
+&#125;
+
+</code></pre><p>先看看NetThread::recvBuffer()，首先服务端会先创建一个线程安全队列来承载接收到的数据recv_queue::queue_type vRecvData，再将刚刚获取的Connection cPtr以及recv_queue::queue_type vRecvData作为参数调用NetThread::recvBuffer(cPtr, vRecvData)。<br>而NetThread::recvBuffer()进一步调用Connection::recv()函数：</p><pre><code class="java">  <span class="keyword">int</span>  NetThread::recvBuffer(NetThread::Connection *cPtr, recv_queue::queue_type &amp;v)
+&#123;
+    <span class="keyword">return</span> cPtr-&gt;recv(v);
+&#125;
+
+</code></pre><p>Connection::recv()会依照不同的传输层协议（若UDP传输，lfd==-1），执行不同的接收方法，例如TCP会执行：</p><pre><code class="java">iBytesReceived = ::read(_sock.getfd(), (<span class="keyword">void</span>*)buffer, sizeof(buffer))
+
+</code></pre><p>根据数据接收情况，如收到FIN分节，errno==EAGAIN等执行不同的动作。若收到真实的请求信息包，会将接收到的数据放在string Connection::_recvbuffer中，然后调用Connection:: parseProtocol()。<br>在Connection:: parseProtocol()中会回调协议解析函数对接收到的数据进行检验，检验通过后，会构造线程安全队列中的元素tagRecvData* recv，并将其放进线程安全队列中：</p><pre><code class="java">  tagRecvData* recv = <span class="keyword">new</span> tagRecvData();
+recv-&gt;buffer           = std::move(ro);
+recv-&gt;ip               = _ip;
+recv-&gt;port             = _port;
+recv-&gt;recvTimeStamp    = TNOWMS;
+recv-&gt;uid              = getId();
+recv-&gt;isOverload       = <span class="keyword">false</span>;
+recv-&gt;isClosed         = <span class="keyword">false</span>;
+recv-&gt;fd               = getfd();
+<span class="comment">//收到完整的包才算</span>
+<span class="keyword">this</span>-&gt;_bEmptyConn = <span class="keyword">false</span>;
+
+<span class="comment">//收到完整包</span>
+o.push_back(recv);
+
+</code></pre><p>到此，RPC请求数据已经被完全获取并放置在线程安全队列中（具体过程如下图所示）。<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h6 id="3-线程安全队列非空，唤醒业务线程发送"><a href="#3-线程安全队列非空，唤醒业务线程发送" class="headerlink" title="3.线程安全队列非空，唤醒业务线程发送"></a>3.线程安全队列非空，唤醒业务线程发送</h6><p>代码运行至此，线程安全队列里面终于有RPC请求包数据了，可以唤醒业务线程Handle进行处理了，代码回到NetThread::processNet()，只要线程安全队列非空，就执行Connection:: insertRecvQueue()：</p><pre><code class="java">  <span class="keyword">void</span> NetThread::processNet(<span class="keyword">const</span> epoll_event &amp;ev)
+&#123;
+    ......
+
+    <span class="keyword">if</span>(ev.events &amp; EPOLLIN)               <span class="comment">//有数据需要读取</span>
+    &#123;
+        ......
+
+        <span class="keyword">if</span>(!vRecvData.empty())
+        &#123;
+            cPtr-&gt;insertRecvQueue(vRecvData);
+        &#125;
+    &#125;
+    ......
+&#125;
+
+</code></pre><p>在Connection:: insertRecvQueue()中，会先对BindAdapter进行过载判断，分为未过载，半过载以及全过载三种情况。若全过载会丢弃线程安全队列中的所有RPC请求数据，否则会执行BindAdapter::insertRecvQueue()。<br>在BindAdapter::insertRecvQueue()中，代码主要有两个动作，第一个是将获取到的RPC请求包放进BindAdapter的接收队列——recv_queue _rbuffer中：</p><pre><code class="java">_rbuffer.push_back(vtRecvData)
+
+</code></pre><p>第二个是唤醒等待条件变量的HandleGroup线程组：</p><pre><code class="java">_handleGroup-&gt;monitor.notify()
+
+</code></pre><p>现在，服务端的网络线程在接收RPC请求数据后，终于唤醒了业务线程（具体流程看下图所示），接下来轮到业务模块登场，看看如何处理RPC请求了。<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h5 id="处理RPC请求"><a href="#处理RPC请求" class="headerlink" title="处理RPC请求"></a>处理RPC请求</h5><p>与前文接收到请求数据后，唤醒业务线程组HandleGroup（就是刚刚才介绍完的_handleGroup-&gt;monitor.notify()）遥相呼应的地方是在“2.2.3业务模块的初始化”第2小点“Handle业务线程的启动”中提到的，在Handle::handleImp()函数中的_handleGroup-&gt;monitor.timedWait(_iWaitTime)。通过条件变量，业务线程组HandleGroup里面的业务线程一起阻塞等待着网络线程对其发起唤醒。现在，终于对条件变量发起通知了，接下来将会如何处理请求呢？在这里，需要先对2.2.3节进行复习，了解到ServantHandle::_servants里面究竟承载着什么。<br>好了，处理RPC请求分为三步：构造请求上下文，调用用户实现的方法处理请求，将响应数据包push到线程安全队列中并通知网络线程，具体函数流程如下图所示，现在进一步分析：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h6 id="1-获取请求数据构造请求上下文"><a href="#1-获取请求数据构造请求上下文" class="headerlink" title="1.获取请求数据构造请求上下文"></a>1.获取请求数据构造请求上下文</h6><p>当业务线程从条件变量上被唤醒之后，从其负责的BindAdapter中获取请求数据：adapter-&gt;waitForRecvQueue(recv, 0)，在BindAdapter::waitForRecvQueue()中，将从线程安全队列recv_queue BindAdapter::_ rbuffer中获取数据：</p><pre><code class="java">  bool BindAdapter::waitForRecvQueue(tagRecvData* &amp;recv, uint32_t iWaitTime)
+&#123;
+    bool bRet = <span class="keyword">false</span>;
+
+    bRet = _rbuffer.pop_front(recv, iWaitTime);
+
+    <span class="keyword">if</span>(!bRet)
+    &#123;
+        <span class="keyword">return</span> bRet;
+    &#125;
+
+    <span class="keyword">return</span> bRet;
+&#125;
+
+</code></pre><p>还记得在哪里将数据压入线程安全队列的吗？对，就在“2.3.2接收RPC请求”的第3点“线程安全队列非空，唤醒业务线程发送”中。<br>接着，调用ServantHandle::handle()对接收到的RPC请求数据进行处理。<br>处理的第一步正如本节小标题所示——构造请求上下文，用的是ServantHandle::createCurrent()：</p><pre><code class="java">  <span class="keyword">void</span> ServantHandle::handle(<span class="keyword">const</span> TC_EpollServer::tagRecvData &amp;stRecvData)
+&#123;
+    TarsCurrentPtr current = createCurrent(stRecvData);
+
+......
+&#125;
+
+</code></pre><p>在ServantHandle::createCurrent()中，先new出TarsCurrent实例，然后调用其initialize()方法，在TarsCurrent::initialize(const TC_EpollServer::tagRecvData &amp;stRecvData, int64_t beginTime)中，将RPC请求包的内容放进请求上下文TarsCurrentPtr current中，后续只需关注这个请求上下文即可。另外可以稍微关注一下，若采用TARS协议会使用TarsCurrent::initialize(const string &amp;sRecvBuffer)将请求包的内容放进请求上下文中，否则直接采用memcpy()系统调用来拷贝内容。下面稍微总结一下这小节的流程：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h6 id="2-处理请求（只介绍TARS协议）"><a href="#2-处理请求（只介绍TARS协议）" class="headerlink" title="2.处理请求（只介绍TARS协议）"></a>2.处理请求（只介绍TARS协议）</h6><p>当获取到请求上下文之后，就需要对其进行处理了。</p><pre><code class="java">  <span class="keyword">void</span> ServantHandle::handle(<span class="keyword">const</span> TC_EpollServer::tagRecvData &amp;stRecvData)
+&#123;
+    <span class="comment">// 构造请求上下文</span>
+    TarsCurrentPtr current = createCurrent(stRecvData);
+
+    <span class="keyword">if</span> (!current) <span class="keyword">return</span>;
+    <span class="comment">// 处理请求</span>
+    <span class="keyword">if</span> (current-&gt;getBindAdapter()-&gt;isTarsProtocol())
+    &#123;
+        handleTarsProtocol(current);
+    &#125;
+    <span class="keyword">else</span>
+    &#123;
+        handleNoTarsProtocol(current);
+    &#125;
+&#125;
+
+</code></pre><p>本RPC框架支持TARS协议与非TARS协议，下面只会介绍对TARS协议的处理，对于非TARS协议，分析流程也是差不多，对非TARS协议协议感兴趣的读者可以对比着来分析非TARS协议部分。在介绍之前，先看看服务相关的继承体系，下面不要混淆这三个类了：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"><br>好了，现在重点放在ServantHandle::handleTarsProtocol(const TarsCurrentPtr ¤t)函数上面。先贴代码：</p><pre><code class="java">  <span class="keyword">void</span> ServantHandle::handleTarsProtocol(<span class="keyword">const</span> TarsCurrentPtr &amp;current)
+&#123;
+    <span class="comment">// 1-对请求上下文current进行预处理</span>
+    <span class="comment">// 2-寻找合适的服务servant</span>
+    map&lt;string, ServantPtr&gt;::iterator sit = _servants.find(current-&gt;getServantName());
+
+    <span class="keyword">if</span> (sit == _servants.end())
+    &#123;
+        current-&gt;sendResponse(TARSSERVERNOSERVANTERR);
+
+        <span class="keyword">return</span>;
+    &#125;
+
+    <span class="keyword">int</span> ret = TARSSERVERUNKNOWNERR;
+
+    string sResultDesc = <span class="string">""</span>;
+
+    vector&lt;<span class="keyword">char</span>&gt; buffer;
+
+    <span class="keyword">try</span>
+    &#123;
+        <span class="comment">//3-业务逻辑处理</span>
+        ret = sit-&gt;second-&gt;dispatch(current, buffer);
+    &#125;
+    <span class="keyword">catch</span>(TarsDecodeException &amp;ex)
+    &#123;
+       ……
+    &#125;
+    <span class="keyword">catch</span>(TarsEncodeException &amp;ex)
+    &#123;
+        ……
+    &#125;
+    <span class="keyword">catch</span>(exception &amp;ex)
+    &#123;
+       ……
+    &#125;
+    <span class="keyword">catch</span>(...)
+    &#123;
+        ……
+    &#125;
+<span class="comment">//回送响应，第3小点再分析吧</span>
+……
+&#125;
+
+</code></pre><p>进入函数中，会先对请求上下文进行预处理，例如set调用合法性检查，染色处理等。随后，就依据上下文中的服务名来获取服务对象：map&lt;string, ServantPtr&gt;::iterator sit = _servants.find(current-&gt;getServantName())，_servants在“2.2.3业务模块的初始化”第2小点“Handle业务线程的启动”中被赋予内容，其key是服务ID（或者叫服务名），value是用户实现的服务XXXServantImp实例指针。<br>随后就可以利用XXXServantImp实例指针来执行RPC请求了：ret = sit-&gt;second-&gt;dispatch(current, buffer)，在Servant:: dispatch()（如图（2-26）因为XXXServantImp是继承自XXXServant，而XXXServant继承自Servant，所以实际是执行Servant的方法）中，使用不同的协议会有不同的处理方式，这里只介绍TARS协议的，调用了XXXServant::onDispatch(tars::TarsCurrentPtr _current, vector<char>&amp;_sResponseBuffer)方法：</char></p><pre><code class="java">  <span class="keyword">int</span> Servant::dispatch(TarsCurrentPtr current, vector&lt;<span class="keyword">char</span>&gt; &amp;buffer)
+&#123;
+    <span class="keyword">int</span> ret = TARSSERVERUNKNOWNERR;
+
+    <span class="keyword">if</span> (current-&gt;getFuncName() == <span class="string">"tars_ping"</span>)
+    &#123;
+        <span class="comment">//略</span>
+    &#125;
+    <span class="keyword">else</span> <span class="keyword">if</span> (!current-&gt;getBindAdapter()-&gt;isTarsProtocol())
+    &#123;
+        <span class="comment">//略</span>
+    &#125;
+    <span class="keyword">else</span>
+    &#123;
+        <span class="function">TC_LockT&lt;TC_ThreadRecMutex&gt; <span class="title">lock</span><span class="params">(*<span class="keyword">this</span>)</span></span>;
+
+        ret = onDispatch(current, buffer);
+    &#125;
+    <span class="keyword">return</span> ret;
+&#125;
+
+</code></pre><p>XXXServant类就是执行Tars2Cpp的时候生成的，会依据用户定义的tars文件来生成相应的纯虚函数，以及onDispatch()方法，该方法的动作有：</p><p>1.找出在本服务类中与请求数据相对应的函数；<br>2.解码请求数据中的函数参数；<br>3.执行XXXServantImp类中用户定义的相应RPC方法；<br>4.编码函数执行后的结果；<br>5.return tars::TARSSERVERSUCCESS。</p><p>上述步骤是按照默认的服务端自动回复的思路去阐述，在实际中，用户可以关闭自动回复功能（如：current-&gt;setResponse(false)），并自行发送回复（如：servant-&gt;async_response_XXXAsync(current, ret, rStr)）。到此，服务端已经执行了RPC方法，下面稍微总结一下本小节的内容：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h6 id="3-将响应数据包push到线程安全队列中并通知网络线程"><a href="#3-将响应数据包push到线程安全队列中并通知网络线程" class="headerlink" title="3.将响应数据包push到线程安全队列中并通知网络线程"></a>3.将响应数据包push到线程安全队列中并通知网络线程</h6><p>处理完RPC请求，执行完RPC方法之后，需要将结果（下面代码中的buffer）回送给客户端：</p><pre><code class="java">  <span class="keyword">void</span> ServantHandle::handleTarsProtocol(<span class="keyword">const</span> TarsCurrentPtr &amp;current)
+&#123;
+    <span class="comment">// 1-对请求上下文current进行预处理</span>
+    <span class="comment">// 2-寻找合适的服务servant</span>
+    <span class="comment">//3-业务逻辑处理</span>
+<span class="comment">//回送响应，本节分析</span>
+    <span class="keyword">if</span> (current-&gt;isResponse())
+    &#123;
+        current-&gt;sendResponse(ret, buffer, TarsCurrent::TARS_STATUS(), sResultDesc);
+    &#125;
+&#125;
+
+</code></pre><p>由于业务与网络是独立开来的，网络线程收到请求包之后利用条件变量来通知业务线程，而业务线程才有什么方式来通知网络线程呢？由前面可知，网络线程是阻塞在epoll中的，因此需要利用epoll来通知网络线程。这次先看图解总结，再分析代码：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"><br>在ServantHandle::handleTarsProtocol()中，最后的一步就是回送响应包。数据包的回送经历的步骤是：编码响应信息——找出与接收请求信息的网络线程，因为我们需要通知他来干活——将响应包放进该网络线程的发送队列——利用epoll的特性唤醒网络线程，我们重点看看NetThread::send():</p><pre><code class="java">  <span class="keyword">void</span> TC_EpollServer::NetThread::send(uint32_t uid, <span class="keyword">const</span> string &amp;s, <span class="keyword">const</span> string &amp;ip, uint16_t port)
+&#123;
+    <span class="keyword">if</span>(_bTerminate)
+    &#123;
+        <span class="keyword">return</span>;
+    &#125;
+
+    tagSendData* send = <span class="keyword">new</span> tagSendData();
+
+    send-&gt;uid = uid;
+    send-&gt;cmd = <span class="string">'s'</span>;
+    send-&gt;buffer = s;
+    send-&gt;ip = ip;
+send-&gt;port = port;
+
+    _sbuffer.push_back(send);
+
+    <span class="comment">//通知epoll响应, 有数据要发送</span>
+    _epoller.mod(_notify.getfd(), H64(ET_NOTIFY), EPOLLOUT);
+&#125;
+
+</code></pre><p>到此，服务器中的业务模块已经完成他的使命，后续将响应数据发给客户端是网络模块的工作了。</p><h5 id="发送RPC响应"><a href="#发送RPC响应" class="headerlink" title="发送RPC响应"></a>发送RPC响应</h5><p>获取了请求，当然需要回复响应，从上面知道业务模块通过_epoller.mod(_notify.getfd(), H64(ET_NOTIFY), EPOLLOUT)通知网络线程的，再加上之前分析“2.3.1接受客户端请连接”以及“2.3.2接收RPC请求”的经验，我们知道，这里必须从NetThread::run()开始讲起，而且是进入case ET_NOTIFY分支：</p><pre><code class="java">  <span class="keyword">try</span>
+&#123;
+    <span class="keyword">const</span> epoll_event &amp;ev = _epoller.get(i);
+    uint32_t h = ev.data.u64 &gt;&gt; <span class="number">32</span>;
+
+    <span class="keyword">switch</span>(h)
+    &#123;
+    <span class="keyword">case</span> ET_LISTEN:
+        ……
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> ET_CLOSE:
+        <span class="comment">//关闭请求</span>
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> ET_NOTIFY:
+        <span class="comment">//发送通知</span>
+        processPipe();
+        <span class="keyword">break</span>;
+     <span class="keyword">case</span> ET_NET:
+        <span class="comment">//网络请求</span>
+        ……
+        <span class="keyword">break</span>;
+      <span class="keyword">default</span>:
+         <span class="keyword">assert</span>(<span class="keyword">true</span>);
+      &#125;
+&#125;
+
+</code></pre><p>在NetThread::processPipe()中，先从线程安全队列中取响应信息包：_sBufQueue.dequeue(sendp, false)，这里与“2.3.3处理RPC请求”的第3小点“将响应数据包push到线程安全队列中并通知网络线程”遥相呼应。然后从响应信息中取得与请求信息相对应的那个Connection的uid，利用uid获取Connection：Connection *cPtr = getConnectionPtr(sendp-&gt;uid)。由于Connection是聚合了TC_Socket的，后续通过Connection将响应数据回送给客户端，具体流程如下图所示：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h5 id="服务端工作总结"><a href="#服务端工作总结" class="headerlink" title="服务端工作总结"></a>服务端工作总结</h5><p>这里用图解总结一下服务端的工作过程：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>TARS可以在考虑到易用性和高性能的同时快速构建系统并自动生成代码，帮助开发人员和企业以微服务的方式快速构建自己稳定可靠的分布式应用，从而令开发人员只关注业务逻辑，提高运营效率。多语言、敏捷研发、高可用和高效运营的特性使 TARS 成为企业级产品。<br>《微服务开源框架TARS的RPC源码解析》系列文章分上下两篇，对RPC调用部分进行源码解析。本文是下篇，我们带大家了解了一下TARS的服务端。欢迎阅读上篇《初识TARS C++客户端》</p><p>TARS微服务助您数字化转型，欢迎访问：<br>TARS官网：<a target="_blank" rel="external nofollow noopener noreferrer" href="https://TarsCloud.org">https://TarsCloud.org</a><br>TARS源码：<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/TarsCloud">https://github.com/TarsCloud</a><br>获取《TARS官方培训电子书》：<a target="_blank" rel="external nofollow noopener noreferrer" href="https://wj.qq.com/s2/6570357/3adb/">https://wj.qq.com/s2/6570357/3adb/</a><br>或扫码获取：<br><img src="https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG" alt="Test" title="微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端"></p><div class="post-copyright"><div class="content"><p>本文标题： 推荐系列-微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端</p><p>本文作者： OSChina</p><p>发布时间： 2021年04月15日 09:19</p><p>最后更新： 2022年03月27日 09:29</p><p>原始链接： <a class="post-url" href="/f6f18459/" title="推荐系列-微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端">https://www.hosiang.cn/f6f18459/</a></p><p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p><footer><a href="https://www.hosiang.cn"><img src="/../images/logo.png" alt="Howe Hsiang"> Howe Hsiang</a></footer></div></div><div class="page-reward"><a id="rewardBtn" href="javascript:;">赏</a></div><div id="reward" class="post-modal reward-lay"><a class="close" href="javascript:;" id="reward-close">×</a> <span class="reward-title"><i class="icon icon-quote-left"></i> 喜欢就赞赏一下呗！ <i class="icon icon-quote-right"></i></span><div class="reward-content"><div class="reward-code"><img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码"></div><div class="reward-select"></div></div></div></div><footer class="article-footer"><div class="post-share"><a href="javascript:" id="share-sub" class="post-share-fab"><i class="fa fa-share-alt" style="padding-top:11px!important"></i></a><div class="post-share-list" id="share-list"><ul class="share-icons"><li><a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/f6f18459/" data-title="Facebook" rel="external nofollow noopener noreferrer"><i class="fa fa-facebook" style="padding-top:9px!important"></i></a></li><li><a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端》 — 狂欢马克思&url=https://www.hosiang.cn/f6f18459/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer"><i class="fa fa-twitter" style="padding-top:9px!important"></i></a></li><li><a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/f6f18459/" data-title="Google+" rel="external nofollow noopener noreferrer"><i class="fa fa-google-plus" style="padding-top:9px!important"></i></a></li><li><a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/f6f18459/&title=《推荐系列-微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端》 — 狂欢马克思&source=&emsp;&emsp;作者：Cony 导语：微服务开源框架TARS的RPC调用包含客户端与服务端，《微服务开源框架TARS的RPC源码解析》系列文章将从..." data-title="QQ" rel="external nofollow noopener noreferrer"><i class="fa fa-qq" style="padding-top:9px!important"></i></a></li><li><a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信"><i class="fa fa-weixin" style="padding-top:9px!important"></i></a></li><li><a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/f6f18459/&title=《推荐系列-微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端》 — 狂欢马克思&pic=https://static.oschina.net/uploads/img/202008/20142119_roC2.jpg" data-title="微博" rel="external nofollow noopener noreferrer"><i class="fa fa-weibo" style="padding-top:9px!important"></i></a></li></ul></div></div><div class="post-modal wx-share" id="wxShare"><a class="close" href="javascript:" id="wxShare-close">×</a><p>扫一扫，分享到微信</p><img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/f6f18459/" alt="微信分享二维码"></div><div class="mask"></div><ul class="article-footer-menu"><li class="article-footer-tags"><i class="fa fa-tags"></i> <a href="/tags/Popular/" class="color3">Popular</a></li></ul></footer></div></article><aside class="post-toc-pos post-toc-top" id="post-toc"><nav class="post-toc-wrap"><ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFTARS"><span class="post-toc-text">什么是TARS</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%88%9D%E8%AF%86%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="post-toc-text">初识服务端</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Application"><span class="post-toc-text">Application</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#TC-EpollServer"><span class="post-toc-text">TC_EpollServer</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#NetThread"><span class="post-toc-text">NetThread</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#HandleGroup%E4%B8%8EHandle"><span class="post-toc-text">HandleGroup与Handle</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#BindAdapter"><span class="post-toc-text">BindAdapter</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="post-toc-text">初始化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#TC-EpollServer%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="post-toc-text">TC_EpollServer的初始化</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9D%97%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="post-toc-text">网络模块初始化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#1-%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%AE%9E%E4%BD%93%E7%9A%84listen-socket"><span class="post-toc-text">1. 创建服务实体的listen socket</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#2-%E5%88%9B%E5%BB%BAepoll"><span class="post-toc-text">2.创建epoll</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#3-%E5%90%AF%E5%8A%A8%E7%BD%91%E7%BB%9C%E7%BA%BF%E7%A8%8B"><span class="post-toc-text">3.启动网络线程</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E4%B8%9A%E5%8A%A1%E6%A8%A1%E5%9D%97%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="post-toc-text">业务模块的初始化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#1-%E5%B0%86BindAdapter%E4%B8%8E%E7%94%A8%E6%88%B7%E5%AE%9A%E4%B9%89%E7%9A%84%E6%96%B9%E6%B3%95%E5%85%B3%E8%81%94%E8%B5%B7%E6%9D%A5"><span class="post-toc-text">1.将BindAdapter与用户定义的方法关联起来</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#2-Handle%E4%B8%9A%E5%8A%A1%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%90%AF%E5%8A%A8"><span class="post-toc-text">2.Handle业务线程的启动</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="post-toc-text">服务端的工作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E6%8E%A5%E5%8F%97%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5"><span class="post-toc-text">接受客户端连接</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#1-accept-%E8%8E%B7%E5%8F%96%E5%AE%A2%E6%88%B7%E7%AB%AFsocket"><span class="post-toc-text">1.accept 获取客户端socket</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#2-%E4%B8%BA%E5%AE%A2%E6%88%B7%E7%AB%AFsocket%E5%88%9B%E5%BB%BAConnection"><span class="post-toc-text">2.为客户端socket创建Connection</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#3-%E4%B8%BAConnection%E9%80%89%E6%8B%A9%E4%B8%80%E6%9D%A1%E7%BD%91%E7%BB%9C%E7%BA%BF%E7%A8%8B"><span class="post-toc-text">3.为Connection选择一条网络线程</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E6%8E%A5%E6%94%B6RPC%E8%AF%B7%E6%B1%82"><span class="post-toc-text">接收RPC请求</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#1-%E8%8E%B7%E5%8F%96%E6%BF%80%E6%B4%BB%E4%BA%86%E7%9A%84%E8%BF%9E%E6%8E%A5Connection"><span class="post-toc-text">1.获取激活了的连接Connection</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#2-%E6%8E%A5%E6%94%B6%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82%EF%BC%8C%E6%94%BE%E8%BF%9B%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%98%9F%E5%88%97%E4%B8%AD"><span class="post-toc-text">2.接收客户端请求，放进线程安全队列中</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#3-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%98%9F%E5%88%97%E9%9D%9E%E7%A9%BA%EF%BC%8C%E5%94%A4%E9%86%92%E4%B8%9A%E5%8A%A1%E7%BA%BF%E7%A8%8B%E5%8F%91%E9%80%81"><span class="post-toc-text">3.线程安全队列非空，唤醒业务线程发送</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%A4%84%E7%90%86RPC%E8%AF%B7%E6%B1%82"><span class="post-toc-text">处理RPC请求</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#1-%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE%E6%9E%84%E9%80%A0%E8%AF%B7%E6%B1%82%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="post-toc-text">1.获取请求数据构造请求上下文</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#2-%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%EF%BC%88%E5%8F%AA%E4%BB%8B%E7%BB%8DTARS%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="post-toc-text">2.处理请求（只介绍TARS协议）</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#3-%E5%B0%86%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE%E5%8C%85push%E5%88%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%98%9F%E5%88%97%E4%B8%AD%E5%B9%B6%E9%80%9A%E7%9F%A5%E7%BD%91%E7%BB%9C%E7%BA%BF%E7%A8%8B"><span class="post-toc-text">3.将响应数据包push到线程安全队列中并通知网络线程</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%8F%91%E9%80%81RPC%E5%93%8D%E5%BA%94"><span class="post-toc-text">发送RPC响应</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93"><span class="post-toc-text">服务端工作总结</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="post-toc-text">总结</span></a></li></ol></li></ol></nav></aside><nav id="article-nav"><a href="/42f9643e/" id="article-nav-newer" class="article-nav-link-wrap"><span class="article-nav-title"><i class="fa fa-hand-o-left" aria-hidden="true"></i> 推荐系列-分布式秒杀 </span></a><a href="/a5721e3d/" id="article-nav-older" class="article-nav-link-wrap"><span class="article-nav-title">推荐系列-事务处理不当，线上接口又双叒内存泄漏了！（附图解问���全过程）</span> <i class="fa fa-hand-o-right" aria-hidden="true"></i></a></nav><div id="gitalk"></div><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script>var gitalk=new Gitalk({repo:"bolg-comment",owner:"Hosiang1026",admin:"Hosiang1026",clientID:"37a2dd4473e8970cecc2",clientSecret:"e30efa17d86d9de4f4ab810872dc62a7b2e7e634",pagerDirection:"last",distractionFreeMode:!0,createIssueManually:!1});gitalk.render("gitalk")</script></section></div><footer id="footer"><div class="outer"><div id="footer-info" class="inner"><script id="_wau78w">var _wau=_wau||[];_wau.push(["small","5dnguv4c2n","78w"])</script><script async src="//waust.at/s.js"></script><p><span id="busuanzi_container_site_uv" style="display:none"><span class="post-count">总字数：<span>1291.8k</span> </span>总访客数：<span id="busuanzi_value_site_uv"></span> </span><span id="busuanzi_container_site_pv" style="display:none">总访问量：<span id="busuanzi_value_site_pv"></span></span><br><span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>Copyright&copy; 2018 - 2022 狂欢马克思 <a href="https://beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">京ICP备17060439号</a></p></div></div><script>var now=new Date;function createtime(){var n=new Date("2017/09/18");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="安全运行 "+dnum+" 天 ",document.getElementById("times").innerHTML=hnum+" 小时 "+mnum+" 分 "+snum+" 秒"}setInterval("createtime()",800)</script></footer><script>var mihoConfig={root:"https://www.hosiang.cn",animate:"true",isHome:"false",share:"true",reward:" 1"}</script><div class="sidebar"><div id="sidebar-search" title="Search"><i class="fa fa-search"></i></div><div id="sidebar-category" title="Categories"><i class="fa fa-book"></i></div><div id="sidebar-tag" title="Tags"><i class="fa fa-tags"></i></div><div id="sidebar-top"><span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span></div></div><div class="sidebar-menu-box" id="sidebar-menu-box"><div class="sidebar-menu-box-container"><div id="sidebar-menu-box-categories"><a class="category-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a><a class="category-link" href="/categories/%E5%85%B6%E4%BB%96%E5%BC%80%E5%8F%91/">其他开发</a><a class="category-link" href="/categories/%E5%89%8D%E6%B2%BF%E5%BC%80%E5%8F%91/">前沿开发</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><a class="category-link" href="/categories/%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC/">升级版本</a><a class="category-link" href="/categories/%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/">博客教程</a><a class="category-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><a class="category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><a class="category-link" href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">日常记录</a><a class="category-link" href="/categories/%E7%83%AD%E9%97%A8%E6%96%87%E7%AB%A0/">热门文章</a></div><div id="sidebar-menu-box-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:16px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:14px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:14px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Interview/" style="font-size:18px">Interview</a> <a href="/tags/Java/" style="font-size:12px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:16px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:16px">Spring</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div><a href="javascript:" class="sidebar-menu-box-close">&times;</a></div><div class="mobile-header-menu-nav" id="mobile-header-menu-nav"><div class="mobile-header-menu-container"><span class="title">导航</span><ul class="mobile-header-menu-navbar"><li><a href="/"><i class="fa fa-home"></i><span>主页</span></a></li><li><a href="/archives"><i class="fa fa-archive"></i><span>归档</span></a></li><li><a href="/gitbook"><i class="fa fa-columns"></i><span>笔记</span></a></li><li><a href="/photo"><i class="fa fa-picture-o"></i><span>相册</span></a></li><li><a href="/love"><i class="fa fa-heart"></i><span>恋爱</span></a></li><li><a href="/collection"><i class="fa fa-envira"></i><span>收藏</span></a></li><li><a href="/about"><i class="fa fa-user"></i><span>关于</span></a></li></ul></div><div class="mobile-header-tag-container"><span class="title">标签</span><div id="mobile-header-container-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:16px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:14px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:14px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Interview/" style="font-size:18px">Interview</a> <a href="/tags/Java/" style="font-size:12px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:16px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:16px">Spring</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div></div><div class="search-wrap"><span class="search-close">&times;</span> <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back"><i class="icon icon-lg icon-chevron-left"></i> </a><input class="search-field" placeholder="Search..." id="keywords"> <a id="search-submit" href="javascript:"><i class="fa fa-search"></i></a><div class="search-container" id="search-container"><ul class="search-result" id="search-result"></ul></div></div><div id="search-tpl"><li class="search-result-item"><a href="{url}" class="search-item-li"><span class="search-item-li-title" title="{title}">{title}</span></a></li></div><script src="/js/search.js"></script><script src="/js/main.js"></script><script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script><div id="particles"></div><script src="/js/particles.js"></script><link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css"><script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script><script src="/js/animate.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({pluginRootPath:"live2dw/",pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2dw/assets/hijiki.model.json"},display:{position:"right",width:150,height:300},mobile:{show:!0,scale:.5},log:!1})</script></body></html>

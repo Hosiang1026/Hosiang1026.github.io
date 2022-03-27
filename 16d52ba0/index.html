@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="Access-Control-Allow-Origin" content="*"><script type="text/javascript">var start_time=(new Date).getTime()</script><meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0"><meta name="baidu-site-verification" content="RYlYHsgO7Y"><meta name="sogou_site_verification" content="MSmrTj7lHV"><meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"><meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be"><title>推荐系列-深入理解Object提供的阻塞和唤醒API | 狂欢马克思</title><meta name="keywords" content="分享技术经验与交流"><meta name="description" content="&amp;emsp;&amp;emsp;点击上方蓝字 ↑↑ Throwable文摘 关注公众号设置星标，不定时推送高质量原创文章 关注 前提 前段时间花了大量时间去研读JUC中同步器AbstractQueuedSynchronizer的源码实现，再结合很久之前看…"><meta property="og:type" content="article"><meta property="og:title" content="推荐系列-深入理解Object提供的阻塞和唤醒API"><meta property="og:url" content="https://www.hosiang.cn/16d52ba0/index.html"><meta property="og:site_name" content="狂欢马克思"><meta property="og:description" content="&amp;emsp;&amp;emsp;点击上方蓝字 ↑↑ Throwable文摘 关注公众号设置星标，不定时推送高质量原创文章 关注 前提 前段时间花了大量时间去研读JUC中同步器AbstractQueuedSynchronizer的源码实现，再结合很久之前看…"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2021-04-15T01:19:21.000Z"><meta property="article:modified_time" content="2022-03-27T01:29:07.861Z"><meta property="article:author" content="Howe Hsiang"><meta property="article:tag" content="Popular"><meta name="twitter:card" content="summary"><link rel="icon" href="/images/favicon.ico"><link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/style.css"><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script"),t=(e.src="https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace",document.getElementsByTagName("script")[0]);t.parentNode.insertBefore(e,t)}()</script><script></script><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 5.4.1"></head><script src="/js/jquery.min.js"></script><script src="/js/pace.min.js"></script><script src="/js/crypto-js.js"></script><script src="/js/cookie.js"></script><script src="/js/calendar.js"></script><script src="/js/festival.js"></script><script>getFestival()</script><body><script>window.onload=function(){document.getElementById("TimeShow").innerHTML="本站耗时 "+((new Date).getTime()-start_time)/1e3+" 秒 "}</script><div id="container"><header id="header"><div id="banner"></div><div id="header-outer"><div id="header-menu" class="header-menu-pos animated"><div class="header-menu-container"><a href="/" class="left"><span class="site-title">狂欢马克思</span></a><nav id="header-menu-nav" class="right"><a href="/" rel="external nofollow"><i class="fa fa-home"></i> <span>主页</span> </a><a href="/archives" rel="external nofollow"><i class="fa fa-archive"></i> <span>归档</span> </a><a href="/gitbook" rel="external nofollow"><i class="fa fa-columns"></i> <span>笔记</span> </a><a href="/photo" rel="external nofollow"><i class="fa fa-picture-o"></i> <span>相册</span> </a><a href="/love" rel="external nofollow"><i class="fa fa-heart"></i> <span>恋爱</span> </a><a href="/collection" rel="external nofollow"><i class="fa fa-envira"></i> <span>收藏</span> </a><a href="/about" rel="external nofollow"><i class="fa fa-user"></i> <span>关于</span></a></nav><a class="mobile-header-menu-button"><i class="fa fa-bars"></i></a></div></div><div id="header-row"><div id="logo"><a href="/"><img src="/../images/logo.png" alt="logo"></a></div><div class="header-info"><div id="header-title"><h2>狂欢马克思</h2></div><div id="header-description"><h3>专注Web开发</h3></div></div><nav class="header-nav"><div class="social"><a title="Github" target="_blank" href="//github.com/Hosiang1026" rel="external nofollow"><i class="fa fa-github fa-2x"></i></a> <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes" rel="external nofollow"><i class="fa fa-qq fa-2x"></i></a> <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969" rel="external nofollow"><i class="fa fa-weibo fa-2x"></i></a></div></nav></div><div id="noticeId" class="show" style="background:rgb(244,247,247,.3)"><marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop()" onmouseout="this.start()"></marquee></div><script type="text/javascript">function browserRedirect(){var i=navigator.userAgent.toLowerCase(),n="ipad"==i.match(/ipad/i),o="iphone os"==i.match(/iphone os/i),a="midp"==i.match(/midp/i),t="rv:1.2.3.4"==i.match(/rv:1.2.3.4/i),e="ucweb"==i.match(/ucweb/i),s="android"==i.match(/android/i),d="windows ce"==i.match(/windows ce/i),i="windows mobile"==i.match(/windows mobile/i),p="",r=randomColor(),p=n||o||a||t||e||s||d||i?($("#noticeId").css({"line-height":"1.6em"}),"<font style='color:"+r+"' face='新华宋体'  size='2'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='hitokoto'></span></span></span><span id='YQData'></font> "):($("#noticeId").css({"line-height":"3.6em","margin-top":"20px"}),"<font style='color:"+r+"' face='新华宋体'  size='6'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='hitokoto'></span></span><span id='YQData'></span></font> ");$("#noticeMar").html(p)}function randomColor(){for(var i="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f".split(","),n="#",o=0;o<6;o++)n+=i[Math.floor(16*Math.random())];return n}$(function(){browserRedirect(),0<$("#hitokoto").length&&getHitokoto()})</script></div></header><script>console.log=function(){}</script><div class="outer"><section id="main" class="body-wrap"><article id="post-深入理解Object提供的阻塞和唤醒API" class="article article-type-post" itemscope itemprop="blogPost"><div class="article-inner"><header class="article-header"><h1 class="post-title" itemprop="name">推荐系列-深入理解Object提供的阻塞和唤醒API</h1><div class="post-title-bar"><ul><li><i class="fa fa-book"></i> <a href="/categories/热门文章/">热门文章</a></li><li><i class="fa fa-calendar"></i> 2021-04-15</li><li><i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span></li><li><span class="post-count">字数统计: 5.6k字</span></li><li><span class="post-count">阅读时长: 24分钟</span></li></ul></div></header><div class="article-entry post-content" itemprop="articleBody"><p>&emsp;&emsp;点击上方蓝字 ↑↑ Throwable文摘 关注公众号设置星标，不定时推送高质量原创文章 关注 前提 前段时间花了大量时间去研读JUC中同步器AbstractQueuedSynchronizer的源码实现，再结合很久之前看…<br><span id="more"></span></p><pre><code>  ![Test](https://oscimg.oschina.net/oscnet/16db69806e093dd6434df2520b4765c75c7.jpg  &apos;深入理解Object提供的阻塞和唤醒API&apos;) 
+
+
+
+
+
+
+点击上方蓝字 ↑↑ Throwable文摘 
+
+
+关注公众号设置星标，不定时推送高质量原创文章 
+
+
+
+
+
+
+
+
+    关注 
+</code></pre><h4 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h4><p>前段时间花了大量时间去研读 <code>java JUC</code> 中同步器 <code>java AbstractQueuedSynchronizer</code> 的源码实现，再结合很久之前看过的一篇关于 <code>java Object</code> 提供的等待和唤醒机制的 <code>java JVM</code> 实现，发现两者有不少的关联，于是决定重新研读一下 <code>java Object</code> 中提供的阻塞和唤醒方法。本文阅读 <code>java JDK</code> 类库源码使用的 <code>java JDK</code> 版本是 <code>`</code>java<br>JDK11</p><pre><code class="，因此本文内容可能不适合于其他版本。">
+#### Object提供的阻塞和唤醒API 
+ ```java 
+java.lang.Object
+``` 作为所有非基本类型的基类，也就是说所有 ```java 
+java.lang.Object
+``` 的子类都具备阻塞和唤醒的功能。下面详细分析 ```java 
+Object
+``` 提供的阻塞和唤醒 ```java 
+API
+``` ，它们有一共共同特点：必须在 ```java 
+synchronized
+``` 所修饰的代码块或者方法中使用。 
+
+##### 阻塞等待-wait 
+等待- ```java 
+wait()
+``` 方法提供了阻塞的功能，分超时和永久阻塞的版本，实际上，底层只提供了一个JNI方法： 
+ ```java 
+// 这个是底层提供的JNI方法，带超时的阻塞等待，响应中断，其他两个只是变体public final native void wait(long timeoutMillis) throws InterruptedException;// 变体方法1，永久阻塞，响应中断public final void wait() throws InterruptedException &#123;    wait(0L);&#125;// 变体方法2，带超时的阻塞，超时时间分两段：毫秒和纳秒，实际上纳秒大于0直接毫秒加1(这么暴��...)，响应中断public final void wait(long timeoutMillis, int nanos) throws InterruptedException &#123;    if (timeoutMillis &lt; 0) &#123;        throw new IllegalArgumentException(&quot;timeoutMillis value is negative&quot;);    &#125;    if (nanos &lt; 0 || nanos &gt; 999999) &#123;        throw new IllegalArgumentException(&quot;nanosecond timeout value out of range&quot;);    &#125;    if (nanos &gt; 0) &#123;        timeoutMillis++;    &#125;    wait(timeoutMillis);&#125;
+</code></pre><p>也就是只有一个 <code>`</code>java<br>wait(long timeoutMillis)</p><pre><code class="方法是JNI接口，其他两个方法相当于：">
+
+
+    ```java 
+wait()
+``` 等价于 
+    ```java 
+wait(0L)
+``` 。 
+
+
+
+    ```java 
+wait(long timeoutMillis, int nanos)
+``` 在参数合法的情况下等价于 
+    ```java 
+wait(timeoutMillis + 1L)
+``` 。 
+
+
+由于 ```java 
+wait(long timeoutMillis, int nanos)
+``` 是参数最完整的方法，它的API注释特别长，这里直接翻译和摘取它注释中的核心要素： 
+
+
+
+    当前线程阻塞等待直到被唤醒，唤醒的情况一般有三种： 
+    ```java 
+notify(All)
+``` 被调用、线程被中断或者在指定了超时阻塞的情况下超过了指定的阻塞时间。 
+
+
+
+    当前线程必须获取此对象的监视器锁( 
+   「monitor lock」)，也就是 
+   「调用阻塞等待方法之前一个线程必须成为此对象的监视器锁的拥有者」。 
+
+
+
+    用了 
+    ```java 
+wait()
+``` 方法之后，当前线程会把自身放到当前对象的等待集合（ 
+    ```java 
+wait-set
+``` ），然后释放所有在此对象上的同步声明（then to relinquish any nd all synchronization claims on this object），谨记只有当前对象上的同步声明会被释放，当前线程在其他对象上的同步锁只有在调用其 
+    ```java 
+wait()
+``` 方法之后才会释放。 
+
+
+
+   「Warning」：线程被唤醒之后（ 
+    ```java 
+notify()
+``` 或者中断）就会从等待集合（ 
+    ```java 
+wait-set
+``` ）中移除并且重新允许被线程调度器调度。通常情况下，这个被唤醒的线程会与其他线程竞争对象上的同步权（锁），一旦线程重新 
+   「控制了对象(regained control of the object)」，它对对象的所有同步声明都恢复到以前的状态，即恢复到调用 
+    ```java 
+wait()
+``` 方法时（笔者认为，其实准确来说，是调用 
+    ```java 
+wait()
+``` 方法前）的状态。 
+
+
+
+    如果任意线程在它调用了 
+    ```java 
+wait()
+``` 之前，或者调用过 
+    ```java 
+wait()
+``` 方法之后处于阻塞等待状态，一旦线程调用了 
+    ```java 
+Thread#interrupt()
+``` ，线程就会中断并且抛出 
+    ```java 
+InterruptedException
+``` 异常，线程的中断状态会被清除。 
+    ```java 
+InterruptedException
+``` 异常会延迟到在第4点提到&quot;它对对象的所有同步声明都恢复到以前的状态&quot;的时候抛出。 
+
+
+值得注意的还有： 
+「一个线程必须成为此对象的监视器锁的拥有者才能正常调用 ```java 
+wait()
+``` 系列方法，也就是 ```java 
+wait()
+``` 系列方法必须在同步代码块（ ```java 
+synchronized
+``` 代码块）中调用，否则会抛出 ```java 
+IllegalMonitorStateException
+``` 异常」，这一点是初学者或者不了解 ```java 
+wait()
+``` 的机制的开发者经常会犯的问题。 
+上面的五点描述可以写个简单的同步代码块伪代码时序总结一下： 
+ ```java 
+final Object lock = new Object();synchronized(lock)&#123;    1、线程进入同步代码块，意味着获取对象监视器锁成功    while(!condition)&#123;        lock.wait();   2.线程调用wait()进行阻塞等待        break;    &#125;    3.线程从wait()的阻塞等待中被唤醒，恢复到第1步之后的同步状态    4.继续执行后面的代码，直到离开同步代码块&#125;
+</code></pre><h5 id="唤醒-notify"><a href="#唤醒-notify" class="headerlink" title="唤醒-notify"></a>唤醒-notify</h5><pre><code class="java">notify()
+``` 方法的方法签名如下： 
+ ```java 
+<span class="meta">@HotSpotIntrinsicCandidatepublic</span> <span class="function"><span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">notify</span><span class="params">()</span></span>;
+</code></pre><p>下面按照惯例翻译一下其API注释：</p><pre><code>唤醒一个阻塞等待在此对象监视器上的线程，（如果存在多个阻塞线程）至于选择哪一个线程进行唤醒是任意的，取决于具体的现实，一个线程通过调用 
+```java 
+</code></pre><p>wait()</p><pre><code class="方法才能阻塞在对象监视器上。">
+
+
+    被唤醒的线程并不会马上继续执行，直到当前线程（也就是当前调用了 
+    ```java 
+notify()
+``` 方法的线程）释放对象上的锁。被唤醒的线程会与其他线程竞争在对象上进行同步（换言之只有获得对象的同步控制权才能继续执行），在成为下一个锁定此对象的线程时，被唤醒的线程没有可靠的特权或劣势。 
+
+
+
+    此方法只有在一个线程获取了此对象监视器的所有权（ 
+    ```java 
+the owner
+``` ）的时候才能调用，具体就是：同步方法中、同步代码块中或者静态同步方法中。否则，会抛出 
+    ```java 
+IllegalMonitorStateException
+``` 异常。 
+
+
+
+##### 唤醒所有-notifyAll 
+ ```java 
+notifyAll()
+``` 方法的方法签名如下： 
+ ```java 
+@HotSpotIntrinsicCandidatepublic final native void notifyAll();
+</code></pre><pre><code>唤醒所有阻塞等待在此对象监视器上的线程，一个线程通过调用 
+```java 
+</code></pre><p>wait()</p><pre><code class="方法才能阻塞在对象监视器上。">
+
+其他注释的描述和 ```java 
+notify()
+``` 方法类似。 
+
+##### synchronized小结 
+我们经常看到的资料中提到 ```java 
+synchronized
+``` 关键字的用法： 
+
+
+
+    普通同步方法，同步或者说锁定的是当前实例对象。 
+
+
+
+    静态同步方法，同步或者说锁定的是当前实例对象的 
+    ```java 
+Class
+``` 对象。 
+
+
+
+    同步代码块，同步或者说锁定的是括号里面的实例对象。 
+
+
+对于同步代码块而言， ```java 
+synchronized
+``` 关键字抽象到字节码层面就是同步代码块中的字节码执行在 ```java 
+monitorenter
+``` 和 ```java 
+monitorexit
+``` 指令之间： 
+ ```java 
+synchronized(xxxx)&#123;    ...coding block&#125;↓↓↓↓↓↓↓↓↓↓monitorenter;...coding block - bytecodemonitorexit;
+</code></pre><pre><code class="java">JVM
+``` 需要保证每一个 ```java 
+monitorenter
+``` 都有一个 ```java 
+monitorexit
+``` 与之相对应。任何对象都有一个 ```java 
+monitor
+``` （实际上是 ```java 
+ObjectMonitor
+``` ）与之相关联，当且仅当一个 ```java 
+monitor
+``` 被持有之后，它将处于锁定状态。线程执行到 ```java 
+monitorenter
+``` 指令时，将会尝试获取对象所对应的 ```java 
+monitor
+``` 所有权，即尝试获取对象的锁。 
+对于同步（静态）方法而言， ```java 
+<span class="keyword">synchronized</span>
+``` 方法则会被翻译成普通的方法调用和返回指令，如： ```java 
+invokevirtual
+``` 等等，在 ```java 
+JVM
+``` 字节码层面并没有任何特别的指令来实现被 ```java 
+<span class="keyword">synchronized</span>
+``` 修饰的方法，而是在 ```java 
+Class
+``` 文件的方法表中将该方法的 ```java 
+access_flags
+``` 字段中的 ```java 
+<span class="keyword">synchronized</span>
+``` 标志位置<span class="number">1</span>，表示该方法是同步方法并使用调用该方法的对象或该方法所属的 ```java 
+Class
+``` 在 ```java 
+JVM
+``` 的内部对象表示 ```java 
+Klass
+``` 作为锁对象。 
+其实从开发者角度简单理解，「这两种方式只是在获取锁的时机有所不同」。 
+下面重复阐述「几个第一眼看起来不合理却是事实的问题」（其实前文已经提及过）： 
+
+
+
+    在线程进入 
+    ```java 
+<span class="keyword">synchronized</span>
+``` 方法或者代码块，相当于获取监视器锁成功，如果此时成功调用 
+    ```java 
+wait()
+``` 系列方法，那么它会立即释放监视器锁，并且添加到等待集合（ 
+    ```java 
+Wait Set
+``` ）中进行阻塞等待。 
+
+
+
+    由于已经有线程释放了监视器锁，那么在另一个线程进入 
+    ```java 
+<span class="keyword">synchronized</span>
+``` 方法或者代码块之后，它可以调用 
+    ```java 
+notify(All)
+``` 方法唤醒等待集合中正在阻塞的线程，但是这个唤醒操作并不是调用 
+    ```java 
+notify(All)
+``` 方法后立即生效，而是在该线程 
+   「退出 ```java 
+<span class="keyword">synchronized</span>
+``` 方法或者代码块之后才生效」。 
+
+
+
+    从 
+    ```java 
+wait()
+``` 方法阻塞过程中被唤醒的线程会竞争监视器目标对象的控制权，一旦重新控制了对象，那么线程的同步状态就会恢复到步入 
+    ```java 
+<span class="keyword">synchronized</span>
+``` 方法或者代码块时候的状态（也就是成功获取到对象监视器锁时候的状态），这个时候线程才能够继续执行。 
+
+
+为了验证这三点，可以写个简单的 ```java 
+Demo
+``` ： 
+ ```java 
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lock</span> </span>&#123;&#125;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WaitMain</span> </span>&#123;    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> DateTimeFormatter F = DateTimeFormatter.ofPattern(<span class="string">"yyyy-MM-dd HH:mm:ss.SSS"</span>);    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;        <span class="comment">// 这里换成Object其实也没有问题        final Lock lock = new Lock();        new Thread(new  WaitRunnable(lock), "WaitThread-1").start();        new Thread(new  WaitRunnable(lock), "WaitThread-2").start();        Thread.sleep(50);        new Thread(new  NotifyRunnable(lock), "NotifyThread").start();        Thread.sleep(Integer.MAX_VALUE);    &#125;    @RequiredArgsConstructor    private static class WaitRunnable implements Runnable &#123;        private final Lock lock;        @Override        public void run() &#123;            synchronized (lock) &#123;                System.out.println(String.format("[%s]-线程[%s]获取锁成功,准备执行wait方法", F.format(LocalDateTime.now()),                        Thread.currentThread().getName()));                while (true) &#123;                    try &#123;                        lock.wait();                    &#125; catch (InterruptedException e) &#123;                        //ignore                    &#125;                    System.out.println(String.format("[%s]-线程[%s]从wait中唤醒,准备exit", F.format(LocalDateTime.now()),                            Thread.currentThread().getName()));                    try &#123;                        Thread.sleep(500);                    &#125; catch (InterruptedException e) &#123;                        //ignore                    &#125;                    break;                &#125;            &#125;        &#125;    &#125;    @RequiredArgsConstructor    private static class NotifyRunnable implements Runnable &#123;        private final Lock lock;        @Override        public void run() &#123;            synchronized (lock) &#123;                System.out.println(String.format("[%s]-线程[%s]获取锁成功,准备执行notifyAll方法", F.format(LocalDateTime.now()),                        Thread.currentThread().getName()));                lock.notifyAll();                System.out.println(String.format("[%s]-线程[%s]先休眠3000ms", F.format(LocalDateTime.now()),                        Thread.currentThread().getName()));                try &#123;                    Thread.sleep(3000);                &#125; catch (InterruptedException e) &#123;                    //ignore                &#125;                System.out.println(String.format("[%s]-线程[%s]准备exit", F.format(LocalDateTime.now()),                        Thread.currentThread().getName()));            &#125;        &#125;    &#125;&#125;</span>
+</code></pre><p>某个时刻的执行结果如下：</p><pre><code class="java">[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">27</span> <span class="number">23</span>:<span class="number">28</span>:<span class="number">17.617</span>]-线程[WaitThread-<span class="number">1</span>]获取锁成功,准备执行wait方法[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">27</span> <span class="number">23</span>:<span class="number">28</span>:<span class="number">17.631</span>]-线程[WaitThread-<span class="number">2</span>]获取锁成功,准备执行wait方法[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">27</span> <span class="number">23</span>:<span class="number">28</span>:<span class="number">17.657</span>]-线程[NotifyThread]获取锁成功,准备执行notifyAll方法 &lt;-------- 这一步执行完说明WaitThread已经释放了锁[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">27</span> <span class="number">23</span>:<span class="number">28</span>:<span class="number">17.657</span>]-线程[NotifyThread]先休眠<span class="number">3000</span>ms[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">27</span> <span class="number">23</span>:<span class="number">28</span>:<span class="number">20.658</span>]-线程[NotifyThread]准备exit &lt;------- 这一步后NotifyThread离开同步代码块[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">27</span> <span class="number">23</span>:<span class="number">28</span>:<span class="number">20.658</span>]-线程[WaitThread-<span class="number">1</span>]从wait中唤醒,准备exit &lt;------- 这一步WaitThread-<span class="number">1</span>解除阻塞[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">27</span> <span class="number">23</span>:<span class="number">28</span>:<span class="number">21.160</span>]-线程[WaitThread-<span class="number">2</span>]从wait中唤醒,准备exit &lt;------- 这一步WaitThread-<span class="number">2</span>解除阻塞，注意发生时间在WaitThread-<span class="number">1</span>解除阻塞<span class="number">500</span>ms之后，符合我们前面提到的第<span class="number">3</span>点
+</code></pre><p>如果结合 <code>java wait()</code> 和 <code>`</code>java<br>notify()</p><pre><code class="可以简单总结出一个同步代码块的伪代码如下："> ```java 
+final Object lock = new Object();// 等待synchronized(lock)&#123;    1、线程进入同步代码块，意味着获取对象监视器锁成功    while(!condition)&#123;        lock.wait();   2.线程调用wait()进行阻塞等待        break;    &#125;    3.线程从wait()的阻塞等待中被唤醒，尝试恢复第1步之后的同步状态，并不会马上生效，直到notify被调用并且调用notify方法的线程已经释放锁，同时当前线程需要竞争成功    4.继续执行后面的代码，直到离开同步代码块&#125;// 唤醒synchronized(lock)&#123;    1、线程进入同步代码块，意味着获取对象监视器锁成功    lock.notify();  2.唤醒其中一个在对象监视器上等待的线程    3.准备推出同步代码块��放��，只有释放锁之后第2步才会生效&#125;
+</code></pre><h4 id="图解Object提供的阻塞和唤醒机制"><a href="#图解Object提供的阻塞和唤醒机制" class="headerlink" title="图解Object提供的阻塞和唤醒机制"></a>图解Object提供的阻塞和唤醒机制</h4><p>结合前面分析过的知识点以及参考资料中的文章，重新画一个图理解一下对象监视器以及相应阻塞和唤醒 <code>`</code>java<br>API</p><pre><code class="的工作示意过程：">
+ ![Test](https://oscimg.oschina.net/oscnet/16db69806e093dd6434df2520b4765c75c7.jpg  &apos;深入理解Object提供的阻塞和唤醒API&apos;) 
+
+  j-u-c-o-w-n-1.png 
+
+
+
+
+
+    ```java 
+Entry Set
+``` （实际上是 
+    ```java 
+ObjectMonitor
+``` 中的 
+    ```java 
+_EntryList
+``` 属性）：存放等待锁并且处于阻塞状态的线程。 
+
+
+
+    ```java 
+Wait Set
+``` （实际上是 
+    ```java 
+ObjectMonitor
+``` 中的 
+    ```java 
+_WaitSet
+``` 属性）：存放处于等待阻塞状态的线程。 
+
+
+
+    ```java 
+The Owner
+``` （实际上是 
+    ```java 
+ObjectMonitor
+``` 中的 
+    ```java 
+_owner
+``` 属性）：指向获得对象监视器的线程，在同一个时刻只能有一个线程被 
+    ```java 
+The Owner
+``` 持有，通俗来看，它就是监视器的控制权。 
+
+
+
+#### 使用例子 
+通过 ```java 
+Object
+``` 提供的阻塞和唤醒机制举几个简单的使用例子。 
+
+##### 维修厕所的例子 
+假设有以下场景：厕所的只有一个卡位，厕所维修工修厕所的时候，任何人不能上厕所。当厕所维修工修完厕所的时候，上厕所的人需要&quot;得到厕所的控制权&quot;才能上厕所。 
+ ```java 
+// 厕所类public class Toilet &#123;    // 厕所的锁    private final Object lock = new Object();    private boolean available;    public Object getLock() &#123;        return lock;    &#125;    public void setAvailable(boolean available) &#123;        this.available = available;    &#125;    public boolean getAvailable() &#123;        return available;    &#125;&#125;// 厕所维修工@RequiredArgsConstructorpublic class ToiletRepairer implements Runnable &#123;    private static final DateTimeFormatter F = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;);    private final Toilet toilet;    @Override    public void run() &#123;        synchronized (toilet.getLock()) &#123;            System.out.println(String.format(&quot;[%s]-厕所维修员得到了厕所的锁,维修厕所要用5000ms...&quot;, LocalDateTime.now().format(F)));            try &#123;                Thread.sleep(5000);            &#125; catch (Exception e) &#123;                // ignore            &#125;            toilet.setAvailable(true);            toilet.getLock().notifyAll();            System.out.println(String.format(&quot;[%s]-厕所维修员维修完毕...&quot;, LocalDateTime.now().format(F)));        &#125;    &#125;&#125;//上厕所的任务@RequiredArgsConstructorpublic class ToiletTask implements Runnable &#123;    private static final DateTimeFormatter F = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;);    private final Toilet toilet;    private final String name;    private final Random random;    @Override    public void run() &#123;        synchronized (toilet.getLock()) &#123;            System.out.println(String.format(&quot;[%s]-%s得到了厕所的锁...&quot;, LocalDateTime.now().format(F), name));            while (!toilet.getAvailable()) &#123;                try &#123;                    toilet.getLock().wait();                &#125; catch (InterruptedException e) &#123;                    //ignore                &#125;                int time = random.nextInt(3) + 1;                try &#123;                    // 模拟上厕所用时                    TimeUnit.SECONDS.sleep(time);                &#125; catch (InterruptedException e) &#123;                    //ignore                &#125;                System.out.println(String.format(&quot;[%s]-%s上厕所用了%s秒...&quot;, LocalDateTime.now().format(F), name, time));            &#125;        &#125;    &#125;&#125;// 场景入口public class Main &#123;    public static void main(String[] args) throws Exception &#123;        Toilet toilet = new Toilet();        Random random = new Random();        Thread toiletRepairer = new Thread(new ToiletRepairer(toilet), &quot;ToiletRepairer&quot;);        Thread thread1 = new Thread(new ToiletTask(toilet, &quot;张三&quot;, random), &quot;thread-1&quot;);        Thread thread2 = new Thread(new ToiletTask(toilet, &quot;李四&quot;, random), &quot;thread-2&quot;);        Thread thread3 = new Thread(new ToiletTask(toilet, &quot;王五&quot;, random), &quot;thread-3&quot;);        thread1.start();        thread2.start();        thread3.start();        Thread.sleep(50);        toiletRepairer.start();        Thread.sleep(Integer.MAX_VALUE);    &#125;&#125;
+</code></pre><p>某次执行的结果如下：</p><pre><code class="java">[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">01</span>:<span class="number">07</span>:<span class="number">25.914</span>]-张三得到了厕所的锁...[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">01</span>:<span class="number">07</span>:<span class="number">25.931</span>]-李四得到了厕所的锁...[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">01</span>:<span class="number">07</span>:<span class="number">25.931</span>]-王五得到了厕所的锁...[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">01</span>:<span class="number">07</span>:<span class="number">25.951</span>]-厕所维修员得到了厕所的锁,维修厕所要用<span class="number">5000</span>ms...[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">01</span>:<span class="number">07</span>:<span class="number">30.951</span>]-厕所维修员维修完毕...[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">01</span>:<span class="number">07</span>:<span class="number">32.952</span>]-张三上厕所用了<span class="number">2</span>秒...[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">01</span>:<span class="number">07</span>:<span class="number">35.952</span>]-王五上厕所用了<span class="number">3</span>秒...[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">01</span>:<span class="number">07</span>:<span class="number">37.953</span>]-李四上厕所用了<span class="number">2</span>秒...
+</code></pre><h5 id="阻塞队列实现"><a href="#阻塞队列实现" class="headerlink" title="阻塞队列实现"></a>阻塞队列实现</h5><p>实现一个简单固定容量的阻塞队列，接口如下：</p><pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BlockingQueue</span>&lt;<span class="title">T</span>&gt; </span>&#123;    <span class="function"><span class="keyword">void</span> <span class="title">put</span><span class="params">(T value)</span> <span class="keyword">throws</span> InterruptedException</span>;    <span class="function">T <span class="title">take</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span>;&#125;
+</code></pre><p>其中 <code>java put(T value)</code> 会阻塞直到队列中有可用的容量，而 <code>`</code>java<br>take()</p><pre><code class="方法会阻塞直到有元素投放到队列中。实现如下："> ```java 
+public class DefaultBlockingQueue&lt;T&gt; implements BlockingQueue&lt;T&gt; &#123;    private Object[] elements;    private final Object notEmpty = new Object();    private final Object notFull = new Object();    private int count;    private int takeIndex;    private int putIndex;    public DefaultBlockingQueue(int capacity) &#123;        this.elements = new Object[capacity];    &#125;    @Override    public void put(T value) throws InterruptedException &#123;        synchronized (notFull) &#123;            while (count == elements.length) &#123;                notFull.wait();            &#125;        &#125;        final Object[] items = this.elements;        items[putIndex] = value;        if (++putIndex == items.length) &#123;            putIndex = 0;        &#125;        count++;        synchronized (notEmpty) &#123;            notEmpty.notify();        &#125;    &#125;    @SuppressWarnings(&quot;unchecked&quot;)    @Override    public T take() throws InterruptedException &#123;        synchronized (notEmpty) &#123;            while (count == 0) &#123;                notEmpty.wait();            &#125;        &#125;        final Object[] items = this.elements;        T value = (T) items[takeIndex];        items[takeIndex] = null;        if (++takeIndex == items.length) &#123;            takeIndex = 0;        &#125;        count--;        synchronized (notFull) &#123;            notFull.notify();        &#125;        return value;    &#125;&#125;
+</code></pre><p>场景入口类：</p><pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;        BlockingQueue&lt;String&gt; queue = <span class="keyword">new</span> DefaultBlockingQueue&lt;&gt;(<span class="number">5</span>);        Runnable r = () -&gt; &#123;            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;                <span class="keyword">try</span> &#123;                    String take = queue.take();                    System.out.println(String.format(<span class="string">"线程%s消费消息-%s"</span>, Thread.currentThread().getName(), take));                &#125; <span class="keyword">catch</span> (Exception e) &#123;                    e.printStackTrace();                &#125;            &#125;        &#125;;        <span class="keyword">new</span> Thread(r, <span class="string">"thread-1"</span>).start();        <span class="keyword">new</span> Thread(r, <span class="string">"thread-2"</span>).start();        IntStream.range(<span class="number">0</span>, <span class="number">10</span>).forEach(i -&gt; &#123;            <span class="keyword">try</span> &#123;                queue.put(String.valueOf(i));            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;                <span class="comment">//ignore            &#125;        &#125;);        Thread.sleep(Integer.MAX_VALUE);    &#125;&#125;</span>
+</code></pre><p>某次执行结果如下：</p><pre><code class="java">线程thread-<span class="number">1</span>消费消息-<span class="number">0</span>线程thread-<span class="number">2</span>消费消息-<span class="number">1</span>线程thread-<span class="number">1</span>消费消息-<span class="number">2</span>线程thread-<span class="number">2</span>消费消息-<span class="number">3</span>线程thread-<span class="number">1</span>消费消息-<span class="number">4</span>线程thread-<span class="number">2</span>消费消息-<span class="number">5</span>线程thread-<span class="number">1</span>消费消息-<span class="number">6</span>线程thread-<span class="number">2</span>消费消息-<span class="number">7</span>线程thread-<span class="number">1</span>消费消息-<span class="number">8</span>线程thread-<span class="number">2</span>消费消息-<span class="number">9</span>
+</code></pre><p>上面这个例子就是简单的单生产者-多消费者的模型。</p><h5 id="线程池实现"><a href="#线程池实现" class="headerlink" title="线程池实现"></a>线程池实现</h5><p>这里实现一个极度简陋的固定容量的线程池，功能是：初始化固定数量的活跃线程，阻塞直到有可用的线程用于提交任务。它只有一个接口方法，接口定义如下：</p><pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ThreadPool</span> </span>&#123;    <span class="function"><span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable runnable)</span></span>;&#125;
+</code></pre><p>具体实现如下：</p><pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultThreadPool</span> <span class="keyword">implements</span> <span class="title">ThreadPool</span> </span>&#123;    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> capacity;    <span class="keyword">private</span> List&lt;Worker&gt; initWorkers;    <span class="keyword">private</span> Deque&lt;Worker&gt; availableWorkers;    <span class="keyword">private</span> Deque&lt;Worker&gt; busyWorkers;    <span class="keyword">private</span> <span class="keyword">final</span> Object nextLock = <span class="keyword">new</span> Object();    <span class="function"><span class="keyword">public</span> <span class="title">DefaultThreadPool</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;        <span class="keyword">this</span>.capacity = capacity;        init(capacity);    &#125;    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;        initWorkers = <span class="keyword">new</span> ArrayList&lt;&gt;(capacity);        availableWorkers = <span class="keyword">new</span> LinkedList&lt;&gt;();        busyWorkers = <span class="keyword">new</span> LinkedList&lt;&gt;();        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; capacity; i++) &#123;            Worker worker = <span class="keyword">new</span> Worker();            worker.setName(<span class="string">"Worker-"</span> + (i + <span class="number">1</span>));            worker.setDaemon(<span class="keyword">true</span>);            initWorkers.add(worker);        &#125;        <span class="keyword">for</span> (Worker w : initWorkers) &#123;            w.start();            availableWorkers.add(w);        &#125;    &#125;    <span class="meta">@Override</span>    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable runnable)</span> </span>&#123;        <span class="keyword">if</span> (<span class="keyword">null</span> == runnable) &#123;            <span class="keyword">return</span>;        &#125;        <span class="keyword">synchronized</span> (nextLock) &#123;            <span class="keyword">while</span> (availableWorkers.size() &lt; <span class="number">1</span>) &#123;                <span class="keyword">try</span> &#123;                    nextLock.wait(<span class="number">500</span>);                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;                    <span class="comment">//ignore                &#125;            &#125;            Worker worker = availableWorkers.removeFirst();            busyWorkers.add(worker);            worker.run(runnable);            nextLock.notifyAll();        &#125;    &#125;    private void makeAvailable(Worker worker) &#123;        synchronized (nextLock) &#123;            availableWorkers.add(worker);            busyWorkers.remove(worker);            nextLock.notifyAll();        &#125;    &#125;    private class Worker extends Thread &#123;        private final Object lock = new Object();        private Runnable runnable;        private AtomicBoolean run = new AtomicBoolean(true);        private void run(Runnable runnable) &#123;            synchronized (lock) &#123;                if (null != this.runnable) &#123;                    throw new IllegalStateException("Already running a Runnable!");                &#125;                this.runnable = runnable;                lock.notifyAll();            &#125;        &#125;        @Override        public void run() &#123;            boolean ran = false;            while (run.get()) &#123;                try &#123;                    synchronized (lock) &#123;                        while (runnable == null &amp;&amp; run.get()) &#123;                            lock.wait(500);                        &#125;                        if (runnable != null) &#123;                            ran = true;                            runnable.run();                        &#125;                    &#125;                &#125; catch (Exception e) &#123;                    e.printStackTrace();                &#125; finally &#123;                    synchronized (lock) &#123;                        runnable = null;                    &#125;                    if (ran) &#123;                        ran = false;                        makeAvailable(this);                    &#125;                &#125;            &#125;        &#125;    &#125;&#125;</span>
+</code></pre><p>编写一个场景类：</p><pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainClient</span> </span>&#123;    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> DateTimeFormatter F = DateTimeFormatter.ofPattern(<span class="string">"yyyy-MM-dd HH:mm:ss.SSS"</span>);    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;        ThreadPool threadPool = <span class="keyword">new</span> DefaultThreadPool(<span class="number">2</span>);        threadPool.execute(() -&gt; &#123;            <span class="keyword">try</span> &#123;                System.out.println(String.format(<span class="string">"[%s]-任务一开始执行持续3秒..."</span>, LocalDateTime.now().format(F)));                Thread.sleep(<span class="number">3000</span>);                System.out.println(String.format(<span class="string">"[%s]-任务一执行结束..."</span>, LocalDateTime.now().format(F)));            &#125;<span class="keyword">catch</span> (Exception e)&#123;                <span class="comment">//ignore            &#125;        &#125;);        threadPool.execute(() -&gt; &#123;            try &#123;                System.out.println(String.format("[%s]-任务二开始执行持续4秒...", LocalDateTime.now().format(F)));                Thread.sleep(4000);                System.out.println(String.format("[%s]-任务二执行结束...", LocalDateTime.now().format(F)));            &#125;catch (Exception e)&#123;                //ignore            &#125;        &#125;);        threadPool.execute(() -&gt; &#123;            try &#123;                System.out.println(String.format("[%s]-任务三开始执行持续5秒...", LocalDateTime.now().format(F)));                Thread.sleep(5000);                System.out.println(String.format("[%s]-任务三执行结束...", LocalDateTime.now().format(F)));            &#125;catch (Exception e)&#123;                //ignore            &#125;        &#125;);        Thread.sleep(Integer.MAX_VALUE);    &#125;&#125;</span>
+</code></pre><p>某次执行结果如下：</p><pre><code class="java">[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">02</span>:<span class="number">07</span>:<span class="number">25.465</span>]-任务二开始执行持续<span class="number">4</span>秒...[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">02</span>:<span class="number">07</span>:<span class="number">25.465</span>]-任务一开始执行持续<span class="number">3</span>秒...[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">02</span>:<span class="number">07</span>:<span class="number">28.486</span>]-任务一执行结束...[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">02</span>:<span class="number">07</span>:<span class="number">28.486</span>]-任务三开始执行持续<span class="number">5</span>秒...[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">02</span>:<span class="number">07</span>:<span class="number">29.486</span>]-任务二执行结束...[<span class="number">2019</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">02</span>:<span class="number">07</span>:<span class="number">33.487</span>]-任务三执行结束...
+</code></pre><h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>鉴于笔者 <code>java C</code> 语言学得不好，这里就无法深入分析 <code>java JVM</code> 源码的实现，只能结合一些现有的资料和自己的理解重新梳理一下 <code>java Object</code> 提供的阻塞和唤醒机制这些知识点。结合之前看过 <code>java JUC</code> 同步器的源码，一时醒悟过来， <code>java JUC</code> 同步器只是在数据结构和算法层面使用 <code>java Java</code> 语言对原来 <code>java JVM</code> 中 <code>java C</code> 语言的阻塞和唤醒机制即 <code>java Object</code> 提供的那几个 <code>java JNI</code> 方法进行了一次实现而已。<br>最后， <code>java Object</code> 提供的阻塞等待唤醒机制是 <code>java JVM</code> 实现的（如果特别熟悉 <code>java C</code> 语言可以通过 <code>java JVM</code> 源码研究其实现，对于大部分开发者来说这部分的知识其实是暗箱），除非是特别熟练或者是 <code>java JDK</code> 版本太低尚未引入 <code>java JUC</code> 包（ <code>java JUC</code> 包是 <code>java JDK1.5</code> 或者之后才加入到 <code>java JDK</code> 中）。一般情况下「不应该优先选择 <code>java Object</code> 」，一方面因为 <code>java Object</code> 提供的 <code>java API</code> 是 <code>java Native</code> 方法，其功能有可能受到 <code>java JVM</code> 版本的影响（有可能带来性能提升这样的正面影响，也有可能是负面影响），另一方面 <code>java Object</code> 提供的 <code>java API</code> 其实并不灵活。综合来看，实际开发中更建议使用专门为并发设计的 <code>java JUC</code> 包中的锁相关类库，例如可重入锁 <code>java ReentrantLock</code> 。</p><p>直到 <code>java JDK11</code> 为止，还有大量的 <code>java JDK</code> 类库使用了 <code>java Object</code> 提供的 <code>java API</code> 以及 <code>java synchronized</code> 关键字实现的阻塞和唤醒功能，此所谓存在即合理。<br>参考资料：</p><pre><code>JVM源码分析之Object.wait/notify实现-By占小狼 
+
+
+
+JDK11相关源码 
+</code></pre><p>（本文完 c-7-d e-a-20190430 r-a-20200720 封面来自于《圣诞之吻ss》）</p><p>本文分享自微信公众号 - Throwable文摘（throwable-doge）。如有侵权，请联系 <a href="mailto:support@oschina.cn" rel="external nofollow noopener noreferrer" target="_blank">support@oschina.cn</a> 删除。本文参与“OSC源创计划”，欢迎正在阅读的你也加入，一起分享。</p><div class="post-copyright"><div class="content"><p>本文标题： 推荐系列-深入理解Object提供的阻塞和唤醒API</p><p>本文作者： OSChina</p><p>发布时间： 2021年04月15日 09:19</p><p>最后更新： 2022年03月27日 09:29</p><p>原始链接： <a class="post-url" href="/16d52ba0/" title="推荐系列-深入理解Object提供的阻塞和唤醒API">https://www.hosiang.cn/16d52ba0/</a></p><p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p><footer><a href="https://www.hosiang.cn"><img src="/../images/logo.png" alt="Howe Hsiang"> Howe Hsiang</a></footer></div></div><div class="page-reward"><a id="rewardBtn" href="javascript:;">赏</a></div><div id="reward" class="post-modal reward-lay"><a class="close" href="javascript:;" id="reward-close">×</a> <span class="reward-title"><i class="icon icon-quote-left"></i> 喜欢就赞赏一下呗！ <i class="icon icon-quote-right"></i></span><div class="reward-content"><div class="reward-code"><img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码"></div><div class="reward-select"></div></div></div></div><footer class="article-footer"><div class="post-share"><a href="javascript:" id="share-sub" class="post-share-fab"><i class="fa fa-share-alt" style="padding-top:11px!important"></i></a><div class="post-share-list" id="share-list"><ul class="share-icons"><li><a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/16d52ba0/" data-title="Facebook" rel="external nofollow noopener noreferrer"><i class="fa fa-facebook" style="padding-top:9px!important"></i></a></li><li><a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-深入理解Object提供的阻塞和唤醒API》 — 狂欢马克思&url=https://www.hosiang.cn/16d52ba0/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer"><i class="fa fa-twitter" style="padding-top:9px!important"></i></a></li><li><a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/16d52ba0/" data-title="Google+" rel="external nofollow noopener noreferrer"><i class="fa fa-google-plus" style="padding-top:9px!important"></i></a></li><li><a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/16d52ba0/&title=《推荐系列-深入理解Object提供的阻塞和唤醒API》 — 狂欢马克思&source=&emsp;&emsp;点击上方蓝字 ↑↑ Throwable文摘 关注公众号设置星标，不定时推送高质量原创文章 关注 前提 前段时间花了大量时间去研读J..." data-title="QQ" rel="external nofollow noopener noreferrer"><i class="fa fa-qq" style="padding-top:9px!important"></i></a></li><li><a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信"><i class="fa fa-weixin" style="padding-top:9px!important"></i></a></li><li><a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/16d52ba0/&title=《推荐系列-深入理解Object提供的阻塞和唤醒API》 — 狂欢马克思&pic=https://static.oschina.net/uploads/img/202008/20142229_q4W7.jpg" data-title="微博" rel="external nofollow noopener noreferrer"><i class="fa fa-weibo" style="padding-top:9px!important"></i></a></li></ul></div></div><div class="post-modal wx-share" id="wxShare"><a class="close" href="javascript:" id="wxShare-close">×</a><p>扫一扫，分享到微信</p><img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/16d52ba0/" alt="微信分享二维码"></div><div class="mask"></div><ul class="article-footer-menu"><li class="article-footer-tags"><i class="fa fa-tags"></i> <a href="/tags/Popular/" class="color3">Popular</a></li></ul></footer></div></article><aside class="post-toc-pos post-toc-top" id="post-toc"><nav class="post-toc-wrap"><ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%89%8D%E6%8F%90"><span class="post-toc-text">前提</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%94%A4%E9%86%92-notify"><span class="post-toc-text">唤醒-notify</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%9B%BE%E8%A7%A3Object%E6%8F%90%E4%BE%9B%E7%9A%84%E9%98%BB%E5%A1%9E%E5%92%8C%E5%94%A4%E9%86%92%E6%9C%BA%E5%88%B6"><span class="post-toc-text">图解Object提供的阻塞和唤醒机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">阻塞队列实现</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">线程池实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="post-toc-text">小结</span></a></li></ol></nav></aside><nav id="article-nav"><a href="/573fb9b4/" id="article-nav-newer" class="article-nav-link-wrap"><span class="article-nav-title"><i class="fa fa-hand-o-left" aria-hidden="true"></i> 推荐系列-速度提高几百倍，记一次数据结构在实际工作中的运用 </span></a><a href="/c1aba8a6/" id="article-nav-older" class="article-nav-link-wrap"><span class="article-nav-title">推荐系列-Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册</span> <i class="fa fa-hand-o-right" aria-hidden="true"></i></a></nav><div id="gitalk"></div><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script>var gitalk=new Gitalk({repo:"bolg-comment",owner:"Hosiang1026",admin:"Hosiang1026",clientID:"37a2dd4473e8970cecc2",clientSecret:"e30efa17d86d9de4f4ab810872dc62a7b2e7e634",pagerDirection:"last",distractionFreeMode:!0,createIssueManually:!1});gitalk.render("gitalk")</script></section></div><footer id="footer"><div class="outer"><div id="footer-info" class="inner"><script id="_wau78w">var _wau=_wau||[];_wau.push(["small","5dnguv4c2n","78w"])</script><script async src="//waust.at/s.js"></script><p><span id="busuanzi_container_site_uv" style="display:none"><span class="post-count">总字数：<span>1291.8k</span> </span>总访客数：<span id="busuanzi_value_site_uv"></span> </span><span id="busuanzi_container_site_pv" style="display:none">总访问量：<span id="busuanzi_value_site_pv"></span></span><br><span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>Copyright&copy; 2018 - 2022 狂欢马克思 <a href="https://beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">京ICP备17060439号</a></p></div></div><script>var now=new Date;function createtime(){var n=new Date("2017/09/18");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="安全运行 "+dnum+" 天 ",document.getElementById("times").innerHTML=hnum+" 小时 "+mnum+" 分 "+snum+" 秒"}setInterval("createtime()",800)</script></footer><script>var mihoConfig={root:"https://www.hosiang.cn",animate:"true",isHome:"false",share:"true",reward:" 1"}</script><div class="sidebar"><div id="sidebar-search" title="Search"><i class="fa fa-search"></i></div><div id="sidebar-category" title="Categories"><i class="fa fa-book"></i></div><div id="sidebar-tag" title="Tags"><i class="fa fa-tags"></i></div><div id="sidebar-top"><span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span></div></div><div class="sidebar-menu-box" id="sidebar-menu-box"><div class="sidebar-menu-box-container"><div id="sidebar-menu-box-categories"><a class="category-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a><a class="category-link" href="/categories/%E5%85%B6%E4%BB%96%E5%BC%80%E5%8F%91/">其他开发</a><a class="category-link" href="/categories/%E5%89%8D%E6%B2%BF%E5%BC%80%E5%8F%91/">前沿开发</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><a class="category-link" href="/categories/%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC/">升级版本</a><a class="category-link" href="/categories/%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/">博客教程</a><a class="category-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><a class="category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><a class="category-link" href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">日常记录</a><a class="category-link" href="/categories/%E7%83%AD%E9%97%A8%E6%96%87%E7%AB%A0/">热门文章</a></div><div id="sidebar-menu-box-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:16px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:14px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:14px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Interview/" style="font-size:18px">Interview</a> <a href="/tags/Java/" style="font-size:12px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:16px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:16px">Spring</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div><a href="javascript:" class="sidebar-menu-box-close">&times;</a></div><div class="mobile-header-menu-nav" id="mobile-header-menu-nav"><div class="mobile-header-menu-container"><span class="title">导航</span><ul class="mobile-header-menu-navbar"><li><a href="/"><i class="fa fa-home"></i><span>主页</span></a></li><li><a href="/archives"><i class="fa fa-archive"></i><span>归档</span></a></li><li><a href="/gitbook"><i class="fa fa-columns"></i><span>笔记</span></a></li><li><a href="/photo"><i class="fa fa-picture-o"></i><span>相册</span></a></li><li><a href="/love"><i class="fa fa-heart"></i><span>恋爱</span></a></li><li><a href="/collection"><i class="fa fa-envira"></i><span>收藏</span></a></li><li><a href="/about"><i class="fa fa-user"></i><span>关于</span></a></li></ul></div><div class="mobile-header-tag-container"><span class="title">标签</span><div id="mobile-header-container-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:16px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:14px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:14px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Interview/" style="font-size:18px">Interview</a> <a href="/tags/Java/" style="font-size:12px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:16px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:16px">Spring</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div></div><div class="search-wrap"><span class="search-close">&times;</span> <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back"><i class="icon icon-lg icon-chevron-left"></i> </a><input class="search-field" placeholder="Search..." id="keywords"> <a id="search-submit" href="javascript:"><i class="fa fa-search"></i></a><div class="search-container" id="search-container"><ul class="search-result" id="search-result"></ul></div></div><div id="search-tpl"><li class="search-result-item"><a href="{url}" class="search-item-li"><span class="search-item-li-title" title="{title}">{title}</span></a></li></div><script src="/js/search.js"></script><script src="/js/main.js"></script><script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script><div id="particles"></div><script src="/js/particles.js"></script><link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css"><script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script><script src="/js/animate.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({pluginRootPath:"live2dw/",pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2dw/assets/hijiki.model.json"},display:{position:"right",width:150,height:300},mobile:{show:!0,scale:.5},log:!1})</script></body></html>

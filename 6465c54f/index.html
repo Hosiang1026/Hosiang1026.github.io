@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="Access-Control-Allow-Origin" content="*"><script type="text/javascript">var start_time=(new Date).getTime()</script><meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0"><meta name="baidu-site-verification" content="RYlYHsgO7Y"><meta name="sogou_site_verification" content="MSmrTj7lHV"><meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"><meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be"><title>推荐系列-漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路 | 狂欢马克思</title><meta name="keywords" content="分享技术经验与交流"><meta name="description" content="&amp;emsp;&amp;emsp;导读 随着业务的增长，一些传统企业对诸如灰度发布、服务路由、服务熔断、服务限流等服务治理的需求越来越强烈，但他们又不想对业务代码做大量的改造，因而 Service Mesh 成了他们比较好的选…"><meta property="og:type" content="article"><meta property="og:title" content="推荐系列-漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路"><meta property="og:url" content="https://www.hosiang.cn/6465c54f/index.html"><meta property="og:site_name" content="狂欢马克思"><meta property="og:description" content="&amp;emsp;&amp;emsp;导读 随着业务的增长，一些传统企业对诸如灰度发布、服务路由、服务熔断、服务限流等服务治理的需求越来越强烈，但他们又不想对业务代码做大量的改造，因而 Service Mesh 成了他们比较好的选…"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2021-04-15T01:46:43.000Z"><meta property="article:modified_time" content="2022-03-27T01:29:07.865Z"><meta property="article:author" content="Howe Hsiang"><meta property="article:tag" content="Popular"><meta name="twitter:card" content="summary"><link rel="icon" href="/images/favicon.ico"><link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/style.css"><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script"),t=(e.src="https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace",document.getElementsByTagName("script")[0]);t.parentNode.insertBefore(e,t)}()</script><script></script><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 5.4.1"></head><script src="/js/jquery.min.js"></script><script src="/js/pace.min.js"></script><script src="/js/crypto-js.js"></script><script src="/js/cookie.js"></script><script src="/js/calendar.js"></script><script src="/js/festival.js"></script><script>getFestival()</script><body><script>window.onload=function(){document.getElementById("TimeShow").innerHTML="本站耗时 "+((new Date).getTime()-start_time)/1e3+" 秒 "}</script><div id="container"><header id="header"><div id="banner"></div><div id="header-outer"><div id="header-menu" class="header-menu-pos animated"><div class="header-menu-container"><a href="/" class="left"><span class="site-title">狂欢马克思</span></a><nav id="header-menu-nav" class="right"><a href="/" rel="external nofollow"><i class="fa fa-home"></i> <span>主页</span> </a><a href="/archives" rel="external nofollow"><i class="fa fa-archive"></i> <span>归档</span> </a><a href="/gitbook" rel="external nofollow"><i class="fa fa-columns"></i> <span>笔记</span> </a><a href="/photo" rel="external nofollow"><i class="fa fa-picture-o"></i> <span>相册</span> </a><a href="/love" rel="external nofollow"><i class="fa fa-heart"></i> <span>恋爱</span> </a><a href="/collection" rel="external nofollow"><i class="fa fa-envira"></i> <span>收藏</span> </a><a href="/about" rel="external nofollow"><i class="fa fa-user"></i> <span>关于</span></a></nav><a class="mobile-header-menu-button"><i class="fa fa-bars"></i></a></div></div><div id="header-row"><div id="logo"><a href="/"><img src="/../images/logo.png" alt="logo"></a></div><div class="header-info"><div id="header-title"><h2>狂欢马克思</h2></div><div id="header-description"><h3>专注Web开发</h3></div></div><nav class="header-nav"><div class="social"><a title="Github" target="_blank" href="//github.com/Hosiang1026" rel="external nofollow"><i class="fa fa-github fa-2x"></i></a> <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes" rel="external nofollow"><i class="fa fa-qq fa-2x"></i></a> <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969" rel="external nofollow"><i class="fa fa-weibo fa-2x"></i></a></div></nav></div><div id="noticeId" class="show" style="background:rgb(244,247,247,.3)"><marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop()" onmouseout="this.start()"></marquee></div><script type="text/javascript">function browserRedirect(){var i=navigator.userAgent.toLowerCase(),n="ipad"==i.match(/ipad/i),o="iphone os"==i.match(/iphone os/i),a="midp"==i.match(/midp/i),t="rv:1.2.3.4"==i.match(/rv:1.2.3.4/i),e="ucweb"==i.match(/ucweb/i),s="android"==i.match(/android/i),d="windows ce"==i.match(/windows ce/i),i="windows mobile"==i.match(/windows mobile/i),p="",r=randomColor(),p=n||o||a||t||e||s||d||i?($("#noticeId").css({"line-height":"1.6em"}),"<font style='color:"+r+"' face='新华宋体'  size='2'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='hitokoto'></span></span></span><span id='YQData'></font> "):($("#noticeId").css({"line-height":"3.6em","margin-top":"20px"}),"<font style='color:"+r+"' face='新华宋体'  size='6'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='hitokoto'></span></span><span id='YQData'></span></font> ");$("#noticeMar").html(p)}function randomColor(){for(var i="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f".split(","),n="#",o=0;o<6;o++)n+=i[Math.floor(16*Math.random())];return n}$(function(){browserRedirect(),0<$("#hitokoto").length&&getHitokoto()})</script></div></header><script>console.log=function(){}</script><div class="outer"><section id="main" class="body-wrap"><article id="post-漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路" class="article article-type-post" itemscope itemprop="blogPost"><div class="article-inner"><header class="article-header"><h1 class="post-title" itemprop="name">推荐系列-漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路</h1><div class="post-title-bar"><ul><li><i class="fa fa-book"></i> <a href="/categories/热门文章/">热门文章</a></li><li><i class="fa fa-calendar"></i> 2021-04-15</li><li><i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span></li><li><span class="post-count">字数统计: 4.7k字</span></li><li><span class="post-count">阅读时长: 18分钟</span></li></ul></div></header><div class="article-entry post-content" itemprop="articleBody"><p>&emsp;&emsp;导读 随着业务的增长，一些传统企业对诸如灰度发布、服务路由、服务熔断、服务限流等服务治理的需求越来越强烈，但他们又不想对业务代码做大量的改造，因而 Service Mesh 成了他们比较好的选…<br><span id="more"></span></p><pre><code>![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+
+
+
+
+
+
+
+
+
+     ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+
+
+
+
+
+
+
+  导读 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    随着业务的增长，一些传统企业对诸如灰度发布、服务路由、服务熔断、服务限流等服务治理的需求越来越强烈，但他们又不想对业务代码做大量的改造，因而 Service Mesh 成了他们比较好的选择；不幸的是业内比较成熟能落地的 Service Mesh 方案如 Istio 都是基于各种容器平台构建的，而这些传统企业很多没有接入容器平台也不想做容器���改���，这就导致 Service mesh 很难应用于这些传统企业或者一些非容器化的场景。 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+
+
+
+
+
+
+
+  作者介绍 
+
+
+
+
+
+
+
+
+
+
+ 张��培 
+
+ 腾讯云微服务团队高级工程师 
+ TSF Mesh 研发及负责人 
+ 热衷于云原生和开源技术，在容器、Service Mesh、消息队列、区块链等领域拥有丰富经验，目前致力于Service Mesh 技术的落地和推广 
+
+
+
+
+
+
+
+
+
+![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+</code></pre><p>前言</p><p>为了兼容 Service mesh 的非容器化场景，TSF Mesh 基于 Istio 构建了 Service mesh 微服务平台，对原生 Istio 实现进行了适当的改造，支持应用同时运行于容器环境和虚拟机环境（同时也打通了 Spring Cloud 框架，实现 Mesh 服务和 Spring Cloud 服务互联互通，服务统一治理）。</p><p>TSF Mesh 对容器和虚拟机统一化的改造主要体现在以下几个方面：</p><pre><code>应用部署和Sidecar注入 
+
+
+
+流量劫持 
+
+
+
+服务注册与发现 
+</code></pre><p>针对这几点，下面会先剖析对比 Istio service mesh 基于 K8s 的实现方案，再讲述 TSF Mesh 是如何实现的，做了哪些改造。</p><pre><code>![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+</code></pre><p>应用部署和 Sidecar 注入</p><p>首先，回顾下 Istio service mesh 的应用部署和 Sidecar 注入方式:</p><p>应用部署：Istio service mesh 依赖 K8s 进行应用的生命周期管理，包括应用的部署和管理（扩缩容、自动恢复、发布）</p><p>Sidecar 注入：分为手动注入和自动注入, 如下图所示：</p><pre><code>手工注入通过手工执行 istioctl kube-inject 来重新构造应用的 CRD yaml 
+自动注入通过 K8s 的 mutable webhook 回调 istio-sidecar-injector 服务来重新构造应用的 CRD yaml 
+
+
+
+
+
+
+
+![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+</code></pre><p>无论是手工注入还是自动注入，Sidecar 注入的本质是将运行 Sidecar 所需要的镜像地址、启动参数、所连接的 Istio 集群（Pilot、Mixes、Citadel）及配置信息填充到注入模版，并添加到应用的 CRD yaml 中，最终通过 K8s 持久化资源并拉起应用和 Sidecar 的 POD。</p><p>那 TSF Mesh 如何做应用部署和 Sidecar 注入的呢？<br>由于 TSF Mesh 需要同时支持容器和虚拟机环境，则首先需要解决虚拟机部署的问题，要实现等同 K8s 的部署能力，需要解决以下几个问题：</p><pre><code>资源和配置管理，如 Istio 集群信息、配置信息等 
+
+
+
+对应于容器的镜像，虚拟机就是程序包，那就涉及到包管理 
+
+
+
+虚拟机应用生命周期的管理 
+
+
+
+虚拟机 Sidecar 注入 
+</code></pre><p>为了解决容器和虚拟机统一部署问题，不能再用 K8s 的存储方式，而是需要更高层的管理模式，我们引入了 tsf-resource 资源管控模块来负责容器和虚拟机相关资源的统一管理，像 Istio 集群相关的信息在控制平台部署时会持久化在 TSF 的 DB 中。</p><p>对于容器平台，当用户从 TSF 控制台部署一个容器应用时，tsf-resource 从 DB 中获取像容器的镜像地址、Istio 集群信息、配置、启动参数等，进行 K8s CRD 的组装，组装完将 CRD 创建请求发送给容器平台完成应用 POD 的拉起，其实这里在组装 CRD 时已经实现了 Sidecar 的自动注入，注入时的动态参数由控制台传递，静态参数如 Sidecar 镜像地址、启动参数等从 DB 中获取。</p><p>对于虚拟机平台，TSF 引入了以下几个模块来解决程序包管理和应用部署的问题：</p><pre><code>tsf-repo，程序包仓库管理，存储应用程序包及相关依赖 
+
+
+
+tsf-master，虚拟机节点管理 master，发送部署/下线/启动/停止等任务给 tsf-agent 
+
+
+
+tsf-agent，虚拟机节点管理 agent，部署在应用机器上，负责初始化机器环境、执行应用部署/下线/启动/停止等任务 
+</code></pre><p>对于虚拟机应用的变更，如例如应用部署、启动、停止、下线，TSF 通过任务的方式来跟踪每个变更，在任务下发的具体流程中，所有任务都是异步执行的，tsf-resource 将任务转发给 tsf-master 后就返回给 TSF 控制台，并由 tsf-master 完成任务的下发和状态跟踪；用户在 TSF 控制台执行操作后，可以根据返回的任务 ID 查询执行结果。</p><pre><code>![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+</code></pre><p>流量劫持</p><p>Service mesh 需要透明的进行服务治理，也就需要透明的接管服务进出流量，将流量劫持到 Sidecar，由 Sidecar 进行流量管理，传统的方式是 iptables 流量劫持（也可采用 BPF、IPVS 等方式），同样下面先回顾下 Istio 的 Service mesh 方案具体是如何劫持流量的，然后再看下 TSF mesh 为了统一容器和虚拟机做了哪些改造。</p><p>查看经过 Sidecar 注入后的应用 YAML 文件，发现 istio-sidecar-injector 服务在注入 Sidecar 容器本身时，还注入了 istio-init 容器，istio-init 容器属于 init 容器（init 容器在应用程序容器启动之前运行，用来初始化一些应用镜像中不存在的实用工具或安装脚本），下面是官方例子中注入的 init 容器部分:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">initContainers:</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- args:</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- -p</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="string">&quot;15001&quot;</span></span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- -u</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="string">&quot;1337&quot;</span></span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- -m</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- REDIRECT</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- -i</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="string">&#x27;*&#x27;</span></span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- -x</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- -b</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="number">9080</span>,</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- -d</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">image: istio/istio-release-proxy_init:<span class="number">1.0</span><span class="number">.1</span></span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imagePullPolicy: IfNotPresent</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name: istio-init</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resources: &#123;&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">securityContext:</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">capabilities:</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add:</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- NET_ADMIN</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">privileged: <span class="literal">true</span></span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...</span><br></pre></td></tr></table></figure><p>可以看出 init 容器 istio-init，被赋予了 NET_ADMIN 的 POD 网络空间权限，具体执行了哪些初始化还看不出来，那再来看下 istio/istio-release-proxy_init:1.0.1 镜像的 Dockerfile。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:xenial</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RUN apt-get update &amp;&amp; apt-get install -y \</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iproute2 \</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables \</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;&amp; rm -rf /<span class="keyword">var</span>/lib/apt/lists<span class="comment">/*</span></span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ADD istio-iptables.sh /usr/local/bin/</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [<span class="string">&quot;/usr/local/bin/istio-iptables.sh&quot;</span>]</span><br></pre></td></tr></table></figure><p>istio-init 容器的 ENTRYPOINT 是 /usr/local/bin/istio-iptables.sh 脚本，顾名思义用于 Istio iptables 流量劫持的脚本，组合上面 istio-init 容器的启动参数，完整命令为：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/local/bin/istio-iptables.sh -p <span class="number">15001</span> -u <span class="number">1337</span> -m REDIRECT -i <span class="string">&#x27;*&#x27;</span> -x <span class="string">&quot;&quot;</span> -b <span class="number">9080</span> -d <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure><p>该命令的主要作用是，将应用容器中访问9080端口的流量（inbound 流量）和所有出站流量（outbound 流量）重定向到 Sidecar（即 envoy）的15001端口。<br>总结下来，Istio 是通过 init 容器完成了流量劫持到 Sidecar 的初始化工作。</p><p>TSF Mesh 如何实现流量劫持的呢？<br>TSF Mesh 同样采用 iptables 方式，不过要兼顾虚拟机平台，需要解决两个主要问题：</p><pre><code>虚拟机下如何执行 iptables 应用劫持策略 
+
+
+
+虚拟机下如何劫持流量，不能劫持虚拟机整个网络空间的流量 
+</code></pre><p>问题1的解决比较���单，我们对 pilot-agent 做些一些扩展，在 pilot-agent 中执行 iptables 脚本，pilot-agent 一个主要工作是生成 envoy 的 bootstrap 配置并启动 envoy、管理 envoy 的生命周期，类似容器环境下做 envoy 启动前的 init 准备，在启动 envoy 前执行 iptables 脚本，也比较合理。</p><p>问题2的解决就比较麻烦了，但又非常重要，不像 K8s 的 POD，POD 间网路是隔离的，一个 POD 一般只会运行一个应用，劫持整个 POD 网路空间里的流量完全没有问题，而虚拟机中可能还有其它进程的存在，这些进程可能也有 Outbound 的流量，因此我们不能劫持虚拟机所有的流量，一种比较合理的劫持方案应该是：</p><pre><code>对于 Inbound 流量，只劫持到部署应用的端口，这个原生 Istio 已经做到，无需改造 
+
+
+
+对于 Outbound 流量，只劫持注册中心已注册服务的流量 
+</code></pre><p>下面来具体讲下 TSF Mesh 如何针对服务来劫持 Outbound 流量的。<br>其实我们的方案和 K8s 的 kube-DNS+kube-proxy 的服务发现机制类似，TSF Mesh 在数据平面引入了一个 mesh-dns 模块，通过连接 pilot-discovery 同步获取注册中心的服务变更来更新本地的 DNS cache，对于来自注册中心的服务会被解析到一个特定的 IP，然后在 iptables 策略中把目的地址到这个特定 IP 的流量重定向 envoy，当然，还需要劫持 DNS 53 端口的流量，先把 DNS 请求引到 mesh-dns，可以看下 iptables nat 表中完整的规则内容：</p><pre><code>![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+</code></pre><p>Inbound 流量劫持跟原生 Istio 实现类似就不赘述了，下图显示的是 Outbound 流量 iptables 劫持的详细过程,其中红色部分为新增的 DNS 劫持规则。</p><pre><code>![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+</code></pre><p>注册服务的域名劫持，除了引入了 mesh-dns 自研模块，还涉及到 pilot-discovery 和 pilot-agent 的改造:</p><p>pilot-discovery 改造点</p><pre><code>pilot-discovery 扩展一个 ServiceInfos 的 grpc 服务，提供注册服务变更同步接口 
+
+
+
+pilot-discovery 早期的 consul controller 实现是，定时通过 Consul 的 Rest API 获取服务数据并和上一次的查询结果进行对比，如果数据发生了变化则通知 Pilot discovery 进行更新，这里我们进行了优化，采用 Consul 的 watch 机制来代替轮询（下面服务注册与发现中也有提到），并在 ServiceInfos 服务初始化时向 consul controller 注册了服务变更的 event 通知 
+
+
+
+ServiceInfos 服务在 mesh-dns 请求第一次到来时同步全量的服务注册表，之后则根据服务的变更情况增量同步 
+</code></pre><p>mesh-dns实现</p><pre><code>DNS 服务基于 github.com/miekg/dns 实现（一个非常轻量级的 DNS 库） 
+
+
+
+和 pilot-discovery 保持注册服务列表的同步，mesh-dns 启动时进行全量同步，运行时进行增量同步 
+
+
+
+处理 DNS 请求时，先检查 Domain 是否在注册服务列表里，如果在则返回一个特定的 IP（可配置），否则请求本地配置的域名服务进行解析 
+</code></pre><p>pilot-agent 改造点</p><pre><code>   类似对 envoy 的管理，pilot-agent 扩展了 mesh-dns 的支持，负责了 mesh-dns 启动配置组装、启动 mesh-dns 及 mesh-dns 生命周期的管理 
+
+
+
+
+
+
+
+
+
+
+
+![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+</code></pre><p>服务注册与发现</p><p>基于流量比例的路由 Istio 中负责流量管理的组件为 Pilot，其中服务发现也是通过 Pilot 完成，Pilot 的高层架构图如下所示：</p><pre><code>![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+</code></pre><p>Istio服务注册与发现的原理</p><pre><code>Istio 服务注册：Istio 架构中本身不提供服务注册的能力，而是依赖于各种底层平台，底层平台是具体服务信息的生产者和维护者，如 Kubernetes 在 POD 部署时会保存 Service 以及对应的 Pod 实例信息。 
+
+
+
+Istio服务发现：Istio 是服务信息的消费者，服务发现是通过 Pilot 组件实现的，Pilot 组件负责维护网格中的标准服务模型，该标准服务模型独立于各种底层平台，Pilot 组件通过适配器和各底层平台对接，以使用底层平台中的服务数据填充此标准模型，再通过标准 xDS 协议（CDS 集群信息和 EDS 实例信息）同步给 envoy。 
+</code></pre><p>TSF Mesh如何实现服务注册与发现的呢？</p><p>同样，TSF Mesh 要兼顾虚拟机平台，需要解决三个主要问题：</p><pre><code>注册中心如何选择 
+
+
+
+服务如何注册 
+
+
+
+实例健康状态如何维护 
+</code></pre><p>问题1: TSF Mesh 容器和虚拟机统一采用 Consul 作为注册中心，因为虚拟机部署不会依赖容器平台，因此服务注册发现也不能依赖容器平台；Pilot 原生实现是支持 Consul 的，但早期的实现比较鸡肋（1.4.0以前还是通过 Rest API 轮询的方式去获取 Consul 注册服务信息的变更），TSF Mesh 针对早期的版本也做了优化，采用 Consul watch 来代替轮询。</p><p>问题2: TSF Mesh 统一了容器和虚拟机的服务注册方式，服务注册都在 envoy 中完成 ,</p><ol><li>类似通过 K8s 部署服务一样，TSF Mesh 在部署时需要用户在应用程序所在目录中创建一个 spec.yaml 服务描述文件，spec.yaml 格式如下：</li></ol><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kind: Application</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spec:</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">services:</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- name: user # 服务名</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ports:         </span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- targetPort: <span class="number">8091</span> # 服务监听端口 </span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protocol: http # 服务协议类型</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">healthCheck:</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path: /health # 健康检查 URL</span><br></pre></td></tr></table></figure><ol start="2"><li><p>Pilot-agent 将 spec.yaml 文件中内容读出并填充到 envoy-rev0.yaml（envoy启动时的静态配置文件）文件的 node 信息中；</p></li><li><p>Pilot-agent 启动 envoy，envoy 本身是支持 HDS 的，TSF Mesh 改造了 envoy 代码默认把本地部署的服务 Endpoint 作为 HealthCheck 请求的 cluster，在启动时把请求发送给 Pilot-discovery；</p></li><li><p>Pilot-discovery 原生是不支持 HDS 控制的，TSF Mesh 扩展 Pilot-discovery 以支持 HDS 服务端来接收 envoy 的 HealthCheck 请求，由于 HDS 定义的请求数据结构里包含 node 信息，也就包含了上面的服务描述信息，Pilot-discovery 组装服务描述信息将服务注册到 consul；</p></li><li><p>Pilot-discovery 是注册中心服务信息的消费者，因此原生是不支持服务注册的，TSF Mesh 再次扩展了 Pilot-discovery，在 Consul Apater 中增加了 RegisterService 接口；</p></li></ol><p>问题3：TSF Mesh 中服务的实例健康状态也是由 envoy 来维护的：</p><pre><code>   envoy 在收到 pilot-discovery 的 HealthCheckSpecifier 回应后，会根据回应中的参数如 check 间隔、check 的实例（这里就是本地服务实例）、check 的 Path（这里就是 spec.yaml 中的 healthCheck path）等异步执行本地实例的 Health Check，根据 check 的结果更新本地实例的健康状态； 
+
+
+
+   HDS 除了支持 HealthCheckRequest 请求，还支持 EndpointHealthResponse 请求，envoy 根据当前实例的健康状态通过 EndpointHealthResponse 周期性同步给 pilot-discovery； 
+
+
+
+   TSF Mesh 完全扩展了 Pilot-discovery 的 HDS 服务，支持对 EndpointHealthResponse 请求的处理，根据请求中实例的健康状态进行 TTL 上报； 
+
+
+
+   TSF Mesh 再次扩展了 Pilot-discovery，在 Consul Apater 中增加了 ReportHealthCheckInfo 接口以支持服务治理的 TTL 上报 
+
+
+
+
+
+
+
+
+
+
+
+![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+</code></pre><p>总结</p><p>TSF Mesh 在深入理解了 Istio service mesh 方案的基础上对其进行了针对性的改造和优化，使得应用能同时运行于容器环境和非容器环境，通过抽象出更高层的管控平台，TSF Mesh 可以不依赖于具体的底层平台而对应用进行统一管理和控制；而 TSF Mesh 作为 TSF 的一种微服务框架实现，不仅仅解决了平台统一化问题，还提供了应用全生命周期管理、数据化运营、立体化监控和服务治理的整套解决方案，具体介绍和使用可参考 TSF Mesh 官网。</p><p>参考链接：</p><ul><li><p>ServiceMesher 社区：<br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.servicemesher.com/">https://www.servicemesher.com/</a></p></li><li><p>TSF Mesh 微服务平台：<br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://cloud.tencent.com/product/tsf-mesh">https://cloud.tencent.com/product/tsf-mesh</a></p></li><li><p>Istio 服务注册插件机制代码解析：<br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.servicemesher.com/blog/istio-pilot-service-registry-code-analysis/">https://www.servicemesher.com/blog/istio-pilot-service-registry-code-analysis/</a></p></li></ul><pre><code>往期 
+
+
+
+
+推荐 
+</code></pre><p>《原生应用 “0” 代码改造，无侵入接入，纵享丝滑般上云体验！》<br>《超有料！万字详解腾讯微服务平台 TSF 的敏捷开发流程》<br>《200 行代码告诉你 TDMQ 中 Pulsar 广播如何实现》</p><pre><code>![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+</code></pre><p>扫描下方二维码关注本公众号，<br>了解更多微服务、消息队列的相关信息！<br>解锁超多鹅厂周边！</p><pre><code>![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+
+
+
+
+
+
+戳原文，了解更多腾讯微服务平台相关信息 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ![Test](https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png  &apos;漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路&apos;) 
+
+
+    点亮在看，你最好看 
+</code></pre><p>本文分享自微信公众号 - 腾讯云中间件（gh_6ea1bc2dd5fd）。如有侵权，请联系 <a href="mailto:support@oschina.cn" rel="external nofollow noopener noreferrer" target="_blank">support@oschina.cn</a> 删除。本文参与“OSC源创计划”，欢迎正在阅读的你也加入，一起分享。</p><div class="post-copyright"><div class="content"><p>本文标题： 推荐系列-漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路</p><p>本文作者： OSChina</p><p>发布时间： 2021年04月15日 09:46</p><p>最后更新： 2022年03月27日 09:29</p><p>原始链接： <a class="post-url" href="/6465c54f/" title="推荐系列-漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路">https://www.hosiang.cn/6465c54f/</a></p><p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p><footer><a href="https://www.hosiang.cn"><img src="/../images/logo.png" alt="Howe Hsiang"> Howe Hsiang</a></footer></div></div><div class="page-reward"><a id="rewardBtn" href="javascript:;">赏</a></div><div id="reward" class="post-modal reward-lay"><a class="close" href="javascript:;" id="reward-close">×</a> <span class="reward-title"><i class="icon icon-quote-left"></i> 喜欢就赞赏一下呗！ <i class="icon icon-quote-right"></i></span><div class="reward-content"><div class="reward-code"><img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码"></div><div class="reward-select"></div></div></div></div><footer class="article-footer"><div class="post-share"><a href="javascript:" id="share-sub" class="post-share-fab"><i class="fa fa-share-alt" style="padding-top:11px!important"></i></a><div class="post-share-list" id="share-list"><ul class="share-icons"><li><a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/6465c54f/" data-title="Facebook" rel="external nofollow noopener noreferrer"><i class="fa fa-facebook" style="padding-top:9px!important"></i></a></li><li><a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路》 — 狂欢马克思&url=https://www.hosiang.cn/6465c54f/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer"><i class="fa fa-twitter" style="padding-top:9px!important"></i></a></li><li><a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/6465c54f/" data-title="Google+" rel="external nofollow noopener noreferrer"><i class="fa fa-google-plus" style="padding-top:9px!important"></i></a></li><li><a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/6465c54f/&title=《推荐系列-漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路》 — 狂欢马克思&source=&emsp;&emsp;导读 随着业务的增长，一些传统企业对诸如灰度发布、服务路由、服务熔断、服务限流等服务治理的需求越来越强烈，但他们又不想对业务代码做..." data-title="QQ" rel="external nofollow noopener noreferrer"><i class="fa fa-qq" style="padding-top:9px!important"></i></a></li><li><a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信"><i class="fa fa-weixin" style="padding-top:9px!important"></i></a></li><li><a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/6465c54f/&title=《推荐系列-漫谈腾讯微服务平台 TSF Mesh 统一容器和虚拟机之路》 — 狂欢马克思&pic=https://oscimg.oschina.net/oscnet/bfff1172-62a6-4b46-a55f-2271058bd0c6.png" data-title="微博" rel="external nofollow noopener noreferrer"><i class="fa fa-weibo" style="padding-top:9px!important"></i></a></li></ul></div></div><div class="post-modal wx-share" id="wxShare"><a class="close" href="javascript:" id="wxShare-close">×</a><p>扫一扫，分享到微信</p><img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/6465c54f/" alt="微信分享二维码"></div><div class="mask"></div><ul class="article-footer-menu"><li class="article-footer-tags"><i class="fa fa-tags"></i> <a href="/tags/Popular/" class="color3">Popular</a></li></ul></footer></div></article><nav id="article-nav"><a href="/722586c4/" id="article-nav-newer" class="article-nav-link-wrap"><span class="article-nav-title"><i class="fa fa-hand-o-left" aria-hidden="true"></i> 推荐系列-开源一周岁，MindSpore新特性巨量来袭 </span></a><a href="/b54190b3/" id="article-nav-older" class="article-nav-link-wrap"><span class="article-nav-title">推荐系列-Java技术专题-源码分析系列-JDK动态代理的实现</span> <i class="fa fa-hand-o-right" aria-hidden="true"></i></a></nav><div id="gitalk"></div><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script>var gitalk=new Gitalk({repo:"bolg-comment",owner:"Hosiang1026",admin:"Hosiang1026",clientID:"37a2dd4473e8970cecc2",clientSecret:"e30efa17d86d9de4f4ab810872dc62a7b2e7e634",pagerDirection:"last",distractionFreeMode:!0,createIssueManually:!1});gitalk.render("gitalk")</script></section></div><footer id="footer"><div class="outer"><div id="footer-info" class="inner"><script id="_wau78w">var _wau=_wau||[];_wau.push(["small","5dnguv4c2n","78w"])</script><script async src="//waust.at/s.js"></script><p><span id="busuanzi_container_site_uv" style="display:none"><span class="post-count">总字数：<span>1291.8k</span> </span>总访客数：<span id="busuanzi_value_site_uv"></span> </span><span id="busuanzi_container_site_pv" style="display:none">总访问量：<span id="busuanzi_value_site_pv"></span></span><br><span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>Copyright&copy; 2018 - 2022 狂欢马克思 <a href="https://beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">京ICP备17060439号</a></p></div></div><script>var now=new Date;function createtime(){var n=new Date("2017/09/18");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="安全运行 "+dnum+" 天 ",document.getElementById("times").innerHTML=hnum+" 小时 "+mnum+" 分 "+snum+" 秒"}setInterval("createtime()",800)</script></footer><script>var mihoConfig={root:"https://www.hosiang.cn",animate:"true",isHome:"false",share:"true",reward:" 1"}</script><div class="sidebar"><div id="sidebar-search" title="Search"><i class="fa fa-search"></i></div><div id="sidebar-category" title="Categories"><i class="fa fa-book"></i></div><div id="sidebar-tag" title="Tags"><i class="fa fa-tags"></i></div><div id="sidebar-top"><span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span></div></div><div class="sidebar-menu-box" id="sidebar-menu-box"><div class="sidebar-menu-box-container"><div id="sidebar-menu-box-categories"><a class="category-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a><a class="category-link" href="/categories/%E5%85%B6%E4%BB%96%E5%BC%80%E5%8F%91/">其他开发</a><a class="category-link" href="/categories/%E5%89%8D%E6%B2%BF%E5%BC%80%E5%8F%91/">前沿开发</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><a class="category-link" href="/categories/%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC/">升级版本</a><a class="category-link" href="/categories/%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/">博客教程</a><a class="category-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><a class="category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><a class="category-link" href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">日常记录</a><a class="category-link" href="/categories/%E7%83%AD%E9%97%A8%E6%96%87%E7%AB%A0/">热门文章</a></div><div id="sidebar-menu-box-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:16px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:14px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:14px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Interview/" style="font-size:18px">Interview</a> <a href="/tags/Java/" style="font-size:12px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:16px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:16px">Spring</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div><a href="javascript:" class="sidebar-menu-box-close">&times;</a></div><div class="mobile-header-menu-nav" id="mobile-header-menu-nav"><div class="mobile-header-menu-container"><span class="title">导航</span><ul class="mobile-header-menu-navbar"><li><a href="/"><i class="fa fa-home"></i><span>主页</span></a></li><li><a href="/archives"><i class="fa fa-archive"></i><span>归档</span></a></li><li><a href="/gitbook"><i class="fa fa-columns"></i><span>笔记</span></a></li><li><a href="/photo"><i class="fa fa-picture-o"></i><span>相册</span></a></li><li><a href="/love"><i class="fa fa-heart"></i><span>恋爱</span></a></li><li><a href="/collection"><i class="fa fa-envira"></i><span>收藏</span></a></li><li><a href="/about"><i class="fa fa-user"></i><span>关于</span></a></li></ul></div><div class="mobile-header-tag-container"><span class="title">标签</span><div id="mobile-header-container-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:16px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:14px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:14px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Interview/" style="font-size:18px">Interview</a> <a href="/tags/Java/" style="font-size:12px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:16px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:16px">Spring</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div></div><div class="search-wrap"><span class="search-close">&times;</span> <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back"><i class="icon icon-lg icon-chevron-left"></i> </a><input class="search-field" placeholder="Search..." id="keywords"> <a id="search-submit" href="javascript:"><i class="fa fa-search"></i></a><div class="search-container" id="search-container"><ul class="search-result" id="search-result"></ul></div></div><div id="search-tpl"><li class="search-result-item"><a href="{url}" class="search-item-li"><span class="search-item-li-title" title="{title}">{title}</span></a></li></div><script src="/js/search.js"></script><script src="/js/main.js"></script><script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script><div id="particles"></div><script src="/js/particles.js"></script><link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css"><script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script><script src="/js/animate.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({pluginRootPath:"live2dw/",pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2dw/assets/hijiki.model.json"},display:{position:"right",width:150,height:300},mobile:{show:!0,scale:.5},log:!1})</script></body></html>

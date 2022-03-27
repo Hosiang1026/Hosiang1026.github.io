@@ -54,10 +54,10 @@ menu:
     #url: http://hosiang.ccaeo.com/skydrive
     #target: true
     
-  music:
-    title: 音乐
-    url: /music?id=91451362    
-    target: false
+#  music:
+#    title: 音乐
+#    url: /music?id=91451362
+#    target: false
     
   picture-o:
     title: 相册
@@ -74,10 +74,10 @@ menu:
     url: /collection
     target: false
     
-  gamepad:
-    title: 游戏
-    url: https://www.yikm.net
-    target: true
+#  gamepad:
+#    title: 游戏
+#    url: https://www.yikm.net
+#    target: true
     
   user:
     title: 关于

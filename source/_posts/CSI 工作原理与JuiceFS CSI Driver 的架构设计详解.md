@@ -15,8 +15,6 @@ date: 2022-03-27 11:56:25
 <!-- more -->
 
                                                                                                                     
-            程序员健身是为了保养还是保命？参与话题讨论赢好礼 >>>
-            
                                                                                                     容器存储接口（Container Storage Interface）简称 CSI，CSI 建立了行业标准接口的规范，借助 CSI 容器编排系统（CO）可以将任意存储系统暴露给自己的容器工作负载。JuiceFS CSI Driver 通过实现 CSI 接口使得 Kubernetes 上的应用可以通过 PVC（PersistentVolumeClaim）使用 JuiceFS。本文将详细介绍 CSI 的工作原理以及 JuiceFS CSI Driver 的架构设计。 
 #### CSI 的基本组件 
 CSI 的 cloud providers 有两种类型，一种为 in-tree 类型，一种为 out-of-tree 类型。前者是指运行在 K8s 核心组件内部的存储插件；后者是指独立在 K8s 组件之外运行的存储插件。本文主要介绍 out-of-tree 类型的插件。 

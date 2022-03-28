@@ -7,16 +7,13 @@ author: OSChina
 top: 255
 cover_picture: 'https://oscimg.oschina.net/oscnet/aa7296d2-02f0-4a33-a824-3917698bf529.jpg'
 abbrlink: 2c021445
-date: 2022-03-27 11:55:56
+date: 2021-09-28 11:55:56
 ---
 
 &emsp;&emsp;，StreamNative 和 Cloudera 官方宣布共同开源 Apache NiFi 和 Apache Pulsar 联合解决方案，将二者集成打造成完整的边缘到云数据的流平台。 StreamNative 由 Apache Pulsar 创始团队组建...
 <!-- more -->
 
                                                                                                                     
-            程序员健身是为了保养还是保命？参与话题讨论赢好礼 >>>
-            
-                                                                                                     
  近日，StreamNative 和 Cloudera 官方宣布共同开源 Apache NiFi 和 Apache Pulsar 联合解决方案，将二者集成打造成完整的边缘到云数据的流平台。 
  StreamNative 由 Apache Pulsar 创始团队组建，专注于 Apache Pulsar 社区和生态构建，并围绕 Apache Pulsar 打造批流一体的云原生解决方案；Cloudera 团队包括一些 Apache NiFi 的原始开发人员，并通过 Apache NiFi 打造数据流。通过将 NiFi 与 Pulsar 集成，企业能够创建一个云原生、可扩展的实时流数据平台，来摄取、转换和分析海量数据。 
  本文将介绍该处理器的开源背景，以及如何通过简单配置设置 Apache NiFi 来大规模地生产消费来自 Pulsar 主题的消息。Cloudera 为 Data Hub 7.2.14 和更高版本的 CDF[1] 提供开箱即用的处理器。 

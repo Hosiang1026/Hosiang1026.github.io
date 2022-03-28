@@ -7,16 +7,13 @@ author: OSChina
 top: 98
 cover_picture: 'https://oscimg.oschina.net/oscnet/b6c0f153-afbc-4191-bf3e-aeb25c57c418.png'
 abbrlink: 2a5726df
-date: 2022-03-27 11:55:54
+date: 2022-03-24 11:55:54
 ---
 
 &emsp;&emsp;T 导读：在对多款时序数据库进行了选型测试后，同程旅行自研的“夜鹰监控”搭载 TDengine 代替了现有存储设备，减少运维成本。本文分享了他们对建表模型的方案选择思路，接入 TDengine 后...
 <!-- more -->
 
                                                                                                                     
-            程序员健身是为了保养还是保命？参与话题讨论赢好礼 >>>
-            
-                                                                                                     
  小 T 导读：在对多款时序数据库进行了选型测试后，同程旅行自研的“夜鹰监控”搭载 TDengine 代替了现有存储设备，减少运维成本。本文分享了他们对建表模型的方案选择思路，接入 TDengine 后所遇到问题的解决经验以及落地效果展示。 
   
    

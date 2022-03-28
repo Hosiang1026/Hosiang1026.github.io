@@ -14,9 +14,6 @@ date: 2022-03-27 11:53:55
 <!-- more -->
 
                                                                                                                     
-            程序员健身是为了保养还是保命？参与话题讨论赢好礼 >>>
-            
-                                                                                                    1 前言 
 MRS CDL是FusionInsight MRS推出的一种数据实时同步服务，旨在将传统OLTP数据库中的事件信息捕捉并实时推送到大数据产品中去，本文档会详细为大家介绍CDL的整体架构以及关键技术。 
 2 CDL的概念 
 MRS CDL（Change Data Loader）是一款基于Kafka Connect的CDC数据同步服务，可以从多种OLTP数据源捕获数据，如Oracle、MySQL、PostgreSQL等，然后传输给目标存储，该目标存储可以大数据存储如HDFS，OBS，也可以是实时数据湖Hudi等。 

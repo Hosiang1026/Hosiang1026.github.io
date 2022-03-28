@@ -7,18 +7,14 @@ author: OSChina
 top: 302
 cover_picture: 'https://pic1.zhimg.com/80/v2-fc188a47ecda63e3345f98ddd015d684_720w.jpg'
 abbrlink: 82ce8c4c
-date: 2022-03-27 11:56:25
+date: 2022-02-01 11:56:25
 ---
 
 &emsp;&emsp;：通常来说，string表示原生类型，而String表示对象。 本文分享自华为云社区《TypeScript里string和String的区别》，作者：gentle_zhou 。 背景 与JavaScript语言不同的是，TypeScript使...
 <!-- more -->
 
                                                                                                                     
-            程序员健身是为了保养还是保命？参与话题讨论赢好礼 >>>
-            
-                                                                                                     
-本文分享自华为云社区《TypeScript里string和String的区别》，作者：gentle_zhou 。 
- 
+
 #### 背景 
 与JavaScript语言不同的是，TypeScript使用的是静态类型，比如说它指定了变量可以保存的数据类型。如下图所示，如果在JS中，指定变量可以保存的数据类型，会报错：“类型注释只可以在TS文件中被使用”： 
  

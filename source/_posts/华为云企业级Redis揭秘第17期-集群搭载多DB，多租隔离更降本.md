@@ -7,16 +7,13 @@ author: OSChina
 top: 301
 cover_picture: 'https://pic4.zhimg.com/80/v2-7be7ac15c9317eb2c80456da96d1b633_720w.jpg'
 abbrlink: 9c7237b1
-date: 2022-03-27 11:56:25
+date: 2019-12-25 11:56:25
 ---
 
 &emsp;&emsp;：GaussDB(for Redis)支持真正可扩展的多DB，轻松实现降本增效。 本文分享自华为云社区《华为云企业级Redis揭秘第17期：集群搭载多DB，多租隔离更降本》，作者： GaussDB 数据库 。 背景...
 <!-- more -->
 
                                                                                                                     
-            程序员健身是为了保养还是保命？参与话题讨论赢好礼 >>>
-            
-                                                                                                     
 本文分享自华为云社区《华为云企业级Redis揭秘第17期：集群搭载多DB，多租隔离更降本》，作者： GaussDB 数据库 。 
 背景：GaussDB(for Redis)是华为云数据库团队推出的企业级Redis，完全兼容开源Redis，既能显著降低成本，又能提供更稳定可靠的KV存储服务。 
  

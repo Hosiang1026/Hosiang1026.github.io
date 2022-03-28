@@ -7,16 +7,13 @@ author: OSChina
 top: 304
 cover_picture: 'https://devrel.andfun.cn/devrel/posts/2022/03/JKtev1.png'
 abbrlink: dbd25fe1
-date: 2022-03-27 11:56:25
+date: 2022-01-16 11:56:25
 ---
 
 &emsp;&emsp;tpack Compose 是用于构建原生 Android 界面的新工具包。它可简化并加快 Android 上的界面开发，使用更少的代码、强大的工具和直观的 Kotlin API，快速让应用生动而精彩。Compose 使用全新...
 <!-- more -->
 
                                                                                                                     
-            程序员健身是为了保养还是保命？参与话题讨论赢好礼 >>>
-            
-                                                                                                     
 Jetpack Compose 是用于构建原生 Android 界面的新工具包。它可简化并加快 Android 上的界面开发，使用更少的代码、强大的工具和直观的 Kotlin API，快速让应用生动而精彩。Compose 使用全新的组件——可组合项 (Composable) 来布局界面，使用 修饰符 (Modifier) 来配置可组合项。 
 本文会为您讲解由可组合项和修饰符提供支持的组合布局模型，并深入探究其背后的工作原理以及它们的功能，让您更好地了解所用布局和修饰符的工作方式，和应如何以及在何时构建自定义布局，从而实现满足确切应用需求的设计。 
 如果您更喜欢通过视频了解本文内容，请 点击这里 观看。 

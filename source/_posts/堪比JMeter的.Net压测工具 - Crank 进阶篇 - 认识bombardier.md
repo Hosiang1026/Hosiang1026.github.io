@@ -7,16 +7,13 @@ author: OSChina
 top: 320
 cover_picture: 'https://asciinema.org/a/Uz2fTLkoBmIVD8Xc7HwQqJAqg.svg'
 abbrlink: 5fa8ea16
-date: 2022-03-27 11:55:56
+date: 2021-07-11 11:55:56
 ---
 
 &emsp;&emsp; 前言 通过之前的学习，我们已经了解了各参数以及配置的意义，接下来的文章我们分别从bombardier以及wrk入手，进一步了解彼此之间的联系 2. 认识 bombardier bombardier 是一个 HTTP(S) 基...
 <!-- more -->
 
                                                                                                                     
-            程序员健身是为了保养还是保命？参与话题讨论赢好礼 >>>
-            
-                                                                                                    #### 1. 前言 
 通过之前的学习，我们已经了解了各参数以及配置的意义，接下来的文章我们分别从bombardier以及wrk入手，进一步了解彼此之间的联系 
 #### 2. 认识 bombardier 
 bombardier 是一个 HTTP(S) 基准测试工具。它是用 Go 编程语言编写的，并使用优秀的fasthttp代替 Go 的默认 http 库，因为它具有闪电般的快速性能，详细文档查看 

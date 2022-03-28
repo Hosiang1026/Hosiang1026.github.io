@@ -7,17 +7,13 @@ author: OSChina
 top: 286
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-8df5ddd1b1364abddecc9c565eee7eb5499.png'
 abbrlink: dea679e8
-date: 2022-03-27 11:53:55
+date: 2021-06-01 11:53:55
 ---
 
 &emsp;&emsp;月 19 日，也就是前两天，Asahi Linux 官方推特宣布：首个原生支持 M1 系列芯片的 Linux 测试版现已发布，所有人皆可使用！ Asahi Linux 起初只是一个众筹项目，计划为 Apple Silicon Mac ...
 <!-- more -->
 
                                                                                                                     
-            程序员健身是为了保养还是保命？参与话题讨论赢好礼 >>>
-            
-                                                                                                    3 月 19 日，也就是前两天，Asahi Linux 官方推特宣布：首个原生支持 M1 系列芯片的 Linux 测试版现已发布，所有人皆可使用！ 
- 
 Asahi Linux 起初只是一个众筹项目，计划为 Apple Silicon Mac 设备移植 Linux 系统，后来才被命名为 Asahi Linux，开始加速开发。虽然现在还很粗糙，很多功能无法正常工作（例如 GPU 加速、视频编解码器加速、网络摄像头等等），但它的终极目标是可以部署在 M1 芯片 Mac 上作为日常操作系统使用，加油，这是 Asahi Linux 的一小步，却是 Linux 的一大步。 
  
 #### 开源项目推荐 

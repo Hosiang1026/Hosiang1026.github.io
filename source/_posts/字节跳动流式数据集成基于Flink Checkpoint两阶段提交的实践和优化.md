@@ -7,16 +7,13 @@ author: OSChina
 top: 247
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-6c6ef9acc4d8d753a0d1615afbc692ce2bd.png'
 abbrlink: b337f0f5
-date: 2022-03-27 11:55:56
+date: 2022-01-04 11:55:56
 ---
 
 &emsp;&emsp;跳动流式数据集成基于Flink Checkpoint两阶段提交的实践和优化 背景 背景 字节跳动开发套件数据集成团队（DTS ，Data Transmission Service）在字节跳动内基于 Flink 实现了流批一体的数...
 <!-- more -->
 
                                                                                                                     
-            程序员健身是为了保养还是保命？参与话题讨论赢好礼 >>>
-            
-                                                                                                    字节跳动流式数据集成基于Flink Checkpoint两阶段提交的实践和优化 背景 
 ##### 背景 
 字节跳动开发套件数据集成团队（DTS ，Data Transmission Service）在字节跳动内基于 Flink 实现了流批一体的数据集成服务。其中一个典型场景是 Kafka/ByteMQ/RocketMQ -> HDFS/Hive 。Kafka/ByteMQ/RocketMQ -> HDFS/Hive（下面均称之为 MQ dump，具体介绍可见 字节跳动基于Flink的MQ-Hive实时数据集成 ） 在数仓建设第一层，对数据的准确性和实时性要求比较高。​ 
 目前字节跳动中国区 MQ dump 例行任务数巨大，日均处理流量在 PB 量级。巨大的任务量和数据量对 MQ dump 的稳定性以及准确性带来了极大的挑战。​ 

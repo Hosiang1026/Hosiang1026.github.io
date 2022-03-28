@@ -7,16 +7,13 @@ author: OSChina
 top: 291
 cover_picture: 'https://pic4.zhimg.com/80/v2-255d219d833e21297b91ecd2d15d5073_720w.jpg'
 abbrlink: 407da687
-date: 2022-03-27 11:55:11
+date: 2019-05-14 11:55:11
 ---
 
 &emsp;&emsp;：手把手教你使用 Java AWT 创建一个简易计算器。 本文分享自华为云社区《手把手教你使用 Java AWT 创建一个简易计算器》，作者：海拥 。 关于AWT AWT （抽象窗口工具包）是一个有助于构...
 <!-- more -->
 
                                                                                                                     
-            程序员健身是为了保养还是保命？参与话题讨论赢好礼 >>>
-            
-                                                                                                     
 本文分享自华为云社区《手把手教你使用 Java AWT 创建一个简易计算器》，作者：海拥 。 
  
 #### 关于AWT 

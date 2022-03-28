@@ -7,15 +7,12 @@ author: OSChina
 top: 319
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-143c935aac361f29a59d02b4253adddceba.png'
 abbrlink: f279a8b9
-date: 2022-03-27 11:56:26
+date: 2022-01-12 11:56:26
 ---
 
 &emsp;&emsp;来自 eBay 软件工程师、Apache Kyuubi PPMC Member王斐在Apache SeaTunnel & Kyuubi 联合 Meetup的分享，介绍了Apache Kyuubi(Incubating)的基本架构和使用场景，eBay基于自身的需求对K...
 <!-- more -->
 
-                                                                                                                    
-            程序员健身是为了保养还是保命？参与话题讨论赢好礼 >>>
-            
                                                                                                      
 #### Kyuubi是什么 
 首先介绍一下Kyuubi。Kyuubi是一个分布式的Thrift JDBC/ODBC server，支持多租户和分布式等特性，可以满足企业内诸如ETL、BI报表等大数据场景的应用，目前的主要方向是依托本身的架构设计，围绕各类主流计算引擎，打造一个Serverless SQL on Lakehouse服务，目前支持的引擎有Spark、Flink、Trino(也就是Presto)。我今天的主题是围绕Kyuubi和Spark, 关于其它计算引擎这里不再展开。 

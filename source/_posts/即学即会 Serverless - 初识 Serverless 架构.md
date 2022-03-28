@@ -7,16 +7,13 @@ author: OSChina
 top: 291
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-984512aaa972716a6422a498152a36633b8.png'
 abbrlink: 10d91171
-date: 2022-03-27 11:53:17
+date: 2019-11-05 11:53:17
 ---
 
 &emsp;&emsp; 后台回复 手册 提前解锁下载整本 2022 Serverless 工具书！ 抛砖引玉：从云计算到 Serverless 2009 年，UC Berkeley发表了：Above the Clouds: A Berkeley View of ...
 <!-- more -->
 
                                                                                                                     
-            程序员健身是为了保养还是保命？参与话题讨论赢好礼 >>>
-            
-                                                                                                     关注 Serverless 公众号 后台回复 手册 提前解锁下载整本 2022 Serverless 工具书！ 
 ### 抛砖引玉：从云计算到 Serverless 
 2009 年，UC Berkeley发表了：Above the Clouds: A Berkeley View of Cloud Computing 一文，在该文章中首次对云计算做出定义：云计算包含互联网上的应用服务及在数据中心提供这些服务的软硬件设施。居诸不息，随着云计算飞速发展，云计算的形态也在不断的演进，从 IaaS 到 PaaS，再到 SaaS，云计算也逐渐地 “找到了正确的发展方向”。 
  （云计算发展形态） 

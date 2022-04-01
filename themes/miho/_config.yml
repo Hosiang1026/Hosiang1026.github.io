@@ -54,10 +54,10 @@ menu:
     #url: http://hosiang.ccaeo.com/skydrive
     #target: true
     
-#  music:
-#    title: 音乐
-#    url: /music?id=91451362
-#    target: false
+  music:
+    title: 音乐
+    url: /music
+    target: false
     
   picture-o:
     title: 相册

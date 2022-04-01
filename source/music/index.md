@@ -16,7 +16,7 @@
 
 <iframe id="mainiframe" frameborder="no" scrolling="no" width="100%" height="100%" align="center"
 sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
-src="https://song.postgraduate.top/#/music/toplist" >
+src="https://music.qier222.com" >
 </iframe>
 
 <script type="text/javascript">

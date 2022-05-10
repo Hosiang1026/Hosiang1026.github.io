@@ -13,10 +13,11 @@ cache:
 # 更改时区
 before_install:
     - export TZ='Asia/Shanghai'
-
+  
 # 安装hexo及插件
 install:
   # - npm install --ignore-scripts
+  - npm uninstall ** --save
   - npm install
   - npm install hexo-abbrlink
   - npm install hexo-recommended-posts --save
@@ -35,9 +36,8 @@ script:
   - node tool.js
 
   #抓取文章
-
-  - npm install sqlite3
-  - node article.js
+  # - npm install sqlite3
+  # - node article.js
 
   #生成
   - hexo g

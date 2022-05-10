@@ -62,12 +62,12 @@ after_script:
   # Github Pages
   - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
   - git push --quiet "https://${GH_TOKEN}@${GH_REF}" master:master --tags
-  - git tag v0.$TRAVIS_BUILD_NUMBER -a -m "v0.2020$TRAVIS_BUILD_NUMBER 发布博客成功"
+  - git tag v0.$TRAVIS_BUILD_NUMBER -a -m "v0.2022$TRAVIS_BUILD_NUMBER 发布博客成功"
   
-  # Coding Pages  
-  #- git  config --global  credential.helper  store
-  #- git push --force --quiet "https://${CO_TOKEN}@${CO_REF}" master:master
-  #- git push --quiet "https://${CO_TOKEN}@${CO_REF}" master:master --tags
+  # Gitee Pages  
+  - git  config --global  credential.helper  store
+  - git push --force --quiet "https://${GE_TOKEN}@${GE_REF}" master:master
+  - git push --quiet "https://${GE_TOKEN}@${GE_REF}" master:master --tags
 
 
 # 指定博客源码分支

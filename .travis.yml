@@ -17,7 +17,7 @@ before_install:
 # 安装hexo及插件
 install:
   # - npm install --ignore-scripts
-  - npm uninstall ** --save
+  - npm install hexo-sage-posts --save
   - npm install
   - npm install hexo-abbrlink
   - npm install hexo-recommended-posts --save

@@ -60,8 +60,7 @@ after_script:
   - git push --quiet "https://${GH_TOKEN}@${GH_REF}" master:master --tags
   - git tag v0.$TRAVIS_BUILD_NUMBER -a -m "v0.2022$TRAVIS_BUILD_NUMBER Github Pages 发布上线成功"
   
-  # Gitee Pages  
-  - git  config --global  credential.helper  store
+  # Gitee Pages
   - git push --force --quiet "https://${GE_TOKEN}@${GE_REF}" master:master
   - git push --quiet "https://${GE_TOKEN}@${GE_REF}" master:master --tags
   - git tag v0.$TRAVIS_BUILD_NUMBER -a -m "v0.2022$TRAVIS_BUILD_NUMBER Gitee Pages 发布上线成功"

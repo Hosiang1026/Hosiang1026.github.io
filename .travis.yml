@@ -16,9 +16,7 @@ before_install:
   
 # 安装hexo及插件
 install:
-  # - npm install --ignore-scripts
-  - npm config set electron_mirror "https://npm.taobao.org/mirrors/electron/"
-  - npm install -g
+  - npm install --ignore-scripts
 
 script:
   #清除

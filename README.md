@@ -8,6 +8,8 @@
 
 ## 技术方案：Hexo + Travis-CI + Github-Pages + Serverless + CDN
 
+![Blog Version](/images/blog_version.png "博客版本信息")
+
 2017-12-14 
 
 ####  1. [创建第一个测试版](https://hexo.io/docs/)
@@ -45,7 +47,9 @@
 
     npm config set electron_mirror "https://npm.taobao.org/mirrors/electron/"
 
-warning: LF will be replaced by CRLF in js/utils.js.
+    npm config set registry https://registry.npm.taobao.org
+
+错误 warning: LF will be replaced by CRLF in js/utils.js.
 
     git config --global core.autocrlf false
 

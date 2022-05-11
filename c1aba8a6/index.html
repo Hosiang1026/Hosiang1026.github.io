@@ -1,0 +1,707 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="Access-Control-Allow-Origin" content="*"><script type="text/javascript">var start_time=(new Date).getTime()</script><meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0"><meta name="baidu-site-verification" content="RYlYHsgO7Y"><meta name="sogou_site_verification" content="MSmrTj7lHV"><meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"><meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be"><title>推荐系列-Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册 | 狂欢马克思</title><meta name="keywords" content="分享技术经验与交流"><meta name="description" content="&amp;emsp;&amp;emsp;Dubbo服务发布 Dubbo服务发布影响流程的主要包括三个部分，依次是： 服务暴露 心跳 服务注册 服务暴露是对外提供服务及暴露端口，以便消费端可以正常调通服务。心跳机制保证服务器端及客户端…"><meta property="og:type" content="article"><meta property="og:title" content="推荐系列-Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"><meta property="og:url" content="https://www.hosiang.cn/c1aba8a6/index.html"><meta property="og:site_name" content="狂欢马克思"><meta property="og:description" content="&amp;emsp;&amp;emsp;Dubbo服务发布 Dubbo服务发布影响流程的主要包括三个部分，依次是： 服务暴露 心跳 服务注册 服务暴露是对外提供服务及暴露端口，以便消费端可以正常调通服务。心跳机制保证服务器端及客户端…"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><meta property="article:published_time" content="2021-04-15T01:19:21.000Z"><meta property="article:modified_time" content="2022-05-11T07:02:49.915Z"><meta property="article:author" content="Howe Hsiang"><meta property="article:tag" content="Popular"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg"><link rel="icon" href="/images/favicon.ico"><link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/style.css"><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script"),t=(e.src="https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace",document.getElementsByTagName("script")[0]);t.parentNode.insertBefore(e,t)}()</script><script></script><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 6.2.0"></head><script src="/js/jquery.min.js"></script><script src="/js/pace.min.js"></script><script src="/js/crypto-js.js"></script><script src="/js/cookie.js"></script><script src="/js/calendar.js"></script><script src="/js/festival.js"></script><script>getFestival()</script><body><script>window.onload=function(){document.getElementById("TimeShow").innerHTML="本站耗时 "+((new Date).getTime()-start_time)/1e3+" 秒 "}</script><div id="container"><header id="header"><div id="banner"></div><div id="header-outer"><div id="header-menu" class="header-menu-pos animated"><div class="header-menu-container"><a href="/" class="left"><span class="site-title">狂欢马克思</span></a><nav id="header-menu-nav" class="right"><a href="/" rel="external nofollow"><i class="fa fa-home"></i> <span>主页</span> </a><a href="/archives" rel="external nofollow"><i class="fa fa-archive"></i> <span>归档</span> </a><a href="/gitbook" rel="external nofollow"><i class="fa fa-columns"></i> <span>笔记</span> </a><a href="/music" rel="external nofollow"><i class="fa fa-music"></i> <span>音乐</span> </a><a href="/photo" rel="external nofollow"><i class="fa fa-picture-o"></i> <span>相册</span> </a><a href="/collection" rel="external nofollow"><i class="fa fa-envira"></i> <span>收藏</span> </a><a href="/about" rel="external nofollow"><i class="fa fa-user"></i> <span>关于</span></a></nav><a class="mobile-header-menu-button"><i class="fa fa-bars"></i></a></div></div><div id="header-row"><div id="logo"><a href="/"><img src="/../images/logo.png" alt="logo"></a></div><div class="header-info"><div id="header-title"><h2>狂欢马克思</h2></div><div id="header-description"><h3>专注Web开发</h3></div></div><nav class="header-nav"><div class="social"><a title="Github" target="_blank" href="//github.com/Hosiang1026" rel="external nofollow"><i class="fa fa-github fa-2x"></i></a> <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes" rel="external nofollow"><i class="fa fa-qq fa-2x"></i></a> <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969" rel="external nofollow"><i class="fa fa-weibo fa-2x"></i></a></div></nav></div><div id="noticeId" class="show" style="background:rgb(244,247,247,.3)"><marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop()" onmouseout="this.start()"></marquee></div><script type="text/javascript">function browserRedirect(){var i=navigator.userAgent.toLowerCase(),n="ipad"==i.match(/ipad/i),o="iphone os"==i.match(/iphone os/i),a="midp"==i.match(/midp/i),t="rv:1.2.3.4"==i.match(/rv:1.2.3.4/i),e="ucweb"==i.match(/ucweb/i),s="android"==i.match(/android/i),d="windows ce"==i.match(/windows ce/i),i="windows mobile"==i.match(/windows mobile/i),p="",r=randomColor(),p=n||o||a||t||e||s||d||i?($("#noticeId").css({"line-height":"1.6em"}),"<font style='color:"+r+"' face='新华宋体'  size='2'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='hitokoto'></span></span></span><span id='YQData'></font> "):($("#noticeId").css({"line-height":"3.6em","margin-top":"20px"}),"<font style='color:"+r+"' face='新华宋体'  size='6'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='hitokoto'></span></span><span id='YQData'></span></font> ");$("#noticeMar").html(p)}function randomColor(){for(var i="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f".split(","),n="#",o=0;o<6;o++)n+=i[Math.floor(16*Math.random())];return n}$(function(){browserRedirect(),0<$("#hitokoto").length&&getHitokoto()})</script></div></header><script>console.log=function(){}</script><div class="outer"><section id="main" class="body-wrap"><article id="post-Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册" class="article article-type-post" itemscope itemprop="blogPost"><div class="article-inner"><header class="article-header"><h1 class="post-title" itemprop="name">推荐系列-Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册</h1><div class="post-title-bar"><ul><li><i class="fa fa-book"></i> <a href="/categories/热门文章/">热门文章</a></li><li><i class="fa fa-calendar"></i> 2021-04-15</li><li><i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span></li><li><span class="post-count">字数统计: 6.6k字</span></li><li><span class="post-count">阅读时长: 33分钟</span></li></ul></div></header><div class="article-entry post-content" itemprop="articleBody"><p>&amp;emsp;&amp;emsp;Dubbo服务发布 Dubbo服务发布影响流程的主要包括三个部分，依次是： 服务暴露 心跳 服务注册 服务暴露是对外提供服务及暴露端口，以便消费端可以正常调通服务。心跳机制保证服务器端及客户端…</p><span id="more"></span><h3 id="Dubbo服务发布"><a href="#Dubbo服务发布" class="headerlink" title="Dubbo服务发布"></a>Dubbo服务发布</h3><p>Dubbo服务发布影响流程的主要包括三个部分，依次是：</p><p>服务暴露<br>心跳<br>服务注册</p><p>服务暴露是对外提供服务及暴露端口，以便消费端可以正常调通服务。心跳机制保证服务器端及客户端正常长连接的保持，服务注册是向注册中心注册服务暴露服务的过程。</p><h4 id="Dubbo服务暴露"><a href="#Dubbo服务暴露" class="headerlink" title="Dubbo服务暴露"></a>Dubbo服务暴露</h4><p>此处只记录主要代码部分以便能快速定位到主要的核心代码：<br>ServiceConfig.java中代码</p><pre><code class="java"> if (registryURLs != null &amp;&amp; registryURLs.size() &gt; 0
+       &amp;&amp; url.getParameter(&quot;register&quot;, true)) &#123;
+   // 循环祖册中心 URL 数组 registryURLs
+   for (URL registryURL : registryURLs) &#123;
+       // &quot;dynamic&quot; ：服务是否动态注册，如果设为false，注册后将显示后disable状态，需人工启用，并且服务提供者停止时，也不会自动取消册，需人工禁用。
+       url = url.addParameterIfAbsent(&quot;dynamic&quot;, registryURL.getParameter(&quot;dynamic&quot;));
+       // 获得监控中心 URL
+       URL monitorUrl = loadMonitor(registryURL);
+       if (monitorUrl != null) &#123;
+           // 将监控中心的 URL 作为 &quot;monitor&quot; 参数添加到服务提供者的 URL 中，并且需要编码。通过这样的方式，服务提供者的 URL 中，包含了监控中心的配置。
+           url = url.addParameterAndEncoded(Constants.MONITOR_KEY, monitorUrl.toFullString());
+       &#125;
+       if (logger.isInfoEnabled()) &#123;
+           logger.info(&quot;Register dubbo service &quot; + interfaceClass.getName() + &quot; url &quot; + url + &quot; to registry &quot; + registryURL);
+       &#125;
+       // 使用 ProxyFactory 创建 Invoker 对象
+       // 调用 URL#addParameterAndEncoded(key, value) 方法，将服务体用这的 URL 作为 &quot;export&quot; 参数添加到注册中心的 URL 中。通过这样的方式，注册中心的 URL 中，包含了服务提供者的配置。
+       // 创建 Invoker 对象。该 Invoker 对象，执行 #invoke(invocation) 方法时，内部会调用 Service 对象( ref )对应的调用方法。
+       Invoker&lt;?&gt; invoker = proxyFactory.getInvoker(ref, (Class) interfaceClass, registryURL.addParameterAndEncoded(Constants.EXPORT_KEY, url.toFullString()));
+       // 使用 Protocol 暴露 Invoker 对象
+       /**
+        * Protocol$Adaptive =&gt; ProtocolFilterWrapper =&gt; ProtocolListenerWrapper =&gt; RegistryProtocol
+        * =&gt;
+        * Protocol$Adaptive =&gt; ProtocolFilterWrapper =&gt; ProtocolListenerWrapper =&gt; DubboProtocol
+        */
+       Exporter&lt;?&gt; exporter = protocol.export(invoker);
+       // 添加到 `exporters`
+       exporters.add(exporter);
+   &#125;
+&#125;
+</code></pre><p>循环注册中心，对每个注册中心都执行代码块中的执行过程<br>1.如果url中没有dynamic 参数，则从registerUrl中取值，并赋予url dynamic是服务动态注册的标识，默认为true，如果设置为false,则服务注册后显示disable状态，需人工启动<br>2.加载注册中心对应的监控中心配置<br>3.如果注册中心不为空则设置url的 monitor参数<br>4.Invoker proxyFactory.getInvoker  proxyFactory 默认为JavassistProxyFactory对象，这段代码为创建 ref 服务对象的代理对象。 proxyFactory.getInvoker(ref, (Class) interfaceClass, registryURL.addParameterAndEncoded(Constants.EXPORT_KEY, url.toFullString())); 获取ref的代理对象并在registryURL 中添加export属性，代理对象中属性参数如下 <img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"><br>5.protocol.export(invoker) 为暴露服务的核心实现部分,协议的调用链如下：</p><p>其中DubboProtocol 实现了服务暴露及心跳检测功能  RegistryProtocol 调用了DubboProtocol及注册服务<br>接下来经过两个扩展类(包装器) ProtocolFilterWrapper和ProtocolListenerWrapper 进入RegistryProtocol 核心代码如下：</p><pre><code class="java"> public &lt;T&gt; Exporter&lt;T&gt; export(final Invoker&lt;T&gt; originInvoker) throws RpcException &#123;
+   // 暴露服务
+   //export invoker
+   final ExporterChangeableWrapper&lt;T&gt; exporter = doLocalExport(originInvoker);
+
+   //registry provider
+   final Registry registry = getRegistry(originInvoker);
+   // 获得服务提供者 URL
+   final URL registedProviderUrl = getRegistedProviderUrl(originInvoker);
+
+   registry.register(registedProviderUrl);
+   // 订阅override数据
+   // FIXME 提供者订阅时，会影响同一JVM即暴露服务，又引用同一服务的的场景，因为subscribed以服务名为缓存的key，导致订阅信息覆盖。
+   final URL overrideSubscribeUrl = getSubscribedOverrideUrl(registedProviderUrl);
+   final OverrideListener overrideSubscribeListener = new OverrideListener(overrideSubscribeUrl, originInvoker);
+   overrideListeners.put(overrideSubscribeUrl, overrideSubscribeListener);
+   registry.subscribe(overrideSubscribeUrl, overrideSubscribeListener);
+   //保证每次export都返回一个新的exporter实例
+   return new Exporter&lt;T&gt;() &#123;
+       public Invoker&lt;T&gt; getInvoker() &#123;
+           return exporter.getInvoker();
+       &#125;
+
+       public void unexport() &#123;
+           try &#123;
+               exporter.unexport();
+           &#125; catch (Throwable t) &#123;
+               logger.warn(t.getMessage(), t);
+           &#125;
+           try &#123;
+               registry.unregister(registedProviderUrl);
+           &#125; catch (Throwable t) &#123;
+               logger.warn(t.getMessage(), t);
+           &#125;
+           try &#123;
+               overrideListeners.remove(overrideSubscribeUrl);
+               registry.unsubscribe(overrideSubscribeUrl, overrideSubscribeListener);
+           &#125; catch (Throwable t) &#123;
+               logger.warn(t.getMessage(), t);
+           &#125;
+       &#125;
+   &#125;;
+&#125;
+</code></pre><p> </p><pre><code class="java"> /**
+* 暴露服务。
+*
+* 此处的 Local 指的是，本地启动服务，但是不包括向注册中心注册服务的意思。
+* @param originInvoker
+* @param &lt;T&gt;
+* @return
+*/
+@SuppressWarnings(&quot;unchecked&quot;)
+private &lt;T&gt; ExporterChangeableWrapper&lt;T&gt; doLocalExport(final Invoker&lt;T&gt; originInvoker) &#123;
+   // 获得在 `bounds` 中的缓存 Key
+   //dubbo://192.168.20.218:20880/com.alibaba.dubbo.demo.DemoService?anyhost=true&amp;application=demo-provider&amp;default.accepts=1000&amp;default.threadpool=fixed&amp;default.threads=100&amp;default.timeout=5000&amp;dubbo=2.0.0&amp;generic=false&amp;
+   // interface=com.alibaba.dubbo.demo.DemoService&amp;methods=sayHello&amp;owner=uce&amp;pid=1760&amp;side=provider&amp;timestamp=1530150456618
+   String key = getCacheKey(originInvoker);
+   ExporterChangeableWrapper&lt;T&gt; exporter = (ExporterChangeableWrapper&lt;T&gt;) bounds.get(key);
+   if (exporter == null) &#123;
+       synchronized (bounds) &#123;
+           exporter = (ExporterChangeableWrapper&lt;T&gt;) bounds.get(key);
+           // 未暴露过，进行暴露服务
+           if (exporter == null) &#123;
+               // InvokerDelegete 实现 com.alibaba.dubbo.rpc.protocol.InvokerWrapper 类，主要增加了 #getInvoker() 方法，获得真实的，非 InvokerDelegete 的 Invoker 对象。
+               // 因为，可能会存在 InvokerDelegete.invoker 也是 InvokerDelegete 类型的情况。  getProviderUrl 同上 key = getCacheKey
+               final Invoker&lt;?&gt; invokerDelegete = new InvokerDelegete&lt;T&gt;(originInvoker, getProviderUrl(originInvoker));
+               // 暴露服务，创建 Exporter 对象
+
+               Exporter&lt;T&gt; export = (Exporter&lt;T&gt;) protocol.export(invokerDelegete);
+               // 使用 创建的Exporter对象 + originInvoker ，创建 ExporterChangeableWrapper 对象
+               exporter = new ExporterChangeableWrapper&lt;T&gt;(export, originInvoker);
+               bounds.put(key, exporter);
+           &#125;
+       &#125;
+   &#125;
+   return exporter;
+&#125;
+</code></pre><p>1.代用同步锁+double-check的方式来保证同样的服务不重复暴露。<br>2.new InvokerDelegete<t>(originInvoker, getProviderUrl(originInvoker)); InvokerDelegete 实现 com.alibaba.dubbo.rpc.protocol.InvokerWrapper（invoke） 类，主要增加了 #getInvoker() 方法，获得真实的，非 InvokerDelegete 的 Invoker 对象。 <img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"><br>3.调用protocol.export接��� 经过ProtocolFilterWrapper.invoker方法 创过滤器链再暴露服务：<br>protocol.export(buildInvokerChain(invoker, Constants.SERVICE_FILTER_KEY, Constants.PROVIDER));</t></p><pre><code class="java"> /**
+* 构建过滤器链
+* @param invoker injvm://127.0.0.1/com.alibaba.dubbo.demo.DemoService?anyhost=true&amp;application=demo-provider&amp;default.accepts=1000&amp;default.threadpool=fixed&amp;default.threads=100&amp;default.timeout=5000&amp;dubbo=2.0.0&amp;generic=false&amp;interface=com.alibaba.dubbo.demo.DemoService&amp;methods=sayHello&amp;owner=uce&amp;pid=9932&amp;side=provider&amp;timestamp=1527930395583
+* @param key service.filter 该参数用于获得 ServiceConfig 或 ReferenceConfig 配置的自定义过滤器
+*            以 ServiceConfig 举例子，例如 url = injvm://127.0.0.1/com.alibaba.dubbo.demo.DemoService?anyhost=true&amp;application=demo-provider&amp;bind.ip=192.168.3.17&amp;bind.port=20880&amp;default.delay=-1&amp;default.retries=0&amp;default.service.filter=demo&amp;delay=-1&amp;dubbo=2.0.0&amp;generic=false&amp;interface=com.alibaba.dubbo.demo.DemoService&amp;methods=sayHello&amp;pid=81844&amp;qos.port=22222&amp;service.filter=demo&amp;side=provider&amp;timestamp=1520682156043 中，
+*            service.filter=demo，这是笔者配置自定义的 DemoFilter 过滤器。
+*            &lt;dubbo:service interface=&quot;com.alibaba.dubbo.demo.DemoService&quot; ref=&quot;demoService&quot; filter=&quot;demo&quot; /&gt;
+* @param group provider  属性，分组
+*              在暴露服务时，group = provider 。
+*              在引用服务时，group = consumer 。
+* @param &lt;T&gt;
+* @return
+*/
+private static &lt;T&gt; Invoker&lt;T&gt; buildInvokerChain(final Invoker&lt;T&gt; invoker, String key, String group) &#123;
+   Invoker&lt;T&gt; last = invoker;
+   List&lt;Filter&gt; filters = ExtensionLoader.getExtensionLoader(Filter.class).getActivateExtension(invoker.getUrl(), key, group);
+  /* EchoFilter
+     ClassLoaderFilter
+     GenericFilter
+     ContextFilter
+     TraceFilter
+     TimeoutFilter
+     MonitorFilter
+     ExceptionFilter
+     DemoFilter 【自定义】*/
+   //倒序循环 Filter ，创建带 Filter 链的 Invoker 对象。因为是通过嵌套声明匿名类循环调用的方式，所以要倒序。可以手工模拟下这个过程。通过这样的方式，实际过滤的顺序，还是我们上面看到的正序
+   if (filters.size() &gt; 0) &#123;
+       for (int i = filters.size() - 1; i &gt;= 0; i--) &#123;
+           final Filter filter = filters.get(i);
+           final Invoker&lt;T&gt; next = last;
+           last = new Invoker&lt;T&gt;() &#123;
+
+               @Override
+               public Class&lt;T&gt; getInterface() &#123;
+                   return invoker.getInterface();
+               &#125;
+               @Override
+               public URL getUrl() &#123;
+                   return invoker.getUrl();
+               &#125;
+               @Override
+               public boolean isAvailable() &#123;
+                   return invoker.isAvailable();
+               &#125;
+               @Override
+               public Result invoke(Invocation invocation) throws RpcException &#123;
+                   return filter.invoke(next, invocation);
+               &#125;
+               @Override
+               public void destroy() &#123;
+                   invoker.destroy();
+               &#125;
+               @Override
+               public String toString() &#123;
+                   return invoker.toString();
+               &#125;
+           &#125;;
+       &#125;
+   &#125;
+   return last;
+&#125;
+</code></pre><p>List<filter>filters &#x3D; ExtensionLoader.getExtensionLoader(Filter.class).getActivateExtension(invoker.getUrl(), key, group); 获取Active的属于指定组的过过滤器列表 参考文章：<a target="_blank" rel="external nofollow noopener noreferrer" href="https://my.oschina.net/LucasZhu/blog/1835048">https://my.oschina.net/LucasZhu/blog/1835048</a><br>接下来执行DubboProrocol进行服务暴露的过程。</filter></p><pre><code class="java"> public &lt;T&gt; Exporter&lt;T&gt; export(Invoker&lt;T&gt; invoker) throws RpcException &#123;
+   URL url = invoker.getUrl();
+
+   // export service.
+   String key = serviceKey(url);
+   // 创建 DubboExporter 对象，并添加到 `exporterMap` 。
+   DubboExporter&lt;T&gt; exporter = new DubboExporter&lt;T&gt;(invoker, key, exporterMap);
+   exporterMap.put(key, exporter);
+
+   //export an stub service for dispaching event
+   Boolean isStubSupportEvent = url.getParameter(Constants.STUB_EVENT_KEY, Constants.DEFAULT_STUB_EVENT);
+   Boolean isCallbackservice = url.getParameter(Constants.IS_CALLBACK_SERVICE, false);
+   if (isStubSupportEvent &amp;&amp; !isCallbackservice) &#123;
+       String stubServiceMethods = url.getParameter(Constants.STUB_EVENT_METHODS_KEY);
+       if (stubServiceMethods == null || stubServiceMethods.length() == 0) &#123;
+           if (logger.isWarnEnabled()) &#123;
+               logger.warn(new IllegalStateException(&quot;consumer [&quot; + url.getParameter(Constants.INTERFACE_KEY) +
+                       &quot;], has set stubproxy support event ,but no stub methods founded.&quot;));
+           &#125;
+       &#125; else &#123;
+           stubServiceMethodsMap.put(url.getServiceKey(), stubServiceMethods);
+       &#125;
+   &#125;
+   // 启动服务器
+   openServer(url);
+   return exporter;
+&#125;
+</code></pre><p>1.获取invoker的 URL信息 2.获取key信息 为URL中interface与暴露端口的拼装字符串：com.alibaba.dubbo.demo.DemoService:20880 3.创建DubboExporter对象 并且入参为exporterMap 4.将exporter对象添加到exporterMap中  </p><pre><code class="java">  /**
+ * 启动服务器
+ *
+ * @param url URL
+ */
+private void openServer(URL url) &#123;
+   // find server.
+   String key = url.getAddress();
+   //client 也可以暴露一个只有server可以调用的服务。
+   boolean isServer = url.getParameter(Constants.IS_SERVER_KEY, true);
+   if (isServer) &#123;
+       ExchangeServer server = serverMap.get(key);
+       if (server == null) &#123;
+           serverMap.put(key, createServer(url));
+       &#125; else &#123;
+           //server支持reset,配合override功能使用
+           server.reset(url);
+       &#125;
+   &#125;
+&#125;
+</code></pre><p>调用createServer()方法 并存入DubboProtocol的serverMap中  </p><pre><code class="java"> private ExchangeServer createServer(URL url) &#123;
+   //默认开启server关闭时发送readonly事件
+   url = url.addParameterIfAbsent(Constants.CHANNEL_READONLYEVENT_SENT_KEY, Boolean.TRUE.toString());
+   //默认开启heartbeat
+   url = url.addParameterIfAbsent(Constants.HEARTBEAT_KEY, String.valueOf(Constants.DEFAULT_HEARTBEAT));
+   String str = url.getParameter(Constants.SERVER_KEY, Constants.DEFAULT_REMOTING_SERVER);
+   // 校验 Server 的 Dubbo SPI 拓展是否存在
+   if (str != null &amp;&amp; str.length() &gt; 0 &amp;&amp; !ExtensionLoader.getExtensionLoader(Transporter.class).hasExtension(str))
+       throw new RpcException(&quot;Unsupported server type: &quot; + str + &quot;, url: &quot; + url);
+   // 设置codec为 `&quot;Dubbo&quot;`
+   url = url.addParameter(Constants.CODEC_KEY, Version.isCompatibleVersion() ? COMPATIBLE_CODEC_NAME : DubboCodec.NAME);
+   ExchangeServer server;
+   try &#123;
+       server = Exchangers.bind(url, requestHandler);
+   &#125; catch (RemotingException e) &#123;
+       throw new RpcException(&quot;Fail to start server(url: &quot; + url + &quot;) &quot; + e.getMessage(), e);
+   &#125;
+   str = url.getParameter(Constants.CLIENT_KEY);
+   if (str != null &amp;&amp; str.length() &gt; 0) &#123;
+       Set&lt;String&gt; supportedTypes = ExtensionLoader.getExtensionLoader(Transporter.class).getSupportedExtensions();
+       if (!supportedTypes.contains(str)) &#123;
+           throw new RpcException(&quot;Unsupported client type: &quot; + str);
+       &#125;
+   &#125;
+   return server;
+&#125;
+</code></pre><p>1.默认开启server 关闭时发送readonly事件：channel.readonly.sent : true 2.默认开启 heartbeat  3.获取服务暴露的 server 传输 ， 默认为netty 4.设置编码器为Dubbo也就是 DubboCountCodec 5.Exchangers#bind(url, requestHandler) 启动服务器，requestHandler结构如下<br><img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"><br>具体实现代码如下：</p><pre><code class="java"> private ExchangeHandler requestHandler = new ExchangeHandlerAdapter() &#123;
+
+   public Object reply(ExchangeChannel channel, Object message) throws RemotingException &#123;
+       if (message instanceof Invocation) &#123;
+           Invocation inv = (Invocation) message;
+           Invoker&lt;?&gt; invoker = getInvoker(channel, inv);
+           //如果是callback 需要处理高版本调用低版本的问题
+           if (Boolean.TRUE.toString().equals(inv.getAttachments().get(IS_CALLBACK_SERVICE_INVOKE))) &#123;
+               String methodsStr = invoker.getUrl().getParameters().get(&quot;methods&quot;);
+               boolean hasMethod = false;
+               if (methodsStr == null || methodsStr.indexOf(&quot;,&quot;) == -1) &#123;
+                   hasMethod = inv.getMethodName().equals(methodsStr);
+               &#125; else &#123;
+                   String[] methods = methodsStr.split(&quot;,&quot;);
+                   for (String method : methods) &#123;
+                       if (inv.getMethodName().equals(method)) &#123;
+                           hasMethod = true;
+                           break;
+                       &#125;
+                   &#125;
+               &#125;
+               if (!hasMethod) &#123;
+                   logger.warn(new IllegalStateException(&quot;The methodName &quot; + inv.getMethodName() + &quot; not found in callback service interface ,invoke will be ignored. please update the api interface. url is:&quot; + invoker.getUrl()) + &quot; ,invocation is :&quot; + inv);
+                   return null;
+               &#125;
+           &#125;
+           RpcContext.getContext().setRemoteAddress(channel.getRemoteAddress());
+           return invoker.invoke(inv);
+       &#125;
+       throw new RemotingException(channel, &quot;Unsupported request: &quot; + message == null ? null : (message.getClass().getName() + &quot;: &quot; + message) + &quot;, channel: consumer: &quot; + channel.getRemoteAddress() + &quot; --&gt; provider: &quot; + channel.getLocalAddress());
+   &#125;
+
+   @Override
+   public void received(Channel channel, Object message) throws RemotingException &#123;
+       if (message instanceof Invocation) &#123;
+           reply((ExchangeChannel) channel, message);
+       &#125; else &#123;
+           super.received(channel, message);
+       &#125;
+   &#125;
+
+   @Override
+   public void connected(Channel channel) throws RemotingException &#123;
+       invoke(channel, Constants.ON_CONNECT_KEY);
+   &#125;
+
+   @Override
+   public void disconnected(Channel channel) throws RemotingException &#123;
+       if (logger.isInfoEnabled()) &#123;
+           logger.info(&quot;disconected from &quot; + channel.getRemoteAddress() + &quot;,url:&quot; + channel.getUrl());
+       &#125;
+       invoke(channel, Constants.ON_DISCONNECT_KEY);
+   &#125;
+
+   private void invoke(Channel channel, String methodKey) &#123;
+       Invocation invocation = createInvocation(channel, channel.getUrl(), methodKey);
+       if (invocation != null) &#123;
+           try &#123;
+               received(channel, invocation);
+           &#125; catch (Throwable t) &#123;
+               logger.warn(&quot;Failed to invoke event method &quot; + invocation.getMethodName() + &quot;(), cause: &quot; + t.getMessage(), t);
+           &#125;
+       &#125;
+   &#125;
+
+   private Invocation createInvocation(Channel channel, URL url, String methodKey) &#123;
+       String method = url.getParameter(methodKey);
+       if (method == null || method.length() == 0) &#123;
+           return null;
+       &#125;
+       RpcInvocation invocation = new RpcInvocation(method, new Class&lt;?&gt;[0], new Object[0]);
+       invocation.setAttachment(Constants.PATH_KEY, url.getPath());
+       invocation.setAttachment(Constants.GROUP_KEY, url.getParameter(Constants.GROUP_KEY));
+       invocation.setAttachment(Constants.INTERFACE_KEY, url.getParameter(Constants.INTERFACE_KEY));
+       invocation.setAttachment(Constants.VERSION_KEY, url.getParameter(Constants.VERSION_KEY));
+       if (url.getParameter(Constants.STUB_EVENT_KEY, false)) &#123;
+           invocation.setAttachment(Constants.STUB_EVENT_KEY, Boolean.TRUE.toString());
+       &#125;
+       return invocation;
+   &#125;
+&#125;;
+</code></pre><p>Exchangeers.bind(URL url, ExchangeHandler handler)</p><pre><code class="java"> public static ExchangeServer bind(URL url, ExchangeHandler handler) throws RemotingException &#123;
+   if (url == null) &#123;
+       throw new IllegalArgumentException(&quot;url == null&quot;);
+   &#125;
+   if (handler == null) &#123;
+       throw new IllegalArgumentException(&quot;handler == null&quot;);
+   &#125;
+   url = url.addParameterIfAbsent(Constants.CODEC_KEY, &quot;exchange&quot;);
+   return getExchanger(url).bind(url, handler);
+&#125;
+public static Exchanger getExchanger(URL url) &#123;
+   String type = url.getParameter(Constants.EXCHANGER_KEY, Constants.DEFAULT_EXCHANGER);
+   return getExchanger(type);
+&#125;
+public static Exchanger getExchanger(String type) &#123;
+   return ExtensionLoader.getExtensionLoader(Exchanger.class).getExtension(type);
+&#125;
+</code></pre><p>接口作用是设置exchanger params为header 并且获取Exchanger.class的header扩展接口HeaderExchanger， 并调用bind方法：</p><pre><code class="java"> public class HeaderExchanger implements Exchanger &#123;
+   public static final String NAME = &quot;header&quot;;
+   public ExchangeClient connect(URL url, ExchangeHandler handler) throws RemotingException &#123;
+       return new HeaderExchangeClient(Transporters.connect(url, new DecodeHandler(new HeaderExchangeHandler(handler))), true);
+   &#125;
+   public ExchangeServer bind(URL url, ExchangeHandler handler) throws RemotingException &#123;
+       return new HeaderExchangeServer(Transporters.bind(url, new DecodeHandler(new HeaderExchangeHandler(handler))));
+   &#125;
+&#125;
+</code></pre><p>先将 DubboProtocol入参 传过来的ExchangeHandler对象ExchangeHandlerAdapter() 进行包装组成handler链：最后返回ChannelHandler对象，接下来调用：Transporters.bind(url, new DecodeHandler(new HeaderExchangeHandler(handler))) Server Transporters.bind(URL url, ChannelHandler… handlers) Transpoter$Adaptive.bind()<br><img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"><br>数据透传 NettyTransporter.java Server NettyTransporter.bind(URL url, ChannelHandler listener)</p><pre><code class="java"> public Server bind(URL url, ChannelHandler listener) throws RemotingException &#123;
+   return new NettyServer(url, listener);
+&#125;
+</code></pre><p>作用是：<br>返回一个NettyServer实例：  </p><pre><code class="java"> public NettyServer(URL url, ChannelHandler handler) throws RemotingException &#123;
+   super(url, ChannelHandlers.wrap(handler, ExecutorUtil.setThreadName(url, SERVER_THREAD_POOL_NAME)));
+&#125;
+</code></pre><p>ExecutorUtil.setThreadName(url, SERVER_THREAD_POOL_NAME)) 只用是生成获取ThreadName的名称 为URL添加threadname的param ChannelHandlers.wrap(ChannelHandler handler, URL url)  代码如下：</p><pre><code class="java"> public class ChannelHandlers &#123;
+
+   private static ChannelHandlers INSTANCE = new ChannelHandlers();
+
+   protected ChannelHandlers() &#123;
+   &#125;
+   public static ChannelHandler wrap(ChannelHandler handler, URL url) &#123;
+       return ChannelHandlers.getInstance().wrapInternal(handler, url);
+   &#125;
+   protected static ChannelHandlers getInstance() &#123;
+       return INSTANCE;
+   &#125;
+   static void setTestingChannelHandlers(ChannelHandlers instance) &#123;
+       INSTANCE = instance;
+   &#125;
+   protected ChannelHandler wrapInternal(ChannelHandler handler, URL url) &#123;
+       return new MultiMessageHandler(new HeartbeatHandler(ExtensionLoader.getExtensionLoader(Dispatcher.class)
+               .getAdaptiveExtension().dispatch(handler, url)));
+   &#125;
+&#125;
+</code></pre><p>ExtensionLoader.getExtensionLoader(Dispatcher.class).getAdaptiveExtension().dispatch(handler, url)： <img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"><br>获取到AllDispatcher分发器进行透传：</p><pre><code class="java"> public class AllDispatcher implements Dispatcher &#123;
+   public static final String NAME = &quot;all&quot;;
+
+   public ChannelHandler dispatch(ChannelHandler handler, URL url) &#123;
+       return new AllChannelHandler(handler, url);
+   &#125;
+&#125;
+</code></pre><p>结构如图所示：<img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"><br>调用WrappedChannelHandler的构造方法：</p><pre><code class="java"> public WrappedChannelHandler(ChannelHandler handler, URL url) &#123;
+   this.handler = handler;
+   this.url = url;
+   executor = (ExecutorService) ExtensionLoader.getExtensionLoader(ThreadPool.class).getAdaptiveExtension().getExecutor(url);
+
+   String componentKey = Constants.EXECUTOR_SERVICE_COMPONENT_KEY;
+   if (Constants.CONSUMER_SIDE.equalsIgnoreCase(url.getParameter(Constants.SIDE_KEY))) &#123;
+       componentKey = Constants.CONSUMER_SIDE;
+   &#125;
+   DataStore dataStore = ExtensionLoader.getExtensionLoader(DataStore.class).getDefaultExtension();
+   dataStore.put(componentKey, Integer.toString(url.getPort()), executor);
+&#125;
+</code></pre><p>这段代码的功能为：<br>1.将 之前头创的DecoderHandler对象再进包装 包装为AllChannelHandler 2.生成线程池对象Executor对象 3.获取默认的DataStore对象，并将线程池对象放入DataStore 中 key为 : java.util.concurrent.ExecutorService 字符串和服务暴露的端口 值为线程池对象<br>return new MultiMessageHandler(new HeartbeatHandler(ExtensionLoader.getExtensionLoader(Dispatcher.class)                 .getAdaptiveExtension().dispatch(handler, url))); 接下来将返回的AllChannelHandler对象用HeartbeatHandler 和 MultiMessageHandler 进行包装处理并返回ChannelHandler.wrap() 的上一端。<br>NettyTransporter.bind(URL url, ChannelHandler listener) -&gt; new NettyServer(URL url, ChannelHandler handler) -&gt;  super(url, ChannelHandlers.wrap(handler, ExecutorUtil.setThreadName(url, SERVER_THREAD_POOL_NAME))); 接下来是创建NettyServer对象的最后一步：</p><pre><code class="java"> NettyServer ==&gt;
+public NettyServer(URL url, ChannelHandler handler) throws RemotingException &#123;
+   super(url, ChannelHandlers.wrap(handler, ExecutorUtil.setThreadName(url, SERVER_THREAD_POOL_NAME)));
+&#125;
+AbstractServer==&gt;
+public AbstractServer(URL url, ChannelHandler handler) throws RemotingException &#123;
+   super(url, handler);
+   localAddress = getUrl().toInetSocketAddress();
+   String host = url.getParameter(Constants.ANYHOST_KEY, false)
+           || NetUtils.isInvalidLocalHost(getUrl().getHost())
+           ? NetUtils.ANYHOST : getUrl().getHost();
+   bindAddress = new InetSocketAddress(host, getUrl().getPort());
+   this.accepts = url.getParameter(Constants.ACCEPTS_KEY, Constants.DEFAULT_ACCEPTS);
+   this.idleTimeout = url.getParameter(Constants.IDLE_TIMEOUT_KEY, Constants.DEFAULT_IDLE_TIMEOUT);
+   try &#123;
+       doOpen();
+       if (logger.isInfoEnabled()) &#123;
+           logger.info(&quot;Start &quot; + getClass().getSimpleName() + &quot; bind &quot; + getBindAddress() + &quot;, export &quot; + getLocalAddress());
+       &#125;
+   &#125; catch (Throwable t) &#123;
+       throw new RemotingException(url.toInetSocketAddress(), null, &quot;Failed to bind &quot; + getClass().getSimpleName()
+               + &quot; on &quot; + getLocalAddress() + &quot;, cause: &quot; + t.getMessage(), t);
+   &#125;
+   //fixme replace this with better method
+   DataStore dataStore = ExtensionLoader.getExtensionLoader(DataStore.class).getDefaultExtension();
+   executor = (ExecutorService) dataStore.get(Constants.EXECUTOR_SERVICE_COMPONENT_KEY, Integer.toString(url.getPort()));
+&#125;
+
+AbstractEndpoint ==&gt;
+public AbstractEndpoint(URL url, ChannelHandler handler) &#123;
+   super(url, handler);
+   this.codec = getChannelCodec(url);
+   this.timeout = url.getPositiveParameter(Constants.TIMEOUT_KEY, Constants.DEFAULT_TIMEOUT);
+   this.connectTimeout = url.getPositiveParameter(Constants.CONNECT_TIMEOUT_KEY, Constants.DEFAULT_CONNECT_TIMEOUT);
+&#125;
+AbstractPeer==&gt;
+public AbstractPeer(URL url, ChannelHandler handler) &#123;
+   if (url == null) &#123;
+       throw new IllegalArgumentException(&quot;url == null&quot;);
+   &#125;
+   if (handler == null) &#123;
+       throw new IllegalArgumentException(&quot;handler == null&quot;);
+   &#125;
+   this.url = url;
+   this.handler = handler;
+&#125;
+</code></pre><p>调用栈如上所示： 因为之前设置了codec为dubbo 所以返回DubboCountCodec实例 获取超时时间timeout ,和链接的超时时间connectTimeout localAddress为本地IP:PORT  port为服务暴露的端口 host 为0.0.0.0 bindAddress为 host:port port为服务暴露的端口 this.accept 为默认获取最大连接数 idleTimeout为 url中 idle.timeout 核心代码：doOpen()</p><pre><code class="java"> @Override
+protected void doOpen() throws Throwable &#123;
+   NettyHelper.setNettyLoggerFactory();
+   ExecutorService boss = Executors.newCachedThreadPool(new NamedThreadFactory(&quot;NettyServerBoss&quot;, true));
+   ExecutorService worker = Executors.newCachedThreadPool(new NamedThreadFactory(&quot;NettyServerWorker&quot;, true));
+   ChannelFactory channelFactory = new NioServerSocketChannelFactory(boss, worker, getUrl().getPositiveParameter(Constants.IO_THREADS_KEY, Constants.DEFAULT_IO_THREADS));
+   bootstrap = new ServerBootstrap(channelFactory);
+
+   final NettyHandler nettyHandler = new NettyHandler(getUrl(), this);
+   channels = nettyHandler.getChannels();
+   // https://issues.jboss.org/browse/NETTY-365
+   // https://issues.jboss.org/browse/NETTY-379
+   // final Timer timer = new HashedWheelTimer(new NamedThreadFactory(&quot;NettyIdleTimer&quot;, true));
+   bootstrap.setPipelineFactory(new ChannelPipelineFactory() &#123;
+       public ChannelPipeline getPipeline() &#123;
+           NettyCodecAdapter adapter = new NettyCodecAdapter(getCodec(), getUrl(), NettyServer.this);
+           ChannelPipeline pipeline = Channels.pipeline();
+           /*int idleTimeout = getIdleTimeout();
+           if (idleTimeout &gt; 10000) &#123;
+               pipeline.addLast(&quot;timer&quot;, new IdleStateHandler(timer, idleTimeout / 1000, 0, 0));
+           &#125;*/
+           pipeline.addLast(&quot;decoder&quot;, adapter.getDecoder());
+           pipeline.addLast(&quot;encoder&quot;, adapter.getEncoder());
+           pipeline.addLast(&quot;handler&quot;, nettyHandler);
+           return pipeline;
+       &#125;
+   &#125;);
+   // bind
+   channel = bootstrap.bind(getBindAddress());
+&#125;
+</code></pre><p>1.首先进行Netty的日志配置 接下来先生成 NettyCodecAdapter 入参为之前生成的codec , URL信息(主要用到buffer属性配置Netty缓冲区)及 this (Handler) 对象 接下来就是设置Netty的Encoder Decoder 来进行数据的编码与解码 其会调用 this的handler链来进行数据处理。Dubbo2.5.6采用的是Netty3来进行通讯的，此处就不进行赘述。<br>AbstractServer 接下来获取到从DataStore对象中获取之前缓存的线程池 ，设置 NettyServer的 executor属性。<br>自此，Dubbo服务暴露的代码解析完毕，NettyServer的类结构图如下：<br><img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"></p><h4 id="心跳服务"><a href="#心跳服务" class="headerlink" title="心跳服务"></a>心跳服务</h4><p>Dubbo provider的心跳服务是 HeaderExchanger bind代码执行的最后一步：参数是上面生成的Server对象 (NettyServer)。<br><img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"></p><pre><code class="java"> public HeaderExchangeServer(Server server) &#123;
+   if (server == null) &#123;
+       throw new IllegalArgumentException(&quot;server == null&quot;);
+   &#125;
+   this.server = server;
+   this.heartbeat = server.getUrl().getParameter(Constants.HEARTBEAT_KEY, 0);
+   this.heartbeatTimeout = server.getUrl().getParameter(Constants.HEARTBEAT_TIMEOUT_KEY, heartbeat * 3);
+   if (heartbeatTimeout &lt; heartbeat * 2) &#123;
+       throw new IllegalStateException(&quot;heartbeatTimeout &lt; heartbeatInterval * 2&quot;);
+   &#125;
+   startHeatbeatTimer();
+&#125;
+</code></pre><p>1.初始化 server信息 2.获取server URL中heartbeat信息 及心跳超时信息，默认为heartbeat的三倍 3.执行心跳代码 startHeatbeatTimer()</p><pre><code class="java"> private void startHeatbeatTimer() &#123;
+   stopHeartbeatTimer();
+   if (heartbeat &gt; 0) &#123;
+       heatbeatTimer = scheduled.scheduleWithFixedDelay(
+               new HeartBeatTask(new HeartBeatTask.ChannelProvider() &#123;
+                   public Collection&lt;Channel&gt; getChannels() &#123;
+                       return Collections.unmodifiableCollection(
+                               HeaderExchangeServer.this.getChannels());
+                   &#125;
+               &#125;, heartbeat, heartbeatTimeout),
+               heartbeat, heartbeat, TimeUnit.MILLISECONDS);
+   &#125;
+&#125;
+</code></pre><p>1.停止定时任务——首先停止定时器中所有任务，置空 beatbeatTimer； 2.重新设置定时器 ， ���环��测<br>接下来在DubboProtocol的openServer(URL) 方法中将创建的ExchangeServer对象放入 DubboProtocol的 serverMap 集合对象中  key为服务的ip:port 如 192.168.20.218:20880 value为之前创建的ExchangeServer对象<br>DubboProtocol export方法到此执行完毕，最终返回的是 DubboExporter对象包装了入参的invoker对象，serviceKey信息，及服务暴露的 exporterMap对象。<br><img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"><br><img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"></p><h4 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h4><p>我们接着来看RegistryProtocol 接下来的执行代码：</p><pre><code class="java"> public &lt;T&gt; Exporter&lt;T&gt; export(final Invoker&lt;T&gt; originInvoker) throws RpcException &#123;
+   // 暴露服务
+   //export invoker
+   final ExporterChangeableWrapper&lt;T&gt; exporter = doLocalExport(originInvoker);
+
+   //registry provider 添加定时任务  ping request response
+   final Registry registry = getRegistry(originInvoker);
+   // 获得服务提供者 URL
+   final URL registedProviderUrl = getRegistedProviderUrl(originInvoker);
+
+   registry.register(registedProviderUrl);
+   // 订阅override数据
+   // FIXME 提供者订阅时，会影响同一JVM即暴露服务，又引用同一服务的的场景，因为subscribed以服务名为缓存的key，导致订阅信息覆盖。
+   final URL overrideSubscribeUrl = getSubscribedOverrideUrl(registedProviderUrl);
+   final OverrideListener overrideSubscribeListener = new OverrideListener(overrideSubscribeUrl, originInvoker);
+   overrideListeners.put(overrideSubscribeUrl, overrideSubscribeListener);
+   registry.subscribe(overrideSubscribeUrl, overrideSubscribeListener);
+   //保证每次export都返回一个新的exporter实例
+   return new Exporter&lt;T&gt;() &#123;
+       public Invoker&lt;T&gt; getInvoker() &#123;
+           return exporter.getInvoker();
+       &#125;
+
+       public void unexport() &#123;
+           try &#123;
+               exporter.unexport();
+           &#125; catch (Throwable t) &#123;
+               logger.warn(t.getMessage(), t);
+           &#125;
+           try &#123;
+               registry.unregister(registedProviderUrl);
+           &#125; catch (Throwable t) &#123;
+               logger.warn(t.getMessage(), t);
+           &#125;
+           try &#123;
+               overrideListeners.remove(overrideSubscribeUrl);
+               registry.unsubscribe(overrideSubscribeUrl, overrideSubscribeListener);
+           &#125; catch (Throwable t) &#123;
+               logger.warn(t.getMessage(), t);
+           &#125;
+       &#125;
+   &#125;;
+&#125;
+</code></pre><p>1.ExporterChangeableWrapper<t>doLocalExport(final Invoker<t>originInvoker) 为暴露服务的执行过程，上面流程已经走过。 返回的数据格式如下： <img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"><br>2.根据originInvoker中注册中心信息获取对应的Registry对象,因为这里是zookeeper协议，所以为ZookeeperRegistry对象 3.从注册中心的URL中获得 export 参数对应的值，即服务提供者的URL. 4.registry.register(registedProviderUrl); 用之前创建的注册中心对象注册服务 5.  <br>&#x2F;&#x2F; TODO <br> <br>上面提到 Registry getRegistry(final Invoker&lt;?&gt; originInvoker) 是根据invoker的地址获取registry实例代码如下：</t></t></p><pre><code class="java"> private Registry getRegistry(final Invoker&lt;?&gt; originInvoker) &#123;
+   // registry://127.0.0.1:2181/com.alibaba.dubbo.registry.RegistryService?application=demo-provider&amp;dubbo=2.0.0&amp;export=dubbo%3A%2F%2F192.168.20.218%3A20880%2Fcom.alibaba.dubbo.demo.DemoService%3Fanyhost%3Dtrue%26application%3Ddemo-provider%26default.accepts%3D1000%26default.threadpool%3Dfixed%26default.threads%3D100%26default.timeout%3D5000%26dubbo%3D2.0.0%26generic%3Dfalse%26interface%3Dcom.alibaba.dubbo.demo.DemoService%26methods%3DsayHello%26owner%3Duce%26pid%3D12028%26side%3Dprovider%26timestamp%3D1531912729429&amp;owner=uce&amp;pid=12028&amp;registry=zookeeper&amp;timestamp=1531912729343
+   URL registryUrl = originInvoker.getUrl();
+   if (Constants.REGISTRY_PROTOCOL.equals(registryUrl.getProtocol())) &#123;
+       String protocol = registryUrl.getParameter(Constants.REGISTRY_KEY, Constants.DEFAULT_DIRECTORY);
+       registryUrl = registryUrl.setProtocol(protocol).removeParameter(Constants.REGISTRY_KEY);
+   &#125;
+   // zookeeper://127.0.0.1:2181/com.alibaba.dubbo.registry.RegistryService?application=demo-provider&amp;dubbo=2.0.0&amp;export=dubbo%3A%2F%2F192.168.20.218%3A20880%2Fcom.alibaba.dubbo.demo.DemoService%3Fanyhost%3Dtrue%26application%3Ddemo-provider%26default.accepts%3D1000%26default.threadpool%3Dfixed%26default.threads%3D100%26default.timeout%3D5000%26dubbo%3D2.0.0%26generic%3Dfalse%26interface%3Dcom.alibaba.dubbo.demo.DemoService%26methods%3DsayHello%26owner%3Duce%26pid%3D12028%26side%3Dprovider%26timestamp%3D1531912729429&amp;owner=uce&amp;pid=12028&amp;timestamp=1531912729343
+   return registryFactory.getRegistry(registryUrl);
+&#125;
+</code></pre><p>上面代码的意思是： 1.获取originalInvoker中的URL信息 (注册中心的配置信息) 2.将URL中信息中Param中registry参数获取到，并替换URL中的protocol属性，并删除Param中的registry信息，上面代码中的注释为执行前和执行后的的结果。 3.获取protocol 为 zookeeper对应的RegistryFactory接口的扩展对象 ZookeeperRegistryFactory 并执行getRegistry 方法：<br><img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"><br>ZookeeperRegistryFactory的继承结构和对应类中属性如下图所示： <img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册">其中REGISTRIES &#x3D; new ConcurrentHashMap&lt;String, Registry&gt;(); 代表注册中心的配置，其中可以有多个注册中心配置<br>AbstractRegistryFactory.getRegistry执行代码如下：</p><pre><code class="java"> public Registry getRegistry(URL url) &#123;
+   url = url.setPath(RegistryService.class.getName())
+           .addParameter(Constants.INTERFACE_KEY, RegistryService.class.getName())
+           .removeParameters(Constants.EXPORT_KEY, Constants.REFER_KEY);
+   String key = url.toServiceString();   // zookeeper://192.168.1.157:2181/com.alibaba.dubbo.registry.RegistryService
+   // 锁定注册中心获取过程，保证注册中心单一实例
+   LOCK.lock();
+   try &#123;
+       Registry registry = REGISTRIES.get(key);
+       if (registry != null) &#123;
+           return registry;
+       &#125;
+       registry = createRegistry(url);
+       if (registry == null) &#123;
+           throw new IllegalStateException(&quot;Can not create registry &quot; + url);
+       &#125;
+       REGISTRIES.put(key, registry);
+       return registry;
+   &#125; finally &#123;
+       // 释放锁
+       LOCK.unlock();
+   &#125;
+&#125;
+</code></pre><p>1.设置Path属性，添加interface参数信息，及移除export 和 refer 参数信息。执行结果如下： zookeeper:&#x2F;&#x2F;127.0.0.1:2181&#x2F;com.alibaba.dubbo.registry.RegistryService?application&#x3D;demo-provider&amp;dubbo&#x3D;2.0.0&amp;interface&#x3D;com.alibaba.dubbo.registry.RegistryService&amp;owner&#x3D;uce&amp;pid&#x3D;12028&amp;timestamp&#x3D;1531912729343 2.获取url对应的serviceString信息：zookeeper:&#x2F;&#x2F;127.0.0.1:2181&#x2F;com.alibaba.dubbo.registry.RegistryService，由于我使用的是本地的zookeeper 所以IP为 127.0.0.1 3.顺序地创建注册中心：Registry ZookeeperRegistryFactory.createRegistry(URL url);</p><pre><code class="java"> public Registry createRegistry(URL url) &#123;
+   return new ZookeeperRegistry(url, zookeeperTransporter);
+&#125;
+// 构造ZookeeperRegistry的调用链如下所示
+public ZookeeperRegistry(URL url, ZookeeperTransporter zookeeperTransporter) &#123;
+   super(url);
+   if (url.isAnyHost()) &#123;
+       throw new IllegalStateException(&quot;registry address == null&quot;);
+   &#125;
+   String group = url.getParameter(Constants.GROUP_KEY, DEFAULT_ROOT);
+   if (!group.startsWith(Constants.PATH_SEPARATOR)) &#123;
+       group = Constants.PATH_SEPARATOR + group;
+   &#125;
+   this.root = group;
+   zkClient = zookeeperTransporter.connect(url);
+   zkClient.addStateListener(new StateListener() &#123;
+       public void stateChanged(int state) &#123;
+           if (state == RECONNECTED) &#123;
+               try &#123;
+                   recover();
+               &#125; catch (Exception e) &#123;
+                   logger.error(e.getMessage(), e);
+               &#125;
+           &#125;
+       &#125;
+   &#125;);
+&#125;
+public FailbackRegistry(URL url) &#123;
+   super(url);
+   int retryPeriod = url.getParameter(Constants.REGISTRY_RETRY_PERIOD_KEY, Constants.DEFAULT_REGISTRY_RETRY_PERIOD);
+   this.retryFuture = retryExecutor.scheduleWithFixedDelay(new Runnable() &#123;
+       public void run() &#123;
+           // 检测并连接注册中心
+           try &#123;
+               retry();
+           &#125; catch (Throwable t) &#123; // 防御性容错
+               logger.error(&quot;Unexpected error occur at failed retry, cause: &quot; + t.getMessage(), t);
+           &#125;
+       &#125;
+   &#125;, retryPeriod, retryPeriod, TimeUnit.MILLISECONDS);
+&#125;
+public AbstractRegistry(URL url) &#123;
+   setUrl(url);
+   // 启动文件保存定时器
+   syncSaveFile = url.getParameter(Constants.REGISTRY_FILESAVE_SYNC_KEY, false);
+   String filename = url.getParameter(Constants.FILE_KEY, System.getProperty(&quot;user.home&quot;) + &quot;/.dubbo/dubbo-registry-&quot; + url.getHost() + &quot;.cache&quot;);
+   File file = null;
+   if (ConfigUtils.isNotEmpty(filename)) &#123;
+       file = new File(filename);
+       if (!file.exists() &amp;&amp; file.getParentFile() != null &amp;&amp; !file.getParentFile().exists()) &#123;
+           if (!file.getParentFile().mkdirs()) &#123;
+               throw new IllegalArgumentException(&quot;Invalid registry store file &quot; + file + &quot;, cause: Failed to create directory &quot; + file.getParentFile() + &quot;!&quot;);
+           &#125;
+       &#125;
+   &#125;
+   this.file = file;
+   loadProperties();
+   notify(url.getBackupUrls());
+&#125;
+</code></pre><p>ZookeeperRegistry 的类继承结构图如图所示：<br><img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"> ZooKeeperRegistry.FailbackRegistry.AbstractRegistry中 1.setUrl设置url属性信息 2.是否启用文件的异步保存 3.注册中心对应的本地文件保存的位置信息：如C:\Users\Administrator&#x2F;.dubbo&#x2F;dubbo-registry-127.0.0.1.cache 4.给file赋值 并且加载文件信息到properties属性中 5.notify(url.getBackupUrls) 这段代码不知道什么意思。<br>ZooKeeperRegistry.FailbackRegistry中 1.获取定时任务的时间间隔。 2.开启定时任务定时检测失败的注册，并重新注册。<br>ZooKeeperRegistry 中 1.获取注册中心的group参数 ，默认为&#x2F;dubbo , 并未root赋予group值 2.zkClient &#x3D; zookeeperTransporter.connect(url); 链接zookeeper信息并添加状态监听事件，具体再更文详述吧，代码如下：</p><pre><code class="java"> public ZkclientZookeeperClient(URL url) &#123;
+   super(url);
+   client = new ZkClient(url.getBackupAddress());
+   client.subscribeStateChanges(new IZkStateListener() &#123;
+       @Override
+       public void handleStateChanged(KeeperState state) throws Exception &#123;
+           ZkclientZookeeperClient.this.state = state;
+           if (state == KeeperState.Disconnected) &#123;
+               stateChanged(StateListener.DISCONNECTED);
+           &#125; else if (state == KeeperState.SyncConnected) &#123;
+               stateChanged(StateListener.CONNECTED);
+           &#125;
+       &#125;
+
+       @Override
+       public void handleNewSession() throws Exception &#123;
+           stateChanged(StateListener.RECONNECTED);
+       &#125;
+   &#125;);
+&#125;
+</code></pre><p>3.添加重连状态的状态监听事件 调用 recover()方法。 至此 ZookeeperRegistry创建完毕。<br>ZookeeperRegistryFactory中最后将registry放入 ZookeeperRegistryFactory.REGISTRIES中  key 为zookeeper:&#x2F;&#x2F;127.0.0.1:2181&#x2F;com.alibaba.dubbo.registry.RegistryService value 为之前创建的ZookeeperRegistry对象。<br>接着返回RegistryProtocol 的export方法 ， 1.上面说到了调用doLocalExport(originInvoker);进行服务暴露的过程及调用getRegistry(originInvoker)方法通过ZookeeperRegistryFactory 工厂生成 ZookeeperRegistry 方法，然后加入到工厂REGISTRIES 缓存中，并返回ZookeeperRegistry 实例的过程。<br>2.接下来RegistryProtocol 的export方法中调用 final URL registedProviderUrl &#x3D; getRegistedProviderUrl(originInvoker); 获取服务提供者的URL信息 ， 它是从注册中心的URL中获得export参数对应的值转换的URL信息。（去除掉不需要在注册中心上看到的字段） <img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册"><br>3.接下来调用registry.register(registedProviderUrl); 进行服务的注册将暴露的服务信息注册到注册中心，并且将已经注册的服务URL缓存到ZookeeperRegistry.registered 已注册服务的缓存中。</p><pre><code class="java"> FailbackRegistry.register
+/**
+* 进行服务注册逻辑的实现
+*/
+@Override
+public void register(URL url) &#123;
+   if (destroyed.get())&#123;
+       return;
+   &#125;
+   // 调用AbstractRegistry.register进行服务对应URL的缓存
+   super.register(url);
+   failedRegistered.remove(url);
+   failedUnregistered.remove(url);
+   try &#123;
+       // 向服务器端发送注册请求，将服务注册到注册中心，可以使用各个注册协议(注册中心)的实现 此处使用zookeeper  ZookeeperRegistry.doRegister
+       doRegister(url);
+   &#125; catch (Exception e) &#123;
+       Throwable t = e;
+
+       // 如果开启了启动时检测，则直接抛出异常
+       boolean check = getUrl().getParameter(Constants.CHECK_KEY, true)
+               &amp;&amp; url.getParameter(Constants.CHECK_KEY, true)
+               &amp;&amp; !Constants.CONSUMER_PROTOCOL.equals(url.getProtocol());
+       boolean skipFailback = t instanceof SkipFailbackWrapperException;
+       if (check || skipFailback) &#123;
+           if (skipFailback) &#123;
+               t = t.getCause();
+           &#125;
+           throw new IllegalStateException(&quot;Failed to register &quot; + url + &quot; to registry &quot; + getUrl().getAddress() + &quot;, cause: &quot; + t.getMessage(), t);
+       &#125; else &#123;
+           logger.error(&quot;Failed to register &quot; + url + &quot;, waiting for retry, cause: &quot; + t.getMessage(), t);
+       &#125;
+
+       // 将失败的注册请求记录到失败列表，定时重试
+       failedRegistered.add(url);
+   &#125;
+&#125;
+AbstractRegistry.register
+public void register(URL url) &#123;
+   if (url == null) &#123;
+       throw new IllegalArgumentException(&quot;register url == null&quot;);
+   &#125;
+   if (logger.isInfoEnabled()) &#123;
+       logger.info(&quot;Register: &quot; + url);
+   &#125;
+   // 缓存已经注册的服务
+   registered.add(url);
+&#125;
+ZookeeperRegistry.doRegister
+protected void doRegister(URL url) &#123;
+   try &#123;
+       // 此处为具体服务暴露的代码 toUrlPath 根据URL生成写入zk的路径信息
+       zkClient.create(toUrlPath(url), url.getParameter(Constants.DYNAMIC_KEY, true));
+   &#125; catch (Throwable e) &#123;
+       throw new RpcException(&quot;Failed to register &quot; + url + &quot; to zookeeper &quot; + getUrl() + &quot;, cause: &quot; + e.getMessage(), e);
+   &#125;
+&#125;
+</code></pre><p>4.由registryProviderUrl获取overrideSubscribeUrl 再构建OverrideListener  </p><h4 id="赞赏支持"><a href="#赞赏支持" class="headerlink" title="赞赏支持"></a>赞赏支持</h4><p><img src="https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg" alt="Test" title="Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册">        </p><div class="post-copyright"><div class="content"><p>本文标题： 推荐系列-Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册</p><p>本文作者： OSChina</p><p>发布时间： 2021年04月15日 09:19</p><p>最后更新： 2022年05月11日 15:02</p><p>原始链接： <a class="post-url" href="/c1aba8a6/" title="推荐系列-Dubbo服务发布之服务暴露&amp;心跳机制&amp;服务注册">https://www.hosiang.cn/c1aba8a6/</a></p><p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p><footer><a href="https://www.hosiang.cn"><img src="/../images/logo.png" alt="Howe Hsiang"> Howe Hsiang</a></footer></div></div><div class="page-reward"><a id="rewardBtn" href="javascript:;">赏</a></div><div id="reward" class="post-modal reward-lay"><a class="close" href="javascript:;" id="reward-close">×</a> <span class="reward-title"><i class="icon icon-quote-left"></i> 喜欢就赞赏一下呗！ <i class="icon icon-quote-right"></i></span><div class="reward-content"><div class="reward-code"><img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码"></div><div class="reward-select"></div></div></div></div><footer class="article-footer"><div class="post-share"><a href="javascript:" id="share-sub" class="post-share-fab"><i class="fa fa-share-alt" style="padding-top:11px!important"></i></a><div class="post-share-list" id="share-list"><ul class="share-icons"><li><a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/c1aba8a6/" data-title="Facebook" rel="external nofollow noopener noreferrer"><i class="fa fa-facebook" style="padding-top:9px!important"></i></a></li><li><a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-Dubbo服务发布之服务暴露&心跳机制&服务注册》 — 狂欢马克思&url=https://www.hosiang.cn/c1aba8a6/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer"><i class="fa fa-twitter" style="padding-top:9px!important"></i></a></li><li><a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/c1aba8a6/" data-title="Google+" rel="external nofollow noopener noreferrer"><i class="fa fa-google-plus" style="padding-top:9px!important"></i></a></li><li><a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/c1aba8a6/&title=《推荐系列-Dubbo服务发布之服务暴露&心跳机制&服务注册》 — 狂欢马克思&source=&amp;emsp;&amp;emsp;Dubbo服务发布 Dubbo服务发布影响流程的主要包括三个部分，依次是： 服务暴露 心跳 服务注册 服务暴露是对..." data-title="QQ" rel="external nofollow noopener noreferrer"><i class="fa fa-qq" style="padding-top:9px!important"></i></a></li><li><a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信"><i class="fa fa-weixin" style="padding-top:9px!important"></i></a></li><li><a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/c1aba8a6/&title=《推荐系列-Dubbo服务发布之服务暴露&心跳机制&服务注册》 — 狂欢马克思&pic=https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?cs=srgb&dl=art-close-up-ecology-886521.jpg&fm=jpg" data-title="微博" rel="external nofollow noopener noreferrer"><i class="fa fa-weibo" style="padding-top:9px!important"></i></a></li></ul></div></div><div class="post-modal wx-share" id="wxShare"><a class="close" href="javascript:" id="wxShare-close">×</a><p>扫一扫，分享到微信</p><img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/c1aba8a6/" alt="微信分享二维码"></div><div class="mask"></div><ul class="article-footer-menu"><li class="article-footer-tags"><i class="fa fa-tags"></i> <a href="/tags/Popular/" class="color3">Popular</a></li></ul></footer></div></article><aside class="post-toc-pos post-toc-top" id="post-toc"><nav class="post-toc-wrap"><ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Dubbo%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83"><span class="post-toc-text">Dubbo服务发布</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Dubbo%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2"><span class="post-toc-text">Dubbo服务暴露</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%BF%83%E8%B7%B3%E6%9C%8D%E5%8A%A1"><span class="post-toc-text">心跳服务</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C"><span class="post-toc-text">服务注册</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%B5%9E%E8%B5%8F%E6%94%AF%E6%8C%81"><span class="post-toc-text">赞赏支持</span></a></li></ol></li></ol></nav></aside><nav id="article-nav"><a href="/573fb9b4/" id="article-nav-newer" class="article-nav-link-wrap"><span class="article-nav-title"><i class="fa fa-hand-o-left" aria-hidden="true"></i> 推荐系列-速度提高几百倍，记一次数据结构在实际工作中的运用 </span></a><a href="/16d52ba0/" id="article-nav-older" class="article-nav-link-wrap"><span class="article-nav-title">推荐系列-深入理解Object提供的阻塞和唤醒API</span> <i class="fa fa-hand-o-right" aria-hidden="true"></i></a></nav><div id="gitalk"></div><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script>var gitalk=new Gitalk({repo:"bolg-comment",owner:"Hosiang1026",admin:"Hosiang1026",clientID:"37a2dd4473e8970cecc2",clientSecret:"e30efa17d86d9de4f4ab810872dc62a7b2e7e634",pagerDirection:"last",distractionFreeMode:!0,createIssueManually:!1});gitalk.render("gitalk")</script></section></div><footer id="footer"><div class="outer"><div id="footer-info" class="inner"><script id="_wau78w">var _wau=_wau||[];_wau.push(["small","5dnguv4c2n","78w"])</script><script async src="//waust.at/s.js"></script><p><span id="busuanzi_container_site_uv" style="display:none"><span class="post-count">总字数：<span>1531.2k</span> </span>总访客数：<span id="busuanzi_value_site_uv"></span> </span><span id="busuanzi_container_site_pv" style="display:none">总访问量：<span id="busuanzi_value_site_pv"></span></span><br><span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>Copyright&copy; 2018 - 2022 狂欢马克思 <a href="https://beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">京ICP备17060439号</a></p></div></div><script>var now=new Date;function createtime(){var n=new Date("2017/09/18");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="安全运行 "+dnum+" 天 ",document.getElementById("times").innerHTML=hnum+" 小时 "+mnum+" 分 "+snum+" 秒"}setInterval("createtime()",800)</script></footer><script>var mihoConfig={root:"https://www.hosiang.cn",animate:"true",isHome:"false",share:"true",reward:" 1"}</script><div class="sidebar"><div id="sidebar-search" title="Search"><i class="fa fa-search"></i></div><div id="sidebar-category" title="Categories"><i class="fa fa-book"></i></div><div id="sidebar-tag" title="Tags"><i class="fa fa-tags"></i></div><div id="sidebar-top"><span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span></div></div><div class="sidebar-menu-box" id="sidebar-menu-box"><div class="sidebar-menu-box-container"><div id="sidebar-menu-box-categories"><a class="category-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a><a class="category-link" href="/categories/%E5%85%B6%E4%BB%96%E5%BC%80%E5%8F%91/">其他开发</a><a class="category-link" href="/categories/%E5%89%8D%E6%B2%BF%E5%BC%80%E5%8F%91/">前沿开发</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><a class="category-link" href="/categories/%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC/">升级版本</a><a class="category-link" href="/categories/%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/">博客教程</a><a class="category-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><a class="category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><a class="category-link" href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">日常记录</a><a class="category-link" href="/categories/%E7%83%AD%E9%97%A8%E6%96%87%E7%AB%A0/">热门文章</a></div><div id="sidebar-menu-box-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:17.5px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:15px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12.5px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:15px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size:12.5px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:17.5px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12.5px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:17.5px">Spring</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div><a href="javascript:" class="sidebar-menu-box-close">&times;</a></div><div class="mobile-header-menu-nav" id="mobile-header-menu-nav"><div class="mobile-header-menu-container"><span class="title">导航</span><ul class="mobile-header-menu-navbar"><li><a href="/"><i class="fa fa-home"></i><span>主页</span></a></li><li><a href="/archives"><i class="fa fa-archive"></i><span>归档</span></a></li><li><a href="/gitbook"><i class="fa fa-columns"></i><span>笔记</span></a></li><li><a href="/music"><i class="fa fa-music"></i><span>音乐</span></a></li><li><a href="/photo"><i class="fa fa-picture-o"></i><span>相册</span></a></li><li><a href="/collection"><i class="fa fa-envira"></i><span>收藏</span></a></li><li><a href="/about"><i class="fa fa-user"></i><span>关于</span></a></li></ul></div><div class="mobile-header-tag-container"><span class="title">标签</span><div id="mobile-header-container-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:17.5px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:15px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12.5px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:15px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size:12.5px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:17.5px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12.5px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:17.5px">Spring</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div></div><div class="search-wrap"><span class="search-close">&times;</span> <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back"><i class="icon icon-lg icon-chevron-left"></i> </a><input class="search-field" placeholder="Search..." id="keywords"> <a id="search-submit" href="javascript:"><i class="fa fa-search"></i></a><div class="search-container" id="search-container"><ul class="search-result" id="search-result"></ul></div></div><div id="search-tpl"><li class="search-result-item"><a href="{url}" class="search-item-li"><span class="search-item-li-title" title="{title}">{title}</span></a></li></div><script src="/js/search.js"></script><script src="/js/main.js"></script><script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script><div id="particles"></div><script src="/js/particles.js"></script><link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css"><script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script><script src="/js/animate.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({pluginRootPath:"live2dw/",pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2dw/assets/hijiki.model.json"},display:{position:"right",width:150,height:300},mobile:{show:!0,scale:.5},log:!1})</script></body></html>

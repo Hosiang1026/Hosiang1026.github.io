@@ -1,0 +1,1121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="Access-Control-Allow-Origin" content="*"><script type="text/javascript">var start_time=(new Date).getTime()</script><meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0"><meta name="baidu-site-verification" content="RYlYHsgO7Y"><meta name="sogou_site_verification" content="MSmrTj7lHV"><meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"><meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be"><title>推荐系列-mybatis源码，从配置到 mappedStatement —— mapper.xml 是如何被解析的- | 狂欢马克思</title><meta name="keywords" content="分享技术经验与交流"><meta name="description" content="&amp;emsp;&amp;emsp;Ext1：本文源码解析基于 mybatis-spring-boot-starter 2.1.1，即 mybatis 3.5.3 版本。 Ext2：本文主要是对源码的讲解，着重点会是在源码上。 一、从 MybatisAutoConfiguration 说开去，map…"><meta property="og:type" content="article"><meta property="og:title" content="推荐系列-mybatis源码，从配置到 mappedStatement ——  mapper.xml 是如何被解析的-"><meta property="og:url" content="https://www.hosiang.cn/2a2ed114/index.html"><meta property="og:site_name" content="狂欢马克思"><meta property="og:description" content="&amp;emsp;&amp;emsp;Ext1：本文源码解析基于 mybatis-spring-boot-starter 2.1.1，即 mybatis 3.5.3 版本。 Ext2：本文主要是对源码的讲解，着重点会是在源码上。 一、从 MybatisAutoConfiguration 说开去，map…"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-7e611b6e9f73e6e7b6fd07077ea9175be14.JPEG"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/up-7e611b6e9f73e6e7b6fd07077ea9175be14.JPEG"><meta property="article:published_time" content="2021-04-15T01:19:21.000Z"><meta property="article:modified_time" content="2022-05-11T07:02:49.927Z"><meta property="article:author" content="Howe Hsiang"><meta property="article:tag" content="Popular"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://oscimg.oschina.net/oscnet/up-7e611b6e9f73e6e7b6fd07077ea9175be14.JPEG"><link rel="icon" href="/images/favicon.ico"><link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/style.css"><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script"),t=(e.src="https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace",document.getElementsByTagName("script")[0]);t.parentNode.insertBefore(e,t)}()</script><script></script><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 6.2.0"></head><script src="/js/jquery.min.js"></script><script src="/js/pace.min.js"></script><script src="/js/crypto-js.js"></script><script src="/js/cookie.js"></script><script src="/js/calendar.js"></script><script src="/js/festival.js"></script><script>getFestival()</script><body><script>window.onload=function(){document.getElementById("TimeShow").innerHTML="本站耗时 "+((new Date).getTime()-start_time)/1e3+" 秒 "}</script><div id="container"><header id="header"><div id="banner"></div><div id="header-outer"><div id="header-menu" class="header-menu-pos animated"><div class="header-menu-container"><a href="/" class="left"><span class="site-title">狂欢马克思</span></a><nav id="header-menu-nav" class="right"><a href="/" rel="external nofollow"><i class="fa fa-home"></i> <span>主页</span> </a><a href="/archives" rel="external nofollow"><i class="fa fa-archive"></i> <span>归档</span> </a><a href="/gitbook" rel="external nofollow"><i class="fa fa-columns"></i> <span>笔记</span> </a><a href="/music" rel="external nofollow"><i class="fa fa-music"></i> <span>音乐</span> </a><a href="/photo" rel="external nofollow"><i class="fa fa-picture-o"></i> <span>相册</span> </a><a href="/collection" rel="external nofollow"><i class="fa fa-envira"></i> <span>收藏</span> </a><a href="/about" rel="external nofollow"><i class="fa fa-user"></i> <span>关于</span></a></nav><a class="mobile-header-menu-button"><i class="fa fa-bars"></i></a></div></div><div id="header-row"><div id="logo"><a href="/"><img src="/../images/logo.png" alt="logo"></a></div><div class="header-info"><div id="header-title"><h2>狂欢马克思</h2></div><div id="header-description"><h3>专注Web开发</h3></div></div><nav class="header-nav"><div class="social"><a title="Github" target="_blank" href="//github.com/Hosiang1026" rel="external nofollow"><i class="fa fa-github fa-2x"></i></a> <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes" rel="external nofollow"><i class="fa fa-qq fa-2x"></i></a> <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969" rel="external nofollow"><i class="fa fa-weibo fa-2x"></i></a></div></nav></div><div id="noticeId" class="show" style="background:rgb(244,247,247,.3)"><marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop()" onmouseout="this.start()"></marquee></div><script type="text/javascript">function browserRedirect(){var i=navigator.userAgent.toLowerCase(),n="ipad"==i.match(/ipad/i),o="iphone os"==i.match(/iphone os/i),a="midp"==i.match(/midp/i),t="rv:1.2.3.4"==i.match(/rv:1.2.3.4/i),e="ucweb"==i.match(/ucweb/i),s="android"==i.match(/android/i),d="windows ce"==i.match(/windows ce/i),i="windows mobile"==i.match(/windows mobile/i),p="",r=randomColor(),p=n||o||a||t||e||s||d||i?($("#noticeId").css({"line-height":"1.6em"}),"<font style='color:"+r+"' face='新华宋体'  size='2'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='hitokoto'></span></span></span><span id='YQData'></font> "):($("#noticeId").css({"line-height":"3.6em","margin-top":"20px"}),"<font style='color:"+r+"' face='新华宋体'  size='6'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='hitokoto'></span></span><span id='YQData'></span></font> ");$("#noticeMar").html(p)}function randomColor(){for(var i="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f".split(","),n="#",o=0;o<6;o++)n+=i[Math.floor(16*Math.random())];return n}$(function(){browserRedirect(),0<$("#hitokoto").length&&getHitokoto()})</script></div></header><script>console.log=function(){}</script><div class="outer"><section id="main" class="body-wrap"><article id="post-mybatis源码，从配置到 mappedStatement ——  mapper.xml 是如何被解析的-" class="article article-type-post" itemscope itemprop="blogPost"><div class="article-inner"><header class="article-header"><h1 class="post-title" itemprop="name">推荐系列-mybatis源码，从配置到 mappedStatement —— mapper.xml 是如何被解析的-</h1><div class="post-title-bar"><ul><li><i class="fa fa-book"></i> <a href="/categories/热门文章/">热门文章</a></li><li><i class="fa fa-calendar"></i> 2021-04-15</li><li><i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span></li><li><span class="post-count">字数统计: 9.3k字</span></li><li><span class="post-count">阅读时长: 44分钟</span></li></ul></div></header><div class="article-entry post-content" itemprop="articleBody"><p>&amp;emsp;&amp;emsp;Ext1：本文源码解析基于 mybatis-spring-boot-starter 2.1.1，即 mybatis 3.5.3 版本。 Ext2：本文主要是对源码的讲解，着重点会是在源码上。 一、从 MybatisAutoConfiguration 说开去，map…</p><span id="more"></span><pre><code>                                                                                                                                                                                    Ext1：本文源码解析基于 mybatis-spring-boot-starter 2.1.1，即 mybatis 3.5.3 版本。 
+</code></pre><p>Ext2：本文主要是对源码的讲解，着重点会是在源码上。</p><h5 id="一、从-MybatisAutoConfiguration-说开去，mapper-文件是怎么扫描的？"><a href="#一、从-MybatisAutoConfiguration-说开去，mapper-文件是怎么扫描的？" class="headerlink" title="一、从 MybatisAutoConfiguration 说开去，mapper 文件是怎么扫描的？"></a>一、从 MybatisAutoConfiguration 说开去，mapper 文件是怎么扫描的？</h5><p>我们知道配置 <code>java SqlSessionFactory</code> 是我们集成 <code>java Mybatis</code> 时需要用到的常客， <code>java SqlSessionFactory</code> 顾名思义是用来创建 <code>java SqlSession</code> 对象的， <code>java SqlSession</code> 对象的重要程度不言而喻。源码中提到， <code>java SqlSession</code> 是 <code>java Mybatis</code> 运行最重要的一个接口，通过此接口，我们可以进行我们的操作指令，获取 &#96;&#96;&#96;java<br>mapper</p><pre><code class="，管理事务等操作。">官网 给出了一个简单的配置demo，通过  ```java 
+SqlSessionFactoryBean
+```  进行  ```java 
+sqlSessionFactory
+```  的创建。 
+ ```java 
+@Bean
+public SqlSessionFactory sqlSessionFactory() &#123;
+SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+factoryBean.setDataSource(dataSource());
+return factoryBean.getObject();
+&#125;
+</code></pre><p>我们可以拿到这个 <code>java SqlSessionBean</code> 来进行我们一些定制化操作，比如 <code>java mybatis插件</code> ，自定义的返回处理等等。如果我们不显式声明 <code>java SqlSessionFactory</code> ，则会使用 mybatis-spring-boot-autoconfigure 下的这个 &#96;&#96;&#96;java<br>bean</p><pre><code class="的注册：">![Test](https://oscimg.oschina.net/oscnet/up-7e611b6e9f73e6e7b6fd07077ea9175be14.JPEG  &#39;mybatis源码，从配置到 mappedStatement ——  mapper.xml 是如何被解析的-&#39;) 
+我们可以看到在  ```java 
+mybatis
+```  里的很多定制化常客，都出现在了这里。比如，配置 mapper 文件位置的配置，我们用以下的小段代码来看的话： 
+ ```java 
+-- 来自代码 org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration#sqlSessionFactory --
+
+  if (!ObjectUtils.isEmpty(this.properties.resolveMapperLocations())) &#123;
+    factory.setMapperLocations(this.properties.resolveMapperLocations());
+  &#125;
+</code></pre><p>它的实现实际上非常简单：拿到我们所有的 <code>java mapperLocations</code> 这个数组，解析成 &#96;&#96;&#96;java<br>Resource</p><pre><code class="数组。"> ```java 
+-- 来自代码 org.mybatis.spring.boot.autoconfigure.MybatisProperties#resolveMapperLocations --
+
+public Resource[] resolveMapperLocations() &#123;
+  return Stream.of(Optional.ofNullable(this.mapperLocations).orElse(new String[0]))
+      .flatMap(location -&gt; Stream.of(getResources(location))).toArray(Resource[]::new);
+&#125;
+
+private Resource[] getResources(String location) &#123;
+  try &#123;
+    return resourceResolver.getResources(location);
+  &#125; catch (IOException e) &#123;
+    return new Resource[0];
+  &#125;
+&#125;
+
+-- application.yml中的配置 --
+
+mybatis:
+mapper-locations: classpath*:com/anur/mybatisdemo/test/mapper/*.xml
+*/
+</code></pre><p>纵览一下这几者的关系， <code>java SqlSessionFactory</code> 是根据配置 <code>java Configuration</code> 与 <code>java sqlSessionFactoryBuilder</code> 共同创建的，如果在 spring 项目中，则会由 <code>java SqlSessionFactoryBean</code> 来替代 &#96;&#96;&#96;java<br>SqlSessionFactoryBuilder</p><pre><code class="进行创建。">![Test](https://oscimg.oschina.net/oscnet/up-7e611b6e9f73e6e7b6fd07077ea9175be14.JPEG  &#39;mybatis源码，从配置到 mappedStatement ——  mapper.xml 是如何被解析的-&#39;) 
+##### 二、SqlSessionFactory 的初始化与 XMLMapperBuilder 
+其实上面扯了那么多，只是想引入一下  ```java 
+XMLMapperBuilder
+``` 。我们知道，我们的配置（比如Spring中的 application.yml），最后会被解析成  ```java 
+Configuration
+``` ，而  ```java 
+mapper.xml
+```  文件正是依据我们的配置来进行读取的，读取到的 xml 将被读取成  ```java 
+Resource
+```  文件，最后在  ```java 
+SqlSessionFactoryBean
+```  初始化完毕后、也就是在创建  ```java 
+SqlSessionFactory
+```  之前：会通过  ```java 
+XMLMapperBuilder
+```  完成 xml 文件的解析。 
+![Test](https://oscimg.oschina.net/oscnet/up-7e611b6e9f73e6e7b6fd07077ea9175be14.JPEG  &#39;mybatis源码，从配置到 mappedStatement ——  mapper.xml 是如何被解析的-&#39;) 
+ ```java 
+XMLMapperBuilder
+```  在完成初始化后，调用  ```java 
+org.apache.ibatis.builder.xml.XMLMapperBuilder#parse
+```  来进行真正的 mapper 文件解析： 
+ ```java 
+public void parse() &#123;
+if (!configuration.isResourceLoaded(resource)) &#123;
+  configurationElement(parser.evalNode(&quot;/mapper&quot;));
+  configuration.addLoadedResource(resource);
+  bindMapperForNamespace();
+&#125;
+
+parsePendingResultMaps();
+parsePendingCacheRefs();
+parsePendingStatements();
+&#125;
+</code></pre><pre><code class="java"> configurationElement
+ ```  就是对我们  ```java 
+ xml
+ ```  文件的解析，通过 ```java 
+ parser.evalNode(&quot;/mapper&quot;)
+ ```  拿到我们编写的  ```java 
+ xml
+ ```  的  ```java 
+ &lt;mapper&gt;
+ ```  标签进行初步的解析，源码如下：可以看到许多熟悉的身影，比如  ```java 
+ namespace
+ ``` 、 ```java 
+ resultMap
+ ``` 、 ```java 
+ select|insert|update|delete
+ ```  之类的。 
+```java 
+ private void configurationElement(XNode context) &#123;
+ try &#123;
+   String namespace = context.getStringAttribute(&quot;namespace&quot;);
+   if (namespace == null || namespace.equals(&quot;&quot;)) &#123;
+     throw new BuilderException(&quot;Mapper&#39;s namespace cannot be empty&quot;);
+   &#125;
+   builderAssistant.setCurrentNamespace(namespace);
+   cacheRefElement(context.evalNode(&quot;cache-ref&quot;));
+   cacheElement(context.evalNode(&quot;cache&quot;));
+   parameterMapElement(context.evalNodes(&quot;/mapper/parameterMap&quot;));
+   resultMapElements(context.evalNodes(&quot;/mapper/resultMap&quot;));
+   sqlElement(context.evalNodes(&quot;/mapper/sql&quot;));
+   buildStatementFromContext(context.evalNodes(&quot;select|insert|update|delete&quot;));
+ &#125; catch (Exception e) &#123;
+   throw new BuilderException(&quot;Error parsing Mapper XML. The XML location is &#39;&quot; + resource + &quot;&#39;. Cause: &quot; + e, e);
+ &#125;
+&#125;
+</code></pre><p>给一个简单的 <code>java xml</code> 看一下 <code>java mapper</code> 标签里面的内容方便理解，就是<mapper xxxxxxxxx></mapper>之间那一大段内容， <code>java mybaits</code> 封装的这套 <code>java XNode</code> 可以使得我们访问 <code>java xml</code> 像访问 &#96;&#96;&#96;java<br>map</p><pre><code class="一样轻松："> ```java 
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+      PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+      &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;com.anur.mybatisdemo.test.TrackerConfigMapper&quot;&gt;
+
+  &lt;select id=&quot;getAllFollower&quot; parameterType=&quot;hashmap&quot; resultMap=&quot;customMap&quot;&gt;
+      select *
+      from tracker_config
+      where in_use = 1
+      &lt;if test=&quot;followerId != null&quot;&gt;and user_id = #&#123;followerId&#125;&lt;/if&gt;
+  &lt;/select&gt;
+
+  &lt;select id=&quot;getFollower&quot; resultType=&quot;com.anur.mybatisdemo.test.pojo.TrackerConfigDO&quot;&gt;
+      select *
+      from tracker_config
+      where in_use = 1
+      &lt;if test=&quot;followerId != null&quot;&gt;and user_id = #&#123;followerId&#125;&lt;/if&gt;
+      limit 1
+  &lt;/select&gt;
+
+  &lt;resultMap id=&quot;customMap&quot; type=&quot;com.anur.mybatisdemo.test.pojo.TrackerConfigDO&quot;&gt;
+      &lt;result column=&quot;user_d&quot; property=&quot;userId&quot;/&gt;
+      &lt;result column=&quot;in_use&quot; property=&quot;inUse&quot;/&gt;
+      &lt;association property=&quot;config&quot; resultMap=&quot;customMap&quot;/&gt;
+  &lt;/resultMap&gt;
+&lt;/mapper&gt;
+</code></pre><h5 id="三、ResultMap-是如何解析的"><a href="#三、ResultMap-是如何解析的" class="headerlink" title="三、ResultMap 是如何解析的"></a>三、ResultMap 是如何解析的</h5><p>方才说到， <code>java configurationElement()</code> 方法负责对 <code>java xml</code> 文件进行解析，我们拿几个主要的元素出来讲讲，比如 &#96;&#96;&#96;java<br>resultMap</p><pre><code class="："> ```java 
+resultMapElements(context.evalNodes(&quot;/mapper/resultMap&quot;));
+```  就是解析  ```java 
+resultMap
+```  的入口，同样的，先拿到  ```java 
+resultMap
+```  这个 XML 节点，进入到  ```java 
+resultMapElements
+```  这个方法， ```java 
+resultMapElements
+```  负责解析  ```java 
+xml
+``` ，最后，将解析的结果交给  ```java 
+ResultMapResolver
+```  处理。 
+我们先忽略  ```java 
+ResultMapResolver
+``` ，简单看看  ```java 
+resultMapElement
+```  中做了什么，对应的源码如下，大体可分为两类解析： 
+ ```java 
+private ResultMap resultMapElement(XNode resultMapNode, List&lt;ResultMapping&gt; additionalResultMappings, Class&lt;?&gt; enclosingType) throws Exception &#123;
+ErrorContext.instance().activity(&quot;processing &quot; + resultMapNode.getValueBasedIdentifier());
+String type = resultMapNode.getStringAttribute(&quot;type&quot;,
+    resultMapNode.getStringAttribute(&quot;ofType&quot;,
+        resultMapNode.getStringAttribute(&quot;resultType&quot;,
+            resultMapNode.getStringAttribute(&quot;javaType&quot;))));
+Class&lt;?&gt; typeClass = resolveClass(type);
+if (typeClass == null) &#123;
+  typeClass = inheritEnclosingType(resultMapNode, enclosingType);
+&#125;
+Discriminator discriminator = null;
+List&lt;ResultMapping&gt; resultMappings = new ArrayList&lt;&gt;();
+resultMappings.addAll(additionalResultMappings);
+List&lt;XNode&gt; resultChildren = resultMapNode.getChildren();
+for (XNode resultChild : resultChildren) &#123; // 循环解析子标签
+  if (&quot;constructor&quot;.equals(resultChild.getName())) &#123;
+    processConstructorElement(resultChild, typeClass, resultMappings);
+  &#125; else if (&quot;discriminator&quot;.equals(resultChild.getName())) &#123;
+    discriminator = processDiscriminatorElement(resultChild, typeClass, resultMappings);
+  &#125; else &#123;
+    List&lt;ResultFlag&gt; flags = new ArrayList&lt;&gt;();
+    if (&quot;id&quot;.equals(resultChild.getName())) &#123;
+      flags.add(ResultFlag.ID);
+    &#125;
+    resultMappings.add(buildResultMappingFromContext(resultChild, typeClass, flags));
+  &#125;
+&#125;
+String id = resultMapNode.getStringAttribute(&quot;id&quot;,
+        resultMapNode.getValueBasedIdentifier());
+String extend = resultMapNode.getStringAttribute(&quot;extends&quot;);
+Boolean autoMapping = resultMapNode.getBooleanAttribute(&quot;autoMapping&quot;);
+ResultMapResolver resultMapResolver = new ResultMapResolver(builderAssistant, id, typeClass, extend, discriminator, resultMappings, autoMapping);
+try &#123;
+  return resultMapResolver.resolve();
+&#125; catch (IncompleteElementException  e) &#123;
+  configuration.addIncompleteResultMap(resultMapResolver);
+  throw e;
+&#125;
+&#125;
+</code></pre><p>一种是对 <code>java resultMap</code> 本身属性的解析，也就是 <code>java getStringAttribute</code> ，例如当前 <code>java resultMap</code> 的 <code>java type</code> 是什么，它是否开启 <code>java autoMapping</code> ， &#96;&#96;&#96;java<br>id</p><pre><code class="是什么之类的。">一种则是对子标签的解析，子标签的解析，则分为  ```java 
+constructor
+``` 、 ```java 
+discriminator
+``` 、以及其他字段的解析。  
+ 
+如图所示： ![Test](https://oscimg.oschina.net/oscnet/up-7e611b6e9f73e6e7b6fd07077ea9175be14.JPEG  &#39;mybatis源码，从配置到 mappedStatement ——  mapper.xml 是如何被解析的-&#39;) 
+###### 3.1 ResultMap 中的重要成员：typeHandler 
+在  ```java 
+mybatis
+```  对  ```java 
+mysql
+```  返回的结果集  ```java 
+resultSet
+```  进行解析时， ```java 
+typeHandler
+```  有着举足轻重的作用。 ```java 
+mysql
+```  的  ```java 
+JdbcType
+```  有很多，比如  ```java 
+BLOB
+``` ，  ```java 
+VARCHAR
+``` ，  ```java 
+DATE
+```  等等，而我们的 java 类型(  ```java 
+mybatis
+```  称之为  ```java 
+javaType
+``` ，或者  ```java 
+javaTypeClass
+``` )也很多，还包括我们很多的 自定义的  ```java 
+TypeHandler
+``` ，这里就不赘述了。 
+那么必然存在一个问题，如何将它们一一对应上？毫无疑问， ```java 
+JdbcType
+```  可以被解析为多个  ```java 
+javaTypeClass
+```  ，如  ```java 
+VARCHAR
+```  可以对应解析成我们的  ```java 
+JSON JAVA BEAN
+```  ，也可以解析为  ```java 
+String
+```  等等；同样，  ```java 
+String
+```  类型也可以由多个  ```java 
+JdbcType
+```  解析而来，比如  ```java 
+DATE
+```  类型可以经过一定规则的解析，成为  ```java 
+String
+```  类型的时间。 
+答案就在  ```java 
+org.apache.ibatis.type.TypeHandlerRegistry
+``` 。 
+ ```java 
+public TypeHandlerRegistry() &#123;
+ register(Boolean.class, new BooleanTypeHandler());
+ register(boolean.class, new BooleanTypeHandler());
+ register(JdbcType.BOOLEAN, new BooleanTypeHandler());
+ register(JdbcType.BIT, new BooleanTypeHandler());
+
+ register(Byte.class, new ByteTypeHandler());
+ register(byte.class, new ByteTypeHandler());
+ register(JdbcType.TINYINT, new ByteTypeHandler());
+
+ register(Short.class, new ShortTypeHandler());
+ register(short.class, new ShortTypeHandler());
+ register(JdbcType.SMALLINT, new ShortTypeHandler());
+
+ register(Integer.class, new IntegerTypeHandler());
+ register(int.class, new IntegerTypeHandler());
+ register(JdbcType.INTEGER, new IntegerTypeHandler());
+
+ register(Long.class, new LongTypeHandler());
+ register(long.class, new LongTypeHandler());
+
+ register(Float.class, new FloatTypeHandler());
+ register(float.class, new FloatTypeHandler());
+ register(JdbcType.FLOAT, new FloatTypeHandler());
+
+ register(Double.class, new DoubleTypeHandler());
+ register(double.class, new DoubleTypeHandler());
+ register(JdbcType.DOUBLE, new DoubleTypeHandler());
+ ........
+</code></pre><pre><code class="java"> TypeHandlerRegistry
+ ```  中注册了许多  ```java 
+ javaTypeClass
+ ```  -&gt;  ```java 
+ JdbcType
+ ```  的映射，内部维护了一个变量  ```java 
+  private final Map&lt;Type, Map&lt;JdbcType, TypeHandler&lt;?&gt;&gt;&gt; typeHandlerMap = new ConcurrentHashMap&lt;&gt;();
+</code></pre><p>当我们获取某个 <code>java TypeHandler</code> 时，先根据 <code>java javaTypeClass</code> 获取到 <code>java Map&lt;JdbcType, TypeHandler&lt;?&gt;</code> ，然后再根据 <code>java JdbcType</code> 获取到具体的 &#96;&#96;&#96;java<br>TypeHandler</p><pre><code class="。">例如，对于  ```java 
+javaTypeClass
+```  :  ```java 
+java.util.Date
+```  来说，默认有三种映射，分别是： 
+ ```java 
+null -&gt; DateTypeHandler
+&quot;TIME&quot; -&gt; TimeOnlyTypeHandler
+&quot;DATE&quot; -&gt; DateOnlyTypeHandler
+</code></pre><p>源码中，优先根据 <code>java jdbcType</code> 获取，如果获取不到，则使用兜底的配置，也就是默认的 &#96;&#96;&#96;java<br>TypeHandler</p><pre><code class="，代码如下："> ```java 
+private &lt;T&gt; TypeHandler&lt;T&gt; getTypeHandler(Type type, JdbcType jdbcType) &#123;
+if (ParamMap.class.equals(type)) &#123;
+  return null;
+&#125;
+Map&lt;JdbcType, TypeHandler&lt;?&gt;&gt; jdbcHandlerMap = getJdbcHandlerMap(type);
+TypeHandler&lt;?&gt; handler = null;
+if (jdbcHandlerMap != null) &#123;
+  handler = jdbcHandlerMap.get(jdbcType); // 优先根据 `jdbcType` 获取
+  if (handler == null) &#123;
+    handler = jdbcHandlerMap.get(null);// 否则获取默认的，key 为 null
+  &#125;
+  if (handler == null) &#123;
+    // #591
+    handler = pickSoleHandler(jdbcHandlerMap);
+  &#125;
+&#125;
+// type drives generics here
+return (TypeHandler&lt;T&gt;) handler;
+&#125;
+</code></pre><h6 id="3-2-mapper-xml-配置与-typeHandler"><a href="#3-2-mapper-xml-配置与-typeHandler" class="headerlink" title="3.2 mapper.xml 配置与 typeHandler"></a>3.2 mapper.xml 配置与 typeHandler</h6><p>上面只是说了 <code>java typeHandler</code> 的获取，那么又是如何从 <code>java mapper</code> 文件解析出我们需要的 &#96;&#96;&#96;java<br>typeHandler</p><pre><code class="呢？这里直接上结论，再一一解析。">上图看起来好像复杂，实际上解析过程十分简单，遵循以下几个获取顺序： 
+ 
+ 优先获取 xml 配置的  ```java 
+typeHandler
+``` ，自己配置的  ```java 
+typeHandler
+```  优先级最高 
+ 若果没有配置，则需要从刚才讲的那个  ```java 
+TypeHandlerRegistry
+```  中，通过  ```java 
+javaTypeClass
+```  +  ```java 
+jdbcType
+```  获取 
+ 如果  ```java 
+javaTypeClass
+```  为空则使用  ```java 
+Object.class
+```  类型作为  ```java 
+javaTypeClass
+</code></pre><p>如果 <code>java jdbcType</code> 为空则获取默认的 &#96;&#96;&#96;java<br>typeHandler</p><pre><code> 
+ ```java 
+javaTypeClass
+```  也有自己的获取权重，顺序如下： 
+ 
+ 优先获取 xml 配置的  ```java 
+javaType
+</code></pre><p>否则根据 <code>java property</code> + &#96;&#96;&#96;java<br>resultType</p><pre><code class="根据反射来获取"> 
+3.2.1 typeHandler 的获取顺序 
+源码也很容易看明白，先通过 xml 文件获取  ```java 
+typeHandler
+</code></pre><pre><code class="java"> == org.apache.ibatis.builder.xml.XMLMapperBuilder#buildResultMappingFromContext ==
+
+String typeHandler = context.getStringAttribute(&quot;typeHandler&quot;);
+Class&lt;? extends TypeHandler&lt;?&gt;&gt; typeHandlerClass = resolveClass(typeHandler);
+</code></pre><p>比如对于下面这个xml，update_time 这一属性，会优先使用 &#96;&#96;&#96;java<br>Date2StrTypeHandler</p><pre><code class="来进行解析。"> ```java 
+&lt;resultMap id=&quot;customMap&quot; type=&quot;com.anur.mybatisdemo.test.pojo.TrackerConfigDO&quot;&gt;
+  &lt;result column=&quot;user_id&quot; property=&quot;userId&quot;/&gt;
+  &lt;result column=&quot;update_time&quot; property=&quot;updateTime&quot; typeHandler=&quot;com.anur.mybatisdemo.Date2StrTypeHandler&quot;/&gt;
+  &lt;result column=&quot;in_use&quot; property=&quot;inUse&quot;/&gt;
+  &lt;association property=&quot;config&quot; resultMap=&quot;customMap&quot;/&gt;
+&lt;/resultMap&gt;
+</code></pre><p>紧接着，如果 xml 中指定了 <code>java typeHandler</code> ，则创建一个 <code>java typeHandler</code> 实例，如果没有指定，则 &#96;&#96;&#96;java<br>typeHandler</p><pre><code class="会在下一步骤进行创建。"> ```java 
+
+== org.apache.ibatis.builder.BaseBuilder#resolveTypeHandler(java.lang.Class&lt;?&gt;, java.lang.Class&lt;? extends org.apache.ibatis.type.TypeHandler&lt;?&gt;&gt;) ==
+
+protected TypeHandler&lt;?&gt; resolveTypeHandler(Class&lt;?&gt; javaType, Class&lt;? extends TypeHandler&lt;?&gt;&gt; typeHandlerType) &#123;
+if (typeHandlerType == null) &#123;
+  return null;
+&#125;
+// javaType ignored for injected handlers see issue #746 for full detail
+TypeHandler&lt;?&gt; handler = typeHandlerRegistry.getMappingTypeHandler(typeHandlerType);
+if (handler == null) &#123;
+  // not in registry, create a new one
+  handler = typeHandlerRegistry.getInstance(javaType, typeHandlerType);
+&#125;
+return handler;
+&#125;
+
+</code></pre><p>没有手动指定 <code>java TypeHandler</code> ，那么则会使用 <code>java javaTypeClass</code> + <code>java JdbcType</code> 共同来定位一个 <code>java TypeHandler</code> ，也就是调用 &#96;&#96;&#96;java<br>typeHandlerRegistry.getTypeHandler(resultMapping.javaType, resultMapping.jdbcType)</p><pre><code class="这个方法，此方法在本文"> ```java 
+== org.apache.ibatis.mapping.ResultMapping.Builder#resolveTypeHandler ==
+
+private void resolveTypeHandler() &#123;
+if (resultMapping.typeHandler == null &amp;&amp; resultMapping.javaType != null) &#123;
+  Configuration configuration = resultMapping.configuration;
+  TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
+  resultMapping.typeHandler = typeHandlerRegistry.getTypeHandler(resultMapping.javaType, resultMapping.jdbcType);
+&#125;
+&#125;
+</code></pre><p>3.2.2 javaTypeClass 的获取顺序</p><pre><code class="java"> javaTypeClass
+ ```  也是一样的道理，先是优先从 xml 中获取： 
+```java 
+     String javaType = context.getStringAttribute(&quot;javaType&quot;);
+   Class&lt;?&gt; javaTypeClass = resolveClass(javaType);
+</code></pre><p>比如下面这个 xml 的 userId 这一属性， <code>java javaTypeClass</code> 就是 &#96;&#96;&#96;java<br>Integer</p><pre><code> ```java 
+&lt;resultMap id=&quot;customMap&quot; type=&quot;com.anur.mybatisdemo.test.pojo.TrackerConfigDO&quot;&gt;
+   &lt;result column=&quot;user_id&quot; property=&quot;userId&quot; javaType=&quot;java.lang.Integer&quot;/&gt;
+   &lt;result column=&quot;update_time&quot; property=&quot;updateTime&quot; typeHandler=&quot;com.anur.mybatisdemo.Date2StrTypeHandler&quot;/&gt;
+   &lt;result column=&quot;in_use&quot; property=&quot;inUse&quot;/&gt;
+   &lt;association property=&quot;config&quot; resultMap=&quot;customMap&quot;/&gt;
+ &lt;/resultMap&gt;
+</code></pre><p>但是如果我们不指定，源码中则是这么处理的，通过 <code>java property</code> 这个 xml 配置，配合我们的 <code>java resultType</code> ，共同进行解析，还是拿上面那个 xml 为例， in_use 这个属性，由于我们没有指定 <code>java javaType</code> ，它会通过 <code>java resultMap</code> 中我们指定的那个 javaBean ，也就是 TrackerConfigDO 连同 &#96;&#96;&#96;java<br>property &#x3D; inUse</p><pre><code class="，通过反射来进行解析。"> ```java 
+private Class&lt;?&gt; resolveResultJavaType(Class&lt;?&gt; resultType, String property, Class&lt;?&gt; javaType) &#123;
+if (javaType == null &amp;&amp; property != null) &#123;
+  try &#123;
+    MetaClass metaResultType = MetaClass.forClass(resultType, configuration.getReflectorFactory());
+    javaType = metaResultType.getSetterType(property);
+  &#125; catch (Exception e) &#123;
+    //ignore, following null check statement will deal with the situation
+  &#125;
+&#125;
+if (javaType == null) &#123;
+  javaType = Object.class;
+&#125;
+return javaType;
+&#125;
+</code></pre><h6 id="3-3-ResultMap-中的另一个常用属性：-resultMap嵌套"><a href="#3-3-ResultMap-中的另一个常用属性：-resultMap嵌套" class="headerlink" title="3.3 ResultMap 中的另一个常用属性： resultMap嵌套"></a>3.3 ResultMap 中的另一个常用属性： resultMap嵌套</h6><pre><code class="java"> resultMap
+ ```  嵌套，包括使用  ```java 
+ association
+ ```  一对一的关联、 ```java 
+ collection
+ ```  一对多的管理与  ```java 
+ discriminator
+ ```  +  ```java 
+ case
+ ```  的魔幻sql语句 (感觉这么写很蛋疼) 
+```java 
+ resultMap
+ ```  嵌套大体分为两种情况 
+
+其一是指定直接嵌套，比如下面所示 xml 中的  ```java 
+ collection
+ ```  标签 
+其二是指定另一个  ```java 
+ resultMap
+ ```  进行嵌套，如下所示  ```java 
+ association
+ ```  标签 
+（或者上面两种互相嵌套组合） 
+
+3.3.1 resultMap嵌套中的两种解析规则 
+3.3.1.1 其一，如果指定了显式的  ```java 
+ resultMap
+ ``` ，则直接拿到它的名字 
+这种情况，内嵌  ```java 
+ ResultMap
+ ```  十分简单，就是直接拿到名字： 
+```java 
+ String nestedResultMap = context.getStringAttribute(&quot;resultMap&quot;,
+
+   // 下面会运行，但是不会生成的 id 和当前的 nestedResultMap 没关系，因为我们指定了 resultMap
+   processNestedResultMappings(context, Collections.emptyList(), resultType));
+</code></pre><p>最后，如果你没指定 <code>java resultMap</code> 是哪个包来的，则会给你加上前面的 &#96;&#96;&#96;java<br>namespace</p><pre><code> ```java 
+public String applyCurrentNamespace(String base, boolean isReference) &#123;
+if (base == null) &#123;
+  return null;
+&#125;
+if (isReference) &#123;
+  // is it qualified with any namespace yet?
+  if (base.contains(&quot;.&quot;)) &#123;
+    return base;
+  &#125;
+&#125; else &#123;
+  // is it qualified with this namespace yet?
+  if (base.startsWith(currentNamespace + &quot;.&quot;)) &#123;
+    return base;
+  &#125;
+  if (base.contains(&quot;.&quot;)) &#123;
+    throw new BuilderException(&quot;Dots are not allowed in element names, please remove it from &quot; + base);
+  &#125;
+&#125;
+return currentNamespace + &quot;.&quot; + base;
+&#125;
+</code></pre><p>例如指定了一个一对一关联： <code>java &lt;association property=&quot;config&quot; resultMap=&quot;customMap&quot;/&gt;</code> ，我们拿到的 <code>java id</code> 不是 <code>java customMap</code> ，而是 &#96;&#96;&#96;java<br>com.anur.mybatisdemo.test.TrackerConfigMapper.customMap</p><pre><code>这种情况比较简单，这里就不赘述了（注意，这种情况也会递归解析（下面的这一小节）此标签，但是名字拿的是我们指定的名字）。 
+3.3.1.2 其二，如果未指定显式  ```java 
+resultMap
+``` ，则递归解析，拿到其 ValueBasedIdentifier ，即 id 
+它的递归解析上大体如下图所示： 
+ ```java 
+
+// 方法一，如何解析一个 resultMap，以及其子节点
+== org.apache.ibatis.builder.xml.XMLMapperBuilder#resultMapElement(org.apache.ibatis.parsing.XNode, java.util.List&lt;org.apache.ibatis.mapping.ResultMapping&gt;, java.lang.Class&lt;?&gt;) ==
+
+private ResultMap resultMapElement(XNode resultMapNode, List&lt;ResultMapping&gt; additionalResultMappings, Class&lt;?&gt; enclosingType) throws Exception &#123;
+ List&lt;XNode&gt; resultChildren = resultMapNode.getChildren();
+ for (XNode resultChild : resultChildren) &#123;// 调用方法二循环解析子节点
+     resultMappings.add(buildResultMappingFromContext(resultChild, typeClass, flags));
+ &#125;
+ ResultMapResolver resultMapResolver = new ResultMapResolver(builderAssistant, id, typeClass, extend, discriminator, resultMappings, autoMapping);
+ return resultMapResolver.resolve();
+ &#125;
+
+// 方法二，如何解析一个子节点，如果子节点中包含 resultMap，或者 association、collection、case 等，调用方法三
+ private ResultMapping buildResultMappingFromContext(XNode context, Class&lt;?&gt; resultType, List&lt;ResultFlag&gt; flags) throws Exception &#123;
+ String nestedResultMap = context.getStringAttribute(&quot;resultMap&quot;,
+     processNestedResultMappings(context, Collections.emptyList(), resultType));
+ return builderAssistant.buildResultMapping(resultType, property, column, javaTypeClass, jdbcTypeEnum, nestedSelect, nestedResultMap, notNullColumn, columnPrefix, typeHandlerClass, flags, resultSet, foreignColumn, lazy);
+ &#125;
+
+// 方法三，调用方法一
+ private String processNestedResultMappings(XNode context, List&lt;ResultMapping&gt; resultMappings, Class&lt;?&gt; enclosingType) throws Exception &#123;
+ if (&quot;association&quot;.equals(context.getName())
+     || &quot;collection&quot;.equals(context.getName())
+     || &quot;case&quot;.equals(context.getName())) &#123;
+   if (context.getStringAttribute(&quot;select&quot;) == null) &#123;
+     validateCollection(context, enclosingType);
+     ResultMap resultMap = resultMapElement(context, resultMappings, enclosingType);
+     return resultMap.getId();
+   &#125;
+ &#125;
+ return null;
+ &#125;
+</code></pre><p>用图表示则为以下三个方法：<br><img src="https://oscimg.oschina.net/oscnet/up-7e611b6e9f73e6e7b6fd07077ea9175be14.JPEG" alt="Test" title="mybatis源码，从配置到 mappedStatement ——  mapper.xml 是如何被解析的-"><br>为了避免看起来很混乱，<br>下面将第一个解析 <code>java resultMap</code> 标签的方法称为 &#96;&#96;&#96;java<br>resultMap解析方法</p><pre><code class="，">将第二个解析子标签  ```java 
+resultMapping
+```  的方法称为  ```java 
+子标签解析方法
+``` ， 
+将第三个判断子标签有无内嵌  ```java 
+resultMap
+```  如果有，则调用第一个方法的方法称为  ```java 
+内嵌解析方法
+</code></pre><p>还是拿出我们的 xml 文件来举栗子：</p><pre><code class="java"> &lt;resultMap id=&quot;customMap&quot; type=&quot;com.anur.mybatisdemo.test.pojo.TrackerConfigDO&quot;&gt;
+   &lt;association property=&quot;config&quot; resultMap=&quot;customMap&quot;/&gt;
+   &lt;collection property=&quot;configDOList&quot; ofType=&quot;com.anur.mybatisdemo.test.pojo.TrackerConfigDO&quot;&gt;
+       &lt;result column=&quot;role&quot; property=&quot;role&quot;/&gt;
+       &lt;result column=&quot;in_use&quot; property=&quot;inUse&quot;/&gt;
+   &lt;/collection&gt;
+&lt;/resultMap&gt;
+</code></pre><p>首先调用 <code>java resultMap解析方法</code> 解析我们当前的最外层，即 <code>java customMap</code> ，id为 &#96;&#96;&#96;java<br>xxx略xxx.mapper_customMap</p><pre><code> 发现有子标签，遍历子标签 
+ 
+ 子标签  ```java 
+&lt;collection&gt;
+```  存在内嵌  ```java 
+resultMap
+</code></pre><pre><code> 调用  ```java 
+</code></pre><p>resultMap解析方法<br><code>解析其内嵌</code>java<br>resultMap</p><pre><code class="（略）">   子标签  ```java 
+&lt;collection&gt;
+```  由于显式指定了  ```java 
+resultMap
+``` ，所以其 ```java 
+内嵌id
+```  为  ```java 
+xxx略xxx.mapper_customMap
+</code></pre><p>子标签 <code>java &lt;association&gt;</code> 没有显式指定 <code>java resultMap</code> ，故其内嵌id 从调用 &#96;&#96;&#96;java<br>resultMap解析方法</p><pre><code class="中来">   
+   调用  ```java 
+resultMap解析方法
+```  解析其内嵌  ```java 
+resultMap
+</code></pre><pre><code> 发现有子标签，遍历子标签 
+   
+   子标签  ```java 
+</code></pre><p>role<br><code>没有内嵌</code>java<br>resultMap</p><pre><code>     子标签  ```java 
+inUse
+```  没有内嵌  ```java 
+resultMap
+</code></pre><pre><code> 解析完毕，此  ```java 
+</code></pre><p>resultMap<br><code></code>java<br>Id<br><code>为</code>java<br>xxx略xxx.mapper_resultMap[customMap]_collection[configDOList]</p><pre><code>   子标签  ```java 
+&lt;association&gt;
+```  没有显式指定  ```java 
+resultMap
+``` ， ```java 
+内嵌id
+```  为  ```java 
+xxx略xxx.mapper_resultMap[customMap]_collection[configDOList]
+</code></pre><p>3.3.2 ValueBasedIdentifier<br>刚才提到的 <code>java 内嵌id</code> ，或者 <code>java id</code> 实际上是“一个东西”，可以理解为地址和引用之间的关系。比如说，这个 <code>java resultMap</code> 的 <code>java id</code> 叫做 <code>java customMap</code> ，它的子标签中内嵌了一个 <code>java resultMap</code> ， <code>java 内嵌id</code> 为 &#96;&#96;&#96;java<br>customMap</p><pre><code class="。">从上面的解析我们也可以看出，我们的  ```java 
+ResultMap
+```  只有持有一层结构，即使，  ```java 
+ResultMap
+```  持有其所有子标签  ```java 
+resultMapping
+``` ，而子标签  ```java 
+resultMapping
+```  对另外  ```java 
+ResultMap
+``` ，是通过记录其  ```java 
+id
+```  的形式持有的。 
+这些  ```java 
+ValueBasedIdentifier
+```  或者  ```java 
+id
+``` ，生成规则如下： 
+ ```java 
+public String getValueBasedIdentifier() &#123;
+StringBuilder builder = new StringBuilder();
+XNode current = this;
+while (current != null) &#123;
+  if (current != this) &#123;
+    builder.insert(0, &quot;_&quot;);
+  &#125;
+  String value = current.getStringAttribute(&quot;id&quot;,
+      current.getStringAttribute(&quot;value&quot;,
+          current.getStringAttribute(&quot;property&quot;, null)));
+  if (value != null) &#123;
+    value = value.replace(&#39;.&#39;, &#39;_&#39;);
+    builder.insert(0, &quot;]&quot;);
+    builder.insert(0,
+        value);
+    builder.insert(0, &quot;[&quot;);
+  &#125;
+  builder.insert(0, current.getName());
+  current = current.getParent();
+&#125;
+return builder.toString();
+&#125;
+</code></pre><p>代码很好理解，优先获取标签的 <code>java id</code> 属性、其次则是 <code>java value</code> 属性、最后是 <code>java property</code> 属性， 如果不为空，替换一下 <code>java .</code> 符号，避免它把你命名里面的 <code>java .</code> 当成路径来解析，然后在左右套一个 &#96;&#96;&#96;java<br>[]</p><pre><code> 
+总结规则为  ```java 
+_标签名[命名（可能为空）]
+</code></pre><p>最后再在前面塞一个当前标签的标签名，然后 &#96;&#96;&#96;java<br>while</p><pre><code class="循环上层来向更上层命名。">也就是说打个比方，下面的 xml 最里层的这个关联标签会生成一个  ```java 
+mapper_resultMap[customMap]_collection[configDOList]_association[config]
+```  的  ```java 
+ValueBasedIdentifier
+</code></pre><pre><code class="java"> &lt;resultMap id=&quot;customMap&quot; type=&quot;com.anur.mybatisdemo.test.pojo.TrackerConfigDO&quot;&gt;
+   &lt;collection property=&quot;configDOList&quot; ofType=&quot;com.anur.mybatisdemo.test.pojo.TrackerConfigDO&quot;&gt;
+       &lt;association property=&quot;config&quot; resultMap=&quot;customMap&quot;/&gt;
+   &lt;/collection&gt;
+&lt;/resultMap&gt;
+</code></pre><p>3.3.3 ResultMap 解析总结<br>其实到现在已经很明了了，所有的 <code>java ResultMap</code> 都会被生成一个独立的数据结构，所以无论怎么嵌套，起码在解析层面，是不会出问题的，它只会保存自己的所有子标签，用 <code>java List&lt;ResultMapping&gt;</code> 表示，如果子标签中存在内嵌的 <code>java ResultMap</code> ，则仅仅保存其 <code>java id</code> ，并另外（递归）解析此 &#96;&#96;&#96;java<br>ResultMap</p><pre><code>比如下面这个xml的解析结果： 
+ ```java 
+    &lt;resultMap id=&quot;customMap&quot; type=&quot;com.anur.mybatisdemo.test.pojo.TrackerConfigDO&quot;&gt;
+      &lt;association property=&quot;config&quot; resultMap=&quot;customMap&quot;/&gt;
+      &lt;collection property=&quot;configDOList&quot; ofType=&quot;com.anur.mybatisdemo.test.pojo.TrackerConfigDO&quot;&gt;
+          &lt;result column=&quot;role&quot; property=&quot;role&quot;/&gt;
+          &lt;result column=&quot;in_use&quot; property=&quot;inUse&quot;/&gt;
+      &lt;/collection&gt;
+  &lt;/resultMap&gt;
+</code></pre><p>如此图所示，虚线不是真正的关联，只是保存了一个叫做 <code>java nestedResultMapId</code> 的属性，即 &#96;&#96;&#96;java<br>内嵌id</p><pre><code class="![Test](https://oscimg.oschina.net/oscnet/up-7e611b6e9f73e6e7b6fd07077ea9175be14.JPEG">###### 3.4 在解析 resultSet（��询结果集） 时是如何实现的，会不会死循环？ 
+我们已经对  ```java 
+resultMap
+```  的解析建立起了清晰的认知，那么此时还有另外一个问题， ```java 
+mybatis
+```  在对查询结果集进行解析的时候，是如何使用  ```java 
+resultMap
+```  的？ 
+虽然此部分与  ```java 
+mapper.xml
+```  无关，但如果无法建立起体系，单纯的  ```java 
+resultMap
+```  分析只会让人一头雾水。 
+实际上在  ```java 
+resultMap
+```  解析完成后，mybatis 会将其保存在  ```java 
+configuration
+```  中。 ```java 
+configuration
+```  前面也提到过，里面保存了 mybatis 的配置，但它不仅如此，它还承担了我们  ```java 
+mybtais
+```  上下文对象的作用。类似于  ```java 
+spring
+```  框架中的  ```java 
+applicationContext
+```  。 
+ ```java 
+    ResultMap resultMap = new ResultMap.Builder(configuration, id, type, resultMappings, autoMapping)
+      .discriminator(discriminator)
+      .build();
+  configuration.addResultMap(resultMap);
+</code></pre><p>目光来到我们的 <code>java ResultHandler</code> ，我们知道 <code>java ResultHandler</code> 是 <code>java SqlSession</code> ，也是 mybatis 的核心组件之一，它负责对 &#96;&#96;&#96;java<br>ResultSet</p><pre><code class="进行解析。">解析的核心代码如下（有所删减，后续会有文章专门分析  ```java 
+ResultSetHandler
+``` ，所以这里只是简单提一下） 
+ ```java 
+ private Object (ResultSetWrapper rsw, ResultMap resultMap, CacheKey combinedKey, String columnPrefix, Object partialObject) throws SQLException &#123;
+  final String resultMapId = resultMap.getId(); // 这个id 就是我们前面说了很久的那个 ValueBasedIdentifier
+  Object rowValue = partialObject;
+  if (rowValue != null) &#123;
+    final MetaObject metaObject = configuration.newMetaObject(rowValue);
+    ancestorObjects.put(resultMapId, resultObject);
+    applyNestedResultMappings(rsw, resultMap, metaObject, columnPrefix, combinedKey, false);
+    ancestorObjects.remove(resultMapId);
+  &#125; else &#123;
+    final ResultLoaderMap lazyLoader = new ResultLoaderMap();
+    rowValue = createResultObject(rsw, resultMap, lazyLoader, columnPrefix); // 根据反射构建出当前resultMap的承载对象
+    if (rowValue != null &amp;&amp; !hasTypeHandlerForResultObject(rsw, resultMap.getType())) &#123;
+      final MetaObject metaObject = configuration.newMetaObject(rowValue);// metaObject 是 mybatis 对对象的一套类似反射的封装，但不仅仅是反射这么简单
+      boolean foundValues = this.useConstructorMappings;
+      foundValues = applyPropertyMappings(rsw, resultMap, metaObject, lazyLoader, columnPrefix) 
+          || foundValues;// 解析普通的子标签属性
+      ancestorObjects.put(resultMapId, resultObject);
+      foundValues = applyNestedResultMappings(rsw, resultMap, metaObject, columnPrefix, combinedKey, true)
+          || foundValues; // 解析内嵌 resultMap
+      ancestorObjects.remove(resultMapId);
+      foundValues = lazyLoader.size() &gt; 0 || foundValues;
+      rowValue = foundValues || configuration.isReturnInstanceForEmptyRow() ? rowValue : null;
+    &#125;
+    if (combinedKey != CacheKey.NULL_CACHE_KEY) &#123;
+      nestedResultObjects.put(combinedKey, rowValue);
+    &#125;
+  &#125;
+  return rowValue;
+&#125;
+
+
+// 解析内嵌 resultMap
+private boolean applyNestedResultMappings(ResultSetWrapper rsw, ResultMap resultMap, MetaObject metaObject, String parentPrefix, CacheKey parentRowKey, boolean newObject) &#123;
+  boolean foundValues = false;
+  for (ResultMapping resultMapping : resultMap.getPropertyResultMappings()) &#123;
+    final String nestedResultMapId = resultMapping.getNestedResultMapId();
+    if (nestedResultMapId != null &amp;&amp; resultMapping.getResultSet() == null) &#123; // 如果子标签有内嵌resultMap，才会继续解析
+      try &#123;
+        final String columnPrefix = getColumnPrefix(parentPrefix, resultMapping);
+        final ResultMap nestedResultMap = 
+            getNestedResultMap(rsw.getResultSet(), nestedResultMapId, columnPrefix);// 拿到内嵌的resultMap
+        if (resultMapping.getColumnPrefix() == null) &#123;
+          // try to fill circular reference only when columnPrefix
+          // is not specified for the nested result map (issue #215)
+          // 解决循环引用的核心代码
+          Object ancestorObject = ancestorObjects.get(nestedResultMapId);
+          if (ancestorObject != null) &#123;
+            if (newObject) &#123;
+              linkObjects(metaObject, resultMapping, ancestorObject); // issue #385
+            &#125;
+            continue;
+          &#125;
+        &#125;
+        Object rowValue = nestedResultObjects.get(combinedKey);
+        boolean knownValue = rowValue != null;
+        instantiateCollectionPropertyIfAppropriate(resultMapping, metaObject); // mandatory
+        if (anyNotNullColumnHasValue(resultMapping, columnPrefix, rsw)) &#123;
+
+        final CacheKey rowKey = createRowKey(nestedResultMap, rsw, columnPrefix);
+        final CacheKey combinedKey = combineKeys(rowKey, parentRowKey);
+          // 套娃递归~~
+          rowValue = getRowValue(rsw, nestedResultMap, combinedKey, columnPrefix, rowValue);
+          if (rowValue != null &amp;&amp; !knownValue) &#123;
+            linkObjects(metaObject, resultMapping, rowValue);
+            foundValues = true;
+          &#125;
+        &#125;
+      &#125; catch (SQLException e) &#123;
+        throw new ExecutorException(&quot;Error getting nested result map values for &#39;&quot; + resultMapping.getProperty() + &quot;&#39;.  Cause: &quot; + e, e);
+      &#125;
+    &#125;
+  &#125;
+  return foundValues;
+&#125;
+</code></pre><p>对我们的对象进行赋值，实际上就是来���回回调用这两个方法，那么它如何防止resultMap套自己引起的无限解析呢？<br>3.4.1 借助额外的 Map映射 来解决 resultMap 套娃</p><pre><code class="java">     &lt;resultMap id=&quot;customMap&quot; type=&quot;com.anur.mybatisdemo.test.pojo.TrackerConfigDO&quot;&gt;
+       &lt;association property=&quot;config&quot; resultMap=&quot;customMap&quot;/&gt;
+       &lt;collection property=&quot;configDOList&quot; ofType=&quot;com.anur.mybatisdemo.test.pojo.TrackerConfigDO&quot;&gt;
+           &lt;result column=&quot;role&quot; property=&quot;role&quot;/&gt;
+           &lt;result column=&quot;in_use&quot; property=&quot;inUse&quot;/&gt;
+       &lt;/collection&gt;
+   &lt;/resultMap&gt;
+</code></pre><p>实际上很简单，我们的 <code>java resultMap</code> 都有一个唯一的 <code>java id</code> ，也就是我们所提到的 <code>java ValueBasedIdentifier</code> ，在第一次进入到 <code>java getRowValue</code> 方法时，会通过反射创建我们的 <code>java resultMap</code> 所表示的对象，比如上面 <code>java customMap</code> 这个 <code>java resultMap</code> ，会创建一个 <code>java TrackerConfigDO</code> 对象，然后在解析内嵌 <code>java resultMap</code> 之前，有一个关键动作，将创建的对象放进 &#96;&#96;&#96;java<br>ancestorObjects</p><pre><code class="："> ```java 
+        ancestorObjects.put(resultMapId, resultObject);
+      foundValues = applyNestedResultMappings(rsw, resultMap, metaObject, columnPrefix, combinedKey, true)
+          || foundValues; // 解析内嵌 resultMap
+</code></pre><p>是的，就是 <code>java ancestorObjects</code> 这个map映射，在解析内嵌 <code>java resultMap</code> 子标签时，发现 config 这个子标签所指向的 <code>java resultMap</code> 是它的父亲，也就是 config 这个子标签所引用的 <code>java resultMap</code> 的 <code>java ValueBasedIdentifier</code> 与外面 <code>java id = customMap</code> 的相同，它会把我们刚才放进 &#96;&#96;&#96;java<br>ancestorObjects</p><pre><code class="里的那个对象拿出来，然后直接continue，不再继续向下解析了。">也就是打个比方  ```java 
+TrackerConfigDO@9999
+```  这个对象中，有一个成员变量叫  ```java 
+config
+``` ，它也指向  ```java 
+TrackerConfigDO@9999
+``` 。 
+ ```java 
+            // try to fill circular reference only when columnPrefix
+          // is not specified for the nested result map (issue #215)
+          // 解决循环引用的核心代码
+          Object ancestorObject = ancestorObjects.get(nestedResultMapId);
+          if (ancestorObject != null) &#123;
+            if (newObject) &#123;
+              linkObjects(metaObject, resultMapping, ancestorObject); // issue #385
+            &#125;
+            continue;
+          &#125;
+</code></pre><p>如果发现不是同一个 <code>java ValueBasedIdentifier</code> ，则是一个递归解析，它会递归调用刚才的 <code>java resultMap</code> 解析方法： &#96;&#96;&#96;java<br>rowValue &#x3D; getRowValue(rsw, nestedResultMap, combinedKey, columnPrefix, rowValue);</p><pre><code>和前面说的三个方法递归很像，就是它把解析的主体定义为一个  ```java 
+resultMap
+``` ，在  ```java 
+resultMap
+```  的子标签中如果发现了内嵌  ```java 
+resultMap
+``` ，则���行递归，我这里就不啰嗦了。 
+Extra： 既然说到了这个  ```java 
+ancestorObjects
+```  map，顺便提一嘴。我们知道，一对多的映射，比如一条主数据对应10条从数据，在 mysql 中查询出来时，实际上是有10条的。是我们 mybatis 把这十条合成了一条，那么它是怎么做的呢？实际上也是通过  ```java 
+ancestorObject
+```  来完成的，不过这里主要讲的是  ```java 
+mapper
+```  部分相关源码，后续会有文章专门讲  ```java 
+ResultSetHandler
+</code></pre><h5 id="四、sql语句与-mappedStatment"><a href="#四、sql语句与-mappedStatment" class="headerlink" title="四、sql语句与 mappedStatment"></a>四、sql语句与 mappedStatment</h5><p>饶了一大圈，视线回到我们的 &#96;&#96;&#96;java<br>XMLMapperBuilder</p><pre><code class="："> ```java 
+  private void configurationElement(XNode context) &#123;
+  try &#123;
+    String namespace = context.getStringAttribute(&quot;namespace&quot;);
+    if (namespace == null || namespace.equals(&quot;&quot;)) &#123;
+      throw new BuilderException(&quot;Mapper&#39;s namespace cannot be empty&quot;);
+    &#125;
+    builderAssistant.setCurrentNamespace(namespace);
+    cacheRefElement(context.evalNode(&quot;cache-ref&quot;));
+    cacheElement(context.evalNode(&quot;cache&quot;));
+    parameterMapElement(context.evalNodes(&quot;/mapper/parameterMap&quot;));
+    resultMapElements(context.evalNodes(&quot;/mapper/resultMap&quot;));
+    sqlElement(context.evalNodes(&quot;/mapper/sql&quot;));
+    buildStatementFromContext(context.evalNodes(&quot;select|insert|update|delete&quot;));
+  &#125; catch (Exception e) &#123;
+    throw new BuilderException(&quot;Error parsing Mapper XML. The XML location is &#39;&quot; + resource + &quot;&#39;. Cause: &quot; + e, e);
+  &#125;
+&#125;
+</code></pre><p>同样是拿到我们的 insert，update 等节点们：</p><pre><code class="java">   private void buildStatementFromContext(List&lt;XNode&gt; list, String requiredDatabaseId) &#123;
+   for (XNode context : list) &#123;
+     final XMLStatementBuilder statementParser = new XMLStatementBuilder(configuration, builderAssistant, context, requiredDatabaseId);
+     try &#123;
+       statementParser.parseStatementNode();
+     &#125; catch (IncompleteElementException e) &#123;
+       configuration.addIncompleteStatement(statementParser);
+     &#125;
+   &#125;
+ &#125;
+</code></pre><p>它的主要方法就是 &#96;&#96;&#96;java<br>statementParser.parseStatementNode();</p><pre><code class="，构造函数里面什么都没有，就是对几个成员变量进行赋值，这里就不啰嗦了。">我们看到  ```java 
+parseStatementNode()
+``` ，代码很长，但是我们不着急，现将它拆解成几个部分： 
+ 
+ 1、属性获取，大部分代码实际上都是在对属性(attr)进行获取，比如 resultMap，resultType之类的。 
+ 2、对内嵌语句 sqlFragment、SelectKey 的解析 
+ 3、生成 SqlSource 
+ 4、创建 mappedStatment 
+ 
+第一部分太简单，这里不啰嗦。可以理解为给你一个map，或者json，各种获取值，把它存起来，除此之外没别的了，这里主要对后面几个部分进行讲解。 
+ ```java 
+  public void parseStatementNode() &#123;
+  String id = context.getStringAttribute(&quot;id&quot;);
+  String databaseId = context.getStringAttribute(&quot;databaseId&quot;);
+
+  if (!databaseIdMatchesCurrent(id, databaseId, this.requiredDatabaseId)) &#123;
+    return;
+  &#125;
+
+  String nodeName = context.getNode().getNodeName();
+  SqlCommandType sqlCommandType = SqlCommandType.valueOf(nodeName.toUpperCase(Locale.ENGLISH));
+  boolean isSelect = sqlCommandType == SqlCommandType.SELECT;
+  boolean flushCache = context.getBooleanAttribute(&quot;flushCache&quot;, !isSelect);
+  boolean useCache = context.getBooleanAttribute(&quot;useCache&quot;, isSelect);
+  boolean resultOrdered = context.getBooleanAttribute(&quot;resultOrdered&quot;, false);
+
+  // Include Fragments before parsing
+  XMLIncludeTransformer includeParser = new XMLIncludeTransformer(configuration, builderAssistant);
+  includeParser.applyIncludes(context.getNode());
+
+  String parameterType = context.getStringAttribute(&quot;parameterType&quot;);
+  Class&lt;?&gt; parameterTypeClass = resolveClass(parameterType);
+
+  String lang = context.getStringAttribute(&quot;lang&quot;);
+  LanguageDriver langDriver = getLanguageDriver(lang);
+
+  // Parse selectKey after includes and remove them.
+  processSelectKeyNodes(id, parameterTypeClass, langDriver);
+
+  // Parse the SQL (pre: &lt;selectKey&gt; and &lt;include&gt; were parsed and removed)
+  KeyGenerator keyGenerator;
+  String keyStatementId = id + SelectKeyGenerator.SELECT_KEY_SUFFIX;
+  keyStatementId = builderAssistant.applyCurrentNamespace(keyStatementId, true);
+  if (configuration.hasKeyGenerator(keyStatementId)) &#123;
+    keyGenerator = configuration.getKeyGenerator(keyStatementId);
+  &#125; else &#123;
+    keyGenerator = context.getBooleanAttribute(&quot;useGeneratedKeys&quot;,
+        configuration.isUseGeneratedKeys() &amp;&amp; SqlCommandType.INSERT.equals(sqlCommandType))
+        ? Jdbc3KeyGenerator.INSTANCE : NoKeyGenerator.INSTANCE;
+  &#125;
+
+  SqlSource sqlSource = langDriver.createSqlSource(configuration, context, parameterTypeClass);
+  StatementType statementType = StatementType.valueOf(context.getStringAttribute(&quot;statementType&quot;, StatementType.PREPARED.toString()));
+  Integer fetchSize = context.getIntAttribute(&quot;fetchSize&quot;);
+  Integer timeout = context.getIntAttribute(&quot;timeout&quot;);
+  String parameterMap = context.getStringAttribute(&quot;parameterMap&quot;);
+  String resultType = context.getStringAttribute(&quot;resultType&quot;);
+  Class&lt;?&gt; resultTypeClass = resolveClass(resultType);
+  String resultMap = context.getStringAttribute(&quot;resultMap&quot;);
+  String resultSetType = context.getStringAttribute(&quot;resultSetType&quot;);
+  ResultSetType resultSetTypeEnum = resolveResultSetType(resultSetType);
+  if (resultSetTypeEnum == null) &#123;
+    resultSetTypeEnum = configuration.getDefaultResultSetType();
+  &#125;
+  String keyProperty = context.getStringAttribute(&quot;keyProperty&quot;);
+  String keyColumn = context.getStringAttribute(&quot;keyColumn&quot;);
+  String resultSets = context.getStringAttribute(&quot;resultSets&quot;);
+
+  builderAssistant.addMappedStatement(id, sqlSource, statementType, sqlCommandType,
+      fetchSize, timeout, parameterMap, parameterTypeClass, resultMap, resultTypeClass,
+      resultSetTypeEnum, flushCache, useCache, resultOrdered,
+      keyGenerator, keyProperty, keyColumn, databaseId, langDriver, resultSets);
+&#125;
+</code></pre><h6 id="4-1-sql-内嵌语句-sqlFragment"><a href="#4-1-sql-内嵌语句-sqlFragment" class="headerlink" title="4.1 sql 内嵌语句 sqlFragment"></a>4.1 sql 内嵌语句 sqlFragment</h6><p>这两个标签相信大家都熟悉，就是提高sql复用率（个人不喜欢这种写法）。有了前面 <code>java resultMap</code> 的基础，我们很容易猜得到，这些标签在解析完以后，会生成自己一个唯一的 <code>java id</code> ，然后存到 &#96;&#96;&#96;java<br>configuration</p><pre><code class="里面。">是的，这里也确实是这么操作的。 
+首先， ```java 
+sqlFragment
+```  的解析代码如下： 
+ ```java 
+== org.apache.ibatis.builder.xml.XMLIncludeTransformer#applyIncludes(org.w3c.dom.Node, java.util.Properties, boolean) ==
+/**
+ * Recursively apply includes through all SQL fragments.
+ * @param source Include node in DOM tree
+ * @param variablesContext Current context for static variables with values
+ */
+private void applyIncludes(Node source, final Properties variablesContext, boolean included) &#123;
+  if (source.getNodeName().equals(&quot;include&quot;)) &#123;
+    Node toInclude = findSqlFragment(getStringAttribute(source, &quot;refid&quot;), variablesContext);
+    Properties toIncludeContext = getVariablesContext(source, variablesContext);
+    applyIncludes(toInclude, toIncludeContext, true);
+    if (toInclude.getOwnerDocument() != source.getOwnerDocument()) &#123;
+      toInclude = source.getOwnerDocument().importNode(toInclude, true);
+    &#125;
+    source.getParentNode().replaceChild(toInclude, source);
+    while (toInclude.hasChildNodes()) &#123;
+      toInclude.getParentNode().insertBefore(toInclude.getFirstChild(), toInclude);
+    &#125;
+    toInclude.getParentNode().removeChild(toInclude);
+  &#125; else if (source.getNodeType() == Node.ELEMENT_NODE) &#123;
+    if (included &amp;&amp; !variablesContext.isEmpty()) &#123;
+      // replace variables in attribute values
+      NamedNodeMap attributes = source.getAttributes();
+      for (int i = 0; i &lt; attributes.getLength(); i++) &#123;
+        Node attr = attributes.item(i);
+        attr.setNodeValue(PropertyParser.parse(attr.getNodeValue(), variablesContext));
+      &#125;
+    &#125;
+    NodeList children = source.getChildNodes(); 
+    for (int i = 0; i &lt; children.getLength(); i++) &#123;
+      applyIncludes(children.item(i), variablesContext, included);
+    &#125;
+  &#125; else if (included &amp;&amp; (source.getNodeType() == Node.TEXT_NODE || source.getNodeType() == Node.CDATA_SECTION_NODE)
+      &amp;&amp; !variablesContext.isEmpty()) &#123;
+    // replace variables in text node
+    source.setNodeValue(PropertyParser.parse(source.getNodeValue(), variablesContext));
+  &#125;
+&#125;
+</code></pre><p>我们一步步解析，这段代码有三个大的分支</p><p>第一个分支顾名思义，解析 &#96;&#96;&#96;java<br>include</p><pre><code class="标签用的，"> 第二个则是解析普通节点用的， 
+ 第三个 else 则是代表解析  ```java 
+Text
+```  节点、 ```java 
+CDATASection
+```  节点。 
+ 
+先看看怎么解析普通节点，普通节点将节点拆成子节点，然后循环递归调用自己，这个没什么好说的，前面已经说了各种递归，这个也是一样的道理， ```java 
+mybatis
+```  解析套娃，核心就是递归。 
+ ```java 
+text
+```  节点的解析也很简单，唯一值得注意的就是  ```java 
+variablesContext
+```  这个东西，它实际上是从配置文件中来，我们可以通过配置全局  ```java 
+variables
+```  ，它会在这个时候将其填充进去。 
+打个比方，下面这个  ```java 
+testValue
+``` ，我们在配置里面将其指定为全局变量，在写sql时，会将配置的值注入（不推荐）。 
+ ```java 
+mybatis:
+configuration-properties:
+  testValue: 43
+  
+&lt;select id=&quot;getAllFollower&quot; parameterType=&quot;hashmap&quot; resultMap=&quot;customMap&quot;&gt;
+    select role,in_use, id as inner_id from tracker_config where id &amp;lt;= $&#123;testValue&#125;
+&lt;/select&gt;
+</code></pre><p>后面两个解析很简单，主要是我们的第一个分支，就是如何去解析 &#96;&#96;&#96;java<br>include</p><pre><code class="标签：">看到我们这块分支的代码，上来第一步，是根据名字去  ```java 
+configuration
+```  拿  ```java 
+include
+``` ，这个很好理解。紧接着就是一个递归，直接忽略它，前面的几个小结讲了太多递归，这里懒得再讲了。 
+ ```java 
+      Node toInclude = findSqlFragment(getStringAttribute(source, &quot;refid&quot;), variablesContext);
+    Properties toIncludeContext = getVariablesContext(source, variablesContext);
+    applyIncludes(toInclude, toIncludeContext, true);// 递归解析 include标签
+
+    if (toInclude.getOwnerDocument() != source.getOwnerDocument()) &#123;
+      toInclude = source.getOwnerDocument().importNode(toInclude, true);// 进行资源的引入
+    &#125;
+    source.getParentNode().replaceChild(toInclude, source);// 将sql进行替换
+    while (toInclude.hasChildNodes()) &#123;
+      toInclude.getParentNode().insertBefore(toInclude.getFirstChild(), toInclude);
+    &#125;
+    toInclude.getParentNode().removeChild(toInclude);// 移出引入sql的外标签
+</code></pre><p>我们还是将其分为四个步骤</p><p>1、递归调用，解析 include 标签里面可能含有的 include 标签<br>2、判断 include 元素与当前这个节点是否是同一个文件， 如果不是同一个文件，则将其引入。这个没什么好说的 &#x3D; &#x3D;，一些 xml 的 api<br>3、将include标签进行替换，也就是 &#96;&#96;&#96;java<br>source.getParentNode().replaceChild(toInclude, source);</p><pre><code class="，也就是将真正的那段sql移过来。"> 4、一个while循环 +  ```java 
+toInclude.getParentNode().removeChild(toInclude);
+``` ，这部分实际上就是将刚才移过来那段sql的外层标签去掉，内容（childNode）拿出来。（主要是它没有 removeNodeWrapper（开玩笑的）这种方法，所以它这里采取了一种让人疑惑的写法） 
+ 
+我们拿这样的一段 xml 来模拟一下这个过程： 
+ ```java 
+    &lt;sql id=&quot;select&quot;&gt;select&lt;/sql&gt;
+
+  &lt;sql id=&quot;including&quot;&gt;
+      &lt;include refid=&quot;select&quot;/&gt;
+      *
+      from tracker_config
+  &lt;/sql&gt;
+
+  &lt;select id=&quot;getAllFollower&quot; parameterType=&quot;hashmap&quot; resultMap=&quot;customMap&quot;&gt;
+  &lt;include refid=&quot;including&quot;/&gt; 
+  where id &amp;lt;= $&#123;hashmap.id&#125;
+  &lt;/select&gt;
+</code></pre><p>解析 <code>java id = getAllFollower</code> 这个节点，它是一个普通节点，所以循环它的所有子节点，第一个子节点就是 <code>java &lt;include refid=&quot;including&quot;/&gt;</code> ，首先根据 &#96;&#96;&#96;java<br>refid</p><pre><code class="拿到真正的资源，先给阿姨倒一杯卡布奇诺，先给即将引入的这段">解析  ```java 
+ id=&quot;including&quot;
+``` ，一样的规则，它是个普通节点，循环它所有子节点，第一个子节点是  ```java 
+&lt;include refid=&quot;select&quot;/&gt;
+``` ，和上面一样，即将引入的这另一段 sql 也会被奉上解析套餐。 
+解析套餐三大分支都没什么可以对  ```java 
+&lt;sql id=&quot;select&quot;&gt;select&lt;/sql&gt;
+```  做的，于是进入到我们的 include 四个步骤的后续步骤，先是将其替换，如下所示： 
+ ```java 
+    &lt;sql id=&quot;select&quot;&gt;select&lt;/sql&gt;
+
+  &lt;sql id=&quot;including&quot;&gt;
+      &lt;sql id=&quot;select&quot;&gt;select&lt;/sql&gt;
+      *
+      from tracker_config
+  &lt;/sql&gt;
+
+  &lt;select id=&quot;getAllFollower&quot; parameterType=&quot;hashmap&quot; resultMap=&quot;customMap&quot;&gt;
+  &lt;include refid=&quot;including&quot;/&gt; 
+  where id &amp;lt;= $&#123;hashmap.id&#125;
+  &lt;/select&gt;
+</code></pre><p>然后来到第四步，也就是去“头“，如下：</p><pre><code class="java">     &lt;sql id=&quot;select&quot;&gt;select&lt;/sql&gt;
+
+   &lt;sql id=&quot;including&quot;&gt;
+       select
+       *
+       from tracker_config
+   &lt;/sql&gt;
+
+   &lt;select id=&quot;getAllFollower&quot; parameterType=&quot;hashmap&quot; resultMap=&quot;customMap&quot;&gt;
+   &lt;include refid=&quot;including&quot;/&gt; 
+   where id &amp;lt;= $&#123;hashmap.id&#125;
+   &lt;/select&gt;
+</code></pre><p>最里层的递归出栈，来到上层递归，也就是 &#96;&#96;&#96;java<br><include refid="including"></include></p><pre><code class="的解析，一样的，先替换："> ```java 
+    &lt;sql id=&quot;select&quot;&gt;select&lt;/sql&gt;
+
+  &lt;sql id=&quot;including&quot;&gt;
+      select
+      *
+      from tracker_config
+  &lt;/sql&gt;
+
+  &lt;select id=&quot;getAllFollower&quot; parameterType=&quot;hashmap&quot; resultMap=&quot;customMap&quot;&gt;
+      &lt;sql id=&quot;including&quot;&gt;
+          select
+          *
+          from tracker_config
+    &lt;/sql&gt;
+  where id &amp;lt;= $&#123;hashmap.id&#125;
+  &lt;/select&gt;
+</code></pre><p>然后去头：</p><pre><code class="java">     &lt;sql id=&quot;select&quot;&gt;select&lt;/sql&gt;
+
+   &lt;sql id=&quot;including&quot;&gt;
+       select
+       *
+       from tracker_config
+   &lt;/sql&gt;
+
+   &lt;select id=&quot;getAllFollower&quot; parameterType=&quot;hashmap&quot; resultMap=&quot;customMap&quot;&gt;
+           select
+           *
+           from tracker_config
+   where id &amp;lt;= $&#123;hashmap.id&#125;
+   &lt;/select&gt;
+</code></pre><p>递归完毕， &#96;&#96;&#96;java<br><sql id="including"></sql></p><pre><code class="解析完毕">###### 4.2 selectKey 解析 
+个人不太推荐  ```java 
+selectKey
+```  的使用，个人感觉类似存储过程...，在一个sql里面做各种事情，例如将某个值赋值为另一个sql的结果，比如插入自增id，或者在插入完毕后， ```java 
+SELECT LAST_INSERT_ID() AS xxxx
+```  将插入主键拿到，这种需求更加推荐通过多个mapper + 业务控制、通过插件、或者修改源码的方式去写。 
+从代码也很容易看出来，实际上它就是构建了一个新的查询类型的  ```java 
+mappedStatement
+``` ，将它存到  ```java 
+configuration
+```  的  ```java 
+KeyGenerator
+```  中。 
+ ```java 
+    builderAssistant.addMappedStatement(id, sqlSource, statementType, sqlCommandType,
+      fetchSize, timeout, parameterMap, parameterTypeClass, resultMap, resultTypeClass,
+      resultSetTypeEnum, flushCache, useCache, resultOrdered,
+      keyGenerator, keyProperty, keyColumn, databaseId, langDriver, null);
+
+  id = builderAssistant.applyCurrentNamespace(id, false);
+
+  MappedStatement keyStatement = configuration.getMappedStatement(id, false);
+  configuration.addKeyGenerator(id, new SelectKeyGenerator(keyStatement, executeBefore));
+</code></pre><p>有一点需要注意的是，就是它有一个执行顺序： &#96;&#96;&#96;java<br>boolean executeBefore &#x3D; “BEFORE”.equals(nodeToHandle.getStringAttribute(“order”, “AFTER”));</p><pre><code>是在本sql之前执行，还是在之后执行，其实就是简单指定一下。 
+它保存的map  ```java 
+keyGenerators
+``` ，id 为当前sql的 id，我们执行这条sql语句之前，只需要根据当前执行sql的id，就可以拿到  ```java 
+selectKey
+```  语句。 
+ ```java 
+  public void addKeyGenerator(String id, KeyGenerator keyGenerator) &#123;
+  keyGenerators.put(id, keyGenerator);
+&#125;
+</code></pre><p>在生成执行语句 &#96;&#96;&#96;java<br>mappedStatement</p><pre><code class="之后，它会从"> ```java 
+  private void removeSelectKeyNodes(List&lt;XNode&gt; selectKeyNodes) &#123;
+  for (XNode nodeToHandle : selectKeyNodes) &#123;
+    nodeToHandle.getParent().getNode().removeChild(nodeToHandle.getNode());
+  &#125;
+&#125;
+</code></pre><h6 id="4-3-mappedStatement-的生成"><a href="#4-3-mappedStatement-的生成" class="headerlink" title="4.3 mappedStatement 的生成"></a>4.3 mappedStatement 的生成</h6><p>实际上到了这里已经没什么可以讲的了，mappedStatement 就是一个存放解析对象的一个容器<br><img src="https://oscimg.oschina.net/oscnet/up-7e611b6e9f73e6e7b6fd07077ea9175be14.JPEG" alt="Test" title="mybatis源码，从配置到 mappedStatement ——  mapper.xml 是如何被解析的-"></p><pre><code class="java">  MappedStatement.Builder statementBuilder = new MappedStatement.Builder(configuration, id, sqlSource, sqlCommandType)
+       .resource(resource)
+       .fetchSize(fetchSize)
+       .timeout(timeout)
+       .statementType(statementType)
+       .keyGenerator(keyGenerator)
+       .keyProperty(keyProperty)
+       .keyColumn(keyColumn)
+       .databaseId(databaseId)
+       .lang(lang)
+       .resultOrdered(resultOrdered)
+       .resultSets(resultSets)
+       .resultMaps(getStatementResultMaps(resultMap, resultType, id))
+       .resultSetType(resultSetType)
+       .flushCacheRequired(valueOrDefault(flushCache, !isSelect))
+       .useCache(valueOrDefault(useCache, isSelect))
+       .cache(currentCache);
+
+   ParameterMap statementParameterMap = getStatementParameterMap(parameterMap, parameterType, id);
+   if (statementParameterMap != null) &#123;
+     statementBuilder.parameterMap(statementParameterMap);
+   &#125;
+
+   MappedStatement statement = statementBuilder.build();
+   configuration.addMappedStatement(statement);
+   return statement;
+</code></pre><p>它的实例化是一个比较纯粹的构造器模式，拿到各种配置的 <code>java attribute</code> ，解析出来的 <code>java resultMap</code> 等，加以拼装，它并不是我们理解 &#96;&#96;&#96;java<br>mybatis</p><p>&#96;&#96;&#96; 的重点，我们应该更加关注参与构造的这些参数是怎么来的，由于篇幅有限，再加上博主也懒得讲解一些不常用，或者比较简单的配置。如果哪里分析的有问题，或者希望博主对哪个部分进行比较深入的分析欢迎评论~<br>后续会有更多 mybatis 源码讲解~~</p><h5 id="五、小结"><a href="#五、小结" class="headerlink" title="五、小结"></a>五、小结</h5><p>小小的总结一下，在 mybatis 对 xml 的解析中，常用的几个技巧：</p><p>递归，递归来解决嵌套问题，同时也可以避免生成的java类层级过深<br>id，几乎所有的 node 节点，都会有一个自己的全限定名，配合递归来使用事半功倍<br>统一的上下文，configuration 类，基本什么东西都可以往里面塞，就像是一个哆啦A梦的四次元口袋，它本身也比较纯粹，基本不参与什么业务操作，就是存了很多解析生成的东西<br>大量的兜底配置，实际上文章里很少提到的，但是代码里很常见，即兜底配置，实际上就是一种约定优于配置的思想，许多的额外支持仅仅暴露出来作为可选项，默认是有一套自己的实现的。</p><p>参考资料：</p><p>mybatis-spring-boot-starter 2.1.1 - mybatis 3.5.3</p><div class="post-copyright"><div class="content"><p>本文标题： 推荐系列-mybatis源码，从配置到 mappedStatement —— mapper.xml 是如何被解析的-</p><p>本文作者： OSChina</p><p>发布时间： 2021年04月15日 09:19</p><p>最后更新： 2022年05月11日 15:02</p><p>原始链接： <a class="post-url" href="/2a2ed114/" title="推荐系列-mybatis源码，从配置到 mappedStatement ——  mapper.xml 是如何被解析的-">https://www.hosiang.cn/2a2ed114/</a></p><p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p><footer><a href="https://www.hosiang.cn"><img src="/../images/logo.png" alt="Howe Hsiang"> Howe Hsiang</a></footer></div></div><div class="page-reward"><a id="rewardBtn" href="javascript:;">赏</a></div><div id="reward" class="post-modal reward-lay"><a class="close" href="javascript:;" id="reward-close">×</a> <span class="reward-title"><i class="icon icon-quote-left"></i> 喜欢就赞赏一下呗！ <i class="icon icon-quote-right"></i></span><div class="reward-content"><div class="reward-code"><img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码"></div><div class="reward-select"></div></div></div></div><footer class="article-footer"><div class="post-share"><a href="javascript:" id="share-sub" class="post-share-fab"><i class="fa fa-share-alt" style="padding-top:11px!important"></i></a><div class="post-share-list" id="share-list"><ul class="share-icons"><li><a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/2a2ed114/" data-title="Facebook" rel="external nofollow noopener noreferrer"><i class="fa fa-facebook" style="padding-top:9px!important"></i></a></li><li><a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-mybatis源码，从配置到 mappedStatement ——  mapper.xml 是如何被解析的-》 — 狂欢马克思&url=https://www.hosiang.cn/2a2ed114/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer"><i class="fa fa-twitter" style="padding-top:9px!important"></i></a></li><li><a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/2a2ed114/" data-title="Google+" rel="external nofollow noopener noreferrer"><i class="fa fa-google-plus" style="padding-top:9px!important"></i></a></li><li><a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/2a2ed114/&title=《推荐系列-mybatis源码，从配置到 mappedStatement ——  mapper.xml 是如何被解析的-》 — 狂欢马克思&source=&amp;emsp;&amp;emsp;Ext1：本文源码解析基于 mybatis-spring-boot-starter 2.1.1，即 mybatis..." data-title="QQ" rel="external nofollow noopener noreferrer"><i class="fa fa-qq" style="padding-top:9px!important"></i></a></li><li><a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信"><i class="fa fa-weixin" style="padding-top:9px!important"></i></a></li><li><a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/2a2ed114/&title=《推荐系列-mybatis源码，从配置到 mappedStatement ——  mapper.xml 是如何被解析的-》 — 狂欢马克思&pic=https://static.oschina.net/uploads/img/202001/09181230_1nWS.jpg" data-title="微博" rel="external nofollow noopener noreferrer"><i class="fa fa-weibo" style="padding-top:9px!important"></i></a></li></ul></div></div><div class="post-modal wx-share" id="wxShare"><a class="close" href="javascript:" id="wxShare-close">×</a><p>扫一扫，分享到微信</p><img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/2a2ed114/" alt="微信分享二维码"></div><div class="mask"></div><ul class="article-footer-menu"><li class="article-footer-tags"><i class="fa fa-tags"></i> <a href="/tags/Popular/" class="color3">Popular</a></li></ul></footer></div></article><aside class="post-toc-pos post-toc-top" id="post-toc"><nav class="post-toc-wrap"><ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%8E-MybatisAutoConfiguration-%E8%AF%B4%E5%BC%80%E5%8E%BB%EF%BC%8Cmapper-%E6%96%87%E4%BB%B6%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%AB%E6%8F%8F%E7%9A%84%EF%BC%9F"><span class="post-toc-text">一、从 MybatisAutoConfiguration 说开去，mapper 文件是怎么扫描的？</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E4%B8%89%E3%80%81ResultMap-%E6%98%AF%E5%A6%82%E4%BD%95%E8%A7%A3%E6%9E%90%E7%9A%84"><span class="post-toc-text">三、ResultMap 是如何解析的</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#3-2-mapper-xml-%E9%85%8D%E7%BD%AE%E4%B8%8E-typeHandler"><span class="post-toc-text">3.2 mapper.xml 配置与 typeHandler</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#3-3-ResultMap-%E4%B8%AD%E7%9A%84%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7%EF%BC%9A-resultMap%E5%B5%8C%E5%A5%97"><span class="post-toc-text">3.3 ResultMap 中的另一个常用属性： resultMap嵌套</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E5%9B%9B%E3%80%81sql%E8%AF%AD%E5%8F%A5%E4%B8%8E-mappedStatment"><span class="post-toc-text">四、sql语句与 mappedStatment</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#4-1-sql-%E5%86%85%E5%B5%8C%E8%AF%AD%E5%8F%A5-sqlFragment"><span class="post-toc-text">4.1 sql 内嵌语句 sqlFragment</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#4-3-mappedStatement-%E7%9A%84%E7%94%9F%E6%88%90"><span class="post-toc-text">4.3 mappedStatement 的生成</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#%E4%BA%94%E3%80%81%E5%B0%8F%E7%BB%93"><span class="post-toc-text">五、小结</span></a></li></ol></nav></aside><nav id="article-nav"><a href="/16d52ba0/" id="article-nav-newer" class="article-nav-link-wrap"><span class="article-nav-title"><i class="fa fa-hand-o-left" aria-hidden="true"></i> 推荐系列-深入理解Object提供的阻塞和唤醒API </span></a><a href="/1c66f65/" id="article-nav-older" class="article-nav-link-wrap"><span class="article-nav-title">推荐系列-写好测试，提升应用质量</span> <i class="fa fa-hand-o-right" aria-hidden="true"></i></a></nav><div id="gitalk"></div><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script>var gitalk=new Gitalk({repo:"bolg-comment",owner:"Hosiang1026",admin:"Hosiang1026",clientID:"37a2dd4473e8970cecc2",clientSecret:"e30efa17d86d9de4f4ab810872dc62a7b2e7e634",pagerDirection:"last",distractionFreeMode:!0,createIssueManually:!1});gitalk.render("gitalk")</script></section></div><footer id="footer"><div class="outer"><div id="footer-info" class="inner"><script id="_wau78w">var _wau=_wau||[];_wau.push(["small","5dnguv4c2n","78w"])</script><script async src="//waust.at/s.js"></script><p><span id="busuanzi_container_site_uv" style="display:none"><span class="post-count">总字数：<span>1531.2k</span> </span>总访客数：<span id="busuanzi_value_site_uv"></span> </span><span id="busuanzi_container_site_pv" style="display:none">总访问量：<span id="busuanzi_value_site_pv"></span></span><br><span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>Copyright&copy; 2018 - 2022 狂欢马克思 <a href="https://beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">京ICP备17060439号</a></p></div></div><script>var now=new Date;function createtime(){var n=new Date("2017/09/18");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="安全运行 "+dnum+" 天 ",document.getElementById("times").innerHTML=hnum+" 小时 "+mnum+" 分 "+snum+" 秒"}setInterval("createtime()",800)</script></footer><script>var mihoConfig={root:"https://www.hosiang.cn",animate:"true",isHome:"false",share:"true",reward:" 1"}</script><div class="sidebar"><div id="sidebar-search" title="Search"><i class="fa fa-search"></i></div><div id="sidebar-category" title="Categories"><i class="fa fa-book"></i></div><div id="sidebar-tag" title="Tags"><i class="fa fa-tags"></i></div><div id="sidebar-top"><span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span></div></div><div class="sidebar-menu-box" id="sidebar-menu-box"><div class="sidebar-menu-box-container"><div id="sidebar-menu-box-categories"><a class="category-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a><a class="category-link" href="/categories/%E5%85%B6%E4%BB%96%E5%BC%80%E5%8F%91/">其他开发</a><a class="category-link" href="/categories/%E5%89%8D%E6%B2%BF%E5%BC%80%E5%8F%91/">前沿开发</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><a class="category-link" href="/categories/%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC/">升级版本</a><a class="category-link" href="/categories/%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/">博客教程</a><a class="category-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><a class="category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><a class="category-link" href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">日常记录</a><a class="category-link" href="/categories/%E7%83%AD%E9%97%A8%E6%96%87%E7%AB%A0/">热门文章</a></div><div id="sidebar-menu-box-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:17.5px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:15px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12.5px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:15px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size:12.5px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:17.5px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12.5px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:17.5px">Spring</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div><a href="javascript:" class="sidebar-menu-box-close">&times;</a></div><div class="mobile-header-menu-nav" id="mobile-header-menu-nav"><div class="mobile-header-menu-container"><span class="title">导航</span><ul class="mobile-header-menu-navbar"><li><a href="/"><i class="fa fa-home"></i><span>主页</span></a></li><li><a href="/archives"><i class="fa fa-archive"></i><span>归档</span></a></li><li><a href="/gitbook"><i class="fa fa-columns"></i><span>笔记</span></a></li><li><a href="/music"><i class="fa fa-music"></i><span>音乐</span></a></li><li><a href="/photo"><i class="fa fa-picture-o"></i><span>相册</span></a></li><li><a href="/collection"><i class="fa fa-envira"></i><span>收藏</span></a></li><li><a href="/about"><i class="fa fa-user"></i><span>关于</span></a></li></ul></div><div class="mobile-header-tag-container"><span class="title">标签</span><div id="mobile-header-container-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:17.5px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:15px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12.5px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:15px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size:12.5px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:17.5px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12.5px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:17.5px">Spring</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div></div><div class="search-wrap"><span class="search-close">&times;</span> <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back"><i class="icon icon-lg icon-chevron-left"></i> </a><input class="search-field" placeholder="Search..." id="keywords"> <a id="search-submit" href="javascript:"><i class="fa fa-search"></i></a><div class="search-container" id="search-container"><ul class="search-result" id="search-result"></ul></div></div><div id="search-tpl"><li class="search-result-item"><a href="{url}" class="search-item-li"><span class="search-item-li-title" title="{title}">{title}</span></a></li></div><script src="/js/search.js"></script><script src="/js/main.js"></script><script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script><div id="particles"></div><script src="/js/particles.js"></script><link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css"><script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script><script src="/js/animate.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({pluginRootPath:"live2dw/",pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2dw/assets/hijiki.model.json"},display:{position:"right",width:150,height:300},mobile:{show:!0,scale:.5},log:!1})</script></body></html>

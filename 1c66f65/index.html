@@ -1,0 +1,797 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="Access-Control-Allow-Origin" content="*"><script type="text/javascript">var start_time=(new Date).getTime()</script><meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="google-site-verification" content="9Wt3lmnrT2bfjaHla5s16adhvcQcBHO7PtNf97n5Od0"><meta name="baidu-site-verification" content="RYlYHsgO7Y"><meta name="sogou_site_verification" content="MSmrTj7lHV"><meta name="shenma-site-verification" content="e4428ccce0f22fad61c3716193bf4bd7_1571416388"><meta name="baidu_union_verify" content="584bb6b4bd24108df082b6d20c7aa9be"><title>推荐系列-写好测试，提升应用质量 | 狂欢马克思</title><meta name="keywords" content="分享技术经验与交流"><meta name="description" content="&amp;emsp;&amp;emsp;相信在国内一些中小型公司，开发者很少会去写软件测试相关的代码。当然这背后有一些原因在。本文就讲讲 iOS 开发中的软件测试相关的内容。 一、 测试的重要性 测试很重要！测试很重要！测试很…"><meta property="og:type" content="article"><meta property="og:title" content="推荐系列-写好测试，提升应用质量"><meta property="og:url" content="https://www.hosiang.cn/1c66f65/index.html"><meta property="og:site_name" content="狂欢马克思"><meta property="og:description" content="&amp;emsp;&amp;emsp;相信在国内一些中小型公司，开发者很少会去写软件测试相关的代码。当然这背后有一些原因在。本文就讲讲 iOS 开发中的软件测试相关的内容。 一、 测试的重要性 测试很重要！测试很重要！测试很…"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://raw.githubusercontent.com/FantasticLBP/knowledge-kit/master/assets/2020-07-13-TDDStructure.png"><meta property="article:published_time" content="2021-04-15T01:19:21.000Z"><meta property="article:modified_time" content="2022-05-11T07:02:49.935Z"><meta property="article:author" content="Howe Hsiang"><meta property="article:tag" content="Popular"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://raw.githubusercontent.com/FantasticLBP/knowledge-kit/master/assets/2020-07-13-TDDStructure.png"><link rel="icon" href="/images/favicon.ico"><link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/style.css"><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script"),t=(e.src="https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace",document.getElementsByTagName("script")[0]);t.parentNode.insertBefore(e,t)}()</script><script></script><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 6.2.0"></head><script src="/js/jquery.min.js"></script><script src="/js/pace.min.js"></script><script src="/js/crypto-js.js"></script><script src="/js/cookie.js"></script><script src="/js/calendar.js"></script><script src="/js/festival.js"></script><script>getFestival()</script><body><script>window.onload=function(){document.getElementById("TimeShow").innerHTML="本站耗时 "+((new Date).getTime()-start_time)/1e3+" 秒 "}</script><div id="container"><header id="header"><div id="banner"></div><div id="header-outer"><div id="header-menu" class="header-menu-pos animated"><div class="header-menu-container"><a href="/" class="left"><span class="site-title">狂欢马克思</span></a><nav id="header-menu-nav" class="right"><a href="/" rel="external nofollow"><i class="fa fa-home"></i> <span>主页</span> </a><a href="/archives" rel="external nofollow"><i class="fa fa-archive"></i> <span>归档</span> </a><a href="/gitbook" rel="external nofollow"><i class="fa fa-columns"></i> <span>笔记</span> </a><a href="/music" rel="external nofollow"><i class="fa fa-music"></i> <span>音乐</span> </a><a href="/photo" rel="external nofollow"><i class="fa fa-picture-o"></i> <span>相册</span> </a><a href="/collection" rel="external nofollow"><i class="fa fa-envira"></i> <span>收藏</span> </a><a href="/about" rel="external nofollow"><i class="fa fa-user"></i> <span>关于</span></a></nav><a class="mobile-header-menu-button"><i class="fa fa-bars"></i></a></div></div><div id="header-row"><div id="logo"><a href="/"><img src="/../images/logo.png" alt="logo"></a></div><div class="header-info"><div id="header-title"><h2>狂欢马克思</h2></div><div id="header-description"><h3>专注Web开发</h3></div></div><nav class="header-nav"><div class="social"><a title="Github" target="_blank" href="//github.com/Hosiang1026" rel="external nofollow"><i class="fa fa-github fa-2x"></i></a> <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes" rel="external nofollow"><i class="fa fa-qq fa-2x"></i></a> <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969" rel="external nofollow"><i class="fa fa-weibo fa-2x"></i></a></div></nav></div><div id="noticeId" class="show" style="background:rgb(244,247,247,.3)"><marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop()" onmouseout="this.start()"></marquee></div><script type="text/javascript">function browserRedirect(){var i=navigator.userAgent.toLowerCase(),n="ipad"==i.match(/ipad/i),o="iphone os"==i.match(/iphone os/i),a="midp"==i.match(/midp/i),t="rv:1.2.3.4"==i.match(/rv:1.2.3.4/i),e="ucweb"==i.match(/ucweb/i),s="android"==i.match(/android/i),d="windows ce"==i.match(/windows ce/i),i="windows mobile"==i.match(/windows mobile/i),p="",r=randomColor(),p=n||o||a||t||e||s||d||i?($("#noticeId").css({"line-height":"1.6em"}),"<font style='color:"+r+"' face='新华宋体'  size='2'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='hitokoto'></span></span></span><span id='YQData'></font> "):($("#noticeId").css({"line-height":"3.6em","margin-top":"20px"}),"<font style='color:"+r+"' face='新华宋体'  size='6'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='hitokoto'></span></span><span id='YQData'></span></font> ");$("#noticeMar").html(p)}function randomColor(){for(var i="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f".split(","),n="#",o=0;o<6;o++)n+=i[Math.floor(16*Math.random())];return n}$(function(){browserRedirect(),0<$("#hitokoto").length&&getHitokoto()})</script></div></header><script>console.log=function(){}</script><div class="outer"><section id="main" class="body-wrap"><article id="post-写好测试，提升应用质量" class="article article-type-post" itemscope itemprop="blogPost"><div class="article-inner"><header class="article-header"><h1 class="post-title" itemprop="name">推荐系列-写好测试，提升应用质量</h1><div class="post-title-bar"><ul><li><i class="fa fa-book"></i> <a href="/categories/热门文章/">热门文章</a></li><li><i class="fa fa-calendar"></i> 2021-04-15</li><li><i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span></li><li><span class="post-count">字数统计: 9.9k字</span></li><li><span class="post-count">阅读时长: 42分钟</span></li></ul></div></header><div class="article-entry post-content" itemprop="articleBody"><p>&amp;emsp;&amp;emsp;相信在国内一些中小型公司，开发者很少会去写软件测试相关的代码。当然这背后有一些原因在。本文就讲讲 iOS 开发中的软件测试相关的内容。 一、 测试的重要性 测试很重要！测试很重要！测试很…</p><span id="more"></span><h4 id="一、-测试的重要性"><a href="#一、-测试的重要性" class="headerlink" title="一、 测试的重要性"></a>一、 测试的重要性</h4><p>测试很重要！测试很重要！测试很重要！重要的事情说三遍。<br>场景1：每次我们写完代码后都需要编译运行，以查看应用程序的表现是否符合预期。假如改动点、代码量小，那验证成本低一些，假如不符合预期，则说明我们的代码有问，人工去排查问题花费的时间也少一些。假如改动点很多、受影响的地方较多，我们首先要大概猜测受影响的功能，然后去定位问题、排查问题的成本就很高。<br>场景2：你新接手的 SDK 某个子功能需要做一次技术重构。但是你只有在公司内部的代码托管平台上可以看到一些 Readme、接入文档、系统设计文档、技术方案评估文档等一堆文档。可能你会看完再去动手重构。当你重构完了，找了公司某条业务线的 App 接入测试，点了几下发现发生了奔溃。😂 心想，本地测试、debug 都正常可是为什么接入后就 Crash 了。其实想想也好理解，你本地重构只是确保了你开发的那个功能运行正常，你很难确保你写的代码没有影响其他类、其他功能。假如之前的 SDK 针对每个类都有单元测试代码，那你在新功能开发完毕后完整跑一次单元测试代码就好了，保证每个 Unit Test 都通过、分支覆盖率达到约定的线，那么基本上是没问题的。<br>场景3：在版本迭代的时候，计划功能 A，从开发、联调、测试、上线共2周时间。老司机做事很自信，这么简单的 UI、动画、交互，代码风骚，参考服务端的「领域驱动」在该 feature 开发阶段落地试验了下。联调、本地测试都通过了，还剩3天时间，本以为测试1天，bug fix 一天，最后一天提交审核。代码跟你开了个玩笑，测试完 n 个 bug（大大超出预期）。为了不影响 App 的发布上架，不得不熬夜修 bug。将所有的测试都通过测试工程师去处理，这个阶段理论上质量应该很稳定，不然该阶段发现代码异常、技术设计有漏洞就来不及了，你需要协调各个团队的资源（可能接口要改动、产品侧要改动），这个阶段造成改动的成本非常大。<br>相信大多数开发者都遇到过上述场景的问题。其实上述这几个问题都有解，那就是“软件测试”。</p><h4 id="二、软件测试"><a href="#二、软件测试" class="headerlink" title="二、软件测试"></a>二、软件测试</h4><h5 id="1-分类"><a href="#1-分类" class="headerlink" title="1. 分类"></a>1. 分类</h5><p>软件测试就是在规定的条件下对应用程序进行操作，以发现程序错误，衡量软件质量，并对其是否能满足设计要求进行评估的过程。<br>合理应用软件测试技术，就可以规避掉第一部分的3个场景下的问题。<br>软件测试强调开发、测试同步进行，甚至是测试先行，从需求评审阶段就先考虑好软件测试方案，随后才进行技术方案评审、开发编码、单元测试、集成测试、系统测试、回归测试、验收测试等。<br>软件测试从测试范围分为：单元测试、集成测试、系统测试、回归测试、验收测试（有些公司会谈到“冒烟测试“，这个词的精确定义不知道，但是学软件测试课的时候按照范围就只有上述几个分类）。工程师自己负责的是单元测试。测试工程师、QA 负责的是集成测试、系统测试。<br>单元测试（Unit Testing）：又称为模块测试，是针对程序模块（软件设计的最小单位）来进行正确性检验的测试工作。「单元」的概念会比较抽象，它不仅仅是我们所编写的某个方法、函数，也可能是某个类、对象等。<br>软件测试从开发模式分为：面向测试驱动开发 TDD （Test-driven development）、面向行为驱动开发 BDD （Behavior-driven development）。</p><h5 id="2-TDD"><a href="#2-TDD" class="headerlink" title="2. TDD"></a>2. TDD</h5><p>TDD 的思想是：先编写测试用例，再快速开发代码，然后在测试用例的保证下，可以方便安全地进行代码重构，提升应用程序的质量。一言以蔽之就是通过测试来推动开发的进行。正是由于这个特点，TDD 被广泛使用于敏捷开发。<br>也就是说 TDD 模式下，首先考虑如何针对功能进行测试，然后去编写代码实现，再不断迭代，在测试用例的保证下，不断进行代码优化。<br>优点：目标明确、架构分层清晰。可保证开发代码不会偏离需求。每个阶段持续测试<br>缺点：技术方案需要先评审结束、架构需要提前搭建好。假如需求变动，则前面步骤需要重新执行，灵活性较差。</p><h5 id="3-BDD"><a href="#3-BDD" class="headerlink" title="3. BDD"></a>3. BDD</h5><p>BDD 即行为驱动开发，是敏捷开发技术之一，通过自然语言定义系统行为，以功能使用者的角度，编写需求场景，且这些行为描述可以直接形成需求文档，同时也是测试标准。<br>BDD 的思想是跳出单一的函数，针对的是行为而展开的测试。BDD 关心的是业务领域、行为方式，而不是具体的函数、方法，通过对行为的描述来验证功能的可用性。BDD 使用 DSL （Domin Specific Language）领域特定语言来描述测试用例，这样编写的测试用例非常易读，看起来跟文档一样易读，BDD 的代码结构是 &#96;&#96;&#96;java<br>Given-&gt;When-&gt;Then</p><pre><code class="。">优点：各团队的成员可以集中在一起，设计基于行为的计测试用例。 
+##### 4. 对比 
+根据特点也就是找到了各自的使用场景，TDD 主要针对开发中的最小单元进行测试，适合单元测试。而 BDD 针对的是行为，所以测试范围可以再大一些，在集成测试、系统测试中都可以使用 
+TDD 编写的测试用例一般针对的是开发中的最小单元（比如某个类、函数、方法）而展开，适合单元测试。 
+BDD 编写的测试用例针对的是行为，测试范围更大一些，适合集成测试、系统测试阶段。 
+#### 三、 单元测试编码规范&lt;a name=&quot;codeRules&quot;&gt;&lt;/a&gt; 
+本文的主要重点是针对日常开发阶段工程师可以做的事情，也就是单元测试而展开。 
+编写功能、业务代码的时候一般会遵循  ```java 
+kiss 原则
+```  ，所以类、方法、函数往往不会太大，分层设计越好、职责越单一、耦合度越低的代码越适合做单元测试，单元测试也倒逼开发过程中代码分层、解耦。 
+可能某个功能的实现代码有30行，测试代码有50行。单元测试的代码如何编写才更合理、整洁、规范呢？ 
+##### 1. 编码分模块展开 
+先贴一段代码。 
+ ```java 
+-  (void)testInsertDataInOneSpecifiedTable
+&#123;
+  XCTestExpectation *exception = [self expectationWithDescription:@&quot;测试数据库插入功能&quot;];
+  // given
+  [dbInstance removeAllLogsInTableType:HCTLogTableTypeMeta];
+  NSMutableArray *insertModels = [NSMutableArray array];
+  for (NSInteger index = 1; index &lt;= 10000; index++) &#123;
+      HCTLogMetaModel *model = [[HCTLogMetaModel alloc] init];
+      model.log_id = index;
+              // ...
+      [insertModels addObject:model];
+  &#125;
+  // when
+  [dbInstance add:insertModels inTableType:HCTLogTableTypeMeta];
+     // then 
+    [dbInstance recordsCountInTableType:HCTLogTableTypeMeta completion:^(NSInteger count) &#123;
+      XCTAssert(count == insertModels.count, @&quot;「数据增加」功能：异常&quot;);
+      [exception fulfill];
+  &#125;];
+  [self waitForExpectationsWithCommonTimeout];
+&#125;
+
+</code></pre><p>可以看到这个方法的名称为 testInsertDataInOneSpecifiedTable，这段代码做的事情通过函数名可以看出来：测试插入数据到某个特定的表。这个测试用例分为3部分：测试环境所需的先决条件准备；调用所要测试的某个方法、函数；验证输出和行为是否符合预期。<br>其实，每个测试用例的编写也要按照该种方式去组织代码。步骤分为3个阶段：Given-&gt;When-&gt;Then。<br>所以单元测试的代码规范也就出来了。此外单元测试代码规范统一后，每个人的测试代码都按照这个标准展开，那其他人的阅读起来就更加容易、方便。按照这3个步骤去阅读、理解测试代码，就可以清晰明了的知道在做什么。</p><h5 id="2-一个测试用例只测试一个分支"><a href="#2-一个测试用例只测试一个分支" class="headerlink" title="2. 一个测试用例只测试一个分支"></a>2. 一个测试用例只测试一个分支</h5><p>我们写的代码有很多语句组成，有各种逻辑判断、分支(if…else、swicth)等等，因此一个程序从一个单一入口进去，过程可能产生 n 个不同的分支，但是程序的出口总是一个。所以由于这样的特性，我们的测试也需要针对这样的现状走完尽可能多的分支。相应的指标叫做「分支覆盖率」。<br>假如某个方法内部有 if…else…，我们在测试的时候尽量将每种情况写成一个单独的测试用例，单独的输入、输出，判断是否符合预期。这样每个 case 都单一的测试某个分支，可读性也很高。<br>比如对下面的函数做单元测试，测试用例设计如下</p><pre><code class="java"> - (void)shouldIEatSomething
+&#123;
+  BOOL shouldEat = [self getAteWeight] &lt; self.dailyFoodSupport;
+  if (shouldEat) &#123;
+    [self eatSomemuchFood];
+  &#125; else &#123;
+    [self doSomeExercise];
+  &#125;
+&#125;
+</code></pre><pre><code class="java"> - (void)testShouldIEatSomethingWhenHungry
+&#123;
+  // ....
+&#125;
+
+- (void)testShouldIEatSomethingWhenFull
+&#123;
+ // ...
+&#125;
+</code></pre><h5 id="3-明确标识被测试类"><a href="#3-明确标识被测试类" class="headerlink" title="3. 明确标识被测试类"></a>3. 明确标识被测试类</h5><p>这条主要站在团队合作和代码可读性角度出发来说明。写过单元测试的人都知道，可能某个函数本来就10行代码，可是为了测试它，测试代码写了30行。一个方法这样写问题不大，多看看就看明白是在测试哪个类的哪个方法。可是当这个类本身就很大，测试代码很大的情况下，不管是作者自身还是多年后负责维护的其他同事，看这个代码阅读成本会很大，需要先看测试文件名 <code>java 代码类名 + Test</code> 才知道是测试的是哪个类，看测试方法名 &#96;&#96;&#96;java<br>test + 方法名</p><pre><code class="才知道是测试的是哪个方法。">这样的代码可读性很差，所以应该为当前的测试对象特殊标记，这样测试代码可读性越强、阅读成本越低。比如定义局部变量  ```java 
+_sut
+```  用来标记当前被测试类(sut，System under Test，软件测试领域有个词叫做被测系统，用来表示正在被测试的系统)。 
+ ```java 
+#import &lt;XCTest/XCTest.h&gt;
+#import &quot;HCTLogPayloadModel.h&quot;
+
+@interface HCTLogPayloadModelTest : HCTTestCase
+&#123;
+  HCTLogPayloadModel *_sut;
+&#125;
+
+@end
+
+@implementation HCTLogPayloadModelTest
+
+- (void)setUp
+&#123;
+  [super setUp];
+  HCTLogPayloadModel *model = [[HCTLogPayloadModel alloc] init];
+  model.log_id = 1;
+  // ...
+  _sut = model;
+&#125;
+
+- (void)tearDown
+&#123;
+  _sut = nil;
+  [super tearDown];
+&#125;
+
+- (void)testGetDictionary
+&#123;
+  NSDictionary *payloadDictionary = [_sut getDictionary];
+  XCTAssert([(NSString *)payloadDictionary[@&quot;report_id&quot;] isEqualToString:@&quot;001&quot;] &amp;&amp;
+            [payloadDictionary[@&quot;size&quot;] integerValue] == 102 &amp;&amp;
+            [(NSString *)payloadDictionary[@&quot;meta&quot;] containsString:@&quot;meiying&quot;],
+            @&quot;HCTLogPayloadModel 的 「getDictionary」功能异常&quot;);
+&#125;
+
+@end
+</code></pre><h5 id="4-使用分类来暴露私有方法、私有变量"><a href="#4-使用分类来暴露私有方法、私有变量" class="headerlink" title="4. 使用分类来暴露私有方法、私有变量"></a>4. 使用分类来暴露私有方法、私有变量</h5><p>某些场景下写的测试方法内部可能需要调用被测对象的私有方法，也可能需要访问被测对象的某个私有属性。但是测试类里面是访问不到被测类的私有属性和私有方法的，借助于 &#96;&#96;&#96;java<br>Category</p><pre><code class="可以实现这样的需求。">为测试类添加一个分类，后缀名为  ```java 
+UnitTest
+``` 。如下所示 
+ ```java 
+HermesClient
+```  类有私有属性  ```java 
+@property (nonatomic, strong) NSString *name;
+``` ，私有方法  ```java 
+- (void)hello
+``` 。为了在测试用例中访问私有属性和私有方法，写了如下分类 
+ ```java 
+// HermesClientTest.m
+
+@interface HermesClient (UnitTest)
+
+- (NSString *)name;
+
+- (void)hello;
+
+@end
+
+@implementation HermesClientTest
+
+- (void)testPrivatePropertyAndMethod
+&#123;
+  NSLog(@&quot;%@&quot;,[HermesClient sharedInstance].name);
+  [[HermesClient sharedInstance] hello];
+&#125;
+@end
+</code></pre><h4 id="四、-单元测试下开发模式、技术框架选择"><a href="#四、-单元测试下开发模式、技术框架选择" class="headerlink" title="四、 单元测试下开发模式、技术框架选择"></a>四、 单元测试下开发模式、技术框架选择</h4><p>单元测试是按照测试范围来划分的。TDD、BDD 是按照开发模式来划分的。因此就有各种排列组合，这里我们只关心单元测试下的 TDD、BDD 方案。<br>在单元测试阶段，TDD 和 BDD 都可以适用。</p><h5 id="1-TDD"><a href="#1-TDD" class="headerlink" title="1. TDD"></a>1. TDD</h5><p>TDD 强调不断的测试推动代码的开发，这样 &#96;&#96;&#96;java<br>简化了</p><pre><code class="代码，保证了代码质量。">思想是在拿到一个新的功能时，首先思考该功能如何测试，各种测试用例、各种边界 case；然后完成测试代码的开发；最后编写相应的代码以满足、通过这些测试用例。 
+TDD 开发过程类似下图： 
+&lt;a name=&quot;TDDStructure&quot;&gt;&lt;/a&gt;![Test](https://raw.githubusercontent.com/FantasticLBP/knowledge-kit/master/assets/2020-07-13-TDDStructure.png  &#39;写好测试，提升应用质量&#39;) 
+ 
+ 先编写该功能的测试用例，实现测试代码。这时候去跑测试，是不通过的，也就是到了红色的状态 
+ 然后编写真正的功能实现代码。这时候去跑测试，测试通过，也就是到了绿色的状态 
+ 在测试用例的保证下，可以重构、优化代码 
+ 
+抛出一个问题：TDD 看上去很好，应该用它吗？ 
+这个问题不用着急回答，回答了也不会有对错之分。开发中经常是这样一个流程，新的需求出来后，先经过技术评审会议，确定宏观层面的技术方案、确定各个端的技术实现、使用的技术等，整理出开发文档、会议文档。工期评估后开始编码。事情这么简单吗？前期即使想的再充分、再细致，可能还是存在特殊 case 漏掉的情况，导致技术方案或者是技术实现的改变。如果采用 TDD，那么之前新功能给到后，就要考虑测试用例的设计、编写了测试代码，在测试用例的保证下再去实现功能。如果遇到了技术方案的变更，之前的测试用例要改变、测试代码实现要改变。可能新增的某个 case 导致大部分的测试代码和���现代码都要改变。 
+如何开展 TDD** 
+ 
+新建一个工程，确保 “Include Unit Tests” 选项是选中的状态 ![Test](https://raw.githubusercontent.com/FantasticLBP/knowledge-kit/master/assets/2020-07-13-TDDStructure.png  &#39;写好测试，提升应用质量&#39;)  
+创建后的工程目录如下 ![Test](https://raw.githubusercontent.com/FantasticLBP/knowledge-kit/master/assets/2020-07-13-TDDStructure.png  &#39;写好测试，提升应用质量&#39;)  
+删除 Xcode 创建的测试模版文件  ```java 
+TDDDemoTests.m
+</code></pre><p>假如我们需要设计一个人类，它具有吃饭的功能，且当他吃完后会说一句“好饱啊”。<br>那么按照 TDD 我们先设计测试用例。假设有个 Person 类，有个对象方法叫做吃饭，吃完饭后会返回一个“好饱啊”的字符串。那测试用例就是</p><pre><code> 步骤 
+ 期望 
+ 结果 
+ 
+
+
+ 
+ 实例化 Person 对象，调用对象的 eat 方法 
+ 调用后返回“好饱啊” 
+ ？ 
+ 
+</code></pre><p>实现测试用例代码。创建继承自 Unit Test Case class 的测试类，命名为 <code>java 工程前缀+测试类名+Test</code> ，也就是 &#96;&#96;&#96;java<br>TDDPersonTest.m</p><pre><code class="。">因为要测试 Person 类，所以在主工程中创建 Person 类  
+因为要测试人类在吃饭后说一句“好饱啊”。所以设想那个类目前只有一个吃饭的方法。于是在  ```java 
+TDDPersonTest.m
+```  中创建一个测试函数  ```java 
+-(void)testReturnStatusStringWhenPersonAte;
+``` 函数内容如下  ```java 
+- (void)testReturnStatusStringWhenPersonAte
+&#123;
+  // Given
+  Person *somebody = [[Person alloc] init];
+
+  // When
+  NSString *statusMessage = [somebody performSelector:@selector(eat)];
+
+  // Then
+  XCTAssert([statusMessage isEqualToString:@&quot;好饱啊&quot;], @&quot;Person 「吃饭后返回“好饱啊”」功能异常&quot;);
+&#125;
+</code></pre><p>Xcode 下按快捷键 &#96;&#96;&#96;java<br>Command + U</p><pre><code class=",跑测试代码发现是失败的。因为我们的">从 TDD 开发过程可以看到，我们现在是红色的 “Fail” 状态。所以需要去 Person 类中实现功能代码。Person 类如下  ```java 
+#import &quot;Person.h&quot;
+
+@implementation Person
+
+- (NSString *)eat
+&#123;
+  [NSThread sleepForTimeInterval:1];
+  return @&quot;好饱啊&quot;;;
+&#125;
+
+@end
+</code></pre><p>再次运行，跑一下测试用例(Command + U 快捷键)。发现测试通过，也就是TDD 开发过程中的绿色 “Success” 状态。<br>例子比较简单，假如情况需要，可以在 <code>java -(void)setUp</code> 方法里面做一些测试的前置准备工作，在 &#96;&#96;&#96;java<br>-(void)tearDown</p><pre><code class="方法里做资源释放的操作">假如 eat 方法实现的不够漂亮。现在在测试用例的保证下，大胆重构，最后确保所有的 Unit Test case 通过即可。  
+ 
+##### 2. BDD 
+相比 TDD，BDD 关注的是行为方式的设计，拿上述“人吃饭”举例说明。 
+和 TDD 相比第1～4步骤相同。 
+ 
+BDD 则需要先实现功能代码。创建 Person 类，实现  ```java 
+-(void)eat;
+``` 方法。代码和上面的相同  
+BDD 需要引入好用的框架  ```java 
+Kiwi
+``` ，使用 Pod 的方式引入  
+因为要测试人类在吃饭后说一句“好饱啊”。所以设想那个类目前只有一个吃饭的方法。于是在  ```java 
+TDDPersonTest.m
+```  中创建一个测试函数  ```java 
+-(void)testReturnStatusStringWhenPersonAte;
+``` 函数内容如下  ```java 
+#import &quot;kiwi.h&quot;
+#import &quot;Person.h&quot;
+
+SPEC_BEGIN(BDDPersonTest)
+
+describe(@&quot;Person&quot;, ^&#123;
+  context(@&quot;when someone ate&quot;, ^&#123;
+      it(@&quot;should get a string&quot;,^&#123;
+            Person *someone = [[Person alloc] init];
+          NSString *statusMessage = [someone eat];
+          [[statusMessage shouldNot] beNil];
+          [[statusMessage should] equal:@&quot;好饱啊&quot;];
+      &#125;);
+  &#125;);
+&#125;);
+
+SPEC_END
+</code></pre><h5 id="3-XCTest"><a href="#3-XCTest" class="headerlink" title="3. XCTest"></a>3. XCTest</h5><p>开发步骤<br>Xcode 自带的测试系统是 &#96;&#96;&#96;java<br>XCTest</p><pre><code class="，使用简单。开发步骤如下"> 
+在  ```java 
+Tests
+```  目录下为被测的类创建一个继承自  ```java 
+XCTestCase
+```  的测试类。  
+删除新建的测试代码模版里面的无用方法  ```java 
+- (void)testPerformanceExample
+``` 、 ```java 
+- (void)testExample
+``` 。  
+跟普通类一样，可以继承，可以写私有属性、私有方法。所以可以在新建的类里面，根据需求写一些私有属性等  
+在  ```java 
+- (void)setUp
+```  方法里面写一些初始化、启动设置相关的代码。比如测试数据库功能的时候，写一些数据库连接池相关代码  
+为被测类里面的每个方法写测试方法。被测类里面可能是 n 个方法，测试类里面可能是 m 个方法（m &gt;= n），根据我们在第三部分：单元测试编码规范里讲过的 一个测试用例只测试一个分支，方法内部有 if、switch 语句时，需要为每个分支写测试用例  
+为测试类每个方法写的测试方法有一定的规范。命名必须是  ```java 
+test+被测方法名
+``` 。函数无参数、无返回值。比如  ```java 
+- (void)testSharedInstance
+``` 。  
+测试方法里面的代码按照  ```java 
+Given-&gt;When-&gt;Then
+```  的顺序展开。测试环境所需的先决条件准备；调用所要测试的某个方法、函数；使用断言验证输出和行为是否符合预期。  
+在  ```java 
+- (void)tearDown
+```  方法里面写一些释放掉资源或者关闭的代码。比如测试数据库功能的时候，写一些数据库连接池关闭的代码  
+ 
+断言相关宏 
+ ```java 
+/*!
+ * @function XCTFail(...)
+ * Generates a failure unconditionally.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTFail(...) \
+  _XCTPrimitiveFail(self, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertNil(expression, ...)
+ * Generates a failure when ((\a expression) != nil).
+ * @param expression An expression of id type.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertNil(expression, ...) \
+  _XCTPrimitiveAssertNil(self, expression, @#expression, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertNotNil(expression, ...)
+ * Generates a failure when ((\a expression) == nil).
+ * @param expression An expression of id type.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertNotNil(expression, ...) \
+  _XCTPrimitiveAssertNotNil(self, expression, @#expression, __VA_ARGS__)
+
+/*!
+ * @define XCTAssert(expression, ...)
+ * Generates a failure when ((\a expression) == false).
+ * @param expression An expression of boolean type.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssert(expression, ...) \
+  _XCTPrimitiveAssertTrue(self, expression, @#expression, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertTrue(expression, ...)
+ * Generates a failure when ((\a expression) == false).
+ * @param expression An expression of boolean type.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertTrue(expression, ...) \
+  _XCTPrimitiveAssertTrue(self, expression, @#expression, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertFalse(expression, ...)
+ * Generates a failure when ((\a expression) != false).
+ * @param expression An expression of boolean type.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertFalse(expression, ...) \
+  _XCTPrimitiveAssertFalse(self, expression, @#expression, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertEqualObjects(expression1, expression2, ...)
+ * Generates a failure when ((\a expression1) not equal to (\a expression2)).
+ * @param expression1 An expression of id type.
+ * @param expression2 An expression of id type.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertEqualObjects(expression1, expression2, ...) \
+  _XCTPrimitiveAssertEqualObjects(self, expression1, @#expression1, expression2, @#expression2, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertNotEqualObjects(expression1, expression2, ...)
+ * Generates a failure when ((\a expression1) equal to (\a expression2)).
+ * @param expression1 An expression of id type.
+ * @param expression2 An expression of id type.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertNotEqualObjects(expression1, expression2, ...) \
+  _XCTPrimitiveAssertNotEqualObjects(self, expression1, @#expression1, expression2, @#expression2, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertEqual(expression1, expression2, ...)
+ * Generates a failure when ((\a expression1) != (\a expression2)).
+ * @param expression1 An expression of C scalar type.
+ * @param expression2 An expression of C scalar type.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertEqual(expression1, expression2, ...) \
+  _XCTPrimitiveAssertEqual(self, expression1, @#expression1, expression2, @#expression2, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertNotEqual(expression1, expression2, ...)
+ * Generates a failure when ((\a expression1) == (\a expression2)).
+ * @param expression1 An expression of C scalar type.
+ * @param expression2 An expression of C scalar type.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertNotEqual(expression1, expression2, ...) \
+  _XCTPrimitiveAssertNotEqual(self, expression1, @#expression1, expression2, @#expression2, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertEqualWithAccuracy(expression1, expression2, accuracy, ...)
+ * Generates a failure when (difference between (\a expression1) and (\a expression2) is &gt; (\a accuracy))).
+ * @param expression1 An expression of C scalar type.
+ * @param expression2 An expression of C scalar type.
+ * @param accuracy An expression of C scalar type describing the maximum difference between \a expression1 and \a expression2 for these values to be considered equal.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertEqualWithAccuracy(expression1, expression2, accuracy, ...) \
+  _XCTPrimitiveAssertEqualWithAccuracy(self, expression1, @#expression1, expression2, @#expression2, accuracy, @#accuracy, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertNotEqualWithAccuracy(expression1, expression2, accuracy, ...)
+ * Generates a failure when (difference between (\a expression1) and (\a expression2) is &lt;= (\a accuracy)).
+ * @param expression1 An expression of C scalar type.
+ * @param expression2 An expression of C scalar type.
+ * @param accuracy An expression of C scalar type describing the maximum difference between \a expression1 and \a expression2 for these values to be considered equal.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertNotEqualWithAccuracy(expression1, expression2, accuracy, ...) \
+  _XCTPrimitiveAssertNotEqualWithAccuracy(self, expression1, @#expression1, expression2, @#expression2, accuracy, @#accuracy, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertGreaterThan(expression1, expression2, ...)
+ * Generates a failure when ((\a expression1) &lt;= (\a expression2)).
+ * @param expression1 An expression of C scalar type.
+ * @param expression2 An expression of C scalar type.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertGreaterThan(expression1, expression2, ...) \
+  _XCTPrimitiveAssertGreaterThan(self, expression1, @#expression1, expression2, @#expression2, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertGreaterThanOrEqual(expression1, expression2, ...)
+ * Generates a failure when ((\a expression1) &lt; (\a expression2)).
+ * @param expression1 An expression of C scalar type.
+ * @param expression2 An expression of C scalar type.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertGreaterThanOrEqual(expression1, expression2, ...) \
+  _XCTPrimitiveAssertGreaterThanOrEqual(self, expression1, @#expression1, expression2, @#expression2, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertLessThan(expression1, expression2, ...)
+ * Generates a failure when ((\a expression1) &gt;= (\a expression2)).
+ * @param expression1 An expression of C scalar type.
+ * @param expression2 An expression of C scalar type.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertLessThan(expression1, expression2, ...) \
+  _XCTPrimitiveAssertLessThan(self, expression1, @#expression1, expression2, @#expression2, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertLessThanOrEqual(expression1, expression2, ...)
+ * Generates a failure when ((\a expression1) &gt; (\a expression2)).
+ * @param expression1 An expression of C scalar type.
+ * @param expression2 An expression of C scalar type.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertLessThanOrEqual(expression1, expression2, ...) \
+  _XCTPrimitiveAssertLessThanOrEqual(self, expression1, @#expression1, expression2, @#expression2, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertThrows(expression, ...)
+ * Generates a failure when ((\a expression) does not throw).
+ * @param expression An expression.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertThrows(expression, ...) \
+  _XCTPrimitiveAssertThrows(self, expression, @#expression, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertThrowsSpecific(expression, exception_class, ...)
+ * Generates a failure when ((\a expression) does not throw \a exception_class).
+ * @param expression An expression.
+ * @param exception_class The class of the exception. Must be NSException, or a subclass of NSException.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertThrowsSpecific(expression, exception_class, ...) \
+  _XCTPrimitiveAssertThrowsSpecific(self, expression, @#expression, exception_class, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertThrowsSpecificNamed(expression, exception_class, exception_name, ...)
+ * Generates a failure when ((\a expression) does not throw \a exception_class with \a exception_name).
+ * @param expression An expression.
+ * @param exception_class The class of the exception. Must be NSException, or a subclass of NSException.
+ * @param exception_name The name of the exception.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertThrowsSpecificNamed(expression, exception_class, exception_name, ...) \
+  _XCTPrimitiveAssertThrowsSpecificNamed(self, expression, @#expression, exception_class, exception_name, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertNoThrow(expression, ...)
+ * Generates a failure when ((\a expression) throws).
+ * @param expression An expression.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertNoThrow(expression, ...) \
+  _XCTPrimitiveAssertNoThrow(self, expression, @#expression, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertNoThrowSpecific(expression, exception_class, ...)
+ * Generates a failure when ((\a expression) throws \a exception_class).
+ * @param expression An expression.
+ * @param exception_class The class of the exception. Must be NSException, or a subclass of NSException.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertNoThrowSpecific(expression, exception_class, ...) \
+  _XCTPrimitiveAssertNoThrowSpecific(self, expression, @#expression, exception_class, __VA_ARGS__)
+
+/*!
+ * @define XCTAssertNoThrowSpecificNamed(expression, exception_class, exception_name, ...)
+ * Generates a failure when ((\a expression) throws \a exception_class with \a exception_name).
+ * @param expression An expression.
+ * @param exception_class The class of the exception. Must be NSException, or a subclass of NSException.
+ * @param exception_name The name of the exception.
+ * @param ... An optional supplementary description of the failure. A literal NSString, optionally with string format specifiers. This parameter can be completely omitted.
+*/
+#define XCTAssertNoThrowSpecificNamed(expression, exception_class, exception_name, ...) \
+  _XCTPrimitiveAssertNoThrowSpecificNamed(self, expression, @#expression, exception_class, exception_name, __VA_ARGS__)
+</code></pre><p>经验小结</p><p>XCTestCase 类和其他类一样，你可以定义基类，这里面封装一些常用的方法。 &#96;&#96;&#96;java<br>&#x2F;&#x2F; HCTTestCase.h<br>#import &lt;XCTest&#x2F;XCTest.h&gt;</p><p>NS_ASSUME_NONNULL_BEGIN</p><p>@interface HCTTestCase : XCTestCase</p><p>@property (nonatomic, assign) NSTimeInterval networkTimeout;</p><p>&#x2F;**<br>用一个默认时间设置异步测试 XCTestExpectation 的超时处理<br>*&#x2F;</p><ul><li>(void)waitForExpectationsWithCommonTimeout;</li></ul><p>&#x2F;**<br>用一个默认时间设置异步测试的</p><p>@param handler 超时的处理逻辑<br>*&#x2F;</p><ul><li>(void)waitForExpectationsWithCommonTimeoutUsingHandler:(XCWaitCompletionHandler __nullable)handler;</li></ul><p>&#x2F;**<br>生成 Crash 类型的 meta 数据</p><p>@return meta 类型的字典<br>*&#x2F;</p><ul><li>(NSDictionary *)generateCrashMetaDataFromReport;</li></ul><p>@end</p><p>NS_ASSUME_NONNULL_END</p><p>&#x2F;&#x2F; HCTTestCase.m<br>#import “HCTTestCase.h”<br>#import …</p><p>@implementation HCTTestCase</p><p>#pragma mark - life cycle</p><ul><li><p>(void)setUp<br>{<br>[super setUp];<br>self.networkTimeout &#x3D; 20.0;<br>&#x2F;&#x2F; 1. 设置平台信息<br>[self setupAppProfile];<br>&#x2F;&#x2F; 2. 设置 Mget 配置<br>[[TITrinityInitManager sharedInstance] setup];<br>&#x2F;&#x2F; ….<br>&#x2F;&#x2F; 3. 设置 HermesClient<br>[[HermesClient sharedInstance] setup];<br>}</p></li><li><p>(void)tearDown<br>{<br>[super tearDown];<br>}</p></li></ul><p>#pragma mark - public Method</p><ul><li><p>(void)waitForExpectationsWithCommonTimeout<br>{<br>[self waitForExpectationsWithCommonTimeoutUsingHandler:nil];<br>}</p></li><li><p>(void)waitForExpectationsWithCommonTimeoutUsingHandler:(XCWaitCompletionHandler __nullable)handler<br>{<br>[self waitForExpectationsWithTimeout:self.networkTimeout handler:handler];<br>}</p></li><li><p>(NSDictionary *)generateCrashMetaDataFromReport<br>{<br>NSMutableDictionary *metaDictionary &#x3D; [NSMutableDictionary dictionary];<br>NSDate *crashTime &#x3D; [NSDate date];<br>metaDictionary[@”MONITOR_TYPE”] &#x3D; @”appCrash”;<br>&#x2F;&#x2F; …<br>metaDictionary[@”USER_CRASH_DATE”] &#x3D; @([crashTime timeIntervalSince1970] * 1000);<br>return [metaDictionary copy];<br>}</p></li></ul><p>#pragma mark - private method</p><ul><li>(void)setupAppProfile<br>{<br>[[CMAppProfile sharedInstance] setMPlatform:@”70”];<br>&#x2F;&#x2F; …<br>}</li></ul><p>@end</p><pre><code>上述说的基本是开发规范相关。测试方法内部如果调用了其他类的方法，则在测试方法内部必须 Mock 一个外部对象，限制好返回值等。  
+在 XCTest 内难以使用 mock 或 stub，这些是测试中非常常见且重要的功能  
+ 
+例子 
+这里举个例子，是测试一个数据库操作类  ```java 
+HCTDatabase
+``` ，代码只放某个方法的测试代码。 
+ ```java 
+- (void)testRemoveLatestRecordsByCount
+&#123;
+  XCTestExpectation *exception = [self expectationWithDescription:@&quot;测试数据库删除最新数据功能&quot;];
+  // 1. 先清空数据表
+  [dbInstance removeAllLogsInTableType:HCTLogTableTypeMeta];
+  // 2. 再插入一批数据
+  NSMutableArray *insertModels = [NSMutableArray array];
+  NSMutableArray *reportIDS = [NSMutableArray array];
+  
+  for (NSInteger index = 1; index &lt;= 100; index++) &#123;
+      HCTLogMetaModel *model = [[HCTLogMetaModel alloc] init];
+      model.log_id = index;
+      // ...
+      if (index &gt; 90 &amp;&amp; index &lt;= 100) &#123;
+          [reportIDS addObject:model.report_id];
+      &#125;
+      [insertModels addObject:model];
+  &#125;
+  [dbInstance add:insertModels inTableType:HCTLogTableTypeMeta];
+  
+  // 3. 将早期的数据删除掉（id &gt; 90 &amp;&amp; id &lt;= 100）
+  [dbInstance removeLatestRecordsByCount:10 inTableType:HCTLogTableTypeMeta];
+  
+  // 4. 拿到当前的前10条数据和之前存起来的前10条 id 做比较。再判断当前表中的总记录条数是否等于 90
+  [dbInstance getLatestRecoreds:10 inTableType:HCTLogTableTypeMeta completion:^(NSArray&lt;HCTLogModel *&gt; * _Nonnull records) &#123;
+      NSArray&lt;HCTLogModel *&gt; *latestRTentRecords = records;
+      
+      [dbInstance getOldestRecoreds:100 inTableType:HCTLogTableTypeMeta completion:^(NSArray&lt;HCTLogModel *&gt; * _Nonnull records) &#123;
+          NSArray&lt;HCTLogModel *&gt; *currentRecords = records;
+          
+          __block BOOL isEarlyData = NO;
+          [latestRTentRecords enumerateObjectsUsingBlock:^(HCTLogModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) &#123;
+              if ([reportIDS containsObject:obj.report_id]) &#123;
+                  isEarlyData = YES;
+              &#125;
+          &#125;];
+          
+          XCTAssert(!isEarlyData &amp;&amp; currentRecords.count == 90, @&quot;***Database「删除最新n条数据」功能：异常&quot;);
+          [exception fulfill];
+      &#125;];
+      
+  &#125;];
+  [self waitForExpectationsWithCommonTimeout];
+&#125;
+</code></pre><h5 id="3-测试框架"><a href="#3-测试框架" class="headerlink" title="3. 测试框架"></a>3. 测试框架</h5><h6 id="1-Kiwi"><a href="#1-Kiwi" class="headerlink" title="1. Kiwi"></a>1. Kiwi</h6><p>BDD 框架里的 Kiwi 可圈可点。使用 CocoaPods 引入 &#96;&#96;&#96;java<br>pod ‘Kiwi’</p><pre><code class="。看下面的例子">被测类（Planck 项目是一个基于 WebView 的 SDK，根据业务场景，发现针对 WebView 的大部分功能定制都是基于 WebView 的生命周期内发生的，所以参考 NodeJS 的中间件思想，设计了基于生命周期的 WebView 中间件） 
+ ```java 
+#import &lt;Foundation/Foundation.h&gt;
+
+@interface TPKTrustListHelper : NSObject
+
++(void)fetchRemoteTrustList;
+
++(BOOL)isHostInTrustlist:(NSString *)scheme;
+
++(NSArray *)trustList;
+
+@end
+
+</code></pre><p>测试类</p><pre><code class="java"> SPEC_BEGIN(TPKTrustListHelperTest)
+describe(@&quot;Middleware Wrapper&quot;, ^&#123;
+   
+   context(@&quot;when get trustlist&quot;, ^&#123;
+       it(@&quot;should get a array of string&quot;,^&#123;
+           NSArray *array = [TPKTrustListHelper trustList];
+           [[array shouldNot] beNil];
+           NSString *first = [array firstObject];
+           [[first shouldNot] beNil];
+           [[NSStringFromClass([first class]) should] equal:@&quot;__NSCFString&quot;];
+       &#125;);
+   &#125;);
+   
+   context(@&quot;when check a string wether contained in trustlist &quot;, ^&#123;
+       it(@&quot;first string should contained in trustlist&quot;,^&#123;
+           NSArray *array = [TPKTrustListHelper trustList];
+           NSString *first = [array firstObject];
+           [[theValue([TPKTrustListHelper isHostInTrustlist:first]) should] equal:@(YES)];
+       &#125;);
+   &#125;);
+&#125;);
+SPEC_END
+</code></pre><p>例子包含 Kiwi 的最基础元素。 <code>java SPEC_BEGIN</code> 和 <code>java SPEC_END</code> 表示测试类； <code>java describe</code> 描述需要被测试的类； <code>java context</code> 表示一个测试场景，也就是 <code>java Given-&gt;When-&gt;Then</code> 里的 <code>java Given</code> ； <code>java it</code> 表示要测试的内容，也就是也就是 <code>java Given-&gt;When-&gt;Then</code> 里的 <code>java When</code> 和 <code>java Then</code> 。1个 <code>java describe</code> 下可以包含多个 <code>java context</code> ，1个 <code>java context</code> 下可以包含多个 &#96;&#96;&#96;java<br>it</p><pre><code class="。">Kiwi 的使用分为：Specs、 Expectations 、 Mocks and Stubs 、Asynchronous Testing 四部分。点击可以访问详细的说明文档。 
+ ```java 
+it
+```  里面的代码块是真正的测试代码，使用链式调用的方式，简单上手。 
+测试领域中 Mock 和 Stub 非常重要。Mock 模拟对象可以降低对象之间的依赖，模拟出一个纯净的测试环境（类似初中物理课上“控制变量法”的思想）。Kiwi 也支持的非常好，可以模拟对象、模拟空对象、模拟遵循协议的对象等等，点击 Mocks and Stubs 查看。Stub 存根可以控制某个方法的返回值，这对于方法内调用别的对象的方法返回值很有帮助。减少对于外部的依赖，单一测试当前行为是否符合预期。 
+针对异步测试，XCTest 则需要创建一个  ```java 
+XCTestExpectation
+```  对象，在异步实现里面调用该对象的  ```java 
+fulfill
+```  方法，最后设置最大等待时间和完成的回调  ```java 
+- (void)waitForExpectationsWithTimeout:(NSTimeInterval)timeout handler:(nullable XCWaitCompletionHandler)handler;
+```  如下例子 
+ ```java 
+XCTestExpectation *exception = [self expectationWithDescription:@&quot;测试数据库插入功能&quot;];
+  [dbInstance removeAllLogsInTableType:HCTLogTableTypeMeta];
+  NSMutableArray *insertModels = [NSMutableArray array];
+  for (NSInteger index = 1; index &lt;= 10000; index++) &#123;
+      HCTLogMetaModel *model = [[HCTLogMetaModel alloc] init];
+      model.log_id = index;
+        // 。。。
+      [insertModels addObject:model];
+  &#125;
+  [dbInstance add:insertModels inTableType:HCTLogTableTypeMeta];
+  [dbInstance recordsCountInTableType:HCTLogTableTypeMeta completion:^(NSInteger count) &#123;
+      XCTAssert(count == insertModels.count, @&quot;**Database「数据增加」功能：异常&quot;);
+      [exception fulfill];
+  &#125;];
+  [self waitForExpectationsWithCommonTimeout];
+</code></pre><h6 id="2-expecta、Specta"><a href="#2-expecta、Specta" class="headerlink" title="2. expecta、Specta"></a>2. expecta、Specta</h6><p>expecta 和 Specta 都出自 orta 之手，他也是 Cocoapods 的开发者之一。太牛逼了，工程化、质量保证领域的大佬。<br>Specta 是一个轻量级的 BDD 测试框架，采用 DSL 模式，让测试更接近于自然语言，因此更易读。<br>特点：</p><p>易于集成到项目中。在 Xcode 中勾选 &#96;&#96;&#96;java<br>Include Unit Tests</p><pre><code class="，和"> 语法很规范，对比 Kiwi 和 Specta 的文档，发现很多东西都是相同的，也就是很规范，所以学习成本低、后期迁移到其他框架很平滑。 
+ 
+Expecta 是一个匹配（断言）框架，相比 Xcode 的断言 XCAssert，Excepta 提供更加丰富的断言。 
+特点： 
+ 
+ Eepecta 没有数据类型限制，比如 1，并不关心是 NSInteger 还是 CGFloat 
+ 链式编程，写起来很舒服 
+ 反向匹配，很灵活。断言匹配用  ```java 
+except(...).to.equal(...)
+``` ，断言不匹配则使用  ```java 
+.notTo
+```  或者  ```java 
+.toNot
+</code></pre><p>延时匹配，可以在链式表达式后加入 <code>java .will</code> 、 <code>java .willNot</code> 、 &#96;&#96;&#96;java<br>.after(interval)</p><pre><code class="等"> 
+##### 4. 小结 
+Xcode 自带的  ```java 
+XCTestCase
+```  比较适合 TDD，不影响源代码，系统独立且不影响 App 包大小。适合简单场景下的测试。且每个函数在最左侧又个测试按钮，点击后可以单独测试某个函数。 
+Kiwi 是一个强大的 BDD 框架，适合稍微复杂写的项目，写法舒服、功能强大，模拟对象、存根语法、异步测试等满足几乎所有的测试场景。不能和 XCTest 继承。 
+Specta 也是一个 BDD 框架，基于 XCTest 开发，可以和 XCTest 模版集合使用。相比 Kiwi，Specta 轻量一些。开发中一般搭配 Excepta 使用。如果需要使用 Mock 和 Stud 可以搭配 OCMock。 
+Excepta 是一个匹配框架，比 XCTest 的断言则更加全面一些。 
+没办法说哪个最好、最合理，根据项目需求选择合适的组合。 
+#### 五、网络测试 
+我们在测试某个方法的时候可能会遇到方法内部调用了网络通信能力，网络请求成功，可能刷新 UI 或者给出一些成功的提示；网络失败或者网络不可用则给出一些失败的提示。所以需要对网络通信去看进行模拟。 
+iOS 中很多网络都是基于 NSURL 系统下的类实现的。所以我们可以利用  ```java 
+NSURLProtocol
+```  的能力来监控网络并 mock 网络数据。如果感兴趣可以查看这篇文���。 
+开源项目 OHHTTPStubs 就是一个对网络模拟的库。它可以拦截 HTTP 请求，返回 json 数据，定制各种头信息。 
+ 
+几个主要类及其功能： ```java 
+HTTPStubsProtocol
+```  拦截网络请求； ```java 
+HTTPStubs
+```  单例管理  ```java 
+HTTPStubsDescriptor
+```  实例对象； ```java 
+HTTPStubsResponse
+```  伪造 HTTP 请求。 
+ ```java 
+HTTPStubsProtocol
+```  继承自  ```java 
+NSURLProtocol
+``` ，可以在 HTTP 请求发送之前对 request 进行过滤处理 
+ ```java 
++ (BOOL)canInitWithRequest:(NSURLRequest *)request
+&#123;
+ BOOL found = ([HTTPStubs.sharedInstance firstStubPassingTestForRequest:request] != nil);
+ if (!found &amp;&amp; HTTPStubs.sharedInstance.onStubMissingBlock) &#123;
+    HTTPStubs.sharedInstance.onStubMissingBlock(request);
+ &#125;
+ return found;
+&#125;
+</code></pre><pre><code class="java"> firstStubPassingTestForRequest
+ ```  方法内部会判断请求是否需要被当前对象处理 
+紧接着开始发送网络请求。实际上在  ```java 
+ - (void)startLoading
+ ```  方法中可以用任何网络能力去完成请求，比如 NSURLSession、NSURLConnection、AFNetworking 或其他网络框架。OHHTTPStubs 的做法是获取 request、client 对象。如果 HTTPStubs 单例中包含  ```java 
+ onStubActivationBlock
+ ```  对象，则执行该 block，然后利用 responseBlock 对象返回一个 HTTPStubsResponse 响应对象。 
+OHHTTPStubs 的具体 API 可以查看文档。 
+举个例子，利用 Kiwi、OHHTTPStubs 测试离线包功能。代码如下 
+```java 
+ @interface HORouterManager (Unittest)
+
+- (void)fetchOfflineInfoIfNeeded;
+
+@end
+
+SPEC_BEGIN(HORouterTests)
+
+describe(@&quot;routerTests&quot;, ^&#123;
+   context(@&quot;criticalPath&quot;, ^&#123;
+       __block HORouterManager *routerManager = nil;
+       beforeAll(^&#123;
+           routerManager = [[HORouterManager alloc] init];
+       &#125;);
+       it(@&quot;getLocalPath&quot;, ^&#123;
+           __block NSString *pagePath = nil;
+           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;
+               pagePath = [routerManager filePathOfUrl:@&quot;http://***/resource1&quot;];
+           &#125;);
+           [[expectFutureValue(pagePath) shouldEventuallyBeforeTimingOutAfter(5)] beNonNil];
+           
+           __block NSString *rescPath = nil;
+           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;
+               rescPath = [routerManager filePathOfUrl:@&quot;http://***/resource1&quot;];
+           &#125;);
+           [[expectFutureValue(rescPath) shouldEventuallyBeforeTimingOutAfter(5)] beNonNil];
+       &#125;);
+       it(@&quot;fetchOffline&quot;, ^&#123;
+           [HOOfflineManager sharedInstance].offlineInfoInterval = 0;
+           [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) &#123;
+               return [request.URL.absoluteString containsString:@&quot;h5-offline-pkg&quot;];
+           &#125; withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) &#123;
+               NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+               dict[@&quot;code&quot;] = @(0);
+               dict[@&quot;data&quot;] = @&quot;f722fc3efce547897819e9449d2ac562cee9075adda79ed74829f9d948e2f6d542a92e969e39dfbbd70aa2a7240d6fa3e51156c067e8685402727b6c13328092ecc0cbc773d95f9e0603b551e9447211b0e3e72648603e3d18e529b128470fa86aeb45d16af967d1a21b3e04361cfc767b7811aec6f19c274d388ddae4c8c68e857c14122a44c92a455051ae001fa7f2b177704bdebf8a2e3277faf0053460e0ecf178549e034a086470fa3bf287abbdd0f79867741293860b8a29590d2c2bb72b749402fb53dfcac95a7744ad21fe7b9e188881d1c24047d58c9fa46b3ebf4bc42a1defc50748758b5624c6c439c182fe21d4190920197628210160cf279187444bd1cb8707362cc4c3ab7486051af088d7851846bea21b64d4a5c73bd69aafc4bb34eb0862d1525c4f9a62ce64308289e2ecbc19ea105aa2bf99af6dd5a3ff653bbe7893adbec37b44a088b0b74b80532c720c79b7bb59fda3daf85b34ef35&quot;;
+               NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
+               return [OHHTTPStubsResponse responseWithData:data
+                                                 statusCode:200
+                                                    headers:@&#123;@&quot;Content-Type&quot;:@&quot;application/json&quot;&#125;];
+           &#125;];
+           [routerManager fetchOfflineInfoIfNeeded];
+           [[HOOfflineInfo shouldEventually] receive:@selector(saveToLocal:)];
+       &#125;);
+   &#125;);
+&#125;);
+
+SPEC_END
+</code></pre><p>😂 插一嘴，我贴的代码已经好几次可以看到不同的测试框架组合了，所以不是说选了框架 A 就完事，根据场景选择最优解。</p><h4 id="六、UI-测试"><a href="#六、UI-测试" class="headerlink" title="六、UI 测试"></a>六、UI 测试</h4><p>上面文章大篇幅的讲了单元测试相关的话题，单元测试十分适合代码质量、逻辑、网络等内容的测试，但是针对最终产物 App 来说单元测试就不太适合了，如果测试 UI 界面的正确性、功能是否正确显然就不太适合了。Apple 在 Xcode 7 开始推出的 &#96;&#96;&#96;java<br>UI Testing</p><pre><code class="就是苹果自己的">很多 UI 自动化测试框架的底层实现都依赖于  ```java 
+Accessibility
+``` ，也就是 App 可用性。 ```java 
+UI Accessibility
+```  是 iOS 3.0 引入的一个人性化功能，帮助身体不便的人士方便使用 App。 
+Accessibility 通过对 UI 元素进行分类和标记。分类成类似按钮、文本框、文本等类型，使用 identifier 来区分不同 UI 元素。无痕埋点的设计与实现里面也使用  ```java 
+accessibilityIdentifier
+```  来绑定业务数据。 
+ 
+ 使用 Xcode 自带的 UI测试则在创建工程的时候需要勾选 “Include UI Tests”。 
+ 像单元测试意义，UI 测试方法命名以 test 开头。将鼠标光标移到方法内，点击 Xcode 左下方的红色按钮，开始录制 UI 脚本。 
+ 
+![Test](https://raw.githubusercontent.com/FantasticLBP/knowledge-kit/master/assets/2020-07-13-TDDStructure.png  &#39;写好测试，提升应用质量&#39;) 
+解释说明： 
+ ```java 
+/*! Proxy for an application that may or may not be running. */
+@interface XCUIApplication : XCUIElement
+// ...
+@end
+</code></pre><pre><code class="java">  XCUIApplication launch
+  ```  来启动测试。 ```java 
+  XCUIApplication
+  ```  是 UIApplication 在测试进程中的代理，用来和 App 进行一些交互。  
+  使用  ```java 
+  staticTexts
+  ``` 来获取当前屏幕上的静态文本（UILabel）元素的代理。等价于  ```java 
+  [app descendantsMatchingType:XCUIElementTypeStaticText]
+  ``` 。XCUIElementTypeStaticText 参数是枚举类型。  ```java 
+  typedef NS_ENUM(NSUInteger, XCUIElementType) &#123;
+ XCUIElementTypeAny = 0,
+ XCUIElementTypeOther = 1,
+ XCUIElementTypeApplication = 2,
+ XCUIElementTypeGroup = 3,
+ XCUIElementTypeWindow = 4,
+ XCUIElementTypeSheet = 5,
+ XCUIElementTypeDrawer = 6,
+ XCUIElementTypeAlert = 7,
+ XCUIElementTypeDialog = 8,
+ XCUIElementTypeButton = 9,
+ XCUIElementTypeRadioButton = 10,
+ XCUIElementTypeRadioGroup = 11,
+ XCUIElementTypeCheckBox = 12,
+ XCUIElementTypeDisclosureTriangle = 13,
+ XCUIElementTypePopUpButton = 14,
+ XCUIElementTypeComboBox = 15,
+ XCUIElementTypeMenuButton = 16,
+ XCUIElementTypeToolbarButton = 17,
+ XCUIElementTypePopover = 18,
+ XCUIElementTypeKeyboard = 19,
+ XCUIElementTypeKey = 20,
+ XCUIElementTypeNavigationBar = 21,
+ XCUIElementTypeTabBar = 22,
+ XCUIElementTypeTabGroup = 23,
+ XCUIElementTypeToolbar = 24,
+ XCUIElementTypeStatusBar = 25,
+ XCUIElementTypeTable = 26,
+ XCUIElementTypeTableRow = 27,
+ XCUIElementTypeTableColumn = 28,
+ XCUIElementTypeOutline = 29,
+ XCUIElementTypeOutlineRow = 30,
+ XCUIElementTypeBrowser = 31,
+ XCUIElementTypeCollectionView = 32,
+ XCUIElementTypeSlider = 33,
+ XCUIElementTypePageIndicator = 34,
+ XCUIElementTypeProgressIndicator = 35,
+ XCUIElementTypeActivityIndicator = 36,
+ XCUIElementTypeSegmentedControl = 37,
+ XCUIElementTypePicker = 38,
+ XCUIElementTypePickerWheel = 39,
+ XCUIElementTypeSwitch = 40,
+ XCUIElementTypeToggle = 41,
+ XCUIElementTypeLink = 42,
+ XCUIElementTypeImage = 43,
+ XCUIElementTypeIcon = 44,
+ XCUIElementTypeSearchField = 45,
+ XCUIElementTypeScrollView = 46,
+ XCUIElementTypeScrollBar = 47,
+ XCUIElementTypeStaticText = 48,
+ XCUIElementTypeTextField = 49,
+ XCUIElementTypeSecureTextField = 50,
+ XCUIElementTypeDatePicker = 51,
+ XCUIElementTypeTextView = 52,
+ XCUIElementTypeMenu = 53,
+ XCUIElementTypeMenuItem = 54,
+ XCUIElementTypeMenuBar = 55,
+ XCUIElementTypeMenuBarItem = 56,
+ XCUIElementTypeMap = 57,
+ XCUIElementTypeWebView = 58,
+ XCUIElementTypeIncrementArrow = 59,
+ XCUIElementTypeDecrementArrow = 60,
+ XCUIElementTypeTimeline = 61,
+ XCUIElementTypeRatingIndicator = 62,
+ XCUIElementTypeValueIndicator = 63,
+ XCUIElementTypeSplitGroup = 64,
+ XCUIElementTypeSplitter = 65,
+ XCUIElementTypeRelevanceIndicator = 66,
+ XCUIElementTypeColorWell = 67,
+ XCUIElementTypeHelpTag = 68,
+ XCUIElementTypeMatte = 69,
+ XCUIElementTypeDockItem = 70,
+ XCUIElementTypeRuler = 71,
+ XCUIElementTypeRulerMarker = 72,
+ XCUIElementTypeGrid = 73,
+ XCUIElementTypeLevelIndicator = 74,
+ XCUIElementTypeCell = 75,
+ XCUIElementTypeLayoutArea = 76,
+ XCUIElementTypeLayoutItem = 77,
+ XCUIElementTypeHandle = 78,
+ XCUIElementTypeStepper = 79,
+ XCUIElementTypeTab = 80,
+ XCUIElementTypeTouchBar = 81,
+ XCUIElementTypeStatusItem = 82,
+&#125;;
+</code></pre><p>通过 <code>java XCUIApplication</code> 实例化对象调用 <code>java descendantsMatchingType:</code> 方法得到的是 <code>java XCUIElementQuery</code> 类型。比如 <code>java @property (readonly, copy*) XCUIElementQuery *staticTexts;</code> &#96;&#96;&#96;java<br>&#x2F;*! Returns a query for all descendants of the element matching the specified type. *&#x2F;</p><ul><li><p>(XCUIElementQuery *)descendantsMatchingType:(XCUIElementType)type;</p><p><code></code>java<br>descendantsMatchingType<br><code>返回所有后代的类型匹配对象。</code>java<br>childrenMatchingType<br><code>返回当前层级子元素的类型匹配对象</code>java<br>&#x2F;*! Returns a query for direct children of the element matching the specified type. *&#x2F;</p></li><li><p>(XCUIElementQuery *)childrenMatchingType:(XCUIElementType)type;</p><p><code>拿到</code>java<br>XCUIElementQuery<br><code>后不能直接拿到</code>java<br>XCUIElement<br><code>。和</code>java<br>XCUIApplication<br><code>类似，</code>java<br>XCUIElement<br><code>不能直接访问 UI 元素，它是 UI 元素在测试框架中的代理。可以通过</code>java<br>Accessibility<br><code>中的</code>java<br>frame<br><code>、</code>java<br>identifier<br>&#96;&#96;&#96; 来获取。</p></li></ul><p>对比很多自动化测试框架都需要找出 UI 元素，也就是借助于 <code>java Accessibility</code> 的 &#96;&#96;&#96;java<br>identifier</p><p>&#96;&#96;&#96; 。这里的唯一标识生成对比为 UIAutomation 添加自动化测试标签的探索]<br>第三方 UI 自动化测试框架挺多的，可以查看下典型的 appium、macaca。</p><h4 id="七、-测试经验总结"><a href="#七、-测试经验总结" class="headerlink" title="七、 测试经验总结"></a>七、 测试经验总结</h4><p>TDD 写好测试再写业务代码，BDD 先写实现代码，再写基于行为的测试代码。另一种思路是没必要针对每个类的私有方法或者每个方法进行测试，因为等全部功能做完后针对每个类的接口测试，一般会覆盖据大多数的方法。等测试完看如果方法未被覆盖，则针对性的补充 &#96;&#96;&#96;java<br>Unit Test</p><p>&#96;&#96;&#96; 。<br>目前，UI 测试（appium） 还是建议在核心逻辑且长时间没有改动的情况下去做，这样子每次发版本的时候可以当作核心逻辑回归了，目前来看价值是方便后续的迭代和维护上有一些便利性。其他的功能性测试还是走 BDD。<br>对于类、函数、方法的走 TDD，老老实实写 UT、走 UT 覆盖率的把控。<br>UITesting 还是建议在核心逻辑且长时间没有改动的情况下去做，这样子每次发版本的时候可以当作核心逻辑回归，目前来看价值是方便后续的迭代和维护上有一些便利性。例如用户中心 SDK 升级后，当时有了UITesing，基本上免去了测试人员介入。<br>如果是一些活动页和逻辑经常变动的，老老实实走测试黑盒…<br>我觉得一直有个误区，就是觉得自动测试是为了质量，其实质量都是附送的，测试先行是让开发更快更爽的<br><img src="https://raw.githubusercontent.com/FantasticLBP/knowledge-kit/master/assets/2020-07-13-TDDStructure.png" alt="Test" title="写好测试，提升应用质量"><br>WWDC 这张图也很清楚，UI 其实需要的占比较小，还是要靠单测驱动。</p><h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p>维基百科：测试驱动开发</p><div class="post-copyright"><div class="content"><p>本文标题： 推荐系列-写好测试，提升应用质量</p><p>本文作者： OSChina</p><p>发布时间： 2021年04月15日 09:19</p><p>最后更新： 2022年05月11日 15:02</p><p>原始链接： <a class="post-url" href="/1c66f65/" title="推荐系列-写好测试，提升应用质量">https://www.hosiang.cn/1c66f65/</a></p><p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p><footer><a href="https://www.hosiang.cn"><img src="/../images/logo.png" alt="Howe Hsiang"> Howe Hsiang</a></footer></div></div><div class="page-reward"><a id="rewardBtn" href="javascript:;">赏</a></div><div id="reward" class="post-modal reward-lay"><a class="close" href="javascript:;" id="reward-close">×</a> <span class="reward-title"><i class="icon icon-quote-left"></i> 喜欢就赞赏一下呗！ <i class="icon icon-quote-right"></i></span><div class="reward-content"><div class="reward-code"><img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码"></div><div class="reward-select"></div></div></div></div><footer class="article-footer"><div class="post-share"><a href="javascript:" id="share-sub" class="post-share-fab"><i class="fa fa-share-alt" style="padding-top:11px!important"></i></a><div class="post-share-list" id="share-list"><ul class="share-icons"><li><a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.hosiang.cn/1c66f65/" data-title="Facebook" rel="external nofollow noopener noreferrer"><i class="fa fa-facebook" style="padding-top:9px!important"></i></a></li><li><a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-写好测试，提升应用质量》 — 狂欢马克思&url=https://www.hosiang.cn/1c66f65/&via=https://www.hosiang.cn" data-title="Twitter" rel="external nofollow noopener noreferrer"><i class="fa fa-twitter" style="padding-top:9px!important"></i></a></li><li><a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.hosiang.cn/1c66f65/" data-title="Google+" rel="external nofollow noopener noreferrer"><i class="fa fa-google-plus" style="padding-top:9px!important"></i></a></li><li><a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://www.hosiang.cn/1c66f65/&title=《推荐系列-写好测试，提升应用质量》 — 狂欢马克思&source=&amp;emsp;&amp;emsp;相信在国内一些中小型公司，开发者很少会去写软件测试相关的代码。当然这背后有一些原因在。本文就讲讲 iOS 开发中的..." data-title="QQ" rel="external nofollow noopener noreferrer"><i class="fa fa-qq" style="padding-top:9px!important"></i></a></li><li><a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信"><i class="fa fa-weixin" style="padding-top:9px!important"></i></a></li><li><a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://www.hosiang.cn/1c66f65/&title=《推荐系列-写好测试，提升应用质量》 — 狂欢马克思&pic=https://static.oschina.net/uploads/img/202008/05162439_QoQk.jpg" data-title="微博" rel="external nofollow noopener noreferrer"><i class="fa fa-weibo" style="padding-top:9px!important"></i></a></li></ul></div></div><div class="post-modal wx-share" id="wxShare"><a class="close" href="javascript:" id="wxShare-close">×</a><p>扫一扫，分享到微信</p><img src="//api.qrserver.com/v1/create-qr-code/?data=https://www.hosiang.cn/1c66f65/" alt="微信分享二维码"></div><div class="mask"></div><ul class="article-footer-menu"><li class="article-footer-tags"><i class="fa fa-tags"></i> <a href="/tags/Popular/" class="color3">Popular</a></li></ul></footer></div></article><aside class="post-toc-pos post-toc-top" id="post-toc"><nav class="post-toc-wrap"><ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%80%E3%80%81-%E6%B5%8B%E8%AF%95%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="post-toc-text">一、 测试的重要性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BA%8C%E3%80%81%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95"><span class="post-toc-text">二、软件测试</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-%E5%88%86%E7%B1%BB"><span class="post-toc-text">1. 分类</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-TDD"><span class="post-toc-text">2. TDD</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-BDD"><span class="post-toc-text">3. BDD</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-%E4%B8%80%E4%B8%AA%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E5%8F%AA%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF"><span class="post-toc-text">2. 一个测试用例只测试一个分支</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-%E6%98%8E%E7%A1%AE%E6%A0%87%E8%AF%86%E8%A2%AB%E6%B5%8B%E8%AF%95%E7%B1%BB"><span class="post-toc-text">3. 明确标识被测试类</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-%E4%BD%BF%E7%94%A8%E5%88%86%E7%B1%BB%E6%9D%A5%E6%9A%B4%E9%9C%B2%E7%A7%81%E6%9C%89%E6%96%B9%E6%B3%95%E3%80%81%E7%A7%81%E6%9C%89%E5%8F%98%E9%87%8F"><span class="post-toc-text">4. 使用分类来暴露私有方法、私有变量</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%9B%9B%E3%80%81-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%8B%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%E3%80%81%E6%8A%80%E6%9C%AF%E6%A1%86%E6%9E%B6%E9%80%89%E6%8B%A9"><span class="post-toc-text">四、 单元测试下开发模式、技术框架选择</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-TDD"><span class="post-toc-text">1. TDD</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-XCTest"><span class="post-toc-text">3. XCTest</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6"><span class="post-toc-text">3. 测试框架</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#1-Kiwi"><span class="post-toc-text">1. Kiwi</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#2-expecta%E3%80%81Specta"><span class="post-toc-text">2. expecta、Specta</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%85%AD%E3%80%81UI-%E6%B5%8B%E8%AF%95"><span class="post-toc-text">六、UI 测试</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%83%E3%80%81-%E6%B5%8B%E8%AF%95%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93"><span class="post-toc-text">七、 测试经验总结</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="post-toc-text">参考资料</span></a></li></ol></nav></aside><nav id="article-nav"><a href="/2a2ed114/" id="article-nav-newer" class="article-nav-link-wrap"><span class="article-nav-title"><i class="fa fa-hand-o-left" aria-hidden="true"></i> 推荐系列-mybatis源码，从配置到 mappedStatement —— mapper.xml 是如何被解析的- </span></a><a href="/42f9643e/" id="article-nav-older" class="article-nav-link-wrap"><span class="article-nav-title">推荐系列-分布式秒杀</span> <i class="fa fa-hand-o-right" aria-hidden="true"></i></a></nav><div id="gitalk"></div><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script>var gitalk=new Gitalk({repo:"bolg-comment",owner:"Hosiang1026",admin:"Hosiang1026",clientID:"37a2dd4473e8970cecc2",clientSecret:"e30efa17d86d9de4f4ab810872dc62a7b2e7e634",pagerDirection:"last",distractionFreeMode:!0,createIssueManually:!1});gitalk.render("gitalk")</script></section></div><footer id="footer"><div class="outer"><div id="footer-info" class="inner"><script id="_wau78w">var _wau=_wau||[];_wau.push(["small","5dnguv4c2n","78w"])</script><script async src="//waust.at/s.js"></script><p><span id="busuanzi_container_site_uv" style="display:none"><span class="post-count">总字数：<span>1531.2k</span> </span>总访客数：<span id="busuanzi_value_site_uv"></span> </span><span id="busuanzi_container_site_pv" style="display:none">总访问量：<span id="busuanzi_value_site_pv"></span></span><br><span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>Copyright&copy; 2018 - 2022 狂欢马克思 <a href="https://beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">京ICP备17060439号</a></p></div></div><script>var now=new Date;function createtime(){var n=new Date("2017/09/18");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="安全运行 "+dnum+" 天 ",document.getElementById("times").innerHTML=hnum+" 小时 "+mnum+" 分 "+snum+" 秒"}setInterval("createtime()",800)</script></footer><script>var mihoConfig={root:"https://www.hosiang.cn",animate:"true",isHome:"false",share:"true",reward:" 1"}</script><div class="sidebar"><div id="sidebar-search" title="Search"><i class="fa fa-search"></i></div><div id="sidebar-category" title="Categories"><i class="fa fa-book"></i></div><div id="sidebar-tag" title="Tags"><i class="fa fa-tags"></i></div><div id="sidebar-top"><span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span></div></div><div class="sidebar-menu-box" id="sidebar-menu-box"><div class="sidebar-menu-box-container"><div id="sidebar-menu-box-categories"><a class="category-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a><a class="category-link" href="/categories/%E5%85%B6%E4%BB%96%E5%BC%80%E5%8F%91/">其他开发</a><a class="category-link" href="/categories/%E5%89%8D%E6%B2%BF%E5%BC%80%E5%8F%91/">前沿开发</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><a class="category-link" href="/categories/%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC/">升级版本</a><a class="category-link" href="/categories/%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/">博客教程</a><a class="category-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><a class="category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><a class="category-link" href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">日常记录</a><a class="category-link" href="/categories/%E7%83%AD%E9%97%A8%E6%96%87%E7%AB%A0/">热门文章</a></div><div id="sidebar-menu-box-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:17.5px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:15px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12.5px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:15px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size:12.5px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:17.5px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12.5px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:17.5px">Spring</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div><a href="javascript:" class="sidebar-menu-box-close">&times;</a></div><div class="mobile-header-menu-nav" id="mobile-header-menu-nav"><div class="mobile-header-menu-container"><span class="title">导航</span><ul class="mobile-header-menu-navbar"><li><a href="/"><i class="fa fa-home"></i><span>主页</span></a></li><li><a href="/archives"><i class="fa fa-archive"></i><span>归档</span></a></li><li><a href="/gitbook"><i class="fa fa-columns"></i><span>笔记</span></a></li><li><a href="/music"><i class="fa fa-music"></i><span>音乐</span></a></li><li><a href="/photo"><i class="fa fa-picture-o"></i><span>相册</span></a></li><li><a href="/collection"><i class="fa fa-envira"></i><span>收藏</span></a></li><li><a href="/about"><i class="fa fa-user"></i><span>关于</span></a></li></ul></div><div class="mobile-header-tag-container"><span class="title">标签</span><div id="mobile-header-container-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:17.5px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:15px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12.5px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:15px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size:12.5px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:17.5px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12.5px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:17.5px">Spring</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div></div><div class="search-wrap"><span class="search-close">&times;</span> <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back"><i class="icon icon-lg icon-chevron-left"></i> </a><input class="search-field" placeholder="Search..." id="keywords"> <a id="search-submit" href="javascript:"><i class="fa fa-search"></i></a><div class="search-container" id="search-container"><ul class="search-result" id="search-result"></ul></div></div><div id="search-tpl"><li class="search-result-item"><a href="{url}" class="search-item-li"><span class="search-item-li-title" title="{title}">{title}</span></a></li></div><script src="/js/search.js"></script><script src="/js/main.js"></script><script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script><div id="particles"></div><script src="/js/particles.js"></script><link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css"><script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script><script src="/js/animate.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({pluginRootPath:"live2dw/",pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2dw/assets/hijiki.model.json"},display:{position:"right",width:150,height:300},mobile:{show:!0,scale:.5},log:!1})</script></body></html>

@@ -18,6 +18,7 @@ before_install:
 install:
   # - npm install --ignore-scripts
   - npm install
+  - npm install camel-case --save
   #- npm install hexo-abbrlink
   #- npm install hexo-recommended-posts --save
 

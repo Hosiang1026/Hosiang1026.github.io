@@ -58,7 +58,7 @@ function filterHtml(html) {
         //特殊符号处理
         var reg=/\\|\/|\?|\？|\*|\"|\“|\”|\'|\‘|\’|\<|\>|\{|\}|\[|\]|\【|\】|\：|\:|\、|\^|\$|\!|\~|\`|\|/g;
         title = title.replace(reg,"-");
-        //console.log(title + "-- " + url);
+        console.log("解析html页面: " + title + "-- " + url);
 
         arcList.push({
             title: title,
@@ -170,7 +170,7 @@ function insertArrData() {
             var htmlData = [[null, item.title, item.url, item.cover, item.desc, item.content,  item.times ]];
             var sql = "replace into article(id, title, url, cover, desc, content, times) values(?, ?, ?, ?, ?, ?)";
             callDB.insertDatas(sql,htmlData);
-            writeFiles(index+1, item.title, item.cover, item.desc, item.content);
+            writeFiles(index+1, "oschina-"+item.title, item.cover, item.desc, item.content);
         }
     });
 }
@@ -199,7 +199,7 @@ function writeFiles(index, title, cover, desc, content) {
         "&emsp;&emsp;"+desc+"\n" +
         "<!-- more -->\n"+ content;
     console.log(title + " File has been created-"+index + "cover_picture: '"+cover+"'");
-    fs.writeFileSync("./source/_posts/sync/"+title+".md", fileContent, (err) => {
+    fs.writeFileSync("./source/_posts/"+title+".md", fileContent, (err) => {
         if (err) {
             console.error(err);
             return;

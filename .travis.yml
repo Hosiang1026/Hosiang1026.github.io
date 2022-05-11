@@ -17,6 +17,7 @@ before_install:
 # 安装hexo及插件
 install:
   # - npm install --ignore-scripts
+  - rm -rf  /nodejs/lib/node_modules
   - npm config set electron_mirror "https://npm.taobao.org/mirrors/electron/"
   - npm install --save
   #- npm install hexo-abbrlink

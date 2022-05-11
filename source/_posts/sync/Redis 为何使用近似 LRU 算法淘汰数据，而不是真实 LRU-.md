@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 265
-date: 2022-05-11 05:14:30
 cover_picture: 'https://magebyte.oss-cn-shenzhen.aliyuncs.com/redis/20220508223448.png'
+abbrlink: 62a9efed
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;Redis 数据缓存满了怎么办？》我们知道 Redis 缓存满了之后能通过淘汰策略删除数据腾出空间给新数据。 淘汰策略如下所示： 设置过期时间的 key volatile-ttl、volatile-random、volatil...

@@ -5,8 +5,10 @@ tags:
   - Popular
 author: OSChina
 top: 154
+cover_picture: >-
+  https://img.alicdn.com/imgextra/i4/O1CN01tmtpiy1iazJYZdixL_!!6000000004430-2-tps-899-548.png
+abbrlink: 67861b5
 date: 2022-05-11 05:14:30
-cover_picture: 'https://img.alicdn.com/imgextra/i4/O1CN01tmtpiy1iazJYZdixL_!!6000000004430-2-tps-899-548.png'
 ---
 
 &emsp;&emsp; | Joe Moser & 高赟 翻译 | 高赟 Apache Flink，���为 Apache 社区最活跃的项目之一<sup>[1]</sup>，一直秉承积极开放的态度不断进行技术深耕。在此我们很荣幸的发布 Flink 1.15 版本，并...

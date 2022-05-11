@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 318
-date: 2022-05-11 05:14:30
 cover_picture: 'https://tva1.sinaimg.cn/large/e6c9d24ely1h1wsydvy1mj20rs0rsmy3.jpg'
+abbrlink: 26fbf4f7
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp; 大概在两年前我写过一篇 撸了一个 Feign 增强包，当时准备是利用 SpringBoot + K8s 构建应用，这个库可以类似于 SpringCloud 那样结合 SpringBoot 使用声明式接口来达到服务间通讯的目的...

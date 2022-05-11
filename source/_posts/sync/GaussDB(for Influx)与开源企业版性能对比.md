@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 307
-date: 2022-05-11 05:14:30
 cover_picture: 'https://pic1.zhimg.com/80/v2-03d61f53de0a8bc7bd1d2fec26e9e0ac_720w.jpg'
+abbrlink: f335db5f
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;：相比于企业版InfluxDB，GaussDB(for Influx)能为客户提供更高的写入能力、更稳定的查询能力、更高的数据压缩率，高效满足各大时序应用场景需求。 本文分享自华为云社区《华为云GaussDB...

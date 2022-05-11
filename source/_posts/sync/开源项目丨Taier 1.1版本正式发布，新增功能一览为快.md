@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 290
-date: 2022-05-11 05:14:30
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-3190ccd2f82f776ad527f9ace495863773e.jpg'
+abbrlink: 97005d57
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;22年5月8日，Taier 1.1版本正式发布！ 本次版本更新对Flink的支持升级到Flink1.12，支持多种流类型任务，新版本的使用文档已在社区中推送，大家可以随时下载查阅。 github地址： https://...

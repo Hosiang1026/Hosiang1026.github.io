@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 258
-date: 2022-05-11 05:14:30
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-abef33c863bbac395609188355bf8704656.jpg'
+abbrlink: 3aa85cd3
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;aS（software as a service），直译为软件即服务。从本质上而言，是一种软件交付和销售方式，即订阅许可。该商业模式决定了 SaaS 在销售达成时，并不产生所有的收益，而是通过后期不断实现...

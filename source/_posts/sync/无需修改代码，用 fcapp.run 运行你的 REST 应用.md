@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 234
-date: 2022-05-11 05:27:50
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-18e66371ccadf19f0ffcdaf86338db1c200.png'
+abbrlink: 6ff74ebc
+date: 2022-05-11 05:27:50
 ---
 
 &emsp;&emsp; | 阿里云 Serverless 技术研发 落语 背景 阿里云函数计算产品在较早的时候支持了HTTP触发器能力，支持用户使用 HTTP 协议进行函数调用。函数计算后端通过一个共享的 APIServer 组件对所...

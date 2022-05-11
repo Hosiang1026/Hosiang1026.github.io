@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 204
-date: 2022-05-11 05:14:30
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-4b32f58df2c03b26ef4258950210a51f421.png'
+abbrlink: c5ad32c7
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp; 赵真灵（花名：有济）蚂蚁集团技术专家 刘晶（花名：飞廉） 蚂蚁集团技术专家 ** 以下内容整理自 SOFAStack 四周年的分享 本文 5332 字 阅读 10 分钟 SOFA Serverelss 研发运维平台是蚂...

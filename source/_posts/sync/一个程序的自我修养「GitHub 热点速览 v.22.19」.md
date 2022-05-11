@@ -5,8 +5,10 @@ tags:
   - Popular
 author: OSChina
 top: 300
+cover_picture: >-
+  https://img2022.cnblogs.com/blog/759200/202205/759200-20220508222927603-1657267504.jpg
+abbrlink: f0f9bf6f
 date: 2022-05-11 05:14:30
-cover_picture: 'https://img2022.cnblogs.com/blog/759200/202205/759200-20220508222927603-1657267504.jpg'
 ---
 
 &emsp;&emsp;程序要诞生涉及前后端技术，比如，你可以用可视化网页搭建工具 tmagic-editor 完成前端部分，而后端部分的数据库以及数据处理可能就要用到 jsonhero-web 和 directus。知其然知其所以然，...

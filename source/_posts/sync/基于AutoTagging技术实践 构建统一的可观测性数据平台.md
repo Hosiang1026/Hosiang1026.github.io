@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 149
-date: 2022-05-11 05:12:46
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-6b513d7daa21b41133bdea20da2e3bf122c.png'
+abbrlink: e9ee1df8
+date: 2022-05-11 05:12:46
 ---
 
 &emsp;&emsp;云以及容器逐渐成为承载微服务应用的主要基础设施，对于云原生应用的监控保障，也面临诊断难、规模广、弹性大、波动性强等挑战，这些挑战同时也使得云原生应用可观测性成为了运维开发关注...

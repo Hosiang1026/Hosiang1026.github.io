@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 304
-date: 2022-05-11 05:14:30
 cover_picture: 'https://files.mdnice.com/user/11459/f914b0b8-1fdf-40ca-a095-3aed72af4431.png'
+abbrlink: 5a8e1094
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;HBase 读优化 1. HBase客户端优化 和大多数系统一样，客户端作为业务读写的入口，姿势使用不正确通常会导致本业务读延迟较高实际上存在一些使用姿势的推荐用法，这里一般需要关注四个问题...

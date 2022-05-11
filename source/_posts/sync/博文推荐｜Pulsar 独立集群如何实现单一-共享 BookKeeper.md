@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 288
-date: 2022-05-11 05:14:30
 cover_picture: 'https://oscimg.oschina.net/oscnet/088c1b37-e7c4-4663-85b4-c11327b24d2e.png'
+abbrlink: cd2263e5
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;翻译自 StreamNative 博客《Pulsar Isolation Part III: Separate Pulsar Clusters Sharing a Single BookKeeper Cluster》，作者高冉。 译者简介 姚余钱@深圳觉行科技有限公司，致力于医...

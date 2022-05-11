@@ -5,8 +5,9 @@ tags:
   - Popular
 author: csdn
 top: 1
-date: 2022-05-11 05:16:57
 cover_picture: 'https://profile.csdnimg.cn/D/3/1/3_qq_41823971'
+abbrlink: 9b5c38f
+date: 2022-05-11 05:16:57
 ---
 
 &emsp;&emsp;前面的抓包分析和java层定位我这里就不分析了libtiger_tally.so 具体加密在这里so里面 这个是ali安全的soJava层： com/aliyun/TigerTally/TigerTallyAPI主要看init方法这个方法里面有so函数的加载流程先是调用_genericNt2 -------_genericNt1------ _genericNt3 这就是这个so的加载流程接下来就是unidbg模拟了先去官网下载一下源

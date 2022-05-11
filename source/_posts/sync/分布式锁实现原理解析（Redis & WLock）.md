@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 314
-date: 2022-05-11 05:14:30
 cover_picture: 'https://oscimg.oschina.net/oscnet/f1643822-9814-4d6c-910b-c9974d9a57b6.png'
+abbrlink: 51cb8a32
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;单机锁 1. Java原生锁 在Java中每个对象都有一把锁，如普通的Object对象及类的Class对象。线程可以使用synchronized关键字来获取对象上的锁。synchronized关键字可以应用在方法级别（粗粒度...

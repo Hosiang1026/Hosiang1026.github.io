@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 252
-date: 2022-05-11 05:27:50
 cover_picture: 'https://static.oschina.net/uploads/img/202205/09091256_djvz.gif'
+abbrlink: 3d7b926
+date: 2022-05-11 05:27:50
 ---
 
 &emsp;&emsp; 调优思路概述 调优流程 确定性能调优范围 性能因素 调优范围确定 硬件瓶颈点分析 CPU 内存 I/O 网络 查询最耗性能的SQL 分析作业是否被阻塞 调优思路概述 openGauss的总体性能调优思路为...

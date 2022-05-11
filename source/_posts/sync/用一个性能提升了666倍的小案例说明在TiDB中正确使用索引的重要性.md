@@ -5,8 +5,10 @@ tags:
   - Popular
 author: OSChina
 top: 200
+cover_picture: >-
+  https://tidb-blog.oss-cn-beijing.aliyuncs.com/media/企业微信截图_20220428135224-1651305546299.png
+abbrlink: 88fb5540
 date: 2022-05-11 05:27:50
-cover_picture: 'https://tidb-blog.oss-cn-beijing.aliyuncs.com/media/企业微信截图_20220428135224-1651305546299.png'
 ---
 
 &emsp;&emsp; 最近在给一个物流系统做TiDB POC测试，这个系统是基于MySQL开发的，本次投入测试的业务数据大概10个库约900张表，最大单表6千多万行。 这个规模不算大，测试数据以及库表结构是用Dumpl...

@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 320
-date: 2022-05-11 05:14:30
 cover_picture: 'https://pic3.zhimg.com/80/v2-27e70c33cd6e3399aeaca088cedcd0b2_720w.jpg'
+abbrlink: 4fa0c386
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;：HTTP协议是“请求-响应”模式，浏览器必须先发请求给服务器，服务器才会响应该请求。即服务器不会主动发送数据给浏览器。 本文分享自华为云社区《Tomcat支持WebSocket吗？》，作者： ...

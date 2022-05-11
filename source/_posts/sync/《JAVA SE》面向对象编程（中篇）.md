@@ -5,8 +5,9 @@ tags:
   - Popular
 author: csdn
 top: 2
-date: 2022-05-11 05:16:57
 cover_picture: 'https://profile.csdnimg.cn/8/8/B/3_qq_43575801'
+abbrlink: f2f4d40f
+date: 2022-05-11 05:16:57
 ---
 
 &emsp;&emsp;前言上一篇已经讲过包、继承和多态，链接如下：《JAVA SE》面向对象编程（上篇）下面会给各位老铁总结面向对象编程的最后两个知识点： 抽象类和接口。一、（补充）在构造方法中调用重写的方法（坑）一段有坑的代码. 我们创建两个类, B 是父类, D 是子类. D 中重写 func 方法. 并且在 B 的构造方法中调用 func。class B {    public B() {        // do nothing        func();    }    public voi

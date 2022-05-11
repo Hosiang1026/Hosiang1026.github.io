@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 267
-date: 2022-05-11 05:14:30
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-fab21135eb9926f78543d8adcefd177ebde.png'
+abbrlink: 6c2c411
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;22 年 5 月 11 日，中国计算机学会（CCF）数据库专委会和哈尔滨分部联手 CnosDB 开源时序数据库策划举办，围绕 “时序大数据：应用与管理” 议题展开交流与讨论，届时邀请相关领域多位大咖...

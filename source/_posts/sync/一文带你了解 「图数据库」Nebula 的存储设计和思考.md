@@ -5,8 +5,10 @@ tags:
   - Popular
 author: OSChina
 top: 287
+cover_picture: >-
+  https://www-cdn.nebula-graph.com.cn/nebula-blog/nebula-reading-storage-architecture.png
+abbrlink: 38268acd
 date: 2022-05-11 05:14:30
-cover_picture: 'https://www-cdn.nebula-graph.com.cn/nebula-blog/nebula-reading-storage-architecture.png'
 ---
 
 &emsp;&emsp; 在上次的 nebula-storage on nLive 直播中，来自 Nebula 存储团队的负责人王玉珏（四王）同大家分享了 nebula storage 这块的设计思考，也解答了一...

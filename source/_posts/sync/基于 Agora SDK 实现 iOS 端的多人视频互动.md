@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 270
-date: 2022-05-11 05:14:30
 cover_picture: 'https://img-blog.csdnimg.cn/388f8b4690814da0b50a93eb85020ab0.png#pic_center'
+abbrlink: 18e80a83
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;互动直播是当前比较热门的玩法，我们经常见到有PK 连麦、直播答题、一起 KTV、电商直播、互动大班课、视频相亲等。 本文将教你如何通过声网Agora 视频 SDK 在iOS端实现一个视频直播应用。...

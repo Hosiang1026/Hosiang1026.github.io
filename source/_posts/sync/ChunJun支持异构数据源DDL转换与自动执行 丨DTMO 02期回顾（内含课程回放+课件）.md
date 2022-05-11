@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 306
-date: 2022-05-11 05:14:30
 cover_picture: 'https://pic3.zhimg.com/80/v2-bb8067e8c7ad453fb4b8ce26dd4701ce_1440w.jpg'
+abbrlink: '56e0830'
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;： 4月26日晚，ChunJun项目核心成员、袋鼠云数栈大数据引擎开发专家渡劫为大家带来分享《ChunJun支持异构数据源DDL转换与自动执行》，我们将直播精华部分做了整理，带大家再次回顾内容，...

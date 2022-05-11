@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 201
-date: 2022-05-11 05:27:50
 cover_picture: 'https://oscimg.oschina.net/oscnet/6fa08145-e84e-4dee-8183-e261917de932.png'
+abbrlink: 22637a7e
+date: 2022-05-11 05:27:50
 ---
 
 &emsp;&emsp;，ML/AI Infra行业的发展引发了业内人士的热烈讨论。其中，硅谷创业公司Bluesky创始人Mingsheng Hong分享了他在这一领域的心路历程，总结了ML Infra发展的经验教训。他本人此前曾在Googl...

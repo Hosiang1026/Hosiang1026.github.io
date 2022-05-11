@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 157
-date: 2022-05-11 05:12:46
 cover_picture: 'https://oscimg.oschina.net/oscnet/e68bb645-d634-4847-be9f-e29a98f09673.png'
+abbrlink: 6bbb9bc2
+date: 2022-05-11 05:12:46
 ---
 
 &emsp;&emsp;十分高兴地与 Gitpod 的朋友共同宣布，Gitpod 已与我们的远程开发解决方案 JetBrains Gateway 集成。 这意味着您将可以从最喜欢的 JetBrains IDE 中访问托管在临时开发环境中的源代码，根...

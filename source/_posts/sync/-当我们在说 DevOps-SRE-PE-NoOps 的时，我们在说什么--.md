@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 101
-date: 2022-05-11 05:12:46
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-e4645529042561484a555d0cf2a54aa36ed.png'
+abbrlink: a4daac73
+date: 2022-05-11 05:12:46
 ---
 
 &emsp;&emsp;作者：柯浩 GitHub 地址: http://github.com/KeHaohaoke Note: 以下观点不代表本人就职的公司。系作者个人观点。这些观点和作者的本人工作经历有关，可能不够面面俱到。 从 Devops 的由来...

@@ -5,8 +5,9 @@ tags:
   - Popular
 author: csdn
 top: 5
-date: 2022-05-11 05:16:57
 cover_picture: 'https://profile.csdnimg.cn/4/0/F/3_weixin_44096133'
+abbrlink: cdda46b1
+date: 2022-05-11 05:16:57
 ---
 
 &emsp;&emsp;面试官：Kafka是什么，它有什么特性与使用场景？

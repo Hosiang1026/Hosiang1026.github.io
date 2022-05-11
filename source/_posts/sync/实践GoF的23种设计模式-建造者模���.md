@@ -5,8 +5,10 @@ tags:
   - Popular
 author: OSChina
 top: 317
+cover_picture: >-
+  https://tva1.sinaimg.cn/large/007S8ZIlgy1ghky4kprezj319e0kuu0x.jpg#crop=0&crop=0&crop=1&crop=1&id=rf2mz&originHeight=750&originWidth=1634&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=
+abbrlink: 64c2c09d
 date: 2022-05-11 05:14:30
-cover_picture: 'https://tva1.sinaimg.cn/large/007S8ZIlgy1ghky4kprezj319e0kuu0x.jpg#crop=0&crop=0&crop=1&crop=1&id=rf2mz&originHeight=750&originWidth=1634&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title='
 ---
 
 &emsp;&emsp;：针对这种对象成员较多，创建对象逻辑较为繁琐的场景，非常适合使用建造者模式来进行优化。 本文分享自华为云社区《【Go实现】实践GoF的23种设计模式：建造者模式》，作者： 元闰子。 ...

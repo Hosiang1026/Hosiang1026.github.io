@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 116
-date: 2022-05-11 05:14:30
 cover_picture: 'https://img-blog.csdnimg.cn/img_convert/44b888515e15d902c0e16ae21808f30e.gif'
+abbrlink: 602c321a
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;研究发现，在平均 38 分钟的视频会议里面，大概会有 13 分钟左右的时间用于处理和干扰相关的事情。同时研究也表明在参加在线会议的时候，人们更加倾向于语音会议，其中一个关键原因就是大...

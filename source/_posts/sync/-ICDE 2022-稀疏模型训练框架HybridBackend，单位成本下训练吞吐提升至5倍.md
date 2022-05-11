@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 232
-date: 2022-05-11 05:12:46
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-518f6435a1f4773ae40bbb23902df80faa8.png'
+abbrlink: 3a26c272
+date: 2022-05-11 05:12:46
 ---
 
 &emsp;&emsp;来，随着稀疏模型对算力日益增长的需求, CPU集群必须不断扩大集群规模来满足训练的时效需求，这同时也带来了不断上升的资源成本以及实验的调试成本。 为了解决这一问题，阿里云机器学习P...

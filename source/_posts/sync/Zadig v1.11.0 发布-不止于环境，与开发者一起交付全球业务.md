@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 228
-date: 2022-05-11 05:14:30
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-fb41042ce55eb99d474e90c202205b154fc.png'
+abbrlink: 28da7dac
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;dig on Github https://github.com/koderover/zadig Zadig on Gitee https://gitee.com/koderover/zadig Zadig 正式推出新版 v1.11.0，以开发者体验为重要使命，重磅推出“自测模式”又一亮...

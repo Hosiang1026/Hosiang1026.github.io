@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 219
-date: 2022-05-11 05:12:46
 cover_picture: 'https://api.ixiaowai.cn/gqapi/gqapi.php'
+abbrlink: e1e166bd
+date: 2022-05-11 05:12:46
 ---
 
 &emsp;&emsp; 我们在写应用时，基本都会用到配置文件，从各种 shell 到 nginx 等，都有自己的配置文件。虽然这没有太多难度，但是配置项一般相对比较繁杂，解析、校验也会比较麻烦。本文就给大家讲讲...

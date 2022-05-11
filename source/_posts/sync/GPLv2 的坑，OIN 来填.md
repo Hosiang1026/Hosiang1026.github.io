@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 221
-date: 2022-05-11 05:14:30
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-45cdfa75b6cc96ef51c9092b5eca6ffecec.jpg'
+abbrlink: 158f733f
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;：肖滢；作者：肖滢 感谢黄鸿文、谭中意两位开源专家对本文提供的帮助。 OIN，开放专利联盟（Open Invention Network），号称是世界上最大的专利互不侵犯社区。这两年在国内更是颇有美名...

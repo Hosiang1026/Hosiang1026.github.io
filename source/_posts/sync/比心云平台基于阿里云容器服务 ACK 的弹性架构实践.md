@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 299
-date: 2022-05-11 05:14:30
 cover_picture: 'https://api.ixiaowai.cn/gqapi/gqapi.php'
+abbrlink: d3c50357
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;：韩韬｜比心技术 前言 应用容器化改造后，不可避免地会面临这样一个问题：Kubernetes 集群的 Node 资源配置不足会导致 Pod 无法及时运行，购买过多的 Node 又会导致资源的闲置浪费。 那...

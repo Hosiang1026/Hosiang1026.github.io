@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 319
-date: 2022-05-11 05:14:30
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-078cfaf28435f7385e32c6a9ff4b2204771.png'
+abbrlink: cbd4f5b3
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;月前开始尝试用 Golang 写 Web 应用时，第一次意识到：对于一个像我这样过去总写 Java 代码的老程序员来说，因各类 IDE 带来的便利性，几乎忽略了热加载（Live Reload）这个问题的存在。...

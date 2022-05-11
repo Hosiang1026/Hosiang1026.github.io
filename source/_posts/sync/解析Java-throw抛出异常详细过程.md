@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 280
-date: 2022-05-11 05:14:30
 cover_picture: 'https://pic1.zhimg.com/80/v2-613e86336af3e91f1683c8f7a2756fc8_720w.jpg'
+abbrlink: 5adc4396
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;：Java有3种抛出异常的形式：throw、throws、系统自动抛异常。 本文分享自华为云社区《Java-throw异常详解以及过程》，作者： gentle_zhou 。 首先，我们知道Java有3种抛出异常的形式：t...

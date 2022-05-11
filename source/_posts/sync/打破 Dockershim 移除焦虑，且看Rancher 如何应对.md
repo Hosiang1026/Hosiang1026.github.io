@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 152
-date: 2022-05-11 05:14:30
 cover_picture: 'https://static.oschina.net/uploads/img/202205/06182200_Nwjn.png'
+abbrlink: d70727f0
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;龙， SUSE Rancher 中国社区技术经理，负责 Rancher 中国技术社区的维护和运营。拥有 8 年的云计算领域经验，经历了 OpenStack 到 Kubernetes 的技术变革，无论底层操作系统 Linux，还是...

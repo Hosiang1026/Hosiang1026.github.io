@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 213
-date: 2022-05-11 05:27:50
 cover_picture: 'https://pic2.zhimg.com/80/v2-0950a04e4d4e563deec35784d0fd5815_1440w.jpg'
+abbrlink: 5268c15c
+date: 2022-05-11 05:27:50
 ---
 
 &emsp;&emsp;的十几年，DevOps运动在中国得到了大范围的推广与发展，也涌现出了很多DevOps社区，它们在深度和广度上都推动着软件交付模式的变革。尤其是新冠疫情以来，企业的数字化转型需求愈加强烈和...

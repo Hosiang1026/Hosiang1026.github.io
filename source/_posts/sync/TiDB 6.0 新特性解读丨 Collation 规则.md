@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 266
-date: 2022-05-11 05:14:30
 cover_picture: 'https://tidb-blog.oss-cn-beijing.aliyuncs.com/media/1-1651711633100.png'
+abbrlink: caa2a669
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;据库而言，合适的字符集和规则能够大大提升使用者运维和分析的效率。TiDB 从 v4.0 开始支持新 collation 规则，并于 TiDB 6.0 版本进行了更新。本文将深入解读 Collation 规则在 TiDB 6...

@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 296
-date: 2022-05-11 05:14:30
 cover_picture: 'https://oscimg.oschina.net/oscnet/682af219-f173-4cd8-bd88-22e9027e5399.png'
+abbrlink: a0169197
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp; 引言 至今已满27岁的Java语言已经长期占据服务端编程语言开发榜的榜首，无论是从生产环境的部署规模，还是从在开发者群体中的受欢迎程度来看，Java都拥有绝对的“统治”地位。庞大的开发者...

@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 229
-date: 2022-05-11 05:14:30
 cover_picture: 'https://pic2.zhimg.com/80/v2-45b7f24861409cb57510edd10392a965_720w.jpg'
+abbrlink: 35fc2569
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;：本文首先以现今分布式系统的复杂性和稳���性的需求引出混沌工程概念，并阐述了OpenChaos在传统混沌工程上的优化与创新。 背景 随着Serverless，微服务（含服务网格）与越来越多的容器化...

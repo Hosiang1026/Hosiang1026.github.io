@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 303
-date: 2022-05-11 05:14:30
 cover_picture: 'https://oscimg.oschina.net/oscnet/up-407be97af32c24485948a53eef680e338c4.png'
+abbrlink: 5580cea9
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;助力开发者学习、实践OpenHarmony开发，华为开发者联盟生态市场（以下简称“生态市场”）组织了“开发板免费试用活动”，搭载人工智能应用处理器的千元开发板等你免费试用。 【试用开发板...

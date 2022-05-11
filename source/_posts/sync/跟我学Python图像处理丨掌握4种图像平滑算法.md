@@ -5,8 +5,9 @@ tags:
   - Popular
 author: OSChina
 top: 315
-date: 2022-05-11 05:14:30
 cover_picture: 'https://pic4.zhimg.com/80/v2-a3416cbf035770d63e99958906103edf_720w.jpg'
+abbrlink: 104a2158
+date: 2022-05-11 05:14:30
 ---
 
 &emsp;&emsp;：本篇文章主要讲解Python调用OpenCV实现图像平滑，包括四个算法：均值滤波、方框滤波、高斯滤波和中值滤波。 本文分享自华为云社区《[Python图像处理] 四.图像平滑之均值滤波、方框滤波...

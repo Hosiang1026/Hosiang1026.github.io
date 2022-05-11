@@ -76,8 +76,8 @@ branches:
 # 配置Webhook通知
 notifications:
   webhooks: https://oapi.dingtalk.com/robot/send?access_token=6d3354513b93c853cd0250984784bd023de87449122f1bbae431e0b9030c81ab
-  on_success: change 
-  on_failure: always 
-  on_start:   change
+  on_success: always
+  on_failure: always
+  on_start:   always
   on_cancel:  always
-  on_error:   always 
+  on_error:   always

@@ -6,7 +6,7 @@
 
 ## 网站特点：云端写作、自动部署、钉钉通知
 
-## 技术方案：语雀 + Hexo + Travis-CI + Github-Pages + Serverless + CDN
+## 技术方案：Hexo + Travis-CI + Github-Pages + Serverless + CDN
 
 2017-12-14 
 
@@ -28,6 +28,7 @@
     npm update //更新插件和Hexo版本
     npm outdated //检查插件更新
     npm install --save //开始更新
+    npm install --ignore-scripts //上面更新报错，就用这个
     hexo version //查看当前版本号
 
 开始更新

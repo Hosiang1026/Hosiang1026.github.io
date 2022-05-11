@@ -19,7 +19,7 @@ install:
   # - npm install --ignore-scripts
   - rm -rf  /nodejs/lib/node_modules
   - npm config set electron_mirror "https://npm.taobao.org/mirrors/electron/"
-  - npm install --save
+  - npm install
   #- npm install hexo-abbrlink
   #- npm install hexo-recommended-posts --save
 

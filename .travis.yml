@@ -2,7 +2,7 @@
 language: node_js
 
 #设置相应的版本
-node_js: v12.18.3
+node_js: v16.15.0
   
 # 缓存不经常更改的内容
 cache:

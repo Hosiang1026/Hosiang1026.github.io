@@ -8,7 +8,7 @@
 
 ## 技术方案：Hexo + Travis-CI + Github-Pages + Serverless + CDN
 
-![Blog Version](/images/blog_version.png "博客版本信息")
+![Blog Version](https://www.hosiang.cn/images/blog_version.png "博客版本信息")
 
 2017-12-14 
 

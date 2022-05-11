@@ -58,12 +58,13 @@ after_script:
   # Github Pages
   - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
   - git push --quiet "https://${GH_TOKEN}@${GH_REF}" master:master --tags
-  - git tag v0.$TRAVIS_BUILD_NUMBER -a -m "v0.2022$TRAVIS_BUILD_NUMBER 发布博客成功"
+  - git tag v0.$TRAVIS_BUILD_NUMBER -a -m "v0.2022$TRAVIS_BUILD_NUMBER Github Pages 发布上线成功"
   
   # Gitee Pages  
   - git  config --global  credential.helper  store
   - git push --force --quiet "https://${GE_TOKEN}@${GE_REF}" master:master
   - git push --quiet "https://${GE_TOKEN}@${GE_REF}" master:master --tags
+  - git tag v0.$TRAVIS_BUILD_NUMBER -a -m "v0.2022$TRAVIS_BUILD_NUMBER Gitee Pages 发布上线成功"
 
 
 # 指定博客源码分支
@@ -74,7 +75,6 @@ branches:
 
 # 配置Webhook通知
 notifications:
-  #webhooks: https://oapi.dingtalk.com/robot/send?access_token=efd3fcd86a9e3e8b69c1db1e67284191826be28b775a6e60e7453755a9ae9289
   webhooks: https://oapi.dingtalk.com/robot/send?access_token=6d3354513b93c853cd0250984784bd023de87449122f1bbae431e0b9030c81ab
   on_success: change 
   on_failure: always 

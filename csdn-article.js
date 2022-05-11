@@ -28,7 +28,7 @@ function crawler(domain) {
         });
         res.on('end', function () {
             filterHtml(html);
-            //nextPage( html );
+            nextPage( html );
         });
     });
 }
@@ -90,10 +90,10 @@ function crawlerContent() {
                 });
                 //console.log(newList);
                 if (arcList.length == num ){
-                    //insertArrData();
+                    insertArrData();
                     //callDB.closeDB();
                 }
-                //nextPage( html );
+                nextPage( html );
             });
         });
     });
@@ -149,9 +149,9 @@ function insertArrData() {
     newList.forEach(function(item,index){
         //写入文件
         if ('' != item.content){
-            var htmlData = [[null, item.title, author, item.url, item.cover, item.desc, item.content,  item.times ]];
-            var sql = "replace into article(id, title, source, url, cover, desc, content, times) values(?, ?, ?, ?, ?, ?, ?, ?)";
-            callDB.insertDatas(sql,htmlData);
+            //var htmlData = [[null, item.title, author, item.url, item.cover, item.desc, item.content,  item.times ]];
+            //var sql = "replace into article(id, title, source, url, cover, desc, content, times) values(?, ?, ?, ?, ?, ?, ?, ?)";
+            //callDB.insertDatas(sql,htmlData);
             writeFiles(index+1, item.title, item.cover, item.desc, item.content);
         }
     });

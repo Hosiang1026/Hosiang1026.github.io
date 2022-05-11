@@ -3,7 +3,7 @@ var http = require('http');
 var https = require('https');
 var datetime = require("silly-datetime");
 var cheerio = require('cheerio');
-var callDB = require('./callSqlite.js');
+//var callDB = require('./callSqlite.js');
 
 //主域名 _blog_index_recommend_list
 var domain = 'https://www.oschina.net/blog/widgets/_blog_index_recommend_list?type=ajax&';
@@ -167,10 +167,10 @@ function insertArrData() {
     newList.forEach(function(item,index){
         //写入文件
         if ('' != item.content){
-            var htmlData = [[null, item.title, item.url, item.cover, item.desc, item.content,  item.times ]];
-            var sql = "replace into article(id, title, url, cover, desc, content, times) values(?, ?, ?, ?, ?, ?)";
-            callDB.insertDatas(sql,htmlData);
-            writeFiles(index+1, "oschina-"+item.title, item.cover, item.desc, item.content);
+            //var htmlData = [[null, item.title, item.url, item.cover, item.desc, item.content,  item.times ]];
+            //var sql = "replace into article(id, title, url, cover, desc, content, times) values(?, ?, ?, ?, ?, ?)";
+            //callDB.insertDatas(sql,htmlData);
+            writeFiles(index+1, item.title, item.cover, item.desc, item.content);
         }
     });
 }
@@ -199,7 +199,7 @@ function writeFiles(index, title, cover, desc, content) {
         "&emsp;&emsp;"+desc+"\n" +
         "<!-- more -->\n"+ content;
     console.log(title + " File has been created-"+index + "cover_picture: '"+cover+"'");
-    fs.writeFileSync("./source/_posts/"+title+".md", fileContent, (err) => {
+    fs.writeFileSync("./source/_posts/sync/"+title+".md", fileContent, (err) => {
         if (err) {
             console.error(err);
             return;

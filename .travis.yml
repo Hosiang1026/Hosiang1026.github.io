@@ -33,7 +33,7 @@ script:
 
   #抓取文章
   #- npm install sqlite3 --save
-  #- node oschina-article.js
+  - node oschina-article.js
   #- node csdn-article.js
 
   #生成

@@ -56,12 +56,14 @@ after_script:
   - git commit -m " TravisCI第 $TRAVIS_BUILD_NUMBER 次自动构建发布博客 -`date +"%Y-%m-%d %H:%M"`"
 
   # Github Pages
+
   - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+  - git tag v0.$TRAVIS_BUILD_NUMBER -a -m "v0.2022$TRAVIS_BUILD_NUMBER  博客发布上线成功"
   - git push --quiet "https://${GH_TOKEN}@${GH_REF}" master:master --tags
   
   # Gitee Pages
+  - git config --system --unset credential.helper
   - git push --force --quiet "https://${GE_TOKEN}@${GE_REF}" master:master
-  - git tag v0.$TRAVIS_BUILD_NUMBER -a -m "v0.2022$TRAVIS_BUILD_NUMBER  博客发布上线成功"
   - git push --quiet "https://${GE_TOKEN}@${GE_REF}" master:master --tags
 
 

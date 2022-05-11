@@ -200,7 +200,7 @@ function writeFiles(index, title, cover, desc, content) {
         "&emsp;&emsp;"+desc+"\n" +
         "<!-- more -->\n"+ content;
     console.log(title + " File has been created-"+index + "cover_picture: '"+cover+"'");
-    fs.writeFileSync("./source/_posts/"+title+".md", fileContent, (err) => {
+    fs.writeFileSync("./source/_posts/sync/"+title+".md", fileContent, (err) => {
         if (err) {
             console.error(err);
             return;

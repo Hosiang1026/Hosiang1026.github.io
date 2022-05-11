@@ -1,0 +1,268 @@
+---
+title: 推荐系列-Redis 为何使用近似 LRU 算法淘汰数据，而不是真实 LRU-
+categories: 热门文章
+tags:
+  - Popular
+author: OSChina
+top: 265
+date: 2022-05-11 05:14:30
+cover_picture: 'https://magebyte.oss-cn-shenzhen.aliyuncs.com/redis/20220508223448.png'
+---
+
+&emsp;&emsp;Redis 数据缓存满了怎么办？》我们知道 Redis 缓存满了之后能通过淘汰策略删除数据腾出空间给新数据。 淘汰策略如下所示： 设置过期时间的 key volatile-ttl、volatile-random、volatil...
+<!-- more -->
+
+                                                                                                                                                                                        在《Redis 数据缓存满了怎么办？》我们知道 Redis 缓存满了之后能通过淘汰策略删除数据腾出空间给新数据。 
+淘汰策略如下所示： 
+ 
+设置过期时间的 key 
+ 
+ ```java 
+  volatile-ttl、volatile-random、volatile-lru、volatile-lfu
+  ``` 
+  这四种策略淘汰的数据范围是设置了过期时间的数据。 
+所有的 key 
+ 
+ ```java 
+  allkeys-lru、allkeys-random、allkeys-lfu
+  ``` 
+  这三种淘汰策略无论这些键值对是否设置了过期时间，当内存不足都会进行淘汰。 
+这就意味着，即使它的过期时间还没到，也会被删除。当然，如果已经过了过期时间，即使没有被淘汰策略选中，也会被删除。 
+ 
+ ```java 
+  volatile-ttl 和 volatile-randon
+  ``` 
+  很简单，重点在于  
+ ```java 
+  volatile-lru 和 volatile-lfu
+  ``` 
+ ，他们涉及到 LRU 算法 和 LFU 算法。 
+今天码哥带大家一起搞定 Redis 的 LRU 算法… 
+ 
+#### 近似 LRU 算法 
+ 
+ 
+ ```java 
+  LRU
+  ``` 
+  算法的全程是  
+ ```java 
+  Least Rencently Used
+  ``` 
+ ，顾名思义就是按照最近最久未使用的算法进行数据淘汰。 
+核心思想「如果该数据最近被访问，那么将来被发放稳的几率也更高」。 
+我们把所有的数据组织成一个链表： 
+ 
+ MRU���表示链表的表头，代表着最近最常被访问的数据； 
+ LRU：表示链表的表尾，代表最近最不常使用的数据。 
+ 
+ 
+可以发现，LRU 更新和插入新数据都发生在链表首，删除数据都发生在链表尾。 
+被访问的数据会被移动到 MRU 端，被访问的数据之前的数据则相应往后移动一位。 
+ 
+如果选用单链表，删除这个结点，需要 O(n) 遍历一遍找到前驱结点。所以选用双向链表，在删除的时候也能 O(1) 完成。 
+ 
+不是的，由于 LRU 算法需要用链表管理所有的数据，会造成大量额外的空间消耗。 
+除此之外，大量的节点被访问就会带来频繁的链表节点移动操作，从而降低了 Redis 性能。 
+所以 Redis 对该算法做了简化，Redis LRU 算法并不是真正的 LRU，Redis 通过对少量的 key 采样，并淘汰采样的数据中最久没被访问过的 key。 
+这就意味着 Redis 无法淘汰数据库最久访问的数据。 
+Redis LRU 算法有一个重要的点在于可以更改样本数量来调整算法的精度，使其近似接近真实的 LRU 算法，同时又避免了内存的消耗，因为每次只需要采样少量样本，而不是全部数据。 
+配置如下： 
+ 
+ ```java 
+  maxmemory-samples 50
+
+  ``` 
+  
+运行原理 
+大家还记得么，数据结构  
+ ```java 
+  redisObjec
+  ``` 
+ t 中有一个  
+ ```java 
+  lru
+  ``` 
+  字段， 用于记录每个数据最近一次被访问的时间戳。 
+ 
+ ```java 
+  typedef struct redisObject {
+    unsigned type:4;
+    unsigned encoding:4;
+    /* LRU time (relative to global lru_clock) or
+     * LFU data (least significant 8 bits frequency
+     * and most significant 16 bits access time).
+     */
+    unsigned lru:LRU_BITS; 
+    int refcount;
+    void *ptr;
+} robj;
+
+  ``` 
+  
+Redis 在淘汰数据时，第一次随机选出 N 个数据放到候选集合，将 lru 字段值最小的数据淘汰。 
+当再次需要淘汰数据时，会重新挑选数据放入第一次创建的候选集合，不过有一个挑选标准：进入该集合的数据的 lru 的值必须小于候选集合中最小的 lru 值。 
+如果新数据进入候选集合的个数达到了  
+ ```java 
+  maxmemory-samples
+  ``` 
+  设定的值，那就把候选集合中  
+ ```java 
+  lru
+  ``` 
+  最小的数据淘汰。 
+这样就大大减少链表节点数量，同时不用每次访问数据都移动链表节点，大大提升了性能。 
+ 
+#### Java 实现 LRU Cahce 
+ 
+###### LinkedHashMap 实现 
+完全利用 Java 的 
+ ```java 
+  LinkedHashMap
+  ``` 
+ 实现，可以采用组合或者继承的方式实现，「码哥」使用组合的形式完成。 
+ 
+ ```java 
+  public class LRUCache<K, V> {
+    private Map<K, V> map;
+    private final int cacheSize;
+
+    public LRUCache(int initialCapacity) {
+        map = new LinkedHashMap<K, V>(initialCapacity, 0.75f, true) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+                return size() > cacheSize;
+            }
+        };
+        this.cacheSize = initialCapacity;
+    }
+}
+
+  ``` 
+  
+重点在于  
+ ```java 
+  LinkedHashMap
+  ``` 
+ 的第三个构造函数上，要把这个构造参数 
+ ```java 
+  accessOrder
+  ``` 
+ 设为true，代表 
+ ```java 
+  LinkedHashMap
+  ``` 
+ 内部维持访问顺序。 
+另外，还需要重写 
+ ```java 
+  removeEldestEntry()
+  ``` 
+ ，这个函数如果返回 
+ ```java 
+  true
+  ``` 
+ ，代表把最久未被访问的节点移除，从而实现淘汰数据。 
+ 
+###### 自己实现 
+其中代码是从 LeetCode 146. LRU Cache 上摘下来的。代码里面有注释。 
+ 
+ ```java 
+  import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+/**
+ * 在链头放最久未被使用的元素，链尾放刚刚添加或访问的元素
+ */
+class LRUCache {
+    class Node {
+        int key, value;
+        Node pre, next;
+
+        Node(int key, int value) {
+            this.key = key;
+            this.value = value;
+            pre = this;
+            next = this;
+        }
+    }
+
+    private final int capacity;// LRU Cache的容量
+    private Node dummy;// dummy节点是一个冗余节点，dummy的next是链表的第一个节点，dummy的pre是链表的最后一个节点
+    private Map<Integer, Node> cache;//保存key-Node对，Node是双向链表节点
+
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        dummy = new Node(0, 0);
+        cache = new ConcurrentHashMap<>();
+    }
+
+    public int get(int key) {
+        Node node = cache.get(key);
+        if (node == null) return -1;
+        remove(node);
+        add(node);
+        return node.value;
+    }
+
+    public void put(int key, int value) {
+        Node node = cache.get(key);
+        if (node == null) {
+            if (cache.size() >= capacity) {
+                cache.remove(dummy.next.key);
+                remove(dummy.next);
+            }
+            node = new Node(key, value);
+            cache.put(key, node);
+            add(node);
+        } else {
+            cache.remove(node.key);
+            remove(node);
+            node = new Node(key, value);
+            cache.put(key, node);
+            add(node);
+        }
+    }
+
+    /**
+     * 在链表尾部添加新节点
+     *
+     * @param node 新节点
+     */
+    private void add(Node node) {
+        dummy.pre.next = node;
+        node.pre = dummy.pre;
+        node.next = dummy;
+        dummy.pre = node;
+    }
+
+    /**
+     * 从双向链表中删除该节点
+     *
+     * @param node 要删除的节点
+     */
+    private void remove(Node node) {
+        node.pre.next = node.next;
+        node.next.pre = node.pre;
+    }
+}
+
+
+  ``` 
+  
+ 
+码哥到现在已经写了近 23+ 篇 Redis 文章，赠送了很多书籍，收到过许多赞美和少量赞赏，感谢曾经赞赏过我的读者，谢谢。 
+我是「码哥」，大家可以叫我靓仔，好文请点赞，关于 LFU 算法，我们下一篇见。 
+ 
+#### 历史好文 
+ 
+ Redis 内存满了怎么办？ 
+ Redis 的过期数据会被立马删除么？ 
+ Redis 缓存击穿（失效）、缓存穿透、缓存雪崩怎么解决？ 
+ 
+参考文献 
+https://redis.io/docs/manual/eviction/ 
+http://antirez.com/news/109 
+https://time.geekbang.org/column/article/294640 
+https://halfrost.com/lru_lfu_interview/ 
+https://blog.csdn.net/csdlwzy/article/details/95635083
+                                        

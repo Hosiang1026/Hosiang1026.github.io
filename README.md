@@ -40,6 +40,15 @@
 ## 执行hexo server提示找不到该指令 
 
 解决办法： 
+
+错误 Error: electron@13.1.8 postinstall: `node install.js`:
+
+    npm config set electron_mirror "https://npm.taobao.org/mirrors/electron/"
+
+warning: LF will be replaced by CRLF in js/utils.js.
+
+    git config --global core.autocrlf false
+
 在Hexo 3.0 后server被单独出来了，需要安装server，安装的命令如下：
 
     npm install hexo-server --save 
@@ -82,7 +91,11 @@
     $ npm audit fix
 
      https://www.gitpod.io/ 
-     
+
+## 常见问题
+
+     https://blog.csdn.net/qq_29304291/article/details/120049986
+
 ## Star趋势
 
 [![Stargazers over time](https://starchart.cc/fluid-dev/hexo-theme-fluid.svg)](https://starchart.cc/fluid-dev/hexo-theme-fluid)

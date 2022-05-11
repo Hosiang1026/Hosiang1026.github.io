@@ -16,7 +16,9 @@ before_install:
   
 # 安装hexo及插件
 install:
-  - npm install --ignore-scripts
+  # - npm install --ignore-scripts
+  - npm config set electron_mirror "https://npm.taobao.org/mirrors/electron/"
+  - npm install --save
   - npm install hexo-abbrlink
   - npm install hexo-recommended-posts --save
 
@@ -76,7 +78,8 @@ branches:
 
 # 配置Webhook通知
 notifications:
-  webhooks: https://oapi.dingtalk.com/robot/send?access_token=efd3fcd86a9e3e8b69c1db1e67284191826be28b775a6e60e7453755a9ae9289
+  #webhooks: https://oapi.dingtalk.com/robot/send?access_token=efd3fcd86a9e3e8b69c1db1e67284191826be28b775a6e60e7453755a9ae9289
+  webhooks: https://oapi.dingtalk.com/robot/send?access_token=6d3354513b93c853cd0250984784bd023de87449122f1bbae431e0b9030c81ab
   on_success: change 
   on_failure: always 
   on_start:   change

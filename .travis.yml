@@ -28,13 +28,13 @@ script:
   - hexo recommend
 
   #生成相册json
-  - npm install request
   - node tool.js
+  #- npm install request
 
   #抓取文章
-  - npm install sqlite3
   - node oschina-article.js
-  - node csdn-article.js
+  #- npm install sqlite3
+  #- node csdn-article.js
 
   #生成
   - hexo g

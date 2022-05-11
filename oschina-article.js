@@ -30,7 +30,7 @@ function crawler(domain) {
             });
             res.on('end', function () {
                 filterHtml(html);
-                //nextPage( html );
+                nextPage( html );
             });
         });
     }while (i != 5)
@@ -58,7 +58,7 @@ function filterHtml(html) {
         //特殊符号处理
         var reg=/\\|\/|\?|\？|\*|\"|\“|\”|\'|\‘|\’|\<|\>|\{|\}|\[|\]|\【|\】|\：|\:|\、|\^|\$|\!|\~|\`|\|/g;
         title = title.replace(reg,"-");
-        console.log(title + "-- " + url);
+        //console.log(title + "-- " + url);
 
         arcList.push({
             title: title,
@@ -99,12 +99,11 @@ function crawlerContent() {
                         num = num + 1;
                     }
                 });
-                //console.log(newList);
                 if (arcList.length == num ){
-                    //insertArrData();
+                    insertArrData();
                     //callDB.closeDB();
                 }
-                //nextPage( html );
+                nextPage( html );
             });
         });
     });

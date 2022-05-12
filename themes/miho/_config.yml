@@ -64,10 +64,10 @@ menu:
     url: /photo
     target: false
 
-#  heart:
-#    title: 恋爱
-#    url: /love
-#    target: false
+   heart:
+     title: 恋爱
+     url: /love
+     target: false
 
   envira:
     title: 收藏

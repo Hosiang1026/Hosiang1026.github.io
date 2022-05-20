@@ -2,7 +2,7 @@
 
 <!-- 诗词接口暂时不用-->
 <!-- <span id='jinrishici-sentence'>-->
-<!-- <script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> -->
+<script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
  
 <!-- 滚动公告 -->
 <div id = "noticeId" class="show" style="background: rgb(244, 247, 247, 0.3);">
@@ -60,9 +60,9 @@ function browserRedirect() {
        $("#noticeId").css({"line-height":"1.6em"});
        contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
             <% if (theme.countdown.enable) { %>
-           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+           "官宣：<span id='msg'></span><span id='timer'></span>"
             <% } %>
-           +"<span id='hitokoto'></span></span></span><span id='YQData'></font> ";
+           +"<span id='jinrishici-sentence'></span></font> ";
 
     } else {
        $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
@@ -70,7 +70,7 @@ function browserRedirect() {
             <% if (theme.countdown.enable) { %>
            "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
              <% } %>
-           +"<span id='hitokoto'></span></span><span id='YQData'></span></font> ";
+           +"<span id='jinrishici-sentence'></span></font> ";
     }
     
     $("#noticeMar").html(contentHtml);

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>狂欢马克思</title>
+</head>
+<body>
+	<iframe id="blogFrame" name="blogFrame" src="https://hosiang1026.gitee.io" style="width:100%;" frameborder="0"  onLoad="this.height=800" >
+	</iframe>
+</body>
+<script>
+$(function () {
+    //时间控制每隔200毫秒检查当前页面高度以及滚动高度，测试多遍，cpu占用极少，不明显影响程序运行速度
+    window.setInterval("reinitIframe()", 200);
+})
+ 
+ 
+//iframe自适应高度,解决了动态更换页面高度无法自适应问题
+function reinitIframe() {
+    var iframe = document.getElementById("blogFrame");
+    try {
+        //bHeight 和 dHeight 如果相等，用其一等于iframe.height 即可
+        // var bHeight = iframe.contentWindow.document.body.scrollHeight;
+        var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+        // var height = Math.max(bHeight, dHeight);
+        console.log(dHeight)
+        iframe.height = dHeight;
+    } catch (ex) { }
+}
+</script>
+</html>

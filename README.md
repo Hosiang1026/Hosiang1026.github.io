@@ -83,7 +83,8 @@
     gulp-uglify // 混淆js
     gulp-imagemin // 压缩图片
 
-    > npm run dev 开发启动
+    > npm run build 打包构建
+    > npm run dev 开发运行
     > npm run prod 发布线上
     详细命令如下:
     > hexo clean //先清除public目录

@@ -62,6 +62,7 @@
     "sync": "yuque-hexo sync",
     "clean": "yuque-hexo clean",
     "deploy": "npm run sync && node deploy.js",
+    "build": "hexo clean && hexo g",
     "dev": "hexo clean && hexo g && hexo s",
     "prod": "hexo clean && hexo g && hexo d"
   },

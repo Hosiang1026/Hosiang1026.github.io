@@ -2,7 +2,7 @@
 
 ## 作者：吉祥草
 
-## 域名：https://www.hosiang.cn
+## 域名：https://hosiang1026.github.io
 
 ## 网站特点：云端写作、自动部署、钉钉通知
 

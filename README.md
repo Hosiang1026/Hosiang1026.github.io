@@ -2,13 +2,15 @@
 
 ## 作者：吉祥草
 
-## 域名：https://hosiang1026.github.io
+## 主域名：https://haoxiang.eu.org
+## 备域名：https://hosiang1026.github.io
+
 
 ## 网站特点：云端写作、自动部署、钉钉通知
 
 ## 技术方案：Hexo + Travis-CI + Github-Pages + Serverless + CDN
 
-![Blog Version](https://www.hosiang.cn/images/blog_version.png "博客版本信息")
+![Blog Version](https://haoxiang.eu.org/images/blog_version.png "博客版本信息")
 
 2017-12-14 
 

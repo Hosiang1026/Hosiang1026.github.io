@@ -237,7 +237,7 @@ var lzxPlayerInit = function () {
 
     $cover.html('<img src="/images/player_cover.jpg">');
     $songName.html('<a style="color:#f00">正在初始化</a>');
-    $songFrom.html('<a style="color:#f00">www.hosiang.cn</a>');
+    $songFrom.html('<a style="color:#f00">haoxiang.eu.org</a>');
     $songFrom1.html('<a style="color:#f00">音乐播放器</a>');
     $songFrom3.html('<i class="fa fa-times-circle"></i> 歌词未载入');
 

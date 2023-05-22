@@ -205,7 +205,7 @@ aplayer:
 nofollow:
     enable: true
     exclude:
-    - www.hosiang.cn
+    - haoxiang.eu.org
 
 # hexo-admin authentification
 admin:
@@ -218,7 +218,7 @@ admin:
 deploy:
 - type: git
   repo:
-      github: git@github.com:Hosiang1026/Hosiang1026.github.io.git
+      github: git@github.com:Hosiang1026/haoxiang.eu.org.git
       #gitee: git@gitee.com:hosiang1026/hosiang1026.git
   branch: master
   message: site updated at {{ now('YYYY-MM-DD HH:mm:ss') }}

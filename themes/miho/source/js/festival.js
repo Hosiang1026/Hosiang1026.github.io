@@ -373,7 +373,7 @@ function showTime(){
         if (voiceflag){
             var url = window.location.href;
             if ($.cookie("auto_playre") == null || $.cookie("auto_playre") === "yes") {
-                if(url == "https://www.hosiang.cn/"||url == "https://www.hosiang.cn"||
+                if(url == "https://haoxiang.eu.org/"||url == "https://haoxiang.eu.org"||
                   url == "https://blog.hosiang.cn/"||url == "https://blog.hosiang.cn"){
                     speechVoice();
                    }else{

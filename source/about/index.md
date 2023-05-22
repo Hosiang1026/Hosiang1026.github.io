@@ -11,7 +11,7 @@
 
  **网站名称：** 狂欢马克思
 
- **网站域名：** [https://hosiang1026.github.io](https://hosiang1026.github.io)
+ **网站域名：** [https://haoxiang.eu.org](https://haoxiang.eu.org)
  
  **建站时间：** 2018年9月份
  

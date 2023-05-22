@@ -6,7 +6,7 @@ var flag = true;
 var passFlag = true;
 var datas;
 var photosData;
-var host = "https://www.hosiang.cn";
+var host = "https://haoxiang.eu.org";
 var lockUrl = host + "/images/album_lock.jpg";
 
 $.getJSON(host+"/photo/album/photo.json", function (data) {

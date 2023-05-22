@@ -1,5 +1,5 @@
 //需要推送的网站链接
-var content = "https://www.hosiang.cn/";
+var content = "https://haoxiang.eu.org/";
 //对应配置post推送的接口说明
 var options = {
     host: "data.zz.baidu.com",

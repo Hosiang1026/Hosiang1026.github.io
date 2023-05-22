@@ -1,3 +1,3 @@
 <script type="text/javascript">
-    window.location.href = "http://ecgvivu.nat.ipyingshe.com";
+    window.location.href = "https://nas.haoxiang.eu.org:81";
 </script>

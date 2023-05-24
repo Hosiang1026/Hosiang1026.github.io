@@ -5,6 +5,7 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
+Disallow: /page/
 
 User-agent: Googlebot
 Disallow: /vendors/
@@ -13,6 +14,7 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
+Disallow: /page/
 
 User-agent: Baiduspider-image
 Disallow: /vendors/
@@ -21,6 +23,7 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
+Disallow: /page/
 
 User-agent: Sogou web spider
 Disallow: /vendors/
@@ -29,6 +32,7 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
+Disallow: /page/
 
 User-agent: Sogou inst spider
 Disallow: /vendors/
@@ -37,6 +41,7 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
+Disallow: /page/
 
 User-agent: Sogou spider2
 Disallow: /vendors/
@@ -45,6 +50,7 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
+Disallow: /page/
 
 User-agent: Sogou blog
 Disallow: /vendors/
@@ -53,6 +59,7 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
+Disallow: /page/
 
 User-agent: Sogou News Spider
 Disallow: /vendors/
@@ -61,6 +68,7 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
+Disallow: /page/
 
 User-agent: Sogou Orion spider
 Disallow: /vendors/
@@ -69,6 +77,7 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
+Disallow: /page/
 
 User-agent: Sosospider
 Disallow: /vendors/
@@ -77,3 +86,4 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
+Disallow: /page/

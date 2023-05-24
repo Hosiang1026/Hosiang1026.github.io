@@ -26,7 +26,7 @@ menu:
 
 #  star:
 #    title: 首页
-#    url: https://www.hosiang.ml
+#    url: https://haoxiang.eu.org
 #    target: false
 
   home:
@@ -44,21 +44,6 @@ menu:
     url: /gitbook
     target: false
 
-  #list-alt:
-  #  title: 项目
-  #  url: /project
-  #  target: false
-
-  #jsfiddle:
-    #title: 云盘
-    #url: http://hosiang.ccaeo.com/skydrive
-    #target: true
-    
-  music:
-    title: 音乐
-    url: /music
-    target: false
-    
   picture-o:
     title: 相册
     url: /photo
@@ -73,16 +58,26 @@ menu:
     title: 收藏
     url: /collection
     target: false
-    
-#  gamepad:
-#    title: 游戏
-#    url: https://www.yikm.net
-#    target: true
-    
+
   user:
     title: 关于
     url: /about
     target: false
+
+#  list-alt:
+#    title: 项目
+#    url: /project
+#    target: false
+
+#  jsfiddle:
+#    title: 云盘
+#    url: http://hosiang.ccaeo.com/skydrive
+#    target: true
+
+#  gamepad:
+#    title: 游戏
+#    url: https://www.yikm.net
+#    target: true
 
 # Social setting, use to display social information | 社交设置，用来展示社交信息
 #  name:                  Font Awesome icon | Font Awesome 图标

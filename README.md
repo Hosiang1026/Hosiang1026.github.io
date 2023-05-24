@@ -103,6 +103,26 @@
 
      https://blog.csdn.net/qq_29304291/article/details/120049986
 
+## 搜索引擎收录
+
+    搜狗和百度联盟 还未通过验证
+
+## 博客收录
+
+    百度博客提交: http://utility.baidu.com/blogsearch/submit.php
+    博客大全提交：http://lusongsong.com/daohang/login.asp
+    Google博客提交：http://www.google.com/intl/zh-CN/add_url.html
+    搜狗(SoGou)博客提交：http://www.sogou.com/feedback/blogfeedback.php
+
+## 广告联盟收录
+
+    Google adsense：https://www.google.com/adsense/g-app-single-1?hl=zh-CN
+    百度联盟申请地址：http://union.baidu.com
+    淘宝联盟：http://www.alimama.com/
+    搜狗联盟：http://union.sogou.com/
+    亚马逊网站联盟：https://associates.amazon.cn/
+    京东商城销售联盟：http://cps.360buy.com/
+  
 ## Star趋势
 
 [![Stargazers over time](https://starchart.cc/fluid-dev/hexo-theme-fluid.svg)](https://starchart.cc/fluid-dev/hexo-theme-fluid)

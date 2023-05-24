@@ -33,7 +33,7 @@ function crawler(domain) {
                 nextPage( html );
             });
         });
-    }while (i != 5)
+    }while (i != 2)
 }
 
 //解析html页面

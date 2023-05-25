@@ -56,7 +56,8 @@ function filterHtml(html) {
             var tvName = snsArr2[0];
             var tvUrl = snsArr2[1];
             if (tvName.indexOf('#EXTM3U') == -1&&!!tvUrl){
-                var groupName = tvName.substring(tvName.lastIndexOf("=")+2, tvName.lastIndexOf(",")-1);
+                var groupName = tvName.substring(tvName.lastIndexOf("group-title=")+2, tvName.lastIndexOf(",")-1);
+                var displayMark = tvName.substring(tvName.lastIndexOf("display=")+2);
                 if (tvUrl.indexOf("]") != -1){
                     dealIpv6List(groupName, tvName, tvUrl);
                 }else{

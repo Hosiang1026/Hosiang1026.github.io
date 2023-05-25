@@ -219,3 +219,6 @@ http://112.25.48.70/live/program/live/qjshd/4000000/mnf.m3u8
 http://112.25.48.70/live/program/live/shsshd/4000000/mnf.m3u8
 #EXTINF:-1 group-title="轮播节目",SiTV游戏风云
 http://112.25.48.70/live/program/live/yxfyhd/4000000/mnf.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1
+http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225642/index.m3u8
+

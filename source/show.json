@@ -1,0 +1,408 @@
+{
+	"cctv": [
+		{
+			"sort": 1,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "央视节目",
+			"name": "CGTN SD",
+			"url": "http://live.cgtn.com/500/prog_index.m3u8"
+		},
+		{
+			"sort": 2,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "央视节目",
+			"name": "CGTN1 SD",
+			"url": "http://live.cgtn.com/1000/prog_index.m3u8?$全网标清576P"
+		},
+		{
+			"sort": 3,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "央视节目",
+			"name": "CGTN2 SD",
+			"url": "https://livedoc.cgtn.com/1000d/prog_index.m3u8?$全网标清576P"
+		}
+	],
+	"wctv": [
+		{
+			"sort": 1,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "卫视节目",
+			"name": "浙江卫视",
+			"url": "http://hw-m-l.cztv.com/channels/lantian/channel01/1080p.m3u8"
+		},
+		{
+			"sort": 2,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "卫视节目",
+			"name": "香港卫视 SD",
+			"url": "http://zhibo.hkstv.tv:80/livestream/mutfysrq.flv"
+		}
+	],
+	"dctv": [
+		{
+			"sort": 1,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "浙江6套",
+			"url": "http://hw-m-l.cztv.com/channels/lantian/channel06/1080p.m3u8"
+		},
+		{
+			"sort": 2,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "浙江6套",
+			"url": "http://hw-m-l.cztv.com/channels/lantian/channel006/1080p.m3u8"
+		},
+		{
+			"sort": 3,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "浙江公共",
+			"url": "http://hw-m-l.cztv.com/channels/lantian/channel07/1080p.m3u8"
+		},
+		{
+			"sort": 4,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "浙江国际",
+			"url": "http://hw-m-l.cztv.com/channels/lantian/channel010/1080p.m3u8"
+		},
+		{
+			"sort": 5,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "浙江国际",
+			"url": "http://hw-m-l.cztv.com/channels/lantian/channel10/1080p.m3u8"
+		},
+		{
+			"sort": 6,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "浙江少儿",
+			"url": "http://hw-m-l.cztv.com/channels/lantian/channel008/1080p.m3u8"
+		},
+		{
+			"sort": 7,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "浙江少儿",
+			"url": "http://hw-m-l.cztv.com/channels/lantian/channel08/1080p.m3u8"
+		},
+		{
+			"sort": 8,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "浙江教科影视",
+			"url": "http://hw-m-l.cztv.com/channels/lantian/channel004/1080p.m3u8"
+		},
+		{
+			"sort": 9,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "浙江之江记录",
+			"url": "http://hw-m-l.cztv.com/channels/lantian/channel012/1080p.m3u8"
+		},
+		{
+			"sort": 10,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "浙江留学",
+			"url": "http://hw-m-l.cztv.com/channels/lantian/channel09/1080p.m3u8"
+		},
+		{
+			"sort": 11,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "浙江经济生活",
+			"url": "http://hw-m-l.cztv.com/channels/lantian/channel003/1080p.m3u8"
+		},
+		{
+			"sort": 12,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "浙江钱江",
+			"url": "http://hw-m-l.cztv.com/channels/lantian/channel002/1080p.m3u8"
+		},
+		{
+			"sort": 13,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "浙江钱江",
+			"url": "http://hw-m-l.cztv.com/channels/lantian/channel02/1080p.m3u8"
+		},
+		{
+			"sort": 14,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "南京新闻综合",
+			"url": "http://live.nbs.cn/channels/njtv/xwzh/m3u8:500k/live.m3u8"
+		},
+		{
+			"sort": 15,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "青海综合频道",
+			"url": "http://lmt.scqstv.com/live1/live1.m3u8"
+		},
+		{
+			"sort": 16,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "青田电视台",
+			"url": "http://l.cztvcloud.com/channels/lantian/SXqingtian1/720p.m3u8"
+		},
+		{
+			"sort": 17,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "靖江新闻",
+			"url": "http://58.222.151.43:1935/live/xwzhpc/playlist.m3u8"
+		},
+		{
+			"sort": 18,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "北京房山",
+			"url": "http://live.funhillrm.com/5/sd/live.m3u8"
+		},
+		{
+			"sort": 19,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "晋中公共",
+			"url": "http://jzlive.jztvnews.com:90/live/jzgg.m3u8"
+		},
+		{
+			"sort": 20,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "晋中综合",
+			"url": "http://jzlive.jztvnews.com:90/live/jzzh.m3u8"
+		},
+		{
+			"sort": 21,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "晋中生活",
+			"url": "http://l.cztvcloud.com/channels/lantian/SXxinchang2/720p.m3u8"
+		},
+		{
+			"sort": 22,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "新昌新闻",
+			"url": "http://l.cztvcloud.com/channels/lantian/SXxinchang1/720p.m3u8"
+		},
+		{
+			"sort": 23,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "宿州公共",
+			"url": "http://live.ahsz.tv/video/s10001-ggpd/index.m3u8"
+		},
+		{
+			"sort": 24,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "宿州新闻综合",
+			"url": "http://live.ahsz.tv/video/s10001-szzh/index.m3u8"
+		},
+		{
+			"sort": 25,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "宿州科教",
+			"url": "http://live.ahsz.tv/video/s10001-kxjy/index.m3u8"
+		},
+		{
+			"sort": 26,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "新郑综合",
+			"url": "http://live.dxhmt.cn:9081/tv/10184-1.m3u8"
+		},
+		{
+			"sort": 27,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "建安电视台",
+			"url": "http://live.dxhmt.cn:9081/tv/11003-1.m3u8"
+		},
+		{
+			"sort": 28,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "罗山电视台",
+			"url": "http://live.dxhmt.cn:9081/tv/11521-1.m3u8"
+		},
+		{
+			"sort": 29,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "石景山电视台",
+			"url": "http://live.sjsrm.com/bjsjs/sd/live.m3u8"
+		},
+		{
+			"sort": 30,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "ТКР",
+			"url": "http://live.tkr.cdnvideo.ru/tkr/tkr.sdp/playlist.m3u8"
+		},
+		{
+			"sort": 31,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "广东 ‖ 清新综合台",
+			"url": "http://hls.wiseqx.com/live/qxzh.m3u8"
+		},
+		{
+			"sort": 32,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "云南 Ⅰ 文山综合台",
+			"url": "http://tvdrs.wsrtv.com.cn:8100/channellive/ch1.flv"
+		},
+		{
+			"sort": 33,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "文山综合",
+			"url": "http://m3u8.channel.wsrtv.com.cn/cms/videos/nmip-media/channellive/channel7/playlist.m3u8"
+		},
+		{
+			"sort": 34,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "三立新聞",
+			"url": "http://seb.sason.top/sc/sllive_fhd.m3u8"
+		},
+		{
+			"sort": 35,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "東森新聞",
+			"url": "http://seb.sason.top/sc/dsxw_fhd.m3u8"
+		},
+		{
+			"sort": 36,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "東森財經新聞",
+			"url": "http://seb.sason.top/sc/dscjxw_fhd.m3u8"
+		},
+		{
+			"sort": 37,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "中天新聞",
+			"url": "http://seb.sason.top/sc/ztxw_fhd.m3u8"
+		},
+		{
+			"sort": 38,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "台視新聞",
+			"url": "http://seb.sason.top/sc/tsxw_fhd.m3u8"
+		},
+		{
+			"sort": 39,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "西安新闻",
+			"url": "http://stream2.xiancity.cn/xatv1/playlist.m3u8"
+		},
+		{
+			"sort": 40,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "吉州新聞綜合",
+			"url": "http://218.204.153.158/10.m3u8"
+		},
+		{
+			"sort": 41,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "西青新闻综合",
+			"url": "http://221.238.209.44:81/hls/live1.m3u8"
+		},
+		{
+			"sort": 42,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "洪雅新闻综合",
+			"url": "http://117.172.215.250:8083/videos/live/35/39/GQVbrgob5CGJM/GQVbrgob5CGJM.m3u8"
+		},
+		{
+			"sort": 43,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "武汉新闻HD",
+			"url": "http://stream.appwuhan.com/1tzb/sd/live.m3u8"
+		},
+		{
+			"sort": 44,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "清华大学电视台",
+			"url": "http://live.cic.tsinghua.edu.cn/hls/tsinghuatv.m3u8"
+		},
+		{
+			"sort": 45,
+			"display": 0,
+			"netmask": "ipv4",
+			"group": "地方节目",
+			"name": "中国气象 SD",
+			"url": "http://hls.weathertv.cn/tslslive/qCFIfHB/hls/live_sd.m3u8"
+		}
+	]
+}

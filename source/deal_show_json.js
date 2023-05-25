@@ -6,12 +6,18 @@ var https = require('https');
 var domain = 'https://haoxiang.eu.org/tv.m3u';
 var groupArr = ['央视节目','卫视节目','地方节目'];
 var netmaskVer = "ipv4"
-var sort1 = 0;
-var sort2 = 0;
-var sort3 = 0;
-var arcList1 = [];
-var arcList2 = [];
-var arcList3 = [];
+var ipv4_cctv_sort = 0;
+var ipv4_wstv_sort = 0;
+var ipv4_dftv_sort = 0;
+var ipv6_cctv_sort = 0;
+var ipv6_wstv_sort = 0;
+var ipv6_dftv_sort = 0;
+var ipv4_cctv_list = [];
+var ipv4_wstv_list = [];
+var ipv4_dftv_list = [];
+var ipv6_cctv_list = [];
+var ipv6_wstv_list = [];
+var ipv6_dftv_list = [];
 
 crawler(domain);
 
@@ -42,49 +48,18 @@ function filterHtml(html) {
             if (tvName.indexOf('#EXTM3U') == -1&&!!tvUrl){
                 var groupName = tvName.substring(tvName.lastIndexOf("=")+2, tvName.lastIndexOf(",")-1);
                 if (tvUrl.indexOf("]") != -1){
-                    netmaskVer = "ipv6"
-                }
-                if (groupName.indexOf(groupArr[0]) != -1){
-                    sort1 = sort1 +1;
-                    arcList1.push({
-                        sort: sort1,
-                        display: 0,
-                        netmask: netmaskVer,
-                        group: groupName,
-                        name: tvName.substring(tvName.lastIndexOf(",")+1),
-                        url: tvUrl
-                    });
-                }
-
-                if (groupName.indexOf(groupArr[1]) != -1){
-                    sort2 = sort2 +1;
-                    arcList2.push({
-                        sort: sort2,
-                        display: 0,
-                        netmask: netmaskVer,
-                        group: groupName,
-                        name: tvName.substring(tvName.lastIndexOf(",")+1),
-                        url: tvUrl
-                    });
-                }
-
-                if (groupName.indexOf(groupArr[2]) != -1){
-                    sort3 = sort3 +1;
-                    arcList3.push({
-                        sort: sort3,
-                        display: 0,
-                        netmask: netmaskVer,
-                        group: groupName,
-                        name: tvName.substring(tvName.lastIndexOf(",")+1),
-                        url: tvUrl
-                    });
+                    dealIpv6List(groupName, tvName, tvUrl);
+                }else{
+                    dealIpv4List(groupName, tvName, tvUrl);
                 }
             }
         }
     })
 
-    var ipv4_obj={cctv:arcList1, wctv:arcList2, dctv:arcList3};
-    var fileContent = JSON.stringify(ipv4_obj,"","\t");
+    var ipv4_list={cctv:ipv4_cctv_list, wstv:ipv4_wstv_list, dftv:ipv4_dftv_list};
+    var ipv6_list={cctv:ipv6_cctv_list, wstv:ipv6_wstv_list, dftv:ipv6_dftv_list};
+    var obj={ipv4:ipv4_list, ipv6:ipv6_list};
+    var fileContent = JSON.stringify(obj,"","\t");
     console.log(fileContent);
     fs.writeFileSync("./show.json", fileContent, (err) => {
         if (err) {
@@ -92,4 +67,75 @@ function filterHtml(html) {
             return;
         }
     });
+}
+
+
+function dealIpv4List(groupName, tvName, tvUrl) {
+    if (groupName.indexOf(groupArr[0]) != -1){
+        ipv4_cctv_sort = ipv4_cctv_sort +1;
+        ipv4_cctv_list.push({
+            sort: ipv4_cctv_sort,
+            display: 0,
+            group: groupName,
+            name: tvName.substring(tvName.lastIndexOf(",")+1),
+            url: tvUrl
+        });
+    }
+
+    if (groupName.indexOf(groupArr[1]) != -1){
+        ipv4_wstv_sort = ipv4_wstv_sort +1;
+        ipv4_wstv_list.push({
+            sort: ipv4_wstv_sort,
+            display: 0,
+            group: groupName,
+            name: tvName.substring(tvName.lastIndexOf(",")+1),
+            url: tvUrl
+        });
+    }
+
+    if (groupName.indexOf(groupArr[2]) != -1){
+        ipv4_dftv_sort = ipv4_dftv_sort +1;
+        ipv4_dftv_list.push({
+            sort: ipv4_dftv_sort,
+            display: 0,
+            group: groupName,
+            name: tvName.substring(tvName.lastIndexOf(",")+1),
+            url: tvUrl
+        });
+    }
+}
+
+function dealIpv6List(groupName, tvName, tvUrl) {
+    if (groupName.indexOf(groupArr[0]) != -1){
+        ipv6_cctv_sort = ipv6_cctv_sort +1;
+        ipv6_cctv_list.push({
+            sort: ipv4_cctv_sort,
+            display: 0,
+            group: groupName,
+            name: tvName.substring(tvName.lastIndexOf(",")+1),
+            url: tvUrl
+        });
+    }
+
+    if (groupName.indexOf(groupArr[1]) != -1){
+        ipv6_wstv_sort = ipv6_wstv_sort +1;
+        ipv6_wstv_list.push({
+            sort: ipv4_wstv_sort,
+            display: 0,
+            group: groupName,
+            name: tvName.substring(tvName.lastIndexOf(",")+1),
+            url: tvUrl
+        });
+    }
+
+    if (groupName.indexOf(groupArr[2]) != -1){
+        ipv6_dftv_sort = ipv6_dftv_sort +1;
+        ipv6_dftv_list.push({
+            sort: ipv4_dftv_sort,
+            display: 0,
+            group: groupName,
+            name: tvName.substring(tvName.lastIndexOf(",")+1),
+            url: tvUrl
+        });
+    }
 }

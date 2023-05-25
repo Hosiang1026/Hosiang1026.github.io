@@ -61,7 +61,7 @@ function filterHtml(html) {
     var obj={ipv4:ipv4_list, ipv6:ipv6_list};
     var fileContent = JSON.stringify(obj,"","\t");
     console.log(fileContent);
-    fs.writeFileSync("./show.json", fileContent, (err) => {
+    fs.writeFileSync("../source/show.json", fileContent, (err) => {
         if (err) {
             console.error(err);
             return;

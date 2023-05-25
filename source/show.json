@@ -355,12 +355,436 @@
 				"name": "中国气象 SD",
 				"url": "http://hls.weathertv.cn/tslslive/qCFIfHB/hls/live_sd.m3u8"
 			}
+		],
+		"foreign": [
+			{
+				"sort": 1,
+				"display": 0,
+				"group": "国外节目",
+				"name": "中国环球电视",
+				"url": "http://live.cgtn.com/1000/prog_index.m3u8"
+			},
+			{
+				"sort": 2,
+				"display": 0,
+				"group": "国外节目",
+				"name": "韩国韩国中央",
+				"url": "http://119.77.96.184:1935/chn21/chn21/playlist.m3u8"
+			},
+			{
+				"sort": 3,
+				"display": 0,
+				"group": "国外节目",
+				"name": "韩国TJB SBS",
+				"url": "http://1.245.74.5:1935/live/tv/.m3u8"
+			},
+			{
+				"sort": 4,
+				"display": 0,
+				"group": "国外节目",
+				"name": "韩国阿里郎WORLD",
+				"url": "http://amdlive.ctnd.com.edgesuite.net/arirang_1ch/smil:arirang_1ch/master.m3u8"
+			},
+			{
+				"sort": 5,
+				"display": 0,
+				"group": "国外节目",
+				"name": "韩国阿里郎TV",
+				"url": "http://amdlive.ctnd.com.edgesuite.net/arirang_1ch/smil:arirang_1ch.smil/playlist.m3u8"
+			},
+			{
+				"sort": 6,
+				"display": 0,
+				"group": "国外节目",
+				"name": "韩国KCTV",
+				"url": "http://119.77.96.184:1935/chn21/chn21/chunklist_w252131137.m3u8"
+			},
+			{
+				"sort": 7,
+				"display": 0,
+				"group": "国外节目",
+				"name": "韩国EBS第一频道",
+				"url": "http://ebsonairios.ebs.co.kr/groundwavetablet500k/tablet500k/groundwavetablet500k.m3u8"
+			},
+			{
+				"sort": 8,
+				"display": 0,
+				"group": "国外节目",
+				"name": "韩国EBS第二频道",
+				"url": "http://ebsonairios.ebs.co.kr/ebs2tablet500k/tablet500k/ebs2tablet500k.index.m3u8"
+			},
+			{
+				"sort": 9,
+				"display": 0,
+				"group": "国外节目",
+				"name": "韩国EBS加一频道",
+				"url": "http://ebsonairios.ebs.co.kr/plus1tablet500k/tablet500k/plus1tablet500k.index.m3u8"
+			},
+			{
+				"sort": 10,
+				"display": 0,
+				"group": "国外节目",
+				"name": "韩国EBS加二频道",
+				"url": "http://ebsonairios.ebs.co.kr/plus2tablet500k/tablet500k/plus2tablet500k.index.m3u8"
+			},
+			{
+				"sort": 11,
+				"display": 0,
+				"group": "国外节目",
+				"name": "韩国EBSE频道",
+				"url": "http://ebsonairios.ebs.co.kr/plus3tablet500k/tablet500k/plus3tablet500k.index.m3u8"
+			},
+			{
+				"sort": 12,
+				"display": 0,
+				"group": "国外节目",
+				"name": "韩国EBS第一频道",
+				"url": "http://ebsonairios.ebs.co.kr/groundwavetablet500k/tablet500k/playlist.m3u8"
+			},
+			{
+				"sort": 13,
+				"display": 0,
+				"group": "国外节目",
+				"name": "韩国EBS少儿频道",
+				"url": "http://ebsonairios.ebs.co.kr/ebsutablet500k/tablet500k/playlist.m3u8"
+			},
+			{
+				"sort": 14,
+				"display": 0,
+				"group": "国外节目",
+				"name": "韩国EBS儿童频道",
+				"url": "http://ebsonairios.ebs.co.kr/ebsutablet500k/_definst_/tablet500k/chunklist_w1965791004.m3u8"
+			},
+			{
+				"sort": 15,
+				"display": 0,
+				"group": "国外节目",
+				"name": "韩国BBS佛教广播",
+				"url": "http://bbstv.clouducs.com:1935/bbstv-live/livestream/chunklist_w1403706733.m3u8"
+			},
+			{
+				"sort": 16,
+				"display": 0,
+				"group": "国外节目",
+				"name": "朝鲜中央台",
+				"url": "http://119.77.96.184:1935/chn05/chn05/chunklist_w644291506.m3u8"
+			},
+			{
+				"sort": 17,
+				"display": 0,
+				"group": "国外节目",
+				"name": "俄罗斯IGITV蓝光",
+				"url": "http://hls-igi.cdnvideo.ru/igi/igi_hq/playlist.m3u8"
+			},
+			{
+				"sort": 18,
+				"display": 0,
+				"group": "国外节目",
+				"name": "法国法国时尚",
+				"url": "http://lb.streaming.sk/fashiontv/stream/chunklist.m3u8"
+			},
+			{
+				"sort": 19,
+				"display": 0,
+				"group": "国外节目",
+				"name": "法国24台英语",
+				"url": "http://static.france24.com/live/F24_EN_LO_HLS/live_web.m3u8"
+			},
+			{
+				"sort": 20,
+				"display": 0,
+				"group": "国外节目",
+				"name": "越南",
+				"url": "http://antvlive.ab5c6921.cdnviet.com/antv/chunklist.m3u8"
+			},
+			{
+				"sort": 21,
+				"display": 0,
+				"group": "国外节目",
+				"name": "越南台",
+				"url": "http://antvlive.ab5c6921.cdnviet.com/antv/playlist.m3u8"
+			},
+			{
+				"sort": 22,
+				"display": 0,
+				"group": "国外节目",
+				"name": "越南和平HBTV",
+				"url": "http://hoabinhtvlive.746b3ddb.cdnviet.com/hoabinhtv/playlist.m3u8"
+			},
+			{
+				"sort": 23,
+				"display": 0,
+				"group": "国外节目",
+				"name": "越南坚江频道",
+				"url": "http://tv.kgtv.vn/live/kgtv/kgtv.m3u8"
+			},
+			{
+				"sort": 24,
+				"display": 0,
+				"group": "国外节目",
+				"name": "泰国公共台",
+				"url": "http://thaipbs-live.cdn.byteark.com/live-en/playlist_720p/index.m3u8"
+			},
+			{
+				"sort": 25,
+				"display": 0,
+				"group": "国外节目",
+				"name": "Darcizzle电视",
+				"url": "http://30a-tv.com/darcizzle.m3u8"
+			},
+			{
+				"sort": 26,
+				"display": 0,
+				"group": "国外节目",
+				"name": "西班牙中国环球",
+				"url": "http://livees.cgtn.com/1000e/prog_index.m3u8"
+			},
+			{
+				"sort": 27,
+				"display": 0,
+				"group": "国外节目",
+				"name": "蒙古国lMNB",
+				"url": "http://103.14.38.107:1935/live/mnb.stream/master.m3u8"
+			},
+			{
+				"sort": 28,
+				"display": 0,
+				"group": "国外节目",
+				"name": "新马亚洲新闻",
+				"url": "http://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index_4.m3u8"
+			},
+			{
+				"sort": 29,
+				"display": 0,
+				"group": "国外节目",
+				"name": "OR音乐频道",
+				"url": "http://rtmp.one.by:2200/"
+			},
+			{
+				"sort": 30,
+				"display": 0,
+				"group": "国外节目",
+				"name": "V2音乐频道",
+				"url": "http://de1se01.v2beat.live/playlist.m3u8"
+			},
+			{
+				"sort": 31,
+				"display": 0,
+				"group": "国外节目",
+				"name": "乌克兰M2 音乐频道",
+				"url": "http://live.m2.tv/hls3/stream.m3u8"
+			},
+			{
+				"sort": 32,
+				"display": 0,
+				"group": "国外节目",
+				"name": "Sardari TV",
+				"url": "http://158.69.124.9:1935/sardaritv/sardaritv/playlist.m3u8"
+			},
+			{
+				"sort": 33,
+				"display": 0,
+				"group": "国外节目",
+				"name": "Ростов-папа",
+				"url": "http://live-rostovpapa.cdnvideo.ru/rostovpapa/rostovpapa.sdp/playlist.m3u8"
+			},
+			{
+				"sort": 34,
+				"display": 0,
+				"group": "国外节目",
+				"name": "국악방송",
+				"url": "http://mgugaklive.nowcdn.co.kr/gugakvideo/gugakvideo.stream/playlist.m3u8"
+			},
+			{
+				"sort": 35,
+				"display": 0,
+				"group": "国外节目",
+				"name": "Al Sharqiya",
+				"url": "http://ns8.indexforce.com:1935/home/mystream/playlist.m3u8"
+			},
+			{
+				"sort": 36,
+				"display": 0,
+				"group": "国外节目",
+				"name": "Al Sharqiya News",
+				"url": "http://ns8.indexforce.com:1935/alsharqiyalive/mystream/playlist.m3u8"
+			},
+			{
+				"sort": 37,
+				"display": 0,
+				"group": "国外节目",
+				"name": "RT en Español",
+				"url": "https://rt-esp.rttv.com/live/rtesp/playlist.m3u8"
+			},
+			{
+				"sort": 38,
+				"display": 0,
+				"group": "国外节目",
+				"name": "Саратов 24",
+				"url": "https://saratov24.tv/online/playlist.php"
+			},
+			{
+				"sort": 39,
+				"display": 0,
+				"group": "国外节目",
+				"name": "С1",
+				"url": "https://sitv.ru/hls/stv.m3u8"
+			},
+			{
+				"sort": 40,
+				"display": 0,
+				"group": "国外节目",
+				"name": "Телеканал 86",
+				"url": "https://sitv.ru/hls/s86.m3u8"
+			},
+			{
+				"sort": 41,
+				"display": 0,
+				"group": "国外节目",
+				"name": "ALTV",
+				"url": "https://thaipbs-ujxrch.cdn.byteark.com/live/playlist_1080p/index.m3u8"
+			},
+			{
+				"sort": 42,
+				"display": 0,
+				"group": "国外节目",
+				"name": "Тивиком",
+				"url": "http://tvcom.stream.intelema.ru/tvcom/studio/playlist.m3u8"
+			},
+			{
+				"sort": 43,
+				"display": 0,
+				"group": "国外节目",
+				"name": "Alanya Posta TV",
+				"url": "http://win4.yayin.com.tr/postatv/postatv/playlist.m3u8"
+			},
+			{
+				"sort": 44,
+				"display": 0,
+				"group": "国外节目",
+				"name": "Русский Север Вологда",
+				"url": "http://185.186.142.16/streams.rs.m3u8"
+			},
+			{
+				"sort": 45,
+				"display": 0,
+				"group": "国外节目",
+				"name": "Самара ГИС",
+				"url": "http://45.67.57.9:8080/new/new/playlist.m3u8"
+			},
+			{
+				"sort": 46,
+				"display": 0,
+				"group": "国外节目",
+				"name": "TV BRICS Chinese",
+				"url": "https://brics.bonus-tv.ru/cdn/brics/chinese/playlist.m3u8"
+			},
+			{
+				"sort": 47,
+				"display": 0,
+				"group": "国外节目",
+				"name": "RTV",
+				"url": "https://cdn.appv.jagobd.com:444/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/rtv-sg.stream/playlist.m3u8"
+			},
+			{
+				"sort": 48,
+				"display": 0,
+				"group": "国外节目",
+				"name": "Sada TV",
+				"url": "http://cdn12.henico.net:8080/live/sadatv/index.m3u8"
+			},
+			{
+				"sort": 49,
+				"display": 0,
+				"group": "国外节目",
+				"name": "360°",
+				"url": "https://edge2-tv-ll.facecast.io/evacoder_hls_hi/CkxfR1xNUAJwTgtXTBZTAJli/index.m3u8"
+			},
+			{
+				"sort": 50,
+				"display": 0,
+				"group": "国外节目",
+				"name": "VB",
+				"url": "http://live.tv2bornholm.dk/stream/live/chunklist.m3u8"
+			},
+			{
+				"sort": 51,
+				"display": 0,
+				"group": "国外节目",
+				"name": "ArirangTV",
+				"url": "http://amdlive-ch01.ctnd.com.edgesuite.net/arirang_1ch/smil:arirang_1ch.smil/playlist.m3u8"
+			},
+			{
+				"sort": 52,
+				"display": 0,
+				"group": "国外节目",
+				"name": "Luxury",
+				"url": "http://nano.teleservice.su:8080/hls/luxury.m3u8"
+			}
+		],
+		"other": [
+			{
+				"sort": 1,
+				"display": 0,
+				"group": "轮播节目",
+				"name": "斗鱼电影HD12",
+				"url": "http://diyp.112114.xyz/douyu/2436390"
+			},
+			{
+				"sort": 2,
+				"display": 0,
+				"group": "轮播节目",
+				"name": "斗鱼电影HD14",
+				"url": "http://diyp.112114.xyz/douyu/36337"
+			},
+			{
+				"sort": 3,
+				"display": 0,
+				"group": "轮播节目",
+				"name": "斗鱼电影HD25",
+				"url": "http://diyp.112114.xyz/douyu/315131"
+			},
+			{
+				"sort": 4,
+				"display": 0,
+				"group": "轮播节目",
+				"name": "SiTV动漫秀场",
+				"url": "http://112.25.48.70/live/program/live/dmxchd/4000000/mnf.m3u8"
+			},
+			{
+				"sort": 5,
+				"display": 0,
+				"group": "轮播节目",
+				"name": "SiTV都市剧场",
+				"url": "http://112.25.48.70/live/program/live/dsjchd/4000000/mnf.m3u8"
+			},
+			{
+				"sort": 6,
+				"display": 0,
+				"group": "轮播节目",
+				"name": "SiTV全纪实",
+				"url": "http://112.25.48.70/live/program/live/qjshd/4000000/mnf.m3u8"
+			},
+			{
+				"sort": 7,
+				"display": 0,
+				"group": "轮播节目",
+				"name": "SiTV生活时尚",
+				"url": "http://112.25.48.70/live/program/live/shsshd/4000000/mnf.m3u8"
+			},
+			{
+				"sort": 8,
+				"display": 0,
+				"group": "轮播节目",
+				"name": "SiTV游戏风云",
+				"url": "http://112.25.48.70/live/program/live/yxfyhd/4000000/mnf.m3u8"
+			}
 		]
 	},
 	"ipv6": {
 		"cctv": [
 			{
-				"sort": 3,
+				"sort": 1,
 				"display": 0,
 				"group": "央视节目",
 				"name": "CCTV-1",
@@ -368,6 +792,8 @@
 			}
 		],
 		"wstv": [],
-		"dftv": []
+		"dftv": [],
+		"foreign": [],
+		"other": []
 	}
 }

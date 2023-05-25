@@ -4,20 +4,30 @@ var https = require('https');
 
 //主域名
 var domain = 'https://haoxiang.eu.org/tv.m3u';
-var groupArr = ['央视节目','卫视节目','地方节目'];
-var netmaskVer = "ipv4"
+var groupArr = ['央视节目','卫视节目','地方节目','国外节目','其他节目'];
 var ipv4_cctv_sort = 0;
 var ipv4_wstv_sort = 0;
 var ipv4_dftv_sort = 0;
+var ipv4_other_sort = 0;
+var ipv4_foreign_sort = 0;
+
 var ipv6_cctv_sort = 0;
 var ipv6_wstv_sort = 0;
 var ipv6_dftv_sort = 0;
+var ipv6_other_sort = 0;
+var ipv6_foreign_sort = 0;
+
 var ipv4_cctv_list = [];
 var ipv4_wstv_list = [];
 var ipv4_dftv_list = [];
+var ipv4_other_list = [];
+var ipv4_foreign_list = [];
+
 var ipv6_cctv_list = [];
 var ipv6_wstv_list = [];
 var ipv6_dftv_list = [];
+var ipv6_other_list = [];
+var ipv6_foreign_list = [];
 
 crawler(domain);
 
@@ -56,8 +66,8 @@ function filterHtml(html) {
         }
     })
 
-    var ipv4_list={cctv:ipv4_cctv_list, wstv:ipv4_wstv_list, dftv:ipv4_dftv_list};
-    var ipv6_list={cctv:ipv6_cctv_list, wstv:ipv6_wstv_list, dftv:ipv6_dftv_list};
+    var ipv4_list={cctv:ipv4_cctv_list, wstv:ipv4_wstv_list, dftv:ipv4_dftv_list, foreign:ipv4_foreign_list, other:ipv4_other_list};
+    var ipv6_list={cctv:ipv6_cctv_list, wstv:ipv6_wstv_list, dftv:ipv6_dftv_list, foreign:ipv6_foreign_list, other:ipv6_other_list};
     var obj={ipv4:ipv4_list, ipv6:ipv6_list};
     var fileContent = JSON.stringify(obj,"","\t");
     console.log(fileContent);
@@ -71,6 +81,7 @@ function filterHtml(html) {
 
 
 function dealIpv4List(groupName, tvName, tvUrl) {
+    //央视
     if (groupName.indexOf(groupArr[0]) != -1){
         ipv4_cctv_sort = ipv4_cctv_sort +1;
         ipv4_cctv_list.push({
@@ -80,8 +91,10 @@ function dealIpv4List(groupName, tvName, tvUrl) {
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl
         });
+        return;
     }
 
+    //卫视
     if (groupName.indexOf(groupArr[1]) != -1){
         ipv4_wstv_sort = ipv4_wstv_sort +1;
         ipv4_wstv_list.push({
@@ -91,8 +104,10 @@ function dealIpv4List(groupName, tvName, tvUrl) {
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl
         });
+        return;
     }
 
+    //地方
     if (groupName.indexOf(groupArr[2]) != -1){
         ipv4_dftv_sort = ipv4_dftv_sort +1;
         ipv4_dftv_list.push({
@@ -102,36 +117,87 @@ function dealIpv4List(groupName, tvName, tvUrl) {
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl
         });
+        return;
+    }
+
+    //国外
+    if (groupName.indexOf(groupArr[3]) != -1){
+        ipv4_foreign_sort = ipv4_foreign_sort +1;
+        ipv4_foreign_list.push({
+            sort: ipv4_foreign_sort,
+            display: 0,
+            group: groupName,
+            name: tvName.substring(tvName.lastIndexOf(",")+1),
+            url: tvUrl
+        });
+    //其他
+    }else{
+        ipv4_other_sort = ipv4_other_sort +1;
+        ipv4_other_list.push({
+            sort: ipv4_other_sort,
+            display: 0,
+            group: groupName,
+            name: tvName.substring(tvName.lastIndexOf(",")+1),
+            url: tvUrl
+        });
     }
 }
 
 function dealIpv6List(groupName, tvName, tvUrl) {
+    //央视
     if (groupName.indexOf(groupArr[0]) != -1){
         ipv6_cctv_sort = ipv6_cctv_sort +1;
         ipv6_cctv_list.push({
-            sort: ipv4_cctv_sort,
+            sort: ipv6_cctv_sort,
             display: 0,
             group: groupName,
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl
         });
+        return;
     }
 
+    //卫视
     if (groupName.indexOf(groupArr[1]) != -1){
         ipv6_wstv_sort = ipv6_wstv_sort +1;
         ipv6_wstv_list.push({
-            sort: ipv4_wstv_sort,
+            sort: ipv6_wstv_sort,
+            display: 0,
+            group: groupName,
+            name: tvName.substring(tvName.lastIndexOf(",")+1),
+            url: tvUrl
+        })
+        return;
+    }
+
+    //地方
+    if (groupName.indexOf(groupArr[2]) != -1){
+        ipv6_dftv_sort = ipv6_dftv_sort +1;
+        ipv6_dftv_list.push({
+            sort: ipv6_dftv_sort,
             display: 0,
             group: groupName,
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl
         });
+        return;
     }
 
-    if (groupName.indexOf(groupArr[2]) != -1){
-        ipv6_dftv_sort = ipv6_dftv_sort +1;
-        ipv6_dftv_list.push({
-            sort: ipv4_dftv_sort,
+    //国外
+    if (groupName.indexOf(groupArr[3]) != -1){
+        ipv6_foreign_sort = ipv6_foreign_sort +1;
+        ipv6_foreign_list.push({
+            sort: ipv6_foreign_sort,
+            display: 0,
+            group: groupName,
+            name: tvName.substring(tvName.lastIndexOf(",")+1),
+            url: tvUrl
+        });
+    //其他
+    }else{
+        ipv6_other_sort = ipv6_other_sort +1;
+        ipv6_other_list.push({
+            sort: ipv6_other_sort,
             display: 0,
             group: groupName,
             name: tvName.substring(tvName.lastIndexOf(",")+1),

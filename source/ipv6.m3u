@@ -1,56 +1,45 @@
 #EXTM3U
 
 #EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225642/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-2,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225643/index.m3u8
+https://cctvwbndali.v.myalicdn.com/cctvwbnd/cctv1_2/index.m3u8
 #EXTINF:-1 group-title="央视节目",CCTV-3,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225634/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-4,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225621/index.m3u8
+https://media.hndyjyfw.gov.cn/live/jz-cctv-3/live.m3u8
 #EXTINF:-1 group-title="央视节目",CCTV-5,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225633/index.m3u8
+https://media.hndyjyfw.gov.cn/live/jz-cctv-5/live.m3u8
 #EXTINF:-1 group-title="央视节目",CCTV-5+,display="0"
-http://[2409:8087:3428:20:500::100f]:6610/PLTV/88888888/224/3221225821/index.m3u8?servicetype=1
+https://media.hndyjyfw.gov.cn/live/jz-cctv-5-plus/live.m3u8
 #EXTINF:-1 group-title="央视节目",CCTV-6,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225632/index.m3u8
+https://media.hndyjyfw.gov.cn/live/jz-cctv-6/live.m3u8
 #EXTINF:-1 group-title="央视节目",CCTV-7,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225624/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-8,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225631/index.m3u8
+https://media.hndyjyfw.gov.cn/live/jz-cctv-7/live.m3u8
 #EXTINF:-1 group-title="央视节目",CCTV-9,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225646/index.m3u8
+https://media.hndyjyfw.gov.cn/live/jz-cctv-9/live.m3u8
 #EXTINF:-1 group-title="央视节目",CCTV-10,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225636/index.m3u8
+https://media.hndyjyfw.gov.cn/live/jz-cctv-10/live.m3u8
 #EXTINF:-1 group-title="央视节目",CCTV-11,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225628/index.m3u8
+https://media.hndyjyfw.gov.cn/live/jz-cctv-11/live.m3u8
 #EXTINF:-1 group-title="央视节目",CCTV-12,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225637/index.m3u8
+https://media.hndyjyfw.gov.cn/live/jz-cctv-12/live.m3u8
 #EXTINF:-1 group-title="央视节目",CCTV-13,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225638/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-14,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225640/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-15,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225641/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-16,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221226230/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-17,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225909/index.m3u8
-#EXTINF:-1 group-title="央视节目",体育赛事,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225706/index.m3u8
-#EXTINF:-1 group-title="央视节目",超级体育,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888888/224/3221225622/2/index.m3u8
-#EXTINF:-1 group-title="央视节目",纯享超清,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225786/index.m3u8
-#EXTINF:-1 group-title="央视节目",中国教育,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225917/index.m3u8?fmt=ts2hls
-#EXTINF:-1 group-title="央视节目",职教频道,display="0"
-http://[2409:8087:5011:1020::15]/180000001001/00000001000000001017000000440665/index.m3u8
-#EXTINF:-1 group-title="央视节目",CNC英文<,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888888/224/3221225693/2/index.m3u8
-#EXTINF:-1 group-title="央视节目",CNC中文,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888888/224/3221225694/2/index.m3u8
-#EXTINF:-1 group-title="央视节目",CGTN英语,display="0"
-http://[2409:8087:5011:1020::1f]/180000001001/00000001000000000002000000028019/main.m3u8?IASHttpSessionId=OTT
-#EXTINF:-1 group-title="央视节目",CGTN纪实,display="0"
-http://[2409:8087:5011:1020::1f]/180000001001/00000001000000000002000000028012/main.m3u8?IASHttpSessionId=OTT
+https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv13_2/index.m3u8
+#EXTINF:-1 group-title="央视节目",CNC,display="0"
+http://source07.v.news.cn/live/CNC_EN/playlist.m3u8
+#EXTINF:-1 group-title="央视节目",CGTN-China,display="0"
+http://live.cgtn.com/500/prog_index.m3u8
+#EXTINF:-1 group-title="央视节目",CGTN-Arabic,display="0"
+http://livear.cgtn.com/1000a/prog_index.m3u8
+#EXTINF:-1 group-title="央视节目",CGTN-Español,display="0"
+http://livees.cgtn.com/500e/prog_index.m3u8
+#EXTINF:-1 group-title="央视节目",CGTN-France,display="0"
+http://livefr.cgtn.com/1000f/prog_index.m3u8
+#EXTINF:-1 group-title="央视节目",苏州4k,display="0"
+http://liveshowbak2.kan0512.com/ksz-norecord/csztv4k_4k.m3u8
+
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="1"
+http://live.sctvcloud.com/live/bcgqlive/playlist.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="1"
+https://media.hndyjyfw.gov.cn/live/jz-cctv-1/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-13,display="1"
+http://ncyd.jilu8.cn/PLTV/88888910/224/3221225621/index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-13,display="1"
+https://media.hndyjyfw.gov.cn/live/jz-cctv-13/live.m3u8

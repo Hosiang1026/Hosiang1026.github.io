@@ -53,8 +53,8 @@ function filterHtml(html) {
                 }
 
                 //查询
-                var querySql = "select * from tv_show where tv_url = "+"'"+tvUrl+"'";
-                var queryResult = callDB.queryDatasByUrl(querySql);
+                //var querySql = "select * from tv_show where tv_url = "+"'"+tvUrl+"'";
+                //var queryResult = callDB.queryDatasByUrl(querySql);
                 //var htmlData = [[null, groupName, tvName, tvUrl, ipVerion, displayMark, null]];
                 //var sql = "insert or replace into tv_show(id, group_name, tv_name, tv_url, ip_verion, display, times) values(?, ?, ?, ?, ?, ?, ?)";
                 //callDB.insertDatas(sql, htmlData);

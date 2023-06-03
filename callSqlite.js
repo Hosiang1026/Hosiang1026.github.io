@@ -15,8 +15,8 @@ var file = "blog.db";
 var sqliteDB = new SqliteDB(file);
 
 /// create table.
-function createTables(tableName) {
-    var createTableSql = "create table if not exists "+tableName+"(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, source TEXT, url TEXT, cover BLOB,  desc BLOB, content BLOB, times TEXT);";
+function createTables(tableName, createTableSql) {
+    //var createTableSql = "create table if not exists "+tableName+"(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, source TEXT, url TEXT, cover BLOB,  desc BLOB, content BLOB, times TEXT);";
     sqliteDB.createTable(createTableSql);
 }
 
@@ -50,10 +50,16 @@ function queryDatas(querySql) {
     sqliteDB.queryData(querySql, dataDeal);
 }
 
+function queryDatasByUrl(querySql) {
+    //var querySql = 'select * from tiles where level = 1 and column >= 10 and column <= 11 and row >= 10 and row <=11';
+    return sqliteDB.queryData(querySql, dataDeal);
+}
+
 function dataDeal(objects){
     for(var i = 0; i < objects.length; ++i){
         console.log(objects[i]);
     }
+    return objects;
 }
 
 
@@ -84,6 +90,7 @@ module.exports = {
     createTables,
     insertDatas,
     queryDatas,
+    queryDatasByUrl,
     updateDatas,
     closeDB
 };

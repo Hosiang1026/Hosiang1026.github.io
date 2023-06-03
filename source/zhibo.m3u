@@ -3753,3 +3753,14 @@ https://15799848.s21v.faiusr.com/58/ABUIABA6GAAgnIS24gUoptqYDQ.mp4
 https://15799848.s21v.faiusr.com/58/ABUIABA6GAAgzMnG4gUoroOQgQU.mp4
 #EXTINF:-1 group-title="韩国舞曲",FourLadies-Move
 https://15799848.s21v.faiusr.com/58/ABUIABA6GAAg85Do5QUow-P-wwI.mp4
+
+#EXTINF:-1 group-title="轮播节目",SiTV动漫秀场,display="0"
+http://112.25.48.70/live/program/live/dmxchd/4000000/mnf.m3u8
+#EXTINF:-1 group-title="轮播节目",SiTV都市剧场,display="0"
+http://112.25.48.70/live/program/live/dsjchd/4000000/mnf.m3u8
+#EXTINF:-1 group-title="轮播节目",SiTV全纪实,display="0"
+http://112.25.48.70/live/program/live/qjshd/4000000/mnf.m3u8
+#EXTINF:-1 group-title="轮播节目",SiTV生活时尚,display="0"
+http://112.25.48.70/live/program/live/shsshd/4000000/mnf.m3u8
+#EXTINF:-1 group-title="轮播节目",SiTV游戏风云,display="0"
+http://112.25.48.70/live/program/live/yxfyhd/4000000/mnf.m3u8

@@ -1,293 +1,403 @@
 #EXTM3U
-
 #EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
 https://cctvwbndali.v.myalicdn.com/cctvwbnd/cctv1_2/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1,display="1"
-http://live.sctvcloud.com/live/bcgqlive/playlist.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-13,display="0"
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
 https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv13_2/index.m3u8
-#EXTINF:-1 group-title="央视节目",CGTN-China,display="0"
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
 http://live.cgtn.com/500/prog_index.m3u8
-#EXTINF:-1 group-title="央视节目",CGTN-Arabic,display="0"
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
 http://livear.cgtn.com/1000a/prog_index.m3u8
-#EXTINF:-1 group-title="央视节目",CGTN-Español,display="0"
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
 http://livees.cgtn.com/500e/prog_index.m3u8
-#EXTINF:-1 group-title="央视节目",CGTN-France,display="0"
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
 http://livefr.cgtn.com/1000f/prog_index.m3u8
-#EXTINF:-1 group-title="央视节目",苏州4k,display="0"
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
 http://liveshowbak2.kan0512.com/ksz-norecord/csztv4k_4k.m3u8
 #EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225642/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-2,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225643/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-3,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225634/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-4,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225621/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-5,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225633/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-5+,display="0"
-http://[2409:8087:3428:20:500::100f]:6610/PLTV/88888888/224/3221225821/index.m3u8?servicetype=1
-#EXTINF:-1 group-title="央视节目",CCTV-6,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225632/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-7,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225624/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-8,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225631/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-9,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225646/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-10,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225636/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-11,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225628/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-12,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225637/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-13,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225638/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-14,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225640/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-15,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225641/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-16,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221226230/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-17,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225909/index.m3u8
-#EXTINF:-1 group-title="央视节目",体育赛事,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225706/index.m3u8
-#EXTINF:-1 group-title="央视节目",超级体育,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888888/224/3221225622/2/index.m3u8
-#EXTINF:-1 group-title="央视节目",纯享超清,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225786/index.m3u8
-#EXTINF:-1 group-title="央视节目",中国教育,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888910/224/3221225917/index.m3u8?fmt=ts2hls
-#EXTINF:-1 group-title="央视节目",职教频道,display="0"
-http://[2409:8087:5011:1020::15]/180000001001/00000001000000001017000000440665/index.m3u8
-#EXTINF:-1 group-title="央视节目",CNC英文<,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888888/224/3221225693/2/index.m3u8
-#EXTINF:-1 group-title="央视节目",CNC中文,display="0"
-http://[2409:8087:3869:8021:1001::e5]:6610/PLTV/88888888/224/3221225694/2/index.m3u8
-#EXTINF:-1 group-title="央视节目",CGTN英语,display="0"
-http://[2409:8087:5011:1020::1f]/180000001001/00000001000000000002000000028019/main.m3u8?IASHttpSessionId=OTT
-#EXTINF:-1 group-title="央视节目",CGTN纪实,display="0"
-http://[2409:8087:5011:1020::1f]/180000001001/00000001000000000002000000028012/main.m3u8?IASHttpSessionId=OTT
-
-#EXTINF:-1 group-title="央视节目",CGTN SD,display="0"
 http://live.cgtn.com/500/prog_index.m3u8
-#EXTINF:-1 group-title="央视节目",CGTN1 SD,display="0"
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
 http://live.cgtn.com/1000/prog_index.m3u8?$全网标清576P
-#EXTINF:-1 group-title="央视节目",CGTN2 SD,display="0"
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
 https://livedoc.cgtn.com/1000d/prog_index.m3u8?$全网标清576P
 #EXTINF:-1 group-title="卫视节目",浙江卫视,display="0"
 http://hw-m-l.cztv.com/channels/lantian/channel01/1080p.m3u8
-#EXTINF:-1 group-title="卫视节目",香港卫视 SD,display="0"
+#EXTINF:-1 group-title="卫视节目",浙江卫视,display="0"
 http://zhibo.hkstv.tv:80/livestream/mutfysrq.flv
-#EXTINF:-1 group-title="地方节目",浙江6套,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://hw-m-l.cztv.com/channels/lantian/channel06/1080p.m3u8
-#EXTINF:-1 group-title="地方节目",浙江6套,display="1"
+#EXTINF:-1 group-title="地方节目",display="1"
 http://hw-m-l.cztv.com/channels/lantian/channel006/1080p.m3u8
-#EXTINF:-1 group-title="地方节目",浙江公共,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://hw-m-l.cztv.com/channels/lantian/channel07/1080p.m3u8
-#EXTINF:-1 group-title="地方节目",浙江国际,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://hw-m-l.cztv.com/channels/lantian/channel010/1080p.m3u8
-#EXTINF:-1 group-title="地方节目",浙江国际,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://hw-m-l.cztv.com/channels/lantian/channel10/1080p.m3u8
-#EXTINF:-1 group-title="地方节目",浙江少儿,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://hw-m-l.cztv.com/channels/lantian/channel008/1080p.m3u8
-#EXTINF:-1 group-title="地方节目",浙江少儿,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://hw-m-l.cztv.com/channels/lantian/channel08/1080p.m3u8
-#EXTINF:-1 group-title="地方节目",浙江教科影视,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://hw-m-l.cztv.com/channels/lantian/channel004/1080p.m3u8
-#EXTINF:-1 group-title="地方节目",浙江之江记录,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://hw-m-l.cztv.com/channels/lantian/channel012/1080p.m3u8
-#EXTINF:-1 group-title="地方节目",浙江留学,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://hw-m-l.cztv.com/channels/lantian/channel09/1080p.m3u8
-#EXTINF:-1 group-title="地方节目",浙江经济生活,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://hw-m-l.cztv.com/channels/lantian/channel003/1080p.m3u8
-#EXTINF:-1 group-title="地方节目",浙江钱江,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://hw-m-l.cztv.com/channels/lantian/channel002/1080p.m3u8
-#EXTINF:-1 group-title="地方节目",浙江钱江,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://hw-m-l.cztv.com/channels/lantian/channel02/1080p.m3u8
-#EXTINF:-1 group-title="地方节目",南京新闻综合,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://live.nbs.cn/channels/njtv/xwzh/m3u8:500k/live.m3u8
-#EXTINF:-1 group-title="地方节目",青海综合频道,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://lmt.scqstv.com/live1/live1.m3u8
-#EXTINF:-1 group-title="地方节目",青田电视台,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://l.cztvcloud.com/channels/lantian/SXqingtian1/720p.m3u8
-#EXTINF:-1 group-title="地方节目",靖江新闻,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://58.222.151.43:1935/live/xwzhpc/playlist.m3u8
-#EXTINF:-1 group-title="地方节目",北京房山,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://live.funhillrm.com/5/sd/live.m3u8
-#EXTINF:-1 group-title="地方节目",晋中公共,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://jzlive.jztvnews.com:90/live/jzgg.m3u8
-#EXTINF:-1 group-title="地方节目",晋中综合,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://jzlive.jztvnews.com:90/live/jzzh.m3u8
-#EXTINF:-1 group-title="地方节目",晋中生活,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://l.cztvcloud.com/channels/lantian/SXxinchang2/720p.m3u8
-#EXTINF:-1 group-title="地方节目",新昌新闻,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://l.cztvcloud.com/channels/lantian/SXxinchang1/720p.m3u8
-#EXTINF:-1 group-title="地方节目",宿州公共,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://live.ahsz.tv/video/s10001-ggpd/index.m3u8
-#EXTINF:-1 group-title="地方节目",宿州新闻综合,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://live.ahsz.tv/video/s10001-szzh/index.m3u8
-#EXTINF:-1 group-title="地方节目",宿州科教,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://live.ahsz.tv/video/s10001-kxjy/index.m3u8
-#EXTINF:-1 group-title="地方节目",新郑综合,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://live.dxhmt.cn:9081/tv/10184-1.m3u8
-#EXTINF:-1 group-title="地方节目",建安电视台,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://live.dxhmt.cn:9081/tv/11003-1.m3u8
-#EXTINF:-1 group-title="地方节目",罗山电视台,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://live.dxhmt.cn:9081/tv/11521-1.m3u8
-#EXTINF:-1 group-title="地方节目",石景山电视台,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://live.sjsrm.com/bjsjs/sd/live.m3u8
-#EXTINF:-1 group-title="地方节目",ТКР,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://live.tkr.cdnvideo.ru/tkr/tkr.sdp/playlist.m3u8
-#EXTINF:-1 group-title="地方节目",广东 ‖ 清新综合台,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://hls.wiseqx.com/live/qxzh.m3u8
-#EXTINF:-1 group-title="地方节目",云南 Ⅰ 文山综合台,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://tvdrs.wsrtv.com.cn:8100/channellive/ch1.flv
-#EXTINF:-1 group-title="地方节目",文山综合,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://m3u8.channel.wsrtv.com.cn/cms/videos/nmip-media/channellive/channel7/playlist.m3u8
-#EXTINF:-1 group-title="地方节目",三立新聞,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://seb.sason.top/sc/sllive_fhd.m3u8
-#EXTINF:-1 group-title="地方节目",東森新聞,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://seb.sason.top/sc/dsxw_fhd.m3u8
-#EXTINF:-1 group-title="地方节目",東森財經新聞,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://seb.sason.top/sc/dscjxw_fhd.m3u8
-#EXTINF:-1 group-title="地方节目",中天新聞,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://seb.sason.top/sc/ztxw_fhd.m3u8
-#EXTINF:-1 group-title="地方节目",台視新聞,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://seb.sason.top/sc/tsxw_fhd.m3u8
-#EXTINF:-1 group-title="地方节目",西安新闻,display="0"
-http://stream2.xiancity.cn/xatv1/playlist.m3u8
-#EXTINF:-1 group-title="地方节目",吉州新聞綜合,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://218.204.153.158/10.m3u8
-#EXTINF:-1 group-title="地方节目",西青新闻综合,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://221.238.209.44:81/hls/live1.m3u8
-#EXTINF:-1 group-title="地方节目",洪雅新闻综合,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://117.172.215.250:8083/videos/live/35/39/GQVbrgob5CGJM/GQVbrgob5CGJM.m3u8
-#EXTINF:-1 group-title="地方节目",武汉新闻HD,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://stream.appwuhan.com/1tzb/sd/live.m3u8
-#EXTINF:-1 group-title="地方节目",清华大学电视台,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://live.cic.tsinghua.edu.cn/hls/tsinghuatv.m3u8
-#EXTINF:-1 group-title="地方节目",中国气象 SD,display="0"
+#EXTINF:-1 group-title="地方节目",民生卫视,display="0"
 http://hls.weathertv.cn/tslslive/qCFIfHB/hls/live_sd.m3u8
-#EXTINF:-1 group-title="国外节目",中国环球电视,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://live.cgtn.com/1000/prog_index.m3u8
-#EXTINF:-1 group-title="国外节目",韩国韩国中央,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://119.77.96.184:1935/chn21/chn21/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",韩国TJB SBS,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://1.245.74.5:1935/live/tv/.m3u8
-#EXTINF:-1 group-title="国外节目",韩国阿里郎WORLD,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://amdlive.ctnd.com.edgesuite.net/arirang_1ch/smil:arirang_1ch/master.m3u8
-#EXTINF:-1 group-title="国外节目",韩国阿里郎TV,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://amdlive.ctnd.com.edgesuite.net/arirang_1ch/smil:arirang_1ch.smil/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",韩国KCTV,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://119.77.96.184:1935/chn21/chn21/chunklist_w252131137.m3u8
-#EXTINF:-1 group-title="国外节目",韩国EBS第一频道,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://ebsonairios.ebs.co.kr/groundwavetablet500k/tablet500k/groundwavetablet500k.m3u8
-#EXTINF:-1 group-title="国外节目",韩国EBS第二频道,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://ebsonairios.ebs.co.kr/ebs2tablet500k/tablet500k/ebs2tablet500k.index.m3u8
-#EXTINF:-1 group-title="国外节目",韩国EBS加一频道,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://ebsonairios.ebs.co.kr/plus1tablet500k/tablet500k/plus1tablet500k.index.m3u8
-#EXTINF:-1 group-title="国外节目",韩国EBS加二频道,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://ebsonairios.ebs.co.kr/plus2tablet500k/tablet500k/plus2tablet500k.index.m3u8
-#EXTINF:-1 group-title="国外节目",韩国EBSE频道,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://ebsonairios.ebs.co.kr/plus3tablet500k/tablet500k/plus3tablet500k.index.m3u8
-#EXTINF:-1 group-title="国外节目",韩国EBS第一频道,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://ebsonairios.ebs.co.kr/groundwavetablet500k/tablet500k/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",韩国EBS少儿频道,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://ebsonairios.ebs.co.kr/ebsutablet500k/tablet500k/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",韩国EBS儿童频道,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://ebsonairios.ebs.co.kr/ebsutablet500k/_definst_/tablet500k/chunklist_w1965791004.m3u8
-#EXTINF:-1 group-title="国外节目",韩国BBS佛教广播,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://bbstv.clouducs.com:1935/bbstv-live/livestream/chunklist_w1403706733.m3u8
-#EXTINF:-1 group-title="国外节目",朝鲜中央台,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://119.77.96.184:1935/chn05/chn05/chunklist_w644291506.m3u8
-#EXTINF:-1 group-title="国外节目",俄罗斯IGITV蓝光,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://hls-igi.cdnvideo.ru/igi/igi_hq/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",法国法国时尚,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://lb.streaming.sk/fashiontv/stream/chunklist.m3u8
-#EXTINF:-1 group-title="国外节目",法国24台英语,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://static.france24.com/live/F24_EN_LO_HLS/live_web.m3u8
-#EXTINF:-1 group-title="国外节目",越南,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://antvlive.ab5c6921.cdnviet.com/antv/chunklist.m3u8
-#EXTINF:-1 group-title="国外节目",越南台,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://antvlive.ab5c6921.cdnviet.com/antv/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",越南和平HBTV,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://hoabinhtvlive.746b3ddb.cdnviet.com/hoabinhtv/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",越南坚江频道,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://tv.kgtv.vn/live/kgtv/kgtv.m3u8
-#EXTINF:-1 group-title="国外节目",泰国公共台,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://thaipbs-live.cdn.byteark.com/live-en/playlist_720p/index.m3u8
-#EXTINF:-1 group-title="国外节目",Darcizzle电视,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://30a-tv.com/darcizzle.m3u8
-#EXTINF:-1 group-title="国外节目",西班牙中国环球,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://livees.cgtn.com/1000e/prog_index.m3u8
-#EXTINF:-1 group-title="国外节目",蒙古国lMNB,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://103.14.38.107:1935/live/mnb.stream/master.m3u8
-#EXTINF:-1 group-title="国外节目",新马亚洲新闻,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index_4.m3u8
-#EXTINF:-1 group-title="国外节目",OR音乐频道,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://rtmp.one.by:2200/,display="0"
-#EXTINF:-1 group-title="国外节目",V2音乐频道,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://de1se01.v2beat.live/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",乌克兰M2 音乐频道,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://live.m2.tv/hls3/stream.m3u8
-#EXTINF:-1 group-title="国外节目",Sardari TV,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://158.69.124.9:1935/sardaritv/sardaritv/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",Ростов-папа,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://live-rostovpapa.cdnvideo.ru/rostovpapa/rostovpapa.sdp/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",국악방송,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://mgugaklive.nowcdn.co.kr/gugakvideo/gugakvideo.stream/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",Al Sharqiya,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://ns8.indexforce.com:1935/home/mystream/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",Al Sharqiya News,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://ns8.indexforce.com:1935/alsharqiyalive/mystream/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",RT en Español,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 https://rt-esp.rttv.com/live/rtesp/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",Саратов 24,display="0"
-https://saratov24.tv/online/playlist.php,display="0"
-#EXTINF:-1 group-title="国外节目",С1,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 https://sitv.ru/hls/stv.m3u8
-#EXTINF:-1 group-title="国外节目",Телеканал 86,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 https://sitv.ru/hls/s86.m3u8
-#EXTINF:-1 group-title="国外节目",ALTV,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 https://thaipbs-ujxrch.cdn.byteark.com/live/playlist_1080p/index.m3u8
-#EXTINF:-1 group-title="国外节目",Тивиком,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://tvcom.stream.intelema.ru/tvcom/studio/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",Alanya Posta TV,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://win4.yayin.com.tr/postatv/postatv/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",Русский Север Вологда,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://185.186.142.16/streams.rs.m3u8
-#EXTINF:-1 group-title="国外节目",Самара ГИС,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://45.67.57.9:8080/new/new/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",TV BRICS Chinese,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 https://brics.bonus-tv.ru/cdn/brics/chinese/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",RTV,display="0"
-https://cdn.appv.jagobd.com:444/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/rtv-sg.stream/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",Sada TV,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://cdn12.henico.net:8080/live/sadatv/index.m3u8
-#EXTINF:-1 group-title="国外节目",360°,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 https://edge2-tv-ll.facecast.io/evacoder_hls_hi/CkxfR1xNUAJwTgtXTBZTAJli/index.m3u8
-#EXTINF:-1 group-title="国外节目",VB,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://live.tv2bornholm.dk/stream/live/chunklist.m3u8
-#EXTINF:-1 group-title="国外节目",ArirangTV,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://amdlive-ch01.ctnd.com.edgesuite.net/arirang_1ch/smil:arirang_1ch.smil/playlist.m3u8
-#EXTINF:-1 group-title="国外节目",Luxury,display="0"
+#EXTINF:-1 group-title="国外节目",俄罗斯卫视,display="0"
 http://nano.teleservice.su:8080/hls/luxury.m3u8
-#EXTINF:-1 group-title="轮播节目",斗鱼电影HD12,display="0"
+#EXTINF:-1 group-title="轮播节目",斗鱼视频,display="0"
 http://diyp.112114.xyz/douyu/2436390,display="0"
-#EXTINF:-1 group-title="轮播节目",斗鱼电影HD14,display="0"
+#EXTINF:-1 group-title="轮播节目",斗鱼视频,display="0"
 http://diyp.112114.xyz/douyu/36337,display="0"
-#EXTINF:-1 group-title="轮播节目",斗鱼电影HD25,display="0"
+#EXTINF:-1 group-title="轮播节目",斗鱼视频,display="0"
 http://diyp.112114.xyz/douyu/315131,display="0"
-#EXTINF:-1 group-title="轮播节目",SiTV动漫秀场,display="0"
+#EXTINF:-1 group-title="轮播节目",斗鱼视频,display="0"
 http://112.25.48.70/live/program/live/dmxchd/4000000/mnf.m3u8
-#EXTINF:-1 group-title="轮播节目",SiTV都市剧场,display="0"
+#EXTINF:-1 group-title="轮播节目",斗鱼视频,display="0"
 http://112.25.48.70/live/program/live/dsjchd/4000000/mnf.m3u8
-#EXTINF:-1 group-title="轮播节目",SiTV全纪实,display="0"
+#EXTINF:-1 group-title="轮播节目",斗鱼视频,display="0"
 http://112.25.48.70/live/program/live/qjshd/4000000/mnf.m3u8
-#EXTINF:-1 group-title="轮播节目",SiTV生活时尚,display="0"
+#EXTINF:-1 group-title="轮播节目",斗鱼视频,display="0"
 http://112.25.48.70/live/program/live/shsshd/4000000/mnf.m3u8
-#EXTINF:-1 group-title="轮播节目",SiTV游戏风云,display="0"
+#EXTINF:-1 group-title="轮播节目",斗鱼视频,display="0"
 http://112.25.48.70/live/program/live/yxfyhd/4000000/mnf.m3u8
+
+
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+https://cctvwbndali.v.myalicdn.com/cctvwbnd/cctv1_2/index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv13_2/index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://live.cgtn.com/500/prog_index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://livear.cgtn.com/1000a/prog_index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://livees.cgtn.com/500e/prog_index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://livefr.cgtn.com/1000f/prog_index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://liveshowbak2.kan0512.com/ksz-norecord/csztv4k_4k.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://lvbaiducdncmn.inter.iqiyi.com/tslive/c54_lb_157_600_t10/c54_lb_157_600_t10.m3u8?key=0b292c335e5837e948e91dd5d11efa525
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://playtv-live.ifeng.com/live/06OLEEWQKN4.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hw-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream4.jlntv.cn:80/jlwshd/playlist.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream.qhbtv.com/qhws/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://live.ybtvyun.com/video/s10016-7e5f23de35df/index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hw-m-l.cztv.com/channels/lantian/channel006/1080p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hw-m-l.cztv.com/channels/lantian/channel003/1080p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hw-m-l.cztv.com/channels/lantian/channel004/1080p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hw-m-l.cztv.com/channels/lantian/channel002/1080p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hw-m-l.cztv.com/channels/lantian/channel007/1080p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hw-m-l.cztv.com/channels/lantian/channel008/1080p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hw-m-l.cztv.com/channels/lantian/channel010/1080p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://jzlive.jztvnews.com:90/live/jzgg.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://jzlive.jztvnews.com:90/live/jzzh.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hls.nntv.cn/nnlive/NNTV_VOD_A.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hls.nntv.cn/nnlive/NNTV_PUB_A.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hls.nntv.cn/nnlive/NNTV_NEWS_A.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hls.nntv.cn/nnlive/NNTV_METRO_A.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://test5.btzx.com.cn/live/13TV.stream/playlist.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+https://lglivepull.sznews.com/live/2646.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+https://lglivepull.sznews.com/live/2647.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://l.cztvcloud.com/channels/lantian/SXxinchang2/720p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://pull.dayuntongzhou.com/live/tztv.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream1.jlntv.cn/yspd/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream1.jlntv.cn/shpd/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream1.jlntv.cn/xcpd/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hw-m-l.cztv.com/channels/lantian/channel008/1080p.m3u8?zzhed
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hw-m-l.cztv.com/channels/lantian/channel08/360p.m3u8?zzhed
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hw-m-l.cztv.com/channels/lantian/channel08/720p.m3u8?zzhed
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://hw-m-l.cztv.com/channels/lantian/channel012/1080p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://l.cztvcloud.com/channels/lantian/SXyuyao2/720p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://l.cztvcloud.com/channels/lantian/SXyuyao1/720p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://l.cztvcloud.com/channels/lantian/SXshangyu1/720p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://l.cztvcloud.com/channels/lantian/SXshangyu2/720p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://l.cztvcloud.com/channels/lantian/SXshangyu3/720p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://live1.wuhubtv.com/channel3/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://live1.wuhubtv.com/channel1/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://live.shaoxing.com.cn/video/s10001-sxtv2/index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://live.shaoxing.com.cn/video/s10001-sxtv3/index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://tmpstream.hyrtv.cn/hygg/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://tmpstream.hyrtv.cn/xwzh/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://l.cztvcloud.com/channels/lantian/SXshengzhou1/720p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream.lytv.net.cn/2/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://31182.hlsplay.aodianyun.com/lms_31182/tv_channel_175.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream.hhek.cn/dyjy/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream.hhek.cn/ggpd/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://live.hnxttv.com:9601/live/dspd/800K/tzwj_video.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://live.hnxttv.com:9601/live/xwzh/800K/tzwj_video.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://l.cztvcloud.com/channels/lantian/SXxiaoshan1/720p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://l.cztvcloud.com/channels/lantian/SXxinchang1/720p.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream.hhek.cn/xwzh/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://live.shaoxing.com.cn/video/s10001-sxtv1/index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://live.hnxttv.com:9601/live/dspd/800K/tzwj_video.m3u8?auth=654837809071524@615@2E9A5FD0B225B012E3178551CF3754A8&BVUUID=C236454D-5355-2F5F-FA96-1887C72E55CE
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream2.jlntv.cn/baicheng1/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream2.jlntv.cn/qg/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream.haixitv.cn/1/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream2.jlntv.cn/ja/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://live.todaydunhuang.com:1935/live/live100/500K/tzwj_video.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream2.jlntv.cn/naxw/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://live.ahsz.tv/video/s10001-kxjy/index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://live.mudu.tv/watch/4zbn2f.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream.lyxltv.com/xltv/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://stream.smntv.cn/smtv2/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://pili-live-hls.hebitv.com/hebi/hebi.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+https://live.funhillrm.com/2/playlist.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://live.sjsrm.com/bjsjs/sd/live.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://[2409:8087:5e01:34::21]:6610/ZTE_CMS/08984400000000060000000000000319/index.m3u8?IAS
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002264/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://[2409:8087:5e01:34::21]:6610/ZTE_CMS/08984400000000060000000000000320/index.m3u8?IAS
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://[2409:8087:5e01:34::21]:6610/ZTE_CMS/08984400000000060000000000000323/index.m3u8?IAS
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://[2409:8087:5e01:34::21]:6610/ZTE_CMS/08984400000000060000000000000322/index.m3u8?IAS
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://[2409:8087:5e01:34::21]:6610/ZTE_CMS/08984400000000060000000000000382/index.m3u8?IAS
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://lvbaiducdncmn.inter.iqiyi.com/tslive/c54_lb_157_600_t10/c54_lb_157_600_t10.m3u8?key=0b292c335e5837e948e91dd5d11efa525
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002055/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002085/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002065/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://[2409:8087:6a01:1020::d]/cdnrrs.gz.chinamobile.com/PLTV/88888888/224/3221226221/1/index.m3u8?fmt=ts2hls
+#EXTINF:-1 group-title="央视节目",CCTV-1,display="0"
+http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002157/index.m3u8?virtualDomain=yinhe.live_hls.zte.com

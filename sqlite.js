@@ -17,7 +17,7 @@ DB.SqliteDB = function(file){
     if(!DB.exist){
         console.log("Creating db file!");
         fs.openSync(file, 'w');
-    }
+    };
 };
 
 DB.printErrorInfo = function(err){
@@ -29,7 +29,7 @@ DB.SqliteDB.prototype.createTable = function(sql){
         DB.db.run(sql, function(err){
             if(null != err){
                 DB.printErrorInfo(err);
-
+                return;
             }
         });
     });

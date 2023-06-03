@@ -10,160 +10,69 @@
 			},
 			{
 				"sort": 2,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CCTV-3",
-				"url": "https://media.hndyjyfw.gov.cn/live/jz-cctv-3/live.m3u8"
-			},
-			{
-				"sort": 3,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CCTV-5",
-				"url": "https://media.hndyjyfw.gov.cn/live/jz-cctv-5/live.m3u8"
-			},
-			{
-				"sort": 4,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CCTV-5+",
-				"url": "https://media.hndyjyfw.gov.cn/live/jz-cctv-5-plus/live.m3u8"
-			},
-			{
-				"sort": 5,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CCTV-6",
-				"url": "https://media.hndyjyfw.gov.cn/live/jz-cctv-6/live.m3u8"
-			},
-			{
-				"sort": 6,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CCTV-7",
-				"url": "https://media.hndyjyfw.gov.cn/live/jz-cctv-7/live.m3u8"
-			},
-			{
-				"sort": 7,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CCTV-9",
-				"url": "https://media.hndyjyfw.gov.cn/live/jz-cctv-9/live.m3u8"
-			},
-			{
-				"sort": 8,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CCTV-10",
-				"url": "https://media.hndyjyfw.gov.cn/live/jz-cctv-10/live.m3u8"
-			},
-			{
-				"sort": 9,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CCTV-11",
-				"url": "https://media.hndyjyfw.gov.cn/live/jz-cctv-11/live.m3u8"
-			},
-			{
-				"sort": 10,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CCTV-12",
-				"url": "https://media.hndyjyfw.gov.cn/live/jz-cctv-12/live.m3u8"
-			},
-			{
-				"sort": 11,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CCTV-13",
-				"url": "https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv13_2/index.m3u8"
-			},
-			{
-				"sort": 12,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CNC",
-				"url": "http://source07.v.news.cn/live/CNC_EN/playlist.m3u8"
-			},
-			{
-				"sort": 13,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CGTN-China",
-				"url": "http://live.cgtn.com/500/prog_index.m3u8"
-			},
-			{
-				"sort": 14,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CGTN-Arabic",
-				"url": "http://livear.cgtn.com/1000a/prog_index.m3u8"
-			},
-			{
-				"sort": 15,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CGTN-Español",
-				"url": "http://livees.cgtn.com/500e/prog_index.m3u8"
-			},
-			{
-				"sort": 16,
-				"display": "0",
-				"group": "央视节目",
-				"name": "CGTN-France",
-				"url": "http://livefr.cgtn.com/1000f/prog_index.m3u8"
-			},
-			{
-				"sort": 17,
-				"display": "0",
-				"group": "央视节目",
-				"name": "苏州4k",
-				"url": "http://liveshowbak2.kan0512.com/ksz-norecord/csztv4k_4k.m3u8"
-			},
-			{
-				"sort": 18,
 				"display": "1",
 				"group": "央视节目",
 				"name": "CCTV-1",
 				"url": "http://live.sctvcloud.com/live/bcgqlive/playlist.m3u8"
 			},
 			{
-				"sort": 19,
-				"display": "1",
-				"group": "央视节目",
-				"name": "CCTV-1",
-				"url": "https://media.hndyjyfw.gov.cn/live/jz-cctv-1/live.m3u8"
-			},
-			{
-				"sort": 20,
-				"display": "1",
+				"sort": 3,
+				"display": "0",
 				"group": "央视节目",
 				"name": "CCTV-13",
-				"url": "http://ncyd.jilu8.cn/PLTV/88888910/224/3221225621/index.m3u8"
+				"url": "https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv13_2/index.m3u8"
 			},
 			{
-				"sort": 21,
-				"display": "1",
+				"sort": 4,
+				"display": "0",
 				"group": "央视节目",
-				"name": "CCTV-13",
-				"url": "https://media.hndyjyfw.gov.cn/live/jz-cctv-13/live.m3u8"
+				"name": "CGTN-China",
+				"url": "http://live.cgtn.com/500/prog_index.m3u8"
 			},
 			{
-				"sort": 22,
+				"sort": 5,
+				"display": "0",
+				"group": "央视节目",
+				"name": "CGTN-Arabic",
+				"url": "http://livear.cgtn.com/1000a/prog_index.m3u8"
+			},
+			{
+				"sort": 6,
+				"display": "0",
+				"group": "央视节目",
+				"name": "CGTN-Español",
+				"url": "http://livees.cgtn.com/500e/prog_index.m3u8"
+			},
+			{
+				"sort": 7,
+				"display": "0",
+				"group": "央视节目",
+				"name": "CGTN-France",
+				"url": "http://livefr.cgtn.com/1000f/prog_index.m3u8"
+			},
+			{
+				"sort": 8,
+				"display": "0",
+				"group": "央视节目",
+				"name": "苏州4k",
+				"url": "http://liveshowbak2.kan0512.com/ksz-norecord/csztv4k_4k.m3u8"
+			},
+			{
+				"sort": 9,
 				"display": "0",
 				"group": "央视节目",
 				"name": "CGTN SD",
 				"url": "http://live.cgtn.com/500/prog_index.m3u8"
 			},
 			{
-				"sort": 23,
+				"sort": 10,
 				"display": "0",
 				"group": "央视节目",
 				"name": "CGTN1 SD",
 				"url": "http://live.cgtn.com/1000/prog_index.m3u8?$全网标清576P"
 			},
 			{
-				"sort": 24,
+				"sort": 11,
 				"display": "0",
 				"group": "央视节目",
 				"name": "CGTN2 SD",
@@ -269,234 +178,227 @@
 				"display": "0",
 				"group": "地方节目",
 				"name": "浙江钱江",
-				"url": "http://hw-m-l.cztv.com/channels/lantian/channel002/1080p.m3u8"
-			},
-			{
-				"sort": 13,
-				"display": "0",
-				"group": "地方节目",
-				"name": "浙江钱江",
 				"url": "http://hw-m-l.cztv.com/channels/lantian/channel02/1080p.m3u8"
 			},
 			{
-				"sort": 14,
+				"sort": 13,
 				"display": "0",
 				"group": "地方节目",
 				"name": "南京新闻综合",
 				"url": "http://live.nbs.cn/channels/njtv/xwzh/m3u8:500k/live.m3u8"
 			},
 			{
-				"sort": 15,
+				"sort": 14,
 				"display": "0",
 				"group": "地方节目",
 				"name": "青海综合频道",
 				"url": "http://lmt.scqstv.com/live1/live1.m3u8"
 			},
 			{
-				"sort": 16,
+				"sort": 15,
 				"display": "0",
 				"group": "地方节目",
 				"name": "青田电视台",
 				"url": "http://l.cztvcloud.com/channels/lantian/SXqingtian1/720p.m3u8"
 			},
 			{
-				"sort": 17,
+				"sort": 16,
 				"display": "0",
 				"group": "地方节目",
 				"name": "靖江新闻",
 				"url": "http://58.222.151.43:1935/live/xwzhpc/playlist.m3u8"
 			},
 			{
-				"sort": 18,
+				"sort": 17,
 				"display": "0",
 				"group": "地方节目",
 				"name": "北京房山",
 				"url": "http://live.funhillrm.com/5/sd/live.m3u8"
 			},
 			{
-				"sort": 19,
+				"sort": 18,
 				"display": "0",
 				"group": "地方节目",
 				"name": "晋中公共",
 				"url": "http://jzlive.jztvnews.com:90/live/jzgg.m3u8"
 			},
 			{
-				"sort": 20,
+				"sort": 19,
 				"display": "0",
 				"group": "地方节目",
 				"name": "晋中综合",
 				"url": "http://jzlive.jztvnews.com:90/live/jzzh.m3u8"
 			},
 			{
-				"sort": 21,
+				"sort": 20,
 				"display": "0",
 				"group": "地方节目",
 				"name": "晋中生活",
 				"url": "http://l.cztvcloud.com/channels/lantian/SXxinchang2/720p.m3u8"
 			},
 			{
-				"sort": 22,
+				"sort": 21,
 				"display": "0",
 				"group": "地方节目",
 				"name": "新昌新闻",
 				"url": "http://l.cztvcloud.com/channels/lantian/SXxinchang1/720p.m3u8"
 			},
 			{
-				"sort": 23,
+				"sort": 22,
 				"display": "0",
 				"group": "地方节目",
 				"name": "宿州公共",
 				"url": "http://live.ahsz.tv/video/s10001-ggpd/index.m3u8"
 			},
 			{
-				"sort": 24,
+				"sort": 23,
 				"display": "0",
 				"group": "地方节目",
 				"name": "宿州新闻综合",
 				"url": "http://live.ahsz.tv/video/s10001-szzh/index.m3u8"
 			},
 			{
-				"sort": 25,
+				"sort": 24,
 				"display": "0",
 				"group": "地方节目",
 				"name": "宿州科教",
 				"url": "http://live.ahsz.tv/video/s10001-kxjy/index.m3u8"
 			},
 			{
-				"sort": 26,
+				"sort": 25,
 				"display": "0",
 				"group": "地方节目",
 				"name": "新郑综合",
 				"url": "http://live.dxhmt.cn:9081/tv/10184-1.m3u8"
 			},
 			{
-				"sort": 27,
+				"sort": 26,
 				"display": "0",
 				"group": "地方节目",
 				"name": "建安电视台",
 				"url": "http://live.dxhmt.cn:9081/tv/11003-1.m3u8"
 			},
 			{
-				"sort": 28,
+				"sort": 27,
 				"display": "0",
 				"group": "地方节目",
 				"name": "罗山电视台",
 				"url": "http://live.dxhmt.cn:9081/tv/11521-1.m3u8"
 			},
 			{
-				"sort": 29,
+				"sort": 28,
 				"display": "0",
 				"group": "地方节目",
 				"name": "石景山电视台",
 				"url": "http://live.sjsrm.com/bjsjs/sd/live.m3u8"
 			},
 			{
-				"sort": 30,
+				"sort": 29,
 				"display": "0",
 				"group": "地方节目",
 				"name": "ТКР",
 				"url": "http://live.tkr.cdnvideo.ru/tkr/tkr.sdp/playlist.m3u8"
 			},
 			{
-				"sort": 31,
+				"sort": 30,
 				"display": "0",
 				"group": "地方节目",
 				"name": "广东 ‖ 清新综合台",
 				"url": "http://hls.wiseqx.com/live/qxzh.m3u8"
 			},
 			{
-				"sort": 32,
+				"sort": 31,
 				"display": "0",
 				"group": "地方节目",
 				"name": "云南 Ⅰ 文山综合台",
 				"url": "http://tvdrs.wsrtv.com.cn:8100/channellive/ch1.flv"
 			},
 			{
-				"sort": 33,
+				"sort": 32,
 				"display": "0",
 				"group": "地方节目",
 				"name": "文山综合",
 				"url": "http://m3u8.channel.wsrtv.com.cn/cms/videos/nmip-media/channellive/channel7/playlist.m3u8"
 			},
 			{
-				"sort": 34,
+				"sort": 33,
 				"display": "0",
 				"group": "地方节目",
 				"name": "三立新聞",
 				"url": "http://seb.sason.top/sc/sllive_fhd.m3u8"
 			},
 			{
-				"sort": 35,
+				"sort": 34,
 				"display": "0",
 				"group": "地方节目",
 				"name": "東森新聞",
 				"url": "http://seb.sason.top/sc/dsxw_fhd.m3u8"
 			},
 			{
-				"sort": 36,
+				"sort": 35,
 				"display": "0",
 				"group": "地方节目",
 				"name": "東森財經新聞",
 				"url": "http://seb.sason.top/sc/dscjxw_fhd.m3u8"
 			},
 			{
-				"sort": 37,
+				"sort": 36,
 				"display": "0",
 				"group": "地方节目",
 				"name": "中天新聞",
 				"url": "http://seb.sason.top/sc/ztxw_fhd.m3u8"
 			},
 			{
-				"sort": 38,
+				"sort": 37,
 				"display": "0",
 				"group": "地方节目",
 				"name": "台視新聞",
 				"url": "http://seb.sason.top/sc/tsxw_fhd.m3u8"
 			},
 			{
-				"sort": 39,
+				"sort": 38,
 				"display": "0",
 				"group": "地方节目",
 				"name": "西安新闻",
 				"url": "http://stream2.xiancity.cn/xatv1/playlist.m3u8"
 			},
 			{
-				"sort": 40,
+				"sort": 39,
 				"display": "0",
 				"group": "地方节目",
 				"name": "吉州新聞綜合",
 				"url": "http://218.204.153.158/10.m3u8"
 			},
 			{
-				"sort": 41,
+				"sort": 40,
 				"display": "0",
 				"group": "地方节目",
 				"name": "西青新闻综合",
 				"url": "http://221.238.209.44:81/hls/live1.m3u8"
 			},
 			{
-				"sort": 42,
+				"sort": 41,
 				"display": "0",
 				"group": "地方节目",
 				"name": "洪雅新闻综合",
 				"url": "http://117.172.215.250:8083/videos/live/35/39/GQVbrgob5CGJM/GQVbrgob5CGJM.m3u8"
 			},
 			{
-				"sort": 43,
+				"sort": 42,
 				"display": "0",
 				"group": "地方节目",
 				"name": "武汉新闻HD",
 				"url": "http://stream.appwuhan.com/1tzb/sd/live.m3u8"
 			},
 			{
-				"sort": 44,
+				"sort": 43,
 				"display": "0",
 				"group": "地方节目",
 				"name": "清华大学电视台",
 				"url": "http://live.cic.tsinghua.edu.cn/hls/tsinghuatv.m3u8"
 			},
 			{
-				"sort": 45,
+				"sort": 44,
 				"display": "0",
 				"group": "地方节目",
 				"name": "中国气象 SD",
@@ -690,7 +592,7 @@
 				"sort": 27,
 				"display": "0",
 				"group": "国外节目",
-				"name": "蒙��国lMNB",
+				"name": "蒙古国lMNB",
 				"url": "http://103.14.38.107:1935/live/mnb.stream/master.m3u8"
 			},
 			{
@@ -774,71 +676,71 @@
 				"sort": 39,
 				"display": "0",
 				"group": "国外节目",
-				"name": "С1",
-				"url": "https://sitv.ru/hls/stv.m3u8"
-			},
-			{
-				"sort": 40,
-				"display": "0",
-				"group": "国外节目",
 				"name": "Телеканал 86",
 				"url": "https://sitv.ru/hls/s86.m3u8"
 			},
 			{
-				"sort": 41,
+				"sort": 40,
 				"display": "0",
 				"group": "国外节目",
 				"name": "ALTV",
 				"url": "https://thaipbs-ujxrch.cdn.byteark.com/live/playlist_1080p/index.m3u8"
 			},
 			{
-				"sort": 42,
+				"sort": 41,
 				"display": "0",
 				"group": "国外节目",
 				"name": "Тивиком",
 				"url": "http://tvcom.stream.intelema.ru/tvcom/studio/playlist.m3u8"
 			},
 			{
-				"sort": 43,
+				"sort": 42,
 				"display": "0",
 				"group": "国外节目",
 				"name": "Alanya Posta TV",
 				"url": "http://win4.yayin.com.tr/postatv/postatv/playlist.m3u8"
 			},
 			{
-				"sort": 44,
+				"sort": 43,
 				"display": "0",
 				"group": "国外节目",
 				"name": "Русский Север Вологда",
 				"url": "http://185.186.142.16/streams.rs.m3u8"
 			},
 			{
-				"sort": 45,
+				"sort": 44,
 				"display": "0",
 				"group": "国外节目",
 				"name": "Самара ГИС",
 				"url": "http://45.67.57.9:8080/new/new/playlist.m3u8"
 			},
 			{
-				"sort": 46,
+				"sort": 45,
 				"display": "0",
 				"group": "国外节目",
 				"name": "TV BRICS Chinese",
 				"url": "https://brics.bonus-tv.ru/cdn/brics/chinese/playlist.m3u8"
 			},
 			{
-				"sort": 47,
+				"sort": 46,
 				"display": "0",
 				"group": "国外节目",
 				"name": "RTV",
 				"url": "https://cdn.appv.jagobd.com:444/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/rtv-sg.stream/playlist.m3u8"
 			},
 			{
-				"sort": 48,
+				"sort": 47,
 				"display": "0",
 				"group": "国外节目",
 				"name": "Sada TV",
 				"url": "http://cdn12.henico.net:8080/live/sadatv/index.m3u8"
+			},
+			{
+				"sort": 48,
+				"display": "0",
+				"group": "国外节目",
+				"name": "360°",
+				"url": "https://edge2-tv-ll.facecast.io/evacoder_hls_hi/CkxfR1xNUAJwTgtXTBZTAJli/index.m3u8"
 			},
 			{
 				"sort": 49,
@@ -866,54 +768,61 @@
 			{
 				"sort": 1,
 				"display": "0",
-				"group": "国外节��",
-				"name": "360°",
-				"url": "https://edge2-tv-ll.facecast.io/evacoder_hls_hi/CkxfR1xNUAJwTgtXTBZTAJli/index.m3u8"
+				"group": "地方节���",
+				"name": "浙江钱江",
+				"url": "http://hw-m-l.cztv.com/channels/lantian/channel002/1080p.m3u8"
 			},
 			{
 				"sort": 2,
+				"display": "0",
+				"group": "���外节目",
+				"name": "С1",
+				"url": "https://sitv.ru/hls/stv.m3u8"
+			},
+			{
+				"sort": 3,
 				"display": "0",
 				"group": "轮播节目",
 				"name": "斗鱼电影HD12",
 				"url": "http://diyp.112114.xyz/douyu/2436390,display=\"0\""
 			},
 			{
-				"sort": 3,
+				"sort": 4,
 				"display": "0",
 				"group": "轮播节目",
 				"name": "斗鱼电影HD14",
 				"url": "http://diyp.112114.xyz/douyu/36337,display=\"0\""
 			},
 			{
-				"sort": 4,
+				"sort": 5,
 				"display": "0",
 				"group": "轮播节目",
 				"name": "斗鱼电影HD25",
 				"url": "http://diyp.112114.xyz/douyu/315131,display=\"0\""
 			},
 			{
-				"sort": 5,
+				"sort": 6,
 				"display": "0",
 				"group": "轮播节目",
 				"name": "SiTV动漫秀场",
 				"url": "http://112.25.48.70/live/program/live/dmxchd/4000000/mnf.m3u8"
 			},
 			{
-				"sort": 6,
+				"sort": 7,
 				"display": "0",
 				"group": "轮播节目",
 				"name": "SiTV都市剧场",
 				"url": "http://112.25.48.70/live/program/live/dsjchd/4000000/mnf.m3u8"
 			},
 			{
-				"sort": 7,
+				"sort": 8,
 				"display": "0",
 				"group": "轮播节目",
 				"name": "SiTV全纪实",
 				"url": "http://112.25.48.70/live/program/live/qjshd/4000000/mnf.m3u8"
 			},
 			{
-				"sort": 8,
+				"sort": 9,
 				"display": "0",
 				"group": "轮播节目",
 				"name": "SiTV生活时尚",

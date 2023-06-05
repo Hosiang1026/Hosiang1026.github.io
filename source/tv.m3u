@@ -1,8 +1,24 @@
 #EXTM3U
 #EXTINF:-1 group-title="央视节目",CCTV-1
 https://cctvwbndali.v.myalicdn.com/cctvwbnd/cctv1_2/index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-1
+https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv1_2/index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-2
+https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv2_2/index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-4
+https://global.cgtn.cicc.media.caton.cloud/master/cgtn-america.m3u8
 #EXTINF:-1 group-title="央视节目",CCTV-13
+https://cctvwbndtxyhw.liveplay.myqcloud.com/cctvwbnd/jzcctv13_2/index.m3u8
+#EXTINF:-1 group-title="央视节目",CCTV-13
+http://txycsbl.centv.cn/zb/0628cetv1.m3u8
+#EXTINF:-1 group-title="央视节目",CETV-1
 https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv13_2/index.m3u8
+#EXTINF:-1 group-title="央视节目",CETV-2
+http://txycsbl.centv.cn/zb/0822cetv2.m3u8
+#EXTINF:-1 group-title="央视节目",CETV-3
+http://txycsbl.centv.cn/zb/0822cetv3.m3u8
+#EXTINF:-1 group-title="央视节目",CETV-4
+http://txycsbl.centv.cn/zb/0822cetv4.m3u8
 #EXTINF:-1 group-title="央视节目",CGTN-China
 http://live.cgtn.com/500/prog_index.m3u8
 #EXTINF:-1 group-title="央视节目",CGTN-Arabic
@@ -17,12 +33,20 @@ http://liveshowbak2.kan0512.com/ksz-norecord/csztv4k_4k.m3u8
 http://live.cgtn.com/1000/prog_index.m3u8?$全网标清576P
 #EXTINF:-1 group-title="央视节目",CGTN2 SD
 https://livedoc.cgtn.com/1000d/prog_index.m3u8?$全网标清576P
+#EXTINF:-1 group-title="央视节目",名侦探柯南
+http://lvbaiducdncmn.inter.iqiyi.com/tslive/c54_lb_157_600_t10/c54_lb_157_600_t10.m3u8?key=0b292c335e5837e948e91dd5d11efa525
 #EXTINF:-1 group-title="卫视节目",浙江卫视
 http://hw-m-l.cztv.com/channels/lantian/channel01/1080p.m3u8
 #EXTINF:-1 group-title="备份节目",浙江卫视
 http://hw-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8
 #EXTINF:-1 group-title="备份节目",浙江卫视
 http://zhibo.hkstv.tv:80/livestream/mutfysrq.flv
+#EXTINF:-1 group-title="卫视节目",吉林卫视
+http://stream4.jlntv.cn:80/jlwshd/playlist.m3u8
+#EXTINF:-1 group-title="卫视节目",青海卫视
+http://stream.qhbtv.com/qhws/sd/live.m3u8
+#EXTINF:-1 group-title="卫视节目",延边卫视
+http://live.ybtvyun.com/video/s10016-7e5f23de35df/index.m3u8
 #EXTINF:-1 group-title="地方节目",浙江6套
 http://hw-m-l.cztv.com/channels/lantian/channel06/1080p.m3u8
 #EXTINF:-1 group-title="备份节目",浙江6套
@@ -51,6 +75,46 @@ http://hw-m-l.cztv.com/channels/lantian/channel002/1080p.m3u8
 http://hw-m-l.cztv.com/channels/lantian/channel02/1080p.m3u8
 #EXTINF:-1 group-title="地方节目",浙江新闻
 http://hw-m-l.cztv.com/channels/lantian/channel007/1080p.m3u8
+#EXTINF:-1 group-title="地方节目",浙江数码
+http://hw-m-l.cztv.com/channels/lantian/channel012/1080p.m3u8
+#EXTINF:-1 group-title="地方节目",南宁影视
+http://hls.nntv.cn/nnlive/NNTV_VOD_A.m3u8
+#EXTINF:-1 group-title="地方节目",南宁公共
+http://hls.nntv.cn/nnlive/NNTV_PUB_A.m3u8
+#EXTINF:-1 group-title="地方节目",南宁新闻
+http://hls.nntv.cn/nnlive/NNTV_NEWS_A.m3u8
+#EXTINF:-1 group-title="地方节目",南宁都市
+http://hls.nntv.cn/nnlive/NNTV_METRO_A.m3u8
+#EXTINF:-1 group-title="地方节目",新星综合
+http://test5.btzx.com.cn/live/13TV.stream/playlist.m3u8
+#EXTINF:-1 group-title="地方节目",深圳东部
+https://lglivepull.sznews.com/live/2646.m3u8
+#EXTINF:-1 group-title="地方节目",深圳龙岗
+https://lglivepull.sznews.com/live/2647.m3u8
+#EXTINF:-1 group-title="地方节目",新昌生活
+http://l.cztvcloud.com/channels/lantian/SXxinchang2/720p.m3u8
+#EXTINF:-1 group-title="地方节目",通州融媒
+http://pull.dayuntongzhou.com/live/tztv.m3u8
+#EXTINF:-1 group-title="地方节目",吉林影视
+http://stream1.jlntv.cn/yspd/sd/live.m3u8
+#EXTINF:-1 group-title="地方节目",吉林生活
+http://stream1.jlntv.cn/shpd/sd/live.m3u8
+#EXTINF:-1 group-title="地方节目",吉林乡村
+http://stream1.jlntv.cn/xcpd/sd/live.m3u8
+#EXTINF:-1 group-title="地方节目",余姚姚江
+http://l.cztvcloud.com/channels/lantian/SXyuyao2/720p.m3u8
+#EXTINF:-1 group-title="地方节目",余姚新闻
+http://l.cztvcloud.com/channels/lantian/SXyuyao1/720p.m3u8
+#EXTINF:-1 group-title="地方节目",上虞新闻
+http://l.cztvcloud.com/channels/lantian/SXshangyu1/720p.m3u8
+#EXTINF:-1 group-title="地方节目",上虞经济
+http://l.cztvcloud.com/channels/lantian/SXshangyu2/720p.m3u8
+#EXTINF:-1 group-title="地方节目",上虞商都
+http://l.cztvcloud.com/channels/lantian/SXshangyu3/720p.m3u8
+#EXTINF:-1 group-title="地方节目",芜湖公共
+http://live1.wuhubtv.com/channel3/sd/live.m3u8
+#EXTINF:-1 group-title="地方节目",芜湖新闻
+http://live1.wuhubtv.com/channel1/sd/live.m3u8
 #EXTINF:-1 group-title="地方节目",南京新闻综合
 http://live.nbs.cn/channels/njtv/xwzh/m3u8:500k/live.m3u8
 #EXTINF:-1 group-title="地方节目",青海综合频道
@@ -229,139 +293,85 @@ http://112.25.48.70/live/program/live/qjshd/4000000/mnf.m3u8
 http://112.25.48.70/live/program/live/shsshd/4000000/mnf.m3u8
 #EXTINF:-1 group-title="轮播节目",斗鱼视频
 http://112.25.48.70/live/program/live/yxfyhd/4000000/mnf.m3u8
-#EXTINF:-1 group-title="央视节目",名侦探柯南
-http://lvbaiducdncmn.inter.iqiyi.com/tslive/c54_lb_157_600_t10/c54_lb_157_600_t10.m3u8?key=0b292c335e5837e948e91dd5d11efa525
-#EXTINF:-1 group-title="卫视节目",吉林卫视
-http://stream4.jlntv.cn:80/jlwshd/playlist.m3u8
-#EXTINF:-1 group-title="卫视节目",青海卫视
-http://stream.qhbtv.com/qhws/sd/live.m3u8
-#EXTINF:-1 group-title="卫视节目",延边卫视
-http://live.ybtvyun.com/video/s10016-7e5f23de35df/index.m3u8
-#EXTINF:-1 group-title="地方节目",南宁影视
-http://hls.nntv.cn/nnlive/NNTV_VOD_A.m3u8
-#EXTINF:-1 group-title="地方节目",南宁公共
-http://hls.nntv.cn/nnlive/NNTV_PUB_A.m3u8
-#EXTINF:-1 group-title="地方节目",南宁新闻
-http://hls.nntv.cn/nnlive/NNTV_NEWS_A.m3u8
-#EXTINF:-1 group-title="地方节目",南宁都市
-http://hls.nntv.cn/nnlive/NNTV_METRO_A.m3u8
-#EXTINF:-1 group-title="地方节目",新星综合
-http://test5.btzx.com.cn/live/13TV.stream/playlist.m3u8
-#EXTINF:-1 group-title="地方节目",深圳东部
-https://lglivepull.sznews.com/live/2646.m3u8
-#EXTINF:-1 group-title="地方节目",深圳龙岗
-https://lglivepull.sznews.com/live/2647.m3u8
-#EXTINF:-1 group-title="地方节目",新昌生活
-http://l.cztvcloud.com/channels/lantian/SXxinchang2/720p.m3u8
-#EXTINF:-1 group-title="地方节目",通州融媒
-http://pull.dayuntongzhou.com/live/tztv.m3u8
-#EXTINF:-1 group-title="地方节目",吉林影视
-http://stream1.jlntv.cn/yspd/sd/live.m3u8
-#EXTINF:-1 group-title="地方节目",吉林生活
-http://stream1.jlntv.cn/shpd/sd/live.m3u8
-#EXTINF:-1 group-title="地方节目",吉林乡村
-http://stream1.jlntv.cn/xcpd/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
-http://hw-m-l.cztv.com/channels/lantian/channel008/1080p.m3u8?zzhed
-#EXTINF:-1 group-title="央视节目",CCTV-1
-http://hw-m-l.cztv.com/channels/lantian/channel08/360p.m3u8?zzhed
-#EXTINF:-1 group-title="央视节目",CCTV-1
-http://hw-m-l.cztv.com/channels/lantian/channel08/720p.m3u8?zzhed
-#EXTINF:-1 group-title="央视节目",CCTV-1
-http://hw-m-l.cztv.com/channels/lantian/channel012/1080p.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
-http://l.cztvcloud.com/channels/lantian/SXyuyao2/720p.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
-http://l.cztvcloud.com/channels/lantian/SXyuyao1/720p.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
-http://l.cztvcloud.com/channels/lantian/SXshangyu1/720p.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
-http://l.cztvcloud.com/channels/lantian/SXshangyu2/720p.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
-http://l.cztvcloud.com/channels/lantian/SXshangyu3/720p.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
-http://live1.wuhubtv.com/channel3/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
-http://live1.wuhubtv.com/channel1/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://live.shaoxing.com.cn/video/s10001-sxtv2/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://live.shaoxing.com.cn/video/s10001-sxtv3/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://tmpstream.hyrtv.cn/hygg/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://tmpstream.hyrtv.cn/xwzh/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://l.cztvcloud.com/channels/lantian/SXshengzhou1/720p.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://stream.lytv.net.cn/2/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://31182.hlsplay.aodianyun.com/lms_31182/tv_channel_175.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://stream.hhek.cn/dyjy/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://stream.hhek.cn/ggpd/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://live.hnxttv.com:9601/live/dspd/800K/tzwj_video.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://live.hnxttv.com:9601/live/xwzh/800K/tzwj_video.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://l.cztvcloud.com/channels/lantian/SXxiaoshan1/720p.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://l.cztvcloud.com/channels/lantian/SXxinchang1/720p.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://stream.hhek.cn/xwzh/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://live.shaoxing.com.cn/video/s10001-sxtv1/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://live.hnxttv.com:9601/live/dspd/800K/tzwj_video.m3u8?auth=654837809071524@615@2E9A5FD0B225B012E3178551CF3754A8&BVUUID=C236454D-5355-2F5F-FA96-1887C72E55CE
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://stream2.jlntv.cn/baicheng1/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://stream2.jlntv.cn/qg/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://stream.haixitv.cn/1/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://stream2.jlntv.cn/ja/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://live.todaydunhuang.com:1935/live/live100/500K/tzwj_video.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://stream2.jlntv.cn/naxw/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://live.ahsz.tv/video/s10001-kxjy/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://live.mudu.tv/watch/4zbn2f.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://stream.lyxltv.com/xltv/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://stream.smntv.cn/smtv2/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://pili-live-hls.hebitv.com/hebi/hebi.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 https://live.funhillrm.com/2/playlist.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://live.sjsrm.com/bjsjs/sd/live.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://[2409:8087:5e01:34::21]:6610/ZTE_CMS/08984400000000060000000000000319/index.m3u8?IAS
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002264/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://[2409:8087:5e01:34::21]:6610/ZTE_CMS/08984400000000060000000000000320/index.m3u8?IAS
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://[2409:8087:5e01:34::21]:6610/ZTE_CMS/08984400000000060000000000000323/index.m3u8?IAS
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://[2409:8087:5e01:34::21]:6610/ZTE_CMS/08984400000000060000000000000322/index.m3u8?IAS
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://[2409:8087:5e01:34::21]:6610/ZTE_CMS/08984400000000060000000000000382/index.m3u8?IAS
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://lvbaiducdncmn.inter.iqiyi.com/tslive/c54_lb_157_600_t10/c54_lb_157_600_t10.m3u8?key=0b292c335e5837e948e91dd5d11efa525
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002055/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002085/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002065/index.m3u8?virtualDomain=yinhe.live_hls.zte.com
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://[2409:8087:6a01:1020::d]/cdnrrs.gz.chinamobile.com/PLTV/88888888/224/3221226221/1/index.m3u8?fmt=ts2hls
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="其他节目",未知
 http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002157/index.m3u8?virtualDomain=yinhe.live_hls.zte.com

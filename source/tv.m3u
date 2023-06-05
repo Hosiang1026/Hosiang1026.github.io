@@ -20,6 +20,8 @@ https://livedoc.cgtn.com/1000d/prog_index.m3u8?$全网标清576P
 #EXTINF:-1 group-title="卫视节目",浙江卫视
 http://hw-m-l.cztv.com/channels/lantian/channel01/1080p.m3u8
 #EXTINF:-1 group-title="备份节目",浙江卫视
+http://hw-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8
+#EXTINF:-1 group-title="备份节目",浙江卫视
 http://zhibo.hkstv.tv:80/livestream/mutfysrq.flv
 #EXTINF:-1 group-title="地方节目",浙江6套
 http://hw-m-l.cztv.com/channels/lantian/channel06/1080p.m3u8
@@ -229,10 +231,6 @@ http://112.25.48.70/live/program/live/shsshd/4000000/mnf.m3u8
 http://112.25.48.70/live/program/live/yxfyhd/4000000/mnf.m3u8
 #EXTINF:-1 group-title="央视节目",名侦探柯南
 http://lvbaiducdncmn.inter.iqiyi.com/tslive/c54_lb_157_600_t10/c54_lb_157_600_t10.m3u8?key=0b292c335e5837e948e91dd5d11efa525
-#EXTINF:-1 group-title="央视节目",凤凰资讯
-http://playtv-live.ifeng.com/live/06OLEEWQKN4.m3u8
-#EXTINF:-1 group-title="卫视节目",浙江卫视
-http://hw-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8
 #EXTINF:-1 group-title="卫视节目",吉林卫视
 http://stream4.jlntv.cn:80/jlwshd/playlist.m3u8
 #EXTINF:-1 group-title="卫视节目",青海卫视

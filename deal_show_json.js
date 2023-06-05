@@ -58,11 +58,10 @@ function filterHtml(html) {
             if (tvTitle.indexOf('#EXTM3U') == -1&&!!tvUrl){
                 var groupName = tvTitle.substring(tvTitle.lastIndexOf("group-title=")+13, tvTitle.indexOf(",")-1);
                 var tvName = tvTitle.substring(tvTitle.indexOf(",")+1,tvTitle.lastIndexOf("display=")-1);
-                var displayMark = tvTitle.substring(tvTitle.lastIndexOf("display=")+9, tvTitle.length-1);
                 if (tvUrl.indexOf("]") != -1){
-                    dealIpv6List(groupName, tvName, tvUrl, displayMark);
+                    dealIpv6List(groupName, tvName, tvUrl);
                 }else{
-                    dealIpv4List(groupName, tvName, tvUrl, displayMark);
+                    dealIpv4List(groupName, tvName, tvUrl);
                 }
             }
         }
@@ -82,13 +81,12 @@ function filterHtml(html) {
 }
 
 
-function dealIpv4List(groupName, tvName, tvUrl, displayMark) {
+function dealIpv4List(groupName, tvName, tvUrl) {
     //央视
     if (groupName.indexOf(groupArr[0]) != -1){
         ipv4_cctv_sort = ipv4_cctv_sort +1;
         ipv4_cctv_list.push({
             sort: ipv4_cctv_sort,
-            display: displayMark,
             group: groupName,
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl
@@ -101,7 +99,6 @@ function dealIpv4List(groupName, tvName, tvUrl, displayMark) {
         ipv4_wstv_sort = ipv4_wstv_sort +1;
         ipv4_wstv_list.push({
             sort: ipv4_wstv_sort,
-            display: displayMark,
             group: groupName,
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl
@@ -114,7 +111,6 @@ function dealIpv4List(groupName, tvName, tvUrl, displayMark) {
         ipv4_dftv_sort = ipv4_dftv_sort +1;
         ipv4_dftv_list.push({
             sort: ipv4_dftv_sort,
-            display: displayMark,
             group: groupName,
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl
@@ -127,7 +123,6 @@ function dealIpv4List(groupName, tvName, tvUrl, displayMark) {
         ipv4_foreign_sort = ipv4_foreign_sort +1;
         ipv4_foreign_list.push({
             sort: ipv4_foreign_sort,
-            display: displayMark,
             group: groupName,
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl
@@ -137,7 +132,6 @@ function dealIpv4List(groupName, tvName, tvUrl, displayMark) {
         ipv4_other_sort = ipv4_other_sort +1;
         ipv4_other_list.push({
             sort: ipv4_other_sort,
-            display: displayMark,
             group: groupName,
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl
@@ -145,13 +139,12 @@ function dealIpv4List(groupName, tvName, tvUrl, displayMark) {
     }
 }
 
-function dealIpv6List(groupName, tvName, tvUrl, displayMark) {
+function dealIpv6List(groupName, tvName, tvUrl) {
     //央视
     if (groupName.indexOf(groupArr[0]) != -1){
         ipv6_cctv_sort = ipv6_cctv_sort +1;
         ipv6_cctv_list.push({
             sort: ipv6_cctv_sort,
-            display: displayMark,
             group: groupName,
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl
@@ -164,7 +157,6 @@ function dealIpv6List(groupName, tvName, tvUrl, displayMark) {
         ipv6_wstv_sort = ipv6_wstv_sort +1;
         ipv6_wstv_list.push({
             sort: ipv6_wstv_sort,
-            display: displayMark,
             group: groupName,
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl
@@ -177,7 +169,6 @@ function dealIpv6List(groupName, tvName, tvUrl, displayMark) {
         ipv6_dftv_sort = ipv6_dftv_sort +1;
         ipv6_dftv_list.push({
             sort: ipv6_dftv_sort,
-            display: displayMark,
             group: groupName,
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl
@@ -190,7 +181,6 @@ function dealIpv6List(groupName, tvName, tvUrl, displayMark) {
         ipv6_foreign_sort = ipv6_foreign_sort +1;
         ipv6_foreign_list.push({
             sort: ipv6_foreign_sort,
-            display: displayMark,
             group: groupName,
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl
@@ -200,7 +190,6 @@ function dealIpv6List(groupName, tvName, tvUrl, displayMark) {
         ipv6_other_sort = ipv6_other_sort +1;
         ipv6_other_list.push({
             sort: ipv6_other_sort,
-            display: displayMark,
             group: groupName,
             name: tvName.substring(tvName.lastIndexOf(",")+1),
             url: tvUrl

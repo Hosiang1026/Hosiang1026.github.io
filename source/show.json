@@ -10,101 +10,77 @@
 			{
 				"sort": 2,
 				"group": "央视节目",
-				"name": "CCTV-1",
-				"url": "https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv1_2/index.m3u8"
-			},
-			{
-				"sort": 3,
-				"group": "央视节目",
-				"name": "CCTV-2",
-				"url": "https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv2_2/index.m3u8"
-			},
-			{
-				"sort": 4,
-				"group": "央视节目",
-				"name": "CCTV-4",
-				"url": "https://global.cgtn.cicc.media.caton.cloud/master/cgtn-america.m3u8"
-			},
-			{
-				"sort": 5,
-				"group": "央视节目",
 				"name": "CCTV-13",
 				"url": "https://cctvwbndtxyhw.liveplay.myqcloud.com/cctvwbnd/jzcctv13_2/index.m3u8"
 			},
 			{
-				"sort": 6,
+				"sort": 3,
 				"group": "央视节目",
-				"name": "CCTV-13",
+				"name": "CETV-1",
 				"url": "http://txycsbl.centv.cn/zb/0628cetv1.m3u8"
 			},
 			{
-				"sort": 7,
-				"group": "央视节目",
-				"name": "CETV-1",
-				"url": "https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv13_2/index.m3u8"
-			},
-			{
-				"sort": 8,
+				"sort": 4,
 				"group": "央视节目",
 				"name": "CETV-2",
 				"url": "http://txycsbl.centv.cn/zb/0822cetv2.m3u8"
 			},
 			{
-				"sort": 9,
+				"sort": 5,
 				"group": "央视节目",
 				"name": "CETV-3",
 				"url": "http://txycsbl.centv.cn/zb/0822cetv3.m3u8"
 			},
 			{
-				"sort": 10,
+				"sort": 6,
 				"group": "央视节目",
 				"name": "CETV-4",
 				"url": "http://txycsbl.centv.cn/zb/0822cetv4.m3u8"
 			},
 			{
-				"sort": 11,
+				"sort": 7,
 				"group": "央视节目",
 				"name": "CGTN-China",
 				"url": "http://live.cgtn.com/500/prog_index.m3u8"
 			},
 			{
-				"sort": 12,
+				"sort": 8,
 				"group": "央视节目",
 				"name": "CGTN-Arabic",
 				"url": "http://livear.cgtn.com/1000a/prog_index.m3u8"
 			},
 			{
-				"sort": 13,
+				"sort": 9,
 				"group": "央视节目",
 				"name": "CGTN-Español",
 				"url": "http://livees.cgtn.com/500e/prog_index.m3u8"
 			},
 			{
-				"sort": 14,
+				"sort": 10,
 				"group": "央视节目",
 				"name": "CGTN-France",
 				"url": "http://livefr.cgtn.com/1000f/prog_index.m3u8"
 			},
 			{
-				"sort": 15,
+				"sort": 11,
 				"group": "央视节目",
 				"name": "苏州4k",
 				"url": "http://liveshowbak2.kan0512.com/ksz-norecord/csztv4k_4k.m3u8"
 			},
 			{
-				"sort": 16,
+				"sort": 12,
 				"group": "央视节目",
 				"name": "CGTN1 SD",
 				"url": "http://live.cgtn.com/1000/prog_index.m3u8?$全网标清576P"
 			},
 			{
-				"sort": 17,
+				"sort": 13,
 				"group": "央视节目",
 				"name": "CGTN2 SD",
 				"url": "https://livedoc.cgtn.com/1000d/prog_index.m3u8?$全网标清576P"
 			},
 			{
-				"sort": 18,
+				"sort": 14,
 				"group": "央视节目",
 				"name": "名侦探柯南",
 				"url": "http://lvbaiducdncmn.inter.iqiyi.com/tslive/c54_lb_157_600_t10/c54_lb_157_600_t10.m3u8?key=0b292c335e5837e948e91dd5d11efa525"
@@ -804,269 +780,293 @@
 			{
 				"sort": 1,
 				"group": "备份节目",
+				"name": "CCTV-1",
+				"url": "https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv1_2/index.m3u8"
+			},
+			{
+				"sort": 2,
+				"group": "备份节目",
+				"name": "CCTV-2",
+				"url": "https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv2_2/index.m3u8"
+			},
+			{
+				"sort": 3,
+				"group": "备份节目",
+				"name": "CCTV-4",
+				"url": "https://global.cgtn.cicc.media.caton.cloud/master/cgtn-america.m3u8"
+			},
+			{
+				"sort": 4,
+				"group": "备份节目",
+				"name": "CCTV-13",
+				"url": "https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv13_2/index.m3u8"
+			},
+			{
+				"sort": 5,
+				"group": "备份节目",
 				"name": "浙江卫视",
 				"url": "http://hw-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8"
 			},
 			{
-				"sort": 2,
+				"sort": 6,
 				"group": "备份节目",
 				"name": "浙江卫视",
 				"url": "http://zhibo.hkstv.tv:80/livestream/mutfysrq.flv"
 			},
 			{
-				"sort": 3,
+				"sort": 7,
 				"group": "备份节目",
 				"name": "浙江6套",
 				"url": "http://hw-m-l.cztv.com/channels/lantian/channel006/1080p.m3u8"
 			},
 			{
-				"sort": 4,
+				"sort": 8,
 				"group": "备份节目",
 				"name": "浙江国际",
 				"url": "http://hw-m-l.cztv.com/channels/lantian/channel10/1080p.m3u8"
 			},
 			{
-				"sort": 5,
+				"sort": 9,
 				"group": "备份节目",
 				"name": "浙江少儿",
 				"url": "http://hw-m-l.cztv.com/channels/lantian/channel08/1080p.m3u8"
 			},
 			{
-				"sort": 6,
+				"sort": 10,
 				"group": "备份节目",
 				"name": "浙江钱江",
 				"url": "http://hw-m-l.cztv.com/channels/lantian/channel02/1080p.m3u8"
 			},
 			{
-				"sort": 7,
+				"sort": 11,
 				"group": "备份节目",
 				"name": "文山综合",
 				"url": "http://m3u8.channel.wsrtv.com.cn/cms/videos/nmip-media/channellive/channel7/playlist.m3u8"
 			},
 			{
-				"sort": 8,
+				"sort": 12,
 				"group": "轮播节目",
 				"name": "斗鱼视频",
 				"url": "http://diyp.112114.xyz/douyu/2436390"
 			},
 			{
-				"sort": 9,
+				"sort": 13,
 				"group": "轮播节目",
 				"name": "斗鱼视频",
 				"url": "http://diyp.112114.xyz/douyu/36337"
 			},
 			{
-				"sort": 10,
+				"sort": 14,
 				"group": "轮播节目",
 				"name": "斗鱼视频",
 				"url": "http://diyp.112114.xyz/douyu/315131"
 			},
 			{
-				"sort": 11,
+				"sort": 15,
 				"group": "轮播节目",
 				"name": "斗鱼视频",
 				"url": "http://112.25.48.70/live/program/live/dmxchd/4000000/mnf.m3u8"
 			},
 			{
-				"sort": 12,
+				"sort": 16,
 				"group": "轮播节目",
 				"name": "斗鱼视频",
 				"url": "http://112.25.48.70/live/program/live/dsjchd/4000000/mnf.m3u8"
 			},
 			{
-				"sort": 13,
+				"sort": 17,
 				"group": "轮播节目",
 				"name": "斗鱼视频",
 				"url": "http://112.25.48.70/live/program/live/qjshd/4000000/mnf.m3u8"
 			},
 			{
-				"sort": 14,
+				"sort": 18,
 				"group": "轮播节目",
 				"name": "斗鱼视频",
 				"url": "http://112.25.48.70/live/program/live/shsshd/4000000/mnf.m3u8"
 			},
 			{
-				"sort": 15,
+				"sort": 19,
 				"group": "轮播节目",
 				"name": "斗鱼视频",
 				"url": "http://112.25.48.70/live/program/live/yxfyhd/4000000/mnf.m3u8"
 			},
 			{
-				"sort": 16,
+				"sort": 20,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://live.shaoxing.com.cn/video/s10001-sxtv2/index.m3u8"
 			},
 			{
-				"sort": 17,
+				"sort": 21,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://live.shaoxing.com.cn/video/s10001-sxtv3/index.m3u8"
 			},
 			{
-				"sort": 18,
+				"sort": 22,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://tmpstream.hyrtv.cn/hygg/sd/live.m3u8"
 			},
 			{
-				"sort": 19,
+				"sort": 23,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://tmpstream.hyrtv.cn/xwzh/sd/live.m3u8"
 			},
 			{
-				"sort": 20,
+				"sort": 24,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://l.cztvcloud.com/channels/lantian/SXshengzhou1/720p.m3u8"
 			},
 			{
-				"sort": 21,
+				"sort": 25,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://stream.lytv.net.cn/2/sd/live.m3u8"
 			},
 			{
-				"sort": 22,
+				"sort": 26,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://31182.hlsplay.aodianyun.com/lms_31182/tv_channel_175.m3u8"
 			},
 			{
-				"sort": 23,
+				"sort": 27,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://stream.hhek.cn/dyjy/sd/live.m3u8"
 			},
 			{
-				"sort": 24,
+				"sort": 28,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://stream.hhek.cn/ggpd/sd/live.m3u8"
 			},
 			{
-				"sort": 25,
+				"sort": 29,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://live.hnxttv.com:9601/live/dspd/800K/tzwj_video.m3u8"
 			},
 			{
-				"sort": 26,
+				"sort": 30,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://live.hnxttv.com:9601/live/xwzh/800K/tzwj_video.m3u8"
 			},
 			{
-				"sort": 27,
+				"sort": 31,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://l.cztvcloud.com/channels/lantian/SXxiaoshan1/720p.m3u8"
 			},
 			{
-				"sort": 28,
+				"sort": 32,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://l.cztvcloud.com/channels/lantian/SXxinchang1/720p.m3u8"
 			},
 			{
-				"sort": 29,
+				"sort": 33,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://stream.hhek.cn/xwzh/sd/live.m3u8"
 			},
 			{
-				"sort": 30,
+				"sort": 34,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://live.shaoxing.com.cn/video/s10001-sxtv1/index.m3u8"
 			},
 			{
-				"sort": 31,
+				"sort": 35,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://live.hnxttv.com:9601/live/dspd/800K/tzwj_video.m3u8?auth=654837809071524@615@2E9A5FD0B225B012E3178551CF3754A8&BVUUID=C236454D-5355-2F5F-FA96-1887C72E55CE"
 			},
 			{
-				"sort": 32,
+				"sort": 36,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://stream2.jlntv.cn/baicheng1/sd/live.m3u8"
 			},
 			{
-				"sort": 33,
+				"sort": 37,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://stream2.jlntv.cn/qg/sd/live.m3u8"
 			},
 			{
-				"sort": 34,
+				"sort": 38,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://stream.haixitv.cn/1/sd/live.m3u8"
 			},
 			{
-				"sort": 35,
+				"sort": 39,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://stream2.jlntv.cn/ja/sd/live.m3u8"
 			},
 			{
-				"sort": 36,
+				"sort": 40,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://live.todaydunhuang.com:1935/live/live100/500K/tzwj_video.m3u8"
 			},
 			{
-				"sort": 37,
+				"sort": 41,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://stream2.jlntv.cn/naxw/sd/live.m3u8"
 			},
 			{
-				"sort": 38,
+				"sort": 42,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://live.ahsz.tv/video/s10001-kxjy/index.m3u8"
 			},
 			{
-				"sort": 39,
+				"sort": 43,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://live.mudu.tv/watch/4zbn2f.m3u8"
 			},
 			{
-				"sort": 40,
+				"sort": 44,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://stream.lyxltv.com/xltv/sd/live.m3u8"
 			},
 			{
-				"sort": 41,
+				"sort": 45,
 				"group": "其他节目",
-				"name": "��知",
+				"name": "未知",
 				"url": "http://stream.smntv.cn/smtv2/sd/live.m3u8"
 			},
 			{
-				"sort": 42,
+				"sort": 46,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://pili-live-hls.hebitv.com/hebi/hebi.m3u8"
 			},
 			{
-				"sort": 43,
+				"sort": 47,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "https://live.funhillrm.com/2/playlist.m3u8"
 			},
 			{
-				"sort": 44,
+				"sort": 48,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://live.sjsrm.com/bjsjs/sd/live.m3u8"
 			},
 			{
-				"sort": 45,
+				"sort": 49,
 				"group": "其他节目",
 				"name": "未知",
 				"url": "http://lvbaiducdncmn.inter.iqiyi.com/tslive/c54_lb_157_600_t10/c54_lb_157_600_t10.m3u8?key=0b292c335e5837e948e91dd5d11efa525"
@@ -1117,7 +1117,7 @@
 			},
 			{
 				"sort": 7,
-				"group": "其他节��",
+				"group": "其���节目",
 				"name": "未知",
 				"url": "http://[2409:8087:7000:20:1000::22]:6060/yinhe/2/ch00000090990000002055/index.m3u8?virtualDomain=yinhe.live_hls.zte.com"
 			},

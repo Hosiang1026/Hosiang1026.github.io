@@ -1,18 +1,18 @@
 #EXTM3U
 #EXTINF:-1 group-title="央视节目",CCTV-1
 https://cctvwbndali.v.myalicdn.com/cctvwbnd/cctv1_2/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-1
+#EXTINF:-1 group-title="备份节目",CCTV-1
 https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv1_2/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-2
+#EXTINF:-1 group-title="备份节目",CCTV-2
 https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv2_2/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-4
+#EXTINF:-1 group-title="备份节目",CCTV-4
 https://global.cgtn.cicc.media.caton.cloud/master/cgtn-america.m3u8
 #EXTINF:-1 group-title="央视节目",CCTV-13
 https://cctvwbndtxyhw.liveplay.myqcloud.com/cctvwbnd/jzcctv13_2/index.m3u8
-#EXTINF:-1 group-title="央视节目",CCTV-13
-http://txycsbl.centv.cn/zb/0628cetv1.m3u8
-#EXTINF:-1 group-title="央视节目",CETV-1
+#EXTINF:-1 group-title="备份节目",CCTV-13
 https://cctvwbndtxy.liveplay.myqcloud.com/cctvwbnd/jzcctv13_2/index.m3u8
+#EXTINF:-1 group-title="央视节目",CETV-1
+http://txycsbl.centv.cn/zb/0628cetv1.m3u8
 #EXTINF:-1 group-title="央视节目",CETV-2
 http://txycsbl.centv.cn/zb/0822cetv2.m3u8
 #EXTINF:-1 group-title="央视节目",CETV-3

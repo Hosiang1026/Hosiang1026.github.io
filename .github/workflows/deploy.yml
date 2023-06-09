@@ -1,112 +1,21 @@
 # Action 的名字
 name: Hexo Auto Deploy
-
 on:
-  # 触发条件1：main 分支收到 push 后执行任务。
   push:
     branches:
-      - source
-  # 触发条件2：手动按钮
-  workflow_dispatch:
-
-# 这里放环境变量,需要替换成你自己的
-env:
-  # Hexo 编译后使用此 git 用户部署到 github 仓库
-  GIT_USER: Hosiang1026
-  # Hexo 编译后使用此 git 邮箱部署到 github 仓库
-  GIT_EMAIL: hosiang1026@sina.com
-  # Hexo 编译后要部署的 github 仓库
-  GIT_DEPLOY_REPO: Hosiang1026/Hosiang1026.github.io
-  # Hexo 编译后要部署到的分支
-  GIT_DEPLOY_BRANCH: master
-
-  # Hexo 编译后使用此 gitee 用户部署到gitee仓库
-   GITEE_USER: hosiang1026
-  # Hexo 编译后要部署的 gitee 仓库
-   GITEE_DEPLOY_REPO: git@gitee.com:hosiang1026/hosiang1026.git
-  # Hexo 编译后要部署到的分支
-   GITEE_DEPLOY_BRANCH: master
-
-  # 注意替换为你的 GitHub 源仓库地址
-  GIT_SOURCE_REPO: git@github.com:hosiang1026/hosiang1026.git
-  # 注意替换为你的 Gitee 目标仓库地址
-  GITEE_DESTINATION_REPO: git@gitee.com:hosiang1026/hosiang1026.git
+      - source # master 分支有 push 行为时就触发这个 action
 
 jobs:
-  build:
-    name: Build on node ${{ matrix.node_version }} and ${{ matrix.os }}
+  build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id
-    strategy:
-      matrix:
-        os: [ubuntu-18.04]
-        node_version: [12.x]
-
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@master
 
-      - name: Checkout deploy repo
-        uses: actions/checkout@v2
-        with:
-          repository: ${{ env.GIT_DEPLOY_REPO }}
-          ref: ${{ env.GIT_DEPLOY_BRANCH }}
-          path: .deploy_git
-
-      - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node_version }}
-
-      - name: Configuration environment
+      - name: Build and Deploy
+        uses: theme-keep/hexo-deploy-github-pages-action@master # 使用专门部署 Hexo 到 GitHub pages 的 action
         env:
-          HEXO_DEPLOY_PRI: ${{secrets.HEXO_DEPLOY_PRI}}
-        run: |
-          sudo timedatectl set-timezone "Asia/Shanghai"
-          mkdir -p ~/.ssh/
-          echo "$HEXO_DEPLOY_PRI" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-          # coding 已取消同步
-          # ssh-keyscan -t rsa e.coding.net >> ~/.ssh/known_hosts
-          ssh-keyscan -t rsa gitee.com >> ~/.ssh/known_hosts
-          git config --global user.name $GIT_USER
-          git config --global user.email $GIT_EMAIL
-
-      - name: Install dependencies
-        run: |
-               npm install hexo-cli -g
-               npm install
-          # 根据你安装的组件进行安装
-               npm uninstall hexo-generator-index --save
-               npm install hexo-baidu-url-submit hexo-generator-index2 hexo-symbols-count-time hexo-blog-encrypt hexo-deployer-git --save
-          # 复制中文语言包，解决菜单英文的问题
-               cp zh-CN.yml node_modules/hexo-theme-next/languages/
-
-      - name: Deploy hexo
-        run: |
-          npm run deploy
-
-      # 以下为发布到gitee
-      - name: Sync to Gitee
-        uses: hosiang1026/git-mirror-action@master
-        env:
-          # 直接使用了 HEXO_DEPLOY_PRI
-          SSH_PRIVATE_KEY: ${{ secrets.HEXO_DEPLOY_PRI }}
-        with:
-          # GitHub 源仓库地址
-          source-repo: ${{ env.GIT_SOURCE_REPO }}
-          # Gitee 目标仓库地址
-          destination-repo: ${{ env.GITEE_DESTINATION_REPO }}
-
-      - name: Build Gitee Pages
-        uses: hosiang1026/gitee-pages-action@master
-        with:
-          # 你的 Gitee 用户名
-          gitee-username: ${{ env.GITEE_USER }}
-          # 注意在 Settings->Secrets 配置 GITEE_PASSWORD
-          gitee-password: ${{ secrets.GITEE_PASSWORD }}
-          # 你的 Gitee 仓库，仓库名严格区分大小写，请准确填写，否则会出错
-          gitee-repo: ${{ env.GITEE_DEPLOY_REPO }}
-          # 要部署的分支，默认是 master，若是其他分支，则需要指定（指定的分支必须存在）
-          branch: ${{ env.GITEE_DEPLOY_BRANCH }}
+          PERSONAL_TOKEN: ${{ secrets.HEXO_DEPLOY }} # secret 名
+          PUBLISH_REPOSITORY: XPoet/keep-blog # 公共仓库，格式：GitHub 用户名/仓库名
+          BRANCH: master # 分支，填 gh-pages 就行
+          PUBLISH_DIR: ./public # 部署 public 目录下的文件

@@ -66,7 +66,7 @@
     "sync": "yuque-hexo sync",
     "clean": "yuque-hexo clean",
     "deploy": "npm run sync && node deploy.js",
-    "build": "hexo clean && hexo g",
+    "build": "hexo clean && hexo g && node gitalk-auto-init.js",
     "dev": "hexo clean && hexo g && hexo s",
     "prod": "hexo clean && hexo g && hexo d",
     "gitalk": "node gitalk-auto-init.js"

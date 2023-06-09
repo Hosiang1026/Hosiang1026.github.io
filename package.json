@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "bagpipe": "^0.3.5",
+    "blueimp-md5": "^2.19.0",
     "browser-sync": "^2.18.13",
     "buffers": "^0.1.1",
     "cheerio": "^1.0.0-rc.3",
@@ -41,10 +42,13 @@
     "i": "^0.3.6",
     "live2d-widget-model-hijiki": "^1.0.5",
     "livereload": "^0.9.3",
+    "md5": "^2.3.0",
+    "moment": "^2.29.4",
     "renderer": "^0.1.5",
     "request": "^2.88.2",
     "silly-datetime": "^0.1.2",
-    "sqlite3": "^5.0.0"
+    "sqlite3": "^5.0.0",
+    "xml-parser": "^1.2.1"
   },
   "yuqueConfig": {
     "login": "hosiang1026",
@@ -62,9 +66,10 @@
     "sync": "yuque-hexo sync",
     "clean": "yuque-hexo clean",
     "deploy": "npm run sync && node deploy.js",
-    "build": "hexo clean && hexo g",
+    "build": "hexo clean && hexo g && node gitalk-auto-init.js",
     "dev": "hexo clean && hexo g && hexo s",
-    "prod": "hexo clean && hexo g && hexo d"
+    "prod": "hexo clean && hexo g && hexo d",
+    "gitalk": "node gitalk-auto-init.js"
   },
   "devDependencies": {
     "del": "^6.0.0",

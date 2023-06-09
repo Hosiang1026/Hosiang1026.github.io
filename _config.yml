@@ -173,7 +173,11 @@ Plugins:
 baidusitemap:
     path: baidusitemap.xml
 sitemap:
-    path: sitemap.xml
+  path: sitemap.xml
+  template: ./sitemap_template.xml
+  rel: false
+  tag: true
+  category: false
 
 # Security文章加密
 encrypt:

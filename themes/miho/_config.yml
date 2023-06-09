@@ -59,6 +59,11 @@ menu:
     url: /collection
     target: false
 
+  jsfiddle:
+    title: 云盘
+    url: http://hosiang.ccaeo.com/skydrive
+    target: true
+
   user:
     title: 关于
     url: /about
@@ -69,10 +74,7 @@ menu:
 #    url: /project
 #    target: false
 
-#  jsfiddle:
-#    title: 云盘
-#    url: http://hosiang.ccaeo.com/skydrive
-#    target: true
+
 
 #  gamepad:
 #    title: 游戏

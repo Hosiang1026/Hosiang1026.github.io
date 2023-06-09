@@ -28,7 +28,7 @@ env:
    GITEE_DEPLOY_BRANCH: master
 
   # 注意替换为你的 GitHub 源仓库地址
-  GIT_SOURCE_REPO: git@github.com:wbsu2003/wbsu2003.github.io.git
+  GIT_SOURCE_REPO: git@github.com:hosiang1026/hosiang1026.git
   # 注意替换为你的 Gitee 目标仓库地址
   GITEE_DESTINATION_REPO: git@gitee.com:hosiang1026/hosiang1026.git
 

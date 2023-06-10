@@ -10,6 +10,10 @@
 
 ## 技术方案：Hexo + Travis-CI + Github-Pages + Serverless + CDN
 
+## 替代方案：Hexo + Github-Actions + Github-Pages + Serverless + CDN
+
+注：Travis-CI 开始收费，所以采用替代方案进行持续集成
+
 ![Blog Version](https://haoxiang.eu.org/images/blog_version.png "博客版本信息")
 
 2017-12-14 

@@ -29,7 +29,8 @@
 
 ####  2. [Admin管理-安装hexo-admin-qiniu插件](https://xbotao.github.io/hexo-admin-qiniu/)
 
-####  3. 添加畅言评论和音乐
+####  3. 添加Gitalk评论和批量初始化评论脚本gitalk-auto-init.js
+
 
 ## 自动更新
 

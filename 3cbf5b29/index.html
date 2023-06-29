@@ -1,0 +1,419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="Access-Control-Allow-Origin" content="*"><script type="text/javascript">var start_time=(new Date).getTime()</script><meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="baidu-site-verification" content="codeva-JcuFKkCTW2"><meta name="google-site-verification" content="GOa_MDr6Uz7cL7SHoNQIoPhiBCMp1WMlUeUa8avuIOg"><meta name="360-site-verification" content="2a299bcaf5d0e17606cbc47c55252c34"><meta name="baidu_union_verify" content="7fdc0fcf59a6c750e39da4f72040c01e"><title>推荐系列-突破CRUD - 万能树工具类封装 | 狂欢马克思</title><meta name="keywords" content="分享技术经验与交流"><meta name="description" content="&amp;emsp;&amp;emsp;0、学完本文你或许可以收获 感受一个树工具从初始逐步优化完善的过程 树工具封装的设计思考与实现思路 最后收获一款拿来即用的树工具源代码 对于前端树组件有一定了解和使用过的同学可直接跳…"><meta property="og:type" content="article"><meta property="og:title" content="推荐系列-突破CRUD - 万能树工具类封装"><meta property="og:url" content="https://haoxiang.eu.org/3cbf5b29/index.html"><meta property="og:site_name" content="狂欢马克思"><meta property="og:description" content="&amp;emsp;&amp;emsp;0、学完本文你或许可以收获 感受一个树工具从初始逐步优化完善的过程 树工具封装的设计思考与实现思路 最后收获一款拿来即用的树工具源代码 对于前端树组件有一定了解和使用过的同学可直接跳…"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg"><meta property="article:published_time" content="2021-04-15T01:19:21.000Z"><meta property="article:modified_time" content="2023-06-29T07:10:21.084Z"><meta property="article:author" content="Howe Hsiang"><meta property="article:tag" content="Popular"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg"><link rel="icon" href="/images/favicon.ico"><link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/style.css"><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script></script><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 6.3.0"></head><script src="/js/jquery.min.js"></script><script src="/js/pace.min.js"></script><script src="/js/crypto-js.js"></script><script src="/js/cookie.js"></script><script src="/js/calendar.js"></script><script src="/js/festival.js"></script><script>getFestival()</script><body><script>window.onload=function(){document.getElementById("TimeShow").innerHTML="本站耗时 "+((new Date).getTime()-start_time)/1e3+" 秒 "}</script><div id="container"><header id="header"><div id="banner"></div><div id="header-outer"><div id="header-menu" class="header-menu-pos animated"><div class="header-menu-container"><a href="/" class="left"><span class="site-title">狂欢马克思</span></a><nav id="header-menu-nav" class="right"><a href="/" rel="external nofollow"><i class="fa fa-home"></i> <span>主页</span> </a><a href="/archives" rel="external nofollow"><i class="fa fa-archive"></i> <span>归档</span> </a><a href="/gitbook" rel="external nofollow"><i class="fa fa-columns"></i> <span>笔记</span> </a><a href="/photo" rel="external nofollow"><i class="fa fa-picture-o"></i> <span>相册</span> </a><a href="/love" rel="external nofollow"><i class="fa fa-heart"></i> <span>恋爱</span> </a><a href="/collection" rel="external nofollow"><i class="fa fa-envira"></i> <span>收藏</span> </a><a href="/about" rel="external nofollow"><i class="fa fa-user"></i> <span>关于</span></a></nav><a class="mobile-header-menu-button"><i class="fa fa-bars"></i></a></div></div><div id="header-row"><div id="logo"><a href="/"><img src="/../images/logo.png" alt="logo"></a></div><div class="header-info"><div id="header-title"><h2>狂欢马克思</h2></div><div id="header-description"><h3>专注Web开发</h3></div></div><nav class="header-nav"><div class="social"><a title="Github" target="_blank" href="//github.com/Hosiang1026" rel="external nofollow"><i class="fa fa-github fa-2x"></i></a> <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes" rel="external nofollow"><i class="fa fa-qq fa-2x"></i></a> <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969" rel="external nofollow"><i class="fa fa-weibo fa-2x"></i></a></div></nav></div><script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script><div id="noticeId" class="show" style="background:rgb(244,247,247,.3)"><marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop()" onmouseout="this.start()"></marquee></div><script type="text/javascript">function browserRedirect(){var i=navigator.userAgent.toLowerCase(),n="ipad"==i.match(/ipad/i),e="iphone os"==i.match(/iphone os/i),o="midp"==i.match(/midp/i),a="rv:1.2.3.4"==i.match(/rv:1.2.3.4/i),s="ucweb"==i.match(/ucweb/i),t="android"==i.match(/android/i),r="windows ce"==i.match(/windows ce/i),c="windows mobile"==i.match(/windows mobile/i),d="",m=randomColor(),d=n||e||o||a||s||t||r||c?($("#noticeId").css({"line-height":"1.6em"}),"<font style='color:"+m+"' face='新华宋体'  size='2'>官宣：<span id='msg'></span><span id='timer'></span><span id='jinrishici-sentence'></span></font> "):($("#noticeId").css({"line-height":"3.6em","margin-top":"20px"}),"<font style='color:"+m+"' face='新华宋体'  size='6'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='jinrishici-sentence'></span></font> ");$("#noticeMar").html(d)}function randomColor(){for(var i="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f".split(","),n="#",e=0;e<6;e++)n+=i[Math.floor(16*Math.random())];return n}$(function(){browserRedirect()})</script></div></header><script>console.log=function(){}</script><div class="outer"><section id="main" class="body-wrap"><article id="post-突破CRUD - 万能树工具类封装" class="article article-type-post" itemscope itemprop="blogPost"><div class="article-inner"><header class="article-header"><h1 class="post-title" itemprop="name">推荐系列-突破CRUD - 万能树工具类封装</h1><div class="post-title-bar"><ul><li><i class="fa fa-book"></i> <a href="/categories/热门文章/">热门文章</a></li><li><i class="fa fa-calendar"></i> 2021-04-15</li><li><i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span></li><li><span class="post-count">字数统计: 4.5k字</span></li><li><span class="post-count">阅读时长: 19分钟</span></li></ul></div></header><div class="article-entry post-content" itemprop="articleBody"><p>&amp;emsp;&amp;emsp;0、学完本文你或许可以收获 感受一个树工具从初始逐步优化完善的过程 树工具封装的设计思考与实现思路 最后收获一款拿来即用的树工具源代码 对于前端树组件有一定了解和使用过的同学可直接跳…</p><span id="more"></span><h5 id="0、学完本文你或许可以收获"><a href="#0、学完本文你或许可以收获" class="headerlink" title="0、学完本文你或许可以收获"></a>0、学完本文你或许可以收获</h5><p>感受一个树工具从初始逐步优化完善的过程<br>树工具封装的设计思考与实现思路<br>最后收获一款拿来即用的树工具源代码</p><p>对于前端树组件有一定了解和使用过的同学可直接跳跃到第3章节开始。</p><h5 id="1、树长什么样-？"><a href="#1、树长什么样-？" class="headerlink" title="1、树长什么样 ？"></a>1、树长什么样 ？</h5><p>前端的树组件大多数情况下出现在后端的管理系统中，比如我们常见的菜单树、机构树、某某分类树、树表格等。大致像下方图片所展示的这样。<br>菜单树<br><img src="https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg" alt="Test" title="突破CRUD - 万能树工具类封装"><br>机构树<br><img src="https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg" alt="Test" title="突破CRUD - 万能树工具类封装">org_tree.png<br>树表格<br><img src="https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg" alt="Test" title="突破CRUD - 万能树工具类封装"><br>大致上来说，前端树的展现形式就是上面3张图所列的几种形式。而这种前端树组件的展现构成需要依赖于后端返回的数据格式。</p><h5 id="2、数据格式"><a href="#2、数据格式" class="headerlink" title="2、数据格式"></a>2、数据格式</h5><p>结合我自身使用过的前端树组件来说，大致可以分为如下两种。<br>列表形式</p><pre><code class="java"> [
+   &#123; id:1, pId:0, name:&quot;父节点1&quot;&#125;
+
+   &#123; id:11, pId:1, name:&quot;父节点11&quot;&#125;,
+   &#123; id:111, pId:11, name:&quot;叶子节点111&quot;&#125;,
+   &#123; id:112, pId:11, name:&quot;叶子节点112&quot;&#125;,
+   &#123; id:113, pId:11, name:&quot;叶子节点113&quot;&#125;,
+   &#123; id:114, pId:11, name:&quot;叶子节点114&quot;&#125;,
+
+   &#123; id:12, pId:1, name:&quot;父节点12&quot;&#125;,
+   &#123; id:121, pId:12, name:&quot;叶子节点121&quot;&#125;,
+   &#123; id:122, pId:12, name:&quot;叶子节点122&quot;&#125;,
+   &#123; id:123, pId:12, name:&quot;叶子节点123&quot;&#125;,
+   &#123; id:124, pId:12, name:&quot;叶子节点124&quot;&#125;
+]
+</code></pre><p>树形结构</p><pre><code class="java"> [&#123;    name:&quot;父节点1&quot;,
+   children: [
+       &#123; 
+           name:&quot;父节点11&quot;,
+           children: [
+               &#123; name:&quot;叶子节点111&quot;&#125;,
+               &#123; name:&quot;叶子节点112&quot;&#125;,
+               &#123; name:&quot;叶子节点113&quot;&#125;,
+               &#123; name:&quot;叶子节点114&quot;&#125;
+           ]
+       &#125;,
+       &#123; 
+           name:&quot;父节点12&quot;,
+           children: [
+               &#123; name:&quot;叶子节点121&quot;&#125;,
+               &#123; name:&quot;叶子节点122&quot;&#125;,
+               &#123; name:&quot;叶子节点123&quot;&#125;,
+               &#123; name:&quot;叶子节点124&quot;&#125;
+           ]
+       &#125;
+   ]
+&#125;]
+</code></pre><p>本文所讲的树工具封装主要是针对第二种数据格式树形结构来说，因为第一种本身不需要特殊处理，也就不存在什么封装，就是简单的列表查询展示，与一般数据列表数据格式的区别是多了数据ID与父ID属性提供给前端进行树组件的构造。<br>而第二种是要在列表形式的数据格式上进行转换，形成如上所示的树形结构。但是，我们发现里面没有数据ID与父ID属性，why ？ 因为后端完成了数据层面树结构的构造工作，前端树组件再无需根据这两个属性进行树结构的判断构建，直接展示就OK，当然也不绝对，最终还得看前端的树组件是否需要。<br>但一般都会保留这两个属性，因为除过树组件自身的构造需求，业务处理上往往需要这两个属性，而后端树工具要构造树结构，那一定是需要数据ID与父ID的。<br>如果感觉上面说的麻烦你就记住一点，不管是列表结构还是树形结构，始终保留数据ID与父ID两个属性就对了。<br>到这里又有一个新问题了，上面说了列表形式无需封装什么可以直接使用，既然如此那用列表形式的结构就完了呗，为什么写个工具类搞个树结构出来呢 ？<br>原因是，前端树组件的实现方式非常多，不同树插件或组件需要的数据格式可能不一样，有的列表、树形格式都支持，有的仅支持列表或树形的一种，所以为了满足不同前端树的展示需求，提供树形结构的构造工具是必要的。</p><h5 id="3、话不多说，先实现个初版"><a href="#3、话不多说，先实现个初版" class="headerlink" title="3、话不多说，先实现个初版"></a>3、话不多说，先实现个初版</h5><p>从上面的内容我们了解了前端树组件的渲染展现需要后端提供满足需求的数据格式，那么实际上也就决定了树工具类的核心职责就是将一般的数据列表结构转换为树形结构，从而提供给前端使用。<br>解读上面所述的核心职责，首先一般列表是什么列表，此处我们假设为菜单列表，这就有了第一个类MenuEntity，紧接着是转换，谁转换成谁 ？数据列表转换树结构，树结构本身那应该就是个类，我们暂且叫它 TreeNode，结合我们第一步假设的菜单列表，那实际上就是 List&lt; MenuEntity &gt; 转换为 List &lt; TreeNode &gt; ，如此就得到了第二个类TreeNode，最后还剩转换这个动作谁去做 ? 那就是我们今天的主角 TreeUtil 了。<br>好，至此，通过分析树工具类的核心职责，我们分析得到了三个类。</p><p>MenuEntity<br>TreeNode<br>TreeUtil</p><p>OK，有了上面的内容那就来个简单的实现。<br>树节点类</p><pre><code class="java"> public class TreeNode &#123;
+   // 树节点ID
+   private String id;
+   // 树节点名称
+   private String name;
+   // 树节点编码
+   private String code;
+   // 树节点链接
+   private String linkUrl;
+   // 树节点图标
+   private String icon;
+   // 父节点ID
+   private String parentId;
+&#125;
+</code></pre><p>菜单类</p><pre><code class="java"> public class MenuEntity &#123;
+   // 菜单ID
+   private String id;
+   // 上级菜单ID
+   private String pid;
+   // 菜单名称
+   private String name;
+   // 菜单编码
+   private String code;
+   // 菜单图标
+   private String icon;
+   // 菜单链接
+   private String url;
+&#125;
+</code></pre><p>树工具类</p><pre><code class="java"> public class TreeUtil &#123;
+
+   /**
+    * 树���建
+    */
+   public static List&lt;TreeNode&gt; build(List&lt;TreeNode&gt; treeNodes,Object parentId)&#123;
+       List&lt;TreeNode&gt; finalTreeNodes = CollectionUtil.newArrayList();
+       for(TreeNode treeNode : treeNodes)&#123;
+           if(parentId.equals(treeNode.getParentId()))&#123;
+               finalTreeNodes.add(treeNode);
+               innerBuild(treeNodes,treeNode);
+           &#125;
+       &#125;
+       return finalTreeNodes;
+   &#125;
+
+   private static void innerBuild(List&lt;TreeNode&gt; treeNodes,TreeNode parentNode)&#123;
+       for(TreeNode childNode : treeNodes)&#123;
+           if(parentNode.getId().equals(childNode.getParentId()))&#123;
+               List&lt;TreeNode&gt; children = parentNode.getChildren();
+               if(children == null)&#123;
+                   children = CollectionUtil.newArrayList();
+                   parentNode.setChildren(children);
+               &#125;
+               children.add(childNode);
+               childNode.setParentId(parentNode.getId());
+               innerBuild(treeNodes,childNode);
+           &#125;
+       &#125;
+   &#125;
+&#125;
+</code></pre><p>树工具类实现的两个关键点，第一，树构建的开始位置也就是从哪里开始构建，所以需要一个父ID参数来指定构建的起始位置，第二，构建到什么时候结束，不做限制的的话，我们的树是可以无限延伸的，所以此处innerBuild方法进行递归操作。<br>测试代码</p><pre><code class="java"> public static void main(String[] args) &#123;
+   // 1、模拟菜单数据
+   List&lt;MenuEntity&gt; menuEntityList = CollectionUtil.newArrayList();
+   menuEntityList.add(new MenuEntity(&quot;1&quot;,&quot;0&quot;,&quot;系统管理&quot;,&quot;sys&quot;,&quot;/sys&quot;));
+   menuEntityList.add(new MenuEntity(&quot;11&quot;,&quot;1&quot;,&quot;用户管理&quot;,&quot;user&quot;,&quot;/sys/user&quot;));
+   menuEntityList.add(new MenuEntity(&quot;111&quot;,&quot;11&quot;,&quot;用户添加&quot;,&quot;userAdd&quot;,&quot;/sys/user/add&quot;));
+   menuEntityList.add(new MenuEntity(&quot;2&quot;,&quot;0&quot;,&quot;店铺管理&quot;,&quot;store&quot;,&quot;/store&quot;));
+   menuEntityList.add(new MenuEntity(&quot;21&quot;,&quot;2&quot;,&quot;商品管理&quot;,&quot;shop&quot;,&quot;/shop&quot;));
+
+   // 2、MenuEntity -&gt; TreeNode
+   List&lt;TreeNode&gt; treeNodes = CollectionUtil.newArrayList();
+   for(MenuEntity menuEntity : menuEntityList)&#123;
+       TreeNode treeNode = new TreeNode();
+       treeNode.setId(menuEntity.getId());
+       treeNode.setParentId(menuEntity.getPid());
+       treeNode.setCode(menuEntity.getCode());
+       treeNode.setName(menuEntity.getName());
+       treeNode.setLinkUrl(menuEntity.getUrl());
+       treeNodes.add(treeNode);
+   &#125;
+
+   // 3、树结构构建
+   List&lt;TreeNode&gt; treeStructureNodes = TreeUtil.build(treeNodes,&quot;0&quot;);
+   Console.log(JSONUtil.formatJsonStr(JSONUtil.toJsonStr(treeStructureNodes)));
+&#125;
+</code></pre><p>收工，第一版简单的树工具就实现了。</p><h5 id="4、迭代优化"><a href="#4、迭代优化" class="headerlink" title="4、迭代优化"></a>4、迭代优化</h5><h6 id="1-0-这不是我的事"><a href="#1-0-这不是我的事" class="headerlink" title="1.0 这不是我的事"></a>1.0 这不是我的事</h6><p>但是，通过测试代码我们发现这个用起来不是太爽，要将菜单数据转换为树结构竟然需要我先把菜单列表转换成树结构的列表才能调用树工具类的build方法，这里的转换操作仅仅是属性的拷贝，并未完成树状结构的生成构建，但这是调用者需要关心的吗 ？很显然TreeNode集合创建生成这个过程应该是树工具类应该做的事情。所以做了如下调整。<br>1 调整了build方法参数，将原有treeNodes 调整为 menuEntityList，意味着将上面说的treeNodes构建构成交给TreeUtil去做。<br>2 新增了Convert类，并包含convert方法，该方法的职责是完成菜单实体到树节点属性的拷贝。<br>3 再次调整build方法参数，新增Convert转换。<br>调整完成的结果，看下代码。<br>树工具</p><pre><code class="java"> public class TreeUtil_1_0 &#123;
+
+   // 新增的属性转换方法
+   public interface Convert&lt;MenuEntity,TreeNode&gt;&#123;
+       public void convert(MenuEntity menuEntity, TreeNode treeNode);
+   &#125;
+
+   /**
+    * 树构建
+    */
+   public static List&lt;TreeNode&gt; build(List&lt;MenuEntity&gt; menuEntityList,Object parentId,Convert&lt;MenuEntity,TreeNode&gt; convert)&#123;
+
+       // 原来调用方做的事情
+       List&lt;TreeNode&gt; treeNodes = CollectionUtil.newArrayList();
+       for(MenuEntity menuEntity: menuEntityList)&#123;
+           TreeNode treeNode = new TreeNode();
+           convert.convert(menuEntity,treeNode);
+           treeNodes.add(treeNode);
+       &#125;
+
+       List&lt;TreeNode&gt; finalTreeNodes = CollectionUtil.newArrayList();
+       for(TreeNode treeNode : treeNodes)&#123;
+           if(parentId.equals(treeNode.getParentId()))&#123;
+               finalTreeNodes.add(treeNode);
+               innerBuild(treeNodes,treeNode);
+           &#125;
+       &#125;
+       return finalTreeNodes;
+   &#125;
+
+   private static void innerBuild(List&lt;TreeNode&gt; treeNodes,TreeNode parentNode)&#123;
+       for(TreeNode childNode : treeNodes)&#123;
+           if(parentNode.getId().equals(childNode.getParentId()))&#123;
+               List&lt;TreeNode&gt; children = parentNode.getChildren();
+               if(children == null)&#123;
+                   children = CollectionUtil.newArrayList();
+                   parentNode.setChildren(children);
+               &#125;
+               children.add(childNode);
+               childNode.setParentId(parentNode.getId());
+               innerBuild(treeNodes,childNode);
+           &#125;
+       &#125;
+   &#125;
+&#125;
+</code></pre><p>测试代码</p><pre><code class="java"> public static void main(String[] args) &#123;
+   // 1、模拟菜单数据
+   List&lt;MenuEntity&gt; menuEntityList = CollectionUtil.newArrayList();
+   menuEntityList.add(new MenuEntity(&quot;1&quot;,&quot;0&quot;,&quot;系统管理&quot;,&quot;sys&quot;,&quot;/sys&quot;));
+   menuEntityList.add(new MenuEntity(&quot;11&quot;,&quot;1&quot;,&quot;用户管理&quot;,&quot;user&quot;,&quot;/sys/user&quot;));
+   menuEntityList.add(new MenuEntity(&quot;111&quot;,&quot;11&quot;,&quot;用户添加&quot;,&quot;userAdd&quot;,&quot;/sys/user/add&quot;));
+   menuEntityList.add(new MenuEntity(&quot;2&quot;,&quot;0&quot;,&quot;店铺管理&quot;,&quot;store&quot;,&quot;/store&quot;));
+   menuEntityList.add(new MenuEntity(&quot;21&quot;,&quot;2&quot;,&quot;商品管理&quot;,&quot;shop&quot;,&quot;/shop&quot;));
+
+   // 2、树结构构建
+   List&lt;TreeNode&gt; treeStructureNodes = TreeUtil_1_0.build(menuEntityList, &quot;0&quot;, new Convert&lt;MenuEntity, TreeNode&gt;() &#123;
+       @Override
+       public void convert(MenuEntity menuEntity, TreeNode treeNode) &#123;
+           treeNode.setId(menuEntity.getId());
+           treeNode.setParentId(menuEntity.getPid());
+           treeNode.setCode(menuEntity.getCode());
+           treeNode.setName(menuEntity.getName());
+           treeNode.setLinkUrl(menuEntity.getUrl());
+       &#125;
+   &#125;);
+   Console.log(JSONUtil.formatJsonStr(JSONUtil.toJsonStr(treeStructureNodes)));
+&#125;
+</code></pre><p>比较1.0与初版的测试代码，发现少了树节点列表构建的过程，属性拷贝的工作作为回调过程在转换过程中进行处理。</p><h6 id="2-0-仅支持造菜单树哪够"><a href="#2-0-仅支持造菜单树哪够" class="headerlink" title="2.0 仅支持造菜单树哪够"></a>2.0 仅支持造菜单树哪够</h6><p>1.0优化完后，我们来了新的需求，有个机构树也需要生成，此时的树工具仅支持了菜单树，所以我们进行改造，让其支持其他任何对象的树生成。<br>改造点主要是将的TreeUtil中的菜单实体转换为泛型，限于篇幅，就贴个核心方法的代码</p><pre><code class="java"> public static &lt;T&gt; List&lt;TreeNode&gt; build(List&lt;T&gt; list,Object parentId,Convert&lt;T,TreeNode&gt; convert)&#123;
+   List&lt;TreeNode&gt; treeNodes = CollectionUtil.newArrayList();
+   for(T obj : list)&#123;
+       TreeNode treeNode = new TreeNode();
+       convert.convert(obj,treeNode);
+       treeNodes.add(treeNode);
+   &#125;
+
+   List&lt;TreeNode&gt; finalTreeNodes = CollectionUtil.newArrayList();
+   for(TreeNode treeNode : treeNodes)&#123;
+       if(parentId.equals(treeNode.getParentId()))&#123;
+           finalTreeNodes.add(treeNode);
+           innerBuild(treeNodes,treeNode);
+       &#125;
+   &#125;
+   return finalTreeNodes;
+&#125;
+</code></pre><p>如此一来，我们就可以支持任意类型的树构造。</p><h6 id="3-0-哥们，你返回的属性不够用啊"><a href="#3-0-哥们，你返回的属性不够用啊" class="headerlink" title="3.0 哥们，你返回的属性不够用啊"></a>3.0 哥们，你返回的属性不够用啊</h6><p>前两点比较容易想到，也比较容易实现，但这时候前端同学抛来了新的问题，哥们，你返回的树节点属性不够用啊，你看我这界面。需要备注你没返回来啊。<br><img src="https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg" alt="Test" title="突破CRUD - 万能树工具类封装"><br>好吧，这种情况确实没考虑到。<br>要满足上述需求，简单做法就将remark属性直接添加到 TreeNode 类中，Convert中赋下值，这不就满足了，但想想又不对，今天这个前端伙计缺个remark，明天可能别的伙计又缺个其他属性，全加到TreeNode中，TreeNode到底是树节点还是业务实体，所以不能这么搞。<br>这里要处理成可扩展，同时满足开闭原则，所以此处比较妥的处理方式是继承，TreeNode属性满足不了的情况下，通过继承扩展具体业务的树节点来实现。<br>具体改造点如��<br>1 新增菜单实体扩展树节点如下</p><pre><code class="java"> public class MenuEntityTreeNode extends TreeNode &#123;
+   // 扩展备注属性
+   private String remark;
+   // 省略set get ...
+
+&#125;
+</code></pre><p>2 改造TreeUtil.build方法参数，新增TreeNode Class类型参数，如下</p><pre><code class="java"> /**
+* 树构建
+*/
+public static &lt;T,E extends TreeNode&gt; List&lt;E&gt; build(List&lt;T&gt; list,Object parentId,Class&lt;E&gt; treeNodeClass,Convert&lt;T,E&gt; convert)&#123;
+   List&lt;E&gt; treeNodes = CollectionUtil.newArrayList();
+   for(T obj : list)&#123;
+       E treeNode = (E)ReflectUtil.newInstance(treeNodeClass);
+       convert.convert(obj, treeNode);
+       treeNodes.add(treeNode);
+   &#125;
+
+   List&lt;E&gt; finalTreeNodes = CollectionUtil.newArrayList();
+   for(E treeNode : treeNodes)&#123;
+       if(parentId.equals(treeNode.getParentId()))&#123;
+           finalTreeNodes.add((E)treeNode);
+           innerBuild(treeNodes,treeNode);
+       &#125;
+   &#125;
+   return finalTreeNodes;
+&#125;
+</code></pre><p>测试代码</p><pre><code class="java"> public static void main(String[] args) &#123;
+   // ...此处省略模拟数据创建过程
+
+   // 2、树结构构建
+   List&lt;MenuEntityTreeNode&gt; treeStructureNodes = TreeUtil_3_0.build(menuEntityList, &quot;0&quot;,MenuEntityTreeNode.class,new TreeUtil_3_0.Convert&lt;MenuEntity,MenuEntityTreeNode&gt;()&#123;
+
+       @Override
+       public void convert(MenuEntity object, MenuEntityTreeNode treeNode) &#123;
+           treeNode.setId(object.getId());
+           treeNode.setParentId(object.getPid());
+           treeNode.setCode(object.getCode());
+           treeNode.setName(object.getName());
+           treeNode.setLinkUrl(object.getUrl());
+           // 新增的业务属性
+           treeNode.setRemark(&quot;添加备注属性&quot;);
+       &#125;
+   &#125;);
+  Console.log(JSONUtil.formatJsonStr(JSONUtil.toJsonStr(treeStructureNodes)));
+&#125;
+</code></pre><p>如此一来，不同业务场景下需要添加不同的属性时，即可做到可扩展，且对现有代码不造成任何影响和改动。</p><h6 id="4-0-哥们，我的属性名不叫code"><a href="#4-0-哥们，我的属性名不叫code" class="headerlink" title="4.0 哥们，我的属性名不叫code"></a>4.0 哥们，我的属性名不叫code</h6><p>完成了3.0版本，基本上大部分需求就都可以满足了，但是这时候前端同学又抛来了新的问题，哥们，你返回的树节点编号属性是code，但我这边的叫number，对应不上，我这边调整的话影响比较大，你看后端返回的时候能不能处理下。<br>code属性名肯定是不能调整的，因为其他模块树的节点编号都叫code。<br>那怎么办 ？其实也简单，���3.0��本一样，在扩展的业务树节点去加个属性，这样问题是解决了，但万一出现所有treeNode的属性名都跟前端需要的不对应这种极端情况，那意味着所有树属性都需要自行扩展定义，这种岂不是返回了没什么用的父TreeNode心中的所有属性。序列化时倒是可以控制，为空的不进行序列化，但不是依赖序列化框架了么。还有没有其他办法。<br>稍微整理下需求，就是树节点属性在返回前端时要能够支持自定义属性名。<br>类属性定义好就改不了了，怎么自定义，除了新增类和改现有的属性，还有什么办法呢 ？这时候我们应该想到map<br>具体怎么做<br>1 首先，定义新的类TreeNodeMap，看名字就知道基于map实现</p><pre><code class="java"> public class TreeNodeMap extends HashMap &#123;
+
+   private TreeNodeConfig treeNodeConfig;
+
+   public TreeNodeMap()&#123;
+       this.treeNodeConfig = TreeNodeConfig.getDefaultConfig();
+   &#125;
+
+   public TreeNodeMap(TreeNodeConfig treeNodeConfig)&#123;
+       this.treeNodeConfig = treeNodeConfig;
+   &#125;
+
+   public &lt;T&gt; T getId() &#123;
+       return (T)super.get(treeNodeConfig.getIdKey());
+   &#125;
+
+   public void setId(String id) &#123;
+       super.put(treeNodeConfig.getIdKey(), id);
+   &#125;
+
+   public &lt;T&gt; T getParentId() &#123;
+       return (T)super.get(treeNodeConfig.getParentIdKey());
+   &#125;
+
+   public void setParentId(String parentId) &#123;
+       super.put(treeNodeConfig.getParentIdKey(), parentId);
+   &#125;
+
+   public &lt;T&gt; T getName() &#123;
+       return (T)super.get(treeNodeConfig.getNameKey());
+   &#125;
+
+   public void setName(String name) &#123;
+       super.put(treeNodeConfig.getNameKey(), name);
+   &#125;
+
+   public &lt;T&gt; T  getCode() &#123;
+       return (T)super.get(treeNodeConfig.getCodeKey());
+   &#125;
+
+   public TreeNodeMap setCode(String code) &#123;
+       super.put(treeNodeConfig.getCodeKey(), code);
+       return this;
+   &#125;
+
+   public List&lt;TreeNodeMap&gt; getChildren() &#123;
+       return (List&lt;TreeNodeMap&gt;)super.get(treeNodeConfig.getChildrenKey());
+   &#125;
+
+   public void setChildren(List&lt;TreeNodeMap&gt; children) &#123;
+       super.put(treeNodeConfig.getChildrenKey(),children);
+   &#125;
+
+   public void extra(String key,Object value)&#123;
+       super.put(key,value);
+   &#125;
+&#125;
+</code></pre><p>2 既然支持属性名自定义，新增配置类TreeNodeConfig来完成这个事情，同时提供默认属性名</p><pre><code class="java"> public class TreeNodeConfig &#123;
+
+   // 默认属性的单例对象
+   private static TreeNodeConfig defaultConfig = new TreeNodeConfig();
+
+   // 树节点默认属性常量
+   static final String TREE_ID = &quot;id&quot;;
+   static final String TREE_NAME = &quot;name&quot;;
+   static final String TREE_CODE = &quot;code&quot;;
+   static final String TREE_CHILDREN = &quot;children&quot;;
+   static final String TREE_PARENT_ID = &quot;parentId&quot;;
+
+   // 属性
+   private String idKey;
+   private String codeKey;
+   private String nameKey;
+   private String childrenKey;
+   private String parentIdKey;
+
+   public String getIdKey() &#123;
+       return getOrDefault(idKey,TREE_ID);
+   &#125;
+
+   public void setIdKey(String idKey) &#123;
+       this.idKey = idKey;
+   &#125;
+
+   public String getCodeKey() &#123;
+       return getOrDefault(codeKey,TREE_CODE);
+   &#125;
+
+   public void setCodeKey(String codeKey) &#123;
+       this.codeKey = codeKey;
+   &#125;
+
+   public String getNameKey() &#123;
+       return getOrDefault(nameKey,TREE_NAME);
+   &#125;
+
+   public void setNameKey(String nameKey) &#123;
+       this.nameKey = nameKey;
+   &#125;
+
+   public String getChildrenKey() &#123;
+       return getOrDefault(childrenKey,TREE_CHILDREN);
+   &#125;
+
+   public void setChildrenKey(String childrenKey) &#123;
+       this.childrenKey = childrenKey;
+   &#125;
+
+   public String getParentIdKey() &#123;
+       return getOrDefault(parentIdKey,TREE_PARENT_ID);
+   &#125;
+
+   public void setParentIdKey(String parentIdKey) &#123;
+       this.parentIdKey = parentIdKey;
+   &#125;
+
+   public String getOrDefault(String key,String defaultKey)&#123;
+       if(key == null) &#123;
+           return defaultKey;
+       &#125;
+       return key;
+   &#125;
+
+   public static TreeNodeConfig getDefaultConfig()&#123;
+       return defaultConfig;
+   &#125;
+
+&#125;
+</code></pre><p>3 最后，改造TreeUtil.build 方法，基于2.0版本，只需将TreeNode替换成TreeNodeMap即可。</p><pre><code class="java"> /**
+* 树构建
+*/
+public static &lt;T&gt; List&lt;TreeNodeMap&gt; build(List&lt;T&gt; list,Object parentId,Convert&lt;T,TreeNodeMap&gt; convert)&#123;
+   List&lt;TreeNodeMap&gt; treeNodes = CollectionUtil.newArrayList();
+   for(T obj : list)&#123;
+       TreeNodeMap treeNode = new TreeNodeMap();
+       convert.convert(obj,treeNode);
+       treeNodes.add(treeNode);
+   &#125;
+
+   List&lt;TreeNodeMap&gt; finalTreeNodes = CollectionUtil.newArrayList();
+   for(TreeNodeMap treeNode : treeNodes)&#123;
+       if(parentId.equals(treeNode.getParentId()))&#123;
+           finalTreeNodes.add(treeNode);
+           innerBuild(treeNodes,treeNode);
+       &#125;
+   &#125;
+   return finalTreeNodes;
+&#125;
+</code></pre><p>测试代码</p><pre><code class="java"> public static void main(String[] args) &#123;
+    // ... 省略菜单模拟数据的创建过程
+
+   TreeNodeConfig treeNodeConfig = new TreeNodeConfig();
+   // 自定义属性名
+   treeNodeConfig.setCodeKey(&quot;number&quot;);
+   List&lt;TreeNodeMap&gt; treeNodes = TreeUtil_4_0.build(menuEntityList, &quot;0&quot;,treeNodeConfig,new TreeUtil_4_0.Convert&lt;MenuEntity, TreeNodeMap&gt;() &#123;
+       @Override
+       public void convert(MenuEntity object, TreeNodeMap treeNode) &#123;
+           treeNode.setId(object.getId());
+           treeNode.setParentId(object.getPid());
+           treeNode.setCode(object.getCode());
+           treeNode.setName(object.getName());
+           // 属性扩���
+           treeNode.extra(&quot;extra1&quot;,&quot;123&quot;);
+       &#125;
+   &#125;);
+
+   Console.log(JSONUtil.formatJsonStr(JSONUtil.toJsonStr(treeNodes)));
+&#125;
+</code></pre><p>经过上面的改造，我们实现了树节点属性的自定义，顺便还实现了属性可扩展，一举两得。</p><h5 id="3、总结"><a href="#3、总结" class="headerlink" title="3、总结"></a>3、总结</h5><p>目前这个程度可能仍有些场景无法满足，但是对于大部分的问题场景基于3.0或4.0版本稍加改造应该都可以解决。剩下的就结合场景再酌情优化调整。</p><h5 id="4、源代码-amp-视频"><a href="#4、源代码-amp-视频" class="headerlink" title="4、源代码&amp;视频"></a>4、源代码&amp;视频</h5><p>源代码： springboot-tree<br>视    频： 实现讲解</p><h5 id="5、更多精彩"><a href="#5、更多精彩" class="headerlink" title="5、更多精彩"></a>5、更多精彩</h5><p>觉得还行，动动手指留个赞。<br>以上就是今天的内容，我们下期见。<br>更多优质内容，首发公众号【风象南】，欢迎关注。<br><img src="https://oscimg.oschina.net/oscnet/006dLZAxly1gbyft1qkh7j30aa09ugpd.jpg" alt="Test" title="突破CRUD - 万能树工具类封装"></p><div class="post-copyright"><div class="content"><p>本文标题： 推荐系列-突破CRUD - 万能树工具类封装</p><p>本文作者： OSChina</p><p>发布时间： 2021年04月15日 09:19</p><p>最后更新： 2023年06月29日 07:10</p><p>原始链接： <a class="post-url" href="/3cbf5b29/" title="推荐系列-突破CRUD - 万能树工具类封装">https://haoxiang.eu.org/3cbf5b29/</a></p><p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p><footer><a href="https://haoxiang.eu.org"><img src="/../images/logo.png" alt="Howe Hsiang"> Howe Hsiang</a></footer></div></div><div class="page-reward"><a id="rewardBtn" href="javascript:;">赏</a></div><div id="reward" class="post-modal reward-lay"><a class="close" href="javascript:;" id="reward-close">×</a> <span class="reward-title"><i class="icon icon-quote-left"></i> 喜欢就赞赏一下呗！ <i class="icon icon-quote-right"></i></span><div class="reward-content"><div class="reward-code"><img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码"></div><div class="reward-select"></div></div></div></div><footer class="article-footer"><div class="post-share"><a href="javascript:" id="share-sub" class="post-share-fab"><i class="fa fa-share-alt" style="padding-top:11px!important"></i></a><div class="post-share-list" id="share-list"><ul class="share-icons"><li><a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://haoxiang.eu.org/3cbf5b29/" data-title="Facebook" rel="external nofollow noopener noreferrer"><i class="fa fa-facebook" style="padding-top:9px!important"></i></a></li><li><a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-突破CRUD - 万能树工具类封装》 — 狂欢马克思&url=https://haoxiang.eu.org/3cbf5b29/&via=https://haoxiang.eu.org" data-title="Twitter" rel="external nofollow noopener noreferrer"><i class="fa fa-twitter" style="padding-top:9px!important"></i></a></li><li><a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://haoxiang.eu.org/3cbf5b29/" data-title="Google+" rel="external nofollow noopener noreferrer"><i class="fa fa-google-plus" style="padding-top:9px!important"></i></a></li><li><a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://haoxiang.eu.org/3cbf5b29/&title=《推荐系列-突破CRUD - 万能树工具类封装》 — 狂欢马克思&source=&amp;emsp;&amp;emsp;0、学完本文你或许可以收获 感受一个树工具从初始逐步优化完善的过程 树工具封装的设计思考与实现思路 最后收获一款拿..." data-title="QQ" rel="external nofollow noopener noreferrer"><i class="fa fa-qq" style="padding-top:9px!important"></i></a></li><li><a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信"><i class="fa fa-weixin" style="padding-top:9px!important"></i></a></li><li><a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://haoxiang.eu.org/3cbf5b29/&title=《推荐系列-突破CRUD - 万能树工具类封装》 — 狂欢马克思&pic=https://static.oschina.net/uploads/img/202003/05110050_hPhj.jpeg" data-title="微博" rel="external nofollow noopener noreferrer"><i class="fa fa-weibo" style="padding-top:9px!important"></i></a></li></ul></div></div><div class="post-modal wx-share" id="wxShare"><a class="close" href="javascript:" id="wxShare-close">×</a><p>扫一扫，分享到微信</p><img src="//api.qrserver.com/v1/create-qr-code/?data=https://haoxiang.eu.org/3cbf5b29/" alt="微信分享二维码"></div><div class="mask"></div><ul class="article-footer-menu"><li class="article-footer-tags"><i class="fa fa-tags"></i> <a href="/tags/Popular/" class="color3">Popular</a></li></ul></footer></div></article><aside class="post-toc-pos post-toc-top" id="post-toc"><nav class="post-toc-wrap"><ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#0%E3%80%81%E5%AD%A6%E5%AE%8C%E6%9C%AC%E6%96%87%E4%BD%A0%E6%88%96%E8%AE%B8%E5%8F%AF%E4%BB%A5%E6%94%B6%E8%8E%B7"><span class="post-toc-text">0、学完本文你或许可以收获</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1%E3%80%81%E6%A0%91%E9%95%BF%E4%BB%80%E4%B9%88%E6%A0%B7-%EF%BC%9F"><span class="post-toc-text">1、树长什么样 ？</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2%E3%80%81%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="post-toc-text">2、数据格式</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3%E3%80%81%E8%AF%9D%E4%B8%8D%E5%A4%9A%E8%AF%B4%EF%BC%8C%E5%85%88%E5%AE%9E%E7%8E%B0%E4%B8%AA%E5%88%9D%E7%89%88"><span class="post-toc-text">3、话不多说，先实现个初版</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4%E3%80%81%E8%BF%AD%E4%BB%A3%E4%BC%98%E5%8C%96"><span class="post-toc-text">4、迭代优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#1-0-%E8%BF%99%E4%B8%8D%E6%98%AF%E6%88%91%E7%9A%84%E4%BA%8B"><span class="post-toc-text">1.0 这不是我的事</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#2-0-%E4%BB%85%E6%94%AF%E6%8C%81%E9%80%A0%E8%8F%9C%E5%8D%95%E6%A0%91%E5%93%AA%E5%A4%9F"><span class="post-toc-text">2.0 仅支持造菜单树哪够</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#3-0-%E5%93%A5%E4%BB%AC%EF%BC%8C%E4%BD%A0%E8%BF%94%E5%9B%9E%E7%9A%84%E5%B1%9E%E6%80%A7%E4%B8%8D%E5%A4%9F%E7%94%A8%E5%95%8A"><span class="post-toc-text">3.0 哥们，你返回的属性不够用啊</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#4-0-%E5%93%A5%E4%BB%AC%EF%BC%8C%E6%88%91%E7%9A%84%E5%B1%9E%E6%80%A7%E5%90%8D%E4%B8%8D%E5%8F%ABcode"><span class="post-toc-text">4.0 哥们，我的属性名不叫code</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3%E3%80%81%E6%80%BB%E7%BB%93"><span class="post-toc-text">3、总结</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4%E3%80%81%E6%BA%90%E4%BB%A3%E7%A0%81-amp-%E8%A7%86%E9%A2%91"><span class="post-toc-text">4、源代码&amp;视频</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#5%E3%80%81%E6%9B%B4%E5%A4%9A%E7%B2%BE%E5%BD%A9"><span class="post-toc-text">5、更多精彩</span></a></li></ol></nav></aside><nav id="article-nav"><a href="/e13e37e7/" id="article-nav-newer" class="article-nav-link-wrap"><span class="article-nav-title"><i class="fa fa-hand-o-left" aria-hidden="true"></i> 推荐系列-破14亿，Python分析我国存在哪些人口危机！ </span></a><a href="/35bba72e/" id="article-nav-older" class="article-nav-link-wrap"><span class="article-nav-title">推荐系列-绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper</span> <i class="fa fa-hand-o-right" aria-hidden="true"></i></a></nav><div id="gitalk"></div><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script>var gitalk=new Gitalk({repo:"bolg-comment",owner:"Hosiang1026",admin:"Hosiang1026",clientID:"37a2dd4473e8970cecc2",clientSecret:"e30efa17d86d9de4f4ab810872dc62a7b2e7e634",pagerDirection:"last",distractionFreeMode:!0,createIssueManually:!1});gitalk.render("gitalk")</script></section></div><footer id="footer"><div class="outer"><div id="footer-info" class="inner"><script id="_wau78w">var _wau=_wau||[];_wau.push(["small","5dnguv4c2n","78w"])</script><script async src="//waust.at/s.js"></script><p><span id="busuanzi_container_site_uv" style="display:none"><span class="post-count">总字数：<span>1841.6k</span> </span>总访客数：<span id="busuanzi_value_site_uv"></span> </span><span id="busuanzi_container_site_pv" style="display:none">总访问量：<span id="busuanzi_value_site_pv"></span></span><br><span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>Copyright&copy; 2018 - 2023 狂欢马克思 <a href="https://beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">京ICP备17060439号</a></p></div></div><script>var now=new Date;function createtime(){var n=new Date("2017/09/18");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="安全运行 "+dnum+" 天 ",document.getElementById("times").innerHTML=hnum+" 小时 "+mnum+" 分 "+snum+" 秒"}setInterval("createtime()",800)</script></footer><script>var mihoConfig={root:"https://haoxiang.eu.org",animate:"true",isHome:"false",share:"true",reward:" 1"}</script><div class="sidebar"><div id="sidebar-search" title="Search"><i class="fa fa-search"></i></div><div id="sidebar-category" title="Categories"><i class="fa fa-book"></i></div><div id="sidebar-tag" title="Tags"><i class="fa fa-tags"></i></div><div id="sidebar-top"><span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span></div></div><div class="sidebar-menu-box" id="sidebar-menu-box"><div class="sidebar-menu-box-container"><div id="sidebar-menu-box-categories"><a class="category-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a><a class="category-link" href="/categories/%E5%85%B6%E4%BB%96%E5%BC%80%E5%8F%91/">其他开发</a><a class="category-link" href="/categories/%E5%89%8D%E6%B2%BF%E5%BC%80%E5%8F%91/">前沿开发</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><a class="category-link" href="/categories/%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC/">升级版本</a><a class="category-link" href="/categories/%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/">博客教程</a><a class="category-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><a class="category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><a class="category-link" href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">日常记录</a><a class="category-link" href="/categories/%E7%83%AD%E9%97%A8%E6%96%87%E7%AB%A0/">热门文章</a></div><div id="sidebar-menu-box-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:17.5px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:15px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12.5px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:15px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size:12.5px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:17.5px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12.5px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NAS/" style="font-size:10px">NAS</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:17.5px">Spring</a> <a href="/tags/System/" style="font-size:10px">System</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div><a href="javascript:" class="sidebar-menu-box-close">&times;</a></div><div class="mobile-header-menu-nav" id="mobile-header-menu-nav"><div class="mobile-header-menu-container"><span class="title">导航</span><ul class="mobile-header-menu-navbar"><li><a href="/"><i class="fa fa-home"></i><span>主页</span></a></li><li><a href="/archives"><i class="fa fa-archive"></i><span>归档</span></a></li><li><a href="/gitbook"><i class="fa fa-columns"></i><span>笔记</span></a></li><li><a href="/photo"><i class="fa fa-picture-o"></i><span>相册</span></a></li><li><a href="/love"><i class="fa fa-heart"></i><span>恋爱</span></a></li><li><a href="/collection"><i class="fa fa-envira"></i><span>收藏</span></a></li><li><a href="/about"><i class="fa fa-user"></i><span>关于</span></a></li></ul></div><div class="mobile-header-tag-container"><span class="title">标签</span><div id="mobile-header-container-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:17.5px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:15px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12.5px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:15px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size:12.5px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:17.5px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12.5px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NAS/" style="font-size:10px">NAS</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:17.5px">Spring</a> <a href="/tags/System/" style="font-size:10px">System</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div></div><div class="search-wrap"><span class="search-close">&times;</span> <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back"><i class="icon icon-lg icon-chevron-left"></i> </a><input class="search-field" placeholder="Search..." id="keywords"> <a id="search-submit" href="javascript:"><i class="fa fa-search"></i></a><div class="search-container" id="search-container"><ul class="search-result" id="search-result"></ul></div></div><div id="search-tpl"><li class="search-result-item"><a href="{url}" class="search-item-li"><span class="search-item-li-title" title="{title}">{title}</span></a></li></div><script src="/js/search.js"></script><script src="/js/main.js"></script><script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script><div id="particles"></div><script src="/js/particles.js"></script><link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css"><script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script><script src="/js/animate.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({pluginRootPath:"live2dw/",pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2dw/assets/hijiki.model.json"},display:{position:"right",width:150,height:300},mobile:{show:!0,scale:.5},log:!1})</script></body></html>

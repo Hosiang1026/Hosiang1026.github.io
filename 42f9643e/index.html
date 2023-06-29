@@ -1,0 +1,420 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="Access-Control-Allow-Origin" content="*"><script type="text/javascript">var start_time=(new Date).getTime()</script><meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="baidu-site-verification" content="codeva-JcuFKkCTW2"><meta name="google-site-verification" content="GOa_MDr6Uz7cL7SHoNQIoPhiBCMp1WMlUeUa8avuIOg"><meta name="360-site-verification" content="2a299bcaf5d0e17606cbc47c55252c34"><meta name="baidu_union_verify" content="7fdc0fcf59a6c750e39da4f72040c01e"><title>推荐系列-分布式秒杀 | 狂欢马克思</title><meta name="keywords" content="分享技术经验与交流"><meta name="description" content="&amp;emsp;&amp;emsp;一般在具体的业务中，平台方会发布秒杀席位个数，秒杀的时间段，让各个商家报名，将自己的产品参与秒杀活动。这里将同事画的一张图放上来，大致是这么一个流程。关于秒杀原理可以参考单��秒杀…"><meta property="og:type" content="article"><meta property="og:title" content="推荐系列-分布式秒杀"><meta property="og:url" content="https://haoxiang.eu.org/42f9643e/index.html"><meta property="og:site_name" content="狂欢马克思"><meta property="og:description" content="&amp;emsp;&amp;emsp;一般在具体的业务中，平台方会发布秒杀席位个数，秒杀的时间段，让各个商家报名，将自己的产品参与秒杀活动。这里将同事画的一张图放上来，大致是这么一个流程。关于秒杀原理可以参考单��秒杀…"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://oscimg.oschina.net/oscnet/bd0ba1dc2588717d37b6fc03106dc8ec89d.jpg"><meta property="article:published_time" content="2021-04-15T01:19:21.000Z"><meta property="article:modified_time" content="2023-06-29T07:10:21.064Z"><meta property="article:author" content="Howe Hsiang"><meta property="article:tag" content="Popular"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://oscimg.oschina.net/oscnet/bd0ba1dc2588717d37b6fc03106dc8ec89d.jpg"><link rel="icon" href="/images/favicon.ico"><link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet"><link rel="stylesheet" href="/css/style.css"><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?3cd8fa109426bf3f10bd5c362175bace";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script></script><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 6.3.0"></head><script src="/js/jquery.min.js"></script><script src="/js/pace.min.js"></script><script src="/js/crypto-js.js"></script><script src="/js/cookie.js"></script><script src="/js/calendar.js"></script><script src="/js/festival.js"></script><script>getFestival()</script><body><script>window.onload=function(){document.getElementById("TimeShow").innerHTML="本站耗时 "+((new Date).getTime()-start_time)/1e3+" 秒 "}</script><div id="container"><header id="header"><div id="banner"></div><div id="header-outer"><div id="header-menu" class="header-menu-pos animated"><div class="header-menu-container"><a href="/" class="left"><span class="site-title">狂欢马克思</span></a><nav id="header-menu-nav" class="right"><a href="/" rel="external nofollow"><i class="fa fa-home"></i> <span>主页</span> </a><a href="/archives" rel="external nofollow"><i class="fa fa-archive"></i> <span>归档</span> </a><a href="/gitbook" rel="external nofollow"><i class="fa fa-columns"></i> <span>笔记</span> </a><a href="/photo" rel="external nofollow"><i class="fa fa-picture-o"></i> <span>相册</span> </a><a href="/love" rel="external nofollow"><i class="fa fa-heart"></i> <span>恋爱</span> </a><a href="/collection" rel="external nofollow"><i class="fa fa-envira"></i> <span>收藏</span> </a><a href="/about" rel="external nofollow"><i class="fa fa-user"></i> <span>关于</span></a></nav><a class="mobile-header-menu-button"><i class="fa fa-bars"></i></a></div></div><div id="header-row"><div id="logo"><a href="/"><img src="/../images/logo.png" alt="logo"></a></div><div class="header-info"><div id="header-title"><h2>狂欢马克思</h2></div><div id="header-description"><h3>专注Web开发</h3></div></div><nav class="header-nav"><div class="social"><a title="Github" target="_blank" href="//github.com/Hosiang1026" rel="external nofollow"><i class="fa fa-github fa-2x"></i></a> <a title="QQ" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=641904695&site=qq&menu=yes" rel="external nofollow"><i class="fa fa-qq fa-2x"></i></a> <a title="Weibo" target="_blank" href="//www.weibo.com/haoxiang969" rel="external nofollow"><i class="fa fa-weibo fa-2x"></i></a></div></nav></div><script type="text/javascript" src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script><div id="noticeId" class="show" style="background:rgb(244,247,247,.3)"><marquee id="noticeMar" behavior="scoll" class="notice" direction="left" onmouseover="this.stop()" onmouseout="this.start()"></marquee></div><script type="text/javascript">function browserRedirect(){var i=navigator.userAgent.toLowerCase(),n="ipad"==i.match(/ipad/i),e="iphone os"==i.match(/iphone os/i),o="midp"==i.match(/midp/i),a="rv:1.2.3.4"==i.match(/rv:1.2.3.4/i),s="ucweb"==i.match(/ucweb/i),t="android"==i.match(/android/i),r="windows ce"==i.match(/windows ce/i),c="windows mobile"==i.match(/windows mobile/i),d="",m=randomColor(),d=n||e||o||a||s||t||r||c?($("#noticeId").css({"line-height":"1.6em"}),"<font style='color:"+m+"' face='新华宋体'  size='2'>官宣：<span id='msg'></span><span id='timer'></span><span id='jinrishici-sentence'></span></font> "):($("#noticeId").css({"line-height":"3.6em","margin-top":"20px"}),"<font style='color:"+m+"' face='新华宋体'  size='6'>官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span><span id='jinrishici-sentence'></span></font> ");$("#noticeMar").html(d)}function randomColor(){for(var i="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f".split(","),n="#",e=0;e<6;e++)n+=i[Math.floor(16*Math.random())];return n}$(function(){browserRedirect()})</script></div></header><script>console.log=function(){}</script><div class="outer"><section id="main" class="body-wrap"><article id="post-分布式秒杀" class="article article-type-post" itemscope itemprop="blogPost"><div class="article-inner"><header class="article-header"><h1 class="post-title" itemprop="name">推荐系列-分布式秒杀</h1><div class="post-title-bar"><ul><li><i class="fa fa-book"></i> <a href="/categories/热门文章/">热门文章</a></li><li><i class="fa fa-calendar"></i> 2021-04-15</li><li><i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span></li><li><span class="post-count">字数统计: 7.8k字</span></li><li><span class="post-count">阅读时长: 38分钟</span></li></ul></div></header><div class="article-entry post-content" itemprop="articleBody"><p>&amp;emsp;&amp;emsp;一般在具体的业务中，平台方会发布秒杀席位个数，秒杀的时间段，让各个商家报名，将自己的产品参与秒杀活动。这里将同事画的一张图放上来，大致是这么一个流程。关于秒杀原理可以参考单��秒杀…</p><span id="more"></span><pre><code>                                                                                                                                                                                    一般在具体的业务中，平台方会发布秒杀席位个数，秒杀的时间段，让各个商家报名，将自己的产品参与秒杀活动。这里将同事画的一张图放上来，大致是这么一个流程。关于秒杀原理可以参考单机秒杀系统样例  
+</code></pre><p><img src="https://oscimg.oschina.net/oscnet/bd0ba1dc2588717d37b6fc03106dc8ec89d.jpg" alt="Test" title="分布式秒杀"><br>这里面关于Nginx的限流可以参考高并发之Nginx的限流<br>我们这里在秒杀的前一天将所有的批准参加秒杀的商家商品数据导入到redis的商品队列中，这里我们使用当当的elastic-job来实现，关于elastic-job的使用，可以参考分布式调度Elastic-Job攻略<br>这里是以商家的服务来当成一件商品来处理的，所以service可以理解成商品。这里有一个区位的概念，即秒杀当天商家可以报名的所有时间段，我们称之为区位，比如0点～2点，2点～4点等等。区位的实体类字段如下。<br>&#x2F;**</p><ul><li><p>秒杀区位<br><em>&#x2F;<br>@Data<br>@AllArgsConstructor<br>@NoArgsConstructor<br>public class Location {<br>private Long id; &#x2F;&#x2F;区位id<br>private LocalDate date; &#x2F;&#x2F;日期<br>private TimeSegment timeSegment; &#x2F;&#x2F;时间段<br>private int locationNumber; &#x2F;&#x2F;区位数量，即可以容纳多少商家报名<br>private BigDecimal baseCost; &#x2F;&#x2F;商家参与活动的最低缴纳金<br>private double sellPercent; &#x2F;&#x2F;销售百分比缴纳率<br>private boolean releaseLocation; &#x2F;&#x2F;是否发布<br>}<br>&#x2F;</em>*</p></li><li><p>秒杀服务<br><em>&#x2F;<br>@RequiredArgsConstructor<br>@NoArgsConstructor<br>public class Service {<br>@Getter<br>@Setter<br>@NonNull<br>private Long id; &#x2F;&#x2F;服务id<br>@Getter<br>@Setter<br>@NonNull<br>private Long signUpId; &#x2F;&#x2F;报名id<br>@Getter<br>@Setter<br>@NonNull<br>private String serviceCode; &#x2F;&#x2F;服务编码<br>@Getter<br>@Setter<br>@NonNull<br>private String serviceName; &#x2F;&#x2F;服务名称<br>@Getter<br>@Setter<br>@NonNull<br>private String serviceLevel; &#x2F;&#x2F;服务分类<br>@Getter<br>@Setter<br>@NonNull<br>private Price price; &#x2F;&#x2F;价格，包含普通价格和秒杀价格<br>@Getter<br>@Setter<br>@NonNull<br>private int totalCount; &#x2F;&#x2F;参与秒杀的总数<br>@Getter<br>@Setter<br>@NonNull<br>private int limitCount; &#x2F;&#x2F;单个用户可以购买该服务的数量<br>@Getter<br>@Setter<br>@NonNull<br>private TimeSegment timeSegment; &#x2F;&#x2F;时间段<br>@Getter<br>@Setter<br>@NonNull<br>private CheckStatus checkStatus; &#x2F;&#x2F;平台对该秒杀的审核状态<br>@Getter<br>private Lock lock &#x3D; new ReentrantLock(); &#x2F;&#x2F;重入锁<br>@Getter<br>private Condition condition &#x3D; lock.newCondition(); &#x2F;&#x2F;重入锁条件<br>}<br>商家商品(服务)数据导入到redis的商品队列中<br>&#x2F;</em>*</p></li><li><p>在每天的0点开始处理，查看后一天是否有秒杀活动<br>*&#x2F;<br>@Slf4j<br>@Component<br>@ElasticSimpleJob(cron&#x3D;”0 0 0 * * ?”,jobName&#x3D;”loadRedis”,shardingTotalCount&#x3D;2,jobParameter&#x3D;”日期”,shardingItemParameters&#x3D;”0&#x3D;Load0,1&#x3D;Load1”)<br>public class LoadDataToRedisJob implements SimpleJob {<br>@Autowired<br>private RedisService redisService;<br>@Autowired<br>private DataDao dataDao;</p><p>@Override<br>public void execute(ShardingContext shardingContext) {<br>&#x2F;&#x2F;获取后一天所有的秒杀区位<br>List<location>locationNextDayList &#x3D; dataDao.findJobToday(LocalDate.now().plusDays(1));<br>if (!CollectionUtils.isEmpty(locationNextDayList)) {<br>&#x2F;&#x2F;获取一天所有的秒杀区位时间段<br>List<timesegment>segmentList &#x3D; locationNextDayList.stream().map(location -&gt; location.getTimeSegment())<br>.collect(Collectors.toList());<br>switch (shardingContext.getShardingItem()) {<br>case 0:<br>&#x2F;&#x2F;获取每个时间段内的所有参与秒杀的服务<br>segmentList.stream().map(timeSegment -&gt; {<br>List<service>serviceInSegment &#x3D; dataDao.findServiceInSegment(timeSegment);<br>serviceInSegment.stream().forEach(service -&gt; service.setTimeSegment(timeSegment));<br>return serviceInSegment;<br>&#x2F;&#x2F;扁平化所有服务，统一为一组List<br>}).flatMap(services -&gt; services.stream()).forEach(service -&gt; {<br>&#x2F;&#x2F;以服务id以及秒杀时间段组合为主键<br>String key &#x3D; service.getId() + service.getTimeSegment().toString();<br>&#x2F;&#x2F;如果redis中存在该主键的队列，则清空队列<br>if (redisService.exists(key)) {<br>for (int i &#x3D; 0; i &lt; redisService.llen(key); i++) {<br>redisService.rpop(key);<br>}<br>}<br>&#x2F;&#x2F;清空后，根据每个服务的参与总数，将服务按总数量推送到该主键队列中<br>for (int i &#x3D; 0; i &lt; service.getTotalCount(); i++) {<br>redisService.lpush(key, JSONObject.toJSONString(service));<br>}<br>log.info(service.getId() + service.getTimeSegment().toString());<br>&#x2F;&#x2F;以服务id+”:count”组合成该服务的总数键，如果redis中存在该键，则删除<br>String countKey &#x3D; service.getId() + “:count”;<br>if (redisService.exists(countKey)) {<br>redisService.del(countKey);<br>}<br>&#x2F;&#x2F;重新将总数放入该键的redis中存储<br>redisService.set(countKey, String.valueOf(service.getTotalCount()));<br>});<br>break;<br>case 1:<br>break;<br>default:<br>break;<br>}<br>}<br>}</service></timesegment></location></p></li></ul><p>}<br>将服务导入到redis队列后，我们需要设立一个秒杀活动开始的标识，让秒杀下单只能在秒杀活动进行中开启，不在秒杀时间内不允许下单。<br>&#x2F;**</p><ul><li><p>给秒杀时间点设立开启标识，每天0点开始，每2小时执行一次<br>*&#x2F;<br>@Slf4j<br>@Component<br>@ElasticSimpleJob(cron&#x3D;”0 0 0&#x2F;2 * * ?”,jobName&#x3D;”openTimeSeg”,shardingTotalCount&#x3D;1,jobParameter&#x3D;”日期”,shardingItemParameters&#x3D;”0&#x3D;Open0”)<br>public class OpenTimeSegmentJob implements SimpleJob {<br>@Autowired<br>private RedisService redisService;<br>@Autowired<br>private DataDao dataDao;</p><p>@Override<br>public void execute(ShardingContext shardingContext) {<br>&#x2F;&#x2F;获取当天的所有秒杀区位<br>List<location>locationToDayList &#x3D; dataDao.findJobToday(LocalDate.now());<br>&#x2F;&#x2F;如果当天有秒杀活动<br>if (!CollectionUtils.isEmpty(locationToDayList)) {<br>&#x2F;&#x2F;获取当前时间点，当前时间点不一定是准点<br>LocalDateTime now &#x3D; LocalDateTime.now();<br>int year &#x3D; now.getYear();<br>int month &#x3D; now.getMonthValue();<br>int day &#x3D; now.getDayOfMonth();<br>int hour &#x3D; now.getHour();<br>&#x2F;&#x2F;将当前时间拼装成整点<br>LocalDateTime beginDate &#x3D; LocalDateTime.of(year, month, day, hour, 0, 0);<br>&#x2F;&#x2F;以整点时间为基准，在redis中放入开启秒杀时间段，119分钟后消失（每个时间段段为1小时59分钟，2小时的最后一分钟结束该时间段秒杀）<br>redisService.set(“TimeStart:” + new TimeSegment(beginDate, beginDate.plusMinutes(119)).toString(),<br>“opened”,7140);<br>log.info(beginDate.toString() + “至” + beginDate.plusMinutes(119).toString() + “秒杀开始”);<br>}<br>}</location></p></li></ul><p>}<br>到了秒杀时间，我们就可以开始下单了，先定义一个秒杀单的接口<br>public interface SecOrder {<br>&#x2F;**<br>* 秒杀下单<br>* @param secOrder<br>* @return<br>*&#x2F;<br>public String makeOrder(SecOrder secOrder);</p><pre><code>/**
+ * 是否存在该订单编号的秒杀单
+ * @param orderNo
+ * @return
+ */
+public boolean exitsOrder(String orderNo);
+
+/**
+ * 修改支付状态
+ * @param orderNo
+ */
+public void changePayStatus(String orderNo);
+</code></pre><p>}<br>SecOrder的实现类的各属性如下。<br>&#x2F;**</p><ul><li>服务秒杀单<br>*&#x2F;<br>@Slf4j<br>@AllArgsConstructor<br>@NoArgsConstructor<br>@ServiceSecOrderVersion(value &#x3D; 1)<br>public class ServiceSecOrder implements SecOrder {<br>@Getter<br>@Setter<br>private Long id; &#x2F;&#x2F;订单id<br>@Getter<br>@Setter<br>private String orderNo; &#x2F;&#x2F;订单编号<br>@Getter<br>@Setter<br>private Service service; &#x2F;&#x2F;订单服务内容<br>@Getter<br>@Setter<br>private TimeSegment timeSegment; &#x2F;&#x2F;秒杀时间段<br>@Getter<br>@Setter<br>private int number; &#x2F;&#x2F;订单数量<br>@Getter<br>@Setter<br>private BigDecimal amount; &#x2F;&#x2F;订单金额<br>@Getter<br>@Setter<br>private AppUser user; &#x2F;&#x2F;下单人<br>@Getter<br>@Setter<br>private int orderStatus; &#x2F;&#x2F;订单状态<br>@Getter<br>@Setter<br>private LocalDateTime createDate; &#x2F;&#x2F;创建日期</li></ul><p>然后开始下秒杀订单<br>@Override<br>public String makeOrder(SecOrder secOrder) {<br>RedisService redisService &#x3D; SpringBootUtil.getBean(RedisService.class);<br>IdService idService &#x3D; SpringBootUtil.getBean(IdService.class);<br>MessageSender messageSender &#x3D; SpringBootUtil.getBean(MessageSender.class);<br>&#x2F;&#x2F;如果当前时间在秒杀时间段之外，不允许秒杀下单<br>if (LocalDateTime.now().isBefore(((ServiceSecOrder)secOrder).getTimeSegment().getBeginTime())<br>|| LocalDateTime.now().isAfter(((ServiceSecOrder)secOrder).getTimeSegment().getEndTime())) {<br>throw new RuntimeException(“不在秒杀时间段内”);<br>}<br>&#x2F;&#x2F;由于测试时间的问题，此处需要屏蔽，等到实际部署时需要恢复<br>LocalDateTime now &#x3D; LocalDateTime.now();<br>int year &#x3D; now.getYear();<br>int month &#x3D; now.getMonthValue();<br>int day &#x3D; now.getDayOfMonth();<br>int hour &#x3D; now.getHour();<br>LocalDateTime beginDate &#x3D; LocalDateTime.of(year,month,day,hour,0,0);<br>&#x2F;&#x2F;从redis中检查是否有开启秒杀时间段<br>if (!redisService.exists(“TimeStart:” + new TimeSegment(beginDate,beginDate.plusMinutes(119)).toString())) {<br>throw new RuntimeException(“当前时间段无秒杀”);<br>}<br>((ServiceSecOrder)secOrder).setId(idService.genId());<br>if (((ServiceSecOrder)secOrder).getNumber() &gt; ((ServiceSecOrder)secOrder).getService().getLimitCount()) {<br>throw new RuntimeException(“秒杀数量超出限购”);<br>}<br>AppUser loginAppUser &#x3D; AppUserUtil.getLoginAppUser();<br>AppUser user &#x3D; new AppUser();<br>user.setId(loginAppUser.getId());<br>((ServiceSecOrder)secOrder).setOrderNo(getCode(idService));<br>user.setUsername(loginAppUser.getUsername());<br>((ServiceSecOrder)secOrder).setUser(user);<br>&#x2F;&#x2F;设置订单状态0表示未支付状态<br>((ServiceSecOrder)secOrder).setOrderStatus(0);<br>((ServiceSecOrder)secOrder).setCreateDate(LocalDateTime.now());<br>&#x2F;&#x2F;设置用户秒杀队列键名(每一种服务都有独立的用户秒杀队列)<br>&#x2F;&#x2F;队列名由User:+服务id+时间段组成<br>String key &#x3D; “User:” + ((ServiceSecOrder)secOrder).getService().getId()<br>+ ((ServiceSecOrder)secOrder).getTimeSegment().toString();<br>String serviceKey &#x3D; ((ServiceSecOrder)secOrder).getService().getId()<br>+ ((ServiceSecOrder)secOrder).getService().getTimeSegment().toString();<br>&#x2F;&#x2F;如果服务队列还有数据，则推送用户进队列，否则直接返回秒杀失败<br>if (redisService.llen(serviceKey) &gt; 0) {<br>&#x2F;&#x2F;建立每个服务对每个用户对限制数量对键,格式为——“服务id:用户id”<br>String limitUserKey &#x3D; ((ServiceSecOrder) secOrder).getService().getId() + “:”<br>+ ((ServiceSecOrder) secOrder).getUser().getId();<br>&#x2F;&#x2F;如果该键存在，获取该键的值(这里需要考虑分布式的并发问题的可能)<br>&#x2F;&#x2F;但是有幂等，所以此处不会出现一个用户同时秒杀一个商品(服务)的多个并发线程存在<br>if (redisService.exists(limitUserKey)) {<br>String limitCount &#x3D; redisService.get(limitUserKey);<br>&#x2F;&#x2F;如果该键的值达到服务商品的限制数，返回秒杀失败<br>if (Integer.valueOf(limitCount) &#x3D;&#x3D; ((ServiceSecOrder) secOrder).getService().getLimitCount()) {<br>return ((ServiceSecOrder) secOrder).getUser().getUsername() + “秒杀服务”<br>+ ((ServiceSecOrder) secOrder).getService().getServiceName() + “失败”;<br>}<br>}else { &#x2F;&#x2F;如果不存在，设置该键的值为0<br>redisService.set(limitUserKey,”0”);<br>}<br>&#x2F;&#x2F;将秒杀用户id推送到该队列中<br>redisService.lpush(key, ((ServiceSecOrder) secOrder).getUser().getId() + “”);<br>我们将用户id推送到redis队列后就要开始匹配秒杀结果了，因为商品队列早已经在前一天就推送进去了。<br>&#x2F;**</p><ul><li>秒杀结果匹配任务，每天0点开始，每2小时执行一次<br>*&#x2F;<br>@Slf4j<br>@Component<br>@RabbitListener(queues &#x3D; {SecendKillMq.SECENDKILL_QUEUE + “_1”,<br>SecendKillMq.SECENDKILL_QUEUE + “_2”,<br>SecendKillMq.SECENDKILL_QUEUE + “_3”,<br>SecendKillMq.SECENDKILL_QUEUE + “_4”,<br>SecendKillMq.SECENDKILL_QUEUE + “_5”,<br>SecendKillMq.SECENDKILL_QUEUE + “_6”,<br>SecendKillMq.SECENDKILL_QUEUE + “_7”,<br>SecendKillMq.SECENDKILL_QUEUE + “_8”,<br>SecendKillMq.SECENDKILL_QUEUE + “_9”,<br>SecendKillMq.SECENDKILL_QUEUE + “_10”})</li></ul><p>@ElasticSimpleJob(cron&#x3D;”0 0 0&#x2F;2 * * ?”,jobName&#x3D;”secResult”,shardingTotalCount&#x3D;2,jobParameter&#x3D;”日期”,shardingItemParameters&#x3D;”0&#x3D;SecKill0,1&#x3D;SecKill1”)<br>public class SecendKillResultJob implements SimpleJob {<br>@Autowired<br>private RedisService redisService;<br>@Autowired<br>private DataDao dataDao;<br>&#x2F;&#x2F;为了跟MQ搭配，唤醒中断用<br>private List<service>serviceList;</service></p><pre><code>@Override
+public void execute(ShardingContext shardingContext) &#123;
+    //获取当天所有的秒杀区位
+    List&lt;Location&gt; locationTodayList = dataDao.findJobToday(LocalDate.now());
+    //如果当天有秒杀活动
+    if (!CollectionUtils.isEmpty(locationTodayList)) &#123;
+        //获取一天所有的秒杀区位时间段
+        List&lt;TimeSegment&gt; segmentList = locationTodayList.stream().map(location -&gt; location.getTimeSegment())
+                .collect(Collectors.toList());
+        switch (shardingContext.getShardingItem()) &#123;
+            case 0:
+                //从所有秒杀区位时间段过滤当前秒杀时间段
+                this.serviceList = segmentList.stream().filter(timeSegment -&gt; LocalDateTime.now().isAfter(timeSegment.getBeginTime()) &amp;&amp;
+                        LocalDateTime.now().isBefore(timeSegment.getEndTime()))
+                        //将时间段转化成时间段内的秒杀服务
+                        .map(timeSegment -&gt; &#123;
+                            List&lt;Service&gt; serviceInSegment = dataDao.findServiceInSegment(timeSegment);
+                            serviceInSegment.stream().forEach(service -&gt; service.setTimeSegment(timeSegment));
+                            return serviceInSegment;
+                            //扁平化所有的秒杀服务，将所有当前时间段内的服务放入serviceList属性中
+                            //就是拿出当前时间段内所有参与秒杀的服务
+                        &#125;).flatMap(services -&gt; services.stream()).collect(Collectors.toList());
+                //并行化处理所有的秒杀服务
+                int lism = 0;
+                if (serviceList.size() &gt; Runtime.getRuntime().availableProcessors() * 2) &#123;
+                    lism = serviceList.size();
+                &#125;else &#123;
+                    lism = Runtime.getRuntime().availableProcessors() * 2;
+                &#125;
+                ForkJoinPool forkJoinPool = new ForkJoinPool(lism);
+                try &#123;
+                    forkJoinPool.submit(() -&gt;
+                    this.serviceList.parallelStream().forEach(service -&gt; &#123;
+                        while (true) &#123;
+                            try &#123;
+                                service.getLock().lock();
+                                String userKey = &quot;User:&quot; + service.getId() + service.getTimeSegment().toString();
+                                String serviceKey = service.getId() + service.getTimeSegment().toString();
+                                String countKey = service.getId() + &quot;:count&quot;;
+                                //如果下秒杀时间内没有用户下单该服务，则中断该服务的并行线程
+                                //如果有用户下单则唤醒该并行线程
+                                while (redisService.llen(userKey).equals(0L)) &#123;
+                                    try &#123;
+                                        log.info(&quot;用户队列无数据，开始中断&quot;);
+                                        service.getCondition().await();
+                                        LocalDateTime now = LocalDateTime.now();
+                                        if (now.isAfter(service.getTimeSegment().getEndTime())) &#123;
+                                            break;
+                                        &#125;
+                                    &#125; catch (InterruptedException e) &#123;
+                                        e.printStackTrace();
+                                    &#125;
+                                &#125; 
+</code></pre><p>到这里，如果没有用户下单，则会进行线程中断，不会去执行while (true)的无限循环。SecendKillResultJob同时又是RabbitMQ的一个消费者，同时监听了10个消息队列，监听后进行如下处理<br>@RabbitHandler<br>public void receice(byte[] data, Channel channel, Message message) throws IOException {<br>try {<br>&#x2F;&#x2F;告诉服务器收到这条消息 已经被我消费了 可以在队列删掉；否则消息服务器以为这条消息没处理掉 后续还会在发<br>channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);<br>&#x2F;&#x2F;收到服务id<br>Long serviceId &#x3D; unSerialize(data);<br>log.info(serviceId + “”);<br>&#x2F;&#x2F;如果当前秒杀服务列表不为空<br>if (!CollectionUtils.isEmpty(this.serviceList)) {<br>&#x2F;&#x2F;从服务列表中过滤出id为MQ收取的服务ID的服务<br>this.serviceList.stream().filter(service -&gt; service.getId().equals(serviceId))<br>.forEach(service -&gt; {<br>log.info(“存在” + service.getId());<br>try {<br>service.getLock().lock();<br>&#x2F;&#x2F;对该服务所在线程进行唤醒<br>service.getCondition().signalAll();<br>} finally {<br>service.getLock().unlock();<br>}<br>});<br>}<br>} catch (IOException e) {<br>e.printStackTrace();<br>&#x2F;&#x2F;丢弃这条消息<br>channel.basicNack(message.getMessageProperties().getDeliveryTag(), false,false);<br>log.info(“receiver fail”);<br>}<br>}</p><p>&#x2F;**</p><ul><li><p>反序列化</p></li><li><p>@param data</p></li><li><p>@return<br><em>&#x2F;<br>private Long unSerialize(byte[] data) {<br>Input input &#x3D; null;<br>try {<br>Kryo kryo &#x3D; new Kryo();<br>input &#x3D; new Input(new ByteArrayInputStream(data));<br>return kryo.readObject(input,Long.class);<br>}<br>finally {<br>input.close();<br>}<br>}<br>这样我们再回到ServiceSecOrder的makeOrder下单方法中，将用户下单的服务id异步发送到MQ中，去唤醒秒杀结果匹配任务继续执行。<br>&#x2F;</em>*</p></li><li><p>服务秒杀单<br>*&#x2F;<br>@Slf4j<br>@AllArgsConstructor<br>@NoArgsConstructor<br>@ServiceSecOrderVersion(value &#x3D; 1)<br>public class ServiceSecOrder implements SecOrder {<br>@Getter<br>@Setter<br>private Long id; &#x2F;&#x2F;订单id<br>@Getter<br>@Setter<br>private String orderNo; &#x2F;&#x2F;订单编号<br>@Getter<br>@Setter<br>private Service service; &#x2F;&#x2F;订单服务内容<br>@Getter<br>@Setter<br>private TimeSegment timeSegment; &#x2F;&#x2F;秒杀时间段<br>@Getter<br>@Setter<br>private int number; &#x2F;&#x2F;订单数量<br>@Getter<br>@Setter<br>private BigDecimal amount; &#x2F;&#x2F;订单金额<br>@Getter<br>@Setter<br>private AppUser user; &#x2F;&#x2F;下单人<br>@Getter<br>@Setter<br>private int orderStatus; &#x2F;&#x2F;订单状态<br>@Getter<br>@Setter<br>private LocalDateTime createDate; &#x2F;&#x2F;创建日期</p><p>@Override<br>public String makeOrder(SecOrder secOrder) {<br>RedisService redisService &#x3D; SpringBootUtil.getBean(RedisService.class);<br>IdService idService &#x3D; SpringBootUtil.getBean(IdService.class);<br>MessageSender messageSender &#x3D; SpringBootUtil.getBean(MessageSender.class);<br>&#x2F;&#x2F;如果当前时间在秒杀时间段之外，不允许秒杀下单<br>if (LocalDateTime.now().isBefore(((ServiceSecOrder)secOrder).getTimeSegment().getBeginTime())<br>|| LocalDateTime.now().isAfter(((ServiceSecOrder)secOrder).getTimeSegment().getEndTime())) {<br>throw new RuntimeException(“不在秒杀时间段内”);<br>}<br>&#x2F;&#x2F;由于测试时间的问题，此处需要屏蔽，等到实际部署时需要恢复<br>LocalDateTime now &#x3D; LocalDateTime.now();<br>int year &#x3D; now.getYear();<br>int month &#x3D; now.getMonthValue();<br>int day &#x3D; now.getDayOfMonth();<br>int hour &#x3D; now.getHour();<br>LocalDateTime beginDate &#x3D; LocalDateTime.of(year,month,day,hour,0,0);<br>&#x2F;&#x2F;从redis中检查是否有开启秒杀时间段<br>if (!redisService.exists(“TimeStart:” + new TimeSegment(beginDate,beginDate.plusMinutes(119)).toString())) {<br>throw new RuntimeException(“当前时间段无秒杀”);<br>}<br>((ServiceSecOrder)secOrder).setId(idService.genId());<br>if (((ServiceSecOrder)secOrder).getNumber() &gt; ((ServiceSecOrder)secOrder).getService().getLimitCount()) {<br>throw new RuntimeException(“秒杀数量超出限购”);<br>}<br>AppUser loginAppUser &#x3D; AppUserUtil.getLoginAppUser();<br>AppUser user &#x3D; new AppUser();<br>user.setId(loginAppUser.getId());<br>((ServiceSecOrder)secOrder).setOrderNo(getCode(idService));<br>user.setUsername(loginAppUser.getUsername());<br>((ServiceSecOrder)secOrder).setUser(user);<br>&#x2F;&#x2F;设置订单状态0表示未支付状态<br>((ServiceSecOrder)secOrder).setOrderStatus(0);<br>((ServiceSecOrder)secOrder).setCreateDate(LocalDateTime.now());<br>&#x2F;&#x2F;设置用户秒杀队列键名(每一种服务都有独立的用户秒杀队列)<br>&#x2F;&#x2F;队列名由User:+服务id+时间段组成<br>String key &#x3D; “User:” + ((ServiceSecOrder)secOrder).getService().getId()<br>+ ((ServiceSecOrder)secOrder).getTimeSegment().toString();<br>String serviceKey &#x3D; ((ServiceSecOrder)secOrder).getService().getId()<br>+ ((ServiceSecOrder)secOrder).getService().getTimeSegment().toString();<br>&#x2F;&#x2F;如果服务队列还有数据，则推送用户进队列，否则直接返回秒杀失败<br>if (redisService.llen(serviceKey) &gt; 0) {<br>&#x2F;&#x2F;建立每个服务对每个用户对限制数量对键,格式为——“服务id:用户id”<br>String limitUserKey &#x3D; ((ServiceSecOrder) secOrder).getService().getId() + “:”<br>+ ((ServiceSecOrder) secOrder).getUser().getId();<br>&#x2F;&#x2F;如果该键存在，获取该键的值(这里需要考虑分布式的并发��题的可能)<br>&#x2F;&#x2F;但是有幂等，所以此处不会出现一个用户同时秒杀一个商品(服务)的多个并发线程存在<br>if (redisService.exists(limitUserKey)) {<br>String limitCount &#x3D; redisService.get(limitUserKey);<br>&#x2F;&#x2F;如果该键的值达到服务商品的限制数，返回秒杀失败<br>if (Integer.valueOf(limitCount) &#x3D;&#x3D; ((ServiceSecOrder) secOrder).getService().getLimitCount()) {<br>return ((ServiceSecOrder) secOrder).getUser().getUsername() + “秒杀服务”<br>+ ((ServiceSecOrder) secOrder).getService().getServiceName() + “失败”;<br>}<br>}else { &#x2F;&#x2F;如果不存在，设置该键的值为0<br>redisService.set(limitUserKey,”0”);<br>}<br>&#x2F;&#x2F;将秒杀用户id推送到该队列中<br>redisService.lpush(key, ((ServiceSecOrder) secOrder).getUser().getId() + “”);<br>&#x2F;&#x2F;唤醒秒杀结果匹配任务继续执行。<br>CompletableFuture.runAsync(() -&gt; {<br>messageSender.send(SecendKillMq.MQ_EXCHANGE_SECENDKILL,<br>SecendKillMq.ROUTING_KEY_SECENDKILL,<br>((ServiceSecOrder) secOrder).getService().getId());<br>});</p></li></ul><p>这里我们需要先看一段redis-lua代码，表示如果用户队列，服务队列均有数据，则将其弹出，放入一个hash中作为匹配的结果，同时扣减服务队列总数。其意义可以参考用户金额的终极解决方案–Redis Lua<br>@Override<br>public Object secondKill(String userKey, String serviceKey,String userResult, String countKey,String serviceId) {<br>String script &#x3D; “if redis.call(‘llen’,KEYS[1]) &gt; 0 and redis.call(‘llen’,KEYS[2]) &gt; 0 “ +<br>“and tonumber(redis.call(‘get’,KEYS[4])) &gt; 0 then “ +<br>“local userid &#x3D; redis.call(‘rpop’,KEYS[1])” +<br>“redis.call(‘hset’,KEYS[3],userid,redis.call(‘rpop’,KEYS[2])) “ +<br>“redis.call(‘decr’,KEYS[4]) “ +<br>“return redis.call(‘incr’,KEYS[5]..’:’..userid) else return 0 end”;<br>return execute(jedis -&gt; jedis.eval(script,5,userKey,serviceKey,userResult,countKey,serviceId));<br>}<br>秒杀服务线程唤醒后，继续执行<br>&#x2F;**</p><ul><li>秒杀结果匹配任务，每天0点开始，每2小时执行一次<br>*&#x2F;<br>@Slf4j<br>@Component<br>@RabbitListener(queues &#x3D; {SecendKillMq.SECENDKILL_QUEUE + “_1”,<br>SecendKillMq.SECENDKILL_QUEUE + “_2”,<br>SecendKillMq.SECENDKILL_QUEUE + “_3”,<br>SecendKillMq.SECENDKILL_QUEUE + “_4”,<br>SecendKillMq.SECENDKILL_QUEUE + “_5”,<br>SecendKillMq.SECENDKILL_QUEUE + “_6”,<br>SecendKillMq.SECENDKILL_QUEUE + “_7”,<br>SecendKillMq.SECENDKILL_QUEUE + “_8”,<br>SecendKillMq.SECENDKILL_QUEUE + “_9”,<br>SecendKillMq.SECENDKILL_QUEUE + “_10”})</li></ul><p>@ElasticSimpleJob(cron&#x3D;”0 0 0&#x2F;2 * * ?”,jobName&#x3D;”secResult”,shardingTotalCount&#x3D;2,jobParameter&#x3D;”日期”,shardingItemParameters&#x3D;”0&#x3D;SecKill0,1&#x3D;SecKill1”)<br>public class SecendKillResultJob implements SimpleJob {<br>@Autowired<br>private RedisService redisService;<br>@Autowired<br>private DataDao dataDao;<br>&#x2F;&#x2F;为了跟MQ搭配，唤醒中断用<br>private List<service>serviceList;</service></p><pre><code>@Override
+public void execute(ShardingContext shardingContext) &#123;
+    //获取当天所有的秒杀区位
+    List&lt;Location&gt; locationTodayList = dataDao.findJobToday(LocalDate.now());
+    //如果当天有秒杀活动
+    if (!CollectionUtils.isEmpty(locationTodayList)) &#123;
+        //获取一天所有的秒杀区位时间段
+        List&lt;TimeSegment&gt; segmentList = locationTodayList.stream().map(location -&gt; location.getTimeSegment())
+                .collect(Collectors.toList());
+        switch (shardingContext.getShardingItem()) &#123;
+            case 0:
+                //从所有秒杀区位时间段过滤当前秒杀时间段
+                this.serviceList = segmentList.stream().filter(timeSegment -&gt; LocalDateTime.now().isAfter(timeSegment.getBeginTime()) &amp;&amp;
+                        LocalDateTime.now().isBefore(timeSegment.getEndTime()))
+                        //将时间段转化成时间段内的秒杀服务
+                        .map(timeSegment -&gt; &#123;
+                            List&lt;Service&gt; serviceInSegment = dataDao.findServiceInSegment(timeSegment);
+                            serviceInSegment.stream().forEach(service -&gt; service.setTimeSegment(timeSegment));
+                            return serviceInSegment;
+                            //扁平化所有的秒杀服务，将所有当前时间段内的服务放入serviceList属性中
+                            //就是拿出当前时间段内所有参与秒杀的服务
+                        &#125;).flatMap(services -&gt; services.stream()).collect(Collectors.toList());
+                //并行化处理所有的秒杀服务
+                int lism = 0;
+                if (serviceList.size() &gt; Runtime.getRuntime().availableProcessors() * 2) &#123;
+                    lism = serviceList.size();
+                &#125;else &#123;
+                    lism = Runtime.getRuntime().availableProcessors() * 2;
+                &#125;
+                ForkJoinPool forkJoinPool = new ForkJoinPool(lism);
+                try &#123;
+                    forkJoinPool.submit(() -&gt;
+                    this.serviceList.parallelStream().forEach(service -&gt; &#123;
+                        while (true) &#123;
+                            try &#123;
+                                service.getLock().lock();
+                                String userKey = &quot;User:&quot; + service.getId() + service.getTimeSegment().toString();
+                                String serviceKey = service.getId() + service.getTimeSegment().toString();
+                                String countKey = service.getId() + &quot;:count&quot;;
+                                //如果下秒杀时间内没有用户下单该服务，则中断该服务的并行线程
+                                //如果有用户下单则唤醒该并行线程
+                                while (redisService.llen(userKey).equals(0L)) &#123;
+                                    try &#123;
+                                        log.info(&quot;用户队列无数据，开始中断&quot;);
+                                        service.getCondition().await();
+                                        LocalDateTime now = LocalDateTime.now();
+                                        if (now.isAfter(service.getTimeSegment().getEndTime())) &#123;
+                                            break;
+                                        &#125;
+                                    &#125; catch (InterruptedException e) &#123;
+                                        e.printStackTrace();
+                                    &#125;
+                                &#125;
+                                log.info(&quot;中断被唤醒，继续运行&quot;);
+                                //如果用户队列和服务队列均有数据
+                                while (redisService.llen(userKey) &gt; 0 &amp;&amp; redisService.llen(serviceKey) &gt; 0) &#123;
+                                    //匹配出秒杀结果，并扣减服务数量，增加用户秒杀过该服务的数量
+                                    redisService.secondKill(userKey, serviceKey, &quot;UserResult&quot; + service.getId(), countKey,String.valueOf(service.getId()));
+                                &#125;
+                                //如果服务队列为空，表示被秒杀完了，从用户队列弹出用户，告知秒杀失败
+                                while (redisService.llen(serviceKey).equals(0L)) &#123;
+                                    redisService.hset(&quot;UserResult&quot; + service.getId(),redisService.rpop(userKey),&quot;秒杀失败&quot;);
+                                    if (redisService.llen(userKey).equals(0L)) &#123;
+                                        break;
+                                    &#125;
+                                &#125;
+                                //当前时间已经超出了秒杀时间段，结束while(true)无限循环
+                                LocalDateTime now = LocalDateTime.now();
+                                if (now.isAfter(service.getTimeSegment().getEndTime())) &#123;
+                                    break;
+                                &#125;
+                            &#125; finally &#123;
+                                service.getLock().unlock();
+                            &#125;
+                        &#125;
+                    &#125;)).get();
+                &#125; catch (InterruptedException e) &#123;
+                    e.printStackTrace();
+                &#125; catch (ExecutionException e) &#123;
+                    e.printStackTrace();
+                &#125;
+                break;
+            case 1:
+                break;
+            default:
+                break;
+        &#125;
+    &#125;
+&#125; 
+</code></pre><p>当有用户秒杀到服务时，或者服务被秒杀完，用户的下单需要知道自己是否秒杀成功或者秒杀失败。<br>&#x2F;**</p><ul><li><p>服务秒杀单<br>*&#x2F;<br>@Slf4j<br>@AllArgsConstructor<br>@NoArgsConstructor<br>@ServiceSecOrderVersion(value &#x3D; 1)<br>public class ServiceSecOrder implements SecOrder {<br>@Getter<br>@Setter<br>private Long id; &#x2F;&#x2F;订单id<br>@Getter<br>@Setter<br>private String orderNo; &#x2F;&#x2F;订单编号<br>@Getter<br>@Setter<br>private Service service; &#x2F;&#x2F;订单服务内容<br>@Getter<br>@Setter<br>private TimeSegment timeSegment; &#x2F;&#x2F;秒杀时间段<br>@Getter<br>@Setter<br>private int number; &#x2F;&#x2F;订单数量<br>@Getter<br>@Setter<br>private BigDecimal amount; &#x2F;&#x2F;订单金额<br>@Getter<br>@Setter<br>private AppUser user; &#x2F;&#x2F;下单人<br>@Getter<br>@Setter<br>private int orderStatus; &#x2F;&#x2F;订单状态<br>@Getter<br>@Setter<br>private LocalDateTime createDate; &#x2F;&#x2F;创建日期</p><p>@Override<br>public String makeOrder(SecOrder secOrder) {<br>RedisService redisService &#x3D; SpringBootUtil.getBean(RedisService.class);<br>IdService idService &#x3D; SpringBootUtil.getBean(IdService.class);<br>MessageSender messageSender &#x3D; SpringBootUtil.getBean(MessageSender.class);<br>&#x2F;&#x2F;如果当前时间在秒杀时间段之外，不允许秒杀下单<br>if (LocalDateTime.now().isBefore(((ServiceSecOrder)secOrder).getTimeSegment().getBeginTime())<br>|| LocalDateTime.now().isAfter(((ServiceSecOrder)secOrder).getTimeSegment().getEndTime())) {<br>throw new RuntimeException(“不在秒杀时间段内”);<br>}<br>&#x2F;&#x2F;由于测试时间的问题，此处需要屏蔽，等到实际部署时需要恢复<br>LocalDateTime now &#x3D; LocalDateTime.now();<br>int year &#x3D; now.getYear();<br>int month &#x3D; now.getMonthValue();<br>int day &#x3D; now.getDayOfMonth();<br>int hour &#x3D; now.getHour();<br>LocalDateTime beginDate &#x3D; LocalDateTime.of(year,month,day,hour,0,0);<br>&#x2F;&#x2F;从redis中检查是否有开启秒杀时间段<br>if (!redisService.exists(“TimeStart:” + new TimeSegment(beginDate,beginDate.plusMinutes(119)).toString())) {<br>throw new RuntimeException(“当前时间段无秒杀”);<br>}<br>((ServiceSecOrder)secOrder).setId(idService.genId());<br>if (((ServiceSecOrder)secOrder).getNumber() &gt; ((ServiceSecOrder)secOrder).getService().getLimitCount()) {<br>throw new RuntimeException(“秒杀数量超出限购”);<br>}<br>AppUser loginAppUser &#x3D; AppUserUtil.getLoginAppUser();<br>AppUser user &#x3D; new AppUser();<br>user.setId(loginAppUser.getId());<br>((ServiceSecOrder)secOrder).setOrderNo(getCode(idService));<br>user.setUsername(loginAppUser.getUsername());<br>((ServiceSecOrder)secOrder).setUser(user);<br>&#x2F;&#x2F;设置订单状态0表示未支付状态<br>((ServiceSecOrder)secOrder).setOrderStatus(0);<br>((ServiceSecOrder)secOrder).setCreateDate(LocalDateTime.now());<br>&#x2F;&#x2F;设置用户秒杀队列键名(每一种服务都有独立的用户秒杀队列)<br>&#x2F;&#x2F;队列名由User:+服务id+时间段组成<br>String key &#x3D; “User:” + ((ServiceSecOrder)secOrder).getService().getId()<br>+ ((ServiceSecOrder)secOrder).getTimeSegment().toString();<br>String serviceKey &#x3D; ((ServiceSecOrder)secOrder).getService().getId()<br>+ ((ServiceSecOrder)secOrder).getService().getTimeSegment().toString();<br>&#x2F;&#x2F;如果服务队列还有数据，则推送用户进队列，否则直接返回秒杀失败<br>if (redisService.llen(serviceKey) &gt; 0) {<br>&#x2F;&#x2F;建立每个服务对每个用户对限制数量对键,格式为——“服务id:用户id”<br>String limitUserKey &#x3D; ((ServiceSecOrder) secOrder).getService().getId() + “:”<br>+ ((ServiceSecOrder) secOrder).getUser().getId();<br>&#x2F;&#x2F;如果该键存在，获取该键的值(这里需要考虑分布式的并发问题的可能)<br>&#x2F;&#x2F;但是有幂等，所以此处不会出现一个用户同时秒杀一个商品(服务)的多个并发线程存在<br>if (redisService.exists(limitUserKey)) {<br>String limitCount &#x3D; redisService.get(limitUserKey);<br>&#x2F;&#x2F;如果该键的值达到服务商品的限制数，返回秒杀失败<br>if (Integer.valueOf(limitCount) &#x3D;&#x3D; ((ServiceSecOrder) secOrder).getService().getLimitCount()) {<br>return ((ServiceSecOrder) secOrder).getUser().getUsername() + “秒杀服务”<br>+ ((ServiceSecOrder) secOrder).getService().getServiceName() + “失败”;<br>}<br>}else { &#x2F;&#x2F;如果不存在，设置该键的值为0<br>redisService.set(limitUserKey,”0”);<br>}<br>&#x2F;&#x2F;将秒杀用户id推送到该队列中<br>redisService.lpush(key, ((ServiceSecOrder) secOrder).getUser().getId() + “”);<br>&#x2F;&#x2F;唤醒秒杀结果匹配任务继续执行。<br>CompletableFuture.runAsync(() -&gt; {<br>messageSender.send(SecendKillMq.MQ_EXCHANGE_SECENDKILL,<br>SecendKillMq.ROUTING_KEY_SECENDKILL,<br>((ServiceSecOrder) secOrder).getService().getId());<br>});<br>LocalDateTime start &#x3D; LocalDateTime.now();<br>&#x2F;&#x2F;从redis的匹配结果获取当前用户的秒杀结果<br>Future<string>future &#x3D; CompletableFuture.supplyAsync(() -&gt; {<br>while (true) {<br>if (redisService.hexists(“UserResult” + ((ServiceSecOrder) secOrder).getService().getId(),<br>((ServiceSecOrder) secOrder).getUser().getId() + “”)) {<br>return redisService.hget(“UserResult” + ((ServiceSecOrder) secOrder).getService().getId(),<br>((ServiceSecOrder) secOrder).getUser().getId() + “”);<br>}<br>if (LocalDateTime.now().isAfter(start.plusSeconds(3))) {<br>return “秒杀失败”;<br>}<br>}<br>});<br>try {<br>if (future.get(3000, TimeUnit.MILLISECONDS).equals(“秒杀失败”)) {<br>log.info(((ServiceSecOrder) secOrder).getUser().getUsername() + “秒杀服务”<br>+ ((ServiceSecOrder) secOrder).getService().getServiceName() + “失败”);<br>return ((ServiceSecOrder) secOrder).getUser().getUsername() + “秒杀服务”<br>+ ((ServiceSecOrder) secOrder).getService().getServiceName() + “失败”;<br>} else {<br>log.info(((ServiceSecOrder) secOrder).getUser().getUsername() + “秒杀服务”<br>+ ((ServiceSecOrder) secOrder).getService().getServiceName() + “成功”);<br>SecOrderDao secOrderDao &#x3D; SpringBootUtil.getBean(SecOrderDao.class);<br>&#x2F;&#x2F;秒杀成功的将秒杀单存入数据库<br>secOrderDao.saveServiceSecOrder((ServiceSecOrder) secOrder);<br>&#x2F;&#x2F;等待支付结果，5分钟后根据支付与否进行处理<br>&#x2F;&#x2F;如果未支付，则将被秒杀到的服务重新入服务队列，并增加服务总数<br>ServicePayBackSender servicePayBackSender &#x3D; SpringBootUtil.getBean(ServicePayBackSender.class);<br>CompletableFuture.runAsync(() -&gt; {<br>servicePayBackSender.send(SecendKillMq.MQ_EXCHANGE_DEAD,SecendKillMq.ROURING_KEY_DEAD,(ServiceSecOrder) secOrder);<br>});<br>return ((ServiceSecOrder) secOrder).getUser().getUsername() + “秒杀服务”<br>+ ((ServiceSecOrder) secOrder).getService().getServiceName() + “成功”;<br>}<br>} catch (Exception e) {<br>e.printStackTrace();<br>log.info(((ServiceSecOrder) secOrder).getUser().getUsername() + “秒杀服务”<br>+ ((ServiceSecOrder) secOrder).getService().getServiceName() + “失败”);<br>return ((ServiceSecOrder) secOrder).getUser().getUsername() + “秒杀服务”<br>+ ((ServiceSecOrder) secOrder).getService().getServiceName() + “失败”;<br>}<br>} else {<br>return ((ServiceSecOrder) secOrder).getUser().getUsername() + “秒杀服务”<br>+ ((ServiceSecOrder) secOrder).getService().getServiceName() + “失败”;<br>}<br>}</string></p></li></ul><p>这里使用了RabbitMQ的延迟队列，配置如下<br>&#x2F;**</p><ul><li><p>rabbitmq配置</p></li><li><p>*&#x2F;<br>@Configuration<br>public class RabbitmqConfig {</p><p>@Bean<br>public List<queue>secendKillQueues() {<br>List<queue>queues &#x3D; new ArrayList&lt;&gt;();<br>for (int i &#x3D; 1;i &lt; 11;i++) {<br>Queue queue &#x3D; new Queue(SecendKillMq.SECENDKILL_QUEUE + “_” + i);<br>queues.add(queue);<br>}<br>return queues;<br>}</queue></queue></p><p>@Bean<br>public TopicExchange secendKillExchange() {<br>return new TopicExchange(SecendKillMq.MQ_EXCHANGE_SECENDKILL);<br>}</p></li></ul><p>&#x2F;&#x2F; @Bean<br>&#x2F;&#x2F; public FanoutExchange secondKillExchange() {<br>&#x2F;&#x2F; return new FanoutExchange(SecendKillMq.MQ_EXCHANGE_SECENDKILL);<br>&#x2F;&#x2F; }</p><p>@Bean<br>public List<binding>bingingSecondKill(){<br>List<binding>bindings &#x3D; new ArrayList&lt;&gt;();<br>for (int i &#x3D; 1;i &lt; 11;i++) {<br>Binding binding &#x3D; BindingBuilder.bind(secendKillQueues().get(i - 1)).to(secendKillExchange())<br>.with(SecendKillMq.ROUTING_KEY_SECENDKILL + “_” + i);<br>bindings.add(binding);<br>}<br>return bindings;<br>}</binding></binding></p><p>@Bean<br>public Queue deadQueue() {<br>Map&lt;String,Object&gt; arguments &#x3D; new HashMap&lt;&gt;();<br>arguments.put(“x-dead-letter-exchange”,SecendKillMq.MQ_EXCHANGE_DEAD);<br>arguments.put(“x-dead-letter-routing-key”,SecendKillMq.ROUTING_KEY_PAYBACK);<br>return new Queue(SecendKillMq.DEAD_QUEUE,true,false,false,arguments);<br>}</p><p>@Bean<br>public DirectExchange deadExchange() {<br>return new DirectExchange(SecendKillMq.MQ_EXCHANGE_DEAD);<br>}</p><p>@Bean<br>public Binding bindingDeadExchange() {<br>return BindingBuilder.bind(deadQueue()).to(deadExchange())<br>.with(SecendKillMq.ROURING_KEY_DEAD);<br>}</p><p>@Bean<br>public Queue payBackQueue() {<br>return new Queue(SecendKillMq.PAYBACK_QUEUE,true,false,false);<br>}</p><p>@Bean<br>public Binding bindingPayBack() {<br>return BindingBuilder.bind(payBackQueue()).to(deadExchange())<br>.with(SecendKillMq.ROUTING_KEY_PAYBACK);<br>}</p><p>}<br>消息生产者ServicePayBackSender如下<br>@Slf4j<br>@Component<br>public class ServicePayBackSender implements RabbitTemplate.ConfirmCallback,RabbitTemplate.ReturnCallback {<br>@Autowired<br>private RabbitTemplate rabbitTemplate;</p><pre><code>public void send(String exchange,String routingKey,Object content) &#123;
+    log.info(&quot;send content=&quot; + content);
+    this.rabbitTemplate.setMandatory(true);
+    this.rabbitTemplate.setConfirmCallback(this);
+    this.rabbitTemplate.setReturnCallback(this);
+    MessagePostProcessor processor = message -&gt; &#123;
+        message.getMessageProperties().setExpiration(300000 + &quot;&quot;);
+        return message;
+    &#125;;
+    this.rabbitTemplate.convertAndSend(exchange,routingKey,serialize(content),processor);
+&#125;
+
+/**
+ * 确认后回调:
+ * @param correlationData
+ * @param ack
+ * @param cause
+ */
+@Override
+public void confirm(CorrelationData correlationData, boolean ack, String cause) &#123;
+    if (!ack) &#123;
+        log.info(&quot;send ack fail, cause = &quot; + cause);
+    &#125; else &#123;
+        log.info(&quot;send ack success&quot;);
+    &#125;
+&#125;
+
+/**
+ * 失败后return回调：
+ *
+ * @param message
+ * @param replyCode
+ * @param replyText
+ * @param exchange
+ * @param routingKey
+ */
+@Override
+public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) &#123;
+    log.info(&quot;send fail return-message = &quot; + new String(message.getBody()) + &quot;, replyCode: &quot; + replyCode + &quot;, replyText: &quot; + replyText + &quot;, exchange: &quot; + exchange + &quot;, routingKey: &quot; + routingKey);
+&#125;
+
+/**
+ * 对消息对象进行二进制序列化
+ * @param o
+ * @return
+ */
+private byte[] serialize(Object o) &#123;
+    Kryo kryo = new Kryo();
+    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+    Output output = new Output(stream);
+    kryo.writeObject(output, o);
+    output.close();
+    return stream.toByteArray();
+&#125;
+</code></pre><p>}<br>消费者如下<br>@Slf4j<br>@Component<br>@RabbitListener(queues &#x3D; SecendKillMq.PAYBACK_QUEUE)<br>public class ServicePayBackDeal {<br>@Autowired<br>private SecOrderDao secOrderDao;<br>@Autowired<br>private RedisService redisService;</p><pre><code>@RabbitHandler
+public void receice(byte[] data, Channel channel, Message message) throws IOException &#123;
+    try &#123;
+        //告诉服务器收到这条消��� 已经被我消费了 可以在队列删掉；否则消息服务器以为这条消息没处理掉 后续还会在发
+        channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
+        ServiceSecOrder order = unSerialize(data);
+        if (secOrderDao.countServiceSecOrderHasPay(order) == 0) &#123;
+            String key = order.getService().getId() + order.getService().getTimeSegment().toString();
+            String countKey = order.getService().getId() + &quot;:count&quot;;
+            String countLimit = order.getService().getId() + &quot;:&quot; + order.getUser().getId();
+            redisService.unPayedBack(key, JSONObject.toJSONString(order.getService()),countKey,countLimit);
+        &#125;
+    &#125; catch (IOException e) &#123;
+        e.printStackTrace();
+        //丢弃这条消息
+        channel.basicNack(message.getMessageProperties().getDeliveryTag(), false,false);
+        log.info(&quot;receiver fail&quot;);
+    &#125;
+&#125;
+
+/**
+ * 反序列化
+ * @param data
+ * @return
+ */
+private ServiceSecOrder unSerialize(byte[] data) &#123;
+    Input input = null;
+    try &#123;
+        Kryo kryo = new Kryo();
+        input = new Input(new ByteArrayInputStream(data));
+        return kryo.readObject(input,ServiceSecOrder.class);
+    &#125;
+    finally &#123;
+        input.close();
+    &#125;
+&#125;
+</code></pre><p>}<br>unPayedBack也是一段redis-lua,代码如下<br>@Override<br>public Object unPayedBack(String serviceKey,String serviceValue, String countKey,String limitCountKey) {<br>String script &#x3D; “redis.call(‘lpush’,KEYS[1],ARGV[1]) “ +<br>“redis.call(‘incr’,KEYS[2]) “ +<br>“return redis.call(‘decr’,KEYS[3])”;<br>return execute(jedis -&gt; jedis.eval(script,3,serviceKey,countKey,limitCountKey,serviceValue));<br>}<br>在秒杀结束后唤醒所有的秒杀中断，退出while(true)的无限循环<br>&#x2F;**</p><ul><li><p>在每个秒杀段最后一分钟唤醒所有秒杀中断，每天的1点59分开始，每2小时执行一次<br>*&#x2F;<br>@Component<br>@ElasticSimpleJob(cron&#x3D;”0 59 1&#x2F;2 * * ?”,jobName&#x3D;”signal”,shardingTotalCount&#x3D;2,jobParameter&#x3D;”日期”,shardingItemParameters&#x3D;”0&#x3D;Signal0,1&#x3D;Signal1”)<br>public class SignalJob implements SimpleJob {<br>@Autowired<br>private DataDao dataDao;<br>@Autowired<br>private MessageSender messageSender;</p><p>@Override<br>public void execute(ShardingContext shardingContext) {<br>&#x2F;&#x2F;获取当天所有的秒杀区位<br>List<location>locationTodayList &#x3D; dataDao.findJobToday(LocalDate.now());<br>if (!CollectionUtils.isEmpty(locationTodayList)) {<br>&#x2F;&#x2F;获取一天所有的秒杀区位时间段<br>List<timesegment>segmentList &#x3D; locationTodayList.stream().map(location -&gt; location.getTimeSegment())<br>.collect(Collectors.toList());<br>switch (shardingContext.getShardingItem()) {<br>case 0:<br>segmentList.stream().filter(timeSegment -&gt; LocalDateTime.now().plusMinutes(-2L).isAfter(timeSegment.getBeginTime()) &amp;&amp;<br>LocalDateTime.now().plusMinutes(-2L).isBefore(timeSegment.getEndTime()))<br>&#x2F;&#x2F;将时间段转化成时间段内的秒杀服务<br>.map(timeSegment -&gt; {<br>List<service>serviceInSegment &#x3D; dataDao.findServiceInSegment(timeSegment);<br>serviceInSegment.stream().forEach(service -&gt; service.setTimeSegment(timeSegment));<br>return serviceInSegment;<br>&#x2F;&#x2F;扁平化所有的秒杀服务<br>}).flatMap(services -&gt; services.stream()).forEach(service -&gt; {<br>CompletableFuture.runAsync(() -&gt; {<br>messageSender.send(SecendKillMq.MQ_EXCHANGE_SECENDKILL,<br>SecendKillMq.ROUTING_KEY_SECENDKILL,<br>service.getId());<br>});<br>});<br>break;<br>case 1:<br>break;<br>default:<br>break;<br>}<br>}<br>}</service></timesegment></location></p></li></ul><p>}<br>现在我们来建立下单的Controller<br>先建立一个秒杀单工厂接口<br>public interface SecOrderFactory {<br>&#x2F;**<br>* 创建秒杀订单<br>* @return<br>*&#x2F;<br>public SecOrder createSecOrder();</p><pre><code>/**
+ * 获取秒杀订单
+ * @return
+ */
+public SecOrder getSecOrder();
+</code></pre><p>}<br>Service版本标签<br>@Target(ElementType.TYPE)<br>@Retention(RetentionPolicy.RUNTIME)<br>public @interface ServiceSecOrderVersion {<br>int value();<br>}<br>Service工厂实现类<br>@Component<br>public class ServiceSecOrderFactory implements SecOrderFactory {<br>private Set&lt;Class&lt;?&gt;&gt; classes &#x3D; ClassUtil.getClassSet(“com.cloud.secondkill.domain”);<br>private SecOrder createdSecOrder;</p><pre><code>@PostConstruct
+private void init() &#123;
+    this.createdSecOrder = createSecOrder();
+&#125;
+
+@Override
+public SecOrder createSecOrder() &#123;
+    Object instance = null;
+    try &#123;
+        //过滤有@ServiceSecOrderVersion标签的类
+        instance = classes.stream().filter(clazz -&gt; clazz.isAnnotationPresent(ServiceSecOrderVersion.class))
+                //过滤实现了SecOrder接口的类
+                .filter(clazz -&gt; SecOrder.class.isAssignableFrom(clazz))
+                //找出版本号大的类，并实例化为对象
+                .max(Comparator.comparingInt(clazz -&gt; clazz.getAnnotation(ServiceSecOrderVersion.class).value()))
+                .get().newInstance();
+    &#125; catch (InstantiationException e) &#123;
+        e.printStackTrace();
+    &#125; catch (IllegalAccessException e) &#123;
+        e.printStackTrace();
+    &#125;
+    return (SecOrder) instance;
+&#125;
+
+@Override
+public SecOrder getSecOrder() &#123;
+    return createdSecOrder;
+&#125;
+</code></pre><p>}<br>秒杀单的Bean<br>@Component<br>public class SecOrderBean {<br>@Getter<br>private Map&lt;String,Class&gt; secOrderFactoryMap &#x3D; new HashMap&lt;&gt;();<br>@Getter<br>private Map&lt;String,Class&gt; secOrderMap &#x3D; new HashMap&lt;&gt;();</p><pre><code>@PostConstruct
+private void init() &#123;
+    Set&lt;Class&lt;?&gt;&gt; classes = ClassUtil.getClassSet(&quot;com.cloud.secondkill.domain&quot;);
+    classes.stream().filter(clazz -&gt; SecOrderFactory.class.isAssignableFrom(clazz))
+            .forEach(clazz -&gt; secOrderFactoryMap.put(clazz.getSimpleName(),clazz));
+    classes.stream().filter(clazz -&gt; SecOrder.class.isAssignableFrom(clazz))
+            .forEach(clazz -&gt; secOrderMap.put(clazz.getSimpleName(),clazz));
+&#125;
+</code></pre><p>}<br>下单Controller<br>@Slf4j<br>@RestController<br>public class SecOrderController {<br>private ThreadLocal<secorderfactory>secOrderFactory &#x3D; new ThreadLocal&lt;&gt;();<br>private ThreadLocal<secorder>secOrderService &#x3D; new ThreadLocal&lt;&gt;();<br>@Autowired<br>private SecOrderBean secOrderBean;</secorder></secorderfactory></p><pre><code>@SuppressWarnings(&quot;unchecked&quot;)
+@Transactional
+@PostMapping(&quot;/makesecorder&quot;)
+@LxRateLimit(perSecond = 500,timeOut = 500) //此处为接口限流，数字可以根据实际清空改写
+public Result&lt;String&gt; makeSecOrder(@RequestBody String secOrderStr, @RequestParam(&quot;type&quot;) String type) throws Exception &#123;
+    log.info(secOrderStr);
+    try &#123;
+        SecOrder secOrder = setSecOrderFactory(secOrderStr, type);
+        String secResult = this.secOrderService.get().makeOrder(secOrder);
+        return Result.success(secResult);
+    &#125; finally &#123;
+        secOrderFactory.remove();
+        secOrderService.remove();
+    &#125;
+&#125;
+
+private SecOrder setSecOrderFactory(String secOrderStr,String type) &#123;
+    Class classType = secOrderBean.getSecOrderMap().get(type);
+    Object secOrder = JSONObject.parseObject(secOrderStr, classType);
+    setSecOrderFactory(type);
+    return (SecOrder) secOrder;
+&#125;
+
+private void setSecOrderFactory(String type) &#123;
+    Class classFactoryType = secOrderBean.getSecOrderFactoryMap().get(type + &quot;Factory&quot;);
+    this.secOrderFactory.set((SecOrderFactory) SpringBootUtil.getBean(classFactoryType));
+    this.secOrderService.set(this.secOrderFactory.get().getSecOrder());
+&#125;
+</code></pre><p>}<br>以上不明白的可以参考用工厂方法模式来下不同订单 以及使用简单工厂加接口加适配器模式来遵守开闭原则<br>@LxRateLimit为接口限流<br>@Target(ElementType.METHOD)<br>@Retention(RetentionPolicy.RUNTIME)<br>public @interface LxRateLimit {<br>&#x2F;**<br>*<br>* @return<br>*&#x2F;<br>String value() default “”;</p><pre><code>/**
+ * 每秒向桶中放入令牌的数量   默认最大即不做限流
+ * @return
+ */
+double perSecond() default Double.MAX_VALUE;
+
+/**
+ * 获取令牌的等待时间  默认0
+ * @return
+ */
+int timeOut() default 0;
+
+/**
+ * 超时时间单位
+ * @return
+ */
+TimeUnit timeOutUnit() default TimeUnit.MILLISECONDS;
+</code></pre><p>}<br>AOP拦截<br>@Slf4j<br>@Aspect<br>@Component<br>public class LxRateLimitAspect {<br>private RateLimiter rateLimiter &#x3D; RateLimiter.create(Double.MAX_VALUE);</p><pre><code>/**
+ * 带有指定注解切入
+ */
+@ResponseBody
+@Around(value = &quot;@annotation(com.cloud.secondkill.annotion.LxRateLimit)&quot;)
+public Object aroundNotice(ProceedingJoinPoint pjp) throws Throwable &#123;
+    log.info(&quot;拦截到了&#123;&#125;方法...&quot;, pjp.getSignature().getName());
+    Signature signature = pjp.getSignature();
+    MethodSignature methodSignature = (MethodSignature)signature;
+    //获取目标方法
+    Method targetMethod = methodSignature.getMethod();
+    if (targetMethod.isAnnotationPresent(LxRateLimit.class)) &#123;
+        //获取目标方法的@LxRateLimit注解
+        LxRateLimit lxRateLimit = targetMethod.getAnnotation(LxRateLimit.class);
+        rateLimiter.setRate(lxRateLimit.perSecond());
+        if (!rateLimiter.tryAcquire(lxRateLimit.timeOut(), lxRateLimit.timeOutUnit()))
+            return &quot;服务器繁忙，请稍后再试!&quot;;
+    &#125;
+    return pjp.proceed();
+&#125;
+</code></pre><p>}<br>具体原理可以参考Guava RateLimiter限流源码解析和实例应用<br>现在要加入秒杀的幂等，来防止工具秒杀<br>token Controller<br>@RestController<br>public class TokenController {<br>@Autowired<br>private RedisService redisService;</p><pre><code>@GetMapping(&quot;/gettoken&quot;)
+public Map getToken(@RequestParam(&quot;url&quot;) String url) &#123;
+    Map&lt;String,String&gt; tokenMap = new HashMap&lt;&gt;();
+    String tokenValue = UUID.randomUUID().toString();
+    AppUser user = AppUserUtil.getLoginAppUser();
+    String key = url + user.getId();
+    tokenMap.put(key,tokenValue);
+    redisService.set(key,tokenValue);
+    return tokenMap;
+&#125;
+</code></pre><p>}<br>配置幂等Spring MVC拦截器<br>@Component<br>@Slf4j<br>public class TokenInterceptor implements HandlerInterceptor {<br>@Autowired<br>private RedisService redisService;</p><pre><code>@Override
+public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123;
+    AppUser user = AppUserUtil.getLoginAppUser();
+    String tokenName = request.getRequestURI() + user.getId();
+    String tokenValue = request.getParameter(&quot;token_value&quot;);
+    if (tokenValue != null &amp;&amp; !tokenValue.equals(&quot;&quot;)) &#123;
+        log.info(&quot;tokenName:&#123;&#125;,tokenValue:&#123;&#125;&quot;,tokenName,tokenValue);
+        return handleToken(request,response,handler,user);
+    &#125;
+    return false;
+&#125;
+
+@Override
+public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView) throws Exception &#123;
+    if (redisService.exists(request.getParameter(&quot;token_value&quot;))) &#123;
+        RedisTool.releaseDistributedLock(redisService, request.getParameter(&quot;token_value&quot;), request.getParameter(&quot;token_value&quot;));
+    &#125;
+&#125;
+
+@Override
+public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception &#123;
+
+&#125;
+
+/**
+ * 分布式锁处理
+ * @param request
+ * @param response
+ * @param handler
+ * @return
+ * @throws Exception
+ */
+private boolean handleToken(HttpServletRequest request, HttpServletResponse response, Object handler,AppUser user) throws Exception &#123;
+    //当大量高并发下所有带token参数的请求进来时，进行分布式锁定,允许某一台服务器的一个线程进入，锁定时间3分钟
+    if (RedisTool.tryGetDistributedLock(redisService,request.getParameter(&quot;token_value&quot;),request.getParameter(&quot;token_value&quot;),180)) &#123;
+        if (redisService.exists(request.getRequestURI() + user.getId())) &#123;
+            //当请求的url与token与redis中的存储相同时
+            if (redisService.get(request.getRequestURI() + user.getId()).equals(request.getParameter(&quot;token_value&quot;))) &#123;
+                //放行的该线程删除redis中存储的token
+                redisService.del(request.getRequestURI() + user.getId());
+                log.info(&quot;放行&quot;);
+                RedisTool.releaseDistributedLock(redisService,request.getParameter(&quot;token_value&quot;),request.getParameter(&quot;token_value&quot;));
+                //放行
+                return true;
+            &#125;
+        &#125;
+        log.info(&quot;拦截&quot;);
+        //当请求的url与token与redis中的存储不相同时，解除锁定
+        RedisTool.releaseDistributedLock(redisService,request.getParameter(&quot;token_value&quot;),request.getParameter(&quot;token_value&quot;));
+        //进行拦截
+        return false;
+    &#125;
+    return false;
+&#125;
+</code></pre><p>}<br>@SpringBootConfiguration<br>public class TokenInterceptorConfig extends WebMvcConfigurerAdapter {<br>@Autowired<br>private TokenInterceptor tokenInterceptor;</p><pre><code>@Override
+public void addInterceptors(InterceptorRegistry registry) &#123;
+    registry.addInterceptor(tokenInterceptor).addPathPatterns(&quot;/makesecorder&quot;);
+&#125;
+</code></pre><p>}    </p><div class="post-copyright"><div class="content"><p>本文标题： 推荐系列-分布式秒杀</p><p>本文作者： OSChina</p><p>发布时间： 2021年04月15日 09:19</p><p>最后更新： 2023年06月29日 07:10</p><p>原始链接： <a class="post-url" href="/42f9643e/" title="推荐系列-分布式秒杀">https://haoxiang.eu.org/42f9643e/</a></p><p>版权声明： 本文著作权归作者所有，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a>许可协议，转载请注明出处！</p><footer><a href="https://haoxiang.eu.org"><img src="/../images/logo.png" alt="Howe Hsiang"> Howe Hsiang</a></footer></div></div><div class="page-reward"><a id="rewardBtn" href="javascript:;">赏</a></div><div id="reward" class="post-modal reward-lay"><a class="close" href="javascript:;" id="reward-close">×</a> <span class="reward-title"><i class="icon icon-quote-left"></i> 喜欢就赞赏一下呗！ <i class="icon icon-quote-right"></i></span><div class="reward-content"><div class="reward-code"><img id="rewardCode" src="/images/threepay_code.jpg" alt="打赏二维码"></div><div class="reward-select"></div></div></div></div><footer class="article-footer"><div class="post-share"><a href="javascript:" id="share-sub" class="post-share-fab"><i class="fa fa-share-alt" style="padding-top:11px!important"></i></a><div class="post-share-list" id="share-list"><ul class="share-icons"><li><a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://haoxiang.eu.org/42f9643e/" data-title="Facebook" rel="external nofollow noopener noreferrer"><i class="fa fa-facebook" style="padding-top:9px!important"></i></a></li><li><a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐系列-分布式秒杀》 — 狂欢马克思&url=https://haoxiang.eu.org/42f9643e/&via=https://haoxiang.eu.org" data-title="Twitter" rel="external nofollow noopener noreferrer"><i class="fa fa-twitter" style="padding-top:9px!important"></i></a></li><li><a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://haoxiang.eu.org/42f9643e/" data-title="Google+" rel="external nofollow noopener noreferrer"><i class="fa fa-google-plus" style="padding-top:9px!important"></i></a></li><li><a class="qq share-sns" target="_blank" href="https://connect.qq.com/widget/shareqq/index.html?url=https://haoxiang.eu.org/42f9643e/&title=《推荐系列-分布式秒杀》 — 狂欢马克思&source=&amp;emsp;&amp;emsp;一般在具体的业务中，平台方会发布秒杀席位个数，秒杀的时间段，让各个商家报名，将自己的产品参与秒杀活动。这里将同事画..." data-title="QQ" rel="external nofollow noopener noreferrer"><i class="fa fa-qq" style="padding-top:9px!important"></i></a></li><li><a class="weixin share-sns" id="wxFab" href="javascript:" data-title="微信"><i class="fa fa-weixin" style="padding-top:9px!important"></i></a></li><li><a class="weibo share-sns" target="_blank" href="https://service.weibo.com/share/share.php?url=https://haoxiang.eu.org/42f9643e/&title=《推荐系列-分布式秒杀》 — 狂欢马克思&pic=https://static.oschina.net/uploads/img/201911/14142103_vUaT.jpg" data-title="微博" rel="external nofollow noopener noreferrer"><i class="fa fa-weibo" style="padding-top:9px!important"></i></a></li></ul></div></div><div class="post-modal wx-share" id="wxShare"><a class="close" href="javascript:" id="wxShare-close">×</a><p>扫一扫，分享到微信</p><img src="//api.qrserver.com/v1/create-qr-code/?data=https://haoxiang.eu.org/42f9643e/" alt="微信分享二维码"></div><div class="mask"></div><ul class="article-footer-menu"><li class="article-footer-tags"><i class="fa fa-tags"></i> <a href="/tags/Popular/" class="color3">Popular</a></li></ul></footer></div></article><nav id="article-nav"><a href="/f2bfbdf7/" id="article-nav-newer" class="article-nav-link-wrap"><span class="article-nav-title"><i class="fa fa-hand-o-left" aria-hidden="true"></i> 推荐系列-分布式事务的四种解决方案 </span></a><a href="/fa27462a/" id="article-nav-older" class="article-nav-link-wrap"><span class="article-nav-title">推荐系列-别再用PS了，我用五行Python代码就实现了批量抠图</span> <i class="fa fa-hand-o-right" aria-hidden="true"></i></a></nav><div id="gitalk"></div><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script>var gitalk=new Gitalk({repo:"bolg-comment",owner:"Hosiang1026",admin:"Hosiang1026",clientID:"37a2dd4473e8970cecc2",clientSecret:"e30efa17d86d9de4f4ab810872dc62a7b2e7e634",pagerDirection:"last",distractionFreeMode:!0,createIssueManually:!1});gitalk.render("gitalk")</script></section></div><footer id="footer"><div class="outer"><div id="footer-info" class="inner"><script id="_wau78w">var _wau=_wau||[];_wau.push(["small","5dnguv4c2n","78w"])</script><script async src="//waust.at/s.js"></script><p><span id="busuanzi_container_site_uv" style="display:none"><span class="post-count">总字数：<span>1841.6k</span> </span>总访客数：<span id="busuanzi_value_site_uv"></span> </span><span id="busuanzi_container_site_pv" style="display:none">总访问量：<span id="busuanzi_value_site_pv"></span></span><br><span id="TimeShow">本站</span><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><br>Copyright&copy; 2018 - 2023 狂欢马克思 <a href="https://beian.miit.gov.cn" rel="external nofollow noopener noreferrer" target="_blank">京ICP备17060439号</a></p></div></div><script>var now=new Date;function createtime(){var n=new Date("2017/09/18");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="安全运行 "+dnum+" 天 ",document.getElementById("times").innerHTML=hnum+" 小时 "+mnum+" 分 "+snum+" 秒"}setInterval("createtime()",800)</script></footer><script>var mihoConfig={root:"https://haoxiang.eu.org",animate:"true",isHome:"false",share:"true",reward:" 1"}</script><div class="sidebar"><div id="sidebar-search" title="Search"><i class="fa fa-search"></i></div><div id="sidebar-category" title="Categories"><i class="fa fa-book"></i></div><div id="sidebar-tag" title="Tags"><i class="fa fa-tags"></i></div><div id="sidebar-top"><span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span></div></div><div class="sidebar-menu-box" id="sidebar-menu-box"><div class="sidebar-menu-box-container"><div id="sidebar-menu-box-categories"><a class="category-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a><a class="category-link" href="/categories/%E5%85%B6%E4%BB%96%E5%BC%80%E5%8F%91/">其他开发</a><a class="category-link" href="/categories/%E5%89%8D%E6%B2%BF%E5%BC%80%E5%8F%91/">前沿开发</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><a class="category-link" href="/categories/%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC/">升级版本</a><a class="category-link" href="/categories/%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/">博客教程</a><a class="category-link" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a><a class="category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><a class="category-link" href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">日常记录</a><a class="category-link" href="/categories/%E7%83%AD%E9%97%A8%E6%96%87%E7%AB%A0/">热门文章</a></div><div id="sidebar-menu-box-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:17.5px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:15px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12.5px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:15px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size:12.5px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:17.5px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12.5px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NAS/" style="font-size:10px">NAS</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:17.5px">Spring</a> <a href="/tags/System/" style="font-size:10px">System</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div><a href="javascript:" class="sidebar-menu-box-close">&times;</a></div><div class="mobile-header-menu-nav" id="mobile-header-menu-nav"><div class="mobile-header-menu-container"><span class="title">导航</span><ul class="mobile-header-menu-navbar"><li><a href="/"><i class="fa fa-home"></i><span>主页</span></a></li><li><a href="/archives"><i class="fa fa-archive"></i><span>归档</span></a></li><li><a href="/gitbook"><i class="fa fa-columns"></i><span>笔记</span></a></li><li><a href="/photo"><i class="fa fa-picture-o"></i><span>相册</span></a></li><li><a href="/love"><i class="fa fa-heart"></i><span>恋爱</span></a></li><li><a href="/collection"><i class="fa fa-envira"></i><span>收藏</span></a></li><li><a href="/about"><i class="fa fa-user"></i><span>关于</span></a></li></ul></div><div class="mobile-header-tag-container"><span class="title">标签</span><div id="mobile-header-container-tags"><a href="/tags/Ajax/" style="font-size:10px">Ajax</a> <a href="/tags/AliGenie/" style="font-size:10px">AliGenie</a> <a href="/tags/Alipay/" style="font-size:10px">Alipay</a> <a href="/tags/Android/" style="font-size:10px">Android</a> <a href="/tags/Blockchain/" style="font-size:17.5px">Blockchain</a> <a href="/tags/CQRS/" style="font-size:10px">CQRS</a> <a href="/tags/Database/" style="font-size:15px">Database</a> <a href="/tags/Docker/" style="font-size:10px">Docker</a> <a href="/tags/EasyUI/" style="font-size:10px">EasyUI</a> <a href="/tags/Guitar/" style="font-size:10px">Guitar</a> <a href="/tags/Hackintosh/" style="font-size:12.5px">Hackintosh</a> <a href="/tags/Hexo/" style="font-size:15px">Hexo</a> <a href="/tags/IntelliJ-IDEA/" style="font-size:10px">IntelliJ IDEA</a> <a href="/tags/Java/" style="font-size:12.5px">Java</a> <a href="/tags/Kali-Linux/" style="font-size:10px">Kali Linux</a> <a href="/tags/Life/" style="font-size:17.5px">Life</a> <a href="/tags/Mac-OS/" style="font-size:12.5px">Mac OS</a> <a href="/tags/MultiThread/" style="font-size:10px">MultiThread</a> <a href="/tags/NAS/" style="font-size:10px">NAS</a> <a href="/tags/NodeJS/" style="font-size:10px">NodeJS</a> <a href="/tags/Popular/" style="font-size:20px">Popular</a> <a href="/tags/Python/" style="font-size:10px">Python</a> <a href="/tags/SaaS/" style="font-size:10px">SaaS</a> <a href="/tags/Servlet/" style="font-size:10px">Servlet</a> <a href="/tags/Spring/" style="font-size:17.5px">Spring</a> <a href="/tags/System/" style="font-size:10px">System</a> <a href="/tags/Upgrade/" style="font-size:10px">Upgrade</a> <a href="/tags/Web/" style="font-size:10px">Web</a> <a href="/tags/Windows/" style="font-size:10px">Windows</a> <a href="/tags/Work/" style="font-size:10px">Work</a> <a href="/tags/iOS/" style="font-size:10px">iOS</a></div></div></div><div class="search-wrap"><span class="search-close">&times;</span> <a href="javascript:" class="header-icon waves-effect waves-circle waves-light" id="back"><i class="icon icon-lg icon-chevron-left"></i> </a><input class="search-field" placeholder="Search..." id="keywords"> <a id="search-submit" href="javascript:"><i class="fa fa-search"></i></a><div class="search-container" id="search-container"><ul class="search-result" id="search-result"></ul></div></div><div id="search-tpl"><li class="search-result-item"><a href="{url}" class="search-item-li"><span class="search-item-li-title" title="{title}">{title}</span></a></li></div><script src="/js/search.js"></script><script src="/js/main.js"></script><script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script><div id="particles"></div><script src="/js/particles.js"></script><link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css"><script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script><script src="/js/animate.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({pluginRootPath:"live2dw/",pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2dw/assets/hijiki.model.json"},display:{position:"right",width:150,height:300},mobile:{show:!0,scale:.5},log:!1})</script></body></html>

@@ -12,6 +12,10 @@
 
 ## 替代方案：Hexo + Github-Actions + Github-Pages + Serverless + CDN
 
+## 最新方案：Hexo + Github-Actions + Github-Pages + Cloudflare
+
+目前博客分别部署在Github和Cloudflare上面，作为Github-Pages备份网站，Cloudflare也是直接同步Github博客仓库代码。
+
 注：Travis-CI 开始收费，所以采用替代方案进行持续集成
 
 ![Blog Version](https://haoxiang.eu.org/images/blog_version.png "博客版本信息")

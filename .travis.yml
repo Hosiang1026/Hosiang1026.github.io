@@ -9,7 +9,7 @@ node_js: v22.2.0
 cache:
     apt: true
     directories:
-        # - node_modules
+      - node_modules
 
 # 更改时区
 before_install:

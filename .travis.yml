@@ -20,7 +20,7 @@ install:
   - npm install --ignore-scripts
   - nvm install 20
   - nvm use 20
-
+  - npm install -g npm
 
 script:
   #清除

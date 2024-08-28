@@ -8,7 +8,7 @@
   "dependencies": {
     "bagpipe": "^0.3.5",
     "blueimp-md5": "^2.19.0",
-    "browser-sync": "^2.18.13",
+    "browser-sync": "^3.0.2",
     "buffers": "^0.1.1",
     "cheerio": "^1.0.0-rc.3",
     "chromedriver": "^128.0.0",

@@ -83,5 +83,9 @@
     "hexo-generator-baidu-sitemap": "^0.1.6",
     "hexo-generator-sitemap": "^3.0.1",
     "yuque-hexo": "1.9.1"
-  }
+  },
+  "engines": {
+  "node": ">=18.0.0",
+  "npm": ">=8.0.0"
+}
 }

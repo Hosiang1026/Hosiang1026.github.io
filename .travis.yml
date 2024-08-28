@@ -18,6 +18,9 @@ before_install:
 # 安装hexo及插件
 install:
   - npm install --ignore-scripts
+  - nvm install 20
+  - nvm use 20
+
 
 script:
   #清除

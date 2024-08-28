@@ -7,7 +7,7 @@ node_js: v22.2.0
   
 # 缓存不经常更改的内容
 cache:
-    apt: true
+    #apt: true
     directories:
       - node_modules
 

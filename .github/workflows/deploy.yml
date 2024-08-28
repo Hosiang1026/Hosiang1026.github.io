@@ -10,12 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-        
-      - name: InstallNode
-        uses: actions/setup-node@v3
+        uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18.x
+      - name: Install Dependencies
+        run: npm install
+      - name: Test
+        run: npm test -- --no-parallel
+        env:
+          CI: true  
           
       - name: Build and Deploy
         uses: theme-keep/hexo-deploy-github-pages-action@master # 使用专门部署 Hexo 到 GitHub pages 的 action

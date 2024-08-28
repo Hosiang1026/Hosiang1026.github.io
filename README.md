@@ -38,11 +38,14 @@
 
 ## 自动更新
 
-    npm update //更新插件和Hexo版本
+    npm update -g //更新插件和Hexo版本
+    pm update --save //更新系统插件
     npm outdated //检查插件更新
     npm install --save //开始更新
     npm install --ignore-scripts //上面更新报错，就用这个
     hexo version //查看当前版本号
+
+    npm install -g npm-checknpm install -g npm-upgrade
 
 开始更新
 
@@ -66,11 +69,17 @@
 
 在Hexo 3.0 后server被单独出来了，需要安装server，安装的命令如下：
 
+    npm install --force
     npm install hexo-server --save 
 
 安装此server后再试，问题解决。
 
-    npm install -g hexo-cli
+    //升级nodejs
+    npm install -g npm-checknpm install -g npm-upgrade
+
+    npm install -g hexo-cli //升级 Hexo
+    npm install hexo@7.3.0 --save //升级 Hexo 7.3.0
+
     npm install hexo-deployer-git --save
     
     npm install hexo-renderer-ejs --save

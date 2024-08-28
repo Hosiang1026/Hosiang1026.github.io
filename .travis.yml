@@ -17,6 +17,7 @@ before_install:
 # 安装hexo及插件
 install:
   - npm install --ignore-scripts
+  - npm i undici
 
 script:
   #清除

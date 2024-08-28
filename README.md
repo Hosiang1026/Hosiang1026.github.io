@@ -16,7 +16,7 @@
 
 目前博客分别部署在Github和Cloudflare上面，Github-Pages作为备份网站，Cloudflare作为主网站，也是直接同步Github博客仓库代码部署的。
 
-注：Travis-CI 开始收费，所以采用替代方案进行持续集成
+注：Travis-CI 开始收费，所以采用Github-Actions替代方案进行持续集成
 
 ![Blog Version](https://haoxiang.eu.org/images/blog_version.png "博客版本信息")
 

@@ -33,10 +33,6 @@ jobs:
           hexo clean
           hexo generate  
 
-      - name: Generate static pages		# 生成博客
-        run: hexo generate
-        working-directory: ./public
-
       - name: Deploy to GitHub Pages	# 将生成的博客推送到你对应的仓库中
         uses: peaceiris/actions-gh-pages@v3
         with:

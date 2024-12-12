@@ -87,8 +87,48 @@ docker run -d --restart=always --name ddns-go --net=host -v /mnt/sda1/ddns:/root
 NAS盒子、路由器A和路由器B必须设置静态内网IP，其他设备DHCP分配地址，然后通过NAS盒子里的Nginx代理可以实现访问家里的路由器，配置如下：
 
 路由器A:
+```
+server {
+        listen 82;
+        listen [::]:82;
+
+        location / {
+ 	client_max_body_size 1024m;
+	proxy_http_version 1.1;
+	proxy_set_header Upgrade         $http_upgrade;
+	proxy_set_header Connection      "Upgrade";
+	proxy_set_header Host            $http_host;
+	proxy_set_header X-Real-IP       $remote_addr;
+	proxy_set_header X-Forward-For   $proxy_add_x_forwarded_for;
+	proxy_set_header X-Forward-Proto $scheme;
+	proxy_redirect off; 
+	proxy_pass http://192.168.1.3;
+        }
+}
+
+```
 
 路由器B:
+```
+server {
+        listen 83;
+        listen [::]:83;
+
+        location / {
+ 	client_max_body_size 1024m;
+	proxy_http_version 1.1;
+	proxy_set_header Upgrade         $http_upgrade;
+	proxy_set_header Connection      "Upgrade";
+	proxy_set_header Host            $http_host;
+	proxy_set_header X-Real-IP       $remote_addr;
+	proxy_set_header X-Forward-For   $proxy_add_x_forwarded_for;
+	proxy_set_header X-Forward-Proto $scheme;
+	proxy_redirect off; 
+	proxy_pass http://192.168.1.4;
+        }
+}
+
+```
 
 执行以下命令，即可访问
 
@@ -102,3 +142,5 @@ nginx -s reload
 
 虽然IPV6是未来的趋势，对于设备所在的外网不支持IPV6，就没办法访问了，这个问题，暂时还没找到解决方案。更多IPV6文档，请查看：https://ipw.cn/doc
 最后，第一次论坛发帖，希望大家评论点赞多多支持！！！
+
+最后补充，外网不支持IPV6，建议使用cloudflare内网穿透，网速慢一点，但操作简单，楼主已经改成这个方案。

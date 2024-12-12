@@ -5,7 +5,7 @@ on:
       - master  # 当 master 分支有 push 行为时触发这个 action
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,11 +29,14 @@ jobs:
         run: |
           hexo clean
           hexo generate  
-
+  deploy:
+      runs-on: ubuntu-22.04
+      permissions:
+        contents: write
+      steps:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           external_repository: Hosiang1026/Hosiang1026.github.io
           publish_dir: ./public
-          force_orphan: true

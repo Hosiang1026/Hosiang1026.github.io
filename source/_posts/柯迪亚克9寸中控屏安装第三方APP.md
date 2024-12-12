@@ -21,11 +21,13 @@ date: 2024-12-12 00:00:00
 1. Windows系统的笔记本一款
 2. 双公头USB数据线一条（某宝购买，很便宜的）
 
-<p align="center">2018款-柯迪亚克-车机系统信息</p>
+<p align="center">2018款-柯迪亚克-车机系统信</p>
+
 ![Popular](/photo/album/image/image_154.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 
 <p align="center">双公头USB数据线</p>
+
 ![Popular](/photo/album/image/image_155.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 ### 二、步骤
@@ -43,12 +45,17 @@ date: 2024-12-12 00:00:00
 注：D://SkodaEQ.apk 是在笔记本磁盘里已经下载好的APP路径
 
 <p align="center">解锁USB模式</p>
+
 ![Popular](/photo/album/image/image_156.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+
 ![Popular](/photo/album/image/image_157.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+
 ![Popular](/photo/album/image/image_158.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 <p align="center">使用adb命令安装APP</p>
+
 ![Popular](/photo/album/image/image_160.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+
 ![Popular](/photo/album/image/image_159.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 

@@ -11,6 +11,8 @@
   ---|---|---|---|---|---|---|---|---
   Windows | 狂欢马克思 | V1.0.0 | 104MB | 2019-03-02 | 吉祥草 | Win All | <a href="https://pan.baidu.com/s/1wxPUHyfv1-ISgwNmh7EkYA">点击下载</a> | abe3
   Android | 狂欢马克思 | V1.0.0 | 1.39MB | 2019-03-02 | 吉祥草 | Android 2.3及以上版本 |  <a href="https://hosiang.lanzoui.com/iiKFPeo7zej">点击下载</a> | fk1w
+  Android | adb工具 | 未知 | 未知 | 未知 | 未知 | 未知 |  <a href="https://haoxiang.eu.org/cheji/adb-tools.zip">点击下载</a> | 无
+  Android | SkodaEQ | 未知 | 未知 | 未知 | 未知 | 未知 |  <a href="https://haoxiang.eu.org/cheji/SkodaEQ.apk">点击下载</a> | 无
  
 ### 导航网站
 

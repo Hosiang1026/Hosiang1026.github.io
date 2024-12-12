@@ -14,8 +14,6 @@
 
  **网站域名：** [https://haoxiang.eu.org](https://haoxiang.eu.org)
  
- **备用域名：** [https://hosiang1026.github.io](https://hosiang1026.github.io)
- 
  **建站时间：** 2018年9月份
  
  **服务信念：**  编写代码，改变世界！

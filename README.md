@@ -54,7 +54,7 @@
 
 ## 执行hexo server提示找不到该指令 
 
-解决办法： 
+解决办法:
 
 错误 Error: electron@13.1.8 postinstall: `node install.js`:
 

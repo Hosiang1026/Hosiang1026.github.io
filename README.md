@@ -5,7 +5,6 @@
 ## 主域名：https://haoxiang.eu.org
 ## 备域名：https://hosiang1026.github.io
 
-
 ## 网站特点：云端写作、自动部署、钉钉通知
 
 ## 技术方案：Hexo + Travis-CI + Github-Pages + Serverless + CDN

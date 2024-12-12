@@ -31,20 +31,12 @@ jobs:
           hexo generate  
 
       - name: Deploy to GitHub Pages
-        env: 
-          HEXO_DEPLOY: ${{ secrets.HEXO_DEPLOY }}
-
-        run: |
-          cd public  # 进入生成的 Hexo 页面目录
-          git init  # 初始化新的 Git 仓库
-          git config --global user.name "Hosiang1026"  # 动态获取 GitHub 用户名
-          git config --global user.email "hosiang1026@sina.com"  # 使用 GitHub 提供的 noreply 邮箱
-          git config --global --add safe.directory $GITHUB_WORKSPACE  # 添加当前工作目录为安全目录
-          git remote add origin https://${{ secrets.HEXO_DEPLOY }}@github.com/Hosiang1026/Hosiang1026.github.io.git  # 添加公有仓库的远程地址
-          git checkout -m master  # 切换到 gh-pages 分支
-          git add .
-          git commit  -m "Deploy Hexo pages"
-          git push -u origin master  # 强制推送到公有仓库的 gh-pages 分支
+        uses: theme-keep/hexo-deploy-github-pages-action@master # 使用专门部署 Hexo 到 GitHub pages 的 action
+        env:
+          PERSONAL_TOKEN: ${{ secrets.HEXO_DEPLOY }} # secret 名
+          PUBLISH_REPOSITORY: Hosiang1026/Hosiang1026.github.io # 公共仓库，格式：GitHub 用户名/仓库名
+          BRANCH: master # 分支，填 gh-pages 就行
+          PUBLISH_DIR: ./public # 部署 public 目录下的文件
 
 
 

@@ -33,7 +33,6 @@
 
 ####  3. 添加Gitalk评论和批量初始化评论脚本gitalk-auto-init.js
 
-
 ## 自动更新
 
     npm update -g //更新插件和Hexo版本

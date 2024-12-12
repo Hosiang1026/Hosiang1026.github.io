@@ -47,7 +47,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
         env:
           PERSONAL_TOKEN: ${{ secrets.HEXO_DEPLOY }} # secret 名
           PUBLISH_REPOSITORY: Hosiang1026/Hosiang1026.github.io # 公共仓库，格式：GitHub 用户名/仓库名

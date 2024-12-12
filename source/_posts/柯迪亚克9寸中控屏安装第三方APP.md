@@ -91,9 +91,9 @@ https://club.autohome.com.cn/bbs/thread/532d43b11f73ae35/81904759-1.html
 
 附件清单
 
-1.adb工具  [https://haoxiang.eu.org/cheji/adb-tools.zip](https://haoxiang.eu.org/cheji/adb-tools.zip)
+1.adb工具
 
-2.SkodaEQ [https://haoxiang.eu.org/cheji/SkodaEQ.apk](https://haoxiang.eu.org/cheji/SkodaEQ.apk)
+2.SkodaEQ 
 
-3.电视家   [https://haoxiang.eu.org/cheji/dainshijia.apk](https://haoxiang.eu.org/cheji/dainshijia.apk)
+3.电视家   
 

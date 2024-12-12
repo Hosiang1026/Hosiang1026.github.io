@@ -1,17 +1,17 @@
 ---
 title: NAS盒子-IPV6动态域名解析外网访问-入门篇
-categories: 热门文章
+categories: 原创文章
 author: 狂欢马克思
 tags:
   - NAS
 top: 1
 cover_picture: photo/album/image/image_028.jpg
 abbrlink: 1489a919
-date: 2022-07-08 00:00:00
+date: 2024-07-08 00:00:00
 ---
 
 
-&emsp;&emsp; 没有公网IP，刷遍论坛和教程，折腾各种内网穿透、异地组网，感觉一点都不快乐了，那就看看这里的IPV6，给你带来全新的解决方案，开始愉快的玩耍吧！
+没有公网IP，刷遍论坛和教程，折腾各种内网穿透、异地组网，感觉一点都不快乐了，那就看看这里的IPV6，给你带来全新的解决方案，开始愉快的玩耍吧！
 
 <!-- more -->
 

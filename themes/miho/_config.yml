@@ -39,10 +39,10 @@ menu:
     url: /archives
     target: false
 
-  columns:
-    title: 笔记
-    url: /gitbook
-    target: false
+  #columns:
+  #  title: 笔记
+  #  url: /gitbook
+  #  target: false
 
   picture-o:
     title: 相册

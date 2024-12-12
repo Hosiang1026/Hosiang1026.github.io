@@ -49,6 +49,7 @@ jobs:
         id: deployment
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.ACTION_TOKEN }}
+          deploy_key: ${{ secrets.HEXO_DEPLOY }}
+          external_repository: Hosiang1026/Hosiang1026.github.io
           publish_dir: ./public
           force_orphan: true

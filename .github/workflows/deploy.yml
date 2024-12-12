@@ -49,6 +49,6 @@ jobs:
         id: deployment
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.HEXO_DEPLOY }}
+          github_token: ${{ secrets.ACTION_TOKEN }}
           publish_dir: ./public
           force_orphan: true

@@ -85,7 +85,7 @@
 
     npm install cnpm -g --registry=https://registry.npm.taobao.org
     
-## 静态资源压缩123
+## 静态资源压缩
 
     $ npm install hexo-neat --save
 

@@ -51,6 +51,5 @@ jobs:
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           external_repository: Hosiang1026/Hosiang1026.github.io
-          publish_branch: master
           publish_dir: ./public
           force_orphan: true

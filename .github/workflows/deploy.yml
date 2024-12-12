@@ -8,6 +8,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Install Git	# 安装Git
+        run: sudo apt update && sudo apt install -y git
+        
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -30,13 +33,17 @@ jobs:
           hexo clean
           hexo generate  
 
-      - name: Deploy to GitHub Pages
-        uses: theme-keep/hexo-deploy-github-pages-action@master # 使用专门部署 Hexo 到 GitHub pages 的 action
-        env:
-          PERSONAL_TOKEN: ${{ secrets.HEXO_DEPLOY }} # secret 名
-          PUBLISH_REPOSITORY: Hosiang1026/Hosiang1026.github.io # 公共仓库，格式：GitHub 用户名/仓库名
-          BRANCH: master # 分支，填 gh-pages 就行
-          PUBLISH_DIR: ./public # 部署 public 目录下的文件
+      - name: Generate static pages		# 生成博客
+        run: hexo generate
+        working-directory: ./public
+
+      - name: Deploy to GitHub Pages	# 将生成的博客推送到你对应的仓库中
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.HEXO_DEPLOY }}		# PERSONAL_TOKEN更换为你自己的token的名称，一定全写成大写
+          publish_dir: ./public
+          external_repository: Hosiang1026/Hosiang1026.github.io # 更改为你的 GitHub Pages 仓库，格式是username/repo
+          publish_branch: master 
 
 
 

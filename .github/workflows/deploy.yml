@@ -24,10 +24,11 @@ jobs:
         with:
           path: ./public
   deploy:
-    needs: build
+    runs-on: ubuntu-22.04
     permissions:
-      pages: write
-      id-token: write
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

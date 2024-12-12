@@ -9,7 +9,7 @@
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  background-image: url("https://source.unsplash.com/random/1920x420"), url("../photo/album/system/system_001.jpg");
+  background-image: url("https://imgapi.cn/api.php?zd=pc&fl=fengjing&gs=images"), url("../photo/album/system/system_001.jpg");
   z-index: -1;
 }
 

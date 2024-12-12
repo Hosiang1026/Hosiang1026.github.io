@@ -6,7 +6,7 @@ tags:
 author: OSChina
 top: 298
 cover_picture: >-
-  https://cdn.jsdelivr.net/gh/filess/img8@main/2022/03/21/1647850196859-ab02f670-b9f9-436d-b659-ab8cfcf515c0.png
+  https://imgapi.cn/bing.php
 abbrlink: a288ecc
 date: 2022-03-27 11:56:25
 ---

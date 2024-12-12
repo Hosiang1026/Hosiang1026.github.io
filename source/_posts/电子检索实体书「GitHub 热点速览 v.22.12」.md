@@ -5,8 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 306
-cover_picture: >-
-  https://img2022.cnblogs.com/blog/759200/202203/759200-20220320194008855-1886706334.jpg
+cover_picture: https://imgapi.cn/bing.php
 abbrlink: 57b570
 date: 2022-03-27 11:55:56
 ---

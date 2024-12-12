@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 267
-cover_picture: 'https://static001.geekbang.org/infoq/2e/2e8a7f50ab06e22d32f7ba9f99778b4c.gif'
+cover_picture: 'https://imgapi.cn/bing.php'
 abbrlink: a8f99157
 date: 2022-03-27 11:55:56
 ---

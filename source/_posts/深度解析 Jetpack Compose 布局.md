@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 304
-cover_picture: 'https://devrel.andfun.cn/devrel/posts/2022/03/JKtev1.png'
+cover_picture: 'https://imgapi.cn/bing.php'
 abbrlink: dbd25fe1
 date: 2022-01-16 11:56:25
 ---

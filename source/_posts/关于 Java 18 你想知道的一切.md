@@ -5,8 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 309
-cover_picture: >-
-  https://zhxhash-blog.oss-cn-beijing.aliyuncs.com/2022-3-16%20%E5%85%B3%E4%BA%8E%20Java%2018%20%E4%BD%A0%E6%83%B3%E7%9F%A5%E9%81%93%E7%9A%84%E4%B8%80%E5%88%87/simple-web-server-1.png
+cover_picture: https://imgapi.cn/bing.php
 abbrlink: 42b58a8c
 date: 2021-06-09 11:56:26
 ---

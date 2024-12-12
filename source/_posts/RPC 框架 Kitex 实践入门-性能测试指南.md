@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 119
-cover_picture: 'http://www.cloudwego.io/img/blog/kitex_performance_testing/qps.png'
+cover_picture: 'https://imgapi.cn/bing.php'
 abbrlink: 79ca83eb
 date: 2022-03-27 11:53:15
 ---

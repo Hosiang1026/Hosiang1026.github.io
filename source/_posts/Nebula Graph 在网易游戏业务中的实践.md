@@ -5,8 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 248
-cover_picture: >-
-  https://www-cdn.nebula-graph.com.cn/nebula-blog/netease-game-knowledge-graph-practice-01.jpeg
+cover_picture: https://imgapi.cn/bing.php
 abbrlink: 971bc8f
 date: 2022-03-27 11:55:41
 ---

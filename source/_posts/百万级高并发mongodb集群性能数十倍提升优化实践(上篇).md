@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 2095
-cover_picture: 'https://static.oschina.net/uploads/img/201912/25113542_YdOn.jpg'
+cover_picture: 'https://imgapi.cn/bing.php'
 abbrlink: 3c4e1869
 date: 2021-04-15 09:19:21
 ---

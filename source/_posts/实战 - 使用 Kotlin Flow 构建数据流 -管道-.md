@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 308
-cover_picture: 'https://devrel.andfun.cn/devrel/posts/2022/03/lSSdLk.png'
+cover_picture: 'https://imgapi.cn/bing.php'
 abbrlink: 5842f04c
 date: 2022-01-12 11:53:55
 ---

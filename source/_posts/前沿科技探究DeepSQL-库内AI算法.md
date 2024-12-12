@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 320
-cover_picture: 'https://static.oschina.net/uploads/img/202203/25112058_QNRj.gif'
+cover_picture: 'https://imgapi.cn/bing.php'
 abbrlink: cc7a5449
 date: 2022-02-19 11:56:26
 ---

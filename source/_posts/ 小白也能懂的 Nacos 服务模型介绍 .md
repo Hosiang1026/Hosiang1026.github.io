@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 728
-cover_picture: 'https://intranetproxy.alipay.com/skylark/lark/0/2021/png/156306/1616164597552-db24b407-4dd5-4ba5-a4bf-3d579e621e9f.png'
+cover_picture: 'https://imgapi.cn/bing.php'
 abbrlink: efb4f2a5
 date: 2021-04-15 09:53:06
 ---

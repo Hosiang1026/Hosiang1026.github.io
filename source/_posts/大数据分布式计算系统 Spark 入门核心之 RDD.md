@@ -5,8 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 190
-cover_picture: >-
-  https://developer.hs.net/storage/attachments/2022/03/17/lB5FBWsuMDdzO8SBc0MhwOQndwJl7LBSeW9aJSg6_thumb.png
+cover_picture: https://imgapi.cn/bing.php
 abbrlink: b62620b6
 date: 2021-11-24 11:55:41
 ---

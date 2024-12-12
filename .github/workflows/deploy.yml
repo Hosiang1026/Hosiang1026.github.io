@@ -43,8 +43,8 @@ jobs:
           git remote add origin https://${{ secrets.HEXO_DEPLOY }}@github.com/Hosiang1026/Hosiang1026.github.io.git  # 添加公有仓库的远程地址
           git checkout -m master  # 切换到 gh-pages 分支
           git add .
-          git commit --allow-empty -m "Deploy Hexo pages"
-          git push -u --force origin master  # 强制推送到公有仓库的 gh-pages 分支
+          git commit  -m "Deploy Hexo pages"
+          git push -u origin master  # 强制推送到公有仓库的 gh-pages 分支
 
 
 

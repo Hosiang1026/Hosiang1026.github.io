@@ -40,7 +40,6 @@ script:
   #生成
   - hexo g
 
-
 # 设置git提交名，邮箱；替换真实token到_config.yml文件，最后depoy部署
 after_script:
  # GH_REF是最下面配置的仓库地址

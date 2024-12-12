@@ -1,27 +1,58 @@
-# Action 的名字
-name: Hexo Auto Deploy
-on:
+name: Deploy # 部署
+ 
+on: # 触发条件
   push:
     branches:
-      - source # master 分支有 push 行为时就触发这个 action
-
+      - source # 推送到 source 分支
+ 
+  release:
+    types:
+      - published # 推送新版本号
+ 
+  workflow_dispatch: # 手动触发
+ 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
+ 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
-      - name: Install Dependencies
-        run: npm install
-      - uses: actions/github-script@v7
-      - name: Build and Deploy
-        uses: theme-keep/hexo-deploy-github-pages-action@master # 使用专门部署 Hexo 到 GitHub pages 的 action
-        env:
-          PERSONAL_TOKEN: ${{ secrets.HEXO_DEPLOY }} # secret 名
-          PUBLISH_REPOSITORY: Hosiang1026/Hosiang1026.github.io # 公共仓库，格式：GitHub 用户名/仓库名
-          BRANCH: master # 分支，填 gh-pages 就行
-          PUBLISH_DIR: ./public # 部署 public 目录下的文件
+    - name: Checkout # Checkout 仓库
+      uses: actions/checkout@v2
+      with:
+        ref: master
+ 
+    - name: Setup Node # 安装 Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20.x"
+ 
+    - name: Install Hexo # 安装 Hexo
+      run: |
+        npm install hexo-cli -g
+        
+    - name: Cache Modules # 缓存 Node 插件
+      uses: actions/cache@v1
+      id: cache-modules
+      with:
+        path: node_modules
+        key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
+ 
+    - name: Install Dependencies # 如果没有缓存或 插件有更新，则安装插件
+      if: steps.cache-modules.outputs.cache-hit != 'true'
+      run: | # 如果仓库里没有 package-lock.json，上传一下，npm ci 必须要有 package-lock.json
+        npm ci
+    - name: Generate # 生成
+      run: |
+        hexo clean
+        hexo generate
+    - name: Deploy # 部署
+      run: |
+        git config --global user.name "Hosiang1026"
+        git config --global user.email "hosiang1026@sina.com"
+        export TZ='Asia/Shanghai'
+        cd public/
+        git init
+        git add -A
+        git commit -m "Create by workflows"
+        git remote add origin [https://${GH_TOKEN}@github.com/Hosiang1026/Hosiang1026.github.io]
+        git push origin master -f

@@ -121,10 +121,6 @@
 
      https://blog.csdn.net/qq_29304291/article/details/120049986
 
-## 搜索引擎收录
-
-    搜狗和百度联盟 还未通过验证
-
 ## 博客收录
 
     百度博客提交: http://utility.baidu.com/blogsearch/submit.php

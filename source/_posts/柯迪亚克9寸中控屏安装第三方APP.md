@@ -1,6 +1,6 @@
 ---
 title: 推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP
-categories: 热门文章
+categories: 原创文章
 author: 狂欢马克思
 tags:
   - Popular

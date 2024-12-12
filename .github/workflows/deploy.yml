@@ -1,50 +1,49 @@
-# 自动化名称
-name: Hexo Blog CI
-
-# 触发条件
+name: Deploy Hexo Project to GitHub Pages
 on:
   push:
     branches:
-      - source
+      - source  # 当 master 分支有 push 行为时触发这个 action
 
-# 设置环境
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      # check it to your workflow can access it
-      # from: https://github.com/actions/checkout
-      - name: Checkout Repository master branch
-        uses: actions/checkout@master
-
-      # from: https://github.com/actions/setup-node
-      - name: Setup Node.js 20.x
-        uses: actions/setup-node@master
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          node-version: "20.x"
+          fetch-depth: 0
 
-      - name: 安装Hexo
-        run: |
-          npm install hexo-cli -g
-          npm install
-          
-      - name: 设置Git信息
-        run: |
-          git config --global user.name 'Hosiang1026' 
-          git config --global user.email 'hosiang1026@sina.com'      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # 指定 Node.js 版本
 
-      - name: Hexo三连
+      - name: Install Dependencies # 安装项目依赖
+        run: npm install  
+
+      - name: Install hexo-cli   # 全局安装hexo-cli 
+        run: |
+          npm install -g hexo-cli 
+
+      - name: Build Hexo # 生成 Hexo 页面
         run: |
           hexo clean
-          hexo generate 
-          hexo deploy
-          
-      - name: Build and Deploy
-        uses: theme-keep/hexo-deploy-github-pages-action@master # 使用专门部署 Hexo 到 GitHub pages 的 action
-        env:
-          PERSONAL_TOKEN: ${{ secrets.HEXO_DEPLOY }} # secret 名
-          PUBLISH_REPOSITORY: Hosiang1026/Hosiang1026.github.io # 公共仓库，格式：GitHub 用户名/仓库名
-          BRANCH: master # 分支，填 gh-pages 就行
-          PUBLISH_DIR: ./public # 部署 public 目录下的文件
-      
+          hexo generate  
+
+      - name: Deploy to GitHub Pages
+        env: 
+          HEXO_DEPLOY: ${{ secrets.HEXO_DEPLOY }}
+
+        run: |
+          cd public  # 进入生成的 Hexo 页面目录
+          git init  # 初始化新的 Git 仓库
+          git config --global user.name "Hosiang1026"  # 动态获取 GitHub 用户名
+          git config --global user.email "hosiang1026@sina.com"  # 使用 GitHub 提供的 noreply 邮箱
+          git config --global --add safe.directory $GITHUB_WORKSPACE  # 添加当前工作目录为安全目录
+          git remote add origin https://${{ secrets.HEXO_DEPLOY }}@github.com/Hosiang1026/Hosiang1026.github.io.git  # 添加公有仓库的远程地址
+          git checkout --orphan master  # 切换到 gh-pages 分支
+          git add .
+          git commit --allow-empty -m "Deploy Hexo pages"
+          git push -u --force origin master  # 强制推送到公有仓库的 gh-pages 分支
+
+

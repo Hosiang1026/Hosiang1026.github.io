@@ -5,7 +5,7 @@ author: 狂欢马克思
 tags:
   - NAS
 top: 1
-cover_picture: photo/album/image/image_028.jpg
+cover_picture: https://www.ecoo.top/img/400x250xhuawei.png.pagespeed.ic.IoK3PayLgZ.webp
 abbrlink: 1489a919
 date: 2024-07-08 00:00:00
 ---
@@ -17,6 +17,8 @@ date: 2024-07-08 00:00:00
 
 
 ### 一、家里网络拓扑图
+
+![NAS](photo/album/image/16926450.jpg "家里网络拓扑图")
 
 介绍一下网络布局，全屋设置同名WiFI，而路由器A和路由器B选择AP模式，是为了减少NAT转发降速，同时保持同一网段，方便所有联网的设备漫游、电视投屏、资源共享，每家的网络情况不一样，仅供参考。
 ```
@@ -45,6 +47,16 @@ IPV6检测：[https://ipw.cn/ipv6](https://ipw.cn/ipv6) ，或者查看NAS盒子
 ```
 docker run -d --restart=always --name ddns-go --net=host -v /mnt/sda1/ddns:/root jeessy/ddns-go -l :9877 -f 600
 ```
+![NAS](photo/album/image/18172115.jpg "家里网络拓扑图")
+![NAS](photo/album/image/461245.jpg "家里网络拓扑图")
+![NAS](photo/album/image/734694.jpg "家里网络拓扑图")
+![NAS](photo/album/image/18172115.jpg "家里网络拓扑图")
+
+![NAS](photo/album/image/26015332.jpg "家里网络拓扑图")
+
+![NAS](photo/album/image/40399854.jpg "家里网络拓扑图")
+![NAS](photo/album/image/76043474.jpg "家里网络拓扑图")
+
 
 安装完，访问 `http://NAS盒子IP:9877` 配置一下
 

@@ -51,5 +51,5 @@ jobs:
         with:
           PERSONAL_TOKEN: ${{ secrets.HEXO_DEPLOY }} # secret 名
           PUBLISH_REPOSITORY: Hosiang1026/Hosiang1026.github.io # 公共仓库，格式：GitHub 用户名/仓库名
-          BRANCH: master # 分支，填 gh-pages 就行
+          BRANCH: gh-pages # 分支，填 gh-pages 就行
           PUBLISH_DIR: ./public # 部署 public 目录下的文件

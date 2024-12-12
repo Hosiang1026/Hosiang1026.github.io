@@ -41,7 +41,7 @@ WiFi名称：www.zhangsan.cn
 申请一个域名：`zhangsan.cn`（比如我的名字为张三），`nas.zhangsan.cn` 二级域名绑定NAS盒子，国内的域名记得备案。我家里运营商送的光猫用路由模式已封禁端口：80、443，无法使用SSL，好在支持IPV6。
 IPV6检测：[https://ipw.cn/ipv6](https://ipw.cn/ipv6) ，或者查看NAS盒子是否支持IPV6，输入命令：`ifconfig`
 
-![NAS](photo/album/image/461245.jpg "家里网络拓扑图")
+![NAS](photo/album/image/734694.jpg "家里网络拓扑图")
 
 #### 1. 安装DDNS-GO
    我申请的域名是腾讯云的，以下就以腾讯云DDNS为例。NAS盒子用Docker安装DDNS-GO，用于自动更新解析IPV6，钉钉群机器人发送更新通知，安装命令如下：
@@ -50,9 +50,9 @@ IPV6检测：[https://ipw.cn/ipv6](https://ipw.cn/ipv6) ，或者查看NAS盒子
 docker run -d --restart=always --name ddns-go --net=host -v /mnt/sda1/ddns:/root jeessy/ddns-go -l :9877 -f 600
 ```
 
-![NAS](photo/album/image/734694.jpg "家里网络拓扑图")
-
 安装完，访问 `http://NAS盒子IP:9877` 配置一下
+
+![NAS](photo/album/image/67538030.jpg "家里网络拓扑图")
 
 #### 2. 腾讯云DNS解析
 （1）API 密钥
@@ -66,7 +66,7 @@ docker run -d --restart=always --name ddns-go --net=host -v /mnt/sda1/ddns:/root
 
 域名解析检测：[https://tool.dnspod.cn](https://tool.dnspod.cn)
 
-![NAS](photo/album/image/18172115.jpg "家里网络拓扑图")
+![NAS](photo/album/image/461245.jpg "家里网络拓扑图")
 
 上面所有操作完成后：
 家里内网可以访问：`http://nas.zhangsan.cn`

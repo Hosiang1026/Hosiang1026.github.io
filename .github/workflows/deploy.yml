@@ -1,45 +1,50 @@
-name: Hexo博客自动化部署
+name: Pages
+
 on:
   push:
     branches:
-      - source  # 当 master 分支有 push 行为时触发这个 action
+      - source # default branch
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Git	# 安装Git
-        run: sudo apt update && sudo apt install -y git
-        
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # If your repository depends on submodule, please see: https://github.com/actions/checkout
+          submodules: recursive
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'  # 指定 Node.js 版本
-
-      - name: Install Dependencies # 安装项目依赖
-        run: npm install  
-
-      - name: Install hexo-cli   # 全局安装hexo-cli 
-        run: |
-          npm install -g hexo-cli 
-
-      - name: Build Hexo # 生成 Hexo 页面
-        run: |
-          hexo clean
-          hexo generate  
-
-      - name: Deploy to GitHub Pages	# 将生成的博客推送到你对应的仓库中
-        uses: peaceiris/actions-gh-pages@v3
+          # Examples: 20, 18.19, >=16.20.2, lts/Iron, lts/Hydrogen, *, latest, current, node
+          # Ref: https://github.com/actions/setup-node#supported-version-syntax
+          node-version: "20"
+      - name: Cache NPM dependencies
+        uses: actions/cache@v4
         with:
-          personal_token: ${{ secrets.HEXO_DEPLOY }}		# PERSONAL_TOKEN更换为你自己的token的名称，一定全写成大写
-          publish_dir: ./public
-          external_repository: Hosiang1026/Hosiang1026.github.io # 更改为你的 GitHub Pages 仓库，格式是username/repo
-          publish_branch: master 
-
-
-
+          path: node_modules
+          key: ${{ runner.OS }}-npm-cache
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

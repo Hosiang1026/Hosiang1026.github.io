@@ -24,7 +24,6 @@
 
 ####  1. [创建第一个测试版](https://hexo.io/docs/)
 
-
 ####  2. 修改主题配置文件和添加文章md文件,生成站内文章搜索
 
 2017-12-15 
@@ -119,6 +118,11 @@
 ## 常见问题
 
      https://blog.csdn.net/qq_29304291/article/details/120049986
+
+## GitHub Pages Action
+
+    https://github.com/peaceiris/actions-gh-pages#readme
+    https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-first-deployment-with-github_token
 
 ## 博客收录
 

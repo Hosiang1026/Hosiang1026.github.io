@@ -40,8 +40,8 @@ jobs:
           git config --global user.name "Hosiang1026"  # 动态获取 GitHub 用户名
           git config --global user.email "hosiang1026@sina.com"  # 使用 GitHub 提供的 noreply 邮箱
           git config --global --add safe.directory $GITHUB_WORKSPACE  # 添加当前工作目录为安全目录
-          git remote add origin https://${{ secrets.HEXO_DEPLOY }}@github.com/Hosiang1026/Hosiang1026.github.io.git  # 添加公有仓库的远程地址
-          git branch -m master  # 切换到 gh-pages 分支
+          git remote add master https://${{ secrets.HEXO_DEPLOY }}@github.com/Hosiang1026/Hosiang1026.github.io.git  # 添加公有仓库的远程地址
+          git checkout --orphan master  # 切换到 gh-pages 分支
           git add .
           git commit --allow-empty -m "Deploy Hexo pages"
           git push -u --force origin master  # 强制推送到公有仓库的 gh-pages 分支

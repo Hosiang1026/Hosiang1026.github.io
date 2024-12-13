@@ -3,11 +3,11 @@ title: 海思NAS机顶盒IPV6动态域名解析外网访问-入门篇
 categories: 原创文章
 author: 狂欢马克思
 tags:
-  - NAS
+  - Hobby
 top: 1
 cover_picture: https://www.ecoo.top/img/400x250xhuawei.png.pagespeed.ic.IoK3PayLgZ.webp
 abbrlink: 1489a919
-date: 2024-07-08 00:00:00
+date: 2024-11-11 00:00:00
 ---
 
 

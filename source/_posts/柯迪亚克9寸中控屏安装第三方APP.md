@@ -3,7 +3,7 @@ title: 斯柯达-柯迪亚克9寸中控屏安装第三方APP
 categories: 原创文章
 author: 狂欢马克思
 tags:
-  - Car
+  - Hobby
 top: 1
 cover_picture: photo/album/image/image_162.png
 abbrlink: cebc765c
@@ -33,16 +33,16 @@ date: 2024-12-12 00:00:00
 ### 二、步骤
 
 1. 解锁USB模式，靠近副驾驶位置的一个主USB插口，默认是只能充电，打开USB模式，拨号界面输入如下密码：
-   （1）打开USB模式：*#534*62559##*
-   （2）关闭USB模式：*#62559*534##*
+   （1）打开USB模式：`*#534*62559##*`
+   （2）关闭USB模式：`*#62559*534##*`
 
 2. 双公头USB数据线连接中控屏和笔记本，一端连接靠近副驾驶位的一个主USB插口，另一端连接笔记本USB插口，确认已经连接上。
 
 3. 使用adb命令安装APP，解压adb文件；cmd命令进入adb文件夹所在路径，输入如下命令：
-   （1）查看设备连接状态：adb devices
-   （2）安装已经下载好的APP：adb install D://SkodaEQ.apk
+   （1）查看设备连接状态：`adb devices`
+   （2）安装已经下载好的APP：`adb install D://SkodaEQ.apk`
 
-注：D://SkodaEQ.apk 是在笔记本磁盘里已经下载好的APP路径
+注：`D://SkodaEQ.apk` 是在笔记本磁盘里已经下载好的APP路径
 
 <p align="center">解锁USB模式</p>
 

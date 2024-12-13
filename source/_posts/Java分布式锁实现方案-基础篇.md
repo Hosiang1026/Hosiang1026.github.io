@@ -1,6 +1,6 @@
 ---
 title: Java分布式锁实现方案-基础篇
-categories: 后端开发
+categories: 原创文章
 author: 狂欢马克思
 tags:
   - Develop

@@ -1,6 +1,6 @@
 ---
 title: Java版简单的比特币系统-实战篇
-categories: 前沿开发
+categories: 原创文章
 author: 狂欢马克思
 tags:
   - Develop

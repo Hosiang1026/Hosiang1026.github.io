@@ -3,9 +3,9 @@ title: Mac-OS黑苹果安装-实战篇
 categories: 原创文章
 tags:
   - System
-author: Hosiang
+author: 狂欢马克思
 top: 1992
-cover_picture: 'https://i2.hdslb.com/bfs/archive/0caba74589e50e509eba12c4d045b6fd99994cfd.jpg'
+cover_picture: 'photo/album/image/image_046.jpg'
 abbrlink: 2e88617f
 date: 2024-04-15 09:46:45
 ---

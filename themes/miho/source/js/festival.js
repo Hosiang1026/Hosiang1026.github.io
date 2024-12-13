@@ -295,7 +295,7 @@ function showTime(){
     var time = "";
     var msgContent = "";
 
-    var currentTime=new Date().getTime();
+    var currentTime=new Date("2024-10-01").getTime();
     var beginDayEarlyTime =new Date().setHours(0, 0, 0, 0) ;
     var endDayEarlyTime =new Date().setHours(0, 0, 0, 1) ;
     //每天凌晨重新获取节日名称和日期
@@ -512,12 +512,12 @@ function songlistArr() {
     if (-1 != birthdayArr.indexOf(calendars)) {
         //生日歌
         $("#banner").css("background-image", "url(/photo/album/system/system_002.jpg)");
-        getFestivalSongList("birthdaySongList");
+        //getFestivalSongList("birthdaySongList");
     }
 
     if (-1 != springFestivalArr.indexOf(calendars)) {
         //春节序曲
-        getFestivalSongList("festivalSongList");
+        //getFestivalSongList("festivalSongList");
         //随机背景图
         if(bannerNum == -1){
             bannerNum = Math.floor(Math.random() * springFestivalBannerArr.length);
@@ -528,7 +528,7 @@ function songlistArr() {
 
     if (-1 != nationalDayArr.indexOf(date.substr(date.indexOf("年") + 1, date.indexOf("日") - 4))) {
         //我爱你中国 小提琴版
-        getFestivalSongList("nationalSongList");
+        //getFestivalSongList("nationalSongList");
         //随机背景图
         if(bannerNum == -1){
             bannerNum = Math.floor(Math.random() * nationalFestivalBannerArr.length);

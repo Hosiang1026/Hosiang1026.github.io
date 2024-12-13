@@ -10,7 +10,7 @@ abbrlink: 1af481d2
 date: 2021-04-15 10:04:00
 ---
 
-&emsp;&emsp;欢迎关注微信公众号：atoildw (数据库技术研究) 上一篇介绍了InfluxDB IOx的一些项目背景及现有架构中存在的问题，详情见：https://my.oschina.net/u/3374539/blog/5015114 1.克隆仓库 git ...
+欢迎关注微信公众号：atoildw (数据库技术研究) 上一篇介绍了InfluxDB IOx的一些项目背景及现有架构中存在的问题，详情见：https://my.oschina.net/u/3374539/blog/5015114 1.克隆仓库 git ...
 <!-- more -->
 
                                                                                                                                                                                          

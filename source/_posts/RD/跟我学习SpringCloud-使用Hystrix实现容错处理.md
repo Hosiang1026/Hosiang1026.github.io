@@ -10,7 +10,7 @@ abbrlink: 94c37fa9
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;创建一个新的 Maven 项目 hystrix-feign-demo，增加 Hystrix 的依赖，代码如下所示。 <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-starter-netfl...
+创建一个新的 Maven 项目 hystrix-feign-demo，增加 Hystrix 的依赖，代码如下所示。 <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-starter-netfl...
 <!-- more -->
 
                                                                                                                                                                                         创建一个新的 Maven 项目 hystrix-feign-demo，增加 Hystrix 的依赖，代码如下所示。 

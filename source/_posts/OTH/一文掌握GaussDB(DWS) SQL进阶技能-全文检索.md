@@ -10,7 +10,7 @@ abbrlink: '47613523'
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;摘要：本文简要介绍了GaussDB(DWS)全文检索的原理和使用方法。 本文分享自华为云社区《GaussDB(DWS) SQL进阶之全文检索》，原文作者：Zhang Jingyao 。 全文检索（Text search）顾名思义，就...
+摘要：本文简要介绍了GaussDB(DWS)全文检索的原理和使用方法。 本文分享自华为云社区《GaussDB(DWS) SQL进阶之全文检索》，原文作者：Zhang Jingyao 。 全文检索（Text search）顾名思义，就...
 <!-- more -->
 
                                                                                                                                                                                          

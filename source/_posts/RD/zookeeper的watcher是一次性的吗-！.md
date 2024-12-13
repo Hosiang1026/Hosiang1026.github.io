@@ -10,7 +10,7 @@ abbrlink: ed4ba453
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;zookeeper zookeeper 是流行的高性能分布式协调工具，它提供了分布式环境中需要的命名服务，配置管理，分布式锁，注册中心，Leader 选举等等功能，应用十分广泛。 zookeeper 的 watcher Clie...
+zookeeper zookeeper 是流行的高性能分布式协调工具，它提供了分布式环境中需要的命名服务，配置管理，分布式锁，注册中心，Leader 选举等等功能，应用十分广泛。 zookeeper 的 watcher Clie...
 <!-- more -->
 
                                                                                                                                                                                         ### zookeeper 

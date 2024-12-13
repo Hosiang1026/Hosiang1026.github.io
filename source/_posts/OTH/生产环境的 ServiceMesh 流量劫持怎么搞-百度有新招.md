@@ -10,7 +10,7 @@ abbrlink: 5fb02aa9
 date: 2021-04-15 09:53:06
 ---
 
-&emsp;&emsp;背景 ServiceMesh 社区使用 iptables 实现流量劫持，这个机制在百度生产环境使用会遇到一些问题，因此，我们探索了其他的流量劫持方式，如基于服务发现的流量劫持机制、基于 SDK 的流量劫持机...
+背景 ServiceMesh 社区使用 iptables 实现流量劫持，这个机制在百度生产环境使用会遇到一些问题，因此，我们探索了其他的流量劫持方式，如基于服务发现的流量劫持机制、基于 SDK 的流量劫持机...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://oscimg.oschina.net/oscnet/up-265cdf85aba4a83e39ffbf8c1fd6b63144d.png  '生产环境的 ServiceMesh 流量劫持怎么搞-百度有新招') 

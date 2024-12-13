@@ -10,7 +10,7 @@ abbrlink: ba6658f3
 date: 2022-03-27 11:56:25
 ---
 
-&emsp;&emsp;什么是Blazor? 有什么优势？ ASP.NET Core Blazor 简介 Blazor 是一个使用 Blazor 生成交互式客户端 Web UI 的框架： 使用 C# 代替 JavaScript 来创建信息丰富的交互式 UI。 共享使用 .NET...
+什么是Blazor? 有什么优势？ ASP.NET Core Blazor 简介 Blazor 是一个使用 Blazor 生成交互式客户端 Web UI 的框架： 使用 C# 代替 JavaScript 来创建信息丰富的交互式 UI。 共享使用 .NET...
 <!-- more -->
 
                                                                                                                     

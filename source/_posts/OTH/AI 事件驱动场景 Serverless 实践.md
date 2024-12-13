@@ -10,7 +10,7 @@ abbrlink: e92e5dd1
 date: 2021-04-15 09:10:30
 ---
 
-&emsp;&emsp;作者 | 李鹏（元毅） 来源 | Serverless 公众号 一、事件驱动框架：Knative Eventing 事件驱动是指��件��持续事务管理过程中，进行决策的一种策略。可以通过调动可用资源执行相关任务，从而解...
+作者 | 李鹏（元毅） 来源 | Serverless 公众号 一、事件驱动框架：Knative Eventing 事件驱动是指��件��持续事务管理过程中，进行决策的一种策略。可以通过调动可用资源执行相关任务，从而解...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://ucc.alicdn.com/pic/developer-ecology/00028dc51710412d84b6945dfef1ef75.jpg AI 事件驱动场景 Serverless 实践) 

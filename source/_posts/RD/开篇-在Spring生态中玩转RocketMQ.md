@@ -10,7 +10,7 @@ abbrlink: ec53255c
 date: 2021-04-15 10:04:46
 ---
 
-&emsp;&emsp;简介： 开篇：在Spring生态中玩转RocketMQ Apache RocketMQ 作为阿里开源的业务消息的首选，通过双11业务打磨，在消息和流处理领域被广泛应用。而微服务生态Spring框架也是业务开发中最受开发...
+简介： 开篇：在Spring生态中玩转RocketMQ Apache RocketMQ 作为阿里开源的业务消息的首选，通过双11业务打磨，在消息和流处理领域被广泛应用。而微服务生态Spring框架也是业务开发中最受开发...
 <!-- more -->
 
                                                                                                                                                                                         简介： 开篇：在Spring生态中玩转RocketMQ 

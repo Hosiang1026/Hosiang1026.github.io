@@ -10,7 +10,7 @@ abbrlink: ca912390
 date: 2021-04-15 09:48:03
 ---
 
-&emsp;&emsp;Vue.js起步 每一个Vue应用都需要通过实例化Vue来实现。 实例：
+Vue.js起步 每一个Vue应用都需要通过实例化Vue来实现。 实例：
 <!-- more -->
 
                                                                                                                                                                                         #### Vue.js起步 

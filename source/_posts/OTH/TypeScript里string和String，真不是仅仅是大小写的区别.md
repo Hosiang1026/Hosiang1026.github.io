@@ -10,7 +10,7 @@ abbrlink: 82ce8c4c
 date: 2022-02-01 11:56:25
 ---
 
-&emsp;&emsp;：通常来说，string表示原生类型，而String表示对象。 本文分享自华为云社区《TypeScript里string和String的区别》，作者：gentle_zhou 。 背景 与JavaScript语言不同的是，TypeScript使...
+：通常来说，string表示原生类型，而String表示对象。 本文分享自华为云社区《TypeScript里string和String的区别》，作者：gentle_zhou 。 背景 与JavaScript语言不同的是，TypeScript使...
 <!-- more -->
 
                                                                                                                     

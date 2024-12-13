@@ -10,7 +10,7 @@ abbrlink: bd52ecc0
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;作者 / Yacine Rezgui 无论您是在应用中请求某项权限，从文件管理系统中选择某个文件，还是期望从第三方应用中获取到某些数据，都会涉及到在 Activity 之间传递数据，而这也正是 Android 中进...
+作者 / Yacine Rezgui 无论您是在应用中请求某项权限，从文件管理系统中选择某个文件，还是期望从第三方应用中获取到某些数据，都会涉及到在 Activity 之间传递数据，而这也正是 Android 中进...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://devrel.andfun.cn/devrel/posts/2021/04/28438119828b0.jpg  '使用 Jetpack ActivityResult 处理 Activity 之间的数据通信') 

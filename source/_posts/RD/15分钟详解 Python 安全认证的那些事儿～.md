@@ -10,7 +10,7 @@ abbrlink: '81793302'
 date: 2021-04-15 09:53:06
 ---
 
-&emsp;&emsp; python 生产实战 安全认证的那些事儿 / 系统安全可能往往是被大家所...
+ python 生产实战 安全认证的那些事儿 / 系统安全可能往往是被大家所...
 <!-- more -->
   
  ![Test](https://oscimg.oschina.net/oscnet/df64a9c2-8ff3-476f-82dc-31f6d000287e.jpg  '15分钟详解 Python 安全认证的那些事儿～') 

@@ -11,7 +11,7 @@ abbrlink: a288ecc
 date: 2022-03-27 11:56:25
 ---
 
-&emsp;&emsp;存储接口（Container Storage Interface）简称 CSI，CSI 建立了行业标准接口的规范，借助 CSI 容器编排系统（CO）可以将任意存储系统暴露给自己的容器工作负载。JuiceFS CSI Driver 通过...
+存储接口（Container Storage Interface）简称 CSI，CSI 建立了行业标准接口的规范，借助 CSI 容器编排系统（CO）可以将任意存储系统暴露给自己的容器工作负载。JuiceFS CSI Driver 通过...
 <!-- more -->
 
                                                                                                                     

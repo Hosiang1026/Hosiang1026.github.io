@@ -10,7 +10,7 @@ abbrlink: 8d830a37
 date: 2021-04-15 10:16:56
 ---
 
-&emsp;&emsp;作者 | 杨丽 出品 | 雷锋网产业组 “Serverless 其实离我们并没有那么遥远”。 如果你是一名互联网研发人员，那么极有可能了解并应用过 Serverless 这套技术体系。纵观 Serverless 过去十年，...
+作者 | 杨丽 出品 | 雷锋网产业组 “Serverless 其实离我们并没有那么遥远”。 如果你是一名互联网研发人员，那么极有可能了解并应用过 Serverless 这套技术体系。纵观 Serverless 过去十年，...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://ucc.alicdn.com/pic/developer-ecology/f3dc52e2a7f842b5b2003ea3aab87aa4.jpg  '独家对话阿里云函数计算负责人不瞋-你所不知道的 Serverless') 

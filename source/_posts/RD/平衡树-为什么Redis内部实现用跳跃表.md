@@ -10,7 +10,7 @@ abbrlink: daa4c7e7
 date: 2021-10-12 11:53:17
 ---
 
-&emsp;&emsp;：Redis使用跳跃表（skiplist）作为有序集合（zset）的底层实现之一。 本文分享自华为云社区《5分钟了解Redis的内部实现跳跃表（skiplist）》，作者：万猫学社。 跳跃表简介 跳跃表（ski...
+：Redis使用跳跃表（skiplist）作为有序集合（zset）的底层实现之一。 本文分享自华为云社区《5分钟了解Redis的内部实现跳跃表（skiplist）》，作者：万猫学社。 跳跃表简介 跳跃表（ski...
 <!-- more -->
 
                                                                                                                     

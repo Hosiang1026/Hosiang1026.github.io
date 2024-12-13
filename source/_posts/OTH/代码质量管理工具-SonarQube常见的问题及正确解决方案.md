@@ -10,7 +10,7 @@ abbrlink: 76d71ac9
 date: 2021-04-14 07:54:42
 ---
 
-&emsp;&emsp;SonarQube 简介 Sonar 是一个用于代码质量管理的开放平台。通过插件机制，Sonar 可以集成不同的测试工具，代码分析工具，以及持续集成工具。 与持续集成工具（例如 Hudson/Jenkins 等）不同，...
+SonarQube 简介 Sonar 是一个用于代码质量管理的开放平台。通过插件机制，Sonar 可以集成不同的测试工具，代码分析工具，以及持续集成工具。 与持续集成工具（例如 Hudson/Jenkins 等）不同，...
 <!-- more -->
 
                                                                                                                                                                                          

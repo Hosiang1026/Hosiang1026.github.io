@@ -10,7 +10,7 @@ abbrlink: b54190b3
 date: 2021-04-15 09:26:24
 ---
 
-&emsp;&emsp;JDK动态代理到底是怎么实现？ JDK的动态代理的类看不见摸不着，虽然可以看到效果，但是底层到底是怎么做的，为什么要求实现接口呢? 从Proxy.newProxyInstance入手 public static Object new...
+JDK动态代理到底是怎么实现？ JDK的动态代理的类看不见摸不着，虽然可以看到效果，但是底层到底是怎么做的，为什么要求实现接口呢? 从Proxy.newProxyInstance入手 public static Object new...
 <!-- more -->
 
                                                                                                                                                                                         ### JDK动态代理到底是怎么实现？ 

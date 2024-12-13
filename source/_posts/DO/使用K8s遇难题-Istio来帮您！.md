@@ -10,7 +10,7 @@ abbrlink: 18d47415
 date: 2021-04-14 07:54:42
 ---
 
-&emsp;&emsp;如果你正在使用容器，特别是Kubernetes，那么你应该也听说过Istio。对于初学者来说，Istio是Kubernetes的服务网格（service mesh）。所谓服务网格，它是一个网络层，并且可以动态管理服务流量...
+如果你正在使用容器，特别是Kubernetes，那么你应该也听说过Istio。对于初学者来说，Istio是Kubernetes的服务网格（service mesh）。所谓服务网格，它是一个网络层，并且可以动态管理服务流量...
 <!-- more -->
 
                                                                                                                                                                                         如果你正在使用容器，特别是Kubernetes，那么你应该也听说过Istio。对于初学者来说，Istio是Kubernetes的服务网格（service mesh）。所谓服务网格，它是一个网络层，并且可以动态管理服务流量，然后以安全的方式进行管理。 

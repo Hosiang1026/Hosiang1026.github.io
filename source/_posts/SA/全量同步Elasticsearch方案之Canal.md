@@ -10,7 +10,7 @@ abbrlink: 6fb2c5b6
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;一、前言 Canal 是阿里的一款开源项目，纯 Java 开发。基于数据库增量日志解析，提供增量数据订阅&消费，目前主要支持了 MySQL(也支持 mariaDB)。 Canal 除了支持 binlog 实时 增量同步 数据...
+一、前言 Canal 是阿里的一款开源项目，纯 Java 开发。基于数据库增量日志解析，提供增量数据订阅&消费，目前主要支持了 MySQL(也支持 mariaDB)。 Canal 除了支持 binlog 实时 增量同步 数据...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://oscimg.oschina.net/oscnet/up-2f6057cce7f25dd90d0d9b893dc074cf547.png  '全量同步Elasticsearch方案之Canal') 

@@ -10,7 +10,7 @@ abbrlink: 6e7bd40e
 date: 2022-03-27 11:53:15
 ---
 
-&emsp;&emsp;ache JMeter是一款100%纯Java的开源软件，旨在加载测试功能行为和测量性能。它可以用来测试静态和动态资源的性能，例如静态文件、Java Servlet、CGI Scripts、Java Object、数据库和FTP服务...
+ache JMeter是一款100%纯Java的开源软件，旨在加载测试功能行为和测量性能。它可以用来测试静态和动态资源的性能，例如静态文件、Java Servlet、CGI Scripts、Java Object、数据库和FTP服务...
 <!-- more -->
 
                                                                                                                     

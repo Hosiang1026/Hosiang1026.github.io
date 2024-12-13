@@ -10,7 +10,7 @@ abbrlink: f83cb87b
 date: 2022-03-27 11:55:54
 ---
 
-&emsp;&emsp;21 年 12 月 9 日，SeaTunnel (原名 Waterdrop) 成功加入 Apache 孵化器，进入孵化器后，SeaTunnel 社区花费了大量时间来梳理整个项目的外部依赖以确保整个项目的合规性，终于在贡献者们四...
+21 年 12 月 9 日，SeaTunnel (原名 Waterdrop) 成功加入 Apache 孵化器，进入孵化器后，SeaTunnel 社区花费了大量时间来梳理整个项目的外部依赖以确保整个项目的合规性，终于在贡献者们四...
 <!-- more -->
 
                                                                                                                     

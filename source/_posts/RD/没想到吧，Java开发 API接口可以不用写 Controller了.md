@@ -10,7 +10,7 @@ abbrlink: 66373cf3
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;本文案例收录在 https://github.com/chengxy-nds/Springboot-Notebook 大家好，我是小富~ 今天介绍我正在用的一款高效敏捷开发工具magic-api，顺便分享一点工作中使用它的心得 缘起 先说一下...
+本文案例收录在 https://github.com/chengxy-nds/Springboot-Notebook 大家好，我是小富~ 今天介绍我正在用的一款高效敏捷开发工具magic-api，顺便分享一点工作中使用它的心得 缘起 先说一下...
 <!-- more -->
 
                                                                                                                                                                                          

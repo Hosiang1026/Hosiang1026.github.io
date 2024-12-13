@@ -10,7 +10,7 @@ abbrlink: 68e3b6fb
 date: 2021-04-15 09:19:21
 ---
 
-&emsp;&emsp;引言 PaddlePaddle作为国内首个深度学习框架，最近发布了更加强大的Fluid1.2版本, 增加了对Windows环境的支持，全面支持了Linux、Mac、 Windows三大环境。 PaddlePaddle在功能完备的基础上，...
+引言 PaddlePaddle作为国内首个深度学习框架，最近发布了更加强大的Fluid1.2版本, 增加了对Windows环境的支持，全面支持了Linux、Mac、 Windows三大环境。 PaddlePaddle在功能完备的基础上，...
 <!-- more -->
 
                                                                                                                                                                                         引言 

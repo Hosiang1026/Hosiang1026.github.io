@@ -10,7 +10,7 @@ abbrlink: e4eddc0d
 date: 2022-03-27 11:53:55
 ---
 
-&emsp;&emsp;：本文主要介绍ACTS应用兼容性测试用例开发编译。 本文分享自华为云社区《移植案例与原理 - XTS子系统之应用兼容性测试用例开发》，作者： zhushy 。 XTS（X Test Suite）子系统是OpenH...
+：本文主要介绍ACTS应用兼容性测试用例开发编译。 本文分享自华为云社区《移植案例与原理 - XTS子系统之应用兼容性测试用例开发》，作者： zhushy 。 XTS（X Test Suite）子系统是OpenH...
 <!-- more -->
  
 本文分享自华为云社区《移植案例与原理 - XTS子系统之应用兼容性测试用例开发》，作者： zhushy 。 

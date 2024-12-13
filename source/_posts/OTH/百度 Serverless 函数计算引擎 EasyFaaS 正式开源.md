@@ -10,7 +10,7 @@ abbrlink: 72de3e5
 date: 2021-04-15 09:53:06
 ---
 
-&emsp;&emsp;"2021年4月，百度函数计算引擎 EasyFaaS，���式开源!" 1. 什么是 EasyFaaS？ EasyFaaS 是一个依赖轻、适配性强、资源占用少、无状态且高性能的函数计算服务引擎。它有以下几个特点： 依赖轻：...
+"2021年4月，百度函数计算引擎 EasyFaaS，���式开源!" 1. 什么是 EasyFaaS？ EasyFaaS 是一个依赖轻、适配性强、资源占用少、无状态且高性能的函数计算服务引擎。它有以下几个特点： 依赖轻：...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://oscimg.oschina.net/oscnet/up-089044190ad5c3eea057edc9175b94d908a.png  '百度 Serverless 函数计算引擎 EasyFaaS 正式开源') 

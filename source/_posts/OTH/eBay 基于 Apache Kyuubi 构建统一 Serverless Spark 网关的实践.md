@@ -10,7 +10,7 @@ abbrlink: f279a8b9
 date: 2022-01-12 11:56:26
 ---
 
-&emsp;&emsp;来自 eBay 软件工程师、Apache Kyuubi PPMC Member王斐在Apache SeaTunnel & Kyuubi 联合 Meetup的分享，介绍了Apache Kyuubi(Incubating)的基本架构和使用场景，eBay基于自身的需求对K...
+来自 eBay 软件工程师、Apache Kyuubi PPMC Member王斐在Apache SeaTunnel & Kyuubi 联合 Meetup的分享，介绍了Apache Kyuubi(Incubating)的基本架构和使用场景，eBay基于自身的需求对K...
 <!-- more -->
 
                                                                                                      

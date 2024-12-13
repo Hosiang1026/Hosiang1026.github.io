@@ -10,7 +10,7 @@ abbrlink: d9aca1af
 date: 2022-03-27 11:55:54
 ---
 
-&emsp;&emsp;nic是美团内部研发设计的一款用于热部署的IDEA插件，本文其实现原理及落地的一些技术细节。在阅读本文之前，建议大家先熟悉一下Spring源码、Spring MVC 源码 、Spring Boot源码 、Agent字节...
+nic是美团内部研发设计的一款用于热部署的IDEA插件，本文其实现原理及落地的一些技术细节。在阅读本文之前，建议大家先熟悉一下Spring源码、Spring MVC 源码 、Spring Boot源码 、Agent字节...
 <!-- more -->
 
                                                                                                                     

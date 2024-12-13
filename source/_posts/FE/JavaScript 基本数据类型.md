@@ -10,7 +10,7 @@ abbrlink: d78db7c6
 date: 2021-04-15 09:53:06
 ---
 
-&emsp;&emsp;JavaScript 数据类型分为两种，一种是基本数据类型：String、Number、Boolean、undefined 和 null，另一种是复杂数据类型：Object。JavaScript 不支持任何创建自定义类型的机制，所有的值最终...
+JavaScript 数据类型分为两种，一种是基本数据类型：String、Number、Boolean、undefined 和 null，另一种是复杂数据类型：Object。JavaScript 不支持任何创建自定义类型的机制，所有的值最终...
 <!-- more -->
 
                                                                                                                                                                                         JavaScript 数据类型分为两种，一种是基本数据类型：String、Number、Boolean、undefined 和 null，另一种是复杂数据类型：Object。JavaScript 不支持任何创建自定义类型的机制，所有的值最终都将是上述六种数据类型之一。 

@@ -10,7 +10,7 @@ abbrlink: 3aefee84
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;Prometheus时序数据库-报警的计算 在前面的文章中，笔者详细的阐述了Prometheus的数据插入存储查询等过程。但作为一个监控神器，报警计算功能是必不可少的。自然的Prometheus也提供了灵活强大...
+Prometheus时序数据库-报警的计算 在前面的文章中，笔者详细的阐述了Prometheus的数据插入存储查询等过程。但作为一个监控神器，报警计算功能是必不可少的。自然的Prometheus也提供了灵活强大...
 <!-- more -->
 
                                                                                                                                                                                         ### Prometheus时序数据库-报警的计算 

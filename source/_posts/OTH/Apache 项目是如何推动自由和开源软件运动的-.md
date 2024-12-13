@@ -10,7 +10,7 @@ abbrlink: c9edc527
 date: 2021-04-15 09:53:06
 ---
 
-&emsp;&emsp;本文翻译自作者 ANDY ORAM 的文章 How the Apache Project Boosted the Free and Open Source Software Movements 不可否认，Apache 项目已经改变了世界。它产生的一些影响包括以下几点： 他...
+本文翻译自作者 ANDY ORAM 的文章 How the Apache Project Boosted the Free and Open Source Software Movements 不可否认，Apache 项目已经改变了世界。它产生的一些影响包括以下几点： 他...
 <!-- more -->
 
                                                                                                                                                                                          

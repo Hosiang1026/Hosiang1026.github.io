@@ -10,7 +10,7 @@ abbrlink: 67321cab
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;由于去年WebRTC-client已经初现成果，因此从开年复工起，我们就开始着力于WebRTC安卓版本的编译。编译WebRTC Android使用的是python2.7.x，出现错误提示如下：“UnicodeDecodeError: ‘ascii...
+由于去年WebRTC-client已经初现成果，因此从开年复工起，我们就开始着力于WebRTC安卓版本的编译。编译WebRTC Android使用的是python2.7.x，出现错误提示如下：“UnicodeDecodeError: ‘ascii...
 <!-- more -->
 
                                                                                                                                                                                         由于去年WebRTC-client已经初现成果，因此从开年复工起，我们就开始着力于WebRTC安卓版本的编译。编译WebRTC Android使用的是python2.7.x，出现错误提示如下：“UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe6 in position 11: ordinal not in range” 

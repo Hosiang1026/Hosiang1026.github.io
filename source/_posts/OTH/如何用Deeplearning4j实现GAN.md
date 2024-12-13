@@ -10,7 +10,7 @@ abbrlink: 277ebbee
 date: 2021-04-14 07:54:42
 ---
 
-&emsp;&emsp;一、Gan的思想 Gan的核心所做的事情是在解决一个argminmax的问题，公式： 1、求解一个Discriminator，可以最大尺度的丈量Generator 产生的数据和真实数据之间的分布距离 2、求解一个Generat...
+一、Gan的思想 Gan的核心所做的事情是在解决一个argminmax的问题，公式： 1、求解一个Discriminator，可以最大尺度的丈量Generator 产生的数据和真实数据之间的分布距离 2、求解一个Generat...
 <!-- more -->
 
                                                                                                                                                                                         一、Gan的思想 

@@ -10,7 +10,7 @@ abbrlink: 8e38b701
 date: 2021-04-15 09:19:21
 ---
 
-&emsp;&emsp;前言 消息队列千千万万，诸如rocketmq,kafka,activemq,rabbitmq等，互联网上也有很多文章分析这些mq的源码，然而实际上对于一般的开发人员来说，其实更关注的并非是这些mq的内部实现，而是怎...
+前言 消息队列千千万万，诸如rocketmq,kafka,activemq,rabbitmq等，互联网上也有很多文章分析这些mq的源码，然而实际上对于一般的开发人员来说，其实更关注的并非是这些mq的内部实现，而是怎...
 <!-- more -->
 
                                                                                                                                                                                         ### 前言 

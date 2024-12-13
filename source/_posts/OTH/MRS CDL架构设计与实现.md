@@ -10,7 +10,7 @@ abbrlink: fb4fd38d
 date: 2022-03-27 11:53:55
 ---
 
-&emsp;&emsp;前言 MRS CDL是FusionInsight MRS推出的一种数据实时同步服务，旨在将传统OLTP数据库中的事件信息捕捉并实时推送到大数据产品中去，本文档会详细为大家介绍CDL的整体架构以及关键技术。 2 ...
+前言 MRS CDL是FusionInsight MRS推出的一种数据实时同步服务，旨在将传统OLTP数据库中的事件信息捕捉并实时推送到大数据产品中去，本文档会详细为大家介绍CDL的整体架构以及关键技术。 2 ...
 <!-- more -->
 
                                                                                                                     

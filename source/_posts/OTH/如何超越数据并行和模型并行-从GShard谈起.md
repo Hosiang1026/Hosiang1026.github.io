@@ -10,7 +10,7 @@ abbrlink: 51819ecb
 date: 2021-11-23 02:39:46
 ---
 
-&emsp;&emsp; | 袁进辉 GShard的论文最早于2020.6.30放在arXiv上，包括《GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding (https://arxiv.org/pdf/2006.16668.pd...
+ | 袁进辉 GShard的论文最早于2020.6.30放在arXiv上，包括《GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding (https://arxiv.org/pdf/2006.16668.pd...
 <!-- more -->
 
                                                                                                                                                                                          

@@ -10,7 +10,7 @@ abbrlink: f94a552f
 date: 2021-04-15 10:04:46
 ---
 
-&emsp;&emsp;Bean的命名 Bean在Ioc容器中可以有一个或多个名称，但这些名称在容器内必须唯一，在Xml中配置id和name属性就可以为Bean起别名。 <bean id="user" name="zhangsan,lisi" class="com.example....
+Bean的命名 Bean在Ioc容器中可以有一个或多个名称，但这些名称在容器内必须唯一，在Xml中配置id和name属性就可以为Bean起别名。 <bean id="user" name="zhangsan,lisi" class="com.example....
 <!-- more -->
 
                                                                                                                                                                                          

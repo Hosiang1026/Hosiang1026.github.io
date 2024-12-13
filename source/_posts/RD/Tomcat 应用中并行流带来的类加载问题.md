@@ -10,7 +10,7 @@ abbrlink: 66cbd16
 date: 2021-04-14 07:56:10
 ---
 
-&emsp;&emsp;本文首发于 vivo互联网技术 微信公众号 链接：https://mp.weixin.qq.com/s/f-X3n9cvDyU5f5NYH6mhxQ 作者：肖铭轩、王道环 随着 Java8 的不断流行，越来越多的开发人员使用并行流（parallel）...
+本文首发于 vivo互联网技术 微信公众号 链接：https://mp.weixin.qq.com/s/f-X3n9cvDyU5f5NYH6mhxQ 作者：肖铭轩、王道环 随着 Java8 的不断流行，越来越多的开发人员使用并行流（parallel）...
 <!-- more -->
 
                                                                                                                                                                                          

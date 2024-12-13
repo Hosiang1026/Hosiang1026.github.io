@@ -10,7 +10,7 @@ abbrlink: a1b64c15
 date: 2021-04-15 09:17:50
 ---
 
-&emsp;&emsp;Hunt Framework 是使用 D语言开发的全栈 Web 框架，类似于 Laravel / SpringBoot / Django 等，可以让 D 语言开发者快速的创建项目，内置超多业务规范一是方便开发者开箱即可用，二是方便管理...
+Hunt Framework 是使用 D语言开发的全栈 Web 框架，类似于 Laravel / SpringBoot / Django 等，可以让 D 语言开发者快速的创建项目，内置超多业务规范一是方便开发者开箱即可用，二是方便管理...
 <!-- more -->
 
                                                                                                                                                                                          ```java 

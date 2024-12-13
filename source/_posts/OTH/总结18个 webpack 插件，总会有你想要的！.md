@@ -10,7 +10,7 @@ abbrlink: 76318c53
 date: 2021-04-15 10:04:00
 ---
 
-&emsp;&emsp;作者：lzg9527 https://juejin.cn/post/6844904193589772301 何为插件(Plugin)？专注处理 webpack 在编译过程中的某个特定的任务的功能模块，可以称为插件。 Plugin 是一个扩展器，它丰富了 ...
+作者：lzg9527 https://juejin.cn/post/6844904193589772301 何为插件(Plugin)？专注处理 webpack 在编译过程中的某个特定的任务的功能模块，可以称为插件。 Plugin 是一个扩展器，它丰富了 ...
 <!-- more -->
 
                                                                                                                                                                                          

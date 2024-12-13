@@ -10,7 +10,7 @@ abbrlink: 8eb96f49
 date: 2021-04-15 09:19:21
 ---
 
-&emsp;&emsp;如果 2019 年技术圈有十大流行词，容器化肯定占有一席之地，随着 Docker 的风靡，前端领域应用到 Docker 的场景也越来越多，本文主要来讲述下开源的分布式图数据库 Nebula Graph 是如何将 Do...
+如果 2019 年技术圈有十大流行词，容器化肯定占有一席之地，随着 Docker 的风靡，前端领域应用到 Docker 的场景也越来越多，本文主要来讲述下开源的分布式图数据库 Nebula Graph 是如何将 Do...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://oscimg.oschina.net/oscnet/up-220236c32299c0d3718994fd689dc97baf1.png  '前端 Docker 镜像体积优化') 

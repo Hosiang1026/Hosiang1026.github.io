@@ -10,7 +10,7 @@ abbrlink: 7143becb
 date: 2022-03-27 11:55:11
 ---
 
-&emsp;&emsp;：详细讲述使用GaussDB(DWS)时，如何使用TPC-DS/TPC-H等标准数据模型，获取DWS的查询性能数据。 本文分享自华为云社区《GaussDB(DWS) 《DWS之TPCD-DS&TPC-H与查询性能的那些事儿》》，作...
+：详细讲述使用GaussDB(DWS)时，如何使用TPC-DS/TPC-H等标准数据模型，获取DWS的查询性能数据。 本文分享自华为云社区《GaussDB(DWS) 《DWS之TPCD-DS&TPC-H与查询性能的那些事儿》》，作...
 <!-- more -->
 
  

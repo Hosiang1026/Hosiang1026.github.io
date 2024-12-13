@@ -10,7 +10,7 @@ abbrlink: dea679e8
 date: 2021-06-01 11:53:55
 ---
 
-&emsp;&emsp;月 19 日，也就是前两天，Asahi Linux 官方推特宣布：首个原生支持 M1 系列芯片的 Linux 测试版现已发布，所有人皆可使用！ Asahi Linux 起初只是一个众筹项目，计划为 Apple Silicon Mac ...
+月 19 日，也就是前两天，Asahi Linux 官方推特宣布：首个原生支持 M1 系列芯片的 Linux 测试版现已发布，所有人皆可使用！ Asahi Linux 起初只是一个众筹项目，计划为 Apple Silicon Mac ...
 <!-- more -->
 
                                                                                                                     

@@ -10,7 +10,7 @@ abbrlink: 57af8598
 date: 2021-04-14 07:54:42
 ---
 
-&emsp;&emsp;前言 2000 年 CollabNet 创建了 Subversion 项目，一晃 SVN 已经诞生 20 年了，截至 r1873568 SVN 主分支共有 59674 次提交，32 个开发者，288 次发布，2005 年 Linus Torvalds 创建了 Git，...
+前言 2000 年 CollabNet 创建了 Subversion 项目，一晃 SVN 已经诞生 20 年了，截至 r1873568 SVN 主分支共有 59674 次提交，32 个开发者，288 次发布，2005 年 Linus Torvalds 创建了 Git，...
 <!-- more -->
 
                                                                                                                                                                                         ### 前言 

@@ -10,7 +10,7 @@ abbrlink: 2b4e32ca
 date: 2021-04-14 07:54:42
 ---
 
-&emsp;&emsp;本文同步发布在 TensorFlow 微信���众号、知乎 SQLFlow 专栏，获得作者授权在开源中国发布，原作者为蚂蚁集团 齐俊、王益 ElasticDL 是一个基于 TensorFlow 2.x 和 Kubernetes 的开源的分布式...
+本文同步发布在 TensorFlow 微信���众号、知乎 SQLFlow 专栏，获得作者授权在开源中国发布，原作者为蚂蚁集团 齐俊、王益 ElasticDL 是一个基于 TensorFlow 2.x 和 Kubernetes 的开源的分布式...
 <!-- more -->
 
                                                                                                                                                                                          

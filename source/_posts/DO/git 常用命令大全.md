@@ -10,7 +10,7 @@ abbrlink: 72442b0b
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;1.git 常用命令 $ git remote add origin git@github.com:yeszao/dofiler.git # 配置远程git版本库 $ git pull origin master # 下载代码及快速合并 $ git push or......
+1.git 常用命令 $ git remote add origin git@github.com:yeszao/dofiler.git # 配置远程git版本库 $ git pull origin master # 下载代码及快速合并 $ git push or......
 <!-- more -->
 
                                                                                                                                                                                         1.git 常用命令   

@@ -10,7 +10,7 @@ abbrlink: 84b3d9c1
 date: 2021-11-23 02:39:46
 ---
 
-&emsp;&emsp; Apache Pulsar —— 客户端消息确认 作者介绍： 腾讯云中间件专家工程师 Apache Pulsar PMC，《深入解析Apache Pulsar》作者。 目前专注于中间件领域，在消息队列和微服务方向具有丰富的...
+ Apache Pulsar —— 客户端消息确认 作者介绍： 腾讯云中间件专家工程师 Apache Pulsar PMC，《深入解析Apache Pulsar》作者。 目前专注于中间件领域，在消息队列和微服务方向具有丰富的...
 <!-- more -->
 
                                                                                                                                                                                         ### 解析 Apache Pulsar —— 客户端消息确认 

@@ -10,7 +10,7 @@ abbrlink: c1a96bce
 date: 2022-02-01 11:53:15
 ---
 
-&emsp;&emsp;｜wandb.ai 翻译｜刘志勇 如你所知���PyTorch、TensorFlow、OneFlow等深度学习框架关注的重心是在GPU等硬件上训练模型，但要想将训练的模型部署到手机、物联网设备以及专用加速器（FPGA、...
+｜wandb.ai 翻译｜刘志勇 如你所知���PyTorch、TensorFlow、OneFlow等深度学习框架关注的重心是在GPU等硬件上训练模型，但要想将训练的模型部署到手机、物联网设备以及专用加速器（FPGA、...
 <!-- more -->
 
                                                                                                                     

@@ -10,7 +10,7 @@ abbrlink: 2371e1eb
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;本文作��：HelloGitHub-老荀 Hi，这里是 HelloGitHub 推出的 HelloZooKeeper 系列，免费开源、有趣、入门级的 ZooKeeper 教程，面向有编程基础的新手。 项目地址：https......
+本文作��：HelloGitHub-老荀 Hi，这里是 HelloGitHub 推出的 HelloZooKeeper 系列，免费开源、有趣、入门级的 ZooKeeper 教程，面向有编程基础的新手。 项目地址：https......
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://img2020.cnblogs.com/blog/759200/202101/759200-20210124161622816-1605238160.png  'ZooKeeper 会话的秘密') 

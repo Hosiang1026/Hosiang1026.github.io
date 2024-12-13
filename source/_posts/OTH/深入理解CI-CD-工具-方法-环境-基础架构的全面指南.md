@@ -10,7 +10,7 @@ abbrlink: f3100ece
 date: 2021-04-15 09:19:21
 ---
 
-&emsp;&emsp;本文来自Rancher Labs 持续集成和持续交付（CI/CD）是DevOps背后的助推力之一。如果你的企业正在考虑使用DevOps，那么CI/CD绝对是需要考虑的其中一部分。但是CI/CD到底意味着什么？为什么它如...
+本文来自Rancher Labs 持续集成和持续交付（CI/CD）是DevOps背后的助推力之一。如果你的企业正在考虑使用DevOps，那么CI/CD绝对是需要考虑的其中一部分。但是CI/CD到底意味着什么？为什么它如...
 <!-- more -->
 
                                                                                                                                                                                         本文来自Rancher Labs 

@@ -10,7 +10,7 @@ abbrlink: 656a0ca5
 date: 2021-04-15 10:16:56
 ---
 
-&emsp;&emsp;本文作者：HelloGitHub-老荀 Hi，这里是 HelloGitHub 推出的 HelloZooKeeper 系列，免费开源、有趣、入门级的 ZooKeeper 教程，面向有编程基础的新手。 项目地址：https://github.com/HelloG...
+本文作者：HelloGitHub-老荀 Hi，这里是 HelloGitHub 推出的 HelloZooKeeper 系列，免费开源、有趣、入门级的 ZooKeeper 教程，面向有编程基础的新手。 项目地址：https://github.com/HelloG...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://img2020.cnblogs.com/blog/759200/202101/759200-20210124161622816-1605238160.png  '手摸手教你阅读和调试大型开源项目 ZooKeeper') 

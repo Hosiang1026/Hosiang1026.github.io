@@ -10,7 +10,7 @@ abbrlink: 9c7237b1
 date: 2019-12-25 11:56:25
 ---
 
-&emsp;&emsp;：GaussDB(for Redis)支持真正可扩展的多DB，轻松实现降本增效。 本文分享自华为云社区《华为云企业级Redis揭秘第17期：集群搭载多DB，多租隔离更降本》，作者： GaussDB 数据库 。 背景...
+：GaussDB(for Redis)支持真正可扩展的多DB，轻松实现降本增效。 本文分享自华为云社区《华为云企业级Redis揭秘第17期：集群搭载多DB，多租隔离更降本》，作者： GaussDB 数据库 。 背景...
 <!-- more -->
 
                                                                                                                     

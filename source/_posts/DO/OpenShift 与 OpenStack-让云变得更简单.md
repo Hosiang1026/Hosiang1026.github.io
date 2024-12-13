@@ -10,7 +10,7 @@ abbrlink: 10ab0b4
 date: 2022-03-27 11:56:25
 ---
 
-&emsp;&emsp;enShift 与 OpenStack 都是在 2010、2011 年左右创建的，用于构建可扩展云平台的开源技术，两者都用于在混合云环境中构建可扩展系统。从历史来看，OpenStack 的存在时间要比 OpenShift 长。...
+enShift 与 OpenStack 都是在 2010、2011 年左右创建的，用于构建可扩展云平台的开源技术，两者都用于在混合云环境中构建可扩展系统。从历史来看，OpenStack 的存在时间要比 OpenShift 长。...
 <!-- more -->
 
                                                                                                                     

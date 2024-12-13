@@ -10,7 +10,7 @@ abbrlink: b937286f
 date: 2021-04-15 09:48:03
 ---
 
-&emsp;&emsp;#前提条件 Fizz网关v1.5.0或以上版本 (安装教程 (opens new window)) gRPC服务 本文使用的gRPC服务样例：https://github.com/wehotel/fizz-examples/tree/master/fizz-example-grpc(opens ne...
+#前提条件 Fizz网关v1.5.0或以上版本 (安装教程 (opens new window)) gRPC服务 本文使用的gRPC服务样例：https://github.com/wehotel/fizz-examples/tree/master/fizz-example-grpc(opens ne...
 <!-- more -->
 
                                                                                                                                                                                          

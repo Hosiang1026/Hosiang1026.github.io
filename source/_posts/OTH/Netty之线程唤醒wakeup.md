@@ -10,7 +10,7 @@ abbrlink: f3c6fac8
 date: 2021-04-15 09:53:06
 ---
 
-&emsp;&emsp;首先回顾下, Netty中的IO线程主要完成三件事 1.轮询IO事件 2.处理IO事件 3.执行任务 在轮询IO事件的过程中,在Linux系统下, 使用epoll实现. 涉及的Netty代码如下 private void select() { //...
+首先回顾下, Netty中的IO线程主要完成三件事 1.轮询IO事件 2.处理IO事件 3.执行任务 在轮询IO事件的过程中,在Linux系统下, 使用epoll实现. 涉及的Netty代码如下 private void select() { //...
 <!-- more -->
 
                                                                                                                                                                                         首先回顾下, Netty中的IO线程主要完成三件事 

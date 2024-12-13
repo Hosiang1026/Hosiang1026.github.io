@@ -10,7 +10,7 @@ abbrlink: 5e435f16
 date: 2021-04-15 09:16:07
 ---
 
-&emsp;&emsp;为什么会发起IOx项目 原文请参见: https://www.influxdata.com/blog/announcing-influxdb-iox/ 1. 下一步的目标 原文中介绍到，过去的7年时间的发展中，InfluxDB 在 metrics 数据的处理上已经...
+为什么会发起IOx项目 原文请参见: https://www.influxdata.com/blog/announcing-influxdb-iox/ 1. 下一步的目标 原文中介绍到，过去的7年时间的发展中，InfluxDB 在 metrics 数据的处理上已经...
 <!-- more -->
 
                                                                                                                                                                                         #### 为什么会发起IOx项目 

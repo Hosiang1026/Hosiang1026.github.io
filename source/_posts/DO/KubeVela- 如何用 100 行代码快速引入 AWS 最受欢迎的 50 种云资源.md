@@ -10,7 +10,7 @@ abbrlink: 89bc2abf
 date: 2022-03-27 11:55:56
 ---
 
-&emsp;&emsp;：KubeVela 社区 KubeVela 目前已经支持了 AWS、Azure、GCP、阿里云、腾讯云、百度云、UCloud 等云厂商，也提供了简单快捷的命令行工具[1]引入云服务商的云资源，但是在 KubeVela 里一个...
+：KubeVela 社区 KubeVela 目前已经支持了 AWS、Azure、GCP、阿里云、腾讯云、百度云、UCloud 等云厂商，也提供了简单快捷的命令行工具[1]引入云服务商的云资源，但是在 KubeVela 里一个...
 <!-- more -->
 
                                                                                                                     

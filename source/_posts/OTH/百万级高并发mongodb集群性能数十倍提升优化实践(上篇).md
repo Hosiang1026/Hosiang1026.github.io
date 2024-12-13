@@ -10,7 +10,7 @@ abbrlink: 3c4e1869
 date: 2021-04-15 09:19:21
 ---
 
-&emsp;&emsp;mongodb内核、wiredtiger存储引擎、rocksdb存储引擎相关源码分析详见(后续持续更新): https://github.com/y123456yz/reading-and-annotate-mongodb-3.6.1 背景 线上某集群峰值TPS超过100万/...
+mongodb内核、wiredtiger存储引擎、rocksdb存储引擎相关源码分析详见(后续持续更新): https://github.com/y123456yz/reading-and-annotate-mongodb-3.6.1 背景 线上某集群峰值TPS超过100万/...
 <!-- more -->
 
                                                                                                                                                                                           mongodb内核、wiredtiger存储引擎、rocksdb存储引擎相关源码分析详见(后续持续更新): 

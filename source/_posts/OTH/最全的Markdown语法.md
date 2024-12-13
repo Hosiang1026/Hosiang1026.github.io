@@ -10,7 +10,7 @@ abbrlink: f72d1f77
 date: 2021-04-15 09:53:06
 ---
 
-&emsp;&emsp;最全的Markdown语法 Markdown是Github最常见的文档说明。Markdown的语法简洁明了、学习容易。按照官方Markdown Cheat Sheet逐个操作一遍自然就会了。 [TOC]这个语法在markdown工具里能够识别...
+最全的Markdown语法 Markdown是Github最常见的文档说明。Markdown的语法简洁明了、学习容易。按照官方Markdown Cheat Sheet逐个操作一遍自然就会了。 [TOC]这个语法在markdown工具里能够识别...
 <!-- more -->
 
                                                                                                                                                                                         ### 最全的Markdown语法 

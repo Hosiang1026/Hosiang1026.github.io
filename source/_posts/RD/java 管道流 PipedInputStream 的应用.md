@@ -10,7 +10,7 @@ abbrlink: 757217ba
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;前言 PipedInputStream 和 PipedOutputStream 设计用来解决跨线程的字节数据传输。它们总是成对出现的，而在使用上，也只能 工作在两个不同的线程上，在一个线程里使用管道输入和输出流可能会...
+前言 PipedInputStream 和 PipedOutputStream 设计用来解决跨线程的字节数据传输。它们总是成对出现的，而在使用上，也只能 工作在两个不同的线程上，在一个线程里使用管道输入和输出流可能会...
 <!-- more -->
 
                                                                                                                                                                                          

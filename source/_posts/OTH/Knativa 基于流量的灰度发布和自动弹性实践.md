@@ -10,7 +10,7 @@ abbrlink: 9e56b51c
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;作者 | 李鹏（元毅） 来源 | Serverless 公众号 一、Knative Knative 提供了基于流量的自动扩缩容能力，可以根据应用的请求量，在高峰时自动扩容实例数；当请求量减少以后，自动缩容实例，做...
+作者 | 李鹏（元毅） 来源 | Serverless 公众号 一、Knative Knative 提供了基于流量的自动扩缩容能力，可以根据应用的请求量，在高峰时自动扩容实例数；当请求量减少以后，自动缩容实例，做...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://ucc.alicdn.com/pic/developer-ecology/1af0a71a9ff844b8a015afa190e739bc.jpg  'Knativa 基于流量的灰度发布和自动弹性实践') 

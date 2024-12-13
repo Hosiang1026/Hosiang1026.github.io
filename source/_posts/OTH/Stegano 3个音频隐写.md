@@ -10,7 +10,7 @@ abbrlink: c4e33cac
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;进入实验地址《CTF Stegano练习之隐写2》。 先看第一类题查看频谱图使用Audacity打开sound1.wav文件。 用Audacity这个工具打开就是因为Audacity提供的强大的音频分析功能，包括波形图、频谱图...
+进入实验地址《CTF Stegano练习之隐写2》。 先看第一类题查看频谱图使用Audacity打开sound1.wav文件。 用Audacity这个工具打开就是因为Audacity提供的强大的音频分析功能，包括波形图、频谱图...
 <!-- more -->
 
                                                                                                                                                                                         进入实验地址《CTF Stegano练习之隐写2》。 

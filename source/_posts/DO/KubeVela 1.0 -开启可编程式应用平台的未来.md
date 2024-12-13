@@ -10,7 +10,7 @@ abbrlink: 97ed6f11
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;作者 | KubeVela 项目维护者 来源 | 阿里巴巴云原生公众号 作为 OAM（Open Application Model）在 Kubernetes 上的实现，KubeVela 项目从 oam-kubernetes-runtime 演进至今不过半年多时间，但...
+作者 | KubeVela 项目维护者 来源 | 阿里巴巴云原生公众号 作为 OAM（Open Application Model）在 Kubernetes 上的实现，KubeVela 项目从 oam-kubernetes-runtime 演进至今不过半年多时间，但...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://ucc.alicdn.com/pic/developer-ecology/e0556b04e67243da8f08430f7b29c3eb.png  'KubeVela 1.0 -开启可编程式应用平台的未来') 

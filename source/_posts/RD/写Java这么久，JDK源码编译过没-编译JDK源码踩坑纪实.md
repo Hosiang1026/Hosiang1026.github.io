@@ -10,7 +10,7 @@ abbrlink: 9b88203a
 date: 2021-04-15 09:19:21
 ---
 
-&emsp;&emsp;好奇害死羊 很多小伙伴们做Java开发，天天写Java代码，肯定离不开Java基础环境：JDK，毕竟我们写好的Java代码也是跑在JVM虚拟机上。 一般来说，我们学Java之前，第一步就是安装JDK环境。这个...
+好奇害死羊 很多小伙伴们做Java开发，天天写Java代码，肯定离不开Java基础环境：JDK，毕竟我们写好的Java代码也是跑在JVM虚拟机上。 一般来说，我们学Java之前，第一步就是安装JDK环境。这个...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://codesheep.oss-cn-hangzhou.aliyuncs.com/blog/20200715232858.png  '写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实') 

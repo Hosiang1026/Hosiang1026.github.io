@@ -10,7 +10,7 @@ abbrlink: cd3f220b
 date: 2021-04-15 10:16:56
 ---
 
-&emsp;&emsp;1 前言 最近看到了Neovim以及SpaceVim，于是上手试了一下。 2 Neovim与SpaceVim Neovim是Vim的一个分支，具有更加现代的GUI、嵌入式以及脚本化的终端、异步工作控制等等特点，默认配置文件为...
+1 前言 最近看到了Neovim以及SpaceVim，于是上手试了一下。 2 Neovim与SpaceVim Neovim是Vim的一个分支，具有更加现代的GUI、嵌入式以及脚本化的终端、异步工作控制等等特点，默认配置文件为...
 <!-- more -->
 
                                                                                                                                                                                         ### 1 前言 

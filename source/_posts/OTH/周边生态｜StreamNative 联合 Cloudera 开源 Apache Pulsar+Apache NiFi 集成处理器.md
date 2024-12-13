@@ -10,7 +10,7 @@ abbrlink: 2c021445
 date: 2021-09-28 11:55:56
 ---
 
-&emsp;&emsp;，StreamNative 和 Cloudera 官方宣布共同开源 Apache NiFi 和 Apache Pulsar 联合解决方案，将二者集成打造成完整的边缘到云数据的流平台。 StreamNative 由 Apache Pulsar 创始团队组建...
+，StreamNative 和 Cloudera 官方宣布共同开源 Apache NiFi 和 Apache Pulsar 联合解决方案，将二者集成打造成完整的边缘到云数据的流平台。 StreamNative 由 Apache Pulsar 创始团队组建...
 <!-- more -->
 
                                                                                                                     

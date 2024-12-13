@@ -10,7 +10,7 @@ abbrlink: 525f7294
 date: 2021-04-15 10:16:57
 ---
 
-&emsp;&emsp;转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 原文参考：https://blog.bitsrc.io/vscode-automations-for-frontend-developers-6c66a6f36...
+转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 原文参考：https://blog.bitsrc.io/vscode-automations-for-frontend-developers-6c66a6f36...
 <!-- more -->
 
                                                                                                                                                                                          

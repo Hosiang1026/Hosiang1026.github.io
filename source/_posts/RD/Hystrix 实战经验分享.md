@@ -10,7 +10,7 @@ abbrlink: db4d793b
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;一、背景 Hystrix是Netlifx开源的一款容错框架，防雪崩利器，具备服务降级，服务熔断，依赖隔离，监控(Hystrix Dashboard)等功能。 尽管说Hystrix官方已不再维护，且有Alibaba Sentinel等新框...
+一、背景 Hystrix是Netlifx开源的一款容错框架，防雪崩利器，具备服务降级，服务熔断，依赖隔离，监控(Hystrix Dashboard)等功能。 尽管说Hystrix官方已不再维护，且有Alibaba Sentinel等新框...
 <!-- more -->
 
                                                                                                                                                                                          

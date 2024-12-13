@@ -10,7 +10,7 @@ abbrlink: deb1c29e
 date: 2021-04-15 10:08:52
 ---
 
-&emsp;&emsp;DolphinDB是一款支持多用户多任务并发操作的高性能分布式时序数据库软件(distributed time-series database)。针对大数据的高效的内存管理是其性能优异的原因之一。本教程涉及的内存管理包括...
+DolphinDB是一款支持多用户多任务并发操作的高性能分布式时序数据库软件(distributed time-series database)。针对大数据的高效的内存管理是其性能优异的原因之一。本教程涉及的内存管理包括...
 <!-- more -->
 
                                                                                                                                                                                         DolphinDB是一款支持多用户多任务并发操作的高性能分布式时序数据库软件(distributed time-series database)。针对大数据的高效的内存管理是其性能优异的原因之一。本教程涉及的内存管理包括以下方面： 

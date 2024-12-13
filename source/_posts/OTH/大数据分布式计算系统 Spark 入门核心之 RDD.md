@@ -10,7 +10,7 @@ abbrlink: b62620b6
 date: 2021-11-24 11:55:41
 ---
 
-&emsp;&emsp;：幻好 来源：https://developer.hs.net/thread/2173 概述 Apache Spark 是一个快速且通用的集群计算系统。提供 Java、Scala、Python 和 R 中的高级 API，以及支持通用执行图的优化引擎。...
+：幻好 来源：https://developer.hs.net/thread/2173 概述 Apache Spark 是一个快速且通用的集群计算系统。提供 Java、Scala、Python 和 R 中的高级 API，以及支持通用执行图的优化引擎。...
 <!-- more -->
 
                                                                                                                     

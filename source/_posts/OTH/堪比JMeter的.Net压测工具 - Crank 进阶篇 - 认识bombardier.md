@@ -10,7 +10,7 @@ abbrlink: 5fa8ea16
 date: 2021-07-11 11:55:56
 ---
 
-&emsp;&emsp; 前言 通过之前的学习，我们已经了解了各参数以及配置的意义，接下来的文章我们分别从bombardier以及wrk入手，进一步了解彼此之间的联系 2. 认识 bombardier bombardier 是一个 HTTP(S) 基...
+ 前言 通过之前的学习，我们已经了解了各参数以及配置的意义，接下来的文章我们分别从bombardier以及wrk入手，进一步了解彼此之间的联系 2. 认识 bombardier bombardier 是一个 HTTP(S) 基...
 <!-- more -->
 
                                                                                                                     

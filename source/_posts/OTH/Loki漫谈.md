@@ -10,7 +10,7 @@ abbrlink: cd16883e
 date: 2021-04-15 09:19:21
 ---
 
-&emsp;&emsp;Loki诞生背景 Kubernetes已经成为编排领域事实上的标准，同时Prometheus也成为基于Kubernetes平台之上、监控领域的标配。Prometheus能够收集业务metrics数据，Grafana界面展示，AlertManage...
+Loki诞生背景 Kubernetes已经成为编排领域事实上的标准，同时Prometheus也成为基于Kubernetes平台之上、监控领域的标配。Prometheus能够收集业务metrics数据，Grafana界面展示，AlertManage...
 <!-- more -->
 
                                                                                                                                                                                          

@@ -10,7 +10,7 @@ abbrlink: 2261688d
 date: 2021-04-15 09:48:03
 ---
 
-&emsp;&emsp;一、前言 ClickHouse是一个用于联机分析(OLAP)的列式数据库管理系统(DBMS)；目前我们使用CH作为实时数仓用于统计分析，在做性能优化的时候使用了 物化视图 这一特性作为优化手段，本文主要分...
+一、前言 ClickHouse是一个用于联机分析(OLAP)的列式数据库管理系统(DBMS)；目前我们使用CH作为实时数仓用于统计分析，在做性能优化的时候使用了 物化视图 这一特性作为优化手段，本文主要分...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://oscimg.oschina.net/oscnet/up-21e2bd40d1663fb34ea4ca4104f803e8f50.png  'ClickHouse性能优化-试试物化视图') 

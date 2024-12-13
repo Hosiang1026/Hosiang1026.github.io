@@ -10,7 +10,7 @@ abbrlink: c742c902
 date: 2021-04-15 09:16:07
 ---
 
-&emsp;&emsp;基于内存的Redis应该是目前各种web开发业务中最为常用的key-value数据库了，我们经常在业务中用其存储用户登陆态（Session存储），加速一些热数据的查询（相比较mysql而言，速度有数量级的提...
+基于内存的Redis应该是目前各种web开发业务中最为常用的key-value数据库了，我们经常在业务中用其存储用户登陆态（Session存储），加速一些热数据的查询（相比较mysql而言，速度有数量级的提...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://segmentfault.com/img/bVcReYG  '高可用Redis服务架构分析与搭建')![Test](https://segmentfault.com/img/bVcReYG  '高可用Redis服务架构分析与搭建') 

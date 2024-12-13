@@ -10,7 +10,7 @@ abbrlink: cdee7d8e
 date: 2021-11-23 02:39:46
 ---
 
-&emsp;&emsp;好，我是张晋涛。 目前已经确定， dockershim 的代码将在 Kubernetes v1.24 版本中被正式从 Kubernetes 的代码仓库移除，预计新版本明年 4 月左右发布。对于喜欢尝鲜的小伙伴，dockershi...
+好，我是张晋涛。 目前已经确定， dockershim 的代码将在 Kubernetes v1.24 版本中被正式从 Kubernetes 的代码仓库移除，预计新版本明年 4 月左右发布。对于喜欢尝鲜的小伙伴，dockershi...
 <!-- more -->
 
                                                                                                                                                                                          

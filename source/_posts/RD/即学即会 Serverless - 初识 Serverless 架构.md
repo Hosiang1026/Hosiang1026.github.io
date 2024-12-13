@@ -10,7 +10,7 @@ abbrlink: 10d91171
 date: 2019-11-05 11:53:17
 ---
 
-&emsp;&emsp; 后台回复 手册 提前解锁下载整本 2022 Serverless 工具书！ 抛砖引玉：从云计算到 Serverless 2009 年，UC Berkeley发表了：Above the Clouds: A Berkeley View of ...
+ 后台回复 手册 提前解锁下载整本 2022 Serverless 工具书！ 抛砖引玉：从云计算到 Serverless 2009 年，UC Berkeley发表了：Above the Clouds: A Berkeley View of ...
 <!-- more -->
 
                                                                                                                     

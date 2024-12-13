@@ -10,7 +10,7 @@ abbrlink: 49b09df1
 date: 2021-04-15 09:48:03
 ---
 
-&emsp;&emsp;一、前言 IntelliJ IDEA 一直是我非常喜欢的 IDE 自从用上之后就回不了头了，但是 Ultimate 版本的费用十分昂贵，其实 JetBrains 自己就提供了6种免费申请授权的方式；本文主要介绍 通过开源...
+一、前言 IntelliJ IDEA 一直是我非常喜欢的 IDE 自从用上之后就回不了头了，但是 Ultimate 版本的费用十分昂贵，其实 JetBrains 自己就提供了6种免费申请授权的方式；本文主要介绍 通过开源...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://oscimg.oschina.net/oscnet/up-3e5070e89c81d46a24fd053fc916556d8f1.png  '免费正版 IntelliJ IDEA license 详细指南') 

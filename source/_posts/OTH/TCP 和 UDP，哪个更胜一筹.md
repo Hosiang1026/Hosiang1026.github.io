@@ -10,7 +10,7 @@ abbrlink: 196eb9a7
 date: 2021-04-15 09:19:21
 ---
 
-&emsp;&emsp;作为 TCP/IP 中两个最具有代表性的传输层协议，TCP 和 UDP 经常被拿出来相互比较。这些协议具体有什么区别，又是什么作用呢？ 在 IT 圈混迹多年的小伙伴们，对 TCP 和 UDP 肯定再熟悉不过了。...
+作为 TCP/IP 中两个最具有代表性的传输层协议，TCP 和 UDP 经常被拿出来相互比较。这些协议具体有什么区别，又是什么作用呢？ 在 IT 圈混迹多年的小伙伴们，对 TCP 和 UDP 肯定再熟悉不过了。...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://oscimg.oschina.net/oscnet/up-8bbcdec2e4ea986a57ebf167b93934fdedc.png  'TCP 和 UDP，哪个更胜一筹') 

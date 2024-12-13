@@ -10,7 +10,7 @@ abbrlink: dfe4ea36
 date: 2021-04-15 09:53:06
 ---
 
-&emsp;&emsp;本文整理自：袋鼠云技术荟 | SQL优化案例(2)：OR条件优化 数栈是云原生—站式数据中台PaaS，我们在github上有一个有趣的开源项目：https://github.com/DTStack/flinkx FlinkX是一个基于Flink...
+本文整理自：袋鼠云技术荟 | SQL优化案例(2)：OR条件优化 数栈是云原生—站式数据中台PaaS，我们在github上有一个有趣的开源项目：https://github.com/DTStack/flinkx FlinkX是一个基于Flink...
 <!-- more -->
 
                                                                                                                                                                                         本文整理自：袋鼠云技术荟 | SQL优化案例(2)：OR条件优化 

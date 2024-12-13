@@ -10,7 +10,7 @@ abbrlink: 188f734f
 date: 2021-04-15 09:48:03
 ---
 
-&emsp;&emsp;一、通过instanceof判断：返回一个布尔值 let a = []; a instanceof Array; //true let b = {}; b instanceof Array; //false instanceof运算符检测Array.prototype属性是否存在于变量a的原型...
+一、通过instanceof判断：返回一个布尔值 let a = []; a instanceof Array; //true let b = {}; b instanceof Array; //false instanceof运算符检测Array.prototype属性是否存在于变量a的原型...
 <!-- more -->
 
                                                                                                                                                                                          

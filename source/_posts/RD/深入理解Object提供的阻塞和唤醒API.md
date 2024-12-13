@@ -10,7 +10,7 @@ abbrlink: 16d52ba0
 date: 2021-04-15 09:19:21
 ---
 
-&emsp;&emsp;点击上方蓝字 ↑↑ Throwable文摘 关注公众号设置星标，不定时推送高质量原创文章 关注 前提 前段时间花了大量时间去研读JUC中同步器AbstractQueuedSynchronizer的源码实现，再结合很久之前看...
+点击上方蓝字 ↑↑ Throwable文摘 关注公众号设置星标，不定时推送高质量原创文章 关注 前提 前段时间花了大量时间去研读JUC中同步器AbstractQueuedSynchronizer的源码实现，再结合很久之前看...
 <!-- more -->
 
                                                                                                                                                                                          

@@ -178,7 +178,7 @@ function writeFiles(index, title, cover, desc, content) {
         "cover_picture: '"+cover+"'\n" +
         "---\n" +
         "\n" +
-        "&emsp;&emsp;"+desc+"\n" +
+        ""+desc+"\n" +
         "<!-- more -->\n"+ content;
     console.log(title + " File has been created-"+index + "cover_picture: '"+cover+"'");
     fs.writeFileSync("./source/_posts/sync/"+title+".md", fileContent, (err) => {

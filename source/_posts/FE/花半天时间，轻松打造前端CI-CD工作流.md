@@ -10,7 +10,7 @@ abbrlink: c0273171
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;点击上方蓝字“前端司南”关注我 您的关注意义重大 原创@前端司南 CI/CD 是 Continuous Intergration/Continuous Deploy 的简称，翻译过来就是持续集成/持续部署。CD 也会被解释为持续交付（...
+点击上方蓝字“前端司南”关注我 您的关注意义重大 原创@前端司南 CI/CD 是 Continuous Intergration/Continuous Deploy 的简称，翻译过来就是持续集成/持续部署。CD 也会被解释为持续交付（...
 <!-- more -->
 
                                                                                                                                                                                          

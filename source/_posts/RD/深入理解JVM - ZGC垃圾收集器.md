@@ -10,7 +10,7 @@ abbrlink: 73cf1acf
 date: 2021-04-15 09:19:21
 ---
 
-&emsp;&emsp;如果下面的一些概念有些不清楚的可以先看深入理解JVM - 垃圾收集器和深入理解JVM - Shenandoah垃圾收集器。 ZGC（Z Garbage Collector）是一款由Oracle公司研发的，以低延迟为首要目标的一款...
+如果下面的一些概念有些不清楚的可以先看深入理解JVM - 垃圾收集器和深入理解JVM - Shenandoah垃圾收集器。 ZGC（Z Garbage Collector）是一款由Oracle公司研发的，以低延迟为首要目标的一款...
 <!-- more -->
 
                                                                                                                                                                                         如果下面的一些概念有些不清楚的可以先看深入理解JVM - 垃圾收集器和深入理解JVM - Shenandoah垃圾收集器。 

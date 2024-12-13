@@ -10,7 +10,7 @@ abbrlink: bc593011
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;关于我 我的博客|文章首发 go-rate是速率限制器库,基于 Token Bucket(令牌桶)算法实现。 go-rate被用在LangTrend的生产中 用于遵守GitHub API速率限制。 速率限制可以完成一些特殊的功能需求...
+关于我 我的博客|文章首发 go-rate是速率限制器库,基于 Token Bucket(令牌桶)算法实现。 go-rate被用在LangTrend的生产中 用于遵守GitHub API速率限制。 速率限制可以完成一些特殊的功能需求...
 <!-- more -->
 
                                                                                                                                                                                         #### 关于我 

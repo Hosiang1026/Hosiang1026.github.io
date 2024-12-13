@@ -10,7 +10,7 @@ abbrlink: 232d570d
 date: 2021-04-15 10:04:46
 ---
 
-&emsp;&emsp;BFC到底是什么东西 BFC 全称：Block Formatting Context， 名为 "块级格式化上下文"。 W3C官方解释为：BFC它决定了元素如何对其内容进行定位，以及与其它元素的关系和相互作用，当涉及到可视...
+BFC到底是什么东西 BFC 全称：Block Formatting Context， 名为 "块级格式化上下文"。 W3C官方解释为：BFC它决定了元素如何对其内容进行定位，以及与其它元素的关系和相互作用，当涉及到可视...
 <!-- more -->
 
                                                                                                                                                                                         #### BFC到底是什么东西 

@@ -10,7 +10,7 @@ abbrlink: ae8ed19a
 date: 2021-04-15 09:48:03
 ---
 
-&emsp;&emsp;YAML 是一种非常简洁/强大/专门用来写配置文件的语言！ YAML 全称是 ”YAML Ain’t a Markup Language” 的递归缩写，该语言的设计参考了 JSON / XML 和 SDL 等语言,强调以数据为中心，简洁易...
+YAML 是一种非常简洁/强大/专门用来写配置文件的语言！ YAML 全称是 ”YAML Ain’t a Markup Language” 的递归缩写，该语言的设计参考了 JSON / XML 和 SDL 等语言,强调以数据为中心，简洁易...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://segmentfault.com/img/bVcRdX0  'Kubernetes 之 YAML 语法')![Test](https://segmentfault.com/img/bVcRdX0  'Kubernetes 之 YAML 语法') 

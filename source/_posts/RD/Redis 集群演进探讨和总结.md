@@ -10,7 +10,7 @@ abbrlink: 90f523c1
 date: 2021-04-15 09:19:21
 ---
 
-&emsp;&emsp;Redis为什么需要集群？ 首先Redis单实例主要有单点，容量有限，流量压力上限的问题。 Redis单点故障，可以通过主从复制replication，和自动故障转移sentinel哨兵机制。 但Redis单Master实例提...
+Redis为什么需要集群？ 首先Redis单实例主要有单点，容量有限，流量压力上限的问题。 Redis单点故障，可以通过主从复制replication，和自动故障转移sentinel哨兵机制。 但Redis单Master实例提...
 <!-- more -->
 
                                                                                                                                                                                         Redis为什么需要集群？ 

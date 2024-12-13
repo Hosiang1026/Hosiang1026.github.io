@@ -46,7 +46,7 @@
                 <div id="albumList" class="iso-box-wrapper col4-iso-box" style="margin-left: -20px;"></div>                            
             </div>
   <div id="menu" align = "center" style = "margin-top: -47px;">
-       <a id="returnAlbum" href="###" style="display:none;">返回相册列表</a>&emsp;&emsp;<a id="firstPage" href="###">首页</a>&emsp;&emsp;<a id="prePage" href="###">上一页</a>&emsp;&emsp;<a id="nextPage" href="###">下一页</a>&emsp;&emsp;<a id="lastPage" href="###">尾页</a>&emsp;&emsp;<select id="jumpWhere"></select>&emsp;&emsp;<a href="###" id="jumpPage"> 跳转</a>&emsp;&emsp;当前第<a id="current"></a>页&emsp;&emsp;总计<a id="pages"></a> 页 &emsp;&emsp;总计<a id="total"></a>条
+       <a id="returnAlbum" href="###" style="display:none;">返回相册列表</a><a id="firstPage" href="###">首页</a><a id="prePage" href="###">上一页</a><a id="nextPage" href="###">下一页</a><a id="lastPage" href="###">尾页</a><select id="jumpWhere"></select><a href="###" id="jumpPage"> 跳转</a>当前第<a id="current"></a>页总计<a id="pages"></a> 页 总计<a id="total"></a>条
    </div>  
  </div>
 

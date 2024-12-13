@@ -10,7 +10,7 @@ abbrlink: 3cca5588
 date: 2021-04-15 09:48:03
 ---
 
-&emsp;&emsp;前言 今天来介绍 go-zero 生态的另一个组件 go-stash。这是一个 logstash 的 Go 语言替代版，我们用 go-stash 相比原先的 logstash 节省了2/3的服务器资源。如果你在用 logstash，不妨试试，...
+前言 今天来介绍 go-zero 生态的另一个组件 go-stash。这是一个 logstash 的 Go 语言替代版，我们用 go-stash 相比原先的 logstash 节省了2/3的服务器资源。如果你在用 logstash，不妨试试，...
 <!-- more -->
 
                                                                                                                                                                                         #### 前言 

@@ -10,7 +10,7 @@ abbrlink: 16a3025f
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;一、Yarn介绍 Yarn是由Facebook、Google、Exponent 和 Tilde 联合推出了一个新的 JS 包管理工具 ，正如官方文档中写的，Yarn 是为了弥补 npm 的一些缺陷而出现的。 二、Yarn优势 1、速度快 ...
+一、Yarn介绍 Yarn是由Facebook、Google、Exponent 和 Tilde 联合推出了一个新的 JS 包管理工具 ，正如官方文档中写的，Yarn 是为了弥补 npm 的一些缺陷而出现的。 二、Yarn优势 1、速度快 ...
 <!-- more -->
 
                                                                                                                                                                                         #### 一、Yarn介绍 

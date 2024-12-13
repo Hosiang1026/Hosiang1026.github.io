@@ -10,7 +10,7 @@ date: 2014-01-01 00:00:00
 cover_picture: 
 ---
 
-&emsp;&emsp;山河日月皆入梦，故人踏星似归来。
+山河日月皆入梦，故人踏星似归来。
 <!-- more -->
 
 ![upgrade](/images/upgrade.jpg "网站正在升级中") 

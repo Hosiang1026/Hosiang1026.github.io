@@ -10,7 +10,7 @@ abbrlink: b337f0f5
 date: 2022-01-04 11:55:56
 ---
 
-&emsp;&emsp;跳动流式数据集成基于Flink Checkpoint两阶段提交的实践和优化 背景 背景 字节跳动开发套件数据集成团队（DTS ，Data Transmission Service）在字节跳动内基于 Flink 实现了流批一体的数...
+跳动流式数据集成基于Flink Checkpoint两阶段提交的实践和优化 背景 背景 字节跳动开发套件数据集成团队（DTS ，Data Transmission Service）在字节跳动内基于 Flink 实现了流批一体的数...
 <!-- more -->
 
                                                                                                                     

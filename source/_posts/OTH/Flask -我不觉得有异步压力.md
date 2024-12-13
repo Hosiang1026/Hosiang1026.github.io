@@ -10,7 +10,7 @@ abbrlink: '5721e686'
 date: 2021-04-14 07:54:42
 ---
 
-&emsp;&emsp;英文 | I'm not feeling the async pressure【1】 原作 | Armin Ronacher，2020.01.01 译者 | 豌豆花下猫@Python猫 声明 ：本翻译基于CC BY-NC-SA 4.0【2】授权协议，内容略有改动，转载请保...
+英文 | I'm not feeling the async pressure【1】 原作 | Armin Ronacher，2020.01.01 译者 | 豌豆花下猫@Python猫 声明 ：本翻译基于CC BY-NC-SA 4.0【2】授权协议，内容略有改动，转载请保...
 <!-- more -->
 
                                                                                                                                                                                         英文 | I'm not feeling the async pressure【1】 

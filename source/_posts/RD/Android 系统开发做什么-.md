@@ -10,7 +10,7 @@ abbrlink: 542f44b8
 date: 2021-04-15 09:46:45
 ---
 
-&emsp;&emsp;题外话 18 年我从 Android 应用开发转 Framework 层开发了，从此开启了 996 幸福生活，博客技术文更新基本停滞了，被工作占据了过多的精力，实在没时间像以前一样拟稿、写作，实践、反复修改...
+题外话 18 年我从 Android 应用开发转 Framework 层开发了，从此开启了 996 幸福生活，博客技术文更新基本停滞了，被工作占据了过多的精力，实在没时间像以前一样拟稿、写作，实践、反复修改...
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://img-blog.csdnimg.cn/img_convert/98d3af1c97b4c11f07f80c4fa609909a.png  'Android 系统开发做什么-') 

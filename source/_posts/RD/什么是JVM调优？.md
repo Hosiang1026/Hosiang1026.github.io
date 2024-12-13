@@ -5,7 +5,7 @@ tags:
   - Popular
 author: csdn
 top: 3
-cover_picture: 'https://imgapi.cn/bing.php'
+cover_picture: 'photo/album/image/image_004.jpg'
 abbrlink: '39872641'
 date: 2021-04-15 08:14:57
 ---

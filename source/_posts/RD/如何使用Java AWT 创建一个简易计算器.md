@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 291
-cover_picture: 'https://pic4.zhimg.com/80/v2-255d219d833e21297b91ecd2d15d5073_720w.jpg'
+cover_picture: 'photo/album/image/image_004.jpg'
 abbrlink: 407da687
 date: 2019-05-14 11:55:11
 ---

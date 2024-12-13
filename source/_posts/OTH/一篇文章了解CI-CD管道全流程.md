@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 882
-cover_picture: 'https://api.ixiaowai.cn/gqapi/gqapi.php'
+cover_picture: photo/album/image/image_004.jpg
 abbrlink: 5d2ee92a
 date: 2021-04-15 09:53:06
 ---

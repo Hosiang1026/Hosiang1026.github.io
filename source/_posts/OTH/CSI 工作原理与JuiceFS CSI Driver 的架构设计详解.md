@@ -6,7 +6,7 @@ tags:
 author: OSChina
 top: 298
 cover_picture: >-
-  https://imgapi.cn/bing.php
+  photo/album/image/image_004.jpg
 abbrlink: a288ecc
 date: 2022-03-27 11:56:25
 ---

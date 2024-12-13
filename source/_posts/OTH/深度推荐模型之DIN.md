@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 1985
-cover_picture: 'https://img-blog.csdnimg.cn/20210118190044920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d1emhvbmdxaWFuZw==,size_1,color_FFFFFF,t_70#pic_center'
+cover_picture: 'photo/album/image/image_004.jpg'
 abbrlink: ced2bb3a
 date: 2021-04-15 09:46:45
 ---

@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 98
-cover_picture: 'https://oscimg.oschina.net/oscnet/b6c0f153-afbc-4191-bf3e-aeb25c57c418.png'
+cover_picture: 'photo/album/image/image_004.jpg'
 abbrlink: 2a5726df
 date: 2022-03-24 11:55:54
 ---

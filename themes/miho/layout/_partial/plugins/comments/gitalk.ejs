@@ -14,17 +14,4 @@
     });
 gitalk.render('gitalk');
 
-let cmtBtns = document.getElementsByClassName('gitment-comments-init-btn');
-  let isClicked = false;
-
-  let timer = setInterval(() => {
-    Array.prototype.forEach.call(cmtBtns, item => {
-      item.click();
-      isClicked = true;
-      if(isClicked) {
-        clearInterval(timer);
-        console.log('Clear timer.')
-      }        
-    })
-  }, 1000)
 </script>

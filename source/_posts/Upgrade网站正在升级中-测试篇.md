@@ -1,6 +1,6 @@
 ---
-title: Upgrade系列-网站正在升级中-测试篇
-categories: 升级版本
+title: Upgrade网站正在升级中-测试篇
+categories: 原创文章
 author: 狂欢马克思
 tags:
   - Upgrade

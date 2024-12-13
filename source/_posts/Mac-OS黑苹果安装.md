@@ -10,7 +10,7 @@ abbrlink: 2e88617f
 date: 2024-04-15 09:46:45
 ---
 
-&emsp;&emsp;**分享重点：**Clover配置、SSDT和DSTD打补丁
+**分享重点：**Clover配置、SSDT和DSTD打补丁
 <!-- more -->
 
 ## 1.0 - 操作系统

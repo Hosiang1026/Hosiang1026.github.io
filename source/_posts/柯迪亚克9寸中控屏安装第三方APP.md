@@ -4,10 +4,10 @@ categories: 原创文章
 author: 狂欢马克思
 tags:
   - Hobby
-top: 1
+top: 3
 cover_picture: photo/album/image/image_162.png
 abbrlink: cebc765c
-date: 2024-12-12 00:00:00
+date: 2024-12-13 10:04:00
 ---
 
 合众北斗公司-9寸中控屏车机，因有安装白名单以外APP限制，而且采用悟空推送不了的，不需要Root，通用方法：使用双公头USB数据线连接，通过adb命令安装第三方APP，不需要手机开热点WiFi，无任何风险。

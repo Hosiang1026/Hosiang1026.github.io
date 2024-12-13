@@ -11,7 +11,7 @@ cover_picture: 'photo/album/image/image_060.jpg'
 ---
 
 
-&emsp;&emsp;本篇文章，EasyUI部分问题总结，有需要的可以参考。
+本篇文章，EasyUI部分问题总结，有需要的可以参考。
 
 <!-- more -->
 

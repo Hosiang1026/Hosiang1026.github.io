@@ -11,7 +11,7 @@ cover_picture: 'photo/album/image/image_028.jpg'
 ---
 
 
-&emsp;&emsp;IDEA是一个强大的IDE，其优秀的代码提示，丰富的插件等不是Eclipse可以比拟的。IDEA的Project其实可以看做是Eclipse的Workspace，Modules可以看出是具体的项目。
+IDEA是一个强大的IDE，其优秀的代码提示，丰富的插件等不是Eclipse可以比拟的。IDEA的Project其实可以看做是Eclipse的Workspace，Modules可以看出是具体的项目。
 
 <!-- more -->
 

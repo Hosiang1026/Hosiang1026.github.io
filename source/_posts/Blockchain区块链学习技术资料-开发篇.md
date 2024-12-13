@@ -11,7 +11,7 @@ cover_picture: 'photo/album/image/image_050.jpg'
 ---
 
 
-&emsp;&emsp;本文收集了所有区块链（BlockChain）技术开发的相关资料，包括 Fabric 和 Ethereum开发资料，一应俱全，赶快 Mark 起来吧！
+本文收集了所有区块链（BlockChain）技术开发的相关资料，包括 Fabric 和 Ethereum开发资料，一应俱全，赶快 Mark 起来吧！
 
 
 <!-- more -->

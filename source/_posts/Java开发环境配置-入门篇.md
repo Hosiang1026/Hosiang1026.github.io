@@ -11,7 +11,7 @@ cover_picture: 'photo/album/image/image_028.jpg'
 ---
 
 
-&emsp;&emsp;Java 是由Sun Microsystems公司于1995年5月推出的高级程序设计语言。Java可运行于多个平台，如Windows, Mac OS，及其他多种UNIX版本的系统。
+Java 是由Sun Microsystems公司于1995年5月推出的高级程序设计语言。Java可运行于多个平台，如Windows, Mac OS，及其他多种UNIX版本的系统。
 
 <!-- more -->
 

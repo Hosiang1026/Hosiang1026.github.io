@@ -1,5 +1,5 @@
 ---
-title: 推荐系列--鸿蒙学院-鸿蒙IDE迎来重大更新，新特性足以让你尖叫
+title: 推荐系列-鸿蒙学院-鸿蒙IDE迎来重大更新，新特性足以让你尖叫
 categories: 热门文章
 tags:
   - Popular

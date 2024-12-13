@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-面经手册 · 第29篇《Spring IOC 特性有哪些，不会读不懂源码！》
+title: 推荐系列-面经手册-Spring IOC 特性有哪些，不会读不懂源码！
 categories: 热门文章
 tags:
   - Popular

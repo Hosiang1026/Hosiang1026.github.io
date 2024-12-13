@@ -11,13 +11,13 @@ cover_picture: 'photo/album/image/image_108.png'
 ---
 
 
-&emsp;&emsp;以前对象之间的引用是通过new来调用实现，有了Spring IOC,我们可以把对象之间的引用交给他来管理，这样就把控制权交给了Spring，所以就叫做控制反转。
+以前对象之间的引用是通过new来调用实现，有了Spring IOC,我们可以把对象之间的引用交给他来管理，这样就把控制权交给了Spring，所以就叫做控制反转。
 
 <!-- more -->
 
 ![Spring](photo/album/image/image_108.png  "Spring系列-详解核心IOC-开发篇")
 
-&emsp;&emsp;Spring IOC的实现用到了设计模式：简单工厂，他也是从简单工厂进化而来的，下面我们看看Spring的IOC是如何进化来的。
+Spring IOC的实现用到了设计模式：简单工厂，他也是从简单工厂进化而来的，下面我们看看Spring的IOC是如何进化来的。
 
 ![image](https://raw.githubusercontent.com/Hosiang1026/springioc/master/src/main/resources/images/springioc.png)
 

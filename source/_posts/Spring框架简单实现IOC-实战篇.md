@@ -11,15 +11,15 @@ cover_picture: 'photo/album/image/image_108.png'
 ---
 
 
-&emsp;&emsp;IoC是Spring框架的核心内容，IoC(Inversion of Control)控制反转，是一种设计思想，DI(依赖注入)是实现IoC的一种方法。其实spring就是一个容器，一个bean容器。主要是完成了完成对象的创建和依赖的管理注入。
+IoC是Spring框架的核心内容，IoC(Inversion of Control)控制反转，是一种设计思想，DI(依赖注入)是实现IoC的一种方法。其实spring就是一个容器，一个bean容器。主要是完成了完成对象的创建和依赖的管理注入。
 
 <!-- more -->
 
 ![Spring](photo/album/image/image_109.png "Spring系列-简单实现IOC-实战篇")
 
-&emsp;&emsp;所谓控制反转，就是把原先我们代码里面需要实现的对象（bean）创建、依赖的代码，反转给ioc容器来帮忙实现，也就是 ioc 容器帮我们做了原本应该我门自己实现的对象创建和依赖的内容。
+所谓控制反转，就是把原先我们代码里面需要实现的对象（bean）创建、依赖的代码，反转给ioc容器来帮忙实现，也就是 ioc 容器帮我们做了原本应该我门自己实现的对象创建和依赖的内容。
 
-&emsp;&emsp;我们有一个业务逻辑模块 UserService 和一个实体类 User 还有一个持久层模块 UserDAO 和它的实现 UserDAOImpl。 
+我们有一个业务逻辑模块 UserService 和一个实体类 User 还有一个持久层模块 UserDAO 和它的实现 UserDAOImpl。 
 他们之间 UserService 调用（依赖）UserDAO 来操作数据库。我们在test 中运行的时候呢，要创建 UserService 和 UserDAO 并将 UserDAO set 到 UserService 中，这是我门正常的逻辑。
 
 好了、现在我们要用自己编写的简单的ioc 来处理这些关系。

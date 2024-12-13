@@ -12,7 +12,7 @@ cover_picture: 'photo/album/image/image_057.jpg'
 ---
 
 
-&emsp;&emsp;愿情话终主，你不再孤独。 
+愿情话终主，你不再孤独。 
 
 <!-- more -->
 

@@ -3,7 +3,7 @@ title: Windows操作系统安装-入门篇
 categories: 原创文章
 author: 狂欢马克思
 tags:
-  - Windows
+  - System
 top: 1
 abbrlink: 4355022a
 date: 2017-01-06 00:00:00
@@ -11,7 +11,7 @@ cover_picture: 'photo/album/image/image_046.jpg'
 ---
 
 
-&emsp;&emsp;Microsoft开发的Windows是目前世界上用户最多、并且兼容性最强的操作系统。最早的Windows操作系统从1985年就推出了，Microsoft Windows是彩色界面的操作系统。
+Microsoft开发的Windows是目前世界上用户最多、并且兼容性最强的操作系统。最早的Windows操作系统从1985年就推出了，Microsoft Windows是彩色界面的操作系统。
 
 <!-- more -->
 

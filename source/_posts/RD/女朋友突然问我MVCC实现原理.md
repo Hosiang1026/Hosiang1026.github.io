@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-懵了！女朋友突然问我MVCC实现原理
+title: 推荐系列-女朋友突然问我MVCC实现原理
 categories: 热门文章
 tags:
   - Popular

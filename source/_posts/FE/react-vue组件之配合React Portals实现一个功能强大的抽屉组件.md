@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-《精通react-vue组件设计》之配合React Portals实现一个功能强大的抽屉组件
+title: 推荐系列-react-vue组件之配合React Portals实现一个功能强大的抽屉组件
 categories: 热门文章
 tags:
   - Popular

@@ -11,7 +11,7 @@ cover_picture: 'photo/album/image/image_012.jpg'
 ---
 
 
-&emsp;&emsp;Android是一种基于Linux的自由及开放源代码的操作系统，主要使用于移动设备，如智能手机和平板电脑，由Google公司和开放手机联盟领导及开发。最初由Andy Rubin开发，主要支持手机。2005年8月由Google收购注资。 
+Android是一种基于Linux的自由及开放源代码的操作系统，主要使用于移动设备，如智能手机和平板电脑，由Google公司和开放手机联盟领导及开发。最初由Andy Rubin开发，主要支持手机。2005年8月由Google收购注资。 
 
 <!-- more -->
 

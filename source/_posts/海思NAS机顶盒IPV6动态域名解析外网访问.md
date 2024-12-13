@@ -1,5 +1,5 @@
 ---
-title: 原创系列-NAS盒子-IPV6动态域名解析外网访问-入门篇
+title: 海思NAS机顶盒IPV6动态域名解析外网访问-入门篇
 categories: 原创文章
 author: 狂欢马克思
 tags:

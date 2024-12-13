@@ -1,5 +1,5 @@
 ---
-title: 原创系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP
+title: 斯柯达-柯迪亚克9寸中控屏安装第三方APP
 categories: 原创文章
 author: 狂欢马克思
 tags:

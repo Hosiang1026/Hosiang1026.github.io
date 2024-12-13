@@ -3,7 +3,7 @@ title: 原创系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP
 categories: 原创文章
 author: 狂欢马克思
 tags:
-  - Popular
+  - Car
 top: 1
 cover_picture: photo/album/image/image_162.png
 abbrlink: cebc765c
@@ -21,7 +21,7 @@ date: 2024-12-12 00:00:00
 1. Windows系统的笔记本一款
 2. 双公头USB数据线一条（某宝购买，很便宜的）
 
-<p align="center">2018款-柯迪亚克-车机系统信</p>
+<p align="center">2018款-柯迪亚克-车机系统信息</p>
 
 ![Popular](/photo/album/image/image_154.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 

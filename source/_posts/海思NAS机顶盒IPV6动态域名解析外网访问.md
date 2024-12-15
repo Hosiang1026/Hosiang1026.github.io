@@ -5,7 +5,7 @@ author: 狂欢马克思
 tags:
   - Hobby
 top: 4
-cover_picture: https://www.ecoo.top/img/400x250xhuawei.png.pagespeed.ic.IoK3PayLgZ.webp
+cover_picture: 'https://pic.haoxiang.eu.org/image/2024/12/15/ipekvt.png'
 abbrlink: 1489a919
 date: 2024-12-13 10:04:00
 ---
@@ -18,7 +18,7 @@ date: 2024-12-13 10:04:00
 
 ### 一、家里网络拓扑图
 
-![NAS](photo/album/image/16926450.jpg "家里网络拓扑图")
+![NAS](https://pic.haoxiang.eu.org/image/2024/12/15/ip39fq.jpg "家里网络拓扑图")
 
 介绍一下网络布局，全屋设置同名WiFI，而路由器A和路由器B选择AP模式，是为了减少NAT转发降速，同时保持同一网段，方便所有联网的设备漫游、电视投屏、资源共享，每家的网络情况不一样，仅供参考。
 ```
@@ -41,7 +41,7 @@ WiFi名称：www.zhangsan.cn
 申请一个域名：`zhangsan.cn`（比如我的名字为张三），`nas.zhangsan.cn` 二级域名绑定NAS盒子，国内的域名记得备案。我家里运营商送的光猫用路由模式已封禁端口：80、443，无法使用SSL，好在支持IPV6。
 IPV6检测：[https://ipw.cn/ipv6](https://ipw.cn/ipv6) ，或者查看NAS盒子是否支持IPV6，输入命令：`ifconfig`
 
-![NAS](photo/album/image/734694.jpg "家里网络拓扑图")
+![NAS](https://pic.haoxiang.eu.org/image/2024/12/15/iq66l7.jpg "家里网络拓扑图")
 
 #### 1. 安装DDNS-GO
    我申请的域名是腾讯云的，以下就以腾讯云DDNS为例。NAS盒子用Docker安装DDNS-GO，用于自动更新解析IPV6，钉钉群机器人发送更新通知，安装命令如下：
@@ -52,13 +52,13 @@ docker run -d --restart=always --name ddns-go --net=host -v /mnt/sda1/ddns:/root
 
 安装完，访问 `http://NAS盒子IP:9877` 配置一下
 
-![NAS](photo/album/image/67538030.jpg "家里网络拓扑图")
+![NAS](https://pic.haoxiang.eu.org/image/2024/12/15/iq6ltz.jpg "家里网络拓扑图")
 
 #### 2. 腾讯云DNS解析
 （1）API 密钥
    腾讯云登陆-DNSPod - 访问管理-API 密钥(用于DDNS-GO配置：DNS服务商填写ID和Token)，可以直接访问[https://console.dnspod.cn/account/token/token](https://console.dnspod.cn/account/token/token)
 
- ![NAS](photo/album/image/18172115.jpg "家里网络拓扑图")
+ ![NAS](https://pic.haoxiang.eu.org/image/2024/12/15/iq61ka.jpg "家里网络拓扑图")
 
 
 （2）DNS解析
@@ -66,7 +66,7 @@ docker run -d --restart=always --name ddns-go --net=host -v /mnt/sda1/ddns:/root
 
 域名解析检测：[https://tool.dnspod.cn](https://tool.dnspod.cn)
 
-![NAS](photo/album/image/461245.jpg "家里网络拓扑图")
+![NAS](https://pic.haoxiang.eu.org/image/2024/12/15/iq639c.jpg "家里网络拓扑图")
 
 上面所有操作完成后：
 家里内网可以访问：`http://nas.zhangsan.cn`
@@ -137,15 +137,15 @@ ln -sf /etc/nginx/sites-{available,enabled}/nginx_router2
 nginx -s reload
 ```
 
-![NAS](photo/album/image/26015332.jpg "家里网络拓扑图")
+![NAS](https://pic.haoxiang.eu.org/image/2024/12/15/iq69da.jpg "家里网络拓扑图")
 
 路由器A访问：`http://nas.zhangsan.cn:82` -->192.168.1.3
 
-![NAS](photo/album/image/40399854.jpg "家里网络拓扑图")
+![NAS](https://pic.haoxiang.eu.org/image/2024/12/15/iq6ch8.jpg "家里网络拓扑图")
 
 路由器B访问：`http://nas.zhangsan.cn:83` -->192.168.1.4
 
-![NAS](photo/album/image/76043474.jpg "家里网络拓扑图")
+![NAS](https://pic.haoxiang.eu.org/image/2024/12/15/iq6h83.jpg "家里网络拓扑图")
 
 虽然IPV6是未来的趋势，对于设备所在的外网不支持IPV6，就没办法访问了，这个问题，暂时还没找到解决方案。更多IPV6文档，请查看：https://ipw.cn/doc
 最后，第一次论坛发帖，希望大家评论点赞多多支持！！！

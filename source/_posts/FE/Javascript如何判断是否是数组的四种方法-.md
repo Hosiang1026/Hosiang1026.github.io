@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Javascript如何判断是否是数组的四种方法-
+title: Javascript如何判断是否是数组的四种方法-
 categories: 热门文章
 tags:
   - Popular

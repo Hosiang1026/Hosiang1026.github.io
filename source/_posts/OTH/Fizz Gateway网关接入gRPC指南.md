@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Fizz Gateway网关接入gRPC指南
+title: Fizz Gateway网关接入gRPC指南
 categories: 热门文章
 tags:
   - Popular

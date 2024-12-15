@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-鸿蒙开源第三方组件——Zbar_ohos条形码阅读器
+title: 鸿蒙开源第三方组件——Zbar_ohos条形码阅读器
 categories: 热门文章
 tags:
   - Popular

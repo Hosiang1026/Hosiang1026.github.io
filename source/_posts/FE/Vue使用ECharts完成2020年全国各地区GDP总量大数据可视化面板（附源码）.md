@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Vue使用ECharts完成2020年全国各地区GDP总量大数据可视化面板（附源码）
+title: Vue使用ECharts完成2020年全国各地区GDP总量大数据可视化面板（附源码）
 categories: 热门文章
 tags:
   - Popular

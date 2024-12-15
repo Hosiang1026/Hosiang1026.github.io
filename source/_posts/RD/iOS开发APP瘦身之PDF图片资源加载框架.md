@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-iOS开发APP瘦身之PDF图片资源加载框架
+title: iOS开发APP瘦身之PDF图片资源加载框架
 categories: 热门文章
 tags:
   - Popular

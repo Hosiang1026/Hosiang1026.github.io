@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-SpringCloud Alibaba实战二十九 - SpringCloud Gateway 请求响应日志
+title: SpringCloud Alibaba实战二十九 - SpringCloud Gateway 请求响应日志
 categories: 热门文章
 tags:
   - Popular

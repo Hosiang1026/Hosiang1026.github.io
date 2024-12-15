@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-面经手册-你说，怎么把Bean塞到Spring容器
+title: 面经手册-你说，怎么把Bean塞到Spring容器
 categories: 热门文章
 tags:
   - Popular

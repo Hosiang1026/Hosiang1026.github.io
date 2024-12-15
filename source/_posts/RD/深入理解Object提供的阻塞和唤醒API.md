@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-深入理解Object提供的阻塞和唤醒API
+title: 深入理解Object提供的阻塞和唤醒API
 categories: 热门文章
 tags:
   - Popular

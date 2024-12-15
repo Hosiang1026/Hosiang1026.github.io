@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-使用码云 gitee-go 做 npm publish
+title: 使用码云 gitee-go 做 npm publish
 categories: 热门文章
 tags:
   - Popular

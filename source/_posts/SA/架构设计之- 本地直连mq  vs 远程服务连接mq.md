@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-架构设计之- 本地直连mq  vs 远程服务连接mq
+title: 架构设计之- 本地直连mq  vs 远程服务连接mq
 categories: 热门文章
 tags:
   - Popular

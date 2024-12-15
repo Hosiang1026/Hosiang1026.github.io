@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Java中的屠龙之术——如何修改语法树
+title: Java中的屠龙之术——如何修改语法树
 categories: 热门文章
 tags:
   - Popular

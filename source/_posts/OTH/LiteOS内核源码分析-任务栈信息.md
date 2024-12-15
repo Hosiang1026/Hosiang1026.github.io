@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-LiteOS内核源码分析-任务栈信息
+title: LiteOS内核源码分析-任务栈信息
 categories: 热门文章
 tags:
   - Popular

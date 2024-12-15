@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-如何用Deeplearning4j实现GAN
+title: 如何用Deeplearning4j实现GAN
 categories: 热门文章
 tags:
   - Popular

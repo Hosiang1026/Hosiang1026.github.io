@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-高可用Redis服务架构分析与搭建
+title: 高可用Redis服务架构分析与搭建
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-EventBridge 事件总线及 EDA 架构解析
+title: EventBridge 事件总线及 EDA 架构解析
 categories: 热门文章
 tags:
   - Popular

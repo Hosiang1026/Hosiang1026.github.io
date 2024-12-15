@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-当你了解了 Apache 的过去，你就了解了 Apache Way
+title: 当你了解了 Apache 的过去，你就了解了 Apache Way
 categories: 热门文章
 tags:
   - Popular

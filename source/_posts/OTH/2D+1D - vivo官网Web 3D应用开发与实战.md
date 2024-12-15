@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-2D+1D - vivo官网Web 3D应用开发与实战
+title: 2D+1D - vivo官网Web 3D应用开发与实战
 categories: 热门文章
 tags:
   - Popular

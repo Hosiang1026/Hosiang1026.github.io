@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Vue 3 生命周期完整指南
+title: Vue 3 生命周期完整指南
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-GraphQL 在 HTTP-2 世界中仍然有意义吗-
+title: GraphQL 在 HTTP-2 世界中仍然有意义吗-
 categories: 热门文章
 tags:
   - Popular

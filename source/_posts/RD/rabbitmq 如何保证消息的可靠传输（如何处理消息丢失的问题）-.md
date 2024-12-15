@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-rabbitmq 如何保证消息的可靠传输（如何处理消息丢失的问题）-
+title: rabbitmq 如何保证消息的可靠传输（如何处理消息丢失的问题）-
 categories: 热门文章
 tags:
   - Popular

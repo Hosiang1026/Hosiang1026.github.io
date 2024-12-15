@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-聊聊 Vue3.0 响应式数据那些事儿
+title: 聊聊 Vue3.0 响应式数据那些事儿
 categories: 热门文章
 tags:
   - Popular

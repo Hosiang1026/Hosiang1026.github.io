@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-(二十七) 跟我学习SpringCloud-使用Hystrix实现容错处理
+title: (二十七) 跟我学习SpringCloud-使用Hystrix实现容错处理
 categories: 热门文章
 tags:
   - Popular

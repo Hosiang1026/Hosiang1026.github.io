@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-你写的Java对象究竟占多少内存-
+title: 你写的Java对象究竟占多少内存-
 categories: 热门文章
 tags:
   - Popular

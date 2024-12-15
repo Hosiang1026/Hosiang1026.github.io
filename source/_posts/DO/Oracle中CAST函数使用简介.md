@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Oracle中CAST函数使用简介
+title: Oracle中CAST函数使用简介
 categories: 热门文章
 tags:
   - Popular

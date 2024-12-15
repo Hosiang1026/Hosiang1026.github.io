@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-HarmonyOS三方件开发指南(17)-BottomNavigationBar
+title: HarmonyOS三方件开发指南(17)-BottomNavigationBar
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-ElasticSearch结合MySQL的两种架构模式对比
+title: ElasticSearch结合MySQL的两种架构模式对比
 categories: 热门文章
 tags:
   - Popular

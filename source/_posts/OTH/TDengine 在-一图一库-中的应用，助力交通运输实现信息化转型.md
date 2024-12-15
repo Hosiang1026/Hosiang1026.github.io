@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-TDengine 在-一图一库-中的应用，助力交通运输实现信息化转型
+title: TDengine 在-一图一库-中的应用，助力交通运输实现信息化转型
 categories: 热门文章
 tags:
   - Popular

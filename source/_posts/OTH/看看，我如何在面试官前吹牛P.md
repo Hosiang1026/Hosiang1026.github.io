@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-看看，我如何在面试官前吹牛P
+title: 看看，我如何在面试官前吹牛P
 categories: 热门文章
 tags:
   - Popular

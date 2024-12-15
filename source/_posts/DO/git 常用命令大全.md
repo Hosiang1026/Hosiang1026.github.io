@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-git 常用命令大全
+title: git 常用命令大全
 categories: 热门文章
 tags:
   - Popular

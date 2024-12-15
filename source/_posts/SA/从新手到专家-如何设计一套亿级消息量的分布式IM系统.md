@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-从新手到专家-如何设计一套亿级消息量的分布式IM系统
+title: 从新手到专家-如何设计一套亿级消息量的分布式IM系统
 categories: 热门文章
 tags:
   - Popular

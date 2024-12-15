@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-JavaScript (算数，比较，逻辑，赋值) 运算符
+title: JavaScript (算数，比较，逻辑，赋值) 运算符
 categories: 热门文章
 tags:
   - Popular

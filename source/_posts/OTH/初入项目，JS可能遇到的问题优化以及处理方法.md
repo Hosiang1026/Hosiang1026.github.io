@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-初入项目，JS可能遇到的问题优化以及处理方法
+title: 初入项目，JS可能遇到的问题优化以及处理方法
 categories: 热门文章
 tags:
   - Popular

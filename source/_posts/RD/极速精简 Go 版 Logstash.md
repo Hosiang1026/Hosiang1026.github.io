@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-极速精简 Go 版 Logstash
+title: 极速精简 Go 版 Logstash
 categories: 热门文章
 tags:
   - Popular

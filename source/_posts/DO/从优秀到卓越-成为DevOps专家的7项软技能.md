@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-从优秀到卓越-成为DevOps专家的7项软技能
+title: 从优秀到卓越-成为DevOps专家的7项软技能
 categories: 热门文章
 tags:
   - Popular

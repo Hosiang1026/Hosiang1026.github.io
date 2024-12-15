@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-一文读懂蓝绿发布-A-B 测试和金丝雀发布的优缺点
+title: 一文读懂蓝绿发布-A-B 测试和金丝雀发布的优缺点
 categories: 热门文章
 tags:
   - Popular

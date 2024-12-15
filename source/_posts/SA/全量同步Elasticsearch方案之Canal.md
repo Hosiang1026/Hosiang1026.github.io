@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-全量同步Elasticsearch方案之Canal
+title: 全量同步Elasticsearch方案之Canal
 categories: 热门文章
 tags:
   - Popular

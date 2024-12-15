@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-MASA Blazor入门这一篇就够了
+title: MASA Blazor入门这一篇就够了
 categories: 热门文章
 tags:
   - Popular

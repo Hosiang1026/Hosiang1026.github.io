@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Zadig 构建效率提升 40% 背后的实践思路
+title: Zadig 构建效率提升 40% 背后的实践思路
 categories: 热门文章
 tags:
   - Popular

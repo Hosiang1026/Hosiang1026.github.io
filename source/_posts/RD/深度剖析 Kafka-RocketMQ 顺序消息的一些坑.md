@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-深度剖析 Kafka-RocketMQ 顺序消息的一些坑
+title: 深度剖析 Kafka-RocketMQ 顺序消息的一些坑
 categories: 热门文章
 tags:
   - Popular

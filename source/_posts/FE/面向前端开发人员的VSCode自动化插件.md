@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-面向前端开发人员的VSCode自动化插件
+title: 面向前端开发人员的VSCode自动化插件
 categories: 热门文章
 tags:
   - Popular

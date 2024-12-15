@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Vue起步（模板语法-循环语句）
+title: Vue起步（模板语法-循环语句）
 categories: 热门文章
 tags:
   - Popular

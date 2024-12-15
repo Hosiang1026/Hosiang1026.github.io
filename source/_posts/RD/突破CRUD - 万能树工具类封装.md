@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-突破CRUD - 万能树工具类封装
+title: 突破CRUD - 万能树工具类封装
 categories: 热门文章
 tags:
   - Popular

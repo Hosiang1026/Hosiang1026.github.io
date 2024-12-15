@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-图解 Kafka 水印备份机制
+title: 图解 Kafka 水印备份机制
 categories: 热门文章
 tags:
   - Popular

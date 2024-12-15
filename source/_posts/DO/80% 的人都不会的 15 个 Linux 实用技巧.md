@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-80% 的人都不会的 15 个 Linux 实用技巧
+title: 80% 的人都不会的 15 个 Linux 实用技巧
 categories: 热门文章
 tags:
   - Popular

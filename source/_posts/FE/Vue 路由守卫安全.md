@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Vue 路由守卫安全
+title: Vue 路由守卫安全
 categories: 热门文章
 tags:
   - Popular

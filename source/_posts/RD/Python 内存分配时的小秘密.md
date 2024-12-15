@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Python 内存分配时的小秘密
+title: Python 内存分配时的小秘密
 categories: 热门文章
 tags:
   - Popular

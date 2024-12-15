@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-聊聊LiteOS中生成的Bin-HEX-ELF三种文件格式
+title: 聊聊LiteOS中生成的Bin-HEX-ELF三种文件格式
 categories: 热门文章
 tags:
   - Popular

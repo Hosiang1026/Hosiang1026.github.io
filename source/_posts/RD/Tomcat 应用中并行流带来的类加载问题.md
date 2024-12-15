@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Tomcat 应用中并行流带来的类加载问题
+title: Tomcat 应用中并行流带来的类加载问题
 categories: 热门文章
 tags:
   - Popular

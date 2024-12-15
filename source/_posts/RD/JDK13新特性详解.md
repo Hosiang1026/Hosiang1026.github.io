@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-JDK13新特性详解
+title: JDK13新特性详解
 categories: 热门文章
 tags:
   - Popular

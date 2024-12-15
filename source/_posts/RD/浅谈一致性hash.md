@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-浅谈一致性hash
+title: 浅谈一致性hash
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Web3D 从入门到跑路 · 3D 初体验
+title: Web3D 从入门到跑路 · 3D 初体验
 categories: 热门文章
 tags:
   - Popular

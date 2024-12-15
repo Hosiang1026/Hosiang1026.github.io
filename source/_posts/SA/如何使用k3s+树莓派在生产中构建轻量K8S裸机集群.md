@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-如何使用k3s+树莓派在生产中构建轻量K8S裸机集群
+title: 如何使用k3s+树莓派在生产中构建轻量K8S裸机集群
 categories: 热门文章
 tags:
   - Popular

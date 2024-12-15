@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-手把手教你用 Github Actions 部署前端项目
+title: 手把手教你用 Github Actions 部署前端项目
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-案例分享｜OpenVINO™  帮助医疗保健公司优化重症监护套件算法
+title: 案例分享｜OpenVINO™  帮助医疗保健公司优化重症监护套件算法
 categories: 热门文章
 tags:
   - Popular

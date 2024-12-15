@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-19 条有效的跨端 cpp 开发经验
+title: 19 条有效的跨端 cpp 开发经验
 categories: 热门文章
 tags:
   - Popular

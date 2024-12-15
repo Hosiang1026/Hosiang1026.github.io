@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-LiteOS内核源码分析-任务LOS_Schedule
+title: LiteOS内核源码分析-任务LOS_Schedule
 categories: 热门文章
 tags:
   - Popular

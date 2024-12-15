@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-尤雨溪-Vue3 考虑彻底放弃 IE 浏览器
+title: 尤雨溪-Vue3 考虑彻底放弃 IE 浏览器
 categories: 热门文章
 tags:
   - Popular

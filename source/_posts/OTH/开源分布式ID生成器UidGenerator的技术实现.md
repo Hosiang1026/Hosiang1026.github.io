@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-开源分布式ID生成器UidGenerator的技术实现
+title: 开源分布式ID生成器UidGenerator的技术实现
 categories: 热门文章
 tags:
   - Popular

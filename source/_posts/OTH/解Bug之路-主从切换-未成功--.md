@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-解Bug之路-主从切换-未成功--
+title: 解Bug之路-主从切换-未成功--
 categories: 热门文章
 tags:
   - Popular

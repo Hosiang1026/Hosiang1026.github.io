@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-并发容器与并发控制 - JUC
+title: 并发容器与并发控制 - JUC
 categories: 热门文章
 tags:
   - Popular

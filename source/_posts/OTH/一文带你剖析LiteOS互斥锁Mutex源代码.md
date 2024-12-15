@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-一文带你剖析LiteOS互斥锁Mutex源代码
+title: 一文带你剖析LiteOS互斥锁Mutex源代码
 categories: 热门文章
 tags:
   - Popular

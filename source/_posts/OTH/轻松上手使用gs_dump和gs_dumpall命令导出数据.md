@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-轻松上手使用gs_dump和gs_dumpall命令导出数据
+title: 轻松上手使用gs_dump和gs_dumpall命令导出数据
 categories: 热门文章
 tags:
   - Popular

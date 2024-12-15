@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-揭开NoahV智能运维前端框架的神秘面纱
+title: 揭开NoahV智能运维前端框架的神秘面纱
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-阿里云上万个 Kubernetes 集群大规模管理实践
+title: 阿里云上万个 Kubernetes 集群大规模管理实践
 categories: 热门文章
 tags:
   - Popular

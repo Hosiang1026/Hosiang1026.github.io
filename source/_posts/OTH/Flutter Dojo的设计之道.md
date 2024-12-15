@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Flutter Dojo的设计之道
+title: Flutter Dojo的设计之道
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-跑马灯带你深入浅出TextView的源码世界
+title: 跑马灯带你深入浅出TextView的源码世界
 categories: 热门文章
 tags:
   - Popular

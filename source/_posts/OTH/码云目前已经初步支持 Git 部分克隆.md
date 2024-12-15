@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-码云目前已经初步支持 Git 部分克隆
+title: 码云目前已经初步支持 Git 部分克隆
 categories: 热门文章
 tags:
   - Popular

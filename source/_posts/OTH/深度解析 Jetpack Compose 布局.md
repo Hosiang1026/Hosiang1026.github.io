@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-深度解析 Jetpack Compose 布局
+title: 深度解析 Jetpack Compose 布局
 categories: 热门文章
 tags:
   - Popular

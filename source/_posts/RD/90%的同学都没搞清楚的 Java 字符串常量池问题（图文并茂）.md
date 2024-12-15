@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-90%的同学都没搞清楚的 Java 字符串常量池问题（图文并茂）
+title: 90%的同学都没搞清楚的 Java 字符串常量池问题（图文并茂）
 categories: 热门文章
 tags:
   - Popular

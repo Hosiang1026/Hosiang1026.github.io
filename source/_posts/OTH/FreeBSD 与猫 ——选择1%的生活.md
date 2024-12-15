@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-FreeBSD 与猫 ——选择1%的生活
+title: FreeBSD 与猫 ——选择1%的生活
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Java 8 + 10 = Java 18
+title: Java 8 + 10 = Java 18
 categories: 热门文章
 tags:
   - Popular

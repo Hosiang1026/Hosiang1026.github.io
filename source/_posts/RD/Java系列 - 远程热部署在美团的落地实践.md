@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Java系列 - 远程热部署在美团的落地实践
+title: Java系列 - 远程热部署在美团的落地实践
 categories: 热门文章
 tags:
   - Popular

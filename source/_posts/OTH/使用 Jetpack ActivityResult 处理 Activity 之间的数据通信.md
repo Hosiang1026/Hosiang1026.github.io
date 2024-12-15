@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-使用 Jetpack ActivityResult 处理 Activity 之间的数据通信
+title: 使用 Jetpack ActivityResult 处理 Activity 之间的数据通信
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Crypto练习之CRC32应用
+title: Crypto练习之CRC32应用
 categories: 热门文章
 tags:
   - Popular

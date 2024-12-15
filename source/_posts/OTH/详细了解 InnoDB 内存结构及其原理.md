@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-详细了解 InnoDB 内存结构及其原理
+title: 详细了解 InnoDB 内存结构及其原理
 categories: 热门文章
 tags:
   - Popular

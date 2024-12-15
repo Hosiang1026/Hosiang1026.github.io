@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-飞桨与PyQt的碰撞，图形化目标检测So Easy
+title: 飞桨与PyQt的碰撞，图形化目标检测So Easy
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列--项目实战- Webpack to Vite， 为开发提速！
+title: 项目实战- Webpack to Vite， 为开发提速！
 categories: 热门文章
 tags:
   - Popular

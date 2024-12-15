@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-zookeeper的watcher是一次性的吗-！
+title: zookeeper的watcher是一次性的吗-！
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Java基础语法（五）&mdash;&mdash;方法的使用
+title: Java基础语法（五）&mdash;&mdash;方法的使用
 categories: 热门文章
 tags:
   - Popular

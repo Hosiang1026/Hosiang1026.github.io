@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-深度推荐模型之DIN
+title: 深度推荐模型之DIN
 categories: 热门文章
 tags:
   - Popular

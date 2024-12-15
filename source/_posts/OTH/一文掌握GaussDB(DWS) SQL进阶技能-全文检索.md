@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-一文掌握GaussDB(DWS) SQL进阶技能-全文检索
+title: 一文掌握GaussDB(DWS) SQL进阶技能-全文检索
 categories: 热门文章
 tags:
   - Popular

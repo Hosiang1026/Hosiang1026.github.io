@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-全面支持三大主流环境 -百度PaddlePaddle新增Windows环境支持
+title: 全面支持三大主流环境 -百度PaddlePaddle新增Windows环境支持
 categories: 热门文章
 tags:
   - Popular

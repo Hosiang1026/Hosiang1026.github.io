@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Gradle 在 Linux 系统与 Windows 系统下的安装配置
+title: Gradle 在 Linux 系统与 Windows 系统下的安装配置
 categories: 热门文章
 tags:
   - Popular

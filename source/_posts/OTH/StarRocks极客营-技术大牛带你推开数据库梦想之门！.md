@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-StarRocks极客营-技术大牛带你推开数据库梦想之门！
+title: StarRocks极客营-技术大牛带你推开数据库梦想之门！
 categories: 热门文章
 tags:
   - Popular

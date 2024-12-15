@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-你的 App 为何在 iPhone 12 上显示异常，而别人的不会-
+title: 你的 App 为何在 iPhone 12 上显示异常，而别人的不会-
 categories: 热门文章
 tags:
   - Popular

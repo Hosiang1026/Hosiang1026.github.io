@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-使用K8s遇难题-Istio来帮您！
+title: 使用K8s遇难题-Istio来帮您！
 categories: 热门文章
 tags:
   - Popular

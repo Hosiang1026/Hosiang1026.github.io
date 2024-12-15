@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-跨平台Web Canvas渲染引擎架构的设计与思考
+title: 跨平台Web Canvas渲染引擎架构的设计与思考
 categories: 热门文章
 tags:
   - Popular

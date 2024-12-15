@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-智能可视化搭建系统 Atom 服务架构演变
+title: 智能可视化搭建系统 Atom 服务架构演变
 categories: 热门文章
 tags:
   - Popular

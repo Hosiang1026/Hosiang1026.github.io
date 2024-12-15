@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-RT-Thread 内核学习笔记 - 内核对象操作API
+title: RT-Thread 内核学习笔记 - 内核对象操作API
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Golang 常见设计模式之装饰模式
+title: Golang 常见设计模式之装饰模式
 categories: 热门文章
 tags:
   - Popular

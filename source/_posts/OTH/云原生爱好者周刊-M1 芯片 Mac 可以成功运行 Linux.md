@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-云原生爱好者周刊-M1 芯片 Mac 可以成功运行 Linux
+title: 云原生爱好者周刊-M1 芯片 Mac 可以成功运行 Linux
 categories: 热门文章
 tags:
   - Popular

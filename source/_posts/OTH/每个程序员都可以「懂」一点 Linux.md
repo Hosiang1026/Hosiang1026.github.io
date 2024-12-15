@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-每个程序员都可以「懂」一点 Linux
+title: 每个程序员都可以「懂」一点 Linux
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-那些年被面试官怼的MySQL索引
+title: 那些年被面试官怼的MySQL索引
 categories: 热门文章
 tags:
   - Popular

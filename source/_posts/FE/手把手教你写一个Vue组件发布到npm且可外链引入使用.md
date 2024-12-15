@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-手把手教你写一个Vue组件发布到npm且可外链引入使用
+title: 手把手教你写一个Vue组件发布到npm且可外链引入使用
 categories: 热门文章
 tags:
   - Popular

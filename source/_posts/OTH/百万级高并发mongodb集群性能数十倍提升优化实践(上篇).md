@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-百万级高并发mongodb集群性能数十倍提升优化实践(上篇)
+title: 百万级高并发mongodb集群性能数十倍提升优化实践(上篇)
 categories: 热门文章
 tags:
   - Popular

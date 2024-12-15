@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Kotlin Vocabulary - 解构声明详解
+title: Kotlin Vocabulary - 解构声明详解
 categories: 热门文章
 tags:
   - Popular

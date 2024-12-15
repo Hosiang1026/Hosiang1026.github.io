@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-学习JVM参数前必须了解的
+title: 学习JVM参数前必须了解的
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-DolphinDB内存表详解
+title: DolphinDB内存表详解
 categories: 热门文章
 tags:
   - Popular

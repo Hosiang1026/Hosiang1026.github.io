@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-ArrayList集合底层扩容原理
+title: ArrayList集合底层扩容原理
 categories: 热门文章
 tags:
   - Popular

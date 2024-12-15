@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-mybatis源码，从配置到 mappedStatement ——  mapper.xml 是如何被解析的-
+title: mybatis源码，从配置到 mappedStatement ——  mapper.xml 是如何被解析的-
 categories: 热门文章
 tags:
   - Popular

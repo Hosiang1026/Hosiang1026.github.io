@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Apache 项目是如何推动自由和开源软件运动的-
+title: Apache 项目是如何推动自由和开源软件运动的-
 categories: 热门文章
 tags:
   - Popular

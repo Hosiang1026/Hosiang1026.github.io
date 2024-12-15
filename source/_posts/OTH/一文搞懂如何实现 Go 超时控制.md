@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-一文搞懂如何实现 Go 超时控制
+title: 一文搞懂如何实现 Go 超时控制
 categories: 热门文章
 tags:
   - Popular

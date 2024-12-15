@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Zadig 基于 OPA 实现 RBAC 和 ABAC 权限管理技术方案详解
+title: Zadig 基于 OPA 实现 RBAC 和 ABAC 权限管理技术方案详解
 categories: 热门文章
 tags:
   - Popular

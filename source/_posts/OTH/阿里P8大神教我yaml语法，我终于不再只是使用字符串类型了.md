@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-阿里P8大神教我yaml语法，我终于不再只是使用字符串类型了
+title: 阿里P8大神教我yaml语法，我终于不再只是使用字符串类型了
 categories: 热门文章
 tags:
   - Popular

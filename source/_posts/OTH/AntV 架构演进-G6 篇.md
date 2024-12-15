@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-AntV 架构演进-G6 篇
+title: AntV 架构演进-G6 篇
 categories: 热门文章
 tags:
   - Popular

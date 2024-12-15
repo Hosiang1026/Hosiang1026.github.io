@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-周边生态｜StreamNative 联合 Cloudera 开源 Apache Pulsar+Apache NiFi 集成处理器
+title: 周边生态｜StreamNative 联合 Cloudera 开源 Apache Pulsar+Apache NiFi 集成处理器
 categories: 热门文章
 tags:
   - Popular

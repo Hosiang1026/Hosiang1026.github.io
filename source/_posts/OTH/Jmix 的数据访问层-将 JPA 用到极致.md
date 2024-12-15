@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Jmix 的数据访问层-将 JPA 用到极致
+title: Jmix 的数据访问层-将 JPA 用到极致
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-拆解大数据总线平台DBus的系统架构
+title: 拆解大数据总线平台DBus的系统架构
 categories: 热门文章
 tags:
   - Popular

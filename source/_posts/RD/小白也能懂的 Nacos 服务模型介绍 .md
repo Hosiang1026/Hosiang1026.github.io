@@ -1,5 +1,5 @@
 ---
-title: 推荐系列- 小白也能懂的 Nacos 服务模型介绍
+title:  小白也能懂的 Nacos 服务模型介绍
 categories: 热门文章
 tags:
   - Popular

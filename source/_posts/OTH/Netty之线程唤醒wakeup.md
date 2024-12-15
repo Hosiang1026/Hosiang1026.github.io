@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Netty之线程唤醒wakeup
+title: Netty之线程唤醒wakeup
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-案例分享 - ElasticDL-同时提升集群利用率和研发效率的分布式深度学习框架
+title: 案例分享 - ElasticDL-同时提升集群利用率和研发效率的分布式深度学习框架
 categories: 热门文章
 tags:
   - Popular

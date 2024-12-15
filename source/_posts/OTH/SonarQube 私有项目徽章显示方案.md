@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-SonarQube 私有项目徽章显示方案
+title: SonarQube 私有项目徽章显示方案
 categories: 热门文章
 tags:
   - Popular

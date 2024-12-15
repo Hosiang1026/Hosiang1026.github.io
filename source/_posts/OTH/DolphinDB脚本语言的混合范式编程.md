@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-DolphinDB脚本语言的混合范式编程
+title: DolphinDB脚本语言的混合范式编程
 categories: 热门文章
 tags:
   - Popular

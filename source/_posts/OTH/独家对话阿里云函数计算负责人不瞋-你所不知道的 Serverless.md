@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-独家对话阿里云函数计算负责人不瞋-你所不知道的 Serverless
+title: 独家对话阿里云函数计算负责人不瞋-你所不知道的 Serverless
 categories: 热门文章
 tags:
   - Popular

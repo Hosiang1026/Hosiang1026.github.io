@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-一篇文章了解CI-CD管道全流程
+title: 一篇文章了解CI-CD管道全流程
 categories: 热门文章
 tags:
   - Popular

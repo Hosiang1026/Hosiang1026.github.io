@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Linux三剑客之awk详解
+title: Linux三剑客之awk详解
 categories: 热门文章
 tags:
   - Popular

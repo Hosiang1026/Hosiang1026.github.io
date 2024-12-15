@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-时序数据库Influx-IOx源码学习一（项目背景）
+title: 时序数据库Influx-IOx源码学习一（项目背景）
 categories: 热门文章
 tags:
   - Popular

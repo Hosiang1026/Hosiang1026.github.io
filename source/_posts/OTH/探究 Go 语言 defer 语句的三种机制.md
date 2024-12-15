@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-探究 Go 语言 defer 语句的三种机制
+title: 探究 Go 语言 defer 语句的三种机制
 categories: 热门文章
 tags:
   - Popular

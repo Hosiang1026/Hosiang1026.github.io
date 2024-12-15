@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Flutter之 State 生命周期
+title: Flutter之 State 生命周期
 categories: 热门文章
 tags:
   - Popular

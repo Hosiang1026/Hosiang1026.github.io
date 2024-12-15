@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-mybatis plus代码生成工具，可生成业务接口、mapper接口、实体类
+title: mybatis plus代码生成工具，可生成业务接口、mapper接口、实体类
 categories: 热门文章
 tags:
   - Popular

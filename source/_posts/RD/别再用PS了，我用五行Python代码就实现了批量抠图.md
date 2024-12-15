@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-别再用PS了，我用五行Python代码就实现了批量抠图
+title: 别再用PS了，我用五行Python代码就实现了批量抠图
 categories: 热门文章
 tags:
   - Popular

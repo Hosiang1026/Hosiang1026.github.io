@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-基于 Kubernetes 的微服务项目设计与实现
+title: 基于 Kubernetes 的微服务项目设计与实现
 categories: 热门文章
 tags:
   - Popular

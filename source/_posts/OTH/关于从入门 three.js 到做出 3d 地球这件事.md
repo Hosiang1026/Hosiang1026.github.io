@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-关于从入门 three.js 到做出 3d 地球这件事
+title: 关于从入门 three.js 到做出 3d 地球这件事
 categories: 热门文章
 tags:
   - Popular

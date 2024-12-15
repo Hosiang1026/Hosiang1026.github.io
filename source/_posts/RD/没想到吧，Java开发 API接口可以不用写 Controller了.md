@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-没想到吧，Java开发 API接口可以不用写 Controller了
+title: 没想到吧，Java开发 API接口可以不用写 Controller了
 categories: 热门文章
 tags:
   - Popular

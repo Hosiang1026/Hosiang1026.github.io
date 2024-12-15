@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-万字长文详解HiveSQL执行计划
+title: 万字长文详解HiveSQL执行计划
 categories: 热门文章
 tags:
   - Popular

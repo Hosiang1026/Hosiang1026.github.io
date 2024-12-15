@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-OpenHarmony移植案例与原理-XTS子系统之应用兼容性测试用例开发
+title: OpenHarmony移植案例与原理-XTS子系统之应用兼容性测试用例开发
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-实战 - 使用 Kotlin Flow 构建数据流 -管道-
+title: 实战 - 使用 Kotlin Flow 构建数据流 -管道-
 categories: 热门文章
 tags:
   - Popular

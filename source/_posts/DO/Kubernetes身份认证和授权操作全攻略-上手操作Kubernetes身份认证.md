@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Kubernetes身份认证和授权操作全攻略-上手操作Kubernetes身份认证
+title: Kubernetes身份认证和授权操作全攻略-上手操作Kubernetes身份认证
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-平衡树-为什么Redis内部实现用跳跃表
+title: 平衡树-为什么Redis内部实现用跳跃表
 categories: 热门文章
 tags:
   - Popular

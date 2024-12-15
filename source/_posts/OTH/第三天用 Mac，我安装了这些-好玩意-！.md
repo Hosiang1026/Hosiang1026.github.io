@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-第三天用 Mac，我安装了这些-好玩意-！
+title: 第三天用 Mac，我安装了这些-好玩意-！
 categories: 热门文章
 tags:
   - Popular

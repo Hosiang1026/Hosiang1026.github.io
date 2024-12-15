@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-为什么很多人不愿意用hibernate了-
+title: 为什么很多人不愿意用hibernate了-
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-教你如何用 Paddle.js 开发智能化微信小程序
+title: 教你如何用 Paddle.js 开发智能化微信小程序
 categories: 热门文章
 tags:
   - Popular

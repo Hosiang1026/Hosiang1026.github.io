@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-DL4J之CNN对今日头条文本分类
+title: DL4J之CNN对今日头条文本分类
 categories: 热门文章
 tags:
   - Popular

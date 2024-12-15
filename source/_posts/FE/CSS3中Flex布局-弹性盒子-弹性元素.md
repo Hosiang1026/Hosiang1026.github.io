@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-CSS3中Flex布局-弹性盒子-弹性元素
+title: CSS3中Flex布局-弹性盒子-弹性元素
 categories: 热门文章
 tags:
   - Popular

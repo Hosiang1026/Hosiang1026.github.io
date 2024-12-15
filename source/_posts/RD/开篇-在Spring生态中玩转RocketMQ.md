@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-开篇-在Spring生态中玩转RocketMQ
+title: 开篇-在Spring生态中玩转RocketMQ
 categories: 热门文章
 tags:
   - Popular

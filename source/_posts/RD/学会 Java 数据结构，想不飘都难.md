@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-学会 Java 数据结构，想不飘都难
+title: 学会 Java 数据结构，想不飘都难
 categories: 热门文章
 tags:
   - Popular

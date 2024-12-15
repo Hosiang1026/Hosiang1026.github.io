@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实
+title: 写Java这么久，JDK源码编译过没-编译JDK源码踩坑纪实
 categories: 热门文章
 tags:
   - Popular

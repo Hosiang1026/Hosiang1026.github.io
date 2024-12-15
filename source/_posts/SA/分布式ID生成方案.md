@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-分布式ID生成方案
+title: 分布式ID生成方案
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-如何超越数据并行和模型并行-从GShard谈起
+title: 如何超越数据并行和模型并行-从GShard谈起
 categories: 热门文章
 tags:
   - Popular

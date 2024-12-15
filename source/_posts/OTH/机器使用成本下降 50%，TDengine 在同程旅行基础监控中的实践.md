@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-机器使用成本下降 50%，TDengine 在同程旅行基础监控中的实践
+title: 机器使用成本下降 50%，TDengine 在同程旅行基础监控中的实践
 categories: 热门文章
 tags:
   - Popular

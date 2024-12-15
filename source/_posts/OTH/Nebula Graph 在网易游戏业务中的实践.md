@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Nebula Graph 在网易游戏业务中的实践
+title: Nebula Graph 在网易游戏业务中的实践
 categories: 热门文章
 tags:
   - Popular

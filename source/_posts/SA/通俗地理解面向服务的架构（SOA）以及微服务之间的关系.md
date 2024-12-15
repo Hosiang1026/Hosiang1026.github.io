@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-通俗地理解面向服务的架构（SOA）以及微服务之间的关系
+title: 通俗地理解面向服务的架构（SOA）以及微服务之间的关系
 categories: 热门文章
 tags:
   - Popular

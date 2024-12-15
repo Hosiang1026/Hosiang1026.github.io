@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-全网最新最简单的 OpenJDK13 代码编译
+title: 全网最新最简单的 OpenJDK13 代码编译
 categories: 热门文章
 tags:
   - Popular

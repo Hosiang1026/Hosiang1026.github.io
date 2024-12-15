@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-如何在 OSC 社区运营你的开源项目-
+title: 如何在 OSC 社区运营你的开源项目-
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-免费正版 IntelliJ IDEA license 详细指南
+title: 免费正版 IntelliJ IDEA license 详细指南
 categories: 热门文章
 tags:
   - Popular

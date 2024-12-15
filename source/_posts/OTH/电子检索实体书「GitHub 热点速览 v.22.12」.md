@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-电子检索实体书「GitHub 热点速览 v.22.12」
+title: 电子检索实体书「GitHub 热点速览 v.22.12」
 categories: 热门文章
 tags:
   - Popular

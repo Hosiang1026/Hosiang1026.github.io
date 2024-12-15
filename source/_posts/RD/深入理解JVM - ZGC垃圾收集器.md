@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-深入理解JVM - ZGC垃圾收集器
+title: 深入理解JVM - ZGC垃圾收集器
 categories: 热门文章
 tags:
   - Popular

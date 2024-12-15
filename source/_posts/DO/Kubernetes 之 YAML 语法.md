@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Kubernetes 之 YAML 语法
+title: Kubernetes 之 YAML 语法
 categories: 热门文章
 tags:
   - Popular

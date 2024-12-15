@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Linux 三剑客之 awk 实战详解教程
+title: Linux 三剑客之 awk 实战详解教程
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-TCP 的三次握手，四次挥手和重要的细节—干货满满，建议细读
+title: TCP 的三次握手，四次挥手和重要的细节—干货满满，建议细读
 categories: 热门文章
 tags:
   - Popular

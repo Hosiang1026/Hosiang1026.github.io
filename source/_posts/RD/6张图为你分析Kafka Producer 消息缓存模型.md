@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-6张图为你分析Kafka Producer 消息缓存模型
+title: 6张图为你分析Kafka Producer 消息缓存模型
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-NetCore的缓存使用详例
+title: NetCore的缓存使用详例
 categories: 热门文章
 tags:
   - Popular

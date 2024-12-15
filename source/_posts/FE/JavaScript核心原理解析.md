@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-JavaScript核心原理解析
+title: JavaScript核心原理解析
 categories: 热门文章
 tags:
   - Popular

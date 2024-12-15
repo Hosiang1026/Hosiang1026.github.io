@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-时序数据库Influx-IOx源码学习三（命令行及配置）
+title: 时序数据库Influx-IOx源码学习三（命令行及配置）
 categories: 热门文章
 tags:
   - Popular

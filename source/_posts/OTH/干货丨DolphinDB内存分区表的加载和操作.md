@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-干货丨DolphinDB内存分区表的加载和操作
+title: 干货丨DolphinDB内存分区表的加载和操作
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-由AnnotatedElementUtils延伸的一些所思所想
+title: 由AnnotatedElementUtils延伸的一些所思所想
 categories: 热门文章
 tags:
   - Popular

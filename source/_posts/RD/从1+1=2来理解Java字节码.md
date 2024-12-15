@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-从1+1=2来理解Java字节码
+title: 从1+1=2来理解Java字节码
 categories: 热门文章
 tags:
   - Popular

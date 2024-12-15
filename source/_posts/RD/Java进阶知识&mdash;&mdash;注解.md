@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Java进阶知识&mdash;&mdash;注解
+title: Java进阶知识&mdash;&mdash;注解
 categories: 热门文章
 tags:
   - Popular

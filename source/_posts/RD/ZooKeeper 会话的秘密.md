@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-ZooKeeper 会话的秘密
+title: ZooKeeper 会话的秘密
 categories: 热门文章
 tags:
   - Popular

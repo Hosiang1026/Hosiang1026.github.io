@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-openGauss动态数据脱敏
+title: openGauss动态数据脱敏
 categories: 热门文章
 tags:
   - Popular

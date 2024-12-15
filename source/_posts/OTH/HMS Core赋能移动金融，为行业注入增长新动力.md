@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-HMS Core赋能移动金融，为行业注入增长新动力
+title: HMS Core赋能移动金融，为行业注入增长新动力
 categories: 热门文章
 tags:
   - Popular

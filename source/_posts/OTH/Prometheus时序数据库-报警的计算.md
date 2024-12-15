@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Prometheus时序数据库-报警的计算
+title: Prometheus时序数据库-报警的计算
 categories: 热门文章
 tags:
   - Popular

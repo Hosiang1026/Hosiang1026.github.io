@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Java泛型可行与不可行
+title: Java泛型可行与不可行
 categories: 热门文章
 tags:
   - Popular

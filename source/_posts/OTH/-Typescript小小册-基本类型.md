@@ -1,5 +1,5 @@
 ---
-title: 推荐系列--Typescript小小册-基本类型
+title: Typescript小小册-基本类型
 categories: 热门文章
 tags:
   - Popular

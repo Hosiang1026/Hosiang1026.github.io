@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-百度 Serverless 函数计算引擎 EasyFaaS 正式开源
+title: 百度 Serverless 函数计算引擎 EasyFaaS 正式开源
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-别再面向 for 循环编程了，Spring 自带的观察者模式就很香！
+title: 别再面向 for 循环编程了，Spring 自带的观察者模式就很香！
 categories: 热门文章
 tags:
   - Popular

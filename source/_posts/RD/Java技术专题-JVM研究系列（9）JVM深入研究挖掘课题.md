@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Java技术专题-JVM研究系列（9）JVM深入研究挖掘课题
+title: Java技术专题-JVM研究系列（9）JVM深入研究挖掘课题
 categories: 热门文章
 tags:
   - Popular

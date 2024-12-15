@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-网易云信在融合通信场景下的探索和实践之 RTMPGateway 服务架构
+title: 网易云信在融合通信场景下的探索和实践之 RTMPGateway 服务架构
 categories: 热门文章
 tags:
   - Popular

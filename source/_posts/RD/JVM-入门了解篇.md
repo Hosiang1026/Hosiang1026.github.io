@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-JVM-入门了解篇
+title: JVM-入门了解篇
 categories: 热门文章
 tags:
   - Popular

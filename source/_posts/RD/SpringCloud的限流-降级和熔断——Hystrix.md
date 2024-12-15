@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-SpringCloud的限流-降级和熔断——Hystrix
+title: SpringCloud的限流-降级和熔断——Hystrix
 categories: 热门文章
 tags:
   - Popular

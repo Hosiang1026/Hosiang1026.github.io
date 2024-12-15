@@ -168,7 +168,7 @@ function writeFiles(index, title, cover, desc, content) {
 
     var fileContent =
         "---\n" +
-        "title: 推荐系列-"+title+"\n" +
+        "title: "+title+"\n" +
         "categories: 热门文章\n" +
         "tags:\n" +
         "  - Popular\n" +

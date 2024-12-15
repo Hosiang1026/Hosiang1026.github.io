@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-从linux源码看socket(tcp)的timeout
+title: 从linux源码看socket(tcp)的timeout
 categories: 热门文章
 tags:
   - Popular

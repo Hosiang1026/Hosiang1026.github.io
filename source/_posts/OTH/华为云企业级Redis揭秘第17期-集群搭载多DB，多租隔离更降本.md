@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-华为云企业级Redis揭秘第17期-集群搭载多DB，多租隔离更降本
+title: 华为云企业级Redis揭秘第17期-集群搭载多DB，多租隔离更降本
 categories: 热门文章
 tags:
   - Popular

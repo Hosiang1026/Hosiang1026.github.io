@@ -1,5 +1,5 @@
 ---
-title: '推荐系列-和产品争论MySQL底层如何实现order by的,惨败-'
+title: '和产品争论MySQL底层如何实现order by的,惨败-'
 categories: 热门文章
 tags:
   - Popular

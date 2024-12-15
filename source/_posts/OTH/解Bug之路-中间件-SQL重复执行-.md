@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-解Bug之路-中间件-SQL重复执行-
+title: 解Bug之路-中间件-SQL重复执行-
 categories: 热门文章
 tags:
   - Popular

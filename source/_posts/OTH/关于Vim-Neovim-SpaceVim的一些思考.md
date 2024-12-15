@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-关于Vim-Neovim-SpaceVim的一些思考
+title: 关于Vim-Neovim-SpaceVim的一些思考
 categories: 热门文章
 tags:
   - Popular

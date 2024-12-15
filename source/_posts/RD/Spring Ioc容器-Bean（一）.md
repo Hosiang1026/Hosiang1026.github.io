@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Spring Ioc容器-Bean（一）
+title: Spring Ioc容器-Bean（一）
 categories: 热门文章
 tags:
   - Popular

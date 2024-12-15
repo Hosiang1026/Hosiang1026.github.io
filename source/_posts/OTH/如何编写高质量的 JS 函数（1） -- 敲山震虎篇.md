@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-如何编写高质量的 JS 函数（1） -- 敲山震虎篇
+title: 如何编写高质量的 JS 函数（1） -- 敲山震虎篇
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-浅谈Netty和Python中的事件驱动
+title: 浅谈Netty和Python中的事件驱动
 categories: 热门文章
 tags:
   - Popular

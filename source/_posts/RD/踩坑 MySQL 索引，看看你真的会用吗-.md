@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-踩坑 MySQL 索引，看看你真的会用吗-
+title: 踩坑 MySQL 索引，看看你真的会用吗-
 categories: 热门文章
 tags:
   - Popular

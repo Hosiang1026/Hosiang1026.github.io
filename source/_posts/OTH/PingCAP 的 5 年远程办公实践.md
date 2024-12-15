@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-PingCAP 的 5 年远程办公实践
+title: PingCAP 的 5 年远程办公实践
 categories: 热门文章
 tags:
   - Popular

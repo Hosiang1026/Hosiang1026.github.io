@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-200 行代码告诉你 TDMQ 中 Pulsar 广播如何实现
+title: 200 行代码告诉你 TDMQ 中 Pulsar 广播如何实现
 categories: 热门文章
 tags:
   - Popular

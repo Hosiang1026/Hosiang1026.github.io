@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-深入理解CI-CD-工具-方法-环境-基础架构的全面指南
+title: 深入理解CI-CD-工具-方法-环境-基础架构的全面指南
 categories: 热门文章
 tags:
   - Popular

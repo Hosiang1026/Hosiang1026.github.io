@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-面试官上来就问MySQL事务，瑟瑟发抖...
+title: 面试官上来就问MySQL事务，瑟瑟发抖...
 categories: 热门文章
 tags:
   - Popular

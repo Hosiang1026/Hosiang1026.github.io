@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-OLAP引擎-基于Druid组件进行数据统计分析
+title: OLAP引擎-基于Druid组件进行数据统计分析
 categories: 热门文章
 tags:
   - Popular

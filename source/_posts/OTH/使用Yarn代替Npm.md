@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-使用Yarn代替Npm
+title: 使用Yarn代替Npm
 categories: 热门文章
 tags:
   - Popular

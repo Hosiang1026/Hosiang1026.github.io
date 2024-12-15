@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-15分钟详解 Python 安全认证的那些事儿～
+title: 15分钟详解 Python 安全认证的那些事儿～
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-3. 堪比JMeter的.Net压测工具 - Crank 进阶篇 - 认识bombardier
+title: 3. 堪比JMeter的.Net压测工具 - Crank 进阶篇 - 认识bombardier
 categories: 热门文章
 tags:
   - Popular

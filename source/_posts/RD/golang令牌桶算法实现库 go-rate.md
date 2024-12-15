@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-golang令牌桶算法实现库 go-rate
+title: golang令牌桶算法实现库 go-rate
 categories: 热门文章
 tags:
   - Popular

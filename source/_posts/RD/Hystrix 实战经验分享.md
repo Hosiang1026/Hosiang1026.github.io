@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Hystrix 实战经验分享
+title: Hystrix 实战经验分享
 categories: 热门文章
 tags:
   - Popular

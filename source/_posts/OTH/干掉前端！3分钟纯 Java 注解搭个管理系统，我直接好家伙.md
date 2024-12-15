@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-干掉前端！3分钟纯 Java 注解搭个管理系统，我直接好家伙
+title: 干掉前端！3分钟纯 Java 注解搭个管理系统，我直接好家伙
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-在 Node.js 上接入 Paddle Lite，让你的网站具备 AI 推理能力
+title: 在 Node.js 上接入 Paddle Lite，让你的网站具备 AI 推理能力
 categories: 热门文章
 tags:
   - Popular

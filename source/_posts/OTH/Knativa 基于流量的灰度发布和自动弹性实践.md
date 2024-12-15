@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Knativa 基于流量的灰度发布和自动弹性实践
+title: Knativa 基于流量的灰度发布和自动弹性实践
 categories: 热门文章
 tags:
   - Popular

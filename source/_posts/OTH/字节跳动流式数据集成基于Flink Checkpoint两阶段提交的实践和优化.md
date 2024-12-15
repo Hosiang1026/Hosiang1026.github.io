@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-字节跳动流式数据集成基于Flink Checkpoint两阶段提交的实践和优化
+title: 字节跳动流式数据集成基于Flink Checkpoint两阶段提交的实践和优化
 categories: 热门文章
 tags:
   - Popular

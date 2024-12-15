@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-读scss-sass实例项目带你入门
+title: 读scss-sass实例项目带你入门
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-用 Go + WebSocket 快速实现一��� chat 服务
+title: 用 Go + WebSocket 快速实现一��� chat 服务
 categories: 热门文章
 tags:
   - Popular

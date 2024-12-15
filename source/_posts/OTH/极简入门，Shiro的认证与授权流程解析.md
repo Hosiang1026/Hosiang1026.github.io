@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-极简入门，Shiro的认证与授权流程解析
+title: 极简入门，Shiro的认证与授权流程解析
 categories: 热门文章
 tags:
   - Popular

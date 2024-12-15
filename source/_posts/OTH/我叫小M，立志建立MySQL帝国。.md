@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-我叫小M，立志建立MySQL帝国。
+title: 我叫小M，立志建立MySQL帝国。
 categories: 热门文章
 tags:
   - Popular

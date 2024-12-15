@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-大数据分布式计算系统 Spark 入门核心之 RDD
+title: 大数据分布式计算系统 Spark 入门核心之 RDD
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Golang 并发编程实践
+title: Golang 并发编程实践
 categories: 热门文章
 tags:
   - Popular

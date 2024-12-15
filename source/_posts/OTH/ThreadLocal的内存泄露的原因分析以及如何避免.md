@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-ThreadLocal的内存泄露的原因分析以及如何避免
+title: ThreadLocal的内存泄露的原因分析以及如何避免
 categories: 热门文章
 tags:
   - Popular

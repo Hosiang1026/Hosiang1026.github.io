@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-盘点 Spring Security 框架中的八大经典设计模式
+title: 盘点 Spring Security 框架中的八大经典设计模式
 categories: 热门文章
 tags:
   - Popular

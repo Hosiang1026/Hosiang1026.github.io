@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-想开发IM集群-先搞懂什么是RPC！
+title: 想开发IM集群-先搞懂什么是RPC！
 categories: 热门文章
 tags:
   - Popular

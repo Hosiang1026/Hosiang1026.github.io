@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Notion 编辑器原理分析，如此好用的富文本是如何实现的-
+title: Notion 编辑器原理分析，如此好用的富文本是如何实现的-
 categories: 热门文章
 tags:
   - Popular

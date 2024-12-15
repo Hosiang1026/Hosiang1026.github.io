@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-JVM自定义类加载器在代码扩展性的实践
+title: JVM自定义类加载器在代码扩展性的实践
 categories: 热门文章
 tags:
   - Popular

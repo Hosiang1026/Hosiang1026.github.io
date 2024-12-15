@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-定了！dockershim 的代码将在 K8s v1.24 正式删除
+title: 定了！dockershim 的代码将在 K8s v1.24 正式删除
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Java技术专题-源码分析系列-JDK动态代理的实现
+title: Java技术专题-源码分析系列-JDK动态代理的实现
 categories: 热门文章
 tags:
   - Popular

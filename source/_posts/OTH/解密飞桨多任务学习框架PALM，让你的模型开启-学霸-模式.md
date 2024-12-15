@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-解密飞桨多任务学习框架PALM，让你的模型开启-学霸-模式
+title: 解密飞桨多任务学习框架PALM，让你的模型开启-学霸-模式
 categories: 热门文章
 tags:
   - Popular

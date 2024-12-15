@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-ClickHouse性能优化-试试物化视图
+title: ClickHouse性能优化-试试物化视图
 categories: 热门文章
 tags:
   - Popular

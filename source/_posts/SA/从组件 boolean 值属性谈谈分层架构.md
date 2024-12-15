@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-从组件 boolean 值属性谈谈分层架构
+title: 从组件 boolean 值属性谈谈分层架构
 categories: 热门文章
 tags:
   - Popular

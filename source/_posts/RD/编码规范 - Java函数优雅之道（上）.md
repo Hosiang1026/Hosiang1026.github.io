@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-编码规范 - Java函数优雅之道（上）
+title: 编码规范 - Java函数优雅之道（上）
 categories: 热门文章
 tags:
   - Popular

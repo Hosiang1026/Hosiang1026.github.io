@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-MySQL 批量插入，如何不插入重复数据-
+title: MySQL 批量插入，如何不插入重复数据-
 categories: 热门文章
 tags:
   - Popular

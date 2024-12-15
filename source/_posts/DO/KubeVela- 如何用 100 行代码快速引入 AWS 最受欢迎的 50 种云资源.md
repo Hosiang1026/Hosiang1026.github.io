@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-KubeVela- 如何用 100 行代码快速引入 AWS 最受欢迎的 50 种云资源
+title: KubeVela- 如何用 100 行代码快速引入 AWS 最受欢迎的 50 种云资源
 categories: 热门文章
 tags:
   - Popular

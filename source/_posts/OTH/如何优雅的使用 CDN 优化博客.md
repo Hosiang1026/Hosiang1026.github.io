@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-如何优雅的使用 CDN 优化博客
+title: 如何优雅的使用 CDN 优化博客
 categories: 热门文章
 tags:
   - Popular

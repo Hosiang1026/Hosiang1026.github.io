@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-JavaScript 基本数据类型
+title: JavaScript 基本数据类型
 categories: 热门文章
 tags:
   - Popular

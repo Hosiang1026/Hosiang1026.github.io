@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-基于 Hunt Framework 3.2.0 快速构建服务端项目教程
+title: 基于 Hunt Framework 3.2.0 快速构建服务端项目教程
 categories: 热门文章
 tags:
   - Popular

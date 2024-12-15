@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-代码质量管理工具-SonarQube常见的问题及正确解决方案
+title: 代码质量管理工具-SonarQube常见的问题及正确解决方案
 categories: 热门文章
 tags:
   - Popular

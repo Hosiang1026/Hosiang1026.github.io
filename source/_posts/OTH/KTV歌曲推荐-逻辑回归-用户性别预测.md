@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-KTV歌曲推荐-逻辑回归-用户性别预测
+title: KTV歌曲推荐-逻辑回归-用户性别预测
 categories: 热门文章
 tags:
   - Popular

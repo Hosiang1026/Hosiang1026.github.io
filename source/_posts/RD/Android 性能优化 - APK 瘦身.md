@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Android 性能优化 - APK 瘦身
+title: Android 性能优化 - APK 瘦身
 categories: 热门文章
 tags:
   - Popular

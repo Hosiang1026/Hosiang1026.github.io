@@ -1,5 +1,5 @@
 ---
-title: 推荐系列- MRS CDL架构设计与实现
+title:  MRS CDL架构设计与实现
 categories: 热门文章
 tags:
   - Popular

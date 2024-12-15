@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-CSI 工作原理与JuiceFS CSI Driver 的架构设计详解
+title: CSI 工作原理与JuiceFS CSI Driver 的架构设计详解
 categories: 热门文章
 tags:
   - Popular

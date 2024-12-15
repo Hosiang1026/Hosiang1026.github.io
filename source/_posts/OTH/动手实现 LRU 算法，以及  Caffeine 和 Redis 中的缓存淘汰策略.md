@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-动手实现 LRU 算法，以及  Caffeine 和 Redis 中的缓存淘汰策略
+title: 动手实现 LRU 算法，以及  Caffeine 和 Redis 中的缓存淘汰策略
 categories: 热门文章
 tags:
   - Popular

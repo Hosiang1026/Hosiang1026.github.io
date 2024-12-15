@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-maven中心仓库OSSRH使用简介
+title: maven中心仓库OSSRH使用简介
 categories: 热门文章
 tags:
   - Popular

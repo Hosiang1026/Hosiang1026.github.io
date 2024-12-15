@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-深入了解kafka系列-消费者
+title: 深入了解kafka系列-消费者
 categories: 热门文章
 tags:
   - Popular

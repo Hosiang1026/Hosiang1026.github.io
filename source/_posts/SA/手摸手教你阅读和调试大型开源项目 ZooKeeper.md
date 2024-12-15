@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-手摸手教你阅读和调试大型开源项目 ZooKeeper
+title: 手摸手教你阅读和调试大型开源项目 ZooKeeper
 categories: 热门文章
 tags:
   - Popular

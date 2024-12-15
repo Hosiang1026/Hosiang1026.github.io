@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-给Gitee小程序加上暗黑模式是什么体验
+title: 给Gitee小程序加上暗黑模式是什么体验
 categories: 热门文章
 tags:
   - Popular

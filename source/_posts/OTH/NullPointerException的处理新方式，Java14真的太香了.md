@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-NullPointerException的处理新方式，Java14真的太香了
+title: NullPointerException的处理新方式，Java14真的太香了
 categories: 热门文章
 tags:
   - Popular

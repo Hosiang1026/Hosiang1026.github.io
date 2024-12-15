@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-总结18个 webpack 插件，总会有你想要的！
+title: 总结18个 webpack 插件，总会有你想要的！
 categories: 热门文章
 tags:
   - Popular

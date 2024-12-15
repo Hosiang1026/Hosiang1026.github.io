@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-开源一周岁，MindSpore新特性巨量来袭
+title: 开源一周岁，MindSpore新特性巨量来袭
 categories: 热门文章
 tags:
   - Popular

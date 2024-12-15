@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-图片的黑魔法——GitHub 热点速览 v.21.13
+title: 图片的黑魔法——GitHub 热点速览 v.21.13
 categories: 热门文章
 tags:
   - Popular

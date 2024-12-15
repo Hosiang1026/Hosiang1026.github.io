@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-eBay 基于 Apache Kyuubi 构建统一 Serverless Spark 网关的实践
+title: eBay 基于 Apache Kyuubi 构建统一 Serverless Spark 网关的实践
 categories: 热门文章
 tags:
   - Popular

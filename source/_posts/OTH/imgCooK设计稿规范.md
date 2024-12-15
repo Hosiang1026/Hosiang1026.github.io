@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-imgCooK设计稿规范
+title: imgCooK设计稿规范
 categories: 热门文章
 tags:
   - Popular

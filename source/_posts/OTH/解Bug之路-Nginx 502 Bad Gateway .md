@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-解Bug之路-Nginx 502 Bad Gateway
+title: 解Bug之路-Nginx 502 Bad Gateway
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-斩获 offer 的 Java 面试宝典
+title: 斩获 offer 的 Java 面试宝典
 categories: 热门文章
 tags:
   - Popular

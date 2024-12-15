@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-如何使用Javascript构建WebRTC视频直播-
+title: 如何使用Javascript构建WebRTC视频直播-
 categories: 热门文章
 tags:
   - Popular

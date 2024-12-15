@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-破14亿，Python分析我国存在哪些人口危机！
+title: 破14亿，Python分析我国存在哪些人口危机！
 categories: 热门文章
 tags:
   - Popular

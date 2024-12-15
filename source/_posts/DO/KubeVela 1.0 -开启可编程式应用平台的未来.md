@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-KubeVela 1.0 -开启可编程式应用平台的未来
+title: KubeVela 1.0 -开启可编程式应用平台的未来
 categories: 热门文章
 tags:
   - Popular

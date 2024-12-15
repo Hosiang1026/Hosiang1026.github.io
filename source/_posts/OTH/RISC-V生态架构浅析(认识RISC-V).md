@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-RISC-V生态架构浅析(认识RISC-V)
+title: RISC-V生态架构浅析(认识RISC-V)
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Redux 中间件 到底怎么工作的呢-
+title: Redux 中间件 到底怎么工作的呢-
 categories: 热门文章
 tags:
   - Popular

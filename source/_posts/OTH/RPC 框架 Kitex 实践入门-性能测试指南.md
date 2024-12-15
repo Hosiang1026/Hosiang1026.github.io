@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-RPC 框架 Kitex 实践入门-性能测试指南
+title: RPC 框架 Kitex 实践入门-性能测试指南
 categories: 热门文章
 tags:
   - Popular

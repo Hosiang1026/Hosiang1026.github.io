@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-关于AJAX（你一定要知道的秘密）
+title: 关于AJAX（你一定要知道的秘密）
 categories: 热门文章
 tags:
   - Popular

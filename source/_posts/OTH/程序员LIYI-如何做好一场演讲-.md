@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-程序员LIYI-如何做好一场演讲-
+title: 程序员LIYI-如何做好一场演讲-
 categories: 热门文章
 tags:
   - Popular

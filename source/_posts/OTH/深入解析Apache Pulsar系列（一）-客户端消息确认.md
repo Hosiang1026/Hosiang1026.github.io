@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-深入解析Apache Pulsar系列（一）-客户端消息确认
+title: 深入解析Apache Pulsar系列（一）-客户端消息确认
 categories: 热门文章
 tags:
   - Popular

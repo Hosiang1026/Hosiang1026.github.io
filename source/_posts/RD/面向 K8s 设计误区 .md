@@ -1,5 +1,5 @@
 ---
-title: 推荐系列- 面向 K8s 设计误区
+title:  面向 K8s 设计误区
 categories: 热门文章
 tags:
   - Popular

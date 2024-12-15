@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-58同城Swift版小游戏研发之路
+title: 58同城Swift版小游戏研发之路
 categories: 热门文章
 tags:
   - Popular

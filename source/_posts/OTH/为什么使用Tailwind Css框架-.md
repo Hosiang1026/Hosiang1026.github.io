@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-为什么使用Tailwind Css框架-
+title: 为什么使用Tailwind Css框架-
 categories: 热门文章
 tags:
   - Popular

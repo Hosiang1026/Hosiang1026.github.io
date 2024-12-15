@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-TypeScript里string和String，真不是仅仅是大小写的区别
+title: TypeScript里string和String，真不是仅仅是大小写的区别
 categories: 热门文章
 tags:
   - Popular

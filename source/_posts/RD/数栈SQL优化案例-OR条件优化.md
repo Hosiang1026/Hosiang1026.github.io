@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-数栈SQL优化案例-OR条件优化
+title: 数栈SQL优化案例-OR条件优化
 categories: 热门文章
 tags:
   - Popular

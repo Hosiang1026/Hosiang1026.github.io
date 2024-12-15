@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-盛最多水的容器Java版（力扣）
+title: 盛最多水的容器Java版（力扣）
 categories: 热门文章
 tags:
   - Popular

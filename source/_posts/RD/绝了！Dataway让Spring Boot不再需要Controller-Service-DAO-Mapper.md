@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper
+title: 绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper
 categories: 热门文章
 tags:
   - Popular

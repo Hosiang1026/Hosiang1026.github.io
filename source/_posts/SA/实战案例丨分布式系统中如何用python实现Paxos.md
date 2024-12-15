@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-实战案例丨分布式系统中如何用python实现Paxos
+title: 实战案例丨分布式系统中如何用python实现Paxos
 categories: 热门文章
 tags:
   - Popular

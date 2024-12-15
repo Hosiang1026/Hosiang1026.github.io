@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-即学即会 Serverless - 初识 Serverless 架构
+title: 即学即会 Serverless - 初识 Serverless 架构
 categories: 热门文章
 tags:
   - Popular

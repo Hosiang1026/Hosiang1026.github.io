@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-PHP中的孤儿进程与僵尸进程
+title: PHP中的孤儿进程与僵尸进程
 categories: 热门文章
 tags:
   - Popular

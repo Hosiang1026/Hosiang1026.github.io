@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Crypto练习之替换密码
+title: Crypto练习之替换密码
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-vivo统一告警平台设计与实践
+title: vivo统一告警平台设计与实践
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-解Bug之路-记一次存储故障的排查过程
+title: 解Bug之路-记一次存储故障的排查过程
 categories: 热门文章
 tags:
   - Popular

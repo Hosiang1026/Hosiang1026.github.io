@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-自己实现一个RPC框架
+title: 自己实现一个RPC框架
 categories: 热门文章
 tags:
   - Popular

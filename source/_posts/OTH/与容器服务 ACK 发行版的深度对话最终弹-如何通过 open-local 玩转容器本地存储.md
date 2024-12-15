@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-与容器服务 ACK 发行版的深度对话最终弹-如何通过 open-local 玩转容器本地存储
+title: 与容器服务 ACK 发行版的深度对话最终弹-如何通过 open-local 玩转容器本地存储
 categories: 热门文章
 tags:
   - Popular

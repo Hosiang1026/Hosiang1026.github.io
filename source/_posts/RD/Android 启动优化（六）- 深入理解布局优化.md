@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Android 启动优化（六）- 深入理解布局优化
+title: Android 启动优化（六）- 深入理解布局优化
 categories: 热门文章
 tags:
   - Popular

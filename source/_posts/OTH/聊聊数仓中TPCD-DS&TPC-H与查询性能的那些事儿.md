@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-聊聊数仓中TPCD-DS&TPC-H与查询性能的那些事儿
+title: 聊聊数仓中TPCD-DS&TPC-H与查询性能的那些事儿
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-JS夸页面通信极简方案&纯前端实现文件下载
+title: JS夸页面通信极简方案&纯前端实现文件下载
 categories: 热门文章
 tags:
   - Popular

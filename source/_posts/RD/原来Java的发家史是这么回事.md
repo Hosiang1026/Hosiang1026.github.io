@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-原来Java的发家史是这么回事
+title: 原来Java的发家史是这么回事
 categories: 热门文章
 tags:
   - Popular

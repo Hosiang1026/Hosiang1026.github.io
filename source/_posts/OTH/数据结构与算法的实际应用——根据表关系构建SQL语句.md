@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-数据结构与算法的实际应用——根据表关系构建SQL语句
+title: 数据结构与算法的实际应用——根据表关系构建SQL语句
 categories: 热门文章
 tags:
   - Popular

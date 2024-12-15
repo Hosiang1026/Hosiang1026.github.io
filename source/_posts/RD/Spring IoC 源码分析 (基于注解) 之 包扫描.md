@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Spring IoC 源码分析 (基于注解) 之 包扫描
+title: Spring IoC 源码分析 (基于注解) 之 包扫描
 categories: 热门文章
 tags:
   - Popular

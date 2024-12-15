@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Linux上TCP的几个内核参数调优
+title: Linux上TCP的几个内核参数调优
 categories: 热门文章
 tags:
   - Popular

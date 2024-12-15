@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-ES 终于可以搜到-悟空哥-了！
+title: ES 终于可以搜到-悟空哥-了！
 categories: 热门文章
 tags:
   - Popular

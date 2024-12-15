@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-继续探究-一文理清JVM和GC（下）
+title: 继续探究-一文理清JVM和GC（下）
 categories: 热门文章
 tags:
   - Popular

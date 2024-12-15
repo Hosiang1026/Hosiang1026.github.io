@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Python字典介绍
+title: Python字典介绍
 categories: 热门文章
 tags:
   - Popular

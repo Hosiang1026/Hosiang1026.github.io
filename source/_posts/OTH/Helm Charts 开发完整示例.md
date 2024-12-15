@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Helm Charts 开发完整示例
+title: Helm Charts 开发完整示例
 categories: 热门文章
 tags:
   - Popular

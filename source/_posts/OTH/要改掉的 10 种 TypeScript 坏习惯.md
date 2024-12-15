@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-要改掉的 10 种 TypeScript 坏习惯
+title: 要改掉的 10 种 TypeScript 坏习惯
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-关于 Java 18 你想知道的一切
+title: 关于 Java 18 你想知道的一切
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-鸿蒙开源第三方组件——SlidingMenu_ohos侧滑菜单组件
+title: 鸿蒙开源第三方组件——SlidingMenu_ohos侧滑菜单组件
 categories: 热门文章
 tags:
   - Popular

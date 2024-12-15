@@ -1,5 +1,5 @@
 ---
-title: 推荐系列--iOS研习记-——记MJExtension多线程Crash的解决历程
+title: iOS研习记-——记MJExtension多线程Crash的解决历程
 categories: 热门文章
 tags:
   - Popular

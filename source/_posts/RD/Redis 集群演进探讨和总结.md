@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Redis 集群演进探讨和总结
+title: Redis 集群演进探讨和总结
 categories: 热门文章
 tags:
   - Popular

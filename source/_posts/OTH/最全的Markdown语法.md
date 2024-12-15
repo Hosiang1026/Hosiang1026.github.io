@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-最全的Markdown语法
+title: 最全的Markdown语法
 categories: 热门文章
 tags:
   - Popular

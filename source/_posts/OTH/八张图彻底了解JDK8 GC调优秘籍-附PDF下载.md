@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-八张图彻底了解JDK8 GC调优秘籍-附PDF下载
+title: 八张图彻底了解JDK8 GC调优秘籍-附PDF下载
 categories: 热门文章
 tags:
   - Popular

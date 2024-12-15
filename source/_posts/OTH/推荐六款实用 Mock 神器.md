@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-推荐六款实用 Mock 神器
+title: 推荐六款实用 Mock 神器
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-前沿科技探究DeepSQL-库内AI算法
+title: 前沿科技探究DeepSQL-库内AI算法
 categories: 热门文章
 tags:
   - Popular

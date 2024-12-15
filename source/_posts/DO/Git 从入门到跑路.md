@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Git 从入门到跑路
+title: Git 从入门到跑路
 categories: 热门文章
 tags:
   - Popular

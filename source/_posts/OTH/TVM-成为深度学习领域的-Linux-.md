@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-TVM-成为深度学习领域的-Linux-
+title: TVM-成为深度学习领域的-Linux-
 categories: 热门文章
 tags:
   - Popular

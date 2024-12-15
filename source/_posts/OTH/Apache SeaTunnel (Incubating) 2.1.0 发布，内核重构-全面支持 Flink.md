@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Apache SeaTunnel (Incubating) 2.1.0 发布，内核重构-全面支持 Flink
+title: Apache SeaTunnel (Incubating) 2.1.0 发布，内核重构-全面支持 Flink
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-基于nodejs的动态编译 weex 组件的平台
+title: 基于nodejs的动态编译 weex 组件的平台
 categories: 热门文章
 tags:
   - Popular

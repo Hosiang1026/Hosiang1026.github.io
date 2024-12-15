@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Loki漫谈
+title: Loki漫谈
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-彻底解决Spring mvc中时间的转换和序列化等问题
+title: 彻底解决Spring mvc中时间的转换和序列化等问题
 categories: 热门文章
 tags:
   - Popular

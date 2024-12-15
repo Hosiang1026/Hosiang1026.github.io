@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-花半天时间，轻松打造前端CI-CD工作流
+title: 花半天时间，轻松打造前端CI-CD工作流
 categories: 热门文章
 tags:
   - Popular

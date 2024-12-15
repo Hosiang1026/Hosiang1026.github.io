@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-AI 事件驱动场景 Serverless 实践
+title: AI 事件驱动场景 Serverless 实践
 categories: 热门文章
 tags:
   - Popular

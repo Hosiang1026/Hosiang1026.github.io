@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-还在使用 SVN 的企业，如何快速迁移到 Gitee
+title: 还在使用 SVN 的企业，如何快速迁移到 Gitee
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-实战 - 认识 RecyclerView
+title: 实战 - 认识 RecyclerView
 categories: 热门文章
 tags:
   - Popular

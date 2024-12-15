@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-如何在工作中快速上手Git
+title: 如何在工作中快速上手Git
 categories: 热门文章
 tags:
   - Popular

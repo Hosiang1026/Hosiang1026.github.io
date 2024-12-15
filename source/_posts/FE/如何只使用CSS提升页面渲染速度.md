@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-如何只使用CSS提升页面渲染速度
+title: 如何只使用CSS提升页面渲染速度
 categories: 热门文章
 tags:
   - Popular

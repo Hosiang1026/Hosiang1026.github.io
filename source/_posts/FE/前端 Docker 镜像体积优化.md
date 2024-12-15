@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-前端 Docker 镜像体积优化
+title: 前端 Docker 镜像体积优化
 categories: 热门文章
 tags:
   - Popular

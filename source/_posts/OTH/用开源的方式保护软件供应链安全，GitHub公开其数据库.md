@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-用开源的方式保护软件供应链安全，GitHub公开其数据库
+title: 用开源的方式保护软件供应链安全，GitHub公开其数据库
 categories: 热门文章
 tags:
   - Popular

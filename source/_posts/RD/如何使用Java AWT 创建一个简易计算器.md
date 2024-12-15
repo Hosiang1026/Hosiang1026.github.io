@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-如何使用Java AWT 创建一个简易计算器
+title: 如何使用Java AWT 创建一个简易计算器
 categories: 热门文章
 tags:
   - Popular

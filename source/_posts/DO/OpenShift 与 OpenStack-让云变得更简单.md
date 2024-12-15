@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-OpenShift 与 OpenStack-让云变得更简单
+title: OpenShift 与 OpenStack-让云变得更简单
 categories: 热门文章
 tags:
   - Popular

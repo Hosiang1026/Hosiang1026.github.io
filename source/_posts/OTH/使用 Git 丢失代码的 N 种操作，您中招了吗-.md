@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-使用 Git 丢失代码的 N 种操作，您中招了吗-
+title: 使用 Git 丢失代码的 N 种操作，您中招了吗-
 categories: 热门文章
 tags:
   - Popular

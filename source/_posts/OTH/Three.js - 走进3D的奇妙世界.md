@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Three.js - 走进3D的奇妙世界
+title: Three.js - 走进3D的奇妙世界
 categories: 热门文章
 tags:
   - Popular

@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-逐行解读Spring- 没人比我更懂循环依赖
+title: 逐行解读Spring- 没人比我更懂循环依赖
 categories: 热门文章
 tags:
   - Popular

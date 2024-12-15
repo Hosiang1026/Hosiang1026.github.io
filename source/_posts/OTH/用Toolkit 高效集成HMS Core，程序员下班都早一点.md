@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-用Toolkit 高效集成HMS Core，程序员下班都早一点
+title: 用Toolkit 高效集成HMS Core，程序员下班都早一点
 categories: 热门文章
 tags:
   - Popular

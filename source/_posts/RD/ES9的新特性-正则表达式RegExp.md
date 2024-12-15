@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-ES9的新特性-正则表达式RegExp
+title: ES9的新特性-正则表达式RegExp
 categories: 热门文章
 tags:
   - Popular

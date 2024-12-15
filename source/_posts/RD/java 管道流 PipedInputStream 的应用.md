@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-java 管道流 PipedInputStream 的应用
+title: java 管道流 PipedInputStream 的应用
 categories: 热门文章
 tags:
   - Popular

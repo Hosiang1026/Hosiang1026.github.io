@@ -1,5 +1,5 @@
 ---
-title: 推荐系列-Linux 是如何管理内存的-
+title: Linux 是如何管理内存的-
 categories: 热门文章
 tags:
   - Popular

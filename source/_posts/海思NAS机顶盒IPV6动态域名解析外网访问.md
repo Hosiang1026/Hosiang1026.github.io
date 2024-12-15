@@ -5,7 +5,7 @@ author: 狂欢马克思
 tags:
   - Hobby
 top: 4
-cover_picture: 'https://pic.haoxiang.eu.org/image/2024/12/15/ipekvt.png'
+cover_picture: 'https://pic.haoxiang.eu.org/image/2024/12/15/3tpww.jpg'
 abbrlink: 1489a919
 date: 2024-12-13 10:04:00
 ---
@@ -14,7 +14,7 @@ date: 2024-12-13 10:04:00
 
 <!-- more -->
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/ipekvt.png "海思NAS机顶盒IPV6动态域名解析外网访问-入门篇")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/3tpww.jpg "海思NAS机顶盒IPV6动态域名解析外网访问-入门篇")
 
 ### 一、家里网络拓扑图
 

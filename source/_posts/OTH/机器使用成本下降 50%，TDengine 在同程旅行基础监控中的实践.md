@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 98
-cover_picture: 'photo/album/image/image_004.jpg'
+cover_picture: 'https://pic.haoxiang.eu.org/image/2024/12/15/3tpww.jpg'
 abbrlink: 2a5726df
 date: 2022-03-24 11:55:54
 ---

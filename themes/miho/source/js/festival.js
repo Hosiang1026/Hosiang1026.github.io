@@ -295,7 +295,7 @@ function showTime(){
     var time = "";
     var msgContent = "";
 
-    var currentTime=new Date("2024-10-01").getTime();
+    var currentTime=new Date().getTime();
     var beginDayEarlyTime =new Date().setHours(0, 0, 0, 0) ;
     var endDayEarlyTime =new Date().setHours(0, 0, 0, 1) ;
     //每天凌晨重新获取节日名称和日期

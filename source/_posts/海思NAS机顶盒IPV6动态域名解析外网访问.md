@@ -10,12 +10,11 @@ abbrlink: 1489a919
 date: 2024-12-13 10:04:00
 ---
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/ipekvt.png "海思NAS机顶盒IPV6动态域名解析外网访问-入门篇")
-
 没有公网IP，刷遍论坛和教程，折腾各种内网穿透、异地组网，感觉一点都不快乐了，那就看看这里的IPV6，给你带来全新的解决方案，开始愉快的玩耍吧！
 
 <!-- more -->
 
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/ipekvt.png "海思NAS机顶盒IPV6动态域名解析外网访问-入门篇")
 
 ### 一、家里网络拓扑图
 

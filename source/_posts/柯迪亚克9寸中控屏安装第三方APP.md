@@ -14,7 +14,7 @@ date: 2024-12-13 10:04:00
 
 <!-- more -->
 
-![Popular](/photo/album/image/image_153.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ktnw.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 ### 一、准备
 
@@ -23,12 +23,12 @@ date: 2024-12-13 10:04:00
 
 <p align="center">2018款-柯迪亚克-车机系统信息</p>
 
-![Popular](/photo/album/image/image_154.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2l2td.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 
 <p align="center">双公头USB数据线</p>
 
-![Popular](/photo/album/image/image_155.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2l49p.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 ### 二、步骤
 
@@ -46,17 +46,17 @@ date: 2024-12-13 10:04:00
 
 <p align="center">解锁USB模式</p>
 
-![Popular](/photo/album/image/image_156.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2l22l.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
-![Popular](/photo/album/image/image_157.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lglv.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
-![Popular](/photo/album/image/image_158.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ll52.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 <p align="center">使用adb命令安装APP</p>
 
-![Popular](/photo/album/image/image_160.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lqsv.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
-![Popular](/photo/album/image/image_159.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ll7e.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 
 ### 三、问题
@@ -73,7 +73,7 @@ APP需要Android 4.0以平台运行，而中控屏系统版本为1.3
 
 注：小白，谨慎替换，当时都有点慌，还好没死机，不然没得救。
 
-![Popular](/photo/album/image/image_161.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lpx0.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 ### 四、参考
 

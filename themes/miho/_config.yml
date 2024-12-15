@@ -44,15 +44,15 @@ menu:
   #  url: /gitbook
   #  target: false
 
-  picture-o:
-    title: 相册
-    url: /photo
-    target: false
+  #picture-o:
+    #title: 相册
+    #url: /photo
+    #target: false
 
-  heart:
-    title: 恋爱
-    url: /love
-    target: false
+  #heart:
+    #title: 恋爱
+    #url: /love
+    #target: false
 
   envira:
     title: 收藏

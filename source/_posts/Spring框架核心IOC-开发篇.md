@@ -7,7 +7,7 @@ tags:
 top: 1
 abbrlink: 43aa0d57
 date: 2020-06-03 00:00:00
-cover_picture: 'photo/album/image/image_108.png'
+cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10szeid.png
 ---
 
 
@@ -15,7 +15,7 @@ cover_picture: 'photo/album/image/image_108.png'
 
 <!-- more -->
 
-![Spring](photo/album/image/image_108.png "Spring系列-框架核心IOC-开发篇")
+![Spring](https://pic.haoxiang.eu.org/image/2024/12/15/10szhdd.png "Spring系列-框架核心IOC-开发篇")
 
 依赖注入(DI)和控制反转(IOC)，目的是为了使类与类之间解耦合，提高系统的可扩展性和可维护性。
 

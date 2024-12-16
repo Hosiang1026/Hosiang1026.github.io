@@ -7,13 +7,13 @@ tags:
 top: 1
 abbrlink: 8bcb3d5y
 date: 2024-06-06 00:00:00
-cover_picture: 'photo/album/image/image_108.png'
+cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10szeid.png
 ---
 
 SaaS（Software as a Service），即多租户（或多承租）软件应用平台，SaaS是这样一种架构模式：它让多个不同环境的用户使用同一套应用程序，且保证用户之间的数据相互隔离。今天要聊的是使用Spring Boot快速构建独立数据库/共享数据库独立Schema的多租户系统，主要是一个SaaS系统最核心的技术实现，而其他的部分有兴趣的朋友可以在此基础上自行扩展。
 <!-- more -->
 
-![SaaS](https://haoxiang.eu.org/photo/album/image/image_081.png "Spring系列-Spring Boot构建多租户SaaS平台-入门篇")
+![SaaS](https://pic.haoxiang.eu.org/image/2024/12/15/10s874r.png "Spring Boot构建多租户SaaS平台-入门篇")
 
 ### 一、 尝试了解多租户的应用场景
 
@@ -151,7 +151,7 @@ publicclass UnaSaasApplication {
 
 最后，让我们看看整个项目的结构：
 
-![SaaS](https://haoxiang.eu.org/photo/album/image/image_120.png "Spring系列-Spring Boot构建多租户SaaS平台-入门篇")
+![SaaS](https://pic.haoxiang.eu.org/image/2024/12/15/10t1i5e.png "Spring系列-Spring Boot构建多租户SaaS平台-入门篇")
 
 ### 四、 实现租户数据源查询模块
 
@@ -744,7 +744,7 @@ publicclass LoginController {
 ```
 在启动项目之前，我们需要为主数据源创建对应的数据库和数据表，用于存放租户数据源信息，同时还需要提供一个租户业务模块数据库和数据表，用来存放租户业务数据。一切准备就绪后，启动项目，在浏览器中输入：http://localhost:8080/login.html
 
-![SaaS](https://haoxiang.eu.org/photo/album/image/image_121.png "Spring系列-Spring Boot构建多租户SaaS平台-入门篇")
+![SaaS](https://pic.haoxiang.eu.org/image/2024/12/15/10t1uha.png "Spring系列-Spring Boot构建多租户SaaS平台-入门篇")
 
 在登录窗口中输入对应的租户名，用户名和密码，测试是否能够正常到达主页。可以多增加几个租户和用户，测试用户是否正常切换到对应的租户下。
 

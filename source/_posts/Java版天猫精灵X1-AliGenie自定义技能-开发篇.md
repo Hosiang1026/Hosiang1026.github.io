@@ -4,16 +4,16 @@ categories: 原创文章
 author: 狂欢马克思
 tags:
   - Develop
-top: 1
+top: 8
 abbrlink: bab7a183
-date: 2024-05-01 00:00:00
-cover_picture: 'photo/album/image/image_028.jpg'
+date: 2024-05-05 00:00:00
+cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10rlkfv.jpg
 ---
 
 阿里巴巴人工智能实验室(AI-Labs)在2018云栖大会上宣布了 5 件大事：大脑升级、造机器人、造无人车、修路，以及开酒店。这里的“大脑”指的是阿里的AliGenie人工智能系统，AliGenie是AI-Labs面向软硬件厂商和开发者推出的，将人工智能中ASR语音识别、NLP自然语言处理、TTS语音合成等自然语言处理技术和能力对外共享的开放式平台。
 <!-- more -->
 
-![AliGenie](https://t1.picb.cc/uploads/2019/08/10/gvT9id.jpg "天猫精灵X1-AliGenie开发者平台自定义技能-Java版")
+![AliGenie](https://pic.haoxiang.eu.org/image/2024/12/15/10s811y.jpg "天猫精灵X1-AliGenie开发者平台自定义技能-Java版")
 
 
 ### 一、常见产品
@@ -41,7 +41,7 @@ AlphaGo结合了三大核心技术：先进的搜索算法、机器学习算法�
 
 自然语言 - DIS结构 + Skil技能回复
 
-![AliGenie](https://t1.picb.cc/uploads/2019/08/10/gvTztD.png "天猫精灵X1-AliGenie开发者平台自定义技能-Java版")
+![AliGenie](https://pic.haoxiang.eu.org/image/2024/12/15/10s80xe.jpg "天猫精灵X1-AliGenie开发者平台自定义技能-Java版")
 
 ### 四、核心概念
 
@@ -113,14 +113,14 @@ NLP 中理解语义分析的方法：
 
 NLP 中深度学习的常见任务
 
-![AliGenie](https://t1.picb.cc/uploads/2019/08/10/gvTD5v.png "天猫精灵X1-AliGenie开发者平台自定义技能-Java版")
+![AliGenie](https://pic.haoxiang.eu.org/image/2024/12/15/10rld68.png "天猫精灵X1-AliGenie开发者平台自定义技能-Java版")
 
 
 3. DIS（Domain+Intent+Solt）
 
 自然语言理解（NLU）完成后产出领域、意图、参数、上下文，后续就需要拿到这些信息做具体的业务逻辑处理。
 
-![AliGenie](https://t1.picb.cc/uploads/2019/08/10/gvTEXi.png "天猫精灵X1-AliGenie开发者平台自定义技能-Java版")
+![AliGenie](/image/2024/12/15/10rld68.png "天猫精灵X1-AliGenie开发者平台自定义技能-Java版")
 
 例句：今天杭州天气怎么样？
 

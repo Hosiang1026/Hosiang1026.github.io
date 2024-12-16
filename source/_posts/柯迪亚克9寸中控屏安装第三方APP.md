@@ -5,7 +5,7 @@ author: 狂欢马克思
 tags:
   - Hobby
 top: 3
-cover_picture: 'https://pic.haoxiang.eu.org/image/2024/12/15/h2lx3a.png'
+cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/h2lx3a.png
 abbrlink: cebc765c
 date: 2024-12-13 10:04:00
 ---

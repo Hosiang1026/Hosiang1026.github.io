@@ -4,10 +4,10 @@ categories: 原创文章
 author: 狂欢马克思
 tags:
   - Develop
-top: 1
+top: 3
 abbrlink: d324a4f0
-date: 2024-05-04 00:00:00
-cover_picture: 'photo/album/image/image_028.jpg'
+date: 2024-05-05 00:00:00
+cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10rlkfv.jpg
 ---
 
 
@@ -15,7 +15,7 @@ IDEA是一个强大的IDE，其优秀的代码提示，丰富的插件等不是E
 
 <!-- more -->
 
-![IntelliJ IDEA](/photo/album/image/java20180501002.png "IntelliJ IntelliJ IDEA部署项目至远程Tomcat-入门篇")
+![IntelliJ IDEA](https://pic.haoxiang.eu.org/image/2024/12/15/10s8do5.png "IntelliJ IntelliJ IDEA部署项目至远程Tomcat-入门篇")
 
 
 
@@ -28,9 +28,6 @@ IDEA是一个强大的IDE，其优秀的代码提示，丰富的插件等不是E
 [Apache Tomcat 9.0.8](https://tomcat.apache.org/download-90.cgi)
 
 
-
-
-
 ---
 
 
@@ -41,7 +38,7 @@ IDEA是一个强大的IDE，其优秀的代码提示，丰富的插件等不是E
 **服务器系统版本：** CentOS-7 64位
 
 
-![IntelliJ IDEA](http://hosiang1026.gitee.io/photo_page/img/dev/tomcat01011.png "IntelliJ IntelliJ IDEA部署项目至远程Tomcat-入门篇")
+![IDEA](https://pic.haoxiang.eu.org/image/2024/12/15/10s8qz3.png "IDEA部署项目至远程Tomcat-入门篇")
 
 
 
@@ -51,7 +48,7 @@ IDEA是一个强大的IDE，其优秀的代码提示，丰富的插件等不是E
 
 网络连接：设置网卡的网关、IP地址和DNS（根据自己的情况）
 
-![IntelliJ IDEA](http://hosiang1026.gitee.io/photo_page/img/dev/tomcat01004.png "IntelliJ IntelliJ IDEA部署项目至远程Tomcat-入门篇")
+![IDEA](http://hosiang1026.gitee.io/photo_page/img/dev/tomcat01004.png "IDEA部署项目至远程Tomcat-入门篇")
 
 网关: 10.10.12.1
 
@@ -72,7 +69,7 @@ nameserver 10.10.126.25
 
 查看命令：`ip addr` 或 `ifconfig`
 
-![IntelliJ IDEA](http://hosiang1026.gitee.io/photo_page/img/dev/tomcat01001.png "IntelliJ IntelliJ IDEA部署项目至远程Tomcat-入门篇")
+![IDEA](https://pic.haoxiang.eu.org/image/2024/12/15/10r8a0h.png "IDEA部署项目至远程Tomcat-入门篇")
 
 检查命令：
 
@@ -87,11 +84,11 @@ ping www.baidu.com (外网)
 
 #### 1.2 安装JDK (自行百度)
 
-![IntelliJ IDEA](http://hosiang1026.gitee.io/photo_page/img/dev/tomcat01002.png "IntelliJ IntelliJ IDEA部署项目至远程Tomcat-入门篇")
+![IDEA](https://pic.haoxiang.eu.org/image/2024/12/15/10r8uue.png "IDEA部署项目至远程Tomcat-入门篇")
 
 #### 1.3 安装Tomcat (自行百度)
 
-![IntelliJ IDEA](http://hosiang1026.gitee.io/photo_page/img/dev/tomcat01003.png "IntelliJ IntelliJ IDEA部署项目至远程Tomcat-入门篇")
+![IntelliJ IDEA](https://pic.haoxiang.eu.org/image/2024/12/15/10r8uue.png "IDEA部署项目至远程Tomcat-入门篇")
 
 ### 二、Tomcat开启JMX监控
 
@@ -156,27 +153,27 @@ cd /usr/java/apache-tomcat-8.5.31/bin
 
 回到Windows，使用jdk自带工具jvisualvm.exe或jconsole.exe连接，工具目录如下：JAVA_HOME/bin
 
-![IntelliJ IDEA](http://hosiang1026.gitee.io/photo_page/img/dev/tomcat01009.png "IntelliJ IntelliJ IDEA部署项目至远程Tomcat-入门篇")
+![IDEA](https://pic.haoxiang.eu.org/image/2024/12/15/10rkvys.png "IDEA部署项目至远程Tomcat-入门篇")
 
-![IntelliJ IDEA](http://hosiang1026.gitee.io/photo_page/img/dev/tomcat01010.png "IntelliJ IntelliJ IDEA部署项目至远程Tomcat-入门篇")
+![IDEA](https://pic.haoxiang.eu.org/image/2024/12/15/10rlp1n.png "IDEA部署项目至远程Tomcat-入门篇")
 
 ### 三、远程Tomcat配置
 
 1、 使用IntelliJ IDEA，打开菜单Run -> 选择Edit Configuration 
 
-![IntelliJ IDEA](photo/album/image/java20180501012.png "步骤一")
+![IDEA](https://pic.haoxiang.eu.org/image/2024/12/15/10spl2p.png "步骤一")
 
 2、 点击“+”号 -> 选择“Tomcat Server” -> 选择“Remote”
 
-![IntelliJ IDEA](http://hosiang1026.gitee.io/photo_page/img/dev/tomcat01005.png "IntelliJ IntelliJ IDEA部署项目至远程Tomcat-入门篇")
+![IDEA](https://pic.haoxiang.eu.org/image/2024/12/15/10rjqbv.png "IDEA部署项目至远程Tomcat-入门篇")
 
-![IntelliJ IDEA](http://hosiang1026.gitee.io/photo_page/img/dev/tomcat01006.png "IntelliJ IntelliJ IDEA部署项目至远程Tomcat-入门篇")
+![IDEA](https://pic.haoxiang.eu.org/image/2024/12/15/10rj71o.png "IDEA部署项目至远程Tomcat-入门篇")
 
 3、启动Tomcat
 
    部署自己的项目（springmvc），启动远程Tomcat.
 
-![IntelliJ IDEA](http://hosiang1026.gitee.io/photo_page/img/dev/tomcat01007.png "IntelliJ IntelliJ IDEA部署项目至远程Tomcat-入门篇")
+![IDEA](https://pic.haoxiang.eu.org/image/2024/12/15/10spt09.png "IDEA部署项目至远程Tomcat-入门篇")
 
 
 ### 四、访问页面

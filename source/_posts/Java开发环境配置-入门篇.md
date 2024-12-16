@@ -6,8 +6,8 @@ tags:
   - Develop
 top: 1
 abbrlink: 69f02c64
-date: 2024-05-06 00:00:00
-cover_picture: 'photo/album/image/image_028.jpg'
+date: 2024-05-05 00:00:00
+cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10rlkfv.jpg
 ---
 
 
@@ -15,7 +15,7 @@ Java 是由Sun Microsystems公司于1995年5月推出的高级程序设计语言
 
 <!-- more -->
 
-![Java](/images/gAhSjg.jpg "Java开发环境配置-入门篇")
+![Java](https://pic.haoxiang.eu.org/image/2024/12/15/10r80v9.jpg "Java开发环境配置-入门篇")
 
 
 ### 一、安装包

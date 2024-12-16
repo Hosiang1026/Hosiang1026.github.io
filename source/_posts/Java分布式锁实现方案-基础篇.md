@@ -4,17 +4,17 @@ categories: 原创文章
 author: 狂欢马克思
 tags:
   - Develop
-top: 1
+top: 6
 abbrlink: 9a85a003
-date: 2024-08-10 00:00:00
-cover_picture: photo/album/image/image_144.png
+date: 2024-05-05 00:00:00
+cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10rlkfv.jpg
 ---
 
 在很多场景中，我们为了保证数据的最终一致性，需要很多的技术方案来支持，比如分布式事务、分布式锁等。那具体什么是分布式锁，分布式锁应用在哪些业务场景、如何来实现分布式锁呢？
 
 <!-- more -->
 
-![Database](/photo/album/image/image_145.png "Java系列-分布式锁实现方案-基础篇")
+![Database](https://pic.haoxiang.eu.org/image/2024/12/15/10u3o8e.png "Java分布式锁实现方案-基础篇")
 
 ---
 

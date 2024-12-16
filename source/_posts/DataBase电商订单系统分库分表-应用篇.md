@@ -7,14 +7,14 @@ tags:
 top: 3
 abbrlink: 89184fb5
 date: 2024-10-01 00:00:00
-cover_picture: photo/album/image/image_123.png
+cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10t23ou.png
 ---
 
 每种分库分表方案也不是十全十美，都是有利有弊的。目前来说，这种使用用户id来切分订单数据的方案，还是被大部分公司给使用。实际效果还不错。
 
 <!-- more -->
 
-![Database](/photo/album/image/image_124.png "后端开发系列-电商订单系统分库分表-应用篇")
+![Database](https://pic.haoxiang.eu.org/image/2024/12/15/10t23ou.png "电商订单系统分库分表-应用篇")
 
 ---
 

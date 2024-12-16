@@ -546,17 +546,12 @@ var calendar = {
 };
 
 <!--获取当前日期-->
-function getCurrentDateTime() {
+function getCurrentDate() {
     var d = new Date();
     var year = d.getFullYear();
     var month = d.getMonth() + 1;
     var date = d.getDate();
     var week = d.getDay();
-    /*时分秒*/
-    /*var hours = d.getHours();
-    var minutes = d.getMinutes();
-    var seconds = d.getSeconds();
-    var ms = d.getMilliseconds();*/
     var curDateTime = year;
     if (month > 9)
         curDateTime = curDateTime + "年" + month;
@@ -566,7 +561,32 @@ function getCurrentDateTime() {
         curDateTime = curDateTime + "月" + date + "日";
     else
         curDateTime = curDateTime + "月0" + date + "日";
-    /*if (hours > 9)
+
+    return curDateTime;
+}
+
+<!--获取当前日期时间-->
+function getCurrentDateTime() {
+    var d = new Date();
+    var year = d.getFullYear();
+    var month = d.getMonth() + 1;
+    var date = d.getDate();
+    var week = d.getDay();
+    /*时分秒*/
+    var hours = d.getHours();
+    var minutes = d.getMinutes();
+    var seconds = d.getSeconds();
+    var ms = d.getMilliseconds();
+    var curDateTime = year;
+    if (month > 9)
+        curDateTime = curDateTime + "年" + month;
+    else
+        curDateTime = curDateTime + "年0" + month;
+    if (date > 9)
+        curDateTime = curDateTime + "月" + date + "日";
+    else
+        curDateTime = curDateTime + "月0" + date + "日";
+    if (hours > 9)
         curDateTime = curDateTime + " " + hours;
     else
         curDateTime = curDateTime + " 0" + hours;
@@ -577,7 +597,7 @@ function getCurrentDateTime() {
     if (seconds > 9)
         curDateTime = curDateTime + ":" + seconds;
     else
-        curDateTime = curDateTime + ":0" + seconds;*/
+        curDateTime = curDateTime + ":0" + seconds;
     var weekday = "";
     if (week == 0)
         weekday = "星期日";
@@ -593,6 +613,7 @@ function getCurrentDateTime() {
         weekday = "星期五";
     else if (week == 6)
         weekday = "星期六";
+    
     curDateTime = curDateTime + " " + weekday;
 
     return curDateTime;
@@ -607,7 +628,19 @@ function showCal(){
     var ww=D.getDay();
     var ss=parseInt(D.getTime() / 1000);
     if (yy<100) yy="19"+yy;
-    return GetLunarDay(yy,mm,dd);
+    return GetLunarDay(0,yy,mm,dd);
+}
+
+<!--获取当前农历(包括农历年)-->
+function showYearCal(){
+    var D=new Date();
+    var yy=D.getFullYear();
+    var mm=D.getMonth()+1;
+    var dd=D.getDate();
+    var ww=D.getDay();
+    var ss=parseInt(D.getTime() / 1000);
+    if (yy<100) yy="19"+yy;
+    return GetLunarDay(1,yy,mm,dd);
 }
 
 //定义全局变量
@@ -646,6 +679,7 @@ function e2c(){
     if(tmp<1900){
         tmp+=1900;
     }
+
     total=(tmp-1921)*365+Math.floor((tmp-1921)/4)+madd[TheDate.getMonth()]+TheDate.getDate()-38;
 
     if(TheDate.getYear()%4==0&&TheDate.getMonth()>1) {
@@ -663,7 +697,7 @@ function e2c(){
     }
     cYear=1921 + m;
     cMonth=k-n+1;
-    cDay=total;
+    cDay=total+4;
     if(k==12){
         if(cMonth==Math.floor(CalendarData[m]/0x10000)+1){
             cMonth=1-cMonth;
@@ -674,14 +708,16 @@ function e2c(){
     }
 }
 
-function GetcDateString(){
+function GetcDateString(yearFlag){
     var tmp="";
     /*显示农历年：（ 如：甲午(马)年 ）*/
-    /*tmp+=tgString.charAt((cYear-4)%10);
-    tmp+=dzString.charAt((cYear-4)%12);
-    tmp+="(";
-    tmp+=sx.charAt((cYear-4)%12);
-    tmp+=")年 ";*/
+    if(yearFlag == 1){
+        tmp+=tgString.charAt((cYear-4)%10);
+        tmp+=dzString.charAt((cYear-4)%12);
+        tmp+=sx.charAt((cYear-4)%12);
+        tmp+="年";
+    }
+
     if(cMonth<1){
         tmp+="(闰)";
         tmp+=monString.charAt(-cMonth-1);
@@ -693,17 +729,19 @@ function GetcDateString(){
     if (cDay%10!=0||cDay==10){
         tmp+=numString.charAt((cDay-1)%10);
     }
+
     return tmp;
 }
 
-function GetLunarDay(solarYear,solarMonth,solarDay){
+function GetLunarDay(yearFlag,solarYear,solarMonth,solarDay){
+
     //solarYear = solarYear<1900?(1900+solarYear):solarYear;
-    if(solarYear<1921 || solarYear>2020){
+    if(solarYear<1921 || solarYear>2100){
         return "";
     }else{
         solarMonth = (parseInt(solarMonth)>0) ? (solarMonth-1) : 11;
         e2c(solarYear,solarMonth,solarDay);
-        return GetcDateString();
+        return GetcDateString(yearFlag);
     }
 }
 

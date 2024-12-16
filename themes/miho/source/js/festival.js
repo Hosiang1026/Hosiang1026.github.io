@@ -1,6 +1,5 @@
-
 //节日倒计时
-var voiceflag = true;
+var voiceflag = false;
 var songflag = true;
 var fesflag = true;
 
@@ -29,9 +28,11 @@ var festivalNameSpecial = "";
 var festivalDateSpecial = "";
 var festivalTimeSpecial = 0;
 //24节气
+var termNote = "";
 var festivalNameTerm = "";
 var festivalDateTerm = "";
 var festivalTimeTerm = 0;
+var festivalRemarkTerm = "";
 //阳历
 var festivalNameSFtv = "";
 var festivalDateSFtv = "";
@@ -44,16 +45,156 @@ var festivalTimeLFtv = 0;
 //定义特殊节日数组
 var special = ["05/2-7*母亲节","06/3-7*父亲节","11/4-4*感恩节"];
 //定义24节气数组
-var solarTerm = ["01*小寒","01*大寒","02*立春","02*雨水","03*惊蛰","03*春分","04*清明(法定节假日)","04*谷雨","05*立夏","05*小满","06*芒种","06*夏至","07*小暑","07*大暑","08*立秋","08*处暑","09*白露","09*秋分","10*寒露","10*霜降","11*立冬","11*小雪","12*大雪","12*冬至"];
+//var solarTerm = ["01*小寒","01*大寒","02*立春","02*雨水","03*惊蛰","03*春分","04*清明(法定节假日)","04*谷雨","05*立夏","05*小满","06*芒种","06*夏至","07*小暑","07*大暑","08*立秋","08*处暑","09*白露","09*秋分","10*寒露","10*霜降","11*立冬","11*小雪","12*大雪","12*冬至"];
 //定义阴历节日数组
 var lFtv = ["01/01*春节(法定节假日)","01/12*老妈的生日|1972","01/15*上元节","02/02*龙头节","02/14*老爸的生日|1970","04/04*寒食节","04/08*佛诞节","05/31*端午节(法定节假日)","07/07*七夕节","07/15*中元节","09/06*中秋节(法定节假日)","09/09*重阳节","09/18*祥祥同学的生日|1992","10/01*七七同学的生日|1995","10/15*下元节","12/08*腊八节","12/23*小年(北方地区)","12/24*小年(南方大部分地区)","12/28*订婚纪念日","12/28*小年(江浙沪地区)","12/29*除夕(法定节假日)"];
 //定义阳历节日数组
 var sFtv = ["01/01*元旦(法定节假日)","02/14*情人节","03/08*妇女节","03/12*植树节","03/15*消费者权益日","04/01*愚人节","05/01*劳动节(法定节假日)","05/04*青年节","05/12*护士节","05/20*网络情人节","06/01*儿童节","07/01*建党节(1921.07.23)|香港回归纪念日(1997.07.01)","07/14*领证纪念日","08/01*建军节(1927.08.01)","09/03*抗战胜利纪念日(1945.09.03)","09/10*教师节","09/18*九一八事变纪念日(1931.09.18)","10/01*国庆节(法定节假日)","10/24*1024程序员节","11/01*万圣节","11/11*网络单身节","12/13*国家公祭日","12/20*澳门回归纪念日(1999.12.20)","12/24*平安夜","12/25*圣诞节"];
 
-
 var birthdayArr = ["正月十二", "二月十四", "九月十八", "十月初一"];
 var springFestivalArr = ["腊月廿三", "腊月廿四", "腊月廿五", "腊月廿六", "腊月廿七", "腊月廿八", "腊月廿九", "腊月三十", "正月初一", "正月初二", "正月初三"];
 var nationalDayArr = ["10月01日", "10月02日", "10月03日", "10月04日", "10月05日", "10月06日", "10月07日"];
+
+var solarTerm = [//二十四节气列表
+        {
+            sort: 1,
+            name:'立春',
+            month: '02',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 2,
+            name:'雨水',
+            month: '02',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 3,
+            name:'惊蛰',
+            month: '03',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 4,
+            name:'春分',
+            month: '03',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 5,
+            name:'谷雨',
+            month: '04',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 7,
+            name:'立夏',
+            month: '05',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 8,
+            name:'小满',
+            month: '05',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 9,
+            name:'芒种',
+            month: '06',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 10,
+            name:'夏至',
+            month: '06',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 11,
+            name:'小暑',
+            month: '07',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 12,
+            name:'大暑',
+            month: '07',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 13,
+            name:'立秋',
+            month: '08',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 14,
+            name:'处暑',
+            month: '08',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 15,
+            name:'白露',
+            month: '09',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 16,
+            name:'秋分',
+            month: '09',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 17,
+            name:'寒露',
+            month: '10',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 18,
+            name:'霜降',
+            month: '10',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 19,
+            name:'立冬',
+            month: '11',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 20,
+            name:'小雪',
+            month: '11',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 21,
+            name:'大雪',
+            month: '12',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 22,
+            name:'冬至',
+            month: '12',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 23,
+            name:'小寒',
+            month: '01',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        },
+        {
+            sort: 24,
+            name:'大寒',
+            month: '01',
+            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+        }
+    ];
 
 var bannerNum = -1;
 
@@ -79,7 +220,7 @@ function getFestival(){
     calendars = showCal();
 
     //获取当前阳历：2019年08月31日
-    date = getCurrentDateTime();
+    date = getCurrentDate();
 
     //年
     syear = date.substr(0,date.indexOf("年"));
@@ -90,70 +231,59 @@ function getFestival(){
 
     //2019/01/01
     var nowDate = syear+"/"+ smouth+"/"+ sday;
-
     //当前时间戳
     nowTime =  new Date(nowDate).getTime();
 
     //遍历特殊节日数组
-    ergodicsSpecialArr(special,(parseInt(syear)-1).toString());
+    ergodicsSpecialArr((parseInt(syear)-1).toString());
 
     //遍历24节气数组
-    ergodicsSolarTermArr(solarTerm,(parseInt(syear)-1).toString());
+    ergodicsSolarTermArr((parseInt(syear)-1).toString());
 
     //遍历阴历节日数组
-    ergodicsLFtvArr(lFtv,(parseInt(syear)-1).toString());
+    ergodicsLFtvArr((parseInt(syear)-1).toString());
 
     //遍历阳历节日数组
-    ergodicsSFtvArr(sFtv,syear);
+    ergodicsSFtvArr((parseInt(syear)-1).toString());
 
     //获取最近的节日日期 - 即以上节日的最小值
     getMinFestival();
 
+    termNote = festivalNameTerm + "，" + festivalRemarkTerm;
 }
 
 /**
  * 遍历24节气数组
  */
-function ergodicsSolarTermArr(solarTerm,termyear) {
+function ergodicsSolarTermArr(termyear) {
+
     for (var i = 0, len = solarTerm.length; i < len; i++) {
         var curr = solarTerm[i];
         //索引节日时间戳
         //节气排序
         var num = i + 1;
         //节气阳历月份
-        var mouth = curr.substr(0, curr.indexOf("*"));
-        mouth = mouth.replace("*", "");
+        var month = curr.month;
         //节气名称
-        var orderName = "";
-        var orderNum = 0;
-        var intNum = parseInt(num);
-        //计算序号
-        if (intNum < 3) {
-            orderNum = 22 + intNum;
-        } else {
-            orderNum = intNum - 2;
-        }
-
-        if ("" != orderNum) {
-            orderName = "第" + orderNum + "个节气-";
-        }
-
-        var currName = orderName + curr.substr(curr.indexOf("*") + 1, curr.length);
+        var orderName = "第" + curr.sort + "个节气-";
+        var currName = orderName + curr.name;
+        var currRemark = curr.remark;
         //24节气转换公历
-        var currDate = conversionTerm(termyear, mouth, num);
+        var currDate = conversionTerm(termyear, month, num);
         var currTime = new Date(currDate).getTime();
-
+        
         //比较日期
         if (nowTime == currTime || nowTime < currTime) {
             festivalNameTerm = currName;
             festivalDateTerm = currDate;
             festivalTimeTerm = currTime;
+            festivalRemarkTerm = currRemark;
             break;
         } else {
             //跨年处理,递归调用
             if (i == len - 1) {
                 var newyear = (parseInt(termyear) + 1).toString();
-                ergodicsSolarTermArr(solarTerm, newyear);
+                ergodicsSolarTermArr(newyear);
             }
         }
     }
@@ -162,7 +292,7 @@ function ergodicsSolarTermArr(solarTerm,termyear) {
 /**
  * 遍历阴历节日数组
  */
-function ergodicsLFtvArr(lFtv,lfyear) {
+function ergodicsLFtvArr(lfyear) {
     for(var i = 0,len=lFtv.length; i < len; i++) {
         var curr = lFtv[i];
         //索引节日时间戳
@@ -187,7 +317,7 @@ function ergodicsLFtvArr(lFtv,lfyear) {
             //跨年处理,递归调用
             if (i == len-1) {
                 var newyear = (parseInt(lfyear)+1).toString();
-                ergodicsLFtvArr(lFtv,newyear);
+                ergodicsLFtvArr(newyear);
             }
         }
 
@@ -197,7 +327,7 @@ function ergodicsLFtvArr(lFtv,lfyear) {
 /**
  * 遍历阳历节日数组
  */
-function ergodicsSFtvArr(sFtv,sfyear) {
+function ergodicsSFtvArr(sfyear) {
     for(var i = 0,len=sFtv.length; i < len; i++) {
         var curr = sFtv[i];
         //索引节日时间戳
@@ -214,7 +344,7 @@ function ergodicsSFtvArr(sFtv,sfyear) {
             //跨年处理,递归调用
             if (i == len-1) {
                 var newyear = (parseInt(sfyear)+1).toString();
-                ergodicsSFtvArr(sFtv,newyear);
+                ergodicsSFtvArr(newyear);
             }
         }
     }
@@ -223,9 +353,9 @@ function ergodicsSFtvArr(sFtv,sfyear) {
 /**
  * 遍历特殊节日数组
  */
-function ergodicsSpecialArr(specialArr,sfyear) {
-    for(var i = 0,len=specialArr.length; i < len; i++) {
-        var curr = specialArr[i];
+function ergodicsSpecialArr(sfyear) {
+    for(var i = 0,len=special.length; i < len; i++) {
+        var curr = special[i];
         //索引节日时间戳
         var nmonth = curr.substr(0,curr.indexOf("/"));
         if (null == currDate) {
@@ -247,7 +377,7 @@ function ergodicsSpecialArr(specialArr,sfyear) {
         //跨年处理,递归调用
         if (i == len-1) {
             var newyear = (parseInt(sfyear)+1).toString();
-            ergodicsSpecialArr(specialArr,newyear);
+            ergodicsSpecialArr(newyear);
         }
 
     }
@@ -293,7 +423,7 @@ function assigFestival(minTime,Names,Dates,Times) {
 function showTime(){
 
     var time = "";
-    var msgContent = "";
+    var msgContent = getCurrentDateTime() + " " + showYearCal();
 
     var currentTime=new Date().getTime();
     var beginDayEarlyTime =new Date().setHours(0, 0, 0, 0) ;
@@ -348,18 +478,16 @@ function showTime(){
 
                 if ("" != festivalName) {
                     //赋值节日名称
-                    msgContent = "今天是" + festivalName + "！";
+                    msgContent = msgContent + "，今天是" + festivalName + "！";
                     $("#timer").html(time);
                     $("#msg").html(msgContent);
-                    $("#weekend").html('');
                 }
             }
 
         }else{
             if ("" != festivalName) {
                 //赋值节日名称
-                msgContent = "距离"+festivalName+"，还有";
-
+                msgContent = msgContent + "，距离"+festivalName+"，还有";
                 //赋值节日倒计时
                 time=day+"天"+hour+"时"+minute+"分"+second+"秒！";
 
@@ -369,11 +497,13 @@ function showTime(){
 
         }
 
+        $("#note").html(termNote);
+
         //语音播报和播放纯音乐
         if (voiceflag){
             var url = window.location.href;
             if ($.cookie("auto_playre") == null || $.cookie("auto_playre") === "yes") {
-                if(url == "https://haoxiang.eu.org/"||url == "https://haoxiang.eu.org"){
+                if(url == "http://localhost:4000/"||url == "https://haoxiang.eu.org/"||url == "https://haoxiang.eu.org"){
                     speechVoice();
                    }else{
                      voiceflag = false;
@@ -403,7 +533,7 @@ function speechVoice() {
                 //Html5语音合成
                 //htmlVoice(text);
                 //百度语音合成
-                baiduVoice(text);
+                //baiduVoice(text);
                 voiceflag = false;
             }
         }
@@ -416,10 +546,29 @@ function speechVoice() {
  */
 function htmlVoice(text) {
     var msg = new SpeechSynthesisUtterance();
-    msg.lang == "zh-CN";
-    msg.rate = 1; //语速
-    msg.pitch = 3; //语调
+    
+    // 设置语音语言为中文
+    msg.lang = "zh-CN"; 
+    
+    // 设置语速 (0.1 到 10，默认是 1)
+    msg.rate = 1; //稍微提高语速
+    
+    // 设置语调 (0 到 2，默认是 1)
+    msg.pitch = 1.5; //降低语调，使语音更自然
+    
+    // 设置要朗读的文本
     msg.text = text;
+    
+    // 设置语音引擎（可以通过调整 voice 来选择不同的声音）
+    var voices = window.speechSynthesis.getVoices();
+    for (var i = 0; i < voices.length; i++) {
+        if (voices[i].lang === "zh-CN") {
+            msg.voice = voices[i]; // 设置中文语音
+            break;
+        }
+    }
+
+    // 开始朗读
     window.speechSynthesis.speak(msg);
 }
 
@@ -448,7 +597,14 @@ function baiduVoice(text) {
     audio.loop = false;
     audio.volume = 1;
     //监听语音播报结束
-    //audio.addEventListener('ended',palyAudio(), false);
+    audio.addEventListener('ended',palyAudio(), false);
+}
+
+function audioArr() {
+    return [
+        'https://aod.cos.tx.xmcdn.com/group10/M0A/1C/F6/wKgDaVV34rnSjpcxAOLRGSfkWLY847.mp3', 
+        'https://aod.cos.tx.xmcdn.com/group10/M0A/1C/F6/wKgDaVV34rnSjpcxAOLRGSfkWLY847.mp3'
+    ];
 }
 
 /**
@@ -505,9 +661,6 @@ function palyAudio() {
  * @returns {*[]|string[]}
  */
 function songlistArr() {
-
-    var calendars = showCal();
-    var date = getCurrentDateTime();
 
     if (-1 != birthdayArr.indexOf(calendars)) {
         //生日歌
@@ -609,22 +762,6 @@ function getWYComments(){
                var artistsname = htmlobj.data.artistsname;
                var content = htmlobj.data.content;
                $("#wycomments").html(content + ' - ' + artistsname + '《' + name + '》');
-           }
-        }
-     });   
-}
-
-//节假日接口
-function getWeekend(){ 
-    $.ajax({
-          method:"get",
-          async: false,
-          url:"https://service-gd5gvcli-1254466492.gz.apigw.tencentcs.com/release/holiday",
-          success: function(htmlobj){
-           if(htmlobj.length>0){  
-               if(htmlobj[0].code==2){
-                    $("#weekend").html('今天是周末，忙碌了一周的您可以稍稍休息一下啦！');
-               }
            }
         }
      });   

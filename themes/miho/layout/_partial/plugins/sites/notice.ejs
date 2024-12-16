@@ -60,7 +60,7 @@ function browserRedirect() {
        $("#noticeId").css({"line-height":"1.6em"});
        contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
             <% if (theme.countdown.enable) { %>
-           "官宣：<span id='msg'></span><span id='timer'></span>"
+           "官宣：<span id='msg'></span><span id='timer'></span><span id='note'></span>"
             <% } %>
            +"<span id='jinrishici-sentence'></span></font> ";
 
@@ -68,7 +68,7 @@ function browserRedirect() {
        $("#noticeId").css({"line-height":"3.6em","margin-top":"20px"});
        contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
             <% if (theme.countdown.enable) { %>
-           "官宣：<span id='weekend'></span><span id='msg'></span><span id='timer'></span>"
+           "官宣：<span id='msg'></span><span id='timer'></span><span id='note'></span>"
              <% } %>
            +"<span id='jinrishici-sentence'></span></font> ";
     }

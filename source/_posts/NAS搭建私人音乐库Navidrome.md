@@ -52,7 +52,8 @@ docker run -d --name navidrome --restart=unless-stopped --user $(id -u):$(id -g)
 
 为了使你的音乐体验更加完美，你可能需要为歌曲添加歌词和封面。这里有两种方法可以实现这一功能：
 
-方法一：使用LyricAPI
+方法一：
+
 LyricAPI是一个支持酷狗、聚合API获取LRC歌词的服务，它还提供获取专辑、艺术家封面等功能。你可以通过以下命令启动：
 
 ```bash

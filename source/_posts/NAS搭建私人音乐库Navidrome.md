@@ -48,7 +48,17 @@ docker run -d --name navidrome --restart=unless-stopped --user $(id -u):$(id -g)
 
 ![60b87-ca3fefb87f148b5c03ecf069fb1f95ab](https://pic.haoxiang.eu.org/image/2024/12/17/prrmbl.png)
 
-### 三、歌词及封面
+### 三、下载歌曲
+
+[XiaoMusic GitHub](https://github.com/hanxi/xiaomusic)：让小爱音箱真正实现无限听歌，释放更多可能！
+
+借助 yt-dlp 强大的下载功能，XiaoMusic 支持语音口令自动下载和播放歌曲。例如，当你对小爱音箱说“播放王菲的《心愿》”，XiaoMusic 会智能化地先将《心愿》下载至本地设备，然后立即播放，确保高质量的音乐体验。无论是热门歌曲还是经典老歌，都能轻松实现播放，让你的音乐时光更加流畅、自由。
+
+```bash
+docker run -dit --restart=always --name xiaomusic -p 8090:8090 -v /mnt/mmcblk1p1/music:/app/music -v /mnt/mmcblk1p1/xiaomusic/conf:/app/conf hanxi/xiaomusic
+```
+
+### 四、歌词及封面
 
 为了使你的音乐体验更加完美，你可能需要为歌曲添加歌词和封面。这里有两种方法可以实现这一功能：
 
@@ -80,7 +90,7 @@ LyricAPI默认监听在28883端口，API地址为：
 ![160214](https://pic.haoxiang.eu.org/image/2024/12/17/qwq04d.png)
 
 
-### 四、总结  
+### 五、总结  
 
 Navidrome作为一款开源的音乐服务器，提供了简单易用且功能强大的音乐管理解决方案。它支持多种音频格式，并允许通过多平台访问和管理自己的音乐库。无论你是在家中还是在外出旅行，使用Navidrome搭建自己的私人音乐流媒体库，都能随时随地享受音乐带来的乐趣。通过Docker安装，配置过程相对简单，几步即可完成，尤其适合希望搭建本地音乐平台的用户。
 

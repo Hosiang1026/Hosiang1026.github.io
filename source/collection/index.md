@@ -11,8 +11,8 @@
 
   车机版本 | 软件名称 | 提取码
   ---|---|---
-  1.31 Release | <a href="https://pan.baidu.com/s/1kVcicy7">adb工具</a> | 无
-  1.31 Release | <a href="https://hosiang.lanzouj.com/b00xay8ri">SkodaEQ</a> | 2ac3
+  MCU 1.31 Release | <a href="https://pan.baidu.com/s/1kVcicy7">adb工具</a> | 无
+  MCU 1.31 Release | <a href="https://hosiang.lanzouj.com/b00xay8ri">SkodaEQ</a> | 2ac3
 
 ### 本站软件
   
@@ -26,7 +26,7 @@
 
    <a href="http://byr.wiki" target="bank">北邮人导航</a>  | <a href="http://wanyouw.com" target="bank">万有导航</a> 
    ---|---
-   <a href="http://lackar.com/aa/" target="bank">AnywhereAnything</a> |  <a href="https://tongji.baidu.com/web/welcome/ico?s=3cd8fa109426bf3f10bd5c362175bace" target="bank">网站统计</a>
+   <a href="http://lackar.com/aa/" target="bank">AnywhereAnything</a> |  <a href="https://stats.uptimerobot.com/w5nLWUvwNl/794422758" target="bank">网站监控</a>
 
  ### 阅读网站
  

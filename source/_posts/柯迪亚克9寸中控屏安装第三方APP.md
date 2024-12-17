@@ -54,7 +54,7 @@ date: 2024-12-13 10:04:00
 
 ![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lglv.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
-<p align="center">快捷键Ctrl+R, 在adb所在路径上输入cmd, 按回车键</p>
+<p align="center">在adb所在路径上输入cmd, 按回车键</p>
 
 ![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ll52.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
@@ -66,7 +66,7 @@ date: 2024-12-13 10:04:00
 
 ![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ll7e.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
-`注：adb使用问题，很多小白不懂，其实免安装的，也不需要去配置全局环境变量，最简单的方法：快捷键Ctrl+R, 在adb所在路径上输入cmd, 按回车键就OK了，adb的路径不要有中文`
+`注：adb使用问题，很多小白不懂，其实免安装的，也不需要去配置全局环境变量，最简单的方法：在adb所在路径上输入cmd, 按回车键就OK了，adb的路径不要有中文`
 
 ### 三、问题
 

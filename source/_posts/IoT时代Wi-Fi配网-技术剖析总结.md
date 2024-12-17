@@ -1,5 +1,5 @@
 ---
-title: IoT时代-Wi-Fi-配网-技术剖析总结
+title: IoT时代Wi-Fi配网-技术剖析总结
 categories: 热门文章
 tags:
   - Popular

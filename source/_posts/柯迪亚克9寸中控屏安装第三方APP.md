@@ -48,18 +48,25 @@ date: 2024-12-13 10:04:00
 
 <p align="center">解锁USB模式</p>
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2l22l.png "#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2l22l.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lglv.png "#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+<p align="center">查看车机是否插上</p>
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ll52.png "#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lglv.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+
+<p align="center">快捷键Ctrl+R, 在adb所在路径上输入cmd, 按回车键</p>
+
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ll52.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 <p align="center">使用adb命令安装APP</p>
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lqsv.png "#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lqsv.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ll7e.png "#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+<p align="center">使用adb命令详细如下</p>
 
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ll7e.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+
+`注：adb使用问题，很多小白不懂，其实免安装的，也不需要去配置全局环境变量，最简单的方法：快捷键Ctrl+R, 在adb所在路径上输入cmd, 按回车键`
 
 ### 三、问题
 

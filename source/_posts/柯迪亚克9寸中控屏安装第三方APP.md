@@ -1,5 +1,5 @@
 ---
-title: 斯柯达-柯迪亚克9寸中控屏安装第三方APP
+title: 柯迪亚克9寸中控屏安装第三方APP-斯柯达
 categories: 原创文章
 author: 狂欢马克思
 tags:
@@ -79,7 +79,7 @@ APP需要Android 4.0以平台运行，而中控屏系统版本为1.3
 
 ### 四、参考
 
-集结一下相关可参考的帖子，adb文件，可以以帖子里载，或者百度下载一个
+集结一下相关可参考的帖子，adb文件，可以帖子里下载或者百度下载一个
 
 1. 9寸安卓车机隐藏密码打开USB从模式安装软件
 
@@ -89,13 +89,41 @@ https://club.autohome.com.cn/bbs/thread/84fffc2a4d664764/86248552-1.html
 
 https://club.autohome.com.cn/bbs/thread/532d43b11f73ae35/81904759-1.html
 
-### 五、附件
+### 五、工程模式
+
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/126znpo.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+
+这个截图，来自其他车型破解方法
+
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/126zg10.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/126zgsj.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+
+2018款柯迪亚克-舒适版，中控屏版本信息，屏幕的四角按顺序点击，就可以出现下面的隐藏页面：
+
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/126zh6v.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+
+工程模式，看上去很简单，不知道有没有隐藏啥后门，大家可以尝试碰碰运气
+
+USB调试模式打开，可能藏在这里，也许就是那些说悟空搜索不到或ADB连接不上的原因
+
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/126zm4y.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+
+升级入口，有原厂固件就可以升级，甚至可以自己定制修改。
+
+发生故障，可以通过日志排查问题，这一般都是我们开发人员查找问题依据。
+
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/126zk4j.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/126zmmb.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+
+收音机设置，左边输入数字，不知道是啥密码。上面的收音机参数，用处不太清楚，也不敢轻易修改。
+
+### 六、附件
 
 附件清单
 
 1.adb工具
 
 2.SkodaEQ 
-
-3.电视家   
 

@@ -58,7 +58,7 @@ USB默认处于充电模式，需要输入隐藏密码进行解锁：
 > （1）查看设备连接状态：`adb devices`
 > （2）安装已经下载好的APP：`adb install D://SkodaEQ.apk`
 
-注：将D://SkodaEQ.apk替换为你的APP路径）
+注：将D://SkodaEQ.apk替换为你的APP路径
 
 <div align="center">  
   <p>查看设备连接状态</p>  

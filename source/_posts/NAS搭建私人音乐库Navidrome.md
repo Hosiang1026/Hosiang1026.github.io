@@ -58,9 +58,6 @@ docker run -d --name navidrome --restart=unless-stopped --user $(id -u):$(id -g)
 docker run -dit --restart=always --name xiaomusic -p 8090:8090 -v /mnt/mmcblk1p1/music:/app/music -v /mnt/mmcblk1p1/xiaomusic/conf:/app/conf hanxi/xiaomusic
 ```
 
-![165021](https://pic.haoxiang.eu.org/image/2024/12/17/rfc6l2.png)
-
-
 ### 四、歌词及封面
 
 为了使你的音乐体验更加完美，你可能需要为歌曲添加歌词和封面。这里有两种方法可以实现这一功能：

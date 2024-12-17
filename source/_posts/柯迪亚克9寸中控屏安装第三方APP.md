@@ -14,8 +14,6 @@ date: 2024-12-13 10:04:00
 
 <!-- more -->
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lx3a.png "斯柯达-柯迪亚克9寸中控屏安装第三方APP")
-
 ![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ktnw.png "#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 ### 一、准备要求
@@ -49,6 +47,11 @@ USB默认处于充电模式，需要输入隐藏密码进行解锁：
 **2. 连接车机与电脑**
 将双公头USB数据线的两端分别连接 **中控屏主USB插口**（靠近副驾驶位）和 **笔记本电脑的USB接口**，确保连接成功。
 
+<div align="center">  
+  <p>查看设备连接状态</p>  
+  <img src="https://pic.haoxiang.eu.org/image/2024/12/15/h2lglv.png" alt="查看设备连接" title="查看设备连接">
+</div>
+
 **3. 安装ADB工具并执行命令**
 
 - **解压ADB工具包**，进入ADB文件夹路径；
@@ -60,31 +63,13 @@ USB默认处于充电模式，需要输入隐藏密码进行解锁：
 
 注：将D://SkodaEQ.apk替换为你的APP路径
 
-<div align="center">  
-  <p>查看设备连接状态</p>  
-  <img src="https://pic.haoxiang.eu.org/image/2024/12/15/h2lglv.png" alt="查看设备连接" title="查看设备连接">
-</div>
+<p align="center">APP路径</p>
 
-<div align="center">  
-  <p>安装第三方APP</p>  
-  <img src="https://pic.haoxiang.eu.org/image/2024/12/15/h2lqsv.png" alt="安装APP" title="安装APP">
-</div>
-
-<p align="center">解锁USB模式</p>
-
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2l22l.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
-
-<p align="center">查看车机是否插上</p>
-
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lglv.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lqsv.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 <p align="center">在adb所在路径上输入cmd, 按回车键</p>
 
 ![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ll52.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
-
-<p align="center">使用adb命令安装APP</p>
-
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lqsv.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 <p align="center">使用adb命令详细如下</p>
 

@@ -62,6 +62,7 @@ USB默认处于充电模式，需要输入隐藏密码进行解锁：
 > （2）安装已经下载好的APP：`adb install D://SkodaEQ.apk`
 
 注：将D://SkodaEQ.apk替换为你的APP路径
+adb使用问题，很多小白不懂，其实免安装的，也不需要去配置全局环境变量，最简单的方法：在adb所在路径上输入cmd, 按回车键就OK了，adb的路径不要有中文
 
 <p align="center">APP路径</p>
 
@@ -75,7 +76,7 @@ USB默认处于充电模式，需要输入隐藏密码进行解锁：
 
 ![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ll7e.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
-`注：adb使用问题，很多小白不懂，其实免安装的，也不需要去配置全局环境变量，最简单的方法：在adb所在路径上输入cmd, 按回车键就OK了，adb的路径不要有中文`
+
 
 ### 三、ADB命令
 

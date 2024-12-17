@@ -1,0 +1,86 @@
+---
+title: NAS搭建私人音乐库Navidrome
+categories: 原创文章
+author: 狂欢马克思
+tags:
+  - Hobby
+top: 3
+cover_picture: https://pic.haoxiang.eu.org/image/2024/12/17/quxenj.jpeg
+abbrlink: 1d8f5496
+date: 2024-12-13 10:04:00
+---
+
+随着日常生活节奏的加快，尽管我们听音乐的时间有所减少，但在很多场合，尤其是驾车途中，音乐依然是不可或缺的陪伴。网易云音乐基本满足了日常的听歌需求。不过，有些经典歌曲，如周杰伦的作品，我始终无法在线收听。更重要的是，当你想和朋友或家人分享自己的音乐库或播放列表时，这时，借助NAS设备搭建一个私人音乐库，就显得尤为重要。
+
+<!-- more -->
+
+![8e819928fca747fe43b386a0a9d626b4b8f41775](https://pic.haoxiang.eu.org/image/2024/12/17/qo0rn2.jpg)
+
+### 一、简介
+
+Navidrome是一个功能全面的跨平台开源音乐流媒体服务器，旨在帮助用户搭建自己的本地音乐库，并通过流媒体服务随时访问。它支持多个平台，包括macOS、Linux、Windows以及Docker，兼容MP3、FLAC、WAV等常见音频格式，几乎满足大多数用户的需求。
+
+通过Navidrome，你可以在Web界面或通过API管理和访问你的音乐库。它不仅支持智能播放列表、用户权限控制、跨平台同步等高级功能，还允许你自定义播放体验，提升日常听歌的便捷性。无论是和朋友分享音乐，还是为自己打造专属的播放环境，Navidrome都能提供极大的便利。
+
+1. 官方网站：[Navidrome官网](https://www.navidrome.org/)
+2. GitHub仓库：[Navidrome GitHub](https://github.com/navidrome/navidrome/)
+
+本教程操作环境为Linux Ubuntu系统，在开始之前，我们需要先安装Docker或docker-compose。
+
+### 二、安装方法  
+
+**通过Docker安装**
+
+```bash
+docker run -d --name navidrome --restart=unless-stopped --user $(id -u):$(id -g) -v /mnt/sda1/webdav/music:/music -v /mnt/sda1/webdav/music/data:/data  -p 4533:4533 -e ND_LOGLEVEL=info deluan/navidrome:latest
+```
+这条命令会将Navidrome运行在后台，并设置自动重启。你需要根据自己的实际路径调整 /mnt/sda1/webdav/music 和 /mnt/sda1/webdav/music/data，这些路径分别对应你的音乐文件夹和数据存储目录。
+
+2. 电脑端访问
+
+安装成功后，打开浏览器，输入 localhost:4533，你将看到Navidrome的登录界面。首次登录时需要设置用户名和密码。
+
+![155621](https://pic.haoxiang.eu.org/image/2024/12/17/prrvde.png)
+
+3. 移动端访问
+
+为了在移动端访问，你可以使用音流APP（适用于安卓、苹果设备）。Windows用户可以访问音流程序下载来获取[客户端](https://music.aqzscn.cn)。在APP中选择Navidrome并填写服务器地址、用户名和密码，音流会自动刷新资源库。点击"立即同步"后，你将能够获取到最新的音乐列表。虽然部分高级功能需要付费，但对于大多数用户来说，免费的功能已经足够满足日常需求。
+
+![60b87-ca3fefb87f148b5c03ecf069fb1f95ab](https://pic.haoxiang.eu.org/image/2024/12/17/prrmbl.png)
+
+### 三、歌词及封面
+
+为了使你的音乐体验更加完美，你可能需要为歌曲添加歌词和封面。这里有两种方法可以实现这一功能：
+
+方法一：使用LyricAPI
+LyricAPI是一个支持酷狗、聚合API获取LRC歌词的服务，它还提供获取专辑、艺术家封面等功能。你可以通过以下命令启动：
+
+```bash
+docker run -d --name lyricapi -p 28883:28883 -v /vol1/1000/musics:/music hisatri/lyricapi
+```
+
+LyricAPI默认监听在28883端口，API地址为：
+
+1. 获取歌词：http://192.168.1.112:28883/lyrics
+2. 获取专辑封面：http://192.168.1.112:28883/cover
+
+将这些API接口集成到音流软件中，设置好歌词接口和封面接口地址后，即可同步歌词和封面。
+
+方法二:
+
+如果你希望编辑歌曲的标题、专辑、艺术家、歌词和封面信息，可以使用音乐标签编辑器，它支持多种音频格式，如FLAC、MP3、M4A等。你可以通过以下链接下载：
+
+1. PC版：https://haoxiang.eu.org/73c67562/ (参考这篇教程)
+2. Web版：https://github.com/xhongc/music-tag-web
+
+![1767201-20191031191519781-1684570911](https://pic.haoxiang.eu.org/image/2024/12/17/qgsj8r.gif)
+
+
+![160214](https://pic.haoxiang.eu.org/image/2024/12/17/qwq04d.png)
+
+
+### 四、总结  
+
+Navidrome作为一款开源的音乐服务器，提供了简单易用且功能强大的音乐管理解决方案。它支持多种音频格式，并允许通过多平台访问和管理自己的音乐库。无论你是在家中还是在外出旅行，使用Navidrome搭建自己的私人音乐流媒体库，都能随时随地享受音乐带来的乐趣。通过Docker安装，配置过程相对简单，几步即可完成，尤其适合希望搭建本地音乐平台的用户。
+
+无论是个人使用还是与家人朋友共享，Navidrome都能为你的音乐体验增添更多色彩。如果你有NAS设备，不妨尝试搭建一个属于自己的私人音乐库，让音乐成为你生活的一部分。

@@ -13,6 +13,7 @@
   ---|---|---
   MCU 1.31 Release | <a href="https://pan.baidu.com/s/1kVcicy7">adb工具</a> | 无
   MCU 1.31 Release | <a href="https://hosiang.lanzouj.com/b00xay8ri">SkodaEQ</a> | 2ac3
+  MCU 1.31 Release | <a href="https://www.aliyundrive.com/s/NuxHc97GqZq">音乐标签</a> | 12py
 
 ### 本站软件
   

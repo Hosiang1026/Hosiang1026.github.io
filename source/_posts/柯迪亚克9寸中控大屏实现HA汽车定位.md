@@ -14,7 +14,7 @@ date: 2024-12-13 10:04:00
 
 <!-- more -->
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lx3a.png "HA汽车定位")
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/17/nk3m2d.png "HA汽车定位")
 
 ### 一、前提条件  
 

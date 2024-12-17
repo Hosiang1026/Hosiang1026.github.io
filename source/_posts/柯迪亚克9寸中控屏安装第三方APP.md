@@ -68,6 +68,59 @@ date: 2024-12-13 10:04:00
 
 `注：adb使用问题，很多小白不懂，其实免安装的，也不需要去配置全局环境变量，最简单的方法：在adb所在路径上输入cmd, 按回车键就OK了，adb的路径不要有中文`
 
+```bash
+# 打开USB模式
+*#534*62559##*
+
+# 关闭USB模式
+*#62559*534##*
+
+# 连接车机
+adb devices
+
+# 安装APP
+adb install <path_apk>
+
+# 推送图片
+adb  push  D:/19110104_032696c5d8.png sdcard/
+
+# 所有APP列表
+adb shell pm list packages
+
+# 卸载APP
+adb shell pm uninstall --user 0 <path_apk>
+
+# APP的路径
+adb shell pm path <path_apk>
+
+# 导出APP安装包
+adb pull <path_apk> <out_apk>
+
+#温馨提示: 车机操作结束后，记得关闭USB模式(不关闭，USB口不能充电)
+
+连接成功后输入以下命令重新挂载目录：
+adb remount
+
+继续输入以下命令设置目录读写权限：
+adb shell mount -o remount,rw /system
+
+继续输入以下命令获取此目录下的应用列表：
+adb shell ls /system/app
+
+找到PackageInstaller.apk注意大小写， 继续输入以下命令删除PackageInstaller.apk：
+adb shell rm /system/app/PackageInstaller.apk
+
+输入以下命令复制新的到PackageInstaller.apk到 /system/app目录下：
+adb push PackageInstaller.apk /system/app/PackageInstaller.apk
+
+输入以下命令设置PackageInstaller.apk的权限：
+adb shell chmod 644 /system/app/PackageInstaller.apk
+
+以上操作完成后重启车机或输入以下命令重启：
+adb reboot
+
+```
+
 ### 三、问题
 
 1. 安装失败，提示INSTALL_FAILED_OLDER_SDK
@@ -128,9 +181,14 @@ USB调试模式打开，可能藏在这里，也许就是那些说悟空搜索�
 
 ### 六、附件
 
-附件清单
+附件清单：1.adb工具 2.SkodaEQ, 请前往<a href="https://haoxiang.eu.org/collection">菜单栏-收藏</a>页面下载
 
-1.adb工具
+导航地图: 高德地图和腾讯地图
 
-2.SkodaEQ 
+腾讯地图的优点: 主要是提供微信小程序进行爱车的定位显示
+高德地图的优点: 开屏显示斯柯达车标版本，同步驾驶里程和常用地址收藏
+
+![Popular](https://pic.haoxiang.eu.org/image/2024/12/17/gk5bku.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+
+
 

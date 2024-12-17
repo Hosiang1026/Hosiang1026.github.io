@@ -9,17 +9,17 @@
 
 ### 分享软件
 
-  操作平台 | 软件名称 | 软件版本 | 兼容性 | 下载地址 | 提取码
-  ---|---|---|---|---|---
-  Android | adb工具 | 未知 | 未知 |  <a href="#">点击下载</a> | 无
-  Android | SkodaEQ | 未知 | 未知 |  <a href="#">点击下载</a> | 无
+  车机版本 | 软件名称 | 提取码
+  ---|---|---
+  1.31 Release | <a href="https://pan.baidu.com/s/1kVcicy7">adb工具</a> | 无
+  1.31 Release | <a href="https://hosiang.lanzouj.com/b00xay8ri">SkodaEQ</a> | 2ac3
 
 ### 本站软件
   
-  操作平台 | 软件名称 | 软件版本 | 文件大小 | 发布日期 | 开发者 | 兼容性 | 下载地址 | 提取码
-  ---|---|---|---|---|---|---|---|---
-  Windows | 狂欢马克思 | V1.0.0 | 104MB | 2019-03-02 | 吉祥草 | Win All | <a href="https://pan.baidu.com/s/1wxPUHyfv1-ISgwNmh7EkYA">点击下载</a> | abe3
-  Android | 狂欢马克思 | V1.0.0 | 1.39MB | 2019-03-02 | 吉祥草 | Android 2.3及以上版本 |  <a href="https://hosiang.lanzoui.com/iiKFPeo7zej">点击下载</a> | fk1w
+  操作平台 |  软件名称 | 提取码
+ ---|---|---
+ Win All | <a href="https://pan.baidu.com/s/1wxPUHyfv1-ISgwNmh7EkYA">狂欢马克思V1.0.0</a> | abe3
+ Android 2.3及以上版本 | <a href="https://hosiang.lanzoui.com/iiKFPeo7zej">狂欢马克思V1.0.0</a> | fk1w
 
 
 ### 导航网站

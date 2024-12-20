@@ -22,6 +22,7 @@ var brithMD;
 //选定的节日
 var festivalName = "";
 var festivalDate = "";
+var yearCalContent = "";
 //特殊节日
 var festivalNameSpecial = "";
 var festivalDateSpecial = "";
@@ -31,7 +32,6 @@ var termNote = "";
 var festivalNameTerm = "";
 var festivalDateTerm = "";
 var festivalTimeTerm = 0;
-var festivalRemarkTerm = "";
 //阳历
 var festivalNameSFtv = "";
 var festivalDateSFtv = "";
@@ -59,139 +59,145 @@ var solarTerm = [//二十四节气列表
             sort: 1,
             name:'立春',
             month: '02',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '气温开始回升，万物复苏,乍暖还寒，注意防寒保暖，预防感冒。'
         },
         {
             sort: 2,
             name:'雨水',
             month: '02',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '降水量增加，空气湿度提升，防湿防潮，室内保持通风，注意保暖防感冒。'
         },
         {
             sort: 3,
             name:'惊蛰',
             month: '03',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '气温快速上升，春雷乍动，昆虫开始活动，防止虫害，外出注意保暖。'
         },
         {
             sort: 4,
             name:'春分',
             month: '03',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '昼夜平分，气温回升明显，保持合理作息，预防春困。'
         },
         {
             sort: 5,
+            name:'清明',
+            month: '04',
+            remark: '降水增加，草木旺盛，外出祭扫注意防雨，适当增加锻炼。'
+        },
+        {
+            sort: 6,
             name:'谷雨',
             month: '04',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '春雨增多，利于作物生长，注意防湿防潮，防止过敏。'
         },
         {
             sort: 7,
             name:'立夏',
             month: '05',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '天气转热，雷雨增多，注意补充水分，避免暴晒。'
         },
         {
             sort: 8,
             name:'小满',
             month: '05',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '雨水增多，湿热显现，保持饮食清淡，防止湿热引起的身体不适。'
         },
         {
             sort: 9,
             name:'芒种',
             month: '06',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '高温多雨，农忙时节，避免中暑，多补充盐分和水分。'
         },
         {
             sort: 10,
             name:'夏至',
             month: '06',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '白天最长，炎热开始，防止高温中暑，适当午休。'
         },
         {
             sort: 11,
             name:'小暑',
             month: '07',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '暑热初显，雷雨增多，减少户外活动，防雷雨天气。'
         },
         {
             sort: 12,
             name:'大暑',
             month: '07',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '一年中最热的时节，多喝凉茶解暑，避免长时间户外活动。'
         },
         {
             sort: 13,
             name:'立秋',
             month: '08',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '暑热渐消，早晚微凉，注意昼夜温差，预防感冒。'
         },
         {
             sort: 14,
             name:'处暑',
             month: '08',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '暑气渐退，秋高气爽，避免干燥引起的不适，多饮水。'
         },
         {
             sort: 15,
             name:'白露',
             month: '09',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '清晨出现露珠，气温明显下降，添衣保暖，防止秋季感冒。'
         },
         {
             sort: 16,
             name:'秋分',
             month: '09',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '昼夜平分，秋意浓郁，防止季节性过敏，注意保暖。'
         },
         {
             sort: 17,
             name:'寒露',
             month: '10',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '气温显著下降，天气转冷，适时增添衣物，注意防寒。'
         },
         {
             sort: 18,
             name:'霜降',
             month: '10',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '初霜出现，冬意渐浓，避免露天早起，护肤保湿。'
         },
         {
             sort: 19,
             name:'立冬',
             month: '11',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '天气寒冷，万物休养生息，注意保暖，加强御寒食物摄入。'
         },
         {
             sort: 20,
             name:'小雪',
             month: '11',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '降雪初现，气温继续下降，防寒防滑，避免摔倒。'
         },
         {
             sort: 21,
             name:'大雪',
             month: '12',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '降雪增多，寒冷加剧，做好防冻措施，注意路面安全。'
         },
         {
             sort: 22,
             name:'冬至',
             month: '12',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '昼最短，夜最长，适当进补，增强免疫力。'
         },
         {
             sort: 23,
             name:'小寒',
             month: '01',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '寒冷加剧，风雪增多，注意保暖，避免长时间室外活动。'
         },
         {
             sort: 24,
             name:'大寒',
             month: '01',
-            remark: '春风杨柳万千条，六亿神州尽舜尧。'
+            remark: '一年中最冷时节，减少外出，做好防寒措施，避免冻伤。'
         }
     ];
 
@@ -247,9 +253,6 @@ function getFestival(){
 
     //获取最近的节日日期 - 即以上节日的最小值
     getMinFestival();
-
-    termNote = festivalNameTerm + "，" + festivalRemarkTerm;
-    $("#note").html(termNote);
 }
 
 /**
@@ -258,26 +261,31 @@ function getFestival(){
 function ergodicsSolarTermArr(termyear) {
 
     for (var i = 0, len = solarTerm.length; i < len; i++) {
-        var curr = solarTerm[i];
+        var next = solarTerm[i];
         //索引节日时间戳
         //节气排序
         var num = i + 1;
         //节气阳历月份
-        var month = curr.month;
+        var month = next.month;
         //节气名称
-        var orderName = "第" + curr.sort + "个节气-";
-        var currName = orderName + curr.name;
-        var currRemark = curr.remark;
+        var orderName = "第" + next.sort + "个节气-";
+        var nextName = orderName + next.name;
+
         //24节气转换公历
-        var currDate = conversionTerm(termyear, month, num);
-        var currTime = new Date(currDate).getTime();
+        var nextDate = conversionTerm(termyear, month, num);
+        var nextTime = new Date(nextDate).getTime();
         
         //比较日期
-        if (nowTime == currTime || nowTime < currTime) {
-            festivalNameTerm = currName;
-            festivalDateTerm = currDate;
-            festivalTimeTerm = currTime;
-            festivalRemarkTerm = currRemark;
+        if (nowTime == nextTime || nowTime < nextTime) {
+            //获取下一个节气
+            festivalNameTerm = nextName;
+            festivalDateTerm = nextDate;
+            festivalTimeTerm = nextTime;
+            //获取当前节气
+            var curr = solarTerm[i-1];
+            var currTermName = "第" + curr.sort + "个节气-" + curr.name;
+            termNote = currTermName + ": " + curr.remark;
+
             break;
         } else {
             //跨年处理,递归调用
@@ -421,10 +429,13 @@ function assigFestival(minTime,Names,Dates,Times) {
  * 计算倒计时
  */
 function showTime(){
-
     var time = "";
-    var msgContent = getCurrentDateTime() + " " + showYearCal()+ " ";
-    //$("#msg").html(msgContent);
+    if("" == yearCalContent){
+        yearCalContent = showYearCal();
+    }
+
+    var msgContent = getCurrentDateTime() + " " + yearCalContent;
+    $("#msg").html(msgContent);
     var currentTime=new Date().getTime();
     var beginDayEarlyTime =new Date().setHours(0, 0, 0, 0) ;
     var endDayEarlyTime =new Date().setHours(0, 0, 0, 1) ;
@@ -450,8 +461,8 @@ function showTime(){
                 festivalName = festivalName.replace("(法定节假日)","");
             }
             //特殊节日
-            var msgHtml = $("#msg").html();
-            if ("" == msgHtml) {
+            var timerHtml = $("#timer").html();
+            if ("" == timerHtml) {
                 if (-1 != festivalName.indexOf("生日")) {
                     <!-- 根据出生农历获取生日星座 -->
                     var birthStr = biryear + "/" + brithMD;
@@ -479,20 +490,18 @@ function showTime(){
                 
                 if ("" != festivalName) {
                     //赋值节日名称
-                    msgContent = msgContent + "，今天是" + festivalName + "！";
-                    $("#msg").html(msgContent); 
+                    var time = "，今天是" + festivalName + "！";
+                    $("#timer").html(time);
+                    $("#note").html(termNote);
                 }
             }
 
         }else{
             if ("" != festivalName) {
-                //赋值节日名称
-                msgContent = msgContent + "，距离"+festivalName+"，还有";
-                //赋值节日倒计时
-                time=day+"天"+hour+"时"+minute+"分"+second+"秒！";
-
+                //赋值节日名称和节日倒计时
+                time = "，距离"+festivalName+"，还有" + day+"天"+hour+"时"+minute+"分"+second+"秒！";
                 $("#timer").html(time);
-                $("#msg").html(msgContent);
+                $("#note").html(termNote);
             }
 
         }

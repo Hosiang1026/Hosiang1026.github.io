@@ -1,7 +1,6 @@
 //节日倒计时
 var voiceflag = false;
 var songflag = true;
-var fesflag = true;
 
 //获取当前农历
 var calendars;
@@ -250,6 +249,7 @@ function getFestival(){
     getMinFestival();
 
     termNote = festivalNameTerm + "，" + festivalRemarkTerm;
+    $("#note").html(termNote);
 }
 
 /**
@@ -423,8 +423,8 @@ function assigFestival(minTime,Names,Dates,Times) {
 function showTime(){
 
     var time = "";
-    var msgContent = getCurrentDateTime() + " " + showYearCal();
-
+    var msgContent = getCurrentDateTime() + " " + showYearCal()+ " ";
+    //$("#msg").html(msgContent);
     var currentTime=new Date().getTime();
     var beginDayEarlyTime =new Date().setHours(0, 0, 0, 0) ;
     var endDayEarlyTime =new Date().setHours(0, 0, 0, 1) ;
@@ -450,8 +450,8 @@ function showTime(){
                 festivalName = festivalName.replace("(法定节假日)","");
             }
             //特殊节日
-            if (fesflag) {
-                fesflag = false;
+            var msgHtml = $("#msg").html();
+            if ("" == msgHtml) {
                 if (-1 != festivalName.indexOf("生日")) {
                     <!-- 根据出生农历获取生日星座 -->
                     var birthStr = biryear + "/" + brithMD;
@@ -476,11 +476,11 @@ function showTime(){
                     festivalName = lunarStr + "-" + syear + festivalName + "，" + "新春快乐、大吉大利";
                 }
 
+                
                 if ("" != festivalName) {
                     //赋值节日名称
                     msgContent = msgContent + "，今天是" + festivalName + "！";
-                    $("#timer").html(time);
-                    $("#msg").html(msgContent);
+                    $("#msg").html(msgContent); 
                 }
             }
 
@@ -496,8 +496,6 @@ function showTime(){
             }
 
         }
-
-        $("#note").html(termNote);
 
         //语音播报和播放纯音乐
         if (voiceflag){

@@ -520,7 +520,6 @@ function showTime(){
         }
 
         songlistArr();
-
     }
 
 

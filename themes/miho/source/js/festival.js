@@ -258,6 +258,7 @@ function getFestival(){
 /**
  * 遍历24节气数组
  */
+let recursionCount = 0;
 function ergodicsSolarTermArr(termyear) {
 
     for (var i = 0, len = solarTerm.length; i < len; i++) {
@@ -282,14 +283,15 @@ function ergodicsSolarTermArr(termyear) {
             festivalDateTerm = nextDate;
             festivalTimeTerm = nextTime;
             //获取当前节气
-            var curr = solarTerm[i-1];
+            var curr = i == 0?solarTerm[23]:solarTerm[i-1];
             var currTermName = "第" + curr.sort + "个节气-" + curr.name;
             termNote = currTermName + ": " + curr.remark;
 
             break;
         } else {
             //跨年处理,递归调用
-            if (i == len - 1) {
+            if (num > 21 && month == 12 && recursionCount < 2) {
+                recursionCount++;
                 var newyear = (parseInt(termyear) + 1).toString();
                 ergodicsSolarTermArr(newyear);
             }

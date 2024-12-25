@@ -4,11 +4,17 @@
 # 图床 https://www.picb.cc/hosiang1026/?lang=zh-CN
 # Site
 title: 狂欢马克思
-subtitle: 专注 WEB 开发
-description: 编写代码，改变世界。
+subtitle: 专注硬件开发
+description: 硬件驱动创新，智能引领未来。
+# subtitle: 专注Web开发
+# description: 编写代码，改变世界。
 author: Howe Hsiang
 language: zh-CN
 timezone: Asia/Shanghai
+
+# 2024年起转型为嵌入式开发工程师，主要开发语言C，专注于嵌入式系统与硬件的开发，致力于将软件与硬件结合，
+ 
+# 推动智能硬件创新。热爱开源项目，持续关注新技术与新事物。
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'

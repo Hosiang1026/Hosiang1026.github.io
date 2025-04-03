@@ -57,7 +57,7 @@ function browserRedirect() {
     var fontColor = randomColor();
     if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
     
-       $("#noticeId").css({"line-height":"1.6em"});
+       $("#noticeId").css({"line-height":"1.6em","margin-top":"28px"});
        contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='2'>"+
             <% if (theme.countdown.enable) { %>
            "官宣：<span id='msg'></span><span id='timer'></span><span id='note'></span>"
@@ -65,7 +65,7 @@ function browserRedirect() {
            +"<span id='jinrishici-sentence'></span></font> ";
 
     } else {
-       $("#noticeId").css({"line-height":"3.6em","margin-top":"70px"});
+       $("#noticeId").css({"line-height":"3.6em","margin-top":"66px"});
        contentHtml = "<font style='color:"+fontColor+"' face='新华宋体'  size='6'>" +
             <% if (theme.countdown.enable) { %>
            "官宣：<span id='msg'></span><span id='timer'></span><span id='note'></span>"

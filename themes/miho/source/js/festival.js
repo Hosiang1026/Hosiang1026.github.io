@@ -410,8 +410,7 @@ function getMinFestival() {
     assigFestival(festivalTime,festivalNameSpecial,festivalDateSpecial,festivalTimeSpecial);
     assigFestival(festivalTime,festivalNameTerm,festivalDateTerm,festivalTimeTerm);
     assigFestival(festivalTime,festivalNameSFtv,festivalDateSFtv,festivalTimeSFtv);
-    //农历日期不准
-    //assigFestival(festivalTime,festivalNameLFtv,festivalDateLFtv,festivalTimeLFtv);
+    assigFestival(festivalTime,festivalNameLFtv,festivalDateLFtv,festivalTimeLFtv);
 }
 
 /**
@@ -437,7 +436,9 @@ function showTime(){
         yearCalContent = showYearCal();
     }
 
-    var msgContent = getCurrentDateTime() + " " + yearCalContent;
+    var msgContent = getCurrentDateTime();
+    <!-- 农历日期不准确 -->
+    <!-- var msgContent = getCurrentDateTime() + " " + yearCalContent; -->
     $("#msg").html(msgContent);
     var currentTime=new Date().getTime();
     var beginDayEarlyTime =new Date().setHours(0, 0, 0, 0) ;

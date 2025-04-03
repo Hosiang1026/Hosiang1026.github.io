@@ -410,7 +410,8 @@ function getMinFestival() {
     assigFestival(festivalTime,festivalNameSpecial,festivalDateSpecial,festivalTimeSpecial);
     assigFestival(festivalTime,festivalNameTerm,festivalDateTerm,festivalTimeTerm);
     assigFestival(festivalTime,festivalNameSFtv,festivalDateSFtv,festivalTimeSFtv);
-    assigFestival(festivalTime,festivalNameLFtv,festivalDateLFtv,festivalTimeLFtv);
+    //农历日期不准
+    //assigFestival(festivalTime,festivalNameLFtv,festivalDateLFtv,festivalTimeLFtv);
 }
 
 /**

@@ -7,7 +7,7 @@ tags:
 top: 4
 abbrlink: 8bcb3d8y
 date: 2024-04-01 00:00:00
-cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10rlkfv.jpg
+cover_picture: https://pic.hosiang.dpdns.org/image/2024/12/15/10rlkfv.jpg
 ---
 
 CQRS 是一种思想很简单清晰的设计模式，它通过在业务上分离操作和查询来使得系统具有更好的可扩展性及性能，使得能够对系统的不同部分进行扩展和优化。这篇文章主要是介绍以及演示 CQRS 模式的基本实践，更多知识需要大家再深入的去学习。

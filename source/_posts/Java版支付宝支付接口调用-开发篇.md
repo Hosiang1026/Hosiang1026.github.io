@@ -7,7 +7,7 @@ tags:
 top: 7
 abbrlink: 275b9440
 date: 2024-05-05 00:00:00
-cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10rlkfv.jpg
+cover_picture: https://pic.hosiang.dpdns.org/image/2024/12/15/10rlkfv.jpg
 ---
 
 
@@ -15,7 +15,7 @@ cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10rlkfv.jpg
 
 <!-- more -->
 
-![Alipay](https://pic.haoxiang.eu.org/image/2024/12/15/10s76ok.jpg "Alipay支付宝支付接口调用-Java版")
+![Alipay](https://pic.hosiang.dpdns.org/image/2024/12/15/10s76ok.jpg "Alipay支付宝支付接口调用-Java版")
 
 ---
 
@@ -62,7 +62,7 @@ https://github.com/Hosiang1026/alipay-demo
 
 ---
 
-![alipay](https://pic.haoxiang.eu.org/image/2024/12/16/reqm3x.gif
+![alipay](https://pic.hosiang.dpdns.org/image/2024/12/16/reqm3x.gif
  "Java调用支付宝电脑网站支付接口")
 
 ---

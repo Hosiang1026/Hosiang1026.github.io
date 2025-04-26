@@ -5,7 +5,7 @@ author: 狂欢马克思
 tags:
   - Hobby
 top: 3
-cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/h2lx3a.png
+cover_picture: https://pic.hosiang.dpdns.org/image/2024/12/15/h2lx3a.png
 abbrlink: cebc765c
 date: 2024-12-13 10:04:00
 ---
@@ -14,7 +14,7 @@ date: 2024-12-13 10:04:00
 
 <!-- more -->
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ktnw.png "#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.hosiang.dpdns.org/image/2024/12/15/h2ktnw.png "#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 ### 一、准备要求
 
@@ -23,12 +23,12 @@ date: 2024-12-13 10:04:00
 
 <div align="center">  
   <p>2018款柯迪亚克车机系统信息</p>  
-  <img src="https://pic.haoxiang.eu.org/image/2024/12/15/h2l2td.png" alt="车机系统信息" title="车机系统信息">
+  <img src="https://pic.hosiang.dpdns.org/image/2024/12/15/h2l2td.png" alt="车机系统信息" title="车机系统信息">
 </div>
 
 <div align="center">  
   <p>双公头USB数据线</p>  
-  <img src="https://pic.haoxiang.eu.org/image/2024/12/15/h2l49p.png" alt="双公头USB数据线" title="双公头USB数据线">
+  <img src="https://pic.hosiang.dpdns.org/image/2024/12/15/h2l49p.png" alt="双公头USB数据线" title="双公头USB数据线">
 </div>
 
 ### **二、操作步骤**
@@ -41,7 +41,7 @@ USB默认处于充电模式，需要输入隐藏密码进行解锁：
 
 <div align="center">  
   <p>解锁USB模式</p>  
-  <img src="https://pic.haoxiang.eu.org/image/2024/12/15/h2l22l.png" alt="解锁USB模式" title="解锁USB模式">
+  <img src="https://pic.hosiang.dpdns.org/image/2024/12/15/h2l22l.png" alt="解锁USB模式" title="解锁USB模式">
 </div>
 
 **2. 连接车机与电脑**
@@ -49,7 +49,7 @@ USB默认处于充电模式，需要输入隐藏密码进行解锁：
 
 <div align="center">  
   <p>查看设备连接状态</p>  
-  <img src="https://pic.haoxiang.eu.org/image/2024/12/15/h2lglv.png" alt="查看设备连接" title="查看设备连接">
+  <img src="https://pic.hosiang.dpdns.org/image/2024/12/15/h2lglv.png" alt="查看设备连接" title="查看设备连接">
 </div>
 
 **3. 安装ADB工具并执行命令**
@@ -66,15 +66,15 @@ adb使用问题，很多小白不懂，其实免安装的，也不需要去配�
 
 <p align="center">APP路径</p>
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lqsv.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.hosiang.dpdns.org/image/2024/12/15/h2lqsv.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 <p align="center">在adb所在路径上输入cmd, 按回车键</p>
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ll52.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.hosiang.dpdns.org/image/2024/12/15/h2ll52.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 <p align="center">使用adb命令详细如下</p>
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2ll7e.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.hosiang.dpdns.org/image/2024/12/15/h2ll7e.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 
 
@@ -149,7 +149,7 @@ adb reboot
 1. 使用论坛提供的脚本设置第三方音乐播放器；
 2. 若触控按键失效或系统重启，通过备份的`hkmanager.apk`恢复原功能。
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/h2lpx0.png "#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.hosiang.dpdns.org/image/2024/12/15/h2lpx0.png "#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 ### 六、附件下载
 
@@ -167,7 +167,7 @@ adb reboot
 - 腾讯地图的优点: 主要是提供微信小程序进行爱车的定位显示
 - 高德地图的优点: 开屏显示斯柯达车标版本，同步驾驶里程和常用地址收藏
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/17/gk5bku.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.hosiang.dpdns.org/image/2024/12/17/gk5bku.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 ### 七、工程模式
 
@@ -178,28 +178,28 @@ adb reboot
 
 这个截图，来自其他车型破解方法
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/126znpo.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.hosiang.dpdns.org/image/2024/12/15/126znpo.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/126zg10.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.hosiang.dpdns.org/image/2024/12/15/126zg10.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/126zgsj.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.hosiang.dpdns.org/image/2024/12/15/126zgsj.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 - 在中控屏四角按顺序点击，进入工程菜单。
 中控屏版本信息，屏幕的四角按顺序点击，就可以出现下面的隐藏页面：
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/126zh6v.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.hosiang.dpdns.org/image/2024/12/15/126zh6v.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 工程模式，看上去很简单，不知道有没有隐藏啥后门，大家可以尝试碰碰运气
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/126zm4y.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.hosiang.dpdns.org/image/2024/12/15/126zm4y.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 升级入口，有原厂固件就可以升级，甚至可以自己定制修改。
 
 发生故障，可以通过日志排查问题，这一般都是我们开发人员查找问题依据。
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/126zk4j.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.hosiang.dpdns.org/image/2024/12/15/126zk4j.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/15/126zmmb.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
+![Popular](https://pic.hosiang.dpdns.org/image/2024/12/15/126zmmb.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 收音机设置，左边输入数字，不知道是啥密码。上面的收音机参数，用处不太清楚，也不敢轻易修改。
 

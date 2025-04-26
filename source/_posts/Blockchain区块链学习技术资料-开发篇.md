@@ -7,7 +7,7 @@ tags:
 top: 1
 abbrlink: 93a7541f
 date: 2024-07-02 00:00:00
-cover_picture: https://pic.haoxiang.eu.org/image/2024/12/16/qoygxb.jpg
+cover_picture: https://pic.hosiang.dpdns.org/image/2024/12/16/qoygxb.jpg
 ---
 
 
@@ -16,7 +16,7 @@ cover_picture: https://pic.haoxiang.eu.org/image/2024/12/16/qoygxb.jpg
 
 <!-- more -->
 
-![Blockchain](https://pic.haoxiang.eu.org/image/2024/12/15/10s6uva.jpg "Blockchain区块链技术了解-Java版")
+![Blockchain](https://pic.hosiang.dpdns.org/image/2024/12/15/10s6uva.jpg "Blockchain区块链技术了解-Java版")
 
 ---
 

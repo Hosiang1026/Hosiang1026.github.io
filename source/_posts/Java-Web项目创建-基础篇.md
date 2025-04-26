@@ -7,7 +7,7 @@ tags:
 top: 2
 abbrlink: a754b403
 date: 2024-05-05 00:00:00
-cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10rlkfv.jpg
+cover_picture: https://pic.hosiang.dpdns.org/image/2024/12/15/10rlkfv.jpg
 ---
 
 

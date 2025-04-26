@@ -7,20 +7,20 @@ tags:
 top: 1
 abbrlink: 450075ac
 date: 2024-09-20 00:00:00
-cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10u1cu9.png
+cover_picture: https://pic.hosiang.dpdns.org/image/2024/12/15/10u1cu9.png
 ---
 
 Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从 Apache2.0 协议开源。Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。
 
 <!-- more -->
 
-![Docker](https://pic.haoxiang.eu.org/image/2024/12/15/10u1mvq.png "Docker秒杀微服务架构容器化部署")
+![Docker](https://pic.hosiang.dpdns.org/image/2024/12/15/10u1mvq.png "Docker秒杀微服务架构容器化部署")
 
 ---
 
 ### 一、部署
 
-![Docker秒杀微服务架构容器化部署](https://pic.haoxiang.eu.org/image/2024/12/15/10u3tm7.png "Docker秒杀微服务架构容器化部署")
+![Docker秒杀微服务架构容器化部署](https://pic.hosiang.dpdns.org/image/2024/12/15/10u3tm7.png "Docker秒杀微服务架构容器化部署")
 
 个人开发项目可以忽略部分环节，如果是团队项目以上所有环节都是必不可少的，测试->预生产->生产环境(蓝绿+灰度发布)
 
@@ -51,29 +51,29 @@ docker.io/portainer/portainer
 
 初次使用需要创建超级用户密码：
 
-![](https://pic.haoxiang.eu.org/image/2024/12/15/10u1m90.png)
+![](https://pic.hosiang.dpdns.org/image/2024/12/15/10u1m90.png)
 
 创建完成以后，你可以选择管理本地或者远程容器：
 
-![](https://pic.haoxiang.eu.org/image/2024/12/15/10u1nhm.png)
+![](https://pic.hosiang.dpdns.org/image/2024/12/15/10u1nhm.png)
 
-![](https://pic.haoxiang.eu.org/image/2024/12/15/10u1ush.png)
+![](https://pic.hosiang.dpdns.org/image/2024/12/15/10u1ush.png)
 
 进入首页：
 
-![](https://pic.haoxiang.eu.org/image/2024/12/15/10u1zjb.png)
+![](https://pic.hosiang.dpdns.org/image/2024/12/15/10u1zjb.png)
 
 撸主跑了7个容器服务，2个正常运行，5个已经死翘翘中。
 
 一些常用的镜像模板：
 
-![](https://pic.haoxiang.eu.org/image/2024/12/15/10u2l38.png)
+![](https://pic.hosiang.dpdns.org/image/2024/12/15/10u2l38.png)
 
 可以对容器服务进行启动、删除、重启等一系列操作，还可以查看日志、系统占用资源统计。
 
-![](https://pic.haoxiang.eu.org/image/2024/12/15/10u2vhx.png)
+![](https://pic.hosiang.dpdns.org/image/2024/12/15/10u2vhx.png)
 
-![](https://pic.haoxiang.eu.org/image/2024/12/15/10u39ut.png)
+![](https://pic.hosiang.dpdns.org/image/2024/12/15/10u39ut.png)
 
 
 ### 三、小结

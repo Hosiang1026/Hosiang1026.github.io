@@ -5,7 +5,7 @@ author: 狂欢马克思
 tags:
   - Hobby
 top: 3
-cover_picture: 'https://pic.haoxiang.eu.org/image/2024/12/15/h2lx3a.png'
+cover_picture: 'https://pic.hosiang.dpdns.org/image/2024/12/15/h2lx3a.png'
 abbrlink: f9583615
 date: 2024-12-13 10:04:00
 ---
@@ -14,7 +14,7 @@ date: 2024-12-13 10:04:00
 
 <!-- more -->
 
-![Popular](https://pic.haoxiang.eu.org/image/2024/12/17/nk44hp.jpg "HA汽车定位")
+![Popular](https://pic.hosiang.dpdns.org/image/2024/12/17/nk44hp.jpg "HA汽车定位")
 
 ### 一、前提条件  
 
@@ -37,7 +37,7 @@ date: 2024-12-13 10:04:00
 
 <p align="center">扫码登录高德地图车机版</p> 
 
-![推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP](https://pic.haoxiang.eu.org/image/2024/12/17/ha997u.jpg)  
+![推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP](https://pic.hosiang.dpdns.org/image/2024/12/17/ha997u.jpg)  
 
 ---
 
@@ -51,10 +51,10 @@ date: 2024-12-13 10:04:00
 
 以下为操作截图参考：  
 
-![抓包截图1](https://pic.haoxiang.eu.org/image/2024/12/17/hbicro.jpg)  
-![抓包截图2](https://pic.haoxiang.eu.org/image/2024/12/17/hbhyjj.jpg)  
-![抓包截图3](https://pic.haoxiang.eu.org/image/2024/12/17/hbi9tm.jpg)  
-![抓包截图4](https://pic.haoxiang.eu.org/image/2024/12/17/hbigo7.jpg)  
+![抓包截图1](https://pic.hosiang.dpdns.org/image/2024/12/17/hbicro.jpg)  
+![抓包截图2](https://pic.hosiang.dpdns.org/image/2024/12/17/hbhyjj.jpg)  
+![抓包截图3](https://pic.hosiang.dpdns.org/image/2024/12/17/hbi9tm.jpg)  
+![抓包截图4](https://pic.hosiang.dpdns.org/image/2024/12/17/hbigo7.jpg)  
 
 ---
 
@@ -68,7 +68,7 @@ date: 2024-12-13 10:04:00
 
 <p align="center">选项 - 高德地图开发 - 获取key</p>
 
-![高德开发者KEY](https://pic.haoxiang.eu.org/image/2024/12/17/hbi1uc.jpg)  
+![高德开发者KEY](https://pic.hosiang.dpdns.org/image/2024/12/17/hbi1uc.jpg)  
 
 ---
 
@@ -83,14 +83,14 @@ date: 2024-12-13 10:04:00
 
 <p align="center">显示汽车位置</p> 
 
-![车辆位置展示](https://pic.haoxiang.eu.org/image/2024/12/17/hbi2wx.jpg)  
+![车辆位置展示](https://pic.hosiang.dpdns.org/image/2024/12/17/hbi2wx.jpg)  
 
 2. **车辆状态信息展示**  
    - 通过HA界面显示车辆基本信息，如速度、状态、导航详情等。  
 
 <p align="center">显示汽车信息</p> 
 
-![汽车信息展示](https://pic.haoxiang.eu.org/image/2024/12/17/hbhy5p.png)  
+![汽车信息展示](https://pic.hosiang.dpdns.org/image/2024/12/17/hbhy5p.png)  
 
 ---
 

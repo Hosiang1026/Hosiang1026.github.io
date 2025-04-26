@@ -7,14 +7,14 @@ tags:
 top: 2
 abbrlink: 22a741ff
 date: 2024-10-01 00:00:00
-cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10t23ou.png
+cover_picture: https://pic.hosiang.dpdns.org/image/2024/12/15/10t23ou.png
 ---
 
 分库分表，根据我个人的经验来看，至少需要保证分好之后的小表在业务发展的几年之内都不会出现单表数据量过大（比如达到千万级）。
 
 <!-- more -->
 
-![Database](https://pic.haoxiang.eu.org/image/2024/12/15/10t23ou.png "分库分表最佳实践-实战篇")
+![Database](https://pic.hosiang.dpdns.org/image/2024/12/15/10t23ou.png "分库分表最佳实践-实战篇")
 
 ---
 
@@ -29,7 +29,7 @@ cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10t23ou.png
 
 先来回顾下整个分库分表的流程如下：
 
-![分库分表](https://pic.haoxiang.eu.org/image/2024/12/15/10tb0o3.png "分库分表")
+![分库分表](https://pic.hosiang.dpdns.org/image/2024/12/15/10tb0o3.png "分库分表")
 
 整个过程也很好理解，基本符合大部分公司的一个发展方向。
 
@@ -49,7 +49,7 @@ cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10t23ou.png
 
 而谈到分表时我们着重讨论的还是水平分表；
 
-![分库分表](https://pic.haoxiang.eu.org/image/2024/12/15/10tb3mj.png "分库分表")
+![分库分表](https://pic.hosiang.dpdns.org/image/2024/12/15/10tb3mj.png "分库分表")
 
 也就是将一张大表数据通过某种路由算法将数据尽可能的均匀分配到 N 张小表中。
 
@@ -60,7 +60,7 @@ cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10t23ou.png
 首先第一种是按照范围划分，比如我们可以将某张表的创建时间按照日期划分存为月表；也可以将某张表的主键按照范围划分，比如
 【1~10000】在一张表，【10001~20000】在一张表，以此类推。
 
-![分库分表](https://pic.haoxiang.eu.org/image/2024/12/15/10tayz9.png "分库分表")
+![分库分表](https://pic.hosiang.dpdns.org/image/2024/12/15/10tayz9.png "分库分表")
 
 这样的分表适合需要对数据做归档处理，比如系统默认只提供近三个月历史数据的查询功能，这样也方便操作；只需要把三月之前的数据单独移走备份保存即可）。
 
@@ -81,7 +81,7 @@ cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10t23ou.png
 
 假设我们这里将原有的一张大表订单信息分为 64 张分表：
 
-![分库分表](https://pic.haoxiang.eu.org/image/2024/12/15/10u11l7.png "分库分表")
+![分库分表](https://pic.hosiang.dpdns.org/image/2024/12/15/10u11l7.png "分库分表")
 
 这里的 `hash` 便是将我们需要分表的字段进行一次散列运算，使得经过散列的数据尽可能的均匀并且不重复。
 
@@ -109,7 +109,7 @@ cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10t23ou.png
 
 所以我们是否可以在 `Mod` 分表的基础上再分为月表，借助于 `Range` 自身的扩展性就不用考虑后续数据迁移的事情了。
 
-![分库分表](https://pic.haoxiang.eu.org/image/2024/12/15/10u0x8y.png "分库分表")
+![分库分表](https://pic.hosiang.dpdns.org/image/2024/12/15/10u0x8y.png "分库分表")
 
 这种方式理论可行，但我没有实际用过，给大家的思路做个参考吧。
 
@@ -130,9 +130,9 @@ cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10t23ou.png
 
 至此整个分表操作完成。
 
-![分库分表](https://pic.haoxiang.eu.org/image/2024/12/15/10u0vun.png "分库分表")
+![分库分表](https://pic.hosiang.dpdns.org/image/2024/12/15/10u0vun.png "分库分表")
 
-![分库分表](https://pic.haoxiang.eu.org/image/2024/12/15/10u15dv.png "分库分表")
+![分库分表](https://pic.hosiang.dpdns.org/image/2024/12/15/10u15dv.png "分库分表")
 
 #### 业务兼容
 

@@ -6,7 +6,7 @@ tags:
 author: OSChina
 top: 298
 cover_picture: >-
-  https://pic.haoxiang.eu.org/image/2024/12/15/3tpww.jpg
+  https://pic.hosiang.dpdns.org/image/2024/12/15/3tpww.jpg
 abbrlink: a288ecc
 date: 2022-03-27 11:56:25
 ---

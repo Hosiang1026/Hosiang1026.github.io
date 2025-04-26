@@ -7,7 +7,7 @@ tags:
 top: 5
 abbrlink: ea524d8
 date: 2024-05-05 00:00:00
-cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10rlkfv.jpg
+cover_picture: https://pic.hosiang.dpdns.org/image/2024/12/15/10rlkfv.jpg
 ---
 
 用多线程只有一个目的，那就是更好的利用cpu的资源，因为所有的多线程代码都可以用单线程来实现。说这个话其实只有一半对，因为反应“多角色”的程序代码，最起码每个角色要给他一个线程吧，否则连实际场景都无法模拟，当然也没法说能用单线程来实现：比如最常见的“生产者，消费者模型”。

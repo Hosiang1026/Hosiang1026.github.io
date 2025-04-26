@@ -7,7 +7,7 @@ tags:
 top: 9
 abbrlink: 4c1d6c
 date: 2024-05-05 00:00:00
-cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10rlkfv.jpg
+cover_picture: https://pic.hosiang.dpdns.org/image/2024/12/15/10rlkfv.jpg
 ---
 
 
@@ -16,7 +16,7 @@ cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10rlkfv.jpg
 
 <!-- more -->
 
-![Blockchain](https://pic.haoxiang.eu.org/image/2024/12/15/10s6uva.jpg "Blockchain简单的比特币系统Java版-实战篇")
+![Blockchain](https://pic.hosiang.dpdns.org/image/2024/12/15/10s6uva.jpg "Blockchain简单的比特币系统Java版-实战篇")
 
 ---
 
@@ -126,7 +126,7 @@ public class Transaction {
 
 ### 三、挖矿
 
-![Blockchain](https://pic.haoxiang.eu.org/image/2024/12/15/10s73zb.png "Blockchain简单的比特币系统Java版-实战篇")
+![Blockchain](https://pic.hosiang.dpdns.org/image/2024/12/15/10s73zb.png "Blockchain简单的比特币系统Java版-实战篇")
 
 挖矿到底是怎么回事？为什么那么多人吵着要去挖矿，梦想着一夜暴富？
 我们可以简单的把挖矿比喻成矿工解一道数学难题的过程，只要解对了就能获取比特币系统奖励的一笔比特币，同时获取了区块链账本新区块的交易记账权，矿工会把比特币系统近期发生的转账交易记录到账本新的一页上，并获取交易的手续费，一旦交易被记录进了账本，交易就算完成了，接收方才能真正收到发送方转账的比特币。那这道数学难题到底长什么样了？
@@ -247,7 +247,7 @@ public static void main(String[] args) {
 
 运行结果如下图所示：
 
-![Blockchain](https://pic.haoxiang.eu.org/image/2024/12/15/10s83qp.png "Blockchain简单的比特币系统Java版-实战篇")
+![Blockchain](https://pic.hosiang.dpdns.org/image/2024/12/15/10s83qp.png "Blockchain简单的比特币系统Java版-实战篇")
 
 至此，我们就用java语言基于区块链账本技术实现了一个简单的比特币系统，包含区块链功能，挖矿产生新比特币功能，转账交易功能，查询余额功能，当然，真正的比特币系统远不止这么简单，比如运用密码学生成比特币钱包与保证交易信息不被篡改，运用P2P通讯技术实现点对点分布式网络等功能。
 

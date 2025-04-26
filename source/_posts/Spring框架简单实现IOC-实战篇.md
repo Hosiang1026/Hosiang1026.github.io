@@ -7,7 +7,7 @@ tags:
 top: 1
 abbrlink: 24ddb72
 date: 2024-06-02 00:00:00
-cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10szeid.png
+cover_picture: https://pic.hosiang.dpdns.org/image/2024/12/15/10szeid.png
 ---
 
 
@@ -15,7 +15,7 @@ IoC是Spring框架的核心内容，IoC(Inversion of Control)控制反转，是�
 
 <!-- more -->
 
-![Spring](https://pic.haoxiang.eu.org/image/2024/12/15/10szhdd.png "Spring系列-简单实现IOC-实战篇")
+![Spring](https://pic.hosiang.dpdns.org/image/2024/12/15/10szhdd.png "Spring系列-简单实现IOC-实战篇")
 
 所谓控制反转，就是把原先我们代码里面需要实现的对象（bean）创建、依赖的代码，反转给ioc容器来帮忙实现，也就是 ioc 容器帮我们做了原本应该我门自己实现的对象创建和依赖的内容。
 
@@ -26,7 +26,7 @@ IoC是Spring框架的核心内容，IoC(Inversion of Control)控制反转，是�
 
 ### 一、项目结构
 
-![image](https://pic.haoxiang.eu.org/image/2024/12/16/r68kp0.png)
+![image](https://pic.hosiang.dpdns.org/image/2024/12/16/r68kp0.png)
 
 ### 二、导入Maven依赖的jar包(pom.xml)
 

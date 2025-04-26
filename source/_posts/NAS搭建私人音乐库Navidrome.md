@@ -5,7 +5,7 @@ author: 狂欢马克思
 tags:
   - Hobby
 top: 1
-cover_picture: https://pic.haoxiang.eu.org/image/2024/12/17/quxenj.jpeg
+cover_picture: https://pic.hosiang.dpdns.org/image/2024/12/17/quxenj.jpeg
 abbrlink: 1d8f5496
 date: 2024-12-17 10:04:00
 ---
@@ -14,7 +14,7 @@ date: 2024-12-17 10:04:00
 
 <!-- more -->
 
-![8e819928fca747fe43b386a0a9d626b4b8f41775](https://pic.haoxiang.eu.org/image/2024/12/17/qo0rn2.jpg)
+![8e819928fca747fe43b386a0a9d626b4b8f41775](https://pic.hosiang.dpdns.org/image/2024/12/17/qo0rn2.jpg)
 
 ### 一、简介
 
@@ -40,13 +40,13 @@ docker run -d --name navidrome --restart=unless-stopped --user $(id -u):$(id -g)
 
 安装成功后，打开浏览器，输入 localhost:4533，你将看到Navidrome的登录界面。首次登录时需要设置用户名和密码。
 
-![155621](https://pic.haoxiang.eu.org/image/2024/12/17/prrvde.png)
+![155621](https://pic.hosiang.dpdns.org/image/2024/12/17/prrvde.png)
 
 3. 移动端访问
 
 为了在移动端访问，你可以使用音流APP（适用于安卓、苹果设备）。Windows用户可以访问音流程序下载来获取[客户端](https://music.aqzscn.cn)。在APP中选择Navidrome并填写服务器地址、用户名和密码，音流会自动刷新资源库。点击"立即同步"后，你将能够获取到最新的音乐列表。虽然部分高级功能需要付费，但对于大多数用户来说，免费的功能已经足够满足日常需求。
 
-![60b87-ca3fefb87f148b5c03ecf069fb1f95ab](https://pic.haoxiang.eu.org/image/2024/12/17/prrmbl.png)
+![60b87-ca3fefb87f148b5c03ecf069fb1f95ab](https://pic.hosiang.dpdns.org/image/2024/12/17/prrmbl.png)
 
 ### 三、下载歌曲
 
@@ -84,10 +84,10 @@ LyricAPI默认监听在28883端口，API地址为：
 1. PC版：https://haoxiang.eu.org/73c67562/ (参考这篇教程)
 2. Web版：https://github.com/xhongc/music-tag-web
 
-![1767201-20191031191519781-1684570911](https://pic.haoxiang.eu.org/image/2024/12/17/qgsj8r.gif)
+![1767201-20191031191519781-1684570911](https://pic.hosiang.dpdns.org/image/2024/12/17/qgsj8r.gif)
 
 
-![160214](https://pic.haoxiang.eu.org/image/2024/12/17/qwq04d.png)
+![160214](https://pic.hosiang.dpdns.org/image/2024/12/17/qwq04d.png)
 
 
 ### 五、总结  

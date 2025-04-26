@@ -7,7 +7,7 @@ tags:
 top: 1
 abbrlink: 2552a56
 date: 2024-06-01 00:00:00
-cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10szeid.png
+cover_picture: https://pic.hosiang.dpdns.org/image/2024/12/15/10szeid.png
 ---
 
 
@@ -15,11 +15,11 @@ cover_picture: https://pic.haoxiang.eu.org/image/2024/12/15/10szeid.png
 
 <!-- more -->
 
-![Spring](https://pic.haoxiang.eu.org/image/2024/12/15/10szhdd.png  "Spring详解核心IOC-开发篇")
+![Spring](https://pic.hosiang.dpdns.org/image/2024/12/15/10szhdd.png  "Spring详解核心IOC-开发篇")
 
 Spring IOC的实现用到了设计模式：简单工厂，他也是从简单工厂进化而来的，下面我们看看Spring的IOC是如何进化来的。
 
-![image](https://pic.haoxiang.eu.org/image/2024/12/16/r8vbgc.png)
+![image](https://pic.hosiang.dpdns.org/image/2024/12/16/r8vbgc.png)
 
 
 ### 一、简单工厂模式

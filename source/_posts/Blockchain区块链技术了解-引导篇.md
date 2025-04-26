@@ -7,14 +7,14 @@ tags:
 top: 1
 abbrlink: e115aa89
 date: 2024-07-04 00:00:00
-cover_picture: https://pic.haoxiang.eu.org/image/2024/12/16/qoygxb.jpg
+cover_picture: https://pic.hosiang.dpdns.org/image/2024/12/16/qoygxb.jpg
 ---
 2017年5月12日，一款名为“永恒之蓝”的恶性勒索病毒在全球蔓延，一旦电脑感染该病毒，照片、文档、音视频等几乎所有文件将被加密，必须一次性支付300美元比特币（约合人民币2070元）才能将其解锁，否则7天后将永久无法恢复。。。
 
 
 <!-- more -->
 
-![Blockchain](https://pic.haoxiang.eu.org/image/2024/12/15/10s6uva.jpg "Blockchain区块链技术了解-Java版")
+![Blockchain](https://pic.hosiang.dpdns.org/image/2024/12/15/10s6uva.jpg "Blockchain区块链技术了解-Java版")
 
 ---
 

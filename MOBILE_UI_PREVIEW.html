@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocationTracker - 手机端界面预览</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 300;
+        }
+        
+        .header p {
+            font-size: 14px;
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+        }
+        
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 30px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        
+        .form-group input[type="number"] {
+            text-align: center;
+        }
+        
+        .switch-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 25px 0;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #4CAF50;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #4CAF50;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 10px 10px 0;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #666;
+        }
+        
+        .start-button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 25px;
+        }
+        
+        .start-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .status-section {
+            margin-bottom: 30px;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .status-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .status-card h3 {
+            margin: 0 0 8px 0;
+            color: #4CAF50;
+            font-size: 14px;
+        }
+        
+        .status-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .log-section {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+        
+        .log-entry {
+            margin: 4px 0;
+            padding: 4px;
+            border-radius: 3px;
+        }
+        
+        .log-success {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+        
+        .log-error {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+        
+        .log-info {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .feature-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 6px;
+            font-size: 12px;
+        }
+        
+        .feature-desc {
+            color: #666;
+            font-size: 11px;
+        }
+        
+        .tab-bar {
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            padding: 0;
+        }
+        
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: bold;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab-button.active {
+            color: #4CAF50;
+            border-bottom-color: #4CAF50;
+            background: white;
+        }
+        
+        .tab-button:hover {
+            background: #f0f0f0;
+        }
+        
+        .tab-icon {
+            font-size: 16px;
+            margin-right: 6px;
+        }
+        
+        .comparison {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .comparison-item {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            min-width: 300px;
+        }
+        
+        .comparison-item h3 {
+            color: #4CAF50;
+            margin-top: 0;
+            text-align: center;
+            font-size: 18px;
+        }
+        
+        .removed-item {
+            color: #999;
+            text-decoration: line-through;
+            margin: 6px 0;
+            font-size: 14px;
+        }
+        
+        .kept-item {
+            color: #4CAF50;
+            font-weight: bold;
+            margin: 6px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>小米位置上报</h1>
+            <p>狂欢马克思</p>
+        </div>
+        
+        <div class="content">
+            <!-- 状态监控面板 -->
+            <div id="status-tab" class="tab-content active">
+                <h2 style="color: #333; margin-bottom: 30px;">状态监控</h2>
+                
+                <div class="status-section">
+                    <h3 style="color: #4CAF50; margin-bottom: 20px;">实时状态</h3>
+                    <div class="status-grid">
+                        <div class="status-card">
+                            <h3>连接状态</h3>
+                            <div class="status-value" style="color: #2ecc71;">已连接</div>
+                        </div>
+                        <div class="status-card">
+                            <h3>定位状态</h3>
+                            <div class="status-value" style="color: #3498db;">运行中</div>
+                        </div>
+                        <div class="status-card">
+                            <h3>电池电量</h3>
+                            <div class="status-value" style="color: #f39c12;">85%</div>
+                        </div>
+                        <div class="status-card">
+                            <h3>上报次数</h3>
+                            <div class="status-value" style="color: #9b59b6;">1,247</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                        <h3 style="color: #4CAF50; margin: 0;">运行日志</h3>
+                        <div style="display: flex; gap: 8px;">
+                            <button style="background: #4CAF50; color: white; border: none; padding: 6px 10px; border-radius: 5px; font-size: 11px; cursor: pointer;">🛠️ 日志</button>
+                            <button style="background: #4CAF50; color: white; border: none; padding: 6px 10px; border-radius: 5px; font-size: 11px; cursor: pointer;">📋 复制</button>
+                        </div>
+                    </div>
+                    <div class="log-section">
+                        <div class="log-entry log-success">[14:23:15] 位置信息发送成功</div>
+                        <div class="log-entry log-info">[14:23:00] 开始定位服务</div>
+                        <div class="log-entry log-success">[14:22:45] Webhook连接建立</div>
+                        <div class="log-entry log-info">[14:22:30] 应用启动完成</div>
+                        <div class="log-entry log-success">[14:22:15] 权限检查通过</div>
+                        <div class="log-entry log-info">[14:22:00] 网络连接正常</div>
+                        <div class="log-entry log-success">[14:21:45] GPS信号良好</div>
+                        <div class="log-entry log-info">[14:21:30] 电池电量85%</div>
+                        <div class="log-entry log-success">[14:21:15] 位置精度5米</div>
+                        <div class="log-entry log-info">[14:21:00] 后台服务运行中</div>
+                        <div class="log-entry log-success">[14:20:45] 数据上报完成</div>
+                        <div class="log-entry log-info">[14:20:30] 系统状态正常</div>
+                        <div class="log-entry log-success">[14:20:15] 内存使用正常</div>
+                        <div class="log-entry log-info">[14:20:00] 网络延迟15ms</div>
+                        <div class="log-entry log-success">[14:19:45] 定位服务稳定</div>
+                        <div class="log-entry log-info">[14:19:30] 数据缓存清理</div>
+                        <div class="log-entry log-success">[14:19:15] 位置更新完成</div>
+                        <div class="log-entry log-info">[14:19:00] 检查网络状态</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 配置面板 -->
+            <div id="config-tab" class="tab-content">
+                <h2 style="color: #333; margin-bottom: 30px;">配置面板</h2>
+                
+                <div class="form-group">
+                    <label>Webhook URL</label>
+                    <input type="text" value="https://ha.haoxiang.eu.org/api/webhook/db72ebc1627e52685ca64cdb3807dfbc61cf1876c0ce0f5eafecb975b577609b" placeholder="https://your-webhook-url.com">
+                </div>
+                
+                <div class="form-group">
+                    <label>更新周期(秒)</label>
+                    <input type="number" value="60" min="10" max="3600">
+                </div>
+                
+                <div class="switch-container">
+                    <span style="font-weight: bold; color: #333; font-size: 16px;">开启通知</span>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="info-box">
+                    <strong>配置说明：</strong><br>
+                    1. Webhook URL: 填入你的webhook地址<br>
+                    2. 更新周期: 定位上报间隔（秒）<br>
+                    3. 开启通知: 保持应用在后台运行<br><br>
+                    <strong>数据格式示例：</strong><br>
+                    {"latitude": 37.7749, "longitude": -122.4194, "speed": 30, "battery": 75}<br>
+                    <strong>APP版本：V2.1.4   开发者：狂欢马克思</strong>
+                </div>
+                
+                <button class="start-button">开始定位</button>
+                
+                <button class="start-button" style="margin-top: 15px; background: linear-gradient(135deg, #2196F3, #1976D2);">优化设置</button>
+            </div>
+        </div>
+        
+        <!-- 底部TAB栏 -->
+        <div class="tab-bar">
+            <button class="tab-button active" onclick="switchTab('status')">
+                <span class="tab-icon">📊</span>监控
+            </button>
+            <button class="tab-button" onclick="switchTab('config')">
+                <span class="tab-icon">⚙️</span>配置
+            </button>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px; color: white;">
+        <h2>手机端单面板布局</h2>
+        <p>使用底部TAB切换配置和监控功能，界面简洁统一</p>
+        <p>支持Android 4.0+，完美适配手机设备</p>
+        <p>通知显示当前上报时间，便于监控数据上报状态</p>
+    </div>
+    
+    <script>
+        function switchTab(tabName) {
+            // 隐藏所有tab内容
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // 移除所有tab按钮的active状态
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // 显示选中的tab内容
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // 激活选中的tab按钮
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html> 

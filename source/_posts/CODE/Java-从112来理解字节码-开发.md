@@ -319,7 +319,7 @@ Constant pool:
   ``` :调用完毕结束方法。 
 这里的 ```text 
   LineNumberTable
-  ``` 是��源码的，我们可以对照下我前面描述是否正确： ![Test](https://cdn.pixabay.com/photo/2019/12/18/20/04/fantasy-4704796_1280.jpg  '从1+1=2来理解Java字节码') 
+  ``` 是源码的，我们可以对照下我前面描述是否正确： ![Test](https://cdn.pixabay.com/photo/2019/12/18/20/04/fantasy-4704796_1280.jpg  '从1+1=2来理解Java字节码') 
  ```text 
   line 10: 0
   ``` : 第10行表示 ```text 

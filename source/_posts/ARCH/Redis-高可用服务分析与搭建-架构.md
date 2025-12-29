@@ -16,7 +16,7 @@ date: 2021-04-15 09:16:07
                                                                                                                                                                                         ![Test](https://segmentfault.com/img/bVcReYG  '高可用Redis服务架构分析与搭建')![Test](https://segmentfault.com/img/bVcReYG  '高可用Redis服务架构分析与搭建') 
 基于内存的Redis应该是目前各种Web开发业务中最为常用的key-value数据库了，我们经常在业务中用其存储用户登录态（Session存储），加速一些热数据的查询（相比较MySQL而言，速度有数量级的提升），做简单的消息队列（LPUSH和BRPOP）、订阅发布（PUB/SUB）系统等等。规模比较大的互联网公司，一般都会有专门的团队，将Redis存储以基础服务的形式提供给各个业务调用。 
 不过任何一个基础服务的提供方，都会被调用方问起的一个问题是：你的服务是否具有高可用性？最好不要因为你的服务经常出问题，导致我这边的业务跟着遭殃。最近我所在的项目中也自己搭了一套小型的“高可用”Redis服务，在此做一下自己的总结和思考。 
-首先我们要定义一下对于Redis服务来说怎样才算是高可用，即在各种出现异常的情况下，依然可以正常提供服务。或者宽松��些，出现异常的情况下，只经过很短暂的时间即可恢复正常服务。所谓异常，应该至少包含了以下几种可能性： 【异常1】某个节点服务器的某个进程突然down掉（例如某开发手残，把一台服务器的redis-server进程kill了） 【异常2】某台节点服务器down掉，相当于这个节点上所有进程都停了（例如某运维手残，把一个服务器的电源拔了；例如一些老旧机器出现硬件故障） 【异常3】任意两个节点服务器之间的通信中断了（例如某临时工手残，把用于两个机房通信的光缆挖断了） 
+首先我们要定义一下对于Redis服务来说怎样才算是高可用，即在各种出现异常的情况下，依然可以正常提供服务。或者宽松些，出现异常的情况下，只经过很短暂的时间即可恢复正常服务。所谓异常，应该至少包含了以下几种可能性： 【异常1】某个节点服务器的某个进程突然down掉（例如某开发手残，把一台服务器的redis-server进程kill了） 【异常2】某台节点服务器down掉，相当于这个节点上所有进程都停了（例如某运维手残，把一个服务器的电源拔了；例如一些老旧机器出现硬件故障） 【异常3】任意两个节点服务器之间的通信中断了（例如某临时工手残，把用于两个机房通信的光缆挖断了） 
 其实以上任意一种异常都是小概率事件，而做到高可用性的基本指导思想就是：多个小概率事件同时发生的概率可以忽略不计。只要我们设计的系统可以容忍短时间内的单点故障，即可实现高可用性。 
 对于搭建高可用Redis服务，网上已有了很多方案，例如Keepalived，Codis，Twemproxy，Redis Sentinel。其中Codis和Twemproxy主要是用于大规模的Redis集群中，也是在Redis官方发布Redis Sentinel之前twitter和豌豆荚提供的开源解决方案。我的业务中数据量并不大，所以搞集群服务反而是浪费机器了。最终在Keepalived和Redis Sentinel之间做了个选择，选择了官方的解决方案Redis Sentinel。 
 Redis Sentinel可以理解为一个监控Redis Server服务是否正常的进程，并且一旦检测到不正常，可以自动地将备份（slave）Redis Server启用，使得外部用户对Redis服务内部出现的异常无感知。我们按照由简至繁的步骤，搭建一个最小型的高可用的Redis服务。 
@@ -28,7 +28,7 @@ Redis Sentinel可以理解为一个监控Redis Server服务是否正常的进程
 ###### 方案2：主从同步Redis Server，单实例Sentinel 
 ![Test](https://segmentfault.com/img/bVcReYG  '高可用Redis服务架构分析与搭建')![Test](https://segmentfault.com/img/bVcReYG  '高可用Redis服务架构分析与搭建') 
 为了实现高可用，解决方案1中所述的单点故障问题，我们必须增加一个备份服务，即在两台服务器上分别各启动一个Redis Server进程，一般情况下由master提供服务，slave只负责同步和备份。与此同时，在额外启动一个Sentinel进程，监控两个Redis Server实例的可用性，以便在master挂掉的时候，及时把slave提升到master的角色继续提供服务，这样就实现了Redis Server的高可用。这基于一个高可用服务设计的依据，即单点故障本身就是个小概率事件，而多个单点同时故障（即master和slave同时挂掉），可以认为是（基本）不可能发生的事件。 
-对于Redis服务的调用方来说，现在要连接的是Redis Sentinel服务，而不是Redis Server了。常见的调用过程是，client先连接Redis Sentinel并询问目前Redis Server中哪个服务是master，��些是slave，然后再去连接相应的Redis Server进行操作。当然目前的第三方库一般都已经实现了这一调用过程，不再需要我们手动去实现。 
+对于Redis服务的调用方来说，现在要连接的是Redis Sentinel服务，而不是Redis Server了。常见的调用过程是，client先连接Redis Sentinel并询问目前Redis Server中哪个服务是master，些是slave，然后再去连接相应的Redis Server进行操作。当然目前的第三方库一般都已经实现了这一调用过程，不再需要我们手动去实现。 
 然而，我们实现了Redis Server服务的主从切换之后，又引入了一个新的问题，即Redis Sentinel本身也是个单点服务，一旦Sentinel进程挂了，那么客户端就没办法链接Sentinel了。所以说，方案2的配置并无法实现高可用性。 
  
 ###### 方案3：主从同步Redis Server，双实例Sentinel 

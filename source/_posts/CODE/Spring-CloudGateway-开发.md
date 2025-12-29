@@ -728,7 +728,7 @@ spring:
  
  
  
- 如果您想用SetStatus修改返回码，同时又不想丢掉真实的返回码，可以增加如下配置，这样真实的返回码��被放在名为<font color="blue">original-status-header-name</font>的key中了： 
+ 如果您想用SetStatus修改返回码，同时又不想丢掉真实的返回码，可以增加如下配置，这样真实的返回码被放在名为<font color="blue">original-status-header-name</font>的key中了： 
  
  
  ```text 

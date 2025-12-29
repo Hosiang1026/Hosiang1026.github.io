@@ -10,7 +10,7 @@ abbrlink: 2b4e32ca
 date: 2021-04-14 07:54:42
 ---
 
-本文同步发布在 TensorFlow 微信���众号、知乎 SQLFlow 专栏，获得作者授权在开源中国发布，原作者为蚂蚁集团 齐俊、王益 ElasticDL 是一个基于 TensorFlow 2.x 和 Kubernetes 的开源的分布式...
+本文同步发布在 TensorFlow 微信众号、知乎 SQLFlow 专栏，获得作者授权在开源中国发布，原作者为蚂蚁集团 齐俊、王益 ElasticDL 是一个基于 TensorFlow 2.x 和 Kubernetes 的开源的分布式...
 <!-- more -->
 
                                                                                                                                                                                          
@@ -24,7 +24,7 @@ ElasticDL 的首要设计意图是简化分布式编程。它允许用户只提�
 同时，ElasticDL 提供的弹性调度的能力在实践中可以让集群的利用高达 90%。当集群资源不足时，一个训练作业里的进程减少；当其他作业结束释放资源后，进程数量随之增加。这样的做法比 TensorFlow Distribution Strategy 专注容错（进程减少的情况下作业不失败，但不会增加进程数量）更进一步。并且，因为 ElasticDL 作业容忍变化的 worker 数量，所以每个作业的启动都不必等待集群有足够的资源，而是可以见缝插针的尽早开始训练，从而缩短等待作业启动的时间，让研发人员可以尽快看到第一个迭代的结果，万一分布式训练有问题，也能尽早发现，从而进一步提升了研发效率。 
 ### 简化分布式深度学习编程 
 为了从海量数据中学习规律，我们需要编写分布式深度学习程序来完成训练任务。这在工业场景中尤为常见。 
-可分布式深度学习程序的编写很难 —— 编程者既要了解深度学习，也要了解分布式系统开发。在一个分布式深度学习系统中，需要启���和监控若干个 workers。因为既要拆分训练数据给 workers，还要综合各个 worker 算出的 gradients 来更新模型，所以涉及通信 (Communication) 和 同步 (Synchronization)。此外，当 worker 数目很多时，作业在执行过程中有 worker 挂掉的概率也会变得很大。如果一个 worker 挂掉，则整个作业重启或者恢复到最近的 checkpoint (Fault Recovery)，那么重启之后可能又会有 worker 挂掉导致重启，于是作业不断陷入重启和恢复，永远也无法完成。这进一步要求编程者具备设计容错 (Fault Tolerance) 系统的能力。其实不仅分布式深度学习，其他分布式机器学习 程序、分布式离线和在线数据处理程序等各种分布式程序的写作，都对编程者有类似上述要求。 
+可分布式深度学习程序的编写很难 —— 编程者既要了解深度学习，也要了解分布式系统开发。在一个分布式深度学习系统中，需要启和监控若干个 workers。因为既要拆分训练数据给 workers，还要综合各个 worker 算出的 gradients 来更新模型，所以涉及通信 (Communication) 和 同步 (Synchronization)。此外，当 worker 数目很多时，作业在执行过程中有 worker 挂掉的概率也会变得很大。如果一个 worker 挂掉，则整个作业重启或者恢复到最近的 checkpoint (Fault Recovery)，那么重启之后可能又会有 worker 挂掉导致重启，于是作业不断陷入重启和恢复，永远也无法完成。这进一步要求编程者具备设计容错 (Fault Tolerance) 系统的能力。其实不仅分布式深度学习，其他分布式机器学习 程序、分布式离线和在线数据处理程序等各种分布式程序的写作，都对编程者有类似上述要求。 
 一个常见的解决思路是为特定类型的作业提供分布式编程框架，让用户只需要完形填空一样补上业务逻辑，而分布式计算（包括通信、同步、和容错）都由框架的代码来完成。一个典型的例子是离线数据处理程序用 MapReduce 框架来写。不管是 Google MapReduce 还是 Hadoop MapReduce，用户基本都只需填写 map 和 reduce 两个函数的实现即可。类似的，在线数据流系统基于 Storm 和 Flink 来写，用户只需提供 bolts 和 nuts 这样的业务逻辑定义。 
 在 ElasticDL 之前，蚂蚁金服的同事们使用过多种框架和类似框架的高层 API。这些方案 大都基于 TensorFlow 和 Kubernetes。 
  
@@ -118,7 +118,7 @@ ElasticDL 的动态数据划分是基于索引的。ElasticDL 要求训练数据
 ElasticDL worker 接收到的一个 task 通常包括多个 minibatches。对于每个 task， worker 打开对应的文件或者表，随后做如下操作： 
  
  读取一个 mini-batch 的训练数据。 
- 用本地模型 (local model) 作为参数调用用户定义的 forward 函数以计算 cost。如果 模型很大，则部��参数可能来自于 parameter server。 
+ 用本地模型 (local model) 作为参数调用用户定义的 forward 函数以计算 cost。如果 模型很大，则部参数可能来自于 parameter server。 
  给定 cost，worker 利用 TensorFlow eager execution 的 GradientTape 机制，进行 backward 计算，得到梯度 (gradient)。 
  如果是 synchronous SGD，此时 worker 调用 AllReduce 实现 FTlib 来同步 gradients 并且更新模型。如果是 asynchronous SGD，worker 不定时的向 parameter server 上传 gradients，也不定时地从 parameter server 获取全局模型参数。 
  
@@ -146,7 +146,7 @@ ElasticDL 实现的弹性调度和刚性调度 (Gang Scheduling) 是对应的。
 下图对应的实验里，我们用 ElasticDL 来执行同样的两个训练作业。第一个作业提交之后的 30 秒，我们提交了第二个作业。第二个作业马上就开始运行，用满了集群剩下的资源，而不需要等到第一个作业结束。在 395 秒时，第一个作业结束。随后，在 580 秒时，第二个作业也结束了。因为弹性调度，使得两个作业尽量同时运行，所以总结束时间比也上图要早。 
 总结： 
  
- 用户等待作业启动时间几乎是 0。 这对于 AI 工作很重要，因为用户最关注的是第一个迭代尽快开始—— 如果第一个迭代失败了，很可能是用户程序的 bug。另外，深度学习模型往往需要手动调优，学习���、optimizer、activation 等配置如果不合理，往往在前几个迭代就能发现；因此第一个迭代能立刻开始，对模型调优的工作效率提高有很大帮助。 
+ 用户等待作业启动时间几乎是 0。 这对于 AI 工作很重要，因为用户最关注的是第一个迭代尽快开始—— 如果第一个迭代失败了，很可能是用户程序的 bug。另外，深度学习模型往往需要手动调优，学习、optimizer、activation 等配置如果不合理，往往在前几个迭代就能发现；因此第一个迭代能立刻开始，对模型调优的工作效率提高有很大帮助。 
  集群利用率高。 第二个实验 (elastic scheduling) 执行期间，有一段时间集群利用率是 100%；其他时间也不低于第一个实验 (gang scheduling)。 
  作业完成更快。 第二个试验里，两个作业用了约 580 秒；第一个实验里需要约 795 秒。 
  

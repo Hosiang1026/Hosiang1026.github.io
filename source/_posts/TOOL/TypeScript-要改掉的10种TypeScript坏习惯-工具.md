@@ -92,7 +92,7 @@ function text: string, author: string, date: Date = new Date())return {text: te
   
   
   
-  我��为什么养成了这样的习惯 
+  我为什么养成了这样的习惯 
    
   
  这个?? 运算符是去年才引入的，所以在长函数中间使用值时，可能很难习惯将其设置为参数默认值。 
@@ -300,7 +300,7 @@ function obj: unknown): obj is Product[] {return Array.isArray(obj) && obj.ev
   
   
   
-  我们为什么养成��这样的习惯 
+  我们为什么养成这样的习惯 
    
   
  我猜想这个习惯越来越常见，因为即使是官方文档也在使用一个字母的名称： 

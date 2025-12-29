@@ -151,7 +151,7 @@ private <T> ExporterChangeableWrapper<T> doLocalExport(final Invoker<T> originIn
   ```  
 1.代用同步锁+double-check的方式来保证同样的服务不重复暴露。 
 2.new InvokerDelegete<T>(originInvoker, getProviderUrl(originInvoker)); InvokerDelegete 实现 com.alibaba.dubbo.rpc.protocol.InvokerWrapper（invoke） 类，主要增加了 #getInvoker() 方法，获得真实的，非 InvokerDelegete 的 Invoker 对象。 ![Test](https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg  'Dubbo服务发布之服务暴露&心跳机制&服务注册') 
-3.调用protocol.export接��� 经过ProtocolFilterWrapper.invoker方法 创过滤器链再暴露服务： 
+3.调用protocol.export接 经过ProtocolFilterWrapper.invoker方法 创过滤器链再暴露服务： 
 protocol.export(buildInvokerChain(invoker, Constants.SERVICE_FILTER_KEY, Constants.PROVIDER)); 
  ```java 
   /**
@@ -607,7 +607,7 @@ Dubbo provider的心跳服务是 HeaderExchanger bind代码执行的最后一步
     }
 }
   ```  
-1.停止定时任务——首先停止定时器中所有任务，置空 beatbeatTimer； 2.重新设置定时器 ， ���环��测 
+1.停止定时任务——首先停止定时器中所有任务，置空 beatbeatTimer； 2.重新设置定时器 ， 环测 
 接下来在DubboProtocol的openServer(URL) 方法中将创建的ExchangeServer对象放入 DubboProtocol的 serverMap 集合对象中  key为服务的ip:port 如 192.168.20.218:20880 value为之前创建的ExchangeServer对象 
 DubboProtocol export方法到此执行完毕，最终返回的是 DubboExporter对象包装了入参的invoker对象，serviceKey信息，及服务暴露的 exporterMap对象。 
 ![Test](https://oscimg.oschina.net/oscnet/b3ce042b0cdf415c14b4721241a95d72154.jpg  'Dubbo服务发布之服务暴露&心跳机制&服务注册') 

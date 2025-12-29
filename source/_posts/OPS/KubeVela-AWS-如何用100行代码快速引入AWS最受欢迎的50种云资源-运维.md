@@ -216,7 +216,7 @@ go run gen.go aws "https://registry.terraform.io/v2/modules?filter%5Bprovider%5D
 其中，对于 data 中的每个 Module 元素，解析它的属性，Id 和 relationship 中的 latest-version 对应的 id；对于 Included 中的每个 Module 版本元素，解析它的属性和Id。 
 属性又解析如下五项： 
 • Name • Downloads • Source • Description • Verified 
-结构体定义在结构体 TFDownload 中，通过 http 库���取 json 数据，再通过 json.Unmarshal 解析出 Terraform modules 的结构体。 
+结构体定义在结构体 TFDownload 中，通过 http 库取 json 数据，再通过 json.Unmarshal 解析出 Terraform modules 的结构体。 
 ##### 批量生产云资源 
 ###### 1. 新建目录，生成资源所需文件 
 解析完毕后，在当前目录下新建文件夹，文件夹命名为 provider 名称。 遍历解析后的 data，对于其中每个 Module 元素，执行下述操作，为其生成相应配置文件，定义和相应文档。 

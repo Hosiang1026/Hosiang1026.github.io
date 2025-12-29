@@ -338,7 +338,7 @@ public class DemoApplication {
   ![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9678c5bce6444fa897e875ba98009d7f~tplv-k3u1fbpfcp-zoom-1.image  '别再面向 for 循环编程了，Spring 自带的观察者模式就很香！') 
    
   ### 666. 彩蛋 
-  至此，我们已经完成了对 Spring 事件��制的学习。当然，还有一些功能，胖友可以自己在倒腾倒腾。 
+  至此，我们已经完成了对 Spring 事件制的学习。当然，还有一些功能，胖友可以自己在倒腾倒腾。 
   ① 如果胖友想要多个监听器按照指定顺序执行，可以通过实现 Ordered 接口，指定其顺序。 
   ② 如果胖友想要监听多种 ApplicationContext 事件，可以实现 SmartApplicationListener 接口，具体示例可以看看 SourceFilteringListener 类。 
   ③  

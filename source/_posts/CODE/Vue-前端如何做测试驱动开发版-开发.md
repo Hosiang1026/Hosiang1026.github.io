@@ -13,7 +13,7 @@ date: 2021-04-15 09:19:21
 最近和测试杠上了，写了的文章都和测试相关。当然，这里的「测试」并不是具体的某个角色，而是验证程序正确性的工作。曾经，前端如何 TDD 困扰了我很久，随着时间的推移，前端框架开始成熟，...
 <!-- more -->
 
-                                                                                                                                                                                        ![Test](https://api.opics.org/api  '前端如何做测试驱动开��-vue版') 
+                                                                                                                                                                                        ![Test](https://api.opics.org/api  '前端如何做测试驱动开-vue版') 
 最近和测试杠上了，写了的文章都和测试相关。当然，这里的「测试」并不是具体的某个角色，而是验证程序正确性的工作。曾经，前端如何 TDD 困扰了我很久，随着时间的推移，前端框架开始成熟，我对前端测试有了更深刻的理解，把我做前端 TDD 的方法分享给大家。 
 ### 理论篇 
 测试驱动开发，英文全称 Test-Driven Development（简称 TDD），是由Kent Beck 先生在极限编程（XP）中倡导的开发方法。以其倡导先写测试程序，然后编码实现其功能得名。 
@@ -21,7 +21,7 @@ TDD 能从技术的角度帮我们提高代码质量，使代码执行结果正�
 当有变更时，测试同学最关心变更的影响范围，然而开发者也很难精准确定变更所带来的影响。虽然我们不追求测试覆盖率，但足够的测试覆盖总是能够给我们更多的信心，TDD 则是增加测试覆盖的唯一途径。 
 在面对一个完全没有思路的算法的时候，TDD 则变成了测试驱动设计（Test-Driven Design）。选一个最简单的用例，用最简单的代码通过测试。逐渐增加测试 Case、通过测试 、重构来驱动出设计。 
 ##### TDD 的步骤 
-![Test](https://api.opics.org/api  '前端如何做测试驱动开��-vue版') 
+![Test](https://api.opics.org/api  '前端如何做测试驱动开-vue版') 
  
  写一个失败的测试 
  写一个刚好让测试通过的代码 
@@ -36,7 +36,7 @@ TDD 能从技术的角度帮我们提高代码质量，使代码执行结果正�
  
 TDD 写出的代码的验证逻辑针对的是独立的代码块，可能不是系统中的业务完整功能。用测试先行的方法写出的漂亮的代码也可能做出的功能不是客户想要的（因为需求理解的错误所导致）。因此，使用 「验收驱动测试开发(ATDD)」是很有必要。 
 ##### 验收驱动测试开发——ATDD(Acceptance Test Driven Development) 
-ATDD 通���名��就可以看出和 TDD 有着某种神秘的联系， ATDD 是 TDD 的延伸。 
+ATDD 通名就可以看出和 TDD 有着某种神秘的联系， ATDD 是 TDD 的延伸。 
 在传统做法中，要给系统添加新的特性，开发人员会按照文档开发，测试，最后交给客户验收。ATDD 则有些不同：在编码前先明确新特性的验收标准，将验收标准转换成测试用例（代码），再编写代码让测试通过，当所有的验收条件被满足，也就意味着这个功能完整的实现。 
 2003 年左右的时候 Kent Beck 曾对 ATDD 提出质疑，时间太早不好查证，我个人猜测原因是 验收条件做为一个 测试 Case 在某些时候会比较大。 
 举个例子： 
@@ -83,16 +83,16 @@ it('如果： a = 1 并且 b = 2，当：执行 add()，则：结果是 3', () =
   vue create vue-tdd-demo
 
   ```  
-![Test](https://api.opics.org/api  '前端如何做测试驱动开��-vue版') 
-![Test](https://api.opics.org/api  '前端如何做测试驱动开��-vue版') 
+![Test](https://api.opics.org/api  '前端如何做测试驱动开-vue版') 
+![Test](https://api.opics.org/api  '前端如何做测试驱动开-vue版') 
 勾选 Unit Testing （单元测试），后面按照自己喜好来选择。 
-![Test](https://api.opics.org/api  '前端如何做测试驱动开��-vue版') 
+![Test](https://api.opics.org/api  '前端如何做测试驱动开-vue版') 
 这里选择 Jest 作为测试框架。 
 ##### 验证环境 
 安装好之后运行  ```text 
   npm run test:unit
   ```  ，刚安装的项目就会报错，真让人惆怅！看看如何解决： 
-![Test](https://api.opics.org/api  '前端如何做测试驱动开��-vue版') 
+![Test](https://api.opics.org/api  '前端如何做测试驱动开-vue版') 
 jest.config.js 或者 package.json 中找到  ```text 
   transformIgnorePatterns
   ```  这个配置 
@@ -107,10 +107,10 @@ transformIgnorePatterns: [
 再运行  ```text 
   npm run test:unit
   ```  
-![Test](https://api.opics.org/api  '前端如何做测试驱动开��-vue版') 
+![Test](https://api.opics.org/api  '前端如何做测试驱动开-vue版') 
 #### 演练实例 
 ##### 需求 
-![Test](https://api.opics.org/api  '前端如何做测试驱动开��-vue版') 
+![Test](https://api.opics.org/api  '前端如何做测试驱动开-vue版') 
 > 页面包含用户名、密码输入框和提交按钮，提交之后成功服务端返回状态为 200 然后跳转到 Home 首页，失败则  ```java 
   alert()
   ```  文字提示。 > > 在用户名密码为空时不能提交。 
@@ -777,9 +777,9 @@ new Vue({
 
   ```  
 运行测试： 
-![Test](https://api.opics.org/api  '前端如何做测试驱动开��-vue版') 
+![Test](https://api.opics.org/api  '前端如何做测试驱动开-vue版') 
 Html 报告： 
-![Test](https://api.opics.org/api  '前端如何做测试驱动开��-vue版') 
+![Test](https://api.opics.org/api  '前端如何做测试驱动开-vue版') 
 点开可以看到每一个文件的覆盖，以及是否有逻辑分支忘记测试。 
 注意：添加测试报告之后运行测试的速度会变慢。 
 #### 总结 

@@ -105,7 +105,7 @@ Library解析
 1、CustomViewAbove主页面 
         CustomViewAbove需要监听触摸、移动、抬起和取消等Touch事件，并记录手指滑动的距离和速度。 
       （1）对Touch事件的处理 
-        Touch事件决定了菜单的显示、移动和隐藏。例如：在菜单的触发范围内，手指向右滑动（POINT_MOVE���时，菜单会跟随滑动到手指所在位置。手指抬起（PRIMARY_POINT_UP）或者取消滑动（CANCEL）时，会依据手指滑动的距离和速度决定菜单页面的下一状态是全部隐藏还是全部显示。 
+        Touch事件决定了菜单的显示、移动和隐藏。例如：在菜单的触发范围内，手指向右滑动（POINT_MOVE时，菜单会跟随滑动到手指所在位置。手指抬起（PRIMARY_POINT_UP）或者取消滑动（CANCEL）时，会依据手指滑动的距离和速度决定菜单页面的下一状态是全部隐藏还是全部显示。 
  
  ```java 
    switch (action) {
@@ -198,7 +198,7 @@ switch (mCurItem){
     final int destX = getDestScrollX(mCurItem);
     /*菜单放置状态为左侧，通过设置主页面的位置实现菜单的弹出展示或弹回隐藏
      1.destX=0,主页面左侧边线与屏幕左侧边线对齐，菜单被全部遮挡，实现菜单弹回隐藏
-     2.destX=MenuWidth，主页面左侧边线向右移动与菜单总宽度相等的距��，实现菜单弹出展示*/
+     2.destX=MenuWidth，主页面左侧边线向右移动与菜单总宽度相等的距，实现菜单弹出展示*/
     if (mViewBehind.getMode() == SlidingMenu.LEFT) {
         mContent.setLeft(destX);
         mViewBehind.scrollBehindTo(destX);

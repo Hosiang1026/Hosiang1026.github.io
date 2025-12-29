@@ -93,7 +93,7 @@ date: 2021-04-15 09:19:21
 	}
 
   ```  
-这一大段代码基本上就是spring扫描识别注解，并注册Bean到IOC容器中的代码。 在第10行有一个findCandidateComponents(basePackage)方法，这个方法里就是具体的扫描逻辑��� 继续跟踪： ClassPathScanningCandidateComponentProvider类 
+这一大段代码基本上就是spring扫描识别注解，并注册Bean到IOC容器中的代码。 在第10行有一个findCandidateComponents(basePackage)方法，这个方法里就是具体的扫描逻辑 继续跟踪： ClassPathScanningCandidateComponentProvider类 
  ```java 
   //扫描给定类路径的包
 	public Set<BeanDefinition> findCandidateComponents(String basePackage) {

@@ -102,7 +102,7 @@ bean的作用域通过scope属性配置
   
    
    scope 
-   描�� 
+   描 
    
    
    singleton 
@@ -213,7 +213,7 @@ public class InstantiationTracingBeanPostProcessor implements BeanPostProcessor 
  
  BeanFactoryPostProcessor 
  
-     BeanFactoryPostProcessor是用来在beans进行初始化前修改bean的配置元数据。与BeanPostProcessor的主要区别是：BeanPostProcessor对Bean实例进行操作，BeanFactoryPostProcessor是对Bean的配��元数据进行操作。 
+     BeanFactoryPostProcessor是用来在beans进行初始化前修改bean的配置元数据。与BeanPostProcessor的主要区别是：BeanPostProcessor对Bean实例进行操作，BeanFactoryPostProcessor是对Bean的配元数据进行操作。 
 public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor, Ordered {
 
     @Override

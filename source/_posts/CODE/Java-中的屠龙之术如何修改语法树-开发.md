@@ -351,7 +351,7 @@ TreeMaker.Block用于创建组合语句的语法树节点（JCBlock），源码�
  stats：语句列表 
  
 #### com.sun.tools.javac.util.List介绍 
-在我们操作抽象语法树的时候，有时会涉及到关于List的操���，���是这个List不是我们经常使用的 ```text 
+在我们操作抽象语法树的时候，有时会涉及到关于List的操，是这个List不是我们经常使用的 ```text 
   java.util.List
   ``` 而是 ```text 
   com.sun.tools.javac.util.List

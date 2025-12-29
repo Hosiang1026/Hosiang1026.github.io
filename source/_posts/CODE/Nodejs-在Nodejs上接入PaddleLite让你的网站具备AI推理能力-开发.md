@@ -50,7 +50,7 @@ pip install -f https://paddlepaddle.org.cn/pip/oschina/gpu paddlepaddle-gpu
 
   ```  
  
-执行上面步骤��我们可以得到转化后的模型文件：mobilenetv1_opt.nb 
+执行上面步骤我们可以得到转化后的模型文件：mobilenetv1_opt.nb 
 3. 在Node.js中进行推理： 
  
   ```java 

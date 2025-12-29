@@ -155,9 +155,9 @@ server:
   Erupt
   ``` 
  的环境就搭建完了，额~ ，这就完了？ 
-咱们什么也没干，项���是个空壳子，一行代码也没写，好像连个表也没建啊！ 
+咱们什么也没干，项是个空壳子，一行代码也没写，好像连个表也没建啊！ 
 ![Test](https://img-blog.csdnimg.cn/20210323130333473.png  '干掉前端！3分钟纯 Java 注解搭个管理系统，我直接好家伙') 
-别着急咱们先启动下项目，看到控制台打印出很多建表语句和插���语句，这是因为 
+别着急咱们先启动下项目，看到控制台打印出很多建表语句和插语句，这是因为 
  ```text 
   Erupt
   ``` 
@@ -322,7 +322,7 @@ public class Student extends BaseModel {
 
   ``` 
   
-但此时新创建的页面不会显示出来，还需要我们手动做一个映射关系，在菜单维护中自定义个��单，类型值一定要为新建的 类名  
+但此时新创建的页面不会显示出来，还需要我们手动做一个映射关系，在菜单维护中自定义个单，类型值一定要为新建的 类名  
  ```text 
   Student
   ``` 
@@ -362,7 +362,7 @@ public class Student extends BaseModel {
  ```java 
   @Getter
 @Setter
-@Erupt(name = "��生表",dataProxy = {StudentDataProxy.class},
+@Erupt(name = "生表",dataProxy = {StudentDataProxy.class},
         power = @Power(importable = true, export = true)
 )
 @Entity

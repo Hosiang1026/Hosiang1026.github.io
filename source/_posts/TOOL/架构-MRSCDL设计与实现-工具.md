@@ -86,7 +86,7 @@ MRS CDL包含CDL Service和CDL Connector两个角色，他们各自的职能如�
    
    缺点 
    存在数据丢失的场景；没有数据备份；数据大小限制；没有背压机制 
-   ���有��据复制；脆弱的容错机制；不支持消息保序；可扩展性较差 
+   有据复制；脆弱的容错机制；不支持消息保序；可扩展性较差 
    
   
  
@@ -107,7 +107,7 @@ MRS CDL对业务进行了上层的抽象，通过引入CDL Job的概念来定义
 在Job结构的基础上，MRS CDL提供执行CDL Job的机制，在运行时，使用Kafka Connect Source Connector结合日志复制技术将CDC事件从源数据存储捕获到Kafka，然后使用Kafka Connect Sink Connector从Kafka提取数据，在应用各种转换规则后将最终结果推送到目标存储。 
 提供定义表级和列级映射转换的机制，在定义CDL Job的过程中可以指定转换规则。 
 4.2 Data Comparison 
-MRS CDL提供一种特殊的Job，用于进行数据一致性对比。用户可以��择源和目标数据存储架构，从源和目标架构中选择各种比较对进行数据比较，以确保数据在源和目标数据存储中一致。 
+MRS CDL提供一种特殊的Job，用于进行数据一致性对比。用户可以择源和目标数据存储架构，从源和目标架构中选择各种比较对进行数据比较，以确保数据在源和目标数据存储中一致。 
  图3 Data Comparison抽象视图 
 MRS CDL提供了专用的Rest API来运行Data Compare Job，并且提供如下能力： 
  

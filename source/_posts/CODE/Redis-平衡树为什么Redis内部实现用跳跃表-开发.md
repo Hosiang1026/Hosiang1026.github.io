@@ -47,7 +47,7 @@ Redis使用跳跃表（skiplist）作为有序集合（zset）的底层实现之
  
  
 ##### 跳跃表节点的结构 
-跳跃表节点��用zskiplistNode结构表示，它包含以下几个属性： 
+跳跃表节点用zskiplistNode结构表示，它包含以下几个属性： 
  
  level属性：表示层的数组，数组中每个项使用zskiplistLevel结构表示，它包含以下两个属性： 
    

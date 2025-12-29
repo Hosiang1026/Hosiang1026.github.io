@@ -229,7 +229,7 @@ export function debounce(fn, delay) {
 
   ``` 
   
-##### 二、最��效��展示 
+##### 二、最效展示 
 演示地址：http://zspt_sf.gitee.io/data-visualization-view 效果图： ![Test](https://img-blog.csdnimg.cn/20210412092055140.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNzgzNjU0,size_16,color_FFFFFF,t_70  'Vue使用ECharts完成2020年全国各地区GDP总量大数据可视化面板（附源码）') 动态效果图： ![Test](https://img-blog.csdnimg.cn/20210412092055140.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNzgzNjU0,size_16,color_FFFFFF,t_70  'Vue使用ECharts完成2020年全国各地区GDP总量大数据可视化面板（附源码）') 
 ##### 三、源码地址 
 github地址：https://github.com/zsptsf/data-visualization 

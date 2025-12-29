@@ -29,7 +29,7 @@ RDD(Resilient Distributed Dataset)名为弹性分布式数据集，是 Spark 中
  
  
 ##### RDD 设计目的 
-在许多迭代式算法(比如机器学习、图算法等)和交互式数据挖掘中，不同计算阶段之间会重用中间结果，即一个阶段的输出结果会作为下一个阶段的输入。但是，之前的 MapReduce 框架采用非循环式的数据流模型，把中间结果写入到 HDFS 中，带来了大量的数据复制、磁盘 IO 和序列化开销。且这些框架只能支持一些特定的计算模式(map/reduce)，并没有提供一种通用的数据抽象。 AMP 实验室发表的一篇关于 RDD 的���文:《Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing》就是为了解决这些问题的。 RDD 提供了一个抽象的数据模型，使用户不必担心底层数据的分布式特性，只需将具体的应用逻辑表达为一系列转换操作(函数)，不同 RDD 之间的转换操作之间还可以形成依赖关系，进而实现管道化，从而避免了中间结果的存储，大大降低了数据复制、磁盘 IO 和序列化开销，并且还提供了更多的API(map/reduec/filter/groupBy 等)。 
+在许多迭代式算法(比如机器学习、图算法等)和交互式数据挖掘中，不同计算阶段之间会重用中间结果，即一个阶段的输出结果会作为下一个阶段的输入。但是，之前的 MapReduce 框架采用非循环式的数据流模型，把中间结果写入到 HDFS 中，带来了大量的数据复制、磁盘 IO 和序列化开销。且这些框架只能支持一些特定的计算模式(map/reduce)，并没有提供一种通用的数据抽象。 AMP 实验室发表的一篇关于 RDD 的文:《Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing》就是为了解决这些问题的。 RDD 提供了一个抽象的数据模型，使用户不必担心底层数据的分布式特性，只需将具体的应用逻辑表达为一系列转换操作(函数)，不同 RDD 之间的转换操作之间还可以形成依赖关系，进而实现管道化，从而避免了中间结果的存储，大大降低了数据复制、磁盘 IO 和序列化开销，并且还提供了更多的API(map/reduec/filter/groupBy 等)。 
 ##### RDD 主要属性 
 在RDD内部，每个 RDD 都具有五个主要属性： 
  
@@ -79,7 +79,7 @@ RDD 是一个数据集的表示，不仅表示了数据集，还表示了这个�
  分区函数(默认是 hash) 
  最佳位置 
  
-分区列表、分区函数、最佳位置，这三个属性其实说的就是数据集在哪，在哪计算更合适，如何分区； 计算函数、依赖关系，这两个属性其实���的是数据集怎么来的。 
+分区列表、分区函数、最佳位置，这三个属性其实说的就是数据集在哪，在哪计算更合适，如何分区； 计算函数、依赖关系，这两个属性其实的是数据集怎么来的。 
 #### RDD 基本操作 
 ##### RDD 对象创建 
  
@@ -215,7 +215,7 @@ Spark RDD 支持通用的 transformations 转换算子如下列表所示：
    
    
    mapPartitions(func) 
-   类似于 map，但独立地在 RDD 的每一个分���上运行，因此在类型为 T 的 RDD 上运行时，func 的函数类型必须是 Iterator[T] => Iterator[U] 
+   类似于 map，但独立地在 RDD 的每一个分上运行，因此在类型为 T 的 RDD 上运行时，func 的函数类型必须是 Iterator[T] => Iterator[U] 
    
    
    mapPartitionsWithIndex(func) 
@@ -316,7 +316,7 @@ Spark RDD 支持通用的 Actions 动作算子如下列表所示：
   
    
    reduce(func) 
-   将RDD中元素按func进行聚合（func是一个 (T,T) => T 的映射函数，其中T为源RDD元素类型��并且func需要满足 交换律 和 结合律 以便支持并行计算） 
+   将RDD中元素按func进行聚合（func是一个 (T,T) => T 的映射函数，其中T为源RDD元素类型并且func需要满足 交换律 和 结合律 以便支持并行计算） 
    
    
    collect() 
@@ -535,7 +535,7 @@ DAG (Directed Acyclic Graph 有向无环图)指的是数据转换执行的过程
 #### 数据混洗 
 部分 Spark 算子会触发众所周知的**混洗（Shuffle）**事件。Spark中的混洗机制是用于将数据重新分布，其结果是所有数据将在各个分区间重新分组。一般情况下，混洗需要跨执行器（executor）或跨机器复制数据，这也是混洗操作一般都比较复杂而且开销大的原因。 
 ##### 基本说明 
-为了理解混洗阶���都发生了哪些事，首先以 reduceByKey 算子为例来看一下。reduceByKey算子会生成一个新的RDD，将源RDD中一个key对应的多个value组合进一个tuple - 然后将这些values输入给reduce函数，得到的result再和key关联放入新的RDD中。这个算子的难点在于对于某一个key来说，并非其对应的所有values都在同一个分区（partition）中，甚至有可能都不在同一台机器上，但是这些values又必须放到一起计算reduce结果。 在Spark中，通常是由于为了进行某种计算操作，而将数据分布到所需要的各个分区当中。而在计算阶段，单个任务（task）只会操作单个分区中的数据 – 因此，为了组织好每个reduceByKey中reduce任务执行时所需的数据，Spark需要执行一个多对多操作。即，Spark需要读取RDD的所有分区，并找到所有key对应的所有values，然后跨分区传输这些values，并将每个key对应的所有values放到同一分区，以便后续计算各个key对应values的reduce结果 – 这个过程就叫做混洗（Shuffle）。 虽然混洗好后，各个分区中的元素和分区自身的顺序都是确定的，但是分区中元素的顺序并非确定的。如果需要混洗后分区内的元素有序，可以参考使用以下混洗操作： 
+为了理解混洗阶都发生了哪些事，首先以 reduceByKey 算子为例来看一下。reduceByKey算子会生成一个新的RDD，将源RDD中一个key对应的多个value组合进一个tuple - 然后将这些values输入给reduce函数，得到的result再和key关联放入新的RDD中。这个算子的难点在于对于某一个key来说，并非其对应的所有values都在同一个分区（partition）中，甚至有可能都不在同一台机器上，但是这些values又必须放到一起计算reduce结果。 在Spark中，通常是由于为了进行某种计算操作，而将数据分布到所需要的各个分区当中。而在计算阶段，单个任务（task）只会操作单个分区中的数据 – 因此，为了组织好每个reduceByKey中reduce任务执行时所需的数据，Spark需要执行一个多对多操作。即，Spark需要读取RDD的所有分区，并找到所有key对应的所有values，然后跨分区传输这些values，并将每个key对应的所有values放到同一分区，以便后续计算各个key对应values的reduce结果 – 这个过程就叫做混洗（Shuffle）。 虽然混洗好后，各个分区中的元素和分区自身的顺序都是确定的，但是分区中元素的顺序并非确定的。如果需要混洗后分区内的元素有序，可以参考使用以下混洗操作： 
  
  mapPartitions 使用 .sorted 对每个分区排序 
  repartitionAndSortWithinPartitions 重分区的同时，对分区进行排序，比自行组合repartition和sort更高效 
@@ -543,7 +543,7 @@ DAG (Directed Acyclic Graph 有向无环图)指的是数据转换执行的过程
  
 会导致混洗的算子有：**重分区（repartition）**类算子，如： repartition 和 coalesce；ByKey 类算子(除了计数类的，如 countByKey) 如：groupByKey 和 reduceByKey；以及Join类算子，如：cogroup 和 join. 
 ##### 性能影响 
-混洗（Shuffle）之所以开销大，是因为混洗操作需要引入磁盘I/O，数据序列化以及网络I/O等操作。为了组织好混洗数据，Spark需要生成对应的任务集 – 一系列map任务用于组织数据，再用一系列reduce任务来聚合数据。注意这里的map、reduce是来自MapReduce的术语，和Spark的map、reduce算子并没有直接关系。 在Spark内部，单个map任务的输出会尽量保存在内存中，直至放不下为止。然后，这些输出会基于目标分区重新排序，并写到一个文件里。在reduce端，reduce任务只读取与之相关的并已经排序好的blocks。 某些混洗算子会导致非常明显的内存开销增长，因为这些算子需要在数据传输前后，在内存中维护组织数据记录的各种数据结构。特别地，reduceByKey和aggregateByKey都会在map端创建这些数据结构，而ByKey系列算子都会在reduce端创建这些数据结构。如果数据在内存中存不下，Spark会把数据吐到磁盘上，当然这回导致��外的磁盘I/O以及垃圾回收的开销。 混洗还会再磁盘上生成很多临时文件。以Spark-1.3来说，这些临时文件会一直保留到其对应的RDD被垃圾回收才删除。之所以这样做，是因为如果血统信息需要重新计算的时候，这些混洗文件可以不必重新生成。如果程序持续引用这些RDD或者垃圾回收启动频率较低，那么这些垃圾回收可能需要等较长的一段时间。这就意味着，长时间运行的Spark作业可能会消耗大量的磁盘。Spark的临时存储目录，是由spark.local.dir 配置参数指定的。 混洗行为可以由一系列配置参数来调优。参考Spark配置指南（Spark Configuration Guide）中“混洗行为”这一小节。 
+混洗（Shuffle）之所以开销大，是因为混洗操作需要引入磁盘I/O，数据序列化以及网络I/O等操作。为了组织好混洗数据，Spark需要生成对应的任务集 – 一系列map任务用于组织数据，再用一系列reduce任务来聚合数据。注意这里的map、reduce是来自MapReduce的术语，和Spark的map、reduce算子并没有直接关系。 在Spark内部，单个map任务的输出会尽量保存在内存中，直至放不下为止。然后，这些输出会基于目标分区重新排序，并写到一个文件里。在reduce端，reduce任务只读取与之相关的并已经排序好的blocks。 某些混洗算子会导致非常明显的内存开销增长，因为这些算子需要在数据传输前后，在内存中维护组织数据记录的各种数据结构。特别地，reduceByKey和aggregateByKey都会在map端创建这些数据结构，而ByKey系列算子都会在reduce端创建这些数据结构。如果数据在内存中存不下，Spark会把数据吐到磁盘上，当然这回导致外的磁盘I/O以及垃圾回收的开销。 混洗还会再磁盘上生成很多临时文件。以Spark-1.3来说，这些临时文件会一直保留到其对应的RDD被垃圾回收才删除。之所以这样做，是因为如果血统信息需要重新计算的时候，这些混洗文件可以不必重新生成。如果程序持续引用这些RDD或者垃圾回收启动频率较低，那么这些垃圾回收可能需要等较长的一段时间。这就意味着，长时间运行的Spark作业可能会消耗大量的磁盘。Spark的临时存储目录，是由spark.local.dir 配置参数指定的。 混洗行为可以由一系列配置参数来调优。参考Spark配置指南（Spark Configuration Guide）中“混洗行为”这一小节。 
 #### 共享变量 
 默认情况下，当 Spark 在集群的多个不同节点的多个任务上并行运行一个函数时，它会把函数中涉及到的每个变量，在每个任务上都生成一个副本。但有时需要在多个任务之间共享变量，或者在任务（Task）和任务控制节点（Driver Program）之间共享变量。 为了满足这种需求，Spark 提供了两种类型的变量： 
  

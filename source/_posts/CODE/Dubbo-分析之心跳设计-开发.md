@@ -32,7 +32,7 @@ TCP Keepalive是操作系统实现的功能，并不是TCP协议的一部分，�
  tcp_keepalive_probes：探测失败重试的次数默认为10次； 
  tcp_keepalive_intvl：重试的间隔时间默认75s； 
  
-以上参数可以修改到/etc/sysctl.conf文件中；是否使用Keepalive用来保活就够了，其实还不够，Keepalive只是在网络层就行保活，如果网络本身没有问题，��是��统由于其他原因已经不可用了，这时候Keepalive并不能发现；所以往往还需要结合心跳机制来一起使用； 
+以上参数可以修改到/etc/sysctl.conf文件中；是否使用Keepalive用来保活就够了，其实还不够，Keepalive只是在网络层就行保活，如果网络本身没有问题，是统由于其他原因已经不可用了，这时候Keepalive并不能发现；所以往往还需要结合心跳机制来一起使用； 
  
 #### 心跳机制 
 何为心跳机制，简单来讲就是客户端启动一个定时器用来定时发送请求，服务端接到请求进行响应，如果多次没有接受到响应，那么客户端认为连接已经断开，可以断开半打开的连接或者进行重连处理；下面以Dubbo为例来看看是如何具体实施的； 
@@ -82,7 +82,7 @@ heartbeat默认为60秒，heartbeatTimeout默认为heartbeat*3，可以理解至
         }
     }
   ```  
-因为Dubbo双端都会发送心跳请求，所以可以发现有两个时间点分别是：lastRead��lastWrite；当然时间和最后读取，最后写的时间间隔大于heartbeat就会发送心跳请求；如果多次心跳未返回结果，也就是最后读取消息时间大于heartbeatTimeout会判定当前是Client还是Server，如果是Client会发起reconnect，Server会关闭连接，这样的考虑是合理的，客户端调用是强依赖可用连接的，而服务端可以等待客户端重新建立连接；以上只是介绍的Client，同样Server端也有相同的心跳处理，在可以查看HeaderExchangeServer； 
+因为Dubbo双端都会发送心跳请求，所以可以发现有两个时间点分别是：lastReadlastWrite；当然时间和最后读取，最后写的时间间隔大于heartbeat就会发送心跳请求；如果多次心跳未返回结果，也就是最后读取消息时间大于heartbeatTimeout会判定当前是Client还是Server，如果是Client会发起reconnect，Server会关闭连接，这样的考虑是合理的，客户端调用是强依赖可用连接的，而服务端可以等待客户端重新建立连接；以上只是介绍的Client，同样Server端也有相同的心跳处理，在可以查看HeaderExchangeServer； 
  
 ##### Dubbo2.7.0 
 Dubbo2.7.0的心跳机制在2.6.X的基础上得到了加强，同样在HeaderExchangeClient中使用HashedWheelTimer开启心跳检测，这是Netty提供的一个时间轮定时器，在任务非常多，并且任务执行时间很短的情况下，HashedWheelTimer比Schedule性能更好，特别适合心跳检测； 

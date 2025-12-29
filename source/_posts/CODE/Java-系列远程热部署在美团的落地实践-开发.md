@@ -19,7 +19,7 @@ nic是美团内部研发设计的一款用于热部署的IDEA插件，本文其�
 ##### 1.1 什么是热部署 
 所谓热部署，就是在应用正在运行时升级软件，却不需要重新启动应用。对于Java应用程序来说，热部署就是在运行时更新Java类文件，同时触发Spring以及其他常用第三方框架的一系列重新加载的过程。在这个过程中不需要重新启动，并且修改的代码实时生效，好比是战斗机在空中完成加油，不需要战斗机熄火降落，一系列操作都在“运行”状态来完成。 
 ##### 1.2 为什么我们需要热部署 
-据了解，美团内部很多工程师每天本地重启服务高达5~12次，单次大概3~8分钟，每天向Cargo（美团内部测试环境管理工具）部署3~5次，单次时长20~45分钟，部署频繁频次高、耗时长，严重影响了系统上线的效率。而插件提供的本地和远程热部署功能，可让将代码变��“秒级”生效。一般而言，开发者日常工作主要分为开发自测和联调两个场景，下面将分别介绍热部署在每个场景中发挥的作用。 
+据了解，美团内部很多工程师每天本地重启服务高达5~12次，单次大概3~8分钟，每天向Cargo（美团内部测试环境管理工具）部署3~5次，单次时长20~45分钟，部署频繁频次高、耗时长，严重影响了系统上线的效率。而插件提供的本地和远程热部署功能，可让将代码变“秒级”生效。一般而言，开发者日常工作主要分为开发自测和联调两个场景，下面将分别介绍热部署在每个场景中发挥的作用。 
  
 ###### 1.2.1 开发自测场景 
 一般来讲，在用插件之前，开发者修改完代码还需等待3~8分钟启动时间，然后手动构造请求或协调上游发请求，耗时且费力。在使用完热部署插件后，修改完代码可以一键增量部署，让变更“秒级”生效，能够做到快速自测。而对于那些无法本地启动项目，也可以通过远程热部署功能使代码变更“秒级”生效。 
@@ -355,7 +355,7 @@ Sonic插件由4大部分组成，包括脚本端、插件端、Agent端，以及
     boolean isRedefineClassesSupported();
 
     //此方法用于替换类的定义，而不引用现有的类文件字节，就像从源代码重新编译以进行修复和继续调试时所做的那样。
-    //在要转换现有类文件字节的地方（例如在字节码插装中），应该使用retransformClasses���
+    //在要转换现有类文件字节的地方（例如在字节码插装中），应该使用retransformClasses
     //该方法可以修改方法体、常量池和属性值，但不能新增、删除、重命名属性或方法，也不能修改方法的签名
     void redefineClasses(ClassDefinition... definitions) throws  ClassNotFoundException, UnmodifiableClassException;
 
@@ -401,7 +401,7 @@ Sonic首先会在本地和远程预定义两个目录，
 所以，Sonic采用拓展ClassPath URL路径来实现文件的修改和新增。并且存在这么一种场景，多个业务侧的项目引入相同的JAR包，在JAR里面配置MyBatis的XML和注解。在此类情况下，Sonic没有办法直接来修改JAR包中源文件，通过拓展路径的方式可以不需要关注JAR包，来修改JAR包中某一文件和XML。同理，采用此类方法可以进行整个JAR包的热替换。下面我们简单介绍一下Sonic的核心监听器，如下图所示： 
  
 ##### 3.4 JVM Class Reload 
-JVM的字节码批量重载逻辑，通过新的字节码二进制流和旧的Class对象生��ClassDefinition定义，instrumentation.redefineClasses（definitions），来触发JVM重载，重载过后将触发初始化时Spring插件注册的Transfrom。接下来，我们简单讲解一下Spring是怎么重载的。 
+JVM的字节码批量重载逻辑，通过新的字节码二进制流和旧的Class对象生ClassDefinition定义，instrumentation.redefineClasses（definitions），来触发JVM重载，重载过后将触发初始化时Spring插件注册的Transfrom。接下来，我们简单讲解一下Spring是怎么重载的。 
 新增class Sonic如何保证可以加载到Classloader上下文中？由于项目在远程执行，所以运行环境复杂，有可能是JAR包方式启动（Spring Boot），也有可能是普通项目，也有可能是War Web项目，针对此类情况Sonic做了一层Classloader URL拓展。 
  
 User ClassLoader是框架自定义的ClassLoader统称，例如Jetty项目是WebAppclassLoader。其中Urlclasspath为当前项目的lib文件件下，例如Spring Boot项目也是从当前项目BOOT-INF/lib/路径中加载CLass等等，不同框架的自定义位置稍有不同。所以针对此类情况，Agent必须拿到用户的自定义Classloader，如果是常规方式启动的，比如普通Spring XML项目，借助Plus（美团内部服务发布平台）发布，此类没有自定义Classloader，是默认AppClassLoader，所以Agent在用户项目启动过程中，借助字节码增强的方式来获取到真正的用户Classloader。 
@@ -415,7 +415,7 @@ Sonic获取到URL数组，把Sonic自定义的拓展Classpath目录加入到URL�
 Spring Bean Reload过程中，Bean的销毁和重启流程，主要内容如下图展示： 
  
 首先当修改Java Class D时，通过Spring ClasspathScan扫描校验当前修改的Bean是否Sprin Bean（注解校验），然后触发销毁流程（BeanDefinitionRegistry.removeBeanDefinition），此方法会将当前Spring上下文中的Bean D和依赖Spring Bean D的Bean C一并销毁，但是作用范围仅仅在当前Spring上下文。如果C被子上下文中的Bean B依赖，就无法更新子上下文中的依赖关系，当有系统请求时，Bean B中关联的Bean C还是热部署之前的对象，所以热部署失败。 
-因此，在Spring初始化过程中，需要维护父子上下文的对应关系，当子上下文变时若变更范围涉及到Bean B时，需要重新更新子上下文中的依赖关系，当有多上下文关联时需要维护多上下文环境，且当前上下文环境入口需要Reload。这里的入口是指：Spring MVC Controller、Mthrift和Pigeon，对不同的流量入口，采用不同的Reload策略。RPC框架入口主要操作为解绑注册中心、重新注册、重新加载启动流程等���，��Spring MVC Controller，主要是解绑和注册URL Mappping来实现流量入口类的变化切换。 
+因此，在Spring初始化过程中，需要维护父子上下文的对应关系，当子上下文变时若变更范围涉及到Bean B时，需要重新更新子上下文中的依赖关系，当有多上下文关联时需要维护多上下文环境，且当前上下文环境入口需要Reload。这里的入口是指：Spring MVC Controller、Mthrift和Pigeon，对不同的流量入口，采用不同的Reload策略。RPC框架入口主要操作为解绑注册中心、重新注册、重新加载启动流程等，Spring MVC Controller，主要是解绑和注册URL Mappping来实现流量入口类的变化切换。 
 ##### 3.6 Spring XML重载 
 当用户修改/新增Spring XML时，需要对XML中所有Bean进行重载。 
  

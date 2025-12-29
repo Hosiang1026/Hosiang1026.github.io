@@ -29,7 +29,7 @@ Druid面向列的存储方式，并且可以在集群中进行大规模的并行
 统治者节点 
 即Overlord-Node，任务的管理节点，进程监视MiddleManager进程，并且是数据摄入Druid的控制器，负责将提取任务分配给MiddleManagers并协调Segement发布。 
 协调节点 
-即Coordinator-Node，主要负责数据的管理和在历史节点上的分布，协调节点告诉历史节点加载新数据、卸载过期数据、复制数据、和为了负载均��移动数据。 
+即Coordinator-Node，主要负责数据的管理和在历史节点上的分布，协调节点告诉历史节点加载新数据、卸载过期数据、复制数据、和为了负载均移动数据。 
 中间管理节点 
 即MiddleManager-Node，摄入实时数据，已生成Segment数据文件，可以理解为overlord节点的工作节点。 
 历史节点 

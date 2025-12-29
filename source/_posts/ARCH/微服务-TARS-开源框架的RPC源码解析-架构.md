@@ -518,7 +518,7 @@ Handle线程通过条件变量来让所有业务线程阻塞等待被唤醒 ，�
 TARS的服务端也不例外。 
 判定逻辑采用Epoll IO复用模型实现，每一条网络线程NetThread都有一个TC_Epoller来做事件的收集、侦听、分发。 
 正如前面所介绍，只有第一条网络线程会执行连接的监听工作，接受新的连接之后，就会构造一个Connection实例，并选择处理这个连接的网络线程。 
-请求被读入后，将���存��接收队列中，并通知业务线程进行处理，在这里，业务线程终于登场了，处理完请求后，将结果放到发送队列。 
+请求被读入后，将存接收队列中，并通知业务线程进行处理，在这里，业务线程终于登场了，处理完请求后，将结果放到发送队列。 
 发送队列有数据，自然需要通知网络线程进行发送，接收到发送通知的网络线程会将响应发往客户端。 
 TARS服务器的工作流程大致就是如此，如上图所示的普通服务器工作流程没有多大的区别，下面将按着接受客户端连接，读入RPC请求，处理RPC请求，发送RPC响应四部分逐一介绍介绍服务端的工作。 
 ##### 接受客户端连接 
@@ -596,7 +596,7 @@ cs.setCloseWaitDefault();
 到此，对应图（2-16）的第一步——接受客户端连接（流程如下图所示），已经完成。 
 ![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 ###### 2.为客户端socket创建Connection 
-接下来是为新来的客户端socket创建一个Connection，在NetThread::accept(int fd)中，创建Connection的代��如��： 
+接下来是为新来的客户端socket创建一个Connection，在NetThread::accept(int fd)中，创建Connection的代如： 
  ```java 
   int timeout = _listeners[fd]->getEndpoint().getTimeout()/1000;
  

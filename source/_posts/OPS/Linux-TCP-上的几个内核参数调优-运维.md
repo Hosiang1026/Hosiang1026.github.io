@@ -92,7 +92,7 @@ echo 1 > /proc/sys/net/ipv4/tcp_abort_on_overflow
 ##### 注意Java默认的Backlog是50 
 这个TCP Backlog的队列大小值是min(tcp_max_syn_backlog,somaxconn,应用层设置的backlog),而Java如果不做额外设置，Backlog默认值仅仅只有50。C语言在使用listen调用的时候需要传进Backlog参数。 
 #### tcp_tw_recycle 
-tcp_tw_recycle这个参数一般是用来抑制TIME_WAIT数量的,但是它有一个副作用。即在tcp_timestamps开启(Linux默认开启)，tcp_tw_recycle会经常导致下面这种现象。 ![Test](https://oscimg.oschina.net/oscnet/up-6da3083f11a90a9feb67b624b3dbc0516f5.png  'Linux上TCP的几个内核参数调优') 也即，如果你的Server开启了tcp_tw_recycle，那么别人如果通过NAT之类的调用你的Server的话，NAT后面的机器只有一台机器能正常工作，其它情况大概率失败。具体原因呢由下图所示: ![Test](https://oscimg.oschina.net/oscnet/up-6da3083f11a90a9feb67b624b3dbc0516f5.png  'Linux上TCP的几个内核参数调优') 在tcp_tw_recycle=1同时tcp_timestamps(默认开启的情况下),对同一个IP的连接会做这样的限制，也即之前后建立的连接的时间戳必须要大于之前建立连接的最后时间戳，但是经过NAT的一个IP后面是不同的机器，时间戳相差极大，就会导致内核直接丢弃时间戳较低的连接的现象。由于这个参数导致的问题，高版本内核已经去掉了这个参数。如果考虑TIME_WAIT问题，可以考虑��置��下 
+tcp_tw_recycle这个参数一般是用来抑制TIME_WAIT数量的,但是它有一个副作用。即在tcp_timestamps开启(Linux默认开启)，tcp_tw_recycle会经常导致下面这种现象。 ![Test](https://oscimg.oschina.net/oscnet/up-6da3083f11a90a9feb67b624b3dbc0516f5.png  'Linux上TCP的几个内核参数调优') 也即，如果你的Server开启了tcp_tw_recycle，那么别人如果通过NAT之类的调用你的Server的话，NAT后面的机器只有一台机器能正常工作，其它情况大概率失败。具体原因呢由下图所示: ![Test](https://oscimg.oschina.net/oscnet/up-6da3083f11a90a9feb67b624b3dbc0516f5.png  'Linux上TCP的几个内核参数调优') 在tcp_tw_recycle=1同时tcp_timestamps(默认开启的情况下),对同一个IP的连接会做这样的限制，也即之前后建立的连接的时间戳必须要大于之前建立连接的最后时间戳，但是经过NAT的一个IP后面是不同的机器，时间戳相差极大，就会导致内核直接丢弃时间戳较低的连接的现象。由于这个参数导致的问题，高版本内核已经去掉了这个参数。如果考虑TIME_WAIT问题，可以考虑置下 
  ```bash
 echo 1 > /proc/sys/net/ipv4/tcp_tw_reuse
 
@@ -167,7 +167,7 @@ echo 5 > /proc/sys/net/ipv4/tcp_retries2
 
   ```  
 但是针对这种现象，最好要做资源上的隔离,例如线程上的隔离或者机器级的隔离。 ![Test](https://oscimg.oschina.net/oscnet/up-6da3083f11a90a9feb67b624b3dbc0516f5.png  'Linux上TCP的几个内核参数调优') 
-golang的goroutine调度模型就可以很好的解决线程资源不够的问题，但缺��是goroutine里面不能有阻塞的系统调用，不然也会和上面一样，但仅仅对于系统之间互相调用而言，都是非阻塞IO,所以golang做微服务还是非常Nice的。当然了我大Java用纯IO事件触发编写代码也不会有问题，就是对心智负担太高-_-! 
+golang的goroutine调度模型就可以很好的解决线程资源不够的问题，但缺是goroutine里面不能有阻塞的系统调用，不然也会和上面一样，但仅仅对于系统之间互相调用而言，都是非阻塞IO,所以golang做微服务还是非常Nice的。当然了我大Java用纯IO事件触发编写代码也不会有问题，就是对心智负担太高-_-! 
 ##### 物理机突然宕机和进程宕不一样 
 值得注意的是，物理机宕机和进程宕但内核还存在表现完全不一样。 ![Test](https://oscimg.oschina.net/oscnet/up-6da3083f11a90a9feb67b624b3dbc0516f5.png  'Linux上TCP的几个内核参数调优') 仅仅进程宕而内核存活，那么内核会立马发送reset给对端，从而不会卡住A系统的线程资源。 
 #### tcp_slow_start_after_idle 
@@ -197,5 +197,5 @@ Linux 新版本
 
   ```  
 #### 总结 
-Linux提供了一大堆内参参数供我们进行调优，其默认设置���参数在很多情况下并不是最佳实践，所以我们需要潜心研究，找到最适合当前环境的组合。 ![Test](https://oscimg.oschina.net/oscnet/up-6da3083f11a90a9feb67b624b3dbc0516f5.png  'Linux上TCP的几个内核参数调优')
+Linux提供了一大堆内参参数供我们进行调优，其默认设置参数在很多情况下并不是最佳实践，所以我们需要潜心研究，找到最适合当前环境的组合。 ![Test](https://oscimg.oschina.net/oscnet/up-6da3083f11a90a9feb67b624b3dbc0516f5.png  'Linux上TCP的几个内核参数调优')
                                         

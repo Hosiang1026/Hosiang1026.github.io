@@ -71,7 +71,7 @@ date: 2021-04-15 09:53:06
  litho: https://github.com/facebook/litho 
  X2C: https://github.com/iReaderAndroid/X2C 
   
- 这两个开���库在大型的项目基本不会使用，不过他们的价值是值得肯定的，核心思想很有意义。 
+ 这两个开库在大型的项目基本不会使用，不过他们的价值是值得肯定的，核心思想很有意义。 
  xml 布局加载耗时的问题， google 也想改善这种现状，最近 Compose beta 发布了，他是采用声明式 UI 的方式来编写布局，避免了 xml 带来的耗时。同时，还支持布局实时预览。这个应该是以后的发展趋势。 
  compose-samples: https://github.com/android/compose-samples 
   

@@ -57,7 +57,7 @@ SnowFlake的ID样本：
   
  
 （本图引用自《IM消息ID技术专题(四)：深度解密美团的分布式ID生成算法》） 
-给大家举个例子吧，���上��所示，比如下面那个 64 bit 的 long 型数字： 
+给大家举个例子吧，上所示，比如下面那个 64 bit 的 long 型数字： 
  
 ① 1 bit：是不用的，为啥呢？ 
 因为二进制里第一个 bit 为如果是 1，那么都是负数，但是我们生成的 ID 都是正数，所以第一个 bit 统一都是 0。 
@@ -200,11 +200,11 @@ CachedUidGenerator是DefaultUidGenerator的重要改进实现。它的核心利�
  
  1）自增列：CachedUidGenerator的workerId在实例每次重启时初始化，且就是数据库的自增ID，从而完美的实现每个实例获取到的workerId不会有任何冲突； 
  2）RingBuffer：CachedUidGenerator不再在每次取ID时都实时计算分布式ID，而是利用RingBuffer数据结构预先生成若干个分布式ID并保存； 
- 3）时间递增：传统的SnowFlake算法实现都是通过System.currentTimeMillis()来获取时间并与上一次时间进行比较，这样的实现严重依赖服务器的时间。而CachedUidGenerator的时间类型是AtomicLong，且通过incrementAndGet()方法获取下一次的时间，从而脱离了对服务器时间的依赖，也就不会有时钟回拨的问题（这种���法也有一个小问题，即分布式ID中的时间信息可能并不是这个ID真正产生的时间点，例如：获取的某分布式ID的值为3200169789968523265，它的反解析结果为{"timestamp":"2019-05-02 23:26:39","workerId":"21","sequence":"1"}，但是这个ID可能并不是在"2019-05-02 23:26:39"这个时间产生的）。 
+ 3）时间递增：传统的SnowFlake算法实现都是通过System.currentTimeMillis()来获取时间并与上一次时间进行比较，这样的实现严重依赖服务器的时间。而CachedUidGenerator的时间类型是AtomicLong，且通过incrementAndGet()方法获取下一次的时间，从而脱离了对服务器时间的依赖，也就不会有时钟回拨的问题（这种法也有一个小问题，即分布式ID中的时间信息可能并不是这个ID真正产生的时间点，例如：获取的某分布式ID的值为3200169789968523265，它的反解析结果为{"timestamp":"2019-05-02 23:26:39","workerId":"21","sequence":"1"}，但是这个ID可能并不是在"2019-05-02 23:26:39"这个时间产生的）。 
  
  
 #### 5.3 小结一下 
-CachedUidGenerator通过缓存的方式预先生成一批唯一ID��表，可以解决唯一ID获取时候的耗时。但这种方式也有不好点，一方面需要耗费内存来缓存这部分数据，另外如果访问量不大的情况下，提前生成的UID中的时间戳可能是很早之前的。而对于大部分的场景来说，DefaultUidGenerator 就可以满足相关的需求了，没必要来凑CachedUidGenerator这个热闹。 
+CachedUidGenerator通过缓存的方式预先生成一批唯一ID表，可以解决唯一ID获取时候的耗时。但这种方式也有不好点，一方面需要耗费内存来缓存这部分数据，另外如果访问量不大的情况下，提前生成的UID中的时间戳可能是很早之前的。而对于大部分的场景来说，DefaultUidGenerator 就可以满足相关的需求了，没必要来凑CachedUidGenerator这个热闹。 
 另外，关于UidGenerator比特位分配的建议： 
  
  

@@ -28,7 +28,7 @@ ache JMeter是一款100%纯Java的开源软件，旨在加载测试功能行为�
 3. 测试完成后，可以在Controller上的监听器中看到Agent发来的测试结果，结果为多个Agent的测试结果汇总而成。 
 不过，JMeter原生的主从方案虽能够支持大并发的压测需求，但是其方案也存在一定的局限性，具体表现在以下几个方面： 
 1. JMeter主从方案部署繁琐。除了为了确保Controller和Agent机器在同一个子网内，还需要保证JMeter版本、Java版本、插件版本的一致性； 
-2. 如果JMeter压测需要用到CSV或者额外的JAR包等，需要在���台Agent上复制一份，并且保证所有的路径配置一致； 
+2. 如果JMeter压测需要用到CSV或者额外的JAR包等，需要在台Agent上复制一份，并且保证所有的路径配置一致； 
 3. 如果JMeter压测的CSV需要每台Agent压测机读取的数据不一样，则需要人为提前进行切分、裁剪和放置； 
 4. JMeter压测时依赖的JAR包、JMX文件、压测报告等，都是在本地保存和管理的，无法统一管理和留存，管理上会造成不便和混乱； 
 5. JMeter压测时通过插件可以覆盖基础的CPU、内存等监控，但是无法覆盖应用级别的监控，例如MySQL连接数、JVM使用等，无法支持用户自定义监控。 
@@ -48,7 +48,7 @@ MeterSphere分布式性能压测方案的方案架构图如下图所示。
 2. MeterSphere根据用户设置的压测配置参数，自动化选择资源池，分发压测脚本和文件，自动启动JMeter压测节点（通过Docker启动）进行压测； 
 3. 压测节点根据分发的脚本与参数，实时或者本地计算后将压测数据推送至Kafka集群； 
 4. Data Streaming集群实时消费Kafka集群中压测数据，然后再经过计算动态写入MySQL数据库中； 
-5. 如配置了相关的Prometheus监控，MeterSphere在压测的同时会自动收���被���测端系统的性能监控数据； 
+5. 如配置了相关的Prometheus监控，MeterSphere在压测的同时会自动收被测端系统的性能监控数据； 
 6. 压测结束后，所有的数据在数据库中保存，方便后续进行分析、分享和查询。 
 结合上述MeterSphere分布式压测方案原理，我们发现，MeterSphere分布式压测方案相对JMeter原生分布式压测方案具备以下几点优势： 
 1. 管理方面的优势 
@@ -98,7 +98,7 @@ curl -sSL https://github.com/metersphere/metersphere/releases/latest/download/q
 如果压测的JMX脚本中包含依赖的CSV文件需要不同的压测节点以读取不同的数据，可以开启“高级配置”页面下的“CSVDataSet”选项，进行CSV自动化切分，参见下图： 
  
 关于监控的配置和设计细节可以参考MeterSphere官方教程：https://blog.csdn.net/FIT2CLOUD/article/details/119673564。 
-此次���加的监控配置如下： 
+此次加的监控配置如下： 
  
 7. 报告的查看、对比与分析 
 所有的配置完成后，选择“保存并执行”选项，MeterSphere会自动刷新与显示压测数据报告。 

@@ -77,7 +77,7 @@ sock_error:
 }
 
   ```  
-由上面代码��见��可以采用设置SO_SNDTIMEO来控制connect系统调用的超时,如下所示: 
+由上面代码见可以采用设置SO_SNDTIMEO来控制connect系统调用的超时,如下所示: 
  ```bash
 setsockopt(sockfd, SOL_SOCKET, SO_SNDTIMEO, &timeout, len);
 
@@ -303,7 +303,7 @@ out_err:
 
 
   ```  
-从上面的内核代码看出，如果socket的write buffer依旧有空间的时候，会立马返回，并不会有timeout。但是write buffer不够的时��，会等待SO_SNDTIMEO的时间(nonblock时候为0)。但是如果SO_SNDTIMEO没有设置的时候,默认初始化为MAX_SCHEDULE_TIMEOUT,可以认为其超时时间为无限。那么其超时时间会有另一个条件来决定，我们看下sk_stream_wait_memory的源码: 
+从上面的内核代码看出，如果socket的write buffer依旧有空间的时候，会立马返回，并不会有timeout。但是write buffer不够的时，会等待SO_SNDTIMEO的时间(nonblock时候为0)。但是如果SO_SNDTIMEO没有设置的时候,默认初始化为MAX_SCHEDULE_TIMEOUT,可以认为其超时时间为无限。那么其超时时间会有另一个条件来决定，我们看下sk_stream_wait_memory的源码: 
  ```bash
 int sk_stream_wait_memory(struct sock *sk, long *timeo_p){
 		// 等待socket shutdown或者socket出现err
@@ -406,7 +406,7 @@ int tcp_recvmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 			/* Do not sleep, just process backlog. */
 			release_sock(sk);
 			lock_sock(sk);
-		} else /* 如果没��读到target自己数(和水位有关,可以暂认为是1)，则等待SO_RCVTIMEO的时间 */
+		} else /* 如果没读到target自己数(和水位有关,可以暂认为是1)，则等待SO_RCVTIMEO的时间 */
 			sk_wait_data(sk, &timeo);	
 	} while (len > 0);
 	......
@@ -476,7 +476,7 @@ cat /proc/sys/net/ipv4/tcp_keepalve_probes 9 即一共探测9次
 ##### 对端物理机宕机后没有数据发送，也没有read等待 
 和上面同理，也是在keepalive定时器超时之后，将连接close。所以我们可以看到一个不活跃的socket在对端物理机突然宕机之后,依旧是ESTABLISHED状态，过很长一段时间之后才会关闭。 
 #### 进程宕后的超时 
-如果仅仅是对端进程宕机的话(进程所在内核会close其���拥���的所有socket)，由于fin包的发送，本端内核可以立刻知道当前socket的状态。如果socket是阻塞的，那么将会在当前或者下一次write/read系统调用的时候返回给应用层相应的错误。如果是nonblock，那么会在select/epoll中触发出对应的事件通知应用层去处理。 如果fin包没发送到对端，那么在下一次write/read的时候内核会发送reset包作为回应。 
+如果仅仅是对端进程宕机的话(进程所在内核会close其拥的所有socket)，由于fin包的发送，本端内核可以立刻知道当前socket的状态。如果socket是阻塞的，那么将会在当前或者下一次write/read系统调用的时候返回给应用层相应的错误。如果是nonblock，那么会在select/epoll中触发出对应的事件通知应用层去处理。 如果fin包没发送到对端，那么在下一次write/read的时候内核会发送reset包作为回应。 
 #### nonblock 
 设置为nonblock=true后，由于read/write都是立刻返回，且通过select/epoll等处理重传超时/probe超时/keep alive超时/socket close等事件，所以根据应用层代码决定其超时特性。定时器超时事件发生的时间如上面几小节所述，和是否nonblock无关。nonblock的编程模式可以让应用层对这些事件做出响应。 
 ### 总结 

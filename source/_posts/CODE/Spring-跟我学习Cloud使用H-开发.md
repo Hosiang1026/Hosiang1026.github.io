@@ -22,7 +22,7 @@ date: 2021-04-15 09:46:45
 </dependency>
   ``` 
   
-在启动类上添加 @EnableHystrix 或者 @EnableCircuitBreaker。注意，@EnableHystrix 中包含了 @EnableCircuitBreaker。  然后编写一个调用接口的方法，在上面增加一个 @HystrixCommand 注解，用于指定依赖服务调用延迟或失败时调用的方法，代码���下所示。 
+在启动类上添加 @EnableHystrix 或者 @EnableCircuitBreaker。注意，@EnableHystrix 中包含了 @EnableCircuitBreaker。  然后编写一个调用接口的方法，在上面增加一个 @HystrixCommand 注解，用于指定依赖服务调用延迟或失败时调用的方法，代码下所示。 
  
  ```java 
   @GetMapping("/callHello")
@@ -90,7 +90,7 @@ HystrixCommand 中除了 fallbackMethod 还有很多的配置，下面我们来�
    
    
    hystrix.command.default.fallback.isolation .semaphore.maxConcurrentRequests 
-   该配置用于如果并发数达到该设置值，���求会被拒绝和抛出异常并且 fallback 不会被调用，默认值为 10。 
+   该配置用于如果并发数达到该设置值，求会被拒绝和抛出异常并且 fallback 不会被调用，默认值为 10。 
    
    
    hystrix.command.default.fallback.enabled 
@@ -142,7 +142,7 @@ HystrixCommand 中除了 fallbackMethod 还有很多的配置，下面我们来�
    
    
    hystrix.command.default.metrics .rollingPercentile.bucketSize 
-   如果 bucket size=100、window=10 秒���若这 10 秒里有 500 次执行，只有最后 100 次执行会被统计到 bucket 里去。增加该值会增加内存开销及排序的开销。默认值为 100。 
+   如果 bucket size=100、window=10 秒若这 10 秒里有 500 次执行，只有最后 100 次执行会被统计到 bucket 里去。增加该值会增加内存开销及排序的开销。默认值为 100。 
    
    
    hystrix.command.default.metrics .healthSnapshot.intervalInMilliseconds 
@@ -186,7 +186,7 @@ HystrixCommand 中除了 fallbackMethod 还有很多的配置，下面我们来�
    
    
    hystrix.threadpool.default .allowMaximumSizeToDivergeFromCoreSize 
-   该属性允许 maximumSize ��配置生效。那么该值可以等于或高于 coreSize。设置 coreSize 小于 maximumSize 会创建一个线程池，该线程池可以支持 maximumSize 并发，但在相对不活动期间将向系统返回线程。默认值为 false。 
+   该属性允许 maximumSize 配置生效。那么该值可以等于或高于 coreSize。设置 coreSize 小于 maximumSize 会创建一个线程池，该线程池可以支持 maximumSize 并发，但在相对不活动期间将向系统返回线程。默认值为 false。 
    
    
    hystrix.threadpool.default.metrics .rollingStats.timeInMilliseconds 

@@ -49,7 +49,7 @@ date: 2021-04-15 09:46:45
    
    
    Notification Manager 
-   使得应���程序可以在状态栏中显示自定义的提示信息。 
+   使得应程序可以在状态栏中显示自定义的提示信息。 
    
    
    Package Manager 

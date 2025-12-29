@@ -21,7 +21,7 @@ Step-1：在仓库的 DevOps 进入 Gitee Go 的配置页面，点击新建流�
 Step-2：新建流水线的初始化配置界面，操作如下图。 
 该配置文件创建保存后，会在你的仓库目录下创建对应的文件，如：.workflow/npm-publish.yml 文件。建议可在自己本地修改流水线配置文件，毕竟有代码高亮，格式也更可控。 
 ![Test](https://oscimg.oschina.net/oscnet/up-066499b5b280c55ed1a65229bb061faebb9.JPEG  '使用码云 gitee-go 做 npm publish ') 
-Step-3：本地优化 npm-publish.yml ��置文件 
+Step-3：本地优化 npm-publish.yml 置文件 
  
  ```bash 
   # ========================================================

@@ -65,7 +65,7 @@ JVM由两部分组成详细的异常消息。第一部分表示失败的操作�
 employee.getName();
 
   ```  
-当��行��上代码时，异常信息中会打印本地变量名称： 
+当行上代码时，异常信息中会打印本地变量名称： 
  ```java 
   "com.developlee.java14.helpfulnullpointerexceptions.HelpfulNullPointerException$Employee.getName()"
 because "employee" is null

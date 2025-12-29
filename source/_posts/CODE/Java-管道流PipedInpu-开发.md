@@ -42,7 +42,7 @@ PipedInputStream 和 PipedOutputStream 设计用来解决跨线程的字节数�
  ```java 
   notifyAll()
   ``` 
-  唤醒读数据的线程可以读数据了，然后阻塞 1s 后继续尝��写数据。PipedInputStream 从  
+  唤醒读数据的线程可以读数据了，然后阻塞 1s 后继续尝写数据。PipedInputStream 从  
  ```text 
   buffer
   ``` 

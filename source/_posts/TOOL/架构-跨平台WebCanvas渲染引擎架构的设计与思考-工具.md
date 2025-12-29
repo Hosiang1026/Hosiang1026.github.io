@@ -64,7 +64,7 @@ date: 2021-04-15 10:16:56
  ### JS Binding机制 
   
    
- JS引擎通常会抽象出VM、JSContext、JSValue、GlobalObject等概念，VM代表一个JS虚拟机实例，拥有独立的堆栈空间，有点类似进程的���念，不同的VM相互是隔离的(因此在v8中以v8::Isolate命名)，一个VM中可以有多个JSContext，JSContext代表一个JS的执行上下文，可以执行JS代码，JSValue代表一个JS值类型，可以是基础数据类型也可以是Object类型，每个JSContext中都会拥有一个GlobalObject对象，GlobalObject在JSContext整个生命周期内，都可以直接进行访问，它默认是可读可写的，因此可以在GlobalObject上绑定属性或者函数等，这样就可以在JSContext执行上下文中访问它们了。 
+ JS引擎通常会抽象出VM、JSContext、JSValue、GlobalObject等概念，VM代表一个JS虚拟机实例，拥有独立的堆栈空间，有点类似进程的念，不同的VM相互是隔离的(因此在v8中以v8::Isolate命名)，一个VM中可以有多个JSContext，JSContext代表一个JS的执行上下文，可以执行JS代码，JSValue代表一个JS值类型，可以是基础数据类型也可以是Object类型，每个JSContext中都会拥有一个GlobalObject对象，GlobalObject在JSContext整个生命周期内，都可以直接进行访问，它默认是可读可写的，因此可以在GlobalObject上绑定属性或者函数等，这样就可以在JSContext执行上下文中访问它们了。 
    
  要想在JS环境中使用Canvas，需要将Canvas相关接口注入到JS环境，正如Java JNI、Python Binding、Lua Binding等类似，JS引擎也提供了Extension机制，称之为JS Binding，它允许开发者使用c++等语言向JS上下文中注入变量、函数、对象等。 
    
@@ -148,7 +148,7 @@ v8::Persistent<v8::Context> context =
   
  ### 渲染管线 
   
- Canvas渲染引擎的核心当然是��染了，上层的互动业务的性能表现，很大程度取决于Canvas的渲染管线设计是否足够优秀。这一部分会分别讨论Canvas2D/WebGL的渲染管线技术选型及具体的方案设计。 
+ Canvas渲染引擎的核心当然是染了，上层的互动业务的性能表现，很大程度取决于Canvas的渲染管线设计是否足够优秀。这一部分会分别讨论Canvas2D/WebGL的渲染管线技术选型及具体的方案设计。 
    
   
  ### ▐  Canvas2D Rendering Context 
@@ -164,7 +164,7 @@ v8::Persistent<v8::Context> context =
   
    
  软件渲染 VS 硬件渲染 
- 软件渲染指的是使用CPU渲染图形，而硬件渲染则是利用GPU。使用GPU的优势一方面是可以降低CPU的使用率，另外GPU的特性(擅长并行计算、浮点数运算等)也使其性能通常会更好。但是GPU在发展的过程中，更多关注的是三维图形的运算，二维矢量图形的渲染似乎关注的较少，因此可以看到像freetype、cairo、skia等早期主要都是使用CPU渲染，虽然khronos组织推出了OpenVG标准，但是也并没有推广开来。目前主流的移动设备都自带GPU，因此对于Canvas2D的技术选型来说，我们更倾向于使用硬���加速的引擎，具体分析可以接着往下看。 
+ 软件渲染指的是使用CPU渲染图形，而硬件渲染则是利用GPU。使用GPU的优势一方面是可以降低CPU的使用率，另外GPU的特性(擅长并行计算、浮点数运算等)也使其性能通常会更好。但是GPU在发展的过程中，更多关注的是三维图形的运算，二维矢量图形的渲染似乎关注的较少，因此可以看到像freetype、cairo、skia等早期主要都是使用CPU渲染，虽然khronos组织推出了OpenVG标准，但是也并没有推广开来。目前主流的移动设备都自带GPU，因此对于Canvas2D的技术选型来说，我们更倾向于使用硬加速的引擎，具体分析可以接着往下看。 
    
  技术选型 
  Canvas2D的实现成本颇高，从零开始写也不太现实，好在社区中有很多关于Canvas 2D矢量绘制的库，这里仅列举了一部分比较有影响力的，主要从backend、成熟度、移植成本等角度进行评判，详细如下表所示。 
@@ -186,7 +186,7 @@ v8::Persistent<v8::Context> context =
   当平台层收到Vsync信号时，会调度到JS线程通知到Canvas； 
   Canvas收到信号后，停止记录命令，生成SkPicture对象（其实就是个DisplayList），封装成PictureLayer，添加到LayerTree，发送到GPU线程； 
   GPU线程Rasterizer模块收到LayerTree之后，会拿到Picture对象，交给当前Window Surface关联的SkCanvas； 
-  ��个SkCanvas先通过Picture回放渲染命令，再根据当前backend选择vulkan、GL或者metal图形API将渲染指令提交到GPU。 
+  个SkCanvas先通过Picture回放渲染命令，再根据当前backend选择vulkan、GL或者metal图形API将渲染指令提交到GPU。 
   
   
   ![Test](https://api.opics.org/api  '跨平台Web Canvas渲染引擎架构的设计与思考') 
@@ -245,7 +245,7 @@ v8::Persistent<v8::Context> context =
    
  双线程模型指的是将GL调用转移到独立的渲染线程执行，解放JS线程的压力。具体的做法可以参考chromium GPU Command Buffer(注意这里的Command Buffer与上面提到的解决的并不是同一个问题，不要混淆)，思路是这样的，JS线程收到Binding调用后，并不直接提交，而是先encode到Command Buffer(通常使用Ring buffer数据结构)缓存起来，随后在渲染线程中访问CommandBuffer，进行Decode，调用真正的GL命令，双线程模型实现要复杂的多，需要考虑Lock Free&WaitFree、同步、参数拷贝等问题，写得不好可能性能还不如单线程模型。 
    
- 最后再提一句，在chromium中，不仅实现了多线程的WebGL渲染模型，还支持了多进程Command Buffer的���型，使用多进程模型可以有效屏蔽各种硬件兼容性问题，带来更好的稳定性。 
+ 最后再提一句，在chromium中，不仅实现了多线程的WebGL渲染模型，还支持了多进程Command Buffer的型，使用多进程模型可以有效屏蔽各种硬件兼容性问题，带来更好的稳定性。 
    
   
  ### ▐  离屏渲染 
@@ -312,7 +312,7 @@ v8::Persistent<v8::Context> context =
    
  同时，TextureView下卡顿、丢帧的情况也更为复杂，有时即使FPS很高但是依然感觉卡顿，下面是常见的两种丢帧情况。 
    
- 第一种丢帧情况是第N帧TextureView线程渲染超时，导��错过了N+1帧UI线程的绘制。 
+ 第一种丢帧情况是第N帧TextureView线程渲染超时，导错过了N+1帧UI线程的绘制。 
   
   ![Test](https://api.opics.org/api  '跨平台Web Canvas渲染引擎架构的设计与思考') 
   

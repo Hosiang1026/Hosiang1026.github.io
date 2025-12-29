@@ -214,7 +214,7 @@ Dataway 提供了2中语言模式，我们可以使用强大的 DataQL 查询语
 return query()
   ```  
 其中 var query = @@sql()<% ... %> 是用来定义SQL外部代码块，并将这个定义存入 query 变量名中。 <% %> 中间的就是 SQL 语句。 
-最后在 DataQL 中���用这个代码块，并返回查询结果。 
+最后在 DataQL 中用这个代码块，并返回查询结果。 
 当接口写好之后就可以保存发布了，为了测试方便，我选用 GET 方式。 
 ![Test](https://oscimg.oschina.net/oscnet/up-aa9b52ddde3ce466cb08e4bbb7fe9183117.png  '绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper') 
 接口发布之后我们直接请求：http://127.0.0.1:8080/API/demos，就看到期待已久的接口返回值了。 

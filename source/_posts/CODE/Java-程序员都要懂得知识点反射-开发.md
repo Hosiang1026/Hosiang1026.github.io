@@ -136,7 +136,7 @@ A: 打印InstantiationException初始化错误。因为A没有默认构造器了
 Q：如何提高反射的效率？ A： 
  
  使用高性能反射包，例如ReflectASM 
- 缓存反射的对���，避免每次都要重复去字节码中获取。（缓存！缓存！） 
+ 缓存反射的对，避免每次都要重复去字节码中获取。（缓存！缓存！） 
  method反射可设置method.setAccessible(true)来关闭安全检查。 
  尽量不要getMethods()后再遍历筛选，而直接用getMethod(methodName)来根据方法名获取方法 
  利用hotspot虚拟机中的反射优化技术（jit技术） 参考资料： https://segmentfault.com/q/1010000003004720 https://www.cnblogs.com/coding-night/p/10772631.html 
@@ -171,7 +171,7 @@ Q: a普通方法调用 b反射方法调用 c关闭安全检查的反射方法调
 b反射方法调用和c关闭安全检查的反射方法调用的性能差异在哪？普通方法调用和关闭安全检查的反射方法调用的性能差异在哪？ A: 
  
  安全检查的性能消耗在于 ，SecurityManager.checkPermission(SecurityConstants.CHECK_MEMBER_ACCESS_PERMISSION); 这项检测需要运行时申请RuntimePermission(“accessDeclaredMembers”)。 所以如果不考虑安全检查， 对反射方法调用invoke时， 应当设置 Method#setAccessible(true) 
- 普通方法和反射方法的��能差异在于 
+ 普通方法和反射方法的能差异在于 
  
  
  Method#invoke 方法会对参数做封装和解封操作 

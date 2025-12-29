@@ -21,7 +21,7 @@ select()方法源码位置: io.netty.channel.nio.NioEventLoop#select
 
   ``` 
   
-在Netty中轮询IO事件是通过调用select()方法, 至于底层基于select,poll,epoll哪一种, 这个和平台有关.总之, 通过select()方法, 监听着ACCEPT,CONNECT,READ,WRITE等事件.一旦有相应的事件发生, Netty就会根据不同的事件调用不同��方法. 
+在Netty中轮询IO事件是通过调用select()方法, 至于底层基于select,poll,epoll哪一种, 这个和平台有关.总之, 通过select()方法, 监听着ACCEPT,CONNECT,READ,WRITE等事件.一旦有相应的事件发生, Netty就会根据不同的事件调用不同方法. 
  
  ```java 
   处理不同事件的源码位置: io.netty.channel.nio.NioEventLoop#processSelectedKey(java.nio.channels.SelectionKey, io.netty.channel.nio.AbstractNioChannel)
@@ -101,7 +101,7 @@ class Server(object):
         print(d)
 
     def loop(self):
-        # 一个无限循环, 和Netty中的run()方法功能一样,��过调用select()方法,一直轮询着事件
+        # 一个无限循环, 和Netty中的run()方法功能一样,过调用select()方法,一直轮询着事件
         while True:
             data = self.selector.select()
             for key, mask in data:

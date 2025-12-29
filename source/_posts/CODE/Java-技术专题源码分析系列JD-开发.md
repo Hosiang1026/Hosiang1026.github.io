@@ -65,7 +65,7 @@ JDK动态代理到底是怎么实现？ JDK的动态代理的类看不见摸不�
   ``` 
   
 #### java.lang.reflect.Proxy.ProxyClassFactory#apply 
-关键点在于 ProxyClassFactory 这个类，从名字也可以猜出来这个类的作用。看��代码： 
+关键点在于 ProxyClassFactory 这个类，从名字也可以猜出来这个类的作用。看代码： 
  
  ```java 
   /**
@@ -152,7 +152,7 @@ JDK动态代理到底是怎么实现？ JDK的动态代理的类看不见摸不�
             // 一些验证、缓存、同步的操作,不是我们研究的重点
             /*
              * Generate the specified proxy class.
-             * 生���特殊的代理类
+             * 生特殊的代理类
              */
             byte[] proxyClassFile = ProxyGenerator.generateProxyClass(
                 proxyName, interfaces, accessFlags);
@@ -208,7 +208,7 @@ ProxyGenerator.generateProxyClass(proxyName, interfaces, accessFlags);``
 
   ``` 
   
-这里我们找到了一个关键的判断条件-saveGeneratedFiles,即是否需要将代���类进行持久化. 
+这里我们找到了一个关键的判断条件-saveGeneratedFiles,即是否需要将代类进行持久化. 
 ##### ProxyGenerator.generateProxyClass 
  
  ```java 
@@ -331,7 +331,7 @@ public final class $Proxy0 extends Proxy implements Person
   ``` 
   
  
-  jdk 为我们的生成了一个叫 $Proxy0（这个名字后面的0是编号，有多个代理类会一次递增）的代理类，这��类文件时放在内存中的，我们在创建代理对象时，就是通过反射获得这个类的构造方法，然后创建的代理实例。通过对这个生成的代理类源码的查看，我们很容易能看出，动态代理实现的具体过程。  
+  jdk 为我们的生成了一个叫 $Proxy0（这个名字后面的0是编号，有多个代理类会一次递增）的代理类，这类文件时放在内存中的，我们在创建代理对象时，就是通过反射获得这个类的构造方法，然后创建的代理实例。通过对这个生成的代理类源码的查看，我们很容易能看出，动态代理实现的具体过程。  
   我们可以对 InvocationHandler 看做一个中介类，中介类持有一个被代理对象，在 invoke 方法中调用了被代理对象的相应方法，而生成的代理类中持有中介类，因此，当我们在调用代理类的时候，就是再调用中介类的 invoke 方法，通过反射转为对被代理对象的调用。  
   代理类调用自己方法时，通过自身持有的中介类对象来调用中介类对象的 invoke 方法，从而达到代理执行被代理对象的方法。也就是说，动态代理通过中介类实现了具体的代理功能。  
   生成的代理类：$Proxy0 extends Proxy implements Person，我们看到代理类继承了 Proxy 类，所以也就决定了 java 动态代理只能对接口进行代理，Java 的继承机制注定了这些动态代理类们无法实现对 class 的动态代理。  

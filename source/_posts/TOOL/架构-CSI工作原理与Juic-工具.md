@@ -493,7 +493,7 @@ func (dswp *desiredStateOfWorldPopulator) processPodVolumes(
  ```text 
   volumeMounter.SetUp
   ``` 
- ，最后更新 ActualStateOfWorld 的记录。这里负��执行 external CSI 插件的是 csiMountMgr，代码如下： 
+ ，最后更新 ActualStateOfWorld 的记录。这里负执行 external CSI 插件的是 csiMountMgr，代码如下： 
  
  ```java 
   func (c *csiMountMgr) SetUp(mounterArgs volume.MounterArgs) error {

@@ -22,7 +22,7 @@ Apache RocketMQ 作为阿里开源的业务消息的首选，通过双11业务�
 我们先会带领各位开发者： 
  
  回顾罗美琪（RocketMQ）和春波特（SpringBoot）故事开始的时候，rocketmq-spring经过6个多月的孵化，作为Apache RocketMQ的子项目正式毕业。 
- 回顾rocketmq-spring毕业后的两��，是如何成为Spring 生态中最受欢迎的 messaging 实现的？ 
+ 回顾rocketmq-spring毕业后的两，是如何成为Spring 生态中最受欢迎的 messaging 实现的？ 
  
   
 最后将通过图文和实操地方式带来给位开发者玩转在Spring生态中使用RocketMQ的三种主流方式。 
@@ -49,7 +49,7 @@ Spring Messaging是Spring Framework 4中添加的模块，是Spring与消息系�
  ![Test](https://api.opics.org/api  '开篇-在Spring生态中玩转RocketMQ') 
  
   
-在Apache RocketMQ生态中，RocketMQ-Spring-Boot-Starter（下文简称RocketMQ-Spring）就是一个支持Spring Messaging API标准的项目。该项目把RocketMQ的客户端使用Spring Boot的方式进行了封装，可以让用户通过简单的annotation和标准的Spring Messaging API编写代码来进行消息的发送和消费，也支持扩展出RocketMQ原生API来支持更加丰富的消息类型。在RocketMQ-Spring毕业初期，RocketMQ社区同学请Spring社区的同学对RocketMQ-Spring代码进行review，引出一段罗美琪（RocketMQ）和春波特（Spring Boot）故事的佳话[1]，著名Spring布道师Josh Long向国外同学介绍如何使用RocketMQ-Spring收发消息[2]。RocketMQ-Spring也在短短两年时间超越Spring-Kafka和Spring-AMQP（注:两者均由Spring社��维护），成为Spring Messaging生态中最活跃的消息项目。 
+在Apache RocketMQ生态中，RocketMQ-Spring-Boot-Starter（下文简称RocketMQ-Spring）就是一个支持Spring Messaging API标准的项目。该项目把RocketMQ的客户端使用Spring Boot的方式进行了封装，可以让用户通过简单的annotation和标准的Spring Messaging API编写代码来进行消息的发送和消费，也支持扩展出RocketMQ原生API来支持更加丰富的消息类型。在RocketMQ-Spring毕业初期，RocketMQ社区同学请Spring社区的同学对RocketMQ-Spring代码进行review，引出一段罗美琪（RocketMQ）和春波特（Spring Boot）故事的佳话[1]，著名Spring布道师Josh Long向国外同学介绍如何使用RocketMQ-Spring收发消息[2]。RocketMQ-Spring也在短短两年时间超越Spring-Kafka和Spring-AMQP（注:两者均由Spring社维护），成为Spring Messaging生态中最活跃的消息项目。 
   
  
  ![Test](https://api.opics.org/api  '开篇-在Spring生态中玩转RocketMQ') 

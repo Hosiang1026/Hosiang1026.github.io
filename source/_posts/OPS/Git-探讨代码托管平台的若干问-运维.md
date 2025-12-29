@@ -184,7 +184,7 @@ Github Enterprise
 Bitbucket 是 Atlassian 开发的代码托管平台，与 Github/Gitlab 不同，Bitbucket 还提供了原生 Mercurial 支持，不过最近，Bitbucket 宣布要逐步关闭 Mercurial 的支持。Atlassian 还开发了 Jira/Sourcetree 这样著名的软件，Bitbucket 源码没有开发，推测主要使用 Java 技术栈（这个从一次 Bitbucket VFSForGit 安装包分析可得）。 
 Gitee 是目前国内最大的代码托管平台之一，早在 2015 年便开始了分布式改造，并编写了一系列服务实现分布式架构，编写了 Nginx 路由模块实现动态路由，基于 libssh 开发了 Basalt v1 SSH 服务器，基于 Golang 开发了 Basalt v2 SSH 服务器，还开发了 git-srv 智能服务后端，brzox Git HTTP/Archive 服务。以及 git-diamond git 协议内部传输服务等等。Gitee 最初代码基于 Gitlab，几年之间已经与 Gitlab 有了很大的差异，现在 Gitee 已经逐步将一些功能从 gitlab 中剥离，实现云平台的微服务，比如目前的 git/svn/hook 验证服务是基于 Golang 编写的 banjo。Gitee 需要以有限的硬件实现更多的用户接入，所以在服务的设计上更倾向于提供资源使用率，对一些比较容易造成计算资源紧张的服务进行降级。 
 #### Git 代码托管平台服务实现 
-Git 代码托管平台的基本服务应该包括浏览器接入支持和 git 客户端接入支持，前者需要平台开发网页提供若干���务供用户访问。后者需要支持 git 客户端推拉代码。通过网站访问存储库意味着 HTTP 服务需要通过一定的途径读写存储库，在 GitWeb 中，这通常使用 git 命令实现，比如使用  ```bash
+Git 代码托管平台的基本服务应该包括浏览器接入支持和 git 客户端接入支持，前者需要平台开发网页提供若干务供用户访问。后者需要支持 git 客户端推拉代码。通过网站访问存储库意味着 HTTP 服务需要通过一定的途径读写存储库，在 GitWeb 中，这通常使用 git 命令实现，比如使用  ```bash
 git tree
   ```  查看  ```bash
 tree
@@ -226,7 +226,7 @@ Github 目前有大约 1亿个项目，我们假设 Github 上存储库大小平
 存储库分片之后还是无法避免特定存储库请求过多的问题，Github 的解决方案是使用三副本读写分离的 Spokes 机制，这一方案最多能够提供 3倍于单一服务器的并发读取能力，但不支持并发写入存储库。三副本机制需要解决分布式系统常见的一致性问题，引入并发写入可能会带来更多的数据冲突，破坏一致性，因此 Github 完全禁止并发写入存储库副本（即同时有不同的写存储库请求）。Gitlab 没有实现这样的技术，BitBucket 则没有披露相关资讯，Gitee 受限与硬件限制和开发资源限制，也没有实施。 
 github-dfs： 
 ![Test](https://api.opics.org/api  '探讨 Git 代码托管平台的若干问题 - 2019 版') 
-除了存储库的分片，代码托管平台还需要考虑数据库 SQL/NoSQL 能否支撑大规模并发，数据库的分布式集群是一个比较成熟的方案，而 Redis 最新的版���也��持集群，因此数据库的伸缩性一般不会存在太大问题，增加机器搭建集群即可。选择关系性数据库时还需要考虑许可证，数据库自身的功能等，比如 Gitlab 目前已经放弃对 MySQL 的支持，而是选择了 PostgreSQL，不过 Gitlab 的选择对于其他代码托管平台来说，也只能算作仅作参考。MariaDB 是 MySQL 的分支版本，随着 MySQL 被 Oracle 收购，开源社区渐渐丧失了对 MySQL 的兴趣，虽然 MySQL 8.0 发布已经很久，但采用 MySQL 8.0 的发行版本寥寥无几，很多还停留在 MySQL 5.X，有些发行版还使用 mariadb-connector-c 替代  ```bash
+除了存储库的分片，代码托管平台还需要考虑数据库 SQL/NoSQL 能否支撑大规模并发，数据库的分布式集群是一个比较成熟的方案，而 Redis 最新的版也持集群，因此数据库的伸缩性一般不会存在太大问题，增加机器搭建集群即可。选择关系性数据库时还需要考虑许可证，数据库自身的功能等，比如 Gitlab 目前已经放弃对 MySQL 的支持，而是选择了 PostgreSQL，不过 Gitlab 的选择对于其他代码托管平台来说，也只能算作仅作参考。MariaDB 是 MySQL 的分支版本，随着 MySQL 被 Oracle 收购，开源社区渐渐丧失了对 MySQL 的兴趣，虽然 MySQL 8.0 发布已经很久，但采用 MySQL 8.0 的发行版本寥寥无几，很多还停留在 MySQL 5.X，有些发行版还使用 mariadb-connector-c 替代  ```bash
 libmysqlclient
   ```  作为数据库连接器，使用 MySQL 的平台很容易迁移到 MariaDB 而不用修改客户端数据库连接代码 ，MariaDB 支持线程池，而 MySQL 仅在企业版中支持线程池。一些 MariaDB 与 MySQL 的对比这里不赘述了。Gogs/Gitea 还支持使用 SQLite，但其使用 SQLite 时，基本上是放弃了伸缩性，不过目前有一个使用 Raft+libuv 实现的分布式 SQLite canonical/dqlite，可以尝试一下。Redis 一般可以作为 Web 缓存或者任务队列的中间件，目前 Redis 虽然支持集群，但就单机 Redis 而言，由于它是单线程的服务，在将内存数据持久化到磁盘是还是可能出现超时，并且单线程服务性能终究有限，在 Github 上，KeyDB 是官方 Redis 的另一个选择，KeyDB 是 Redis 的分支，完全兼容 Redis 协议，KeyDB 支持多线程，有更好的内存效率和高吞吐量。 
 #### Git 代码托管平台的增强功能 
@@ -250,7 +250,7 @@ git svn
   ```  命令，可以将远程 svn 存储库一个个版本递归的转变为 Git 存储库，详细的操作可以参考 《Pro Git 2nd Edition》9.2 Git and Other Systems - Migrating to Git，这种方案的缺点比较是比较耗时，Gitee 开发者曾经帮助国内某汽车制造企业将 Subversion 存储库迁移到 Git，一开始使用  ```bash
 git svn
   ``` ，发现耗费时间太长，于是我找到了一个开源工具： git-svn-fast-import，将其编译好并修复特定 BUG 交给相关同事，后来该企业的迁移工作顺利完成。这个工具直接解析存储库将其转换为 git 存储库，省去了网络传输的消耗。 
-除了支持从其他版本控制系统导入外，一些代码 Git 代码托管平台也支持其他协议接入，Github/Gitee 都支持 Subversion 接入，也就是同一个存储库同时��持 git 客户端和 svn 客户端接入（像 BitBucket 支持 Mercurial 的实现实际上是单独搭建 Mercurial 存储库，不属于此类情况）。实现 Subversion 的接入几个难点，一是 Subversion 各种传输协议细节完全不同，HTTP 基于 WebDAV，而 SVN 协议又是一种自定义的 ABNF 格式协议，如果在考虑支持 Subversion 接入时还需要考虑选择哪种协议，两类协议都支持通常是不现实的，费时费力。二是 Subversion 自身也在不断发展，但实际上在愿意在 Git 代码托管平台使用 svn 的毕竟还是少数，实现 Subversion 接入通常是费力不讨好，投入与产出不成正比。 
+除了支持从其他版本控制系统导入外，一些代码 Git 代码托管平台也支持其他协议接入，Github/Gitee 都支持 Subversion 接入，也就是同一个存储库同时持 git 客户端和 svn 客户端接入（像 BitBucket 支持 Mercurial 的实现实际上是单独搭建 Mercurial 存储库，不属于此类情况）。实现 Subversion 的接入几个难点，一是 Subversion 各种传输协议细节完全不同，HTTP 基于 WebDAV，而 SVN 协议又是一种自定义的 ABNF 格式协议，如果在考虑支持 Subversion 接入时还需要考虑选择哪种协议，两类协议都支持通常是不现实的，费时费力。二是 Subversion 自身也在不断发展，但实际上在愿意在 Git 代码托管平台使用 svn 的毕竟还是少数，实现 Subversion 接入通常是费力不讨好，投入与产出不成正比。 
 Github 实现的是 svn HTTP 协议，将 git 存储库的 commit 映射到 svn 的 revs。Github 的实现并不完美，由于需要通过 commit 计算 svn 版本信息，第一次通过 svn 协议访问存储库时会比较慢，如果当存储库较大时，检出还很容易失败，并且一次检出操作可能需要发送的非常多的请求，大概是所有目录所有文件数目之和。 
 Gitee 使用了 git-as-svn 实现对 svn 的支持，支持的协议有  ```bash
 svn://

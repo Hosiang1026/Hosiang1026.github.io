@@ -195,7 +195,7 @@ Storage Driver: overlay2
 overlay2
   ``` ,不同的存储驱动在 Docker 中表现不一样，但是原理类似，我们来看看 Docker 如何借助 ```bash
 overlay2
-  ``` 来变出这么多文件夹的。我们前面提到过，Docker都是通过mount 去挂载的,���们先找到我们的容器实例id. 
+  ``` 来变出这么多文件夹的。我们前面提到过，Docker都是通过mount 去挂载的,们先找到我们的容器实例id. 
 执行 ```bash
 docker ps -a |grep demo_docker
   ```  
@@ -212,7 +212,7 @@ shm /var/lib/docker/containers/c0afd574aea716593ceb4466943bbd13e3a081bf84da0779e
   ```  
 这里出现了一个挂载信息，但是这个记录不是我们的重点，我们需要找到 ```bash
 overlay2
-  ``` 的挂载信息，所以这里我们���需要执行一个命令: ```bash
+  ``` 的挂载信息，所以这里我们需要执行一个命令: ```bash
 cat /proc/mounts | grep system_u:object_r:container_file_t:s0:c740,c923
   ```  
  ```bash

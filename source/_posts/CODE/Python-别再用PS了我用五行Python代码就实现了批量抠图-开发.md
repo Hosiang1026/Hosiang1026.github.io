@@ -115,7 +115,7 @@ https://www.paddlepaddle.org.cn/install/quick
 
   ```  
  
-下面我们就���以开始写代码了。 
+下面我们就以开始写代码了。 
 开始抠图 
 实现抠图的代码很简单，大概分为下面几个步骤： 
  

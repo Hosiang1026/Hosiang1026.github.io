@@ -133,7 +133,7 @@ docker build -t my-custom-image-arm . -f Dockerfile.arm
 这将为你提供ARM架构的容器镜像。如果你对细节很感兴趣，请参阅： 
 https://www.ecliptik.com/Cross-Building-and-Running-Multi-Arch-Docker-Images/ 
 ### 自动化构建和上传到镜像仓库 
-最后一步是自动化整个流程，以便容器镜像可以自动构建并且自动上传到一个镜像仓库，在那里可以轻松地将其部署到我们地k3s集群。在内部，我们使用GitLab进行源代码管理和CI/CD，因此我们自然希望在其中运行这些构建，它甚至包括一个内置的容器镜像仓库，因此���需要设置单独的镜像仓库。 
+最后一步是自动化整个流程，以便容器镜像可以自动构建并且自动上传到一个镜像仓库，在那里可以轻松地将其部署到我们地k3s集群。在内部，我们使用GitLab进行源代码管理和CI/CD，因此我们自然希望在其中运行这些构建，它甚至包括一个内置的容器镜像仓库，因此需要设置单独的镜像仓库。 
 关于构建Docker镜像，GitLab有十分完善的文档（https://docs.gitlab.com/ee/ci/docker/using_docker_build.html ） ，因此我们不在此赘述。在为docker构建配置GitLab Runner之后，剩下要做的就是为该项目创建.gitlab-ci.yml文件。在我们的例子中，它看起来像这样： 
  ```java 
   image: docker:stable

@@ -100,7 +100,7 @@ User "bob" set.
   ```  
 打开~/.kube/config 文件确认凭据已经设置完成。 
 ![Test](https://oscimg.oschina.net/oscnet/028790ba90522fc405dece51dc584822ffa.jpg  'Kubernetes身份认证和授权操作全攻略-上手操作Kubernetes身份认证') 
-让我们创建���个名为engineering的新命名空间，Bob是其管理员。 
+让我们创建个名为engineering的新命名空间，Bob是其管理员。 
  ```bash
 kubectl create namespace engineering
 namespace/engineering created

@@ -2,7 +2,7 @@
 language: node_js
 
 #设置相应的版本
-node_js: v20.16.0
+node_js: 20.16.0
   
 # 缓存不经常更改的内容
 cache:
@@ -51,8 +51,8 @@ after_script:
   - mv .deploy_git/.git/ ./public/
   - cd ./public
   - git init
-  - git config --global user.name "Hosiang1026"
-  - git config --global user.email "hosiang1026@sina.com"
+  - git config user.name "Hosiang1026"
+  - git config user.email "hosiang1026@sina.com"
   - git add .
   - git commit -m " TravisCI第 $TRAVIS_BUILD_NUMBER 次自动构建发布博客 -`date +"%Y-%m-%d %H:%M"`"
 
@@ -75,7 +75,7 @@ branches:
 
 # 配置Webhook通知
 notifications:
-  webhooks: https://oapi.dingtalk.com/robot/send?access_token=6d3354513b93c853cd0250984784bd023de87449122f1bbae431e0b9030c81ab
+  webhooks: https://oapi.dingtalk.com/robot/send?access_token=${DINGTALK_TOKEN}
   on_success: always
   on_failure: always
   on_start:   always

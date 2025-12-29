@@ -117,6 +117,40 @@
 
      https://blog.csdn.net/qq_29304291/article/details/120049986
 
+## 文章密码加密
+
+博客使用 `hexo-blog-encrypt` 插件对文章进行加密保护。为了不在源码中明文存储密码，采用 Base64 编码方式存储密码。
+
+### 工作原理
+
+1. 在 front matter 中存储 Base64 编码的密码（如 `aG9zaWFuZzEwMjY=`）
+2. `scripts/password-decoder.js` 脚本在构建时自动将 Base64 编码的密码解码为明文（`123456`）
+3. `hexo-blog-encrypt` 插件使用解码后的明文密码对文章内容进行加密
+4. 用户访问时输入原始密码 `123456` 即可解密查看文章
+
+### 使用方法
+
+1. 将密码编码为 Base64：
+   ```bash
+   node -e "console.log(Buffer.from('你的密码', 'utf8').toString('base64'));"
+   ```
+
+2. 在文章的 front matter 中使用编码后的值：
+   ```yaml
+   ---
+   title: 文章标题
+   password: aG9zaWFuZzEwMjY=
+   ---
+   ```
+
+3. 用户访问时输入原始密码即可
+
+### 加密技术栈
+
+- **密钥派生**：PBKDF2 + SHA-256
+- **加密算法**：AES-256-CBC
+- **消息认证码**：HMAC-SHA256
+
 ## GitHub Pages Action
 
     https://github.com/peaceiris/actions-gh-pages#readme

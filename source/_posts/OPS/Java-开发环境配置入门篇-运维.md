@@ -7,7 +7,7 @@ tags:
 top: 1
 abbrlink: 69f02c64
 date: 2024-05-05 00:00:00
-cover_picture: https://hosiang1026.github.io/photos/image/2024/12/15/10rlkfv.jpg
+cover_picture: 'https://api.opics.org/api'
 ---
 
 

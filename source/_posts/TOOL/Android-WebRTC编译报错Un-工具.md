@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 1958
-cover_picture: 'https://oscimg.oschina.net/oscnet/up-59f85ea85781eefccf269163128a601dccd.png'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: 67321cab
 date: 2021-04-15 09:46:45
 ---

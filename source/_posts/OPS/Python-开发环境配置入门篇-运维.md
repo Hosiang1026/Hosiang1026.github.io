@@ -7,7 +7,7 @@ tags:
 top: 1
 abbrlink: 64384826
 date: 2024-01-04 00:00:00
-cover_picture: 'photo/album/image/image_012.jpg'
+cover_picture: 'https://api.opics.org/api'
 ---
 
 

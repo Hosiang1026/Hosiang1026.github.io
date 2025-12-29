@@ -5,7 +5,7 @@ tags:
   - Popular
 author: csdn
 top: 9
-cover_picture: 'https://profile.csdnimg.cn/E/6/7/3_qq_27790011'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: 99d10dd2
 date: 2021-04-15 08:14:57
 ---

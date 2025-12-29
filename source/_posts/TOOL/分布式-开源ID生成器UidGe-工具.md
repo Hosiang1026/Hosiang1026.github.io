@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 684
-cover_picture: 'https://static.oschina.net/uploads/img/202004/03131309_Vyz7.jpg'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: 1fd59830
 date: 2021-04-14 07:54:42
 ---

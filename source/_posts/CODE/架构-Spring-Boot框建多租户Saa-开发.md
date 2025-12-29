@@ -7,7 +7,7 @@ tags:
 top: 1
 abbrlink: 8bcb3d5y
 date: 2024-06-06 00:00:00
-cover_picture: https://hosiang1026.github.io/photos/image/2024/12/15/10szeid.png
+cover_picture: 'https://api.opics.org/api'
 ---
 
 SaaS（Software as a Service），即多租户（或多承租）软件应用平台，SaaS是这样一种架构模式：它让多个不同环境的用户使用同一套应用程序，且保证用户之间的数据相互隔离。今天要聊的是使用Spring Boot快速构建独立数据库/共享数据库独立Schema的多租户系统，主要是一个SaaS系统最核心的技术实现，而其他的部分有兴趣的朋友可以在此基础上自行扩展。

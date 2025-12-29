@@ -7,7 +7,7 @@ tags:
 top: 1
 abbrlink: 24ddb72
 date: 2024-06-02 00:00:00
-cover_picture: https://hosiang1026.github.io/photos/image/2024/12/15/10szeid.png
+cover_picture: 'https://api.opics.org/api'
 ---
 
 

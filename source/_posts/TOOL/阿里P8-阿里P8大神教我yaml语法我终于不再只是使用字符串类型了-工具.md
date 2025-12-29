@@ -5,7 +5,7 @@ tags:
   - Popular
 author: csdn
 top: 10
-cover_picture: 'https://profile.csdnimg.cn/2/7/2/3_chenlixiao007'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: ec86e976
 date: 2021-04-15 08:14:57
 ---

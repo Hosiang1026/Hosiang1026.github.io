@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 1833
-cover_picture: 'https://static.oschina.net/uploads/img/202006/05135313_RBco.jpg'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: 36fa2816
 date: 2021-04-15 09:19:21
 ---

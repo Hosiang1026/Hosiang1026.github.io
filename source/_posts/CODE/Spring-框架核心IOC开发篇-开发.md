@@ -7,7 +7,7 @@ tags:
 top: 1
 abbrlink: 43aa0d57
 date: 2020-06-03 00:00:00
-cover_picture: https://hosiang1026.github.io/photos/image/2024/12/15/10szeid.png
+cover_picture: 'https://api.opics.org/api'
 ---
 
 

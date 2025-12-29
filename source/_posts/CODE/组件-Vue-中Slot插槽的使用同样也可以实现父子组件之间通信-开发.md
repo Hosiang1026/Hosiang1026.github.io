@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 274
-cover_picture: 'https://hosiang1026.github.io/photos/image/2024/12/15/3tpww.jpg'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: baca2438
 date: 2021-11-23 02:39:46
 ---

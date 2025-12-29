@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 733
-cover_picture: 'https://dl-harmonyos.51cto.com/images/202104/645ff9e28dd1fcaf0fd4694e4dcb70e45997b5.gif'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: 24316f3c
 date: 2021-04-15 10:04:00
 ---

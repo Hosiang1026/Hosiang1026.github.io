@@ -7,7 +7,7 @@ tags:
 top: 1
 abbrlink: 27ada2f8
 date: 2017-01-05 00:00:00
-cover_picture: 'photo/album/image/image_046.jpg'
+cover_picture: 'https://api.opics.org/api'
 ---
 
 

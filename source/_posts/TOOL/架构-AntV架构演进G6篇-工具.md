@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 1715
-cover_picture: 'https://static.oschina.net/uploads/img/202003/05105913_xVc4.jpeg'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: 9786661f
 date: 2021-04-15 09:19:21
 ---

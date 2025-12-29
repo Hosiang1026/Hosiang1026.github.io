@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 1859
-cover_picture: 'https://static.oschina.net/uploads/img/202008/05162456_QbTv.jpg'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: 9b88203a
 date: 2021-04-15 09:19:21
 ---

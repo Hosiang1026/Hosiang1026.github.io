@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 752
-cover_picture: 'https://gitee.com/xiaocaipeace/picture/raw/master/2021-4-11/1618142801061-tu1.png'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: 8fc5b4d7
 date: 2021-04-15 09:10:30
 ---

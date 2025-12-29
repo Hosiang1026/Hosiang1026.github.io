@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 855
-cover_picture: 'https://cdn.pixabay.com/photo/2017/03/23/14/54/easter-2168521__480.jpg'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: 277b8939
 date: 2021-04-14 07:54:42
 ---

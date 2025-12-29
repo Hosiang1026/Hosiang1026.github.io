@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 2007
-cover_picture: 'https://img2020.cnblogs.com/blog/759200/202103/759200-20210329170929269-468927623.png'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: 367fa33e
 date: 2021-04-15 09:46:45
 ---

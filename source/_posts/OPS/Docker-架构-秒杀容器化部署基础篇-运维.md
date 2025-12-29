@@ -7,7 +7,7 @@ tags:
 top: 1
 abbrlink: 450075ac
 date: 2024-09-20 00:00:00
-cover_picture: https://hosiang1026.github.io/photos/image/2024/12/15/10u1cu9.png
+cover_picture: 'https://api.opics.org/api'
 ---
 
 Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从 Apache2.0 协议开源。Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。

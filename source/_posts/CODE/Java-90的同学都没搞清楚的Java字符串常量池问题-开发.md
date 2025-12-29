@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 1702
-cover_picture: 'https://hosiang1026.github.io/photos/image/2024/12/15/3tpww.jpg'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: 90b2bae8
 date: 2021-04-15 09:19:21
 ---

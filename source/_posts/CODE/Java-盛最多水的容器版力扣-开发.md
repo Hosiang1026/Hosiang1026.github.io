@@ -5,7 +5,7 @@ tags:
   - Popular
 author: csdn
 top: 4
-cover_picture: 'https://profile.csdnimg.cn/4/F/6/3_weixin_43883917'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: fe67250e
 date: 2021-04-15 08:14:57
 ---

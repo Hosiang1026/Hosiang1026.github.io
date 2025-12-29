@@ -7,7 +7,7 @@ tags:
 top: 8
 abbrlink: bab7a183
 date: 2024-05-05 00:00:00
-cover_picture: https://hosiang1026.github.io/photos/image/2024/12/15/10rlkfv.jpg
+cover_picture: 'https://api.opics.org/api'
 ---
 
 阿里巴巴人工智能实验室(AI-Labs)在2018云栖大会上宣布了 5 件大事：大脑升级、造机器人、造无人车、修路，以及开酒店。这里的“大脑”指的是阿里的AliGenie人工智能系统，AliGenie是AI-Labs面向软硬件厂商和开发者推出的，将人工智能中ASR语音识别、NLP自然语言处理、TTS语音合成等自然语言处理技术和能力对外共享的开放式平台。

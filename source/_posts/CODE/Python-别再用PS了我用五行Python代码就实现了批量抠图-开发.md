@@ -5,7 +5,7 @@ tags:
   - Popular
 author: OSChina
 top: 1729
-cover_picture: 'https://static.oschina.net/uploads/img/202004/20133412_KRiv.jpg'
+cover_picture: 'https://api.opics.org/api'
 abbrlink: fa27462a
 date: 2021-04-15 09:19:21
 ---

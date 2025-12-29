@@ -9,9 +9,7 @@ abbrlink: 24ddb72
 date: 2024-06-02 00:00:00
 cover_picture: 'https://api.opics.org/api'
 ---
-
-
-IoC是Spring框架的核心内容，IoC(Inversion of Control)控制反转，是一种设计思想，DI(依赖注入)是实现IoC的一种方法。其实spring就是一个容器，一个bean容器。主要是完成了完成对象的创建和依赖的管理注入。
+IoC（控制反转）是Spring框架的核心，通过DI（依赖注入）实现对象创建和依赖管理的自动化。Spring本质上就是一个Bean容器，负责完成对象的创建和依赖的注入。本文通过实战方式，从零开始手把手实现一个简化版的IoC容器，深入理解IoC的设计思想和实现原理。通过实际编码，掌握Bean的定义、解析、创建和注入的完整流程，为深入理解Spring框架打下坚实基础。
 
 <!-- more -->
 

@@ -9,9 +9,7 @@ abbrlink: d324a4f0
 date: 2024-05-05 00:00:00
 cover_picture: 'https://api.opics.org/api'
 ---
-
-
-IDEA是一个强大的IDE，其优秀的代码提示，丰富的插件等不是Eclipse可以比拟的。IDEA的Project其实可以看做是Eclipse的Workspace，Modules可以看出是具体的项目。
+IntelliJ IDEA作为强大的Java开发IDE，其优秀的代码提示、丰富的插件生态和智能重构功能远超Eclipse。本文详细介绍如何使用IDEA将Java Web项目部署到远程Tomcat服务器，包括项目配置、远程服务器连接、部署方式选择（热部署、手动部署）等完整流程。从本地开发到生产环境部署，帮助开发者掌握企业级Java项目的部署技能，提升开发效率。
 
 <!-- more -->
 

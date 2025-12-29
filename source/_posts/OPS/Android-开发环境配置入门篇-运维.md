@@ -9,9 +9,7 @@ abbrlink: 957cd1b8
 date: 2024-01-01 00:00:00
 cover_picture: 'https://api.opics.org/api'
 ---
-
-
-Android是一种基于Linux的自由及开放源代码的操作系统，主要使用于移动设备，如智能手机和平板电脑，由Google公司和开放手机联盟领导及开发。最初由Andy Rubin开发，主要支持手机。2005年8月由Google收购注资。 
+Android是基于Linux的开源移动操作系统，由Google公司和开放手机联盟开发，现已成为全球市场份额最大的移动操作系统。本文详细介绍Android开发环境的配置方法，包括Android Studio安装、SDK配置、模拟器设置、真机调试配置等完整流程。从环境搭建到第一个Android应用运行，帮助开发者快速配置Android开发环境，开启移动应用开发之旅，打造属于自己的Android应用。
 
 <!-- more -->
 

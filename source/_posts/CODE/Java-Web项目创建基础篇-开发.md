@@ -9,9 +9,7 @@ abbrlink: a754b403
 date: 2024-05-05 00:00:00
 cover_picture: 'https://api.opics.org/api'
 ---
-
-
-IDEA是一个强大的IDE，其优秀的代码提示，丰富的插件等不是Eclipse可以比拟的。IDEA的Project其实可以看做是Eclipse的Workspace，Modules可以看出是具体的项目。
+IntelliJ IDEA作为强大的Java开发IDE，其优秀的代码提示、丰富的插件生态远超Eclipse。本文详细介绍如何使用IDEA创建Java Web项目，从项目结构搭建、Servlet配置、Web.xml配置到项目部署运行，手把手教您从零开始构建Java Web应用。无论是初学者还是从Eclipse迁移到IDEA的开发者，都能快速掌握IDEA开发Web项目的完整流程，提升开发效率。
 
 <!-- more -->
 

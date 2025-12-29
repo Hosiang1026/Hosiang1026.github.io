@@ -9,9 +9,7 @@ abbrlink: c37d8b1d
 date: 2024-01-02 00:00:00
 cover_picture: 'https://api.opics.org/api'
 ---
-
-
-iOS之前被称为 iPhone OS，是由苹果公司开发的移动操作系统。苹果公司最早于2007年1月9日的Macworld大会上公布这个系统，最初是设计给iPhone使用的，后来陆续套用到iPod touch、iPad以及Apple TV等产品上。iOS与苹果的Mac OS X操作系统一样，属于类Unix的商业操作系统。
+iOS是苹果公司开发的移动操作系统，最初于2007年发布，现已成为iPhone、iPad、iPod touch等设备的核心系统。本文详细介绍iOS开发环境的配置方法，包括Xcode安装、开发者账号注册、模拟器配置、真机调试设置等核心内容。从环境搭建到第一个iOS应用运行，帮助开发者快速配置iOS开发环境，开启iOS应用开发之旅，打造属于自己的移动应用。
 
 <!-- more -->
 

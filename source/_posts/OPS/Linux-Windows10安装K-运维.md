@@ -9,9 +9,7 @@ abbrlink: 27ada2f8
 date: 2017-01-05 00:00:00
 cover_picture: 'https://api.opics.org/api'
 ---
-
-
-Microsoft开发的Windows是目前世界上用户最多、并且兼容性最强的操作系统。最早的Windows操作系统从1985年就推出了，Microsoft Windows是彩色界面的操作系统。
+Windows 10一周年正式版开始支持WSL（Windows的Linux子系统），微软为WSL带来了备受赞誉的Kali Linux。本文详细介绍如何在Windows 10中安装Kali Linux子系统，用原生Kali替换默认的Ubuntu，实现Bash on Kali on Windows。无需虚拟机，无需双系统，在Windows中直接使用完整的Linux环境，为安全测试、渗透测试和Linux学习提供便捷的解决方案。
 
 <!-- more -->
 

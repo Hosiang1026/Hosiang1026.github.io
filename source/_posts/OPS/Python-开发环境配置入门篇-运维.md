@@ -9,9 +9,7 @@ abbrlink: 64384826
 date: 2024-01-04 00:00:00
 cover_picture: 'https://api.opics.org/api'
 ---
-
-
-Python的创始人为吉多·范罗苏姆（Guido van Rossum）。1989年的圣诞节期间，吉多·范罗苏姆为了在阿姆斯特丹打发时间，决心开发一个新的脚本解释程序，作为ABC语言的一种继承。 
+Python由吉多·范罗苏姆（Guido van Rossum）于1989年开发，作为ABC语言的继承者，现已成为最受欢迎的编程语言之一。本文详细介绍Python开发环境的配置方法，包括Python解释器安装、pip包管理器配置、虚拟环境创建、IDE选择配置等核心内容。无论是数据分析、Web开发、人工智能还是自动化脚本，本文都将帮助您快速搭建Python开发环境，开启Python编程之旅。
 
 <!-- more -->
 

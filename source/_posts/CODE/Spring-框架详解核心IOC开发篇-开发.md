@@ -9,9 +9,7 @@ abbrlink: 2552a56
 date: 2024-06-01 00:00:00
 cover_picture: 'https://api.opics.org/api'
 ---
-
-
-以前对象之间的引用是通过new来调用实现，有了Spring IOC,我们可以把对象之间的引用交给他来管理，这样就把控制权交给了Spring，所以就叫做控制反转。
+Spring IOC（控制反转）是Spring框架的核心特性，彻底改变了Java对象管理的方式。传统开发中对象之间的引用需要通过new关键字手动创建，而Spring IOC将对象的创建和依赖管理交给容器统一处理，实现了控制权的反转。本文深入详解Spring IOC的实现原理，从简单工厂模式到IOC容器的演进过程，详细讲解Bean的创建、依赖注入、生命周期管理等核心机制，帮助开发者深入理解Spring框架的设计思想。
 
 <!-- more -->
 

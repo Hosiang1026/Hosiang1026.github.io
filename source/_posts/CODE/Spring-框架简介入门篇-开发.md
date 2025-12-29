@@ -9,10 +9,7 @@ abbrlink: e37b75e2
 date: 2024-06-04 00:00:00
 cover_picture: 'https://api.opics.org/api'
 ---
-
-
-Spring是一个开源框架，Spring是于2003 年兴起的一个轻量级的Java 开发框架，由Rod Johnson 在其著作Expert One-On-One J2EE Development And Design中阐述的部分理念和原型衍生而来。它是为了解决企业应用开发的复杂性而创建的。Spring是一个分层的JavaSE/EEfull-stack(一站式) 轻量级开源框架，其核心是控制反转（IOC）和面向切面（AOP）。
-
+Spring框架是2003年兴起的一个轻量级Java开发框架，由Rod Johnson在其经典著作中阐述的理念衍生而来，旨在解决企业应用开发的复杂性。作为分层的JavaSE/EE一站式轻量级开源框架，Spring的核心是控制反转（IOC）和面向切面（AOP）。本文作为Spring框架的入门指南，系统介绍Spring的发展历程、核心特性、模块组成和基本使用，帮助Java开发者快速入门Spring框架，掌握这一企业级应用开发的核心技术。
 
 <!-- more -->
 

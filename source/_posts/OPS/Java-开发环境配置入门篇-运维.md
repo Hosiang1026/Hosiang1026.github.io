@@ -9,9 +9,7 @@ abbrlink: 69f02c64
 date: 2024-05-05 00:00:00
 cover_picture: 'https://api.opics.org/api'
 ---
-
-
-Java 是由Sun Microsystems公司于1995年5月推出的高级程序设计语言。Java可运行于多个平台，如Windows, Mac OS，及其他多种UNIX版本的系统。
+Java是由Sun Microsystems公司于1995年推出的高级程序设计语言，具有"一次编写，到处运行"的跨平台特性，可运行于Windows、Mac OS、Linux等多种操作系统。本文详细介绍Java开发环境的配置方法，包括JDK安装、环境变量配置、IDE选择（IntelliJ IDEA、Eclipse）、Maven/Gradle构建工具配置等完整流程。从环境搭建到第一个Java程序运行，帮助开发者快速配置Java开发环境，开启Java编程之旅。
 
 <!-- more -->
 

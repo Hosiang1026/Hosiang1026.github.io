@@ -13,29 +13,6 @@ Android是基于Linux的开源移动操作系统，由Google公司和开放手�
 
 <!-- more -->
 
-```html
- <script>
-     if("1026"==prompt("请输入密码："))
-```
-     {
-```
-         alert("密码正确，欢迎阅读！");
-```
-     }
-     else
-     {
-```
-         alert("抱歉，密码错误！");
-```
-         
-```
-         history.back();
-```
-     }
-```html
- </script>
-```
-
 ![Android](/images/gAhSjg.jpg "Android开发环境配置-入门篇")
 
 

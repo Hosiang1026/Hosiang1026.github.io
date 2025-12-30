@@ -1,14 +1,14 @@
-﻿---
-title: 定了！dockershim 的代码将在 K8s v1.24 正式删除
-categories: 热门文章
-tags:
-  - Popular
-author: OSChina
-top: 278
-cover_picture: 'https://api.opics.org/api'
-abbrlink: cdee7d8e
-date: 2021-11-23 02:39:46
 ---
+title: 定了dockershim的代码将在
+categories: Docker容器化技术系列
+tags:
+  - Kubernetes
+  - YAML
+abbrlink: bfe14f73
+date: 2019-04-08 00:00:00
+top: 1
+---
+
 
 好，我是张晋涛。 目前已经确定， dockershim 的代码将在 Kubernetes v1.24 版本中被正式从 Kubernetes 的代码仓库移除，预计新版本明年 4 月左右发布。对于喜欢尝鲜的小伙伴，dockershi...
 <!-- more -->
@@ -55,7 +55,6 @@ date: 2021-11-23 02:39:46
  也请小伙伴们耐心查看下方视频，Mirantis 再次公开声明，我们大可不必为 dockershim 的未来忧心。 
    
   
-  
  ### 影响 
  相信很多小伙伴最关心的就是，这种变化，会对我们日常的生产、开发环境带来哪些变化。我们要怎样快速的进行应对！ 
  抛开这个问题，请小伙伴们评估下各自的实际生产环境。 
@@ -63,9 +62,10 @@ date: 2021-11-23 02:39:46
    生产环境中的 Kubernetes 升级周期  
    当前生产集群中使用的容器运行时是什么  
   
+```
  当然，作为应用软件的开发者而言，此次的变化，并不带来任何开发角度的影响（除非，你是个容器及容器编排开发ヾ(◍°∇°◍)ﾉﾞ）。 
+```
  如果，作为容器、容器编排开发、集群维护管理人员、架构、以及对容器技术关注的小伙伴，建议一定要关注并积极地测试、反馈在 12月即将发布的 Kubernetes v1.24 的 alpha 和 beta 版本。同时，还需要深入 CRI 以及目前较流行的容器运行时（containerd、cri-o）。 
- 建议大家都深入地了解下 containerd 。可以参考我去年做的一次分享：containerd 上手实践。在此处可获取 PPT  https://github.com/tao12345666333/slides/tree/master/2020.12.22-Upyun-OpenTalk 
  虽然，Mirantis 公司宣称会和 Docker 一起维护好 dockershim，但是，就 目前来看 Mirantis 维护的 dockershim 并没什么实质性的进展。而 containerd 在众多的云厂商及公司的生产环境中已被作为其 Kubernetes 的运行时使用了。 
  最后的最后，小伙伴们，拥抱变化吧！ 
  

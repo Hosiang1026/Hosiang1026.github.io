@@ -1,16 +1,15 @@
-﻿---
-title: (二十七) 跟我学习SpringCloud-使用Hystrix实现容错处理
-categories: 热门文章
+---
+title: 二十七跟我学习SpringCloud
+categories: Java开发全栈系列
 tags:
-  - Popular
-author: OSChina
-top: 2049
-cover_picture: 'https://api.opics.org/api'
-abbrlink: 94c37fa9
-date: 2021-04-15 09:46:45
+  - Java
+abbrlink: 8430d347
+date: 2021-02-20 00:00:00
+top: 38
 ---
 
-创建一个新的 Maven 项目 hystrix-feign-demo，增加 Hystrix 的依赖，代码如下所示。 <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-starter-netfl...
+创建一个新的 Maven 项目 hystrix-feign-demo，增加 Hystrix 的依赖，代码如下所示。 <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-starte...
+
 <!-- more -->
 
                                                                                                                                                                                         创建一个新的 Maven 项目 hystrix-feign-demo，增加 Hystrix 的依赖，代码如下所示。 
@@ -20,11 +19,12 @@ date: 2021-04-15 09:46:45
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
 </dependency>
-  ``` 
+  
+``` 
   
 在启动类上添加 @EnableHystrix 或者 @EnableCircuitBreaker。注意，@EnableHystrix 中包含了 @EnableCircuitBreaker。  然后编写一个调用接口的方法，在上面增加一个 @HystrixCommand 注解，用于指定依赖服务调用延迟或失败时调用的方法，代码下所示。 
  
- ```java 
+ ```java
   @GetMapping("/callHello")
 @HystrixCommand(fallbackMethod = "defaultCallHello")
 public String callHello() {
@@ -48,15 +48,15 @@ public String callHello() {
         ", data:
         null
 }
-  ``` 
+  
+``` 
   
  
-#### 配置详解 
+#### 配置详解
 HystrixCommand 中除了 fallbackMethod 还有很多的配置，下面我们来看看这些配置，如下表所示： 
  HystrixCommand 配置详解 
  
   
-   
    名称 
    说明 
    
@@ -67,7 +67,6 @@ HystrixCommand 中除了 fallbackMethod 还有很多的配置，下面我们来�
      THREAD：线程隔离，在单独的线程上执行，并发请求受线程池大小的控制。 
      SEMAPHORE：信号量隔离，在调用线程上执行，并发请求受信号量计数器的限制。 
       
-   
    
    hystrix.command.default.execution.isolation .thread.timeoutInMilliseconds 
    该配置用于 HystrixCommand 执行的超时时间设置，当 HystrixCommand 执行的时间超过了该配置所设置的数值后就会进入服务降级处理，单位是毫秒，默认值为 1000。 
@@ -94,7 +93,9 @@ HystrixCommand 中除了 fallbackMethod 还有很多的配置，下面我们来�
    
    
    hystrix.command.default.fallback.enabled 
+```
    该配置用于确定当执行失败或者请求被拒绝时，是否会尝试调用 hystrixCommand.getFallback()，默认值为 true。 
+```
    
    
    hystrix.command.default.circuitBreaker.enabled 
@@ -126,7 +127,9 @@ HystrixCommand 中除了 fallbackMethod 还有很多的配置，下面我们来�
    
    
    hystrix.command.default.metrics .rollingStats.numBuckets 
+```
    设置一个 rolling window 被划分的数量，若 numBuckets=10、rolling window=10 000，那么一个 bucket 的时间即 1 秒。必须符合 rolling window%numberBuckets==0。默认值为 10。 
+```
    
    
    hystrix.command.default.metrics .rollingPercentile.enabled 
@@ -142,7 +145,9 @@ HystrixCommand 中除了 fallbackMethod 还有很多的配置，下面我们来�
    
    
    hystrix.command.default.metrics .rollingPercentile.bucketSize 
+```
    如果 bucket size=100、window=10 秒若这 10 秒里有 500 次执行，只有最后 100 次执行会被统计到 bucket 里去。增加该值会增加内存开销及排序的开销。默认值为 100。 
+```
    
    
    hystrix.command.default.metrics .healthSnapshot.intervalInMilliseconds 
@@ -166,7 +171,9 @@ HystrixCommand 中除了 fallbackMethod 还有很多的配置，下面我们来�
    
    
    hystrix.collapser.default.requestCache.enabled 
+```
    是否启用对 HystrixCollapser.execute() 和 HystrixCollapser.queue() 的请求缓存，默认值为 true。 
+```
    
    
    hystrix.threadpool.default.coreSize 
@@ -174,6 +181,7 @@ HystrixCommand 中除了 fallbackMethod 还有很多的配置，下面我们来�
    
    
    hystrix.threadpool.default.maxQueueSize 
+
    BlockingQueue 的最大队列数。当设为 -1 时，会使用 SynchronousQueue；值为正数时，会使用 LinkedBlcokingQueue。该设置只会在初始化时有效，之后不能修改 threadpool 的 queue size。默认值为 -1。 
    
    
@@ -197,19 +205,14 @@ HystrixCommand 中除了 fallbackMethod 还有很多的配置，下面我们来�
    设置滚动时间窗划分桶的数量，默认值为 10。 
    
   
- 
-官方的配置信息文档请参考：https://github.com/Netflix/Hystrix/wiki/Configuration。 
 上面列出来的都是 Hystrix 的配置信息，那么在 Spring Cloud 中该如何使用呢？只需要在接口的方法上面使用 HystrixCommand 注解（如下代码所示），指定对应的属性即可。 
  
- ```java 
+```python
   @HystrixCommand(fallbackMethod = "defaultCallHello",commandProperties = {
         @HystrixProperty(name="execution.isolation.strategy", value = "THREAD")
+```
     }
 )
-@GetMapping("/callHello")
-public String callHello() {
-    String result = restTemplate.getForObject("http://localhost:8088/house/hello", String.class);
-    return result;
 }
   ``` 
   

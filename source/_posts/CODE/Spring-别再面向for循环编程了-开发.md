@@ -1,21 +1,18 @@
-﻿---
-title: 别再面向 for 循环编程了，Spring 自带的观察者模式就很香！
-categories: 热门文章
+---
+title: 别再面向for循环编
+categories: Spring生态体系系列
 tags:
-  - Popular
-author: OSChina
-top: 869
-cover_picture: 'https://api.opics.org/api'
-abbrlink: d8c30f85
-date: 2021-04-15 09:48:03
+  - Java
+abbrlink: cd24a30f
+date: 2025-01-02 00:00:00
+top: 20
 ---
 
-1. 概述 在设计模式中，观察者模式是一个比较常用的设计模式。维基百科解释如下： FROM zh.wikipedia.org/wiki/观察者模式 观察者模式是软件设计模式的一种。在此种模式中，一个目标对象管理...
+
+1. 概述 在设计模式中，观察者模式是一个比较常用的设计模式。维基百科解释如下： FROM zh.wikipedia.org/wiki/观察者模式 观察者模式是软件设计模式的一种。在此种模式中，一个目标对象管理。..
 <!-- more -->
 
                                                                                                                                                                                          
-  
-   
   ### 1. 概述 
   在设计模式中，观察者模式是一个比较常用的设计模式。维基百科解释如下： 
    
@@ -26,40 +23,32 @@ date: 2021-04-15 09:48:03
    其它 Service 可以自己订阅 UserRegisterEvent 事件，实现自定义的拓展逻辑。 
    
    
-   
   ### 2. Spring 事件机制 
   Spring 基于观察者模式，实现了自身的事件机制，由三部分组成： 
    
    事件 ApplicationEvent：通过继承它，实现自定义事件。另外，通过它的  
- ```text 
-  source
-  ``` 
+ `source` 
   属性可以获取事件源， 
- ```text 
-  timestamp
-  ``` 
+ `timestamp` 
   属性可以获得发生时间。 
    事件发布者 ApplicationEventPublisher：通过它，可以进行事件的发布。 
    事件监听器 ApplicationListener：通过实现它，进行指定类型的事件的监听。 
    
    
-   
   ### 3. 入门示例 
    
   看完一些基础的概念，我们来撸个 Spring 事件机制的入门示例，具体的场景还是以用户注册为例子。新建  
- ```text 
-  lab-54-demo
-  ``` 
+ `lab-54-demo` 
+```
   项目，最终项目如下图：![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9678c5bce6444fa897e875ba98009d7f~tplv-k3u1fbpfcp-zoom-1.image  '别再面向 for 循环编程了，Spring 自带的观察者模式就很香！') 
+```
    
   #### 3.1 引入依赖 
   在  
- ```text 
-  pom.xml
-  ``` 
+ `pom.xml` 
   文件中，引入相关依赖。 
    
- ```xml 
+ ```xml
   <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -77,17 +66,13 @@ date: 2021-04-15 09:48:03
     <dependencies>
         <!-- 实现对 Spring MVC 的自动化配置 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-Web</artifactId>
         </dependency>
     </dependencies>
 
 </project>
 复制代码
-  ``` 
-  
-  引入  
- ```text 
+  `引入```text
   spring-boot-starter-Web
   ``` 
   依赖的原因，是稍后会提供示例 API 接口，方便测试。 
@@ -95,7 +80,7 @@ date: 2021-04-15 09:48:03
   #### 3.2 UserRegisterEvent 
   创建 UserRegisterEvent 事件类，继承 ApplicationEvent 类，用户注册事件。代码如下： 
    
- ```java 
+ ```java
   public class UserRegisterEvent extends ApplicationEvent {
 
     /**
@@ -108,7 +93,6 @@ date: 2021-04-15 09:48:03
     }
 
     public UserRegisterEvent(Object source, String username) {
-        super(source);
         this.username = username;
     }
 
@@ -118,10 +102,7 @@ date: 2021-04-15 09:48:03
 
 }
 复制代码
-  ``` 
-  
-  通过在 UserRegisterEvent 类中，定义成员变量  
- ```text 
+  `通过在 UserRegisterEvent 类中，定义成员变量```text
   username
   ``` 
  ，将用户名附带上。 
@@ -129,56 +110,48 @@ date: 2021-04-15 09:48:03
   #### 3.3 UserService 
   创建 UserService 类，用户 Service。代码如下： 
    
- ```java 
+```java
   @Service
 public class UserService implements ApplicationEventPublisherAware { // <1>
+```
 
+```java
     private Logger logger = LoggerFactory.getLogger(getClass());
+```
 
+```java
     private ApplicationEventPublisher applicationEventPublisher;
+```
 
+```java
     @Override
     public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
         this.applicationEventPublisher = applicationEventPublisher;
+```
     }
 
+```java
     public void register(String username) {
         // ... 执行注册逻辑
         logger.info("[register][执行用户({}) 的注册逻辑]", username);
+```
 
+```
         // <2> ... 发布
         applicationEventPublisher.publishEvent(new UserRegisterEvent(this, username));
+```
     }
 
 }
 复制代码
-  ``` 
-  
-   
- ```java 
-  <1>
-  ``` 
-  处，实现 ApplicationEventPublisherAware 接口，从而将 ApplicationEventPublisher 注入到其中。 
-   
- ```java 
-  <2>
-  ``` 
-  处，在执行完注册逻辑后，调用 ApplicationEventPublisher 的  
- ```java 
-  #publishEvent(ApplicationEvent event)
-  ``` 
-  方法，发布「3.2 UserRegisterEvent」事件。 
+  ``` `<1>` 处，实现 ApplicationEventPublisherAware 接口，从而将 ApplicationEventPublisher 注入到其中。 `<2>` 处，在执行完注册逻辑后，调用 ApplicationEventPublisher 的 `#publishEvent(ApplicationEvent event)` 方法，发布「3.2 UserRegisterEvent」事件。 
    
   #### 3.4 EmailService 
   创建 EmailService 类，邮箱 Service。代码如下： 
    
- ```java 
-  @Service
 public class EmailService implements ApplicationListener<UserRegisterEvent> { // <1>
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Override
     @Async // <3>
     public void onApplicationEvent(UserRegisterEvent event) { // <2>
         logger.info("[onApplicationEvent][给用户({}) 发送邮件]", event.getUsername());
@@ -186,72 +159,41 @@ public class EmailService implements ApplicationListener<UserRegisterEvent> { //
 
 }
 复制代码
-  ``` 
-  
-   
- ```java 
-  <1>
-  ``` 
-  处，实现 ApplicationListener 接口，通过  
- ```text 
-  E
-  ``` 
-  泛型设置感兴趣的事件。 
-   
- ```java 
-  <2>
-  ``` 
-  处，实现  
- ```java 
-  #onApplicationEvent(E event)
-  ``` 
-  方法，针对监听的 UserRegisterEvent 事件，进行自定义处理。 
-  【可以不加】 
- ```java 
-  <3>
-  ``` 
-  处，锦上添花，设置  
- ```text 
-  @Async
-  ``` 
+  ``` `<1>` 处，实现 ApplicationListener 接口，通过  
+ `E` 
+```
+  泛型设置感兴趣的事件。 `<2>` 处，实现 `#onApplicationEvent(E event)` 方法，针对监听的 UserRegisterEvent 事件，进行自定义处理。 
+  【可以不加】 `<3>` 处，锦上添花，设置  
+```
+ `@Async` 
   注解，声明异步执行。毕竟实际场景下，发送邮件可能比较慢，又是非关键逻辑。 
    
   #### 3.5 CouponService 
   创建 CouponService 类，优惠劵 Service。代码如下： 
    
- ```java 
-  @Service
+```java
 public class CouponService {
+```
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
+```java
     @EventListener // <1>
     public void addCoupon(UserRegisterEvent event) {
         logger.info("[addCoupon][给用户({}) 发放优惠劵]", event.getUsername());
+```
     }
 
 }
 复制代码
-  ``` 
-  
-   
- ```java 
-  <1>
-  ``` 
-  处，在方法上，添加  
- ```text 
-  @EventListener
-  ``` 
+  ``` `<1>` 处，在方法上，添加  
+ `@EventListener` 
   注解，并设置监听的事件为 UserRegisterEvent。这是另一种使用方式！ 
    
   #### 3.6 DemoController 
   创建 DemoController 类，提供  
- ```text 
-  /demo/register
-  ``` 
+ `/demo/register` 
   注册接口。代码如下： 
    
- ```java 
   @RestController
 @RequestMapping("/demo")
 public class DemoController {
@@ -273,13 +215,16 @@ public class DemoController {
   #### 3.7 DemoApplication 
   创建 DemoApplication 类，应用启动类。代码如下： 
    
- ```java 
+```java
   @SpringBootApplication
 @EnableAsync // 开启 Spring 异步的功能
 public class DemoApplication {
+```
 
+```java
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
+```
     }
 
 }
@@ -291,7 +236,6 @@ public class DemoApplication {
   ① 执行 DemoApplication 类，启动项目。 
   ② 调用 http://127.0.0.1:8080/demo/register?username=yudaoyuanma 接口，进行注册。IDEA 控制台打印日志如下： 
    
- ```java 
   # UserService 发布 UserRegisterEvent 事件
 2020-04-06 13:09:39.145  INFO 18615 --- [nio-8080-exec-1] c.i.s.l.eventdemo.service.UserService    : [register][执行用户(yudaoyuanma) 的注册逻辑]
 # CouponService 监听处理该事件
@@ -308,7 +252,6 @@ public class DemoApplication {
   #### 4.1 ApplicationContextEvent 
   ApplicationContextEvent 是 Spring Context 相关的事件基类，如下图所示： 
    
-  ![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9678c5bce6444fa897e875ba98009d7f~tplv-k3u1fbpfcp-zoom-1.image  '别再面向 for 循环编程了，Spring 自带的观察者模式就很香！') 
    
    ContextStartedEvent：Spring Context 启动完成事件。 
    ContextStoppedEvent：Spring Context 停止完成事件。 
@@ -317,7 +260,6 @@ public class DemoApplication {
    
   也就是说，在 Spring Context 的整个生命周期中，会发布相应的 ApplicationContextEvent 事件。 
   SpringApplicationEvent 是 Spring Boot Application（应用）相关的事件基类，如下图所示： 
-  ![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9678c5bce6444fa897e875ba98009d7f~tplv-k3u1fbpfcp-zoom-1.image  '别再面向 for 循环编程了，Spring 自带的观察者模式就很香！') 
    
    ApplicationStartingEvent：Application 启动开始事件。 
    ApplicationEnvironmentPreparedEvent：Spring Environment 准备完成的事件。 
@@ -330,24 +272,18 @@ public class DemoApplication {
    
   #### 4.2 RouteRefreshListener 
   在之前小节中，我们可以看到 Spring Cloud Gateway 通过监听 RefreshRoutesEvent 事件，结合 Nacos 作为配置中心，实现网关路由动态刷新的功能。 
-  ![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9678c5bce6444fa897e875ba98009d7f~tplv-k3u1fbpfcp-zoom-1.image  '别再面向 for 循环编程了，Spring 自带的观察者模式就很香！') 
    
    
   #### 4.3 RefreshRemoteApplicationEvent 
   在之前小节中，我们可以看到 Spring Cloud Config Client 通过监听 RefreshRemoteApplicationEvent 事件，结合 RabbitMQ 作为 Spring Cloud Bus 消息总线，实现本地配置刷新的功能。 
-  ![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9678c5bce6444fa897e875ba98009d7f~tplv-k3u1fbpfcp-zoom-1.image  '别再面向 for 循环编程了，Spring 自带的观察者模式就很香！') 
    
   ### 666. 彩蛋 
   至此，我们已经完成了对 Spring 事件制的学习。当然，还有一些功能，胖友可以自己在倒腾倒腾。 
   ① 如果胖友想要多个监听器按照指定顺序执行，可以通过实现 Ordered 接口，指定其顺序。 
   ② 如果胖友想要监听多种 ApplicationContext 事件，可以实现 SmartApplicationListener 接口，具体示例可以看看 SourceFilteringListener 类。 
   ③  
- ```text 
-  @TransactionalEventListener
-  ``` 
+ `@TransactionalEventListener` 
   注解，可以声明在当前事务“结束”时，执行相应的监听逻辑。 
   ④ 可以通过实现 ApplicationEventMulticaster 接口，定义自定义的事件广播器，可以往里面添加和移除监听器，并发布事件给注册在其中的监听器。使用比较少，基本可以忽略。 
   
   
-
-                                        

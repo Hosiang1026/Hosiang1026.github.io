@@ -1,16 +1,15 @@
-﻿---
-title: 在 Node.js 上接入 Paddle Lite，让你的网站具备 AI 推理能力
-categories: 热门文章
+---
+title: 在Nodejs上接入PaddleLite
+categories: 其他系列
 tags:
-  - Popular
-author: OSChina
-top: 1736
-cover_picture: 'https://api.opics.org/api'
-abbrlink: bb98e2f8
-date: 2021-04-15 09:19:21
+  - JavaScript
+abbrlink: aaf4f0a4
+date: 2023-12-19 00:00:00
+top: 213
 ---
 
-【飞桨开发者说】李睿，北京邮电大学学生，人工智能和移动开发爱好者。 随着桌面端Electron技术逐步崛起，基于Electron开发的代码编辑器、聊天软件、游戏等层出不穷。 对于习惯使用Node.js进...
+
+【飞桨开发者说】李睿，北京邮电大学学生，人工智能和移动开发爱好者。 随着桌面端Electron技术逐步崛起，基于Electron开发的代码编辑器、聊天软件、游戏等层出不穷。 对于习惯使用Node.js进。..
 <!-- more -->
 
                                                                                                                                                                                         【飞桨开发者说】李睿，北京邮电大学学生，人工智能和移动开发爱好者。​ 
@@ -27,38 +26,38 @@ pip install -f https://paddlepaddle.org.cn/pip/oschina/cpu paddlepaddle
 ## GPU版本安装命令
 pip install -f https://paddlepaddle.org.cn/pip/oschina/gpu paddlepaddle-gpu 
  
-##### 项目效果 
+##### 项目效果
 1. 下载预编译结果：可以直接在Paddle Node的Release界面下载预编译的结果，包括以下三个文件： 
  
   paddlenode.node ：编译后的Node.js模块  
   libiomp5md.dll ：OpenMP DLL  
+
   mklml.dll ：MKL数学核心库  
  
 2. 下载并转化预训练模型：从官方开放的模型库中下载mobilenet_v1模型，并使用opt工具（Paddle Lite自带此工具）转换： 
-1.安装Paddle Lite : 
+1。安装Paddle Lite : 
  
-  ```text 
-  pip install paddlelite
-
-  ```  
+  `pip install paddlelite`  
  
 2. 转化模型： 
  
-  ```java 
+  ```java
   paddle_lite_opt –model_dir=./mobilenet_v1 –valid_targets=x86 –optimize_out=mobilenetv1_opt
 
 
   ```  
  
 执行上面步骤我们可以得到转化后的模型文件：mobilenetv1_opt.nb 
+
 3. 在Node.js中进行推理： 
  
-  ```java 
+```javascript
   var addon = require('./paddlenode')
 var arr = new Array(150528)
 for(var i=0; i<arr.length; i++) arr[i]=1;
 addon.set_model_file("./mobilenetv1_opt.nb")
 addon.infer_float(arr,[1, 3, 224, 224])
+```
 
 
   ```  
@@ -67,48 +66,51 @@ addon.infer_float(arr,[1, 3, 224, 224])
 ![Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9zS2lhMUZLRmlhZmdoVWV5VGQ4aWF5cTZzUGM4VjdCOHpWamljejNkNUg5aWI3Rld1a2ZEaEtBOUNDNjRGd3JYaHJWaWIxVm5ZamNYY3JoNGp3UUZPZmQzOTVpY0EvNjQw?x-oss-process=image/format,png  '在 Node.js 上接入 Paddle Lite，让你的网站具备 AI 推理能力') 
 其中0号元素为结果向量的大小，方便进行遍历，其他元素即为模型本身的输出。 
  
-##### 手动编译 
-如果你决定手动编译，首先需要从Paddle Lite的Release中找到x86的预编译结果，目前最新版本是v2.6.1。下载下来之后定位到binding.gyp,将lite_dir变量设定为预编译库 
+##### 手动编译
+如果你决定手动编译，首先需要从Paddle Lite的Release中找到x86的预编译结果，目前最新版本是v2.6.1。下载下来之后定位到binding.gyp，将lite_dir变量设定为预编译库 
 文件夹的绝对路径，示例如下： 
  
   ```json
 {
+```javascript
     'variables': {
+```
         'lite_dir%': 'C:/Users/Li/Desktop/Exp/inference_lite_lib.win.x86.MSVC.C++_static.py37.full_publish',
     },
+```json
     "targets": [
+```
         {
             'target_name': "paddlenode",
+```python
             'sources': ["paddlelib.h","paddlelib.cc","paddlenode.cc"],
             'defines': [
+```
             ],
+```
             'include_dirs': [
                 "<(lite_dir)/cxx/include",
                 "<(lite_dir)/third_party/mklml/include"
+```
             ],
+```
             'libraries': [
                 "-l<(lite_dir)/cxx/lib/libpaddle_api_light_bundled.lib",
                 "-l<(lite_dir)/third_party/mklml/lib/libiomp5md.lib",
                 "-l<(lite_dir)/third_party/mklml/lib/mklml.lib",
+```
                 "-lshlwapi.lib"
             ]
         }
     ]
 }
 
-  ```  
+  
+```  
  
-之后定位到我们的源码所在目录，确保你已经安装好了node-gyp和windows-build-tools，运行： 
+之后定位到我们的源码所在目录，确保你已经安装好了node-gyp和windows-build-tools，运行： `node-gyp configure build` 即可生成最终结果，但是记得从预编译库中复制两个dll动态链接库到编译结果目录。因为官方发布的为Release版lib文件，这里如果使用debug版会导致不匹配的错误。 
  
-  ```text 
-  node-gyp configure build
-
-
-  ```  
- 
-即可生成最终结果，但是记得从预编译库中复制两个dll动态链接库到编译结果目录。因为官方发布的为Release版lib文件，这里如果使用debug版会导致不匹配的错误。 
- 
-##### 原理介绍 
+##### 原理介绍
 这个项目实际上是在Paddle Lite的C++ Demo上套了一层壳，我们最需要关注的是怎么将N-API和C的对象互相转换，在Node.js的官方文档中给出了非常多的函数和解释，在此基础上做转换即可。这里给出一些函数的解释： 
  
   napidefineproperties - 定义资源  
@@ -124,15 +126,10 @@ addon.infer_float(arr,[1, 3, 224, 224])
  
 还有一些函数大体作用相同，仅仅作为转换作用。 
  
-##### 写在最后 
+##### 写在最后
 飞桨已经推出的Paddle.js支持直接在浏览器中进行推理。而本文介绍的Paddle Node项目从另一个角度为Node.js提供可能。飞桨的中文生态给国内开发者和入门者提供了非常大的便利，大大降低了大家的学习成本。希望飞桨能够做得越来越好，进一步降低用户使用门槛，非常感谢。 
-下载安装命令
 
-## CPU版本安装命令
-pip install -f https://paddlepaddle.org.cn/pip/oschina/cpu paddlepaddle
 
-## GPU版本安装命令
-pip install -f https://paddlepaddle.org.cn/pip/oschina/gpu paddlepaddle-gpu
  
  
  >> 访问 PaddlePaddle 官网，了解更多相关内容。 

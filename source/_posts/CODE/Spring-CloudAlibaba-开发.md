@@ -1,20 +1,18 @@
-﻿---
-title: SpringCloud Alibaba实战二十九 - SpringCloud Gateway 请求响应日志
-categories: 热门文章
+---
+title: SpringCloudAlibaba实战二十九SpringC
+categories: Java开发全栈系列
 tags:
-  - Popular
-author: OSChina
-top: 1947
-cover_picture: 'https://api.opics.org/api'
-abbrlink: 2d677f2f
-date: 2021-04-15 09:46:45
+  - Java
+abbrlink: c8d00d53
+date: 2024-01-28 00:00:00
+top: 57
 ---
 
-请求响应日志是日常开发调试定位问题的重要手段，在微服务中引入SpringCloud Gateway后我们希望在网关层统一进行日志的收集。 本节内容将实现以下两个功能： 获取请求的输入输出参数，封装成...
+
+请求响应日志是日常开发调试定位问题的重要手段，在微服务中引入SpringCloud Gateway后我们希望在网关层统一进行日志的收集。 本节内容将实现以下两个功能： 获取请求的输入输出参数，封装成。..
 <!-- more -->
 
                                                                                                                                                                                          
-   
  请求响应日志是日常开发调试定位问题的重要手段，在微服务中引入SpringCloud Gateway后我们希望在网关层统一进行日志的收集。 
  本节内容将实现以下两个功能： 
   
@@ -27,7 +25,7 @@ date: 2021-04-15 09:46:45
    首先我们先定义一个日志体  
   
   
- ```java 
+ ```java
   @Data
 public class GatewayLog {
     /**访问实例*/
@@ -52,13 +50,7 @@ public class GatewayLog {
     private long executeTime;
 }
 
-  ``` 
-  
-  
-   【关键】在网关定义日志过滤器，获取输入输出参数  
-  
-  
- ```java 
+  `【关键】在网关定义日志过滤器，获取输入输出参数```java
   /**
  * 日志过滤器，用于记录日志
  * @author jianzh5
@@ -77,7 +69,6 @@ public class AccessLogFilter implements GlobalFilter, Ordered {
         return -100;
     }
 
-    @Override
     @SuppressWarnings("unchecked")
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
@@ -106,7 +97,6 @@ public class AccessLogFilter implements GlobalFilter, Ordered {
         }else{
             return writeBasicLog(exchange, chain, gatewayLog);
         }
-    }
 
     private Mono<Void> writeBasicLog(ServerWebExchange exchange, GatewayFilterChain chain, GatewayLog accessLog) {
         StringBuilder builder = new StringBuilder();
@@ -124,18 +114,15 @@ public class AccessLogFilter implements GlobalFilter, Ordered {
                     // 打印日志
                     writeAccessLog(accessLog);
                 }));
-    }
 
 
     /**
      * 解决 request body 只能读取一次问题，
-     * 参考: org.springframework.cloud.gateway.filter.factory.rewrite.ModifyRequestBodyGatewayFilterFactory
      * @param exchange
      * @param chain
      * @param gatewayLog
      * @return
      */
-    @SuppressWarnings("unchecked")
     private Mono writeBodyLog(ServerWebExchange exchange, GatewayFilterChain chain, GatewayLog gatewayLog) {
         ServerRequest serverRequest = ServerRequest.create(exchange,messageReaders);
 
@@ -165,12 +152,8 @@ public class AccessLogFilter implements GlobalFilter, Ordered {
 
                     // 记录普通的
                     return chain.filter(exchange.mutate().request(decoratedRequest).response(decoratedResponse).build())
-                            .then(Mono.fromRunnable(() -> {
-                                // 打印日志
                                 writeAccessLog(gatewayLog);
                             }));
-                }));
-    }
 
     /**
      * 打印日志
@@ -190,15 +173,12 @@ public class AccessLogFilter implements GlobalFilter, Ordered {
 
     /**
      * 请求装饰器，重新计算 headers
-     * @param exchange
      * @param headers
      * @param outputMessage
-     * @return
      */
     private ServerHttpRequestDecorator requestDecorate(ServerWebExchange exchange, HttpHeaders headers,
                                                        CachedBodyOutputMessage outputMessage) {
         return new ServerHttpRequestDecorator(exchange.getRequest()) {
-            @Override
             public HttpHeaders getHeaders() {
                 long contentLength = headers.getContentLength();
                 HttpHeaders httpHeaders = new HttpHeaders();
@@ -213,12 +193,10 @@ public class AccessLogFilter implements GlobalFilter, Ordered {
                 return httpHeaders;
             }
 
-            @Override
             public Flux<DataBuffer> getBody() {
                 return outputMessage.getBody();
             }
         };
-    }
 
 
     /**
@@ -230,7 +208,6 @@ public class AccessLogFilter implements GlobalFilter, Ordered {
         DataBufferFactory bufferFactory = response.bufferFactory();
 
         return new ServerHttpResponseDecorator(response) {
-            @Override
             public Mono<Void> writeWith(Publisher<? extends DataBuffer> body) {
                 if (body instanceof Flux) {
                     Date responseTime = new Date();
@@ -266,31 +243,20 @@ public class AccessLogFilter implements GlobalFilter, Ordered {
 
                             return bufferFactory.wrap(content);
                         }));
-                    }
-                }
                 // if body is not a flux. never got there.
                 return super.writeWith(body);
             }
         };
-    }
-}
 
-  ``` 
-  
- 代码较长建议直接拷贝到编辑器，只要注意下面一个关键点： 
-  
- ```java 
+  `代码较长建议直接拷贝到编辑器，只要注意下面一个关键点：```java
   getOrder()
   ``` 
+```
  方法返回的值必须要<-1，「否则标准的NettyWriteResponseFilter将在您的过滤器被调用的机会之前发送响应，即不会执行获取后端响应参数的方法」 
- 通过上面的两步我们已经可以获取到请求的输入输出参数了，在  
- ```java 
-  writeAccessLog()
-  ``` 
- 中将其输出到了日志文件，大家可以在Postman发送请求观察日志。 
+ 通过上面的两步我们已经可以获取到请求的输入输出参数了，在 `writeAccessLog()` 中将其输出到了日志文件，大家可以在Postman发送请求观察日志。 
+```
   
  #### 存储日志 
- 如果需要将日志持久化方便后期检索的话可以考虑将日志存储在MongoDB中，实现过程很简单。（安装MongoDB可以参考这篇文章：实战|MongoDB的安装配置） 
   
    引入MongoDB  
   
@@ -301,85 +267,73 @@ public class AccessLogFilter implements GlobalFilter, Ordered {
     <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
 </dependency>
 
-  ``` 
+  
+``` 
   
  由于gateway是基于webflux，所以我们需要选择reactive版本。 
   
    在GatewayLog上添加对应的注解  
   
   
- ```java 
+```java
   @Data
 @Document
-public class GatewayLog {
     @Id
     private String id;
+```
  ...
 }
 
-  ``` 
-  
-  
-   建立AccessLogRepository  
-  
-  
- ```xml 
+  `建立AccessLogRepository```xml
+```java
   @Repository
 public interface AccessLogRepository extends ReactiveMongoRepository<GatewayLog,String> {
+```
   
 }
 
-  ``` 
-  
-  
-   建立Service  
-  
-  
- ```xml 
+  `建立Service```xml
+```java
   public interface AccessLogService {
+```
 
+```
     /**
      * 保存AccessLog
      * @param gatewayLog 请求响应日志
      * @return 响应日志
+```
      */
+```
     Mono<GatewayLog> saveAccessLog(GatewayLog gatewayLog);
+```
 
 }
 
-  ``` 
-  
-  
-   建立实现类  
-  
-  
- ```java 
+  `建立实现类```java
+```java
   @Service
 public class AccessLogServiceImpl implements AccessLogService {
-    @Autowired
     private AccessLogRepository accessLogRepository;
+```
 
-    @Override
+```java
     public Mono<GatewayLog> saveAccessLog(GatewayLog gatewayLog) {
         return accessLogRepository.insert(gatewayLog);
+```
     }
-}
 
-  ``` 
-  
-  
-   在Nacos配置中心添加MongoDB对应配置  
-  
-  
- ```text 
+  `在Nacos配置中心添加MongoDB对应配置```text
   spring:
   data:
     mongodb:
+```
       host: xxx.xx.x.xx
       port: 27017
       database: accesslog
       username: accesslog
       password: xxxxxx
+```
 
   ``` 
   
@@ -392,10 +346,5 @@ public class AccessLogServiceImpl implements AccessLogService {
  以上，希望对你有所帮助！ 
    
    
- ![Test](https://oscimg.oschina.net/oscnet/5d1b13e8-31f4-44f1-8fcb-ece41f90bac6.png  'SpringCloud Alibaba实战二十九 - SpringCloud Gateway 请求响应日志') 
    
    
-   
-   
- 
-                                        

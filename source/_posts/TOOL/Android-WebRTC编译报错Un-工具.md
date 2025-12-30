@@ -1,13 +1,12 @@
-﻿---
-title: WebRTC编译Android报错UnicodeDecodeError，如何解决-
-categories: 热门文章
+---
+title: WebRTC编译Android报错UnicodeDecode
+categories: 其他系列
 tags:
-  - Popular
-author: OSChina
-top: 1958
-cover_picture: 'https://api.opics.org/api'
-abbrlink: 67321cab
-date: 2021-04-15 09:46:45
+  - Shell
+  - Java
+abbrlink: a44c9d38
+date: 2024-01-06 00:00:00
+top: 168
 ---
 
 由于去年WebRTC-client已经初现成果，因此从开年复工起，我们就开始着力于WebRTC安卓版本的编译。编译WebRTC Android使用的是python2.7.x，出现错误提示如下：“UnicodeDecodeError: ‘ascii...
@@ -20,7 +19,6 @@ date: 2021-04-15 09:46:45
 Ubuntu编译android程序的工作空间的目录不允许有中文。但是一般国内使用的Ubuntu都会默认安装成中文语言，用户目录下的名称都是中文。 
 对此我们有两种解决办法： 
 1、把中文目录修改为英文，注意要修改~/.bashrc中的环境，还需要把安装Ubuntu默认的中文改成英文，比如：桌面和下载等等。 2、因为我们此处安装的是虚拟机，重新安装ubuntu，选择英文即可，该方法过程比较简单，但是安装步骤稍费时。 
-![Test](https://oscimg.oschina.net/oscnet/up-59f85ea85781eefccf269163128a601dccd.png  'WebRTC编译Android报错UnicodeDecodeError，如何解决-') 
 
 ## 问题深入分析
 
@@ -38,6 +36,7 @@ UnicodeDecodeError是Python在处理非ASCII字符时常见的错误。当Python
 ```bash
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+
 ```
 
 2. 执行`source ~/.bashrc`使配置生效
@@ -49,13 +48,7 @@ export LANG=en_US.UTF-8
 
 #### 方案二：使用符号链接
 
-如果不想修改目录名称，可以创建一个英文路径的符号链接：
-
-```bash
-ln -s ~/实际中文目录名 ~/英文目录名
-```
-
-然后在编译时使用英文路径。
+如果不想修改目录名称，可以创建一个英文路径的符号链接： `ln -s ~/实际中文目录名 ~/英文目录名` 然后在编译时使用英文路径。
 
 #### 方案三：修改Python默认编码
 
@@ -66,6 +59,7 @@ ln -s ~/实际中文目录名 ~/英文目录名
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
+
 ```
 
 ### 最佳实践建议
@@ -91,6 +85,4 @@ sys.setdefaultencoding('utf-8')
 4. **编译参数**：根据目标平台正确配置编译参数，包括目标架构、API级别等。
 
 目前我们已经开发了基于WebRTC实现的网页音视频通话系统EasyRTC，大家有兴趣也可以了解一下。 
-![Test](https://oscimg.oschina.net/oscnet/up-59f85ea85781eefccf269163128a601dccd.png  'WebRTC编译Android报错UnicodeDecodeError，如何解决-') 
-对于WebRTC的研究，大家可以关注我们，后续我们也将不断更新此类开发。WebRTC技术的开发将会给我们其他平台的视频直播带来一次变革更新，对于更多的建议和发展可能性，我们欢迎大家的沟通探讨。  
                                         

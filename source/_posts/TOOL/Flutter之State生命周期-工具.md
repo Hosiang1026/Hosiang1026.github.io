@@ -1,0 +1,281 @@
+---
+title: Flutter之State生命周期
+categories: 其他系列
+tags:
+  - JavaScript
+abbrlink: 7d2ca02a
+date: 2019-09-29 00:00:00
+top: 85
+---
+
+
+State 的生命周期，指的是在用户参与的情况下，其关联的 Widget 所经历的，从创建到显示，再到更新最后到停止，直至销毁等各个阶段 不同的阶段涉及到特定的任务处理 State 的生命周期流程如下。..
+<!-- more -->
+
+                                                                                                                                                                                        State 的生命周期，指的是在用户参与的情况下，其关联的 Widget 所经历的，从创建到显示，再到更新最后到停止，直至销毁等各个阶段 
+不同的阶段涉及到特定的任务处理 
+State 的生命周期流程如下图所示 
+![Test](https://oscimg.oschina.net/oscnet/59cc50b995ed1a2914b8453ba44bcb99304.jpg  'Flutter之 State 生命周期') 
+由图可知：State 的生命周期可以分为三个阶段：创建（插入视图树）、更新（在视图树中存在）、销毁（从视图树中移除） 
+创建 
+```
+State 初始化时会依次执行：构造方法 -> initState -> didChangeDependencies -> build，随后完成页面渲染 
+```
+ 
+```
+ 构造方法：State 生命周期的起点，Flutter 会通过调用 StatefulWidget.createState() 来创建一个 State。可以通过构造方法，来接收父 Widget 传递的初始化 UI 配置数据，而这些配置数据，决定了 Widget 最初的呈现状态 
+```
+ initState：在 State 对象被插入视图树时调用。在 State 命周期中只会被调用一次，因此可以在 initState 函数中做一些初始化操作 
+```
+ didChangeDependencies：专门用来处理 State 对象依赖关系变化，会在 initState() 调用结束后调用 
+```
+ build：构建视图。经过构造方法、initState、didChangeDependencies 后，Framework 认为 State 已经准备就绪，于是便调用 build。在 build 中，需要根据父 Widget 传递过来的初始化配置数据及 State 的当前状态，创建一个 Widget 然后返回 
+ 
+更新 
+Widget 的状态更新，主要由 setState、didChangeDependencies 和 didUpdateWidget 触发 
+ 
+ setState：当状态数据发生变化时，可以通过调用 setState 方法告诉 Flutter 使用更新后数据重建 UI 
+
+ didChangeDependencies：State 对象的依赖关系发生变化后，Flutter 会回调该方法，随后触发组件构建。State 对象依赖关系发生变化的典型场景：系统语言 Locale 或应用主题改变时，系统会通知 State 执行 didChangeDependencies 回调方法 
+ didUpdateWidget：Widget 的配置发生变化时，或热重载时，系统会回调该方法 
+ 
+一旦这三个方法被调用，Flutter 随后便会销毁旧的 Widget，并调用 build 方法重建 Widget 
+销毁 
+组件销毁相对创建和更新而言更简单。比如页面销毁时或是组件被移除时，系统会调用 deactivate 和 dispose 这两个方法，来移除或销毁组件 
+ 
+ 当组件的可见状态发生变化时，deactivate 方法会被调用，这时 State 会被暂时从视图树中移除。 注意：页面切换时，由于 State 对象在视图树中的位置发生了变化，需要先暂时移除后再重新添加，重新触发组件构建，因此也会调用 deactivate 方法 
+ 当 State 被永久地从视图树中移除时，Flutter 会调用 dispose 方法，而一旦 dispose 方法被调用，组件就要被销毁了，因此可以在 dispose 方法中进行最终的资源释放、移除监听、清理环境等工作 
+ 
+
+## Flutter State生命周期详解
+
+### 生命周期方法详解
+
+#### 创建阶段的方法
+
+```javascript
+**构造方法（Constructor）**
+```
+- 作用：接收父Widget传递的初始化数据
+- 时机：State对象创建时
+- 注意：不要在这里执行耗时操作
+
+```
+**initState()**
+```
+- 作用：初始化State对象
+- 时机：State对象被插入视图树时
+- 特点：整个生命周期中只调用一次
+- 用途：
+  - 初始化数据
+  - 订阅流（Stream）
+  - 启动定时器
+  - 初始化控制器
+
+```
+**didChangeDependencies()**
+```
+- 作用：处理依赖关系变化
+```
+- 时机：initState()之后，build()之前
+```
+- 特点：可能被多次调用
+- 用途：
+  - 访问InheritedWidget
+  - 处理主题、语言等全局配置变化
+
+```
+**build()**
+```
+- 作用：构建Widget树
+- 时机：每次需要重建UI时
+- 注意：
+  - 不要在这里执行耗时操作
+  - 保持build方法纯净
+  - 避免在build中创建新的Widget实例
+
+#### 更新阶段的方法
+
+```
+**setState()**
+```
+- 作用：通知Framework状态已改变
+- 时机：需要更新UI时手动调用
+- 注意：
+  - 不要频繁调用
+  - 不要在build方法中调用
+  - 只更新需要改变的状态
+
+```
+**didChangeDependencies()（更新时）**
+```
+- 作用：依赖关系变化时调用
+- 触发条件：
+  - 系统语言改变
+  - 应用主题改变
+  - InheritedWidget更新
+
+```
+**didUpdateWidget()**
+```
+- 作用：Widget配置更新时调用
+- 时机：父Widget重建并传入新的配置
+- 用途：
+  - 比较新旧配置
+  - 更新内部状态
+  - 处理配置变化
+
+#### 销毁阶段的方法
+
+```
+**deactivate()**
+```
+- 作用：State对象从视图树中移除时调用
+- 时机：
+  - 页面切换
+  - Widget被移除
+- 注意：可能被重新插入，不是真正的销毁
+
+```
+**dispose()**
+```
+- 作用：State对象永久销毁时调用
+- 时机：State对象不会再被使用时
+- 用途：
+  - 取消订阅
+  - 停止定时器
+  - 释放资源
+  - 清理控制器
+
+### 实际应用示例
+
+#### 示例1：数据初始化
+
+```dart
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  String _data = '';
+  StreamSubscription? _subscription;
+  Timer? _timer;
+
+  void initState() {
+    super.initState();
+    // 初始化数据
+    _data = 'Initial Data';
+    // 订阅流
+    _subscription = stream.listen((data) {
+      setState(() {
+        _data = data;
+      });
+    // 启动定时器
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      // 定时任务
+    });
+
+  void dispose() {
+    // 取消订阅
+    _subscription?.cancel();
+    // 停止定时器
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  Widget build(BuildContext context) {
+    return Text(_data);
+  }
+`#### 示例2：处理配置更新`dart
+  int _counter = 0;
+
+  void didUpdateWidget(MyWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // 比较新旧配置
+    if (widget.initialValue != oldWidget.initialValue) {
+      _counter = widget.initialValue;
+    }
+
+    return Text('Counter: $_counter');
+  }
+`#### 示例3：响应依赖变化`dart
+  ThemeData? _theme;
+
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // 获取主题
+    _theme = Theme.of(context);
+  }
+
+    return Container(
+      color: _theme?.primaryColor,
+      child: Text('Themed Widget'),
+    );
+  }
+```
+
+### 常见问题和最佳实践
+
+#### 问题1：内存泄漏
+
+```
+**原因：**
+```
+- 忘记取消订阅
+- 忘记停止定时器
+- 控制器未释放
+
+```
+**解决方案：**
+```
+- 在dispose中清理所有资源
+- 使用自动取消订阅的包
+- 使用StatefulWidget的生命周期管理
+
+#### 问题2：不必要的重建
+
+- 在build中创建新对象
+- 频繁调用setState
+- 没有使用const构造函数
+
+- 将对象创建移到build外
+- 使用const构造函数
+- 合理使用setState
+- 使用StatefulBuilder局部更新
+
+#### 问题3：异步操作处理
+
+- 在dispose后继续执行异步操作
+- 没有检查mounted状态
+
+```
+Future<void> _loadData() async {
+  final data = await fetchData();
+  if (mounted) {
+    });
+```
+
+```
+
+### 性能优化建议
+
+1. **合理使用setState**：只在必要时调用，避免频繁重建
+2. **使用const构造函数**：减少不必要的对象创建
+3. **拆分Widget**：将复杂Widget拆分为多个小Widget
+
+4. **使用Key**：在列表等场景中正确使用Key
+
+5. **避免在build中执行耗时操作**：将耗时操作移到异步方法中
+
+### 总结
+
+理解Flutter State的生命周期对于开发高质量的Flutter应用至关重要。通过正确使用生命周期方法，我们可以：
+
+- 合理初始化资源
+- 正确处理状态更新
+- 及时释放资源
+- 优化应用性能
+
+掌握生命周期方法的使用，能够帮助我们编写更稳定、更高效的Flutter应用。
+                                        

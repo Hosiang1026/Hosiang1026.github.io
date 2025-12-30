@@ -1,48 +1,482 @@
-﻿---
-title: ElasticSearch结合MySQL的两种架构模式对比
-categories: 热门文章
+---
+title: MySQLElasticSearch结合MySQL的两种
+categories: 架构设计思想系列
 tags:
-  - Popular
-author: OSChina
+  - SQL
+  - MySQL
+  - ElasticSearch
+  - Architecture
+abbrlink: 5b1f4da1
+date: 2021-08-08 00:00:00
 top: 2006
-cover_picture: 'https://api.opics.org/api'
-abbrlink: bb18e6a7
-date: 2021-04-15 09:46:45
 ---
 
-数据库同步的管道架构 MySQL作为数据库的核心能力范围就是在线业务的事务处理和查询访问。因此无论单体应用也好，微服务也好，都会以多连接请求的形式，将业务数据写入MySQL；作为专业的Ela...
+
+MySQL和ElasticSearch是两种不同类型的数据库系统，各有优势。在实际应用中，经常需要将两者结合使用，发挥各自优势。本文详细介绍MySQL与ElasticSearch结合的两种主要架构模式：数据库同步的管道架构和数据事件分发架构，帮助开发者根据业务场景选择最合适的方案。
+
 <!-- more -->
 
-                                                                                                                                                                                         
-   
-  
- ### 数据库同步的管道架构 
- MySQL作为数据库的核心能力范围就是在线业务的事务处理和查询访问。因此无论单体应用也好，微服务也好，都会以多连接请求的形式，将业务数据写入MySQL；作为专业的Elasticsearch，往往在整个过程中，扮演着从MySQL复制数据、建立索引、提供搜索的角色。这是最普遍存在的一种应用场景。 
- 往往从MySQL同步数据到Elasticsearch的过程，就属于异构系统之间的协作了，这块无论从技术选型也好，运维复杂性也好，都比单独解决两边的问题要麻烦。 
- 解决MySQL和Elasticsearch两边数据复制的过程，就是需要用到管道架构了。目前看MySQL数据管道架构就是分为两种，我给它的定义（1）简单粗暴的客户端模式，（2）伪装成从属的副本模式 
- 第一种简单粗暴的客户端模式 
- 其实这种模式也很好理解，就是用SQL定时轮训数据表，抓取增量，然后写入Elasticsearch。常见的技术例如：logstash-jdbc-input插件 
- ![Test](https://oscimg.oschina.net/oscnet/a26c59f2-3425-4542-9b0d-788463cda943.png  'ElasticSearch结合MySQL的两种架构模式对比') 
- ![Test](https://oscimg.oschina.net/oscnet/a26c59f2-3425-4542-9b0d-788463cda943.png  'ElasticSearch结合MySQL的两种架构模式对比') 
- 上述是logstash-jdbc-input插件定时查询MySQL，并且将数据表中变化的insert、update结果抓取到Logstash。然后Logstash就可以进行过滤等操作，并通过Logstash-output-elasticsearch插件输出给Elasticsearh索引。 
- 这种简单粗暴的客户端模式，最大的优势就是简单！属于老少咸宜那种，缺点x也很明显，首先在这种模式下几乎所有的解决方案，都没有直接解决delete的好办法，一般需要业务操作上来同步支持。另外也可以看到logstash-jdbc-input有个schedule选项，最小时间间隔是1分钟。那么从实时性来看，也是客户端这种模式的最大问题。这个就不是说logstash-jdbc-input做不到1秒，甚至更短的间隔，而是这种模式不适合太短的间隔。 
- 除了logstash-jdbc-input插件之外，还有elasticsearch-jdbc，太老了，不推荐。 
- 第二种伪装成从属的副本模式 
- 这种架构模式下的管道技术，设计机制就比较精巧。充分利用了MySQL的主从模式，将自己伪装成slave节点，然后通过CDC方法（数据变更捕获）获取binlog推送的变更数据，然后再用管道的思路，封装成消息推送到Kafka这样的变更分发平台，让Elasticsearch从Kafka上订阅，一会儿说加上kafka的优势，我们先看看这种伪装模式的代表——阿里的canal的具体样子 
- ![Test](https://oscimg.oschina.net/oscnet/a26c59f2-3425-4542-9b0d-788463cda943.png  'ElasticSearch结合MySQL的两种架构模式对比') 
- 这张架构图，来自canal的github官网，基本上很形象的绘制了canal的架构角色，我就不单独画了。 
- 图中的Master、I am a slave，就是canal把自己伪装成了MySQL Master的一个从属节点。那么主节点的binglog只要接收到数据，就会推送给canal，然后canal作为一个管道可以将binglog数据再次推送给Kafka、elasticsearch、HBase ...... 
- 我们先看看这种模式的优缺点，优势非常明显，首先捕获数据的过程是实时的，你完全可以把它当成一个MySQL的从库对待，其次增、删、改的数据表操作基本上都涵盖到了，这也是伪装成MySQL从库的好处；缺点就是架构比较复杂，因为这种binlog需要使用Row模式，日志量会很大。 
- 一般不推荐直接写Elasticsearch，很多文章都只是告诉你用canal的架构是MySQL+canal+kafka+elasticsearch，但从来不去加上kafka的原因，实际上canal完全可以通过自定义类直写ES。其实加上Kafka主要目的就是将MySQl-ES的同步过程的强依赖改为松耦合的异步过程。有一个原则，希望大家能记住，若参与协作的异构系统环节太多，尽量用异步，否则任何一个环节出了事，就堵死了。 
- ![Test](https://oscimg.oschina.net/oscnet/a26c59f2-3425-4542-9b0d-788463cda943.png  'ElasticSearch结合MySQL的两种架构模式对比') 
- 上述的模式就是复杂，MySQL需要打开binglog（当然即便是单库运行，也强烈建议打开），无论canal需要考虑HA，还是构建Kafka集群，都要构建zookeeper集群。而且Kafka的分区模式要自定义为业务主键Hash存放，目的是让业务主键相同的操作都在一个分区上，若数据想长期存放在Kafka一份，尽量用Kafka的业务主键折叠策略，也就是相同主键消息事件，保留最新的。推送给Elasticsearch的过程中，还要再架上一个管道，例如用Logstash进行管道过滤。 
-  
- ### 数据事件分发架构 
- 其实并不存在Elasticsearch为主，MySQL为辅的数据同步方式。原因很简单，Elasticsearch并不是一个事务型实时操作的数据库，它的设计就是面向大吞吐量的写入，并且构建全文索引，以集群节点的分片搜索，结果聚合。因此如果让Elasticsearch为主库的需求，基本上都是事件流驱动的数据处理了，例如：日志采集、设备数据采集、操作事件记录等。那么在事件流驱动的架构体系下，消息中间件就是数据分发的中枢，而MySQL、Elasticsearch都作为此中枢的一个分发持久层客户端而存在。 
- ![Test](https://oscimg.oschina.net/oscnet/a26c59f2-3425-4542-9b0d-788463cda943.png  'ElasticSearch结合MySQL的两种架构模式对比') 
- 上图就是数据事件的一个典型分发架构： 
- 各个微服务对自己产生的业务操作事件封装成日志消息推给Kafka，那么微服务就实时地完成了日志任务，对于kafka作为分发平台，对于日志一方面由Streams Process（流处理）任务进行实时聚合计算，并将聚合结果推送给MySQL，这时候的MySQL就是作为BI统计的一个基准库。流处理系统有很多，Spark streaming、Flink、Storm、Kafka Streams，当然也可以自己写个简单的线程阻塞队列来实现。另一头分发给Logstash管道，管道对日志进行元数据打标签、过滤操作后写入到ES索引，那么BI在统计过程中，下钻到明细搜索的时候，就可以通过ES查询来完成海量日志的分片并行查询与结果聚合。 
- 上述的数据事件分发架构就很好地解决了既要给Elasticsearch写数据，又要给MySQL存计算结果的双重问题。当然不止是这些数据库了，还可以继续加入HDFS、HBase、MongoDB等等。只要你有需求，这就是数据事件的分发架构，其实前面提到的canal走到kafka的时候，也就成了这种架构。 
- 我们可以理解第一种数据库同步的管道架构，就是解决MySQL这样的事务型数据库的复制问题，通过binglog机制，是可以做到实时性的；第二种数据事件分发架构，其实就是典型的流式计算架构，也就是大数据技术范畴的计算架构了，通过消息中间件平台，例如Kafka，当然也可以考虑RocketMQ，将原本并发事务型的计算问题，转换成了解决数据事件流吞吐量的实时计算问题，其应对的环节应该是大量且频繁的数据写入情况。 
- 
-                                        
+## 一、架构模式概述
+
+### 1.1 为什么需要结合使用
+
+```
+**MySQL的优势**：
+```
+- 事务支持完善
+- 数据一致性保证
+- 适合在线业务处理
+- 成熟的生态系统
+
+```
+**ElasticSearch的优势**：
+```
+- 全文搜索能力强
+- 实时搜索性能优秀
+- 支持复杂查询
+- 水平扩展能力强
+
+```
+**结合使用的场景**：
+```
+- MySQL存储业务数据
+- ElasticSearch提供搜索服务
+- 两者数据需要同步
+- 发挥各自优势
+
+### 1.2 两种架构模式
+
+```
+**模式一：数据库同步的管道架构**
+```
+- MySQL作为主数据源
+- 通过管道同步到ElasticSearch
+- 适合数据查询场景
+
+```
+**模式二：数据事件分发架构**
+```
+- 事件驱动架构
+- 通过消息中间件分发
+- 适合大数据量场景
+
+## 二、数据库同步的管道架构
+
+### 2.1 架构设计
+
+```
+**核心思想**：
+```
+- MySQL作为数据库的核心能力范围就是在线业务的事务处理和查询访问
+- 无论单体应用还是微服务，都会以多连接请求的形式，将业务数据写入MySQL
+- ElasticSearch在整个过程中，扮演着从MySQL复制数据、建立索引、提供搜索的角色
+
+```
+**架构图**：
+```
+```
+业务应用 → MySQL（主数据源）
+              ↓
+        数据同步管道
+              ↓
+      ElasticSearch（搜索服务）
+```
+
+### 2.2 简单粗暴的客户端模式
+
+```
+**工作原理**：
+```
+- 使用SQL定时轮询数据表
+- 抓取增量数据
+- 写入ElasticSearch
+
+```
+**技术实现**：
+```
+- Logstash JDBC Input插件
+- Elasticsearch JDBC（已废弃）
+- 自定义定时任务
+
+```
+**Logstash配置示例**：
+```
+```ruby
+input {
+  jdbc {
+    jdbc_connection_string => "jdbc:mysql://localhost:3306/mydb"
+    jdbc_user => "root"
+    jdbc_password => "password"
+    jdbc_driver_library => "/path/to/mysql-connector-java.jar"
+    jdbc_driver_class => "com.mysql.jdbc.Driver"
+    schedule => "* * * * *"
+    statement => "SELECT * FROM products WHERE updated_at > :sql_last_value"
+    use_column_value => true
+    tracking_column => "updated_at"
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["localhost:9200"]
+    index => "products"
+    document_id => "%{id}"
+  }
+}
+```
+
+```
+**优点**：
+```
+- 实现简单
+- 易于理解和维护
+- 适合小规模数据
+
+```
+**缺点**：
+```
+- 实时性差（最小1分钟间隔）
+- 难以处理删除操作
+- 不适合高频率更新场景
+- 资源消耗较大
+
+### 2.3 伪装成从属的副本模式
+
+```
+**工作原理**：
+```
+- 充分利用MySQL的主从模式
+- 将自己伪装成slave节点
+- 通过CDC（数据变更捕获）获取binlog推送的变更数据
+- 封装成消息推送到Kafka
+- ElasticSearch从Kafka订阅数据
+
+```
+**代表技术：Canal**
+```
+
+```
+**架构图**：
+```
+```
+MySQL Master → Binlog
+                  ↓
+              Canal（伪装成Slave）
+                  ↓
+              Kafka（消息队列）
+                  ↓
+         Logstash/自定义消费者
+                  ↓
+          ElasticSearch
+```
+
+```
+**Canal配置示例**：
+```
+```properties
+# canal.properties
+canal.instance.master.address=127.0.0.1:3306
+canal.instance.dbUsername=root
+canal.instance.dbPassword=password
+canal.instance.connectionCharset=UTF-8
+canal.instance.filter.regex=.*\\..*
+canal.mq.servers=127.0.0.1:9092
+canal.mq.topic=canal_topic
+```
+
+```
+**优点**：
+```
+- 实时性强（接近实时）
+- 支持增删改操作
+- 数据完整性好
+- 适合大规模数据
+
+```
+**缺点**：
+```
+- 架构复杂
+- 需要MySQL开启binlog（Row模式）
+- 需要Kafka集群
+- 需要Zookeeper集群
+- 运维成本高
+
+### 2.4 推荐架构：MySQL + Canal + Kafka + ElasticSearch
+
+```
+**完整架构**：
+```
+```
+MySQL（主库）
+    ↓ Binlog（Row模式）
+Canal（CDC工具）
+    ↓ 变更事件
+Kafka（消息队列）
+    ↓ 消息分发
+Logstash/自定义消费者
+    ↓ 数据处理
+ElasticSearch（索引）
+```
+
+```
+**为什么需要Kafka**：
+```
+- 将MySQL-ES的同步过程从强依赖改为松耦合的异步过程
+- 参与协作的异构系统环节太多，尽量用异步
+- 任何一个环节出问题不会堵死整个流程
+- 支持多个消费者订阅
+- 数据可以长期保存
+
+```
+**Kafka分区策略**：
+```
+- 使用业务主键Hash存放
+- 相同主键的操作都在一个分区上
+- 保证顺序性
+- 使用Kafka的业务主键折叠策略，保留最新消息
+
+## 三、数据事件分发架构
+
+### 3.1 架构设计
+
+```
+**核心思想**：
+```
+- 不存在ElasticSearch为主，MySQL为辅的数据同步方式
+- ElasticSearch不是事务型实时操作的数据库
+- 设计面向大吞吐量的写入，构建全文索引
+- 以集群节点的分片搜索，结果聚合
+
+```
+**适用场景**：
+```
+- 事件流驱动的数据处理
+- 日志采集
+- 设备数据采集
+- 操作事件记录
+
+### 3.2 架构流程
+
+```
+**数据流向**：
+```
+```
+微服务/应用
+    ↓ 业务操作事件
+Kafka（消息中间件）
+    ↓ 数据分发
+    ├─→ Streams Process（流处理）→ MySQL（BI统计）
+    └─→ Logstash（管道处理）→ ElasticSearch（明细搜索）
+```
+
+```
+**架构图**：
+```
+```
+业务服务 → 事件消息 → Kafka
+                            ↓
+                    ┌───────┴───────┐
+                    ↓               ↓
+            Streams Process    Logstash
+                    ↓               ↓
+                MySQL          ElasticSearch
+            （BI统计库）      （明细搜索）
+```
+
+### 3.3 流处理系统
+
+```
+**可选技术**：
+```
+- Spark Streaming
+- Flink
+- Storm
+- Kafka Streams
+- 自定义线程阻塞队列
+
+```
+**处理流程**：
+```
+1. 从Kafka消费日志消息
+2. 实时聚合计算
+3. 将聚合结果推送给MySQL（BI统计）
+4. 同时分发给Logstash管道
+
+```
+**Logstash处理**：
+```
+1. 对日志进行元数据打标签
+2. 过滤操作
+3. 写入ES索引
+
+```
+**BI查询流程**：
+```
+- 统计查询：通过MySQL查询聚合结果
+- 明细搜索：通过ES查询海量日志的分片并行查询与结果聚合
+
+### 3.4 优势分析
+
+```
+**解耦设计**：
+```
+- 微服务实时完成日志任务
+- 不阻塞业务处理
+- 异步处理提高性能
+
+```
+**扩展性强**：
+```
+- 可以继续加入HDFS、HBase、MongoDB等
+- 根据需求灵活扩展
+- 支持多种数据存储
+
+```
+**性能优秀**：
+```
+- 流处理实时计算
+- ES分片并行查询
+- 支持大数据量
+
+## 四、两种架构对比
+
+### 4.1 适用场景对比
+
+```
+**数据库同步管道架构**：
+```
+- ✅ MySQL为主数据源
+- ✅ 需要从MySQL同步到ES
+- ✅ 数据一致性要求高
+- ✅ 实时性要求中等
+
+```
+**数据事件分发架构**：
+```
+- ✅ 事件流驱动
+- ✅ 大数据量写入
+- ✅ 需要实时计算
+- ✅ 多数据源存储
+
+### 4.2 技术复杂度对比
+
+```
+**数据库同步管道架构**：
+```
+- 简单模式：低复杂度
+- Canal模式：高复杂度
+- 需要MySQL binlog
+- 需要Kafka集群
+
+```
+**数据事件分发架构**：
+```
+- 需要流处理系统
+- 需要消息队列
+- 需要多个数据存储
+- 架构相对复杂
+
+### 4.3 性能对比
+
+```
+**数据库同步管道架构**：
+```
+- 实时性：Canal模式接近实时
+- 吞吐量：受MySQL性能限制
+- 延迟：秒级到分钟级
+
+```
+**数据事件分发架构**：
+```
+- 实时性：接近实时
+- 吞吐量：支持高吞吐
+- 延迟：毫秒级
+
+## 五、最佳实践
+
+### 5.1 选择建议
+
+```
+**选择数据库同步管道架构，如果**：
+```
+- MySQL是唯一数据源
+- 需要保持数据一致性
+- 数据更新频率不高
+- 团队技术栈相对简单
+
+```
+**选择数据事件分发架构，如果**：
+```
+- 事件驱动架构
+- 需要实时计算
+- 大数据量场景
+- 多数据源需求
+
+### 5.2 实施建议
+
+```
+**数据库同步管道架构**：
+```
+1. 小规模：使用Logstash JDBC
+2. 大规模：使用Canal + Kafka
+3. 确保MySQL开启binlog
+4. 合理设置Kafka分区
+
+```
+**数据事件分发架构**：
+```
+1. 选择合适的流处理框架
+2. 设计合理的消息格式
+3. 考虑数据一致性
+4. 监控各个环节
+
+### 5.3 注意事项
+
+```
+**数据一致性**：
+```
+- 考虑最终一致性
+- 处理数据冲突
+- 监控数据同步状态
+
+```
+**性能优化**：
+```
+- 合理设置Kafka分区数
+- 优化ES索引配置
+- 调整同步频率
+
+```
+**容错处理**：
+```
+- 处理消息丢失
+- 处理重复消息
+- 实现重试机制
+
+## 六、总结
+
+MySQL和ElasticSearch结合使用是常见架构模式，两种架构各有优势：
+
+```
+**数据库同步管道架构**：
+```
+- 适合MySQL为主数据源的场景
+- Canal模式提供实时同步
+- 架构相对复杂但功能强大
+
+```
+**数据事件分发架构**：
+```
+- 适合事件驱动和大数据场景
+- 支持实时计算和多数据源
+- 扩展性强性能优秀
+
+```
+**选择原则**：
+```
+- 根据业务场景选择
+- 考虑团队技术能力
+- 平衡复杂度和性能
+- 预留扩展空间
+
+通过合理选择和实施，可以充分发挥MySQL和ElasticSearch各自的优势，构建高性能、可扩展的数据架构。

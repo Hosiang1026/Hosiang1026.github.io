@@ -1,20 +1,19 @@
-﻿---
-title: rabbitmq 如何保证消息的可靠传输（如何处理消息丢失的问题）-
-categories: 热门文章
+---
+title: rabbitmq如何保证消息的
+categories: 消息队列技术系列
 tags:
-  - Popular
-author: OSChina
-top: 850
-cover_picture: 'https://api.opics.org/api'
-abbrlink: 74c7c93e
-date: 2021-04-15 09:16:39
+  - Go
+abbrlink: 5aa3baa5
+date: 2021-03-07 00:00:00
+top: 7
 ---
 
-（1）rabbitmq 1）生产者弄丢了数据 生产者将数据发送到rabbitmq的时候，可能数据就在半路给搞丢了，因为网络啥的问题，都有可能。 此时可以选择用rabbitmq提供的事务功能，就是生产者发送数...
+
+（1）rabbitmq 1）生产者弄丢了数据 生产者将数据发送到rabbitmq的时候，可能数据就在半路给搞丢了，因为网络啥的问题，都有可能。 此时可以选择用rabbitmq提供的事务功能，就是生产者发送数。..
 <!-- more -->
 
                                                                                                                                                                                          
-###### （1）rabbitmq 
+###### （1）rabbitmq
 1）生产者弄丢了数据 
 生产者将数据发送到rabbitmq的时候，可能数据就在半路给搞丢了，因为网络啥的问题，都有可能。 
 此时可以选择用rabbitmq提供的事务功能，就是生产者发送数据之前开启rabbitmq事务（channel.txSelect），然后发送消息，如果消息没有成功被rabbitmq接收到，那么生产者会收到异常报错，此时就可以回滚事务（channel.txRollback），然后重试发送消息；如果收到了消息，那么可以提交事务（channel.txCommit）。但是问题是，rabbitmq事务机制一搞，基本上吞吐量会下来，因为太耗性能。 
@@ -28,7 +27,8 @@ date: 2021-04-15 09:16:39
 哪怕是你给rabbitmq开启了持久化机制，也有一种可能，就是这个消息写到了rabbitmq中，但是还没来得及持久化到磁盘上，结果不巧，此时rabbitmq挂了，就会导致内存里的一点点数据会丢失。 
 3）消费端弄丢了数据 
 rabbitmq如果丢失了数据，主要是因为你消费的时候，刚消费到，还没处理，结果进程挂了，比如重启了，那么就尴尬了，rabbitmq认为你都消费了，这数据就丢了。 
+```
 这个时候得用rabbitmq提供的ack机制，简单来说，就是你关闭rabbitmq自动ack，可以通过一个api来调用就行，然后每次你自己代码里确保处理完的时候，再程序里ack一把。这样的话，如果你还没处理完，不就没有ack？那rabbitmq就认为你还没处理完，这个时候rabbitmq会把这个消费分配给别的consumer去处理，消息是不会丢的。 ![Test](https://img2020.cnblogs.com/other/1931196/202011/1931196-20201123212958790-894151985.png  'rabbitmq 如何保证消息的可靠传输（如何处理消息丢失的问题）-') 
+```
  
-######  
                                         

@@ -3,7 +3,7 @@ title: JDK-动态代理的实现
 categories: 其他系列
 tags:
   - Java
-abbrlink: '0'
+abbrlink: 393e37e5
 date: 2025-02-22 00:00:00
 ---
 

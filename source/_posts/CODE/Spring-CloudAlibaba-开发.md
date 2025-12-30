@@ -20,7 +20,8 @@ top: 57
    将日志发送到MongoDB进行存储  
   
   
- #### 获取输入输出参数 
+### 一、
+#### 1.1 获取输入输出参数
   
    首先我们先定义一个日志体  
   
@@ -256,7 +257,7 @@ public class AccessLogFilter implements GlobalFilter, Ordered {
  通过上面的两步我们已经可以获取到请求的输入输出参数了，在 `writeAccessLog()` 中将其输出到了日志文件，大家可以在Postman发送请求观察日志。 
 ```
   
- #### 存储日志 
+#### 1.2 存储日志
   
    引入MongoDB  
   

@@ -13,9 +13,9 @@ top: 4
 <!-- more -->
 
                                                                                                                                                                                          
-### 一、OOM的认识
+### 二、OOM的认识
  
-### StackOverflowError
+### 三、StackOverflowError
  
  ```java
    public static void main(String[] args) {
@@ -34,7 +34,7 @@ private static void stackOverflowError() {
   ``` 
   
  
-### OutOfMemeoryError：GC overhead limit exceeded
+### 四、OutOfMemeoryError：GC overhead limit exceeded
 程序在垃圾回收上花费了98%的时间，却收集不会2%的空间。 假如不抛出GC overhead limit，会造成： 
  
  GC清理的一点点内存很快会再次填满，迫使GC再次执行，这样就形成了恶性循环。 
@@ -44,7 +44,7 @@ private static void stackOverflowError() {
  ![Test](https://api.opics.org/api  '继续探究-一文理清JVM和GC（下）') 
    
  
-### OutOfMemeoryError：Direct buffer memory
+### 五、OutOfMemeoryError：Direct buffer memory
  
  写NIO程序经常使用 ByteBuffer 来读取或者写入数据，这是一种基于通道（Channel）和缓冲区（Buffer）的 I/O 方式，它可以使用Native 函数库直接分配堆外内存，然后通过一个存储在Java 堆里面的DirectByteBuffer 对象作为这块内存的引用进行操作。这样能在一些场景中显著提高性能，因为避免了在Java堆和Native堆中来回复制数据。 
  
@@ -95,7 +95,7 @@ ByteBuffer.allocateDirect(capability)：这一种方式是分配OS本地内存�
   ``` 
   
  
-### OutOfMemeoryError：Metaspace
+### 六、OutOfMemeoryError：Metaspace
 Java 8之后的版本使用Metaspace来替代永久代 Metaspace是方法区在HotSpot中的实现，它与持久带最大的区别在于：Metespace并不在虚拟机内存中而是使用本地内存 永久代（java8 后被原空间Metaspace取代了）存放了以下信息： 
  
  虚拟机加载的类信息 
@@ -104,30 +104,30 @@ Java 8之后的版本使用Metaspace来替代永久代 Metaspace是方法区在H
  即时编译后的代码 
  
  
-### 二、4种垃圾收集器
+### 七、4种垃圾收集器
 GC算法（引用计数/复制/标清/标整）是内存回收的方法，垃圾收集器就是算法的实现 
 目前为止还没有完美的收集器出现，更加没有万能的收集器，只是针对具体应用最合适的收集器，进行分代收集 
  
-### 串行垃圾回收器（Serial）
+### 八、串行垃圾回收器（Serial）
 它为单线程环境设计并且只是用一个线程进行垃圾回收，会暂停所有的用户线程。所以不适合服务器环境。 
  
-### 并行垃圾回收器（parallel）
+### 九、并行垃圾回收器（parallel）
 多个垃圾回收线程并行工作，此时用户线程是暂停的，适用于科学计算/大数据处理等弱交互场景 
  
-### 并发垃圾回收器（CMS）
+### 十、并发垃圾回收器（CMS）
 用户线程和垃圾收集线程同时执行（不一定是并行，可能交替执行），不需要停顿用户线程，适用于对响应时间有要求的场景 
  
-### G1垃圾回收器
+### 十一、G1垃圾回收器
 G1垃圾回收器将堆内存分割成不同的区域然后并发的对其进行垃圾回收 
  
-### 三、垃圾收集器解析
+### 十二、垃圾收集器解析
  
-### 查看默认的垃圾收集器
+### 十三、查看默认的垃圾收集器
 java -XX:+PrintCommandLineFlags -version 
  
    
  
-### 默认的垃圾收集器
+### 十四、默认的垃圾收集器
  
  UseSerialGC 
 
@@ -142,7 +142,7 @@ java -XX:+PrintCommandLineFlags -version
  UseG1GC 
  
  
-### 新生代
+### 十五、新生代
  
  串行GC（Serial）/（Serial Coping） 一个单线程的收集器，在行垃圾收集的时候，必须暂停其他所有的工作线程知道它收集结束 
  
@@ -177,7 +177,7 @@ Parallel Scavenge收集器类似ParNew 也是新生代垃圾收集器，使用�
  自适应调节策略也是ParallelScavenge收集器与ParallelNew收集器的一个重要区别 JVM设置参数 -XX:UseParallelGC 或 -XX:UseParallelOldGC（可互相激活），开启后：新生代使用复制算法，老年代使用标记-整理算法。 
  
  
-### 老年代
+### 十六、老年代
  
  串行GC（Serial Old）/（Serial MSC） Serial Old 是Serial 垃圾收集器老年代版本，它同样是个单线程的收集器，使用标记-整理算法，这个收集器也主要是运行在Client默认的java虚拟机默认的老年代垃圾收集器。 用途： 
  
@@ -207,14 +207,14 @@ JVM设置参数： -XX:+UseParallelOldGC开启 Parallel Old收集器，设置该
  
    
  
-### 如何选择垃圾收集器
+### 十七、如何选择垃圾收集器
  
  单CPU或小内存，单机程序 -XX:+UseSerialGC 
  多CPU，需要最大吞吐量，如后台计算型应用 -XX:+UseParallelGC-XX:+UseParallelOldGC 
  多CPU，追求低停顿时间，需快速响应如互联网应用 -XX:+UseConcMarkSweepGC-XX:+ParNewGC 
  
  
-### 四、G1垃圾收集器
+### 十八、G1垃圾收集器
 以前垃圾收集器的特点： 
  
  年轻代和老年代是各自独立且连续的内存块 
@@ -223,7 +223,7 @@ JVM设置参数： -XX:+UseParallelOldGC开启 Parallel Old收集器，设置该
  都是以尽可能少而快速地执行GC为设计原则 
  
  
-### G1 概念
+### 十九、G1 概念
 Garbage-First收集器，是一款面向服务端应用的收集器，优点如下： 
  
  整理空闲空间更快 
@@ -233,7 +233,7 @@ Garbage-First收集器，是一款面向服务端应用的收集器，优点如�
  
 G1收集器的设计目标是取代CMS收集器 
  
-### G1 优势
+### 二十、G1 优势
  
  G1 是一个有整理内存过程的垃圾收集器，不会产生很多内存碎片 
 ```
@@ -242,7 +242,7 @@ G1收集器的设计目标是取代CMS收集器
  
 主要改变是Eden，Survivor和Tenured等内存区域不再是连续的了，而是变成了一个个大小一样的region，每个region从1M到32M不等。一个region有可能属于Eden，Survivor或者Tenured内存区域。 
  
-### G1特点
+### 二十一、G1特点
  
  G1能充分利用多CPU，多核环境硬件优势，尽量缩短STW 
 
@@ -252,7 +252,7 @@ G1收集器的设计目标是取代CMS收集器
  G1虽然也是分代收集器，但整个内存分区不存在物理上的年轻代与老年代的区别，也不需要完全独立的survivor（to space）堆做复制准备。G1只有逻辑上的分代概念，或者说每个分区都可能随G1的运行在不同代之间前后切换。 
  
  
-### G1底层原理
+### 二十二、G1底层原理
  
 区域化内存划片Region，整体变为了一系列不连续的内存区域，避免了全内存区的GC操作。 核心思想： 
 将整个堆内存区域分成大小相同的子区域（Region），在JVM启动时会自动配置这些子区域的大小。 在堆的使用上，G1并不要求对象的存储一定是物理上连续的只要逻辑上连续即可，每个分区也不会固定地为某个代服务，可以按需在年轻代和老年代之间切换。启动时可以通过参数-XX:G1HeapRegionSize=n 可指定分区大小（1MB~32MB，且必须是2的幂），默认将整堆划分为2048个分区。 大小范围在1MB~32MB，最多能设置2048个区域，也即能够支持的最大内存为：32MB*2048=65536MV=64G内存 最大好处就是化整为零，避免全存扫描，只需要按照区域来进行扫描即可 
@@ -292,16 +292,16 @@ G1收集器的设计目标是取代CMS收集器
  
    
  
-### 五、诊断生产环境服务器变慢
+### 二十三、诊断生产环境服务器变慢
  
-### 整机相关
+### 二十四、整机相关
 top 
  
    
  
 前五行是统计信息 第一行是任务队列信息，同uptime命令的执行结果一样 17:16:47：当前时间 up 23:47：系统运行时间 2 users：当前登录用户数 load average:0.21,0.27,0.19：系统负载，即任务队列的平均长度，三个数值分别为1分钟、5分钟、15分钟前到现在的平均值 
  
-### CPU相关
+### 二十五、CPU相关
 1）vmstat 
  
    
@@ -320,7 +320,7 @@ mpstat -P ALL 2 查看CPU核信息
 
 pidstat -u 1 -p 进程号 每个进程使用cpu的用量分解信息 
  
-### 内存相关
+### 二十六、内存相关
 free 
 ```
 应用程序中可用内存 / 系统物理内存>70%：内存充足 应用程序可用内存/系统物理内存<20% 内存不足：需要增加内存 20%<应用程序可用内存/系统物理内存<70%： 内存基本够用 
@@ -328,38 +328,38 @@ free
  
    
  
-### 硬盘相关
+### 二十七、硬盘相关
 df 
 查看磁盘剩余空闲数 
  
    
  
-### 硬盘IO相关
+### 二十八、硬盘IO相关
 iostat -xdk 2 3 
  
    
  
-### 六、分析生产环境CPU占用过高
+### 二十九、分析生产环境CPU占用过高
  
-### 步骤1
+### 三十、步骤1
 先用top命令找出CPU占比最高的 
  
-### 步骤2
+### 三十一、步骤2
 ps -ef 或者 jps 进一步定位，得知是一个怎样的后台程序 
  
-### 步骤3
+### 三十二、步骤3
 ```
 定位到具体线程或者代码 ps -mp 进程 ==-o== THREAD,tid,time 
 ```
 -o：该参数是用户自定义格式 -p：pid进程使用cpu的时间 -m: 显示所有线程 
  
-### 步骤4
+### 三十三、步骤4
 将需要的线程ID转换为16进制格式（英文小写格式） 再使用：printf "%x/\n" 有问题的线程ID 
  
-### 步骤5
+### 三十四、步骤5
 jstat 进程ID | grep tid（16进制线程ID小写英文） 
  
-### 七、常用的JVM监控和性能分析工具
+### 三十五、常用的JVM监控和性能分析工具
  
  jps 虚拟机进程状况工具 
  jinfo Java配置信息工具 

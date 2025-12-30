@@ -1,4 +1,4 @@
----
+﻿---
 title: Java开发环境配置入门
 categories: Java开发全栈系列
 tags:
@@ -23,7 +23,7 @@ Java是由Sun Microsystems公司于1995年推出的高级程序设计语言，�
 
 ### 二、配置过程
 
-#### Windows平台
+#### 2.1 Windows平台
 
 ##### 2.1 安装JDK
 
@@ -71,12 +71,12 @@ java -version
   
 ```
 
-#### Mac平台
+#### 2.2 Mac平台
 
 ##### 2.3 安装JDK
 
 ```
-**方法1：使用Homebrew安装（推荐）**
+方法1：使用Homebrew安装（推荐）
 ```
 
 ```bash
@@ -92,7 +92,7 @@ brew install openjdk@8
 ```
 
 ```
-**方法2：从Oracle官网下载安装包**
+方法2：从Oracle官网下载安装包
 ```
 
 ```
@@ -103,7 +103,7 @@ brew install openjdk@8
 4. 按照向导完成安装
 
 ```
-**方法3：使用SDKMAN管理多个JDK版本（推荐）**
+方法3：使用SDKMAN管理多个JDK版本（推荐）
 ```
 
 ```bash
@@ -126,7 +126,7 @@ sdk default java 17.0.7-tem
 ##### 2.4 配置环境变量
 
 ```
-**查找JDK安装路径：**
+查找JDK安装路径：
 ```
 
 ```bash
@@ -143,11 +143,11 @@ ls /Library/Java/JavaVirtualMachines/
 ```
 
 ```
-**配置环境变量：**
+配置环境变量：
 ```
 
 ```
-**对于bash（macOS默认）：**
+对于bash（macOS默认）：
 ```
 
 ```bash
@@ -168,7 +168,7 @@ source .bash_profile
 ```
 
 ```
-**对于zsh（macOS Catalina及以后默认）：**
+对于zsh（macOS Catalina及以后默认）：
 ```
 
 ```bash
@@ -187,7 +187,7 @@ source .zshrc
 ```
 
 ```
-**验证配置：**
+验证配置：
 ```
 
 ```bash
@@ -205,7 +205,7 @@ echo $PATH
 ```
 
 ```
-**预期输出示例：**
+预期输出示例：
 ```
 ```
 openjdk version "17.0.7" 2023-04-18
@@ -222,7 +222,7 @@ javac 17.0.7
 #### 3.1 IntelliJ IDEA配置
 
 ```
-**1. 配置JDK：**
+1. 配置JDK：
 ```
 
 1. File → Project Structure → Project
@@ -230,7 +230,7 @@ javac 17.0.7
 3. 如果没有，点击"New"添加JDK路径
 
 ```
-**2. 配置Maven：**
+2. 配置Maven：
 ```
 
 1. File → Settings → Build, Execution, Deployment → Build Tools → Maven
@@ -238,7 +238,7 @@ javac 17.0.7
 3. User settings file: 选择settings.xml路径
 
 ```
-**3. 创建第一个Java项目：**
+3. 创建第一个Java项目：
 ```
 
 1. File → New → Project
@@ -251,7 +251,7 @@ javac 17.0.7
 #### 3.2 Eclipse配置
 
 ```
-**1. 配置JDK：**
+1. 配置JDK：
 ```
 
 1. Window → Preferences → Java → Installed JREs
@@ -261,7 +261,7 @@ javac 17.0.7
 5. 点击"Finish"
 
 ```
-**2. 配置Maven：**
+2. 配置Maven：
 ```
 
 1. Window → Preferences → Maven → Installations
@@ -274,7 +274,7 @@ javac 17.0.7
 #### 4.1 使用命令行
 
 ```
-**1. 创建Java文件：**
+1. 创建Java文件：
 ```
 
 ```bash
@@ -287,7 +287,7 @@ cd HelloWorld
 ```
 
 ```
-**2. 编写代码：**
+2. 编写代码：
 ```
 
 ```java
@@ -299,7 +299,7 @@ public class HelloWorld {
 ```
 
 ```
-**3. 编译和运行：**
+3. 编译和运行：
 ```
 
 ```bash
@@ -315,7 +315,7 @@ java HelloWorld
 #### 4.2 使用IDE
 
 ```
-**IntelliJ IDEA：**
+IntelliJ IDEA：
 ```
 
 1. File → New → Project → Java
@@ -329,7 +329,7 @@ java HelloWorld
 #### 5.1 安装Maven
 
 ```
-**Windows：**
+Windows：
 ```
 
 1. 下载Maven：https://maven.apache.org/download.cgi
@@ -339,7 +339,7 @@ java HelloWorld
    - `Path`: 添加 `%MAVEN_HOME%\bin`
 
 ```
-**macOS：**
+macOS：
 ```
 
 ```bash
@@ -369,32 +369,32 @@ mvn exec:java -Dexec.mainClass="com.example.App"
 ### 六、常见问题解决
 
 ```
-**问题1：java命令找不到**
+问题1：java命令找不到
 ```
 
 ```
-**解决方案：**
+解决方案：
 ```
 - 检查JDK是否正确安装
 - 检查PATH环境变量
 - 重新配置环境变量
 
 ```
-**问题2：javac命令找不到**
+问题2：javac命令找不到
 ```
 
 ```
-**解决方案：**
+解决方案：
 ```
 - 确认安装的是JDK而不是JRE
 - 检查JAVA_HOME和PATH配置
 
 ```
-**问题3：版本不匹配**
+问题3：版本不匹配
 ```
 
 ```
-**解决方案：**
+解决方案：
 ```
 ```bash
 # 检查Java版本
@@ -407,11 +407,11 @@ javac -version
 ```
 
 ```java
-**问题4：CLASSPATH配置错误**
+问题4：CLASSPATH配置错误
 ```
 
 ```
-**解决方案：**
+解决方案：
 ```
 ```bash
 # CLASSPATH应该包含：

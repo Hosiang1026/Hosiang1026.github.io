@@ -20,7 +20,8 @@ top: 36
 ```
 本篇涉及到的所有代码都在github上面有 
 在网上关于如何修改Java的抽象语法树的相关API文档并不多，于是本篇记录一下相关的知识点，以便随后查阅。 
-#### JCTree的介绍
+### 一、
+#### 1.1 JCTree的介绍
 JCTree是语法树元素的基类，包含一个重要的字段pos，该字段用于指明当前语法树节点（JCTree）在语法树中的位置，因此我们不能直接用new关键字来创建语法树节点，即使创建了也没有意义。此外，结合访问者模式，将数据结构与数据的处理进行解耦，部分源码如下： 
  ```java
   public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
@@ -53,7 +54,7 @@ JCTree是语法树元素的基类，包含一个重要的字段pos，该字段�
    JCIdent：标识符语法树节点，可以是变量，类型，关键字等等 
     
  
-#### TreeMaker介绍
+#### 1.2 TreeMaker介绍
 TreeMaker用于创建一系列的语法树节点，我们上面说了创建JCTree不能直接使用new关键字来创建，所以Java为我们提供了一个工具，就是TreeMaker，它会在创建时为我们创建的JCTree对象设置pos字段，所以必须使用上下文相关的TreeMaker对象来创建语法树节点。 
 具体的API介绍可以参照，TreeMakerAPI，接下来着重介绍一下常用的几个方法。 
 ##### TreeMaker.Modifiers
@@ -332,7 +333,7 @@ TreeMaker.Block用于创建组合语句的语法树节点（JCBlock），源码�
  
  stats：语句列表 
  
-#### com.sun.tools.javac.util.List介绍
+#### 1.3 com.sun.tools.javac.util.List介绍
 在我们操作抽象语法树的时候，有时会涉及到关于List的操，是这个List不是我们经常使用的 `java.util.List` 而是 `com.sun.tools.javac.util.List` ，这个List比较奇怪，是一个链式的结构，有头结点和尾节点，但是只有尾节点是一个List，这里作为了解就行了。 
 ```java
   public class List<A> extends AbstractCollection<A> implements java.util.List<A> {
@@ -405,7 +406,7 @@ TreeMaker.Block用于创建组合语句的语法树节点（JCBlock），源码�
 
 
   ```  
-#### com.sun.tools.javac.util.ListBuffer
+#### 1.4 com.sun.tools.javac.util.ListBuffer
 由于 `com.sun.tools.javac.util.List` 使用起来不方便，所以又在其上面封装了一层，这个封装类是 `ListBuffer` ，此类的操作和我们平时经常使用的 `java.util.List` 用法非常类似。 
   public class ListBuffer<A> extends AbstractQueue<A> {
 
@@ -459,7 +460,7 @@ TreeMaker.Block用于创建组合语句的语法树节点（JCBlock），源码�
 
 
   ```  
-#### com.sun.tools.javac.util.Names介绍
+#### 1.5 com.sun.tools.javac.util.Names介绍
 ```python
 这个是为我们创建名称的一个工具类，无论是类、方法、参数的名称都需要通过此类来创建。它里面经常被使用到的一个方法就是 `fromString()` ，一般使用方法如下所示。 
   Names names  = new Names()
@@ -468,7 +469,7 @@ names. fromString("setName");
 
 
   ```  
-#### 实战演练
+#### 1.6 实战演练
 上面我们大概了解了如何操作抽象语法树，接下来我们就来写几个真实的案例加深理解。 
 ##### 变量相关
 在类中我们经常操作的参数就是变量，那么如何使用抽象语法树的特性为我们操作变量呢？接下来我们就将一些对于变量的一些操作。 
@@ -679,7 +680,7 @@ JCTree.JCIf anIf = treeMaker.If(
 
 
   ```  
-#### 源码地址
-#### 总结
+#### 1.7 源码地址
+#### 1.8 总结
 纸上得来终觉浅，绝知此事要躬行。希望大家看完此篇文章能够自己在本机上自己试验一下。自己设置几个参数，自己学的Lombok学着生成一下get、set方法，虽然本篇知识在日常开发中基本上不会用到，但是万一用到了这些知识那么别人不会而你会，差距其实就慢慢的给拉开了。本篇涉及到的所有代码都在github上面有，拉下来以后全局搜 `CombatJCTreeProcessor` 类就可以看到了。
                                         

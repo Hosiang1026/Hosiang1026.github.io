@@ -1,4 +1,4 @@
----
+﻿---
 title: SpringBoot实战篇
 categories: Spring生态体系系列
 tags:
@@ -20,11 +20,11 @@ top: 15
 #### 1.1 项目需求
 
 ```
-**项目背景：** 开发一个基于Spring Boot的电商系统，包含商品管理、订单管理、用户管理、支付集成等功能。
+项目背景： 开发一个基于Spring Boot的电商系统，包含商品管理、订单管理、用户管理、支付集成等功能。
 ```
 
 ```
-**核心需求：**
+核心需求：
 ```
 - 用户注册、登录、JWT认证
 - 商品浏览、搜索、分类
@@ -36,24 +36,24 @@ top: 15
 #### 1.2 技术选型
 
 ```
-**技术栈：**
+技术栈：
 ```
-- **框架**: Spring Boot 2.7.0
-- **数据库**: MySQL 8.0 + MyBatis Plus
-- **缓存**: Redis
-- **消息队列**: RabbitMQ
-- **搜索引擎**: Elasticsearch
-- **认证**: Spring Security + JWT
+- 框架: Spring Boot 2.7.0
+- 数据库: MySQL 8.0 + MyBatis Plus
+- 缓存: Redis
+- 消息队列: RabbitMQ
+- 搜索引擎: Elasticsearch
+- 认证: Spring Security + JWT
 ```
-- **API文档**: Swagger (Knife4j)
+- API文档: Swagger (Knife4j)
 ```
 
 ```
-**开发工具：**
+开发工具：
 ```
-- **IDE**: IntelliJ IDEA
-- **构建工具**: Maven
-- **版本控制**: Git
+- IDE: IntelliJ IDEA
+- 构建工具: Maven
+- 版本控制: Git
 
 ### 二、项目架构
 
@@ -104,7 +104,7 @@ ecommerce-system/
 #### 3.1 项目初始化
 
 ```
-**1. 使用Spring Initializr创建项目：**
+1. 使用Spring Initializr创建项目：
 ```
 
 访问 https://start.spring.io/ 或使用IDE创建：
@@ -112,7 +112,7 @@ ecommerce-system/
 - 添加依赖：Web、MyBatis、MySQL、Redis、Security
 
 ```
-**2. 配置application.yml：**
+2. 配置application.yml：
 ```
 
 ```yaml
@@ -153,7 +153,7 @@ jwt:
 #### 3.2 核心功能实现
 
 ```
-**用户认证服务：**
+用户认证服务：
 ```
 
 ```java
@@ -188,7 +188,7 @@ public class AuthService {
 ```
 
 ```
-**商品服务：**
+商品服务：
 ```
 
 ```java
@@ -218,7 +218,7 @@ public class ProductService {
 ```
 
 ```
-**订单服务：**
+订单服务：
 ```
 
 ```java
@@ -278,7 +278,7 @@ mvn clean package -DskipTests
 #### 4.2 Docker部署
 
 ```
-**Dockerfile：**
+Dockerfile：
 ```
 
 ```dockerfile
@@ -294,7 +294,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 ```
 
 ```
-**docker-compose.yml：**
+docker-compose.yml：
 ```
 
 ```yaml
@@ -334,19 +334,19 @@ volumes:
 #### 5.1 经验总结
 
 ```
-**开发过程中的关键点：**
+开发过程中的关键点：
 ```
 
-1. **模块化设计**：清晰的分层和模块划分
-2. **缓存策略**：合理使用Redis缓存提升性能
-3. **消息队列**：异步处理提升系统响应速度
-4. **事务管理**：确保数据一致性
-5. **异常处理**：统一的异常处理机制
+1. 模块化设计：清晰的分层和模块划分
+2. 缓存策略：合理使用Redis缓存提升性能
+3. 消息队列：异步处理提升系统响应速度
+4. 事务管理：确保数据一致性
+5. 异常处理：统一的异常处理机制
 
 #### 5.2 优化建议
 
 ```
-**性能优化：**
+性能优化：
 ```
 - 使用Redis缓存热点数据
 - 数据库读写分离
@@ -354,7 +354,7 @@ volumes:
 - 优化SQL查询
 
 ```
-**功能扩展：**
+功能扩展：
 ```
 - 添加分布式锁
 - 实现分布式事务

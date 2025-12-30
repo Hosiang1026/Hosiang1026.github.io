@@ -22,8 +22,9 @@ top: 112
  notion 也自定义数据层，设计了基于 Block-tree 的数据模型；渲染层用 React 把数据渲染成 html；使用 React 提供的事件(onInput\onCopy\onCut)或者工具条接收用户的操作指令，用户指令转换成 op；操作经过执行并修改数据模型 ，op 也会实时提交到服务端中改变后端数据库中的数据；服务端通过协同把 op 传给其他用户，达到一起编辑同一篇文章目的。 
 ```
  所以整个 notion 可以分两层，数据层专门负责存储数据；渲染层负责把数据渲染成界面，接收用户的事件并转化成 op 操作交给数据层执行。接下来分别介绍。 
-  
- #### 数据层 
+
+### 一、Notion编辑器原理
+#### 1.1 数据层
  在 notion 里一切都为 block，表、图片、文字段落等，block 通过 parent_id 来指向父 block，以此表达层级，如文章下有段落、表格、表格下有行、分栏下又可以圈套表格等。通过这种层级关系，就形成一棵 block-tree。一个 block 最基本的几个属性为： 1. properties: 属性值，如段落中用户输入的文字 2. parent_id: 指向父 block id，形成 block tree 3. type: block 的类型，如表格、行、列、图片、段落等 4. version：版本，用于协同 
  上图为 notion 的一篇两栏的文章，左栏为标题加一个表格；右栏为四行文字. 
  图为了简约，只把部份节点的部份值标识出来 
@@ -33,7 +34,7 @@ top: 112
  也会根据 block id 一直往上找到空间，把这些 block 的 title 取出来形成面包屑。 
  这是 notion 魔力的地方，他就像「乐高积木」一样，每块积木功能不同，可以搭建出不同的形状。在 notion 中每个 block 都和积木一样，block 的能力也不同，但可以组合成不同的解决方案，你可以在 notion 中提供的模板看出有不同需求的解决方案。 
   
- #### op 
+#### 1.2 op
 ```
  有了数据模型后，接下来是需要对这棵数据模型进行修改，在 dom API 里，浏览器提供了节点的删除、增加、修改(属性)、移动等功能 。在 notion 里也一样，数据层通过提供 op 的方式给到渲染层来修改数据，常规对树的操作可以有两类： 
 ```
@@ -65,9 +66,9 @@ top: 112
    定义一套 op 来表达修改数据意图，通过执行 op 来修改 block-tree  
   
   
- #### 表现层 
+#### 1.3 表现层
   
- #### 前台数据模型建立 
+#### 1.4 前台数据模型建立
  在打开一篇文档时会通过 blockId 去服务端拿到前 50 个子 block ，本地把这 50 个 block 缓存到内存中。 
  此时服务端传回的和存在本地 store 的 block 并没有树形概念，而扁平化存储在 map 中，block id 为 key，block 值为 value；树形的构建是在渲染期建立，通过 block id，去 map 中找出所有的子节点递归渲染。从最顶上文章 block id 开始，一直递归到叶子节点。边构建树的过程中边渲染。 
  表现层的渲染大致流程为，第一步从服务端取出当前页的子 block 存放在 block cache 内存中，第二步从最顶上的 block 依次递归到叶子节点进行渲染。 
@@ -106,7 +107,7 @@ top: 112
  这种方式给系统提供了非常大的灵活性，看出 block 为什么这么丰富，他背后要加一个新的 block type 类型速度也是很快，写好 type 渲染器就能完成大部份工作。 
  大体渲染程看完了，接下来看一下一个常规的编辑器他的通用行为是怎么完成的。分别有 选区、undo/redo、复制粘帖、文字输入。 
   
- #### 选区 
+#### 1.5 选区
  notion 有块选区和文字选区两种，块选区可以一次性选中多个 block ，不过只能同时选择同级的；而文字选区是 block type 为 text 的节点专属选区，text block 直接渲染成 contentedable ，选区也是 contenteditable 提供的，但是 contentedable 的存储数据 notion 接管了，后面会细说。接下来得点讲下块选择。 
  块的选择分 2 个步骤： 
   
@@ -121,7 +122,7 @@ top: 112
  后期判断一个元素是否命中就只需要通过鼠标的 x、y 坐标去这个缓存对象里匹配就可。 
  同时被选中的 block 元素记录在 l.default.state.stores 中，并再次触发 react 重新渲染，每个组件都会通过 Block id 判断是否被选中了，当被选中则给 Block 的背景色补上，当然这里会有一个脏区处理，而不是把一整棵树都重新渲染。 
   
- #### Undo/Redo 
+#### 1.6 Undo/Redo
  上面讲过，针对数据层的修改叫做 op，而多个 op 组合在一起叫 Transation。要做 undo 时就简单了，undo/redo 本身就是一个记录栈，每次把操作往栈里放，当用户 ctrl+z 撤销操作时，则从栈顶取出并执行就可。 
  执行一次 op 的过程分成几步： 
   
@@ -192,7 +193,7 @@ case "listRemove":
  看了一圈，是没有去处理的，而是一直往 revisionStack 里怼，直到内存爆啦为止，不过你也不会把他搞爆啦。 
  由于用户所有的操作是一直存放在 revisionStack 里的，而不会随着用户的撤销操作而移除， notion 定义了一个下标指针变量 currentIndex，表示下一次要撤回的操作下标，当每次撤回操作时只需要取出 revisionStack[currentIndex] 里的 invertedOperations 并执行，就达到了撤回效果。同时执行 redo 操作也只需要取出 revisionStack[currentIndex-1] 的操作，并取出 op 里的 operations 并执行就可以了。 
   
- #### 文字操作 
+#### 1.7 文字操作
  文字节点也是一个普通的 block，只是他承载的是文字输入与呈现，输出为 contenteditable div，就如 facebook draft 的视频中所说，需要一个 controlled contenteditable，contenteditable 负责文字呈现与用户事件的接收，接收到事件后再自己处理，如文字加粗、文字录入、文字颜色等，并最终生成 notion 的 op 来修改 block tree 上的 block 节点，这样做的好处就如 facebook draft 里提的复用了浏览器的文字排版渲染、选区等浏览器提供的功能，但接管了数据存储，达到数据完全可控。从而脱离 contenteditable 的数据层，达到 controlled contenteditable。 
  上图代码为文字 block 的渲染组件，onInput 用于接收用户的文字录入，onCompositionStart/onCompositionEnd 也会处理中文输入法的问题。 
  渲染组件将文字 block type 渲染成了如上 contenteditable div 节点 
@@ -276,7 +277,7 @@ function e) {
  文字输入 
  输入文字和属性无太大不同，找到对应的文字区间，并把文字增加到区间就可以了。 
   
- #### 复制粘帖 
+#### 1.8 复制粘帖
  复制粘帖是文字编辑器里面重要功能，特别对于「复制粘帖工程师」而言，最大的还原原有文字是验证能力的标准。 
  复制的工作是把选区里面的内容复制到剪切板里，上面讲过 notion 里有 block 选区和文字选区，文字选区的 copy 就直接用的是浏览器提供的，不需要 notion 做什么处理。如果复制的是 block 选区，就需要做两件事情： 
   
@@ -424,7 +425,7 @@ t.clipboardData.setData("text/html", en(e.device.isWindows, r))
  上面代码为其中一个 div 节点转 op 的过程，op 是创建一个 block，dom 里面的值会当成 block 的参数。 
  office 原理都一致，只是解析格式不一样，就不细看了。 
   
- #### 总结 
+#### 1.9 总结
  notion 在产品能力上很优秀，打破了传统的笔记软件固化思维，与其说提供给用户的是一套笔记工具，而不如说是一套设计笔记软件的系统。但通过 block 能力的增强，能力更多了，可以用来做日常工作管理，团队 wiki 等。 
  notion 整个软件架构的基建能力是把 block 的渲染、block 的存储、数据修改等都处理好，后期功能的增加可快速迭代，在基础上增加更多的 block 类型。 
   

@@ -15,8 +15,9 @@ top: 34
 在还没有前端开发这个概念的时代，CSS 其实作为一个比较简单的 DSL 还相对凑合够用，但随着前端项目越来越复杂，前端各种开发模在随着项目规模扩大的需求而不断进化，比如前端服务上我们由服务端直出变为简单的前后端分离再慢慢的升级成前后端融合的 serverless，再比如 JS 的写法上我们从开始最原始的单文件脚本慢慢引入了各种模块化的方案再到今天组件化全面开花。同样的进化当然也会发生在 CSS 的开发上。 
    CSS 作为一个（曾经）只有全局作用域的 DSL 其实从来都不适合大型工程，毕竟 HTML 被发明时只是用来写文档，CSS 也只是为了加些简单的样式而不是设计用于富应用的。但随着前端项目规模的扩大， CSS 也不得不适应这一历史进程。在 node 刚刚被发明前后那段时间前端工程化还不是很成熟的阶段，工程师们想了各种办法来尽量缓和这一矛盾，比如 BEM、OOCSS、SMACSS 等命名方案来分离关注点，又比如 less、Sass 等工具丰富一下 CSS 的语法并且可以有一个 build 的过程使 CSS 有了初级的模块化能力。但 CSS 不适用于大型工程的问题依然严重，Facebook 的开发经理（也是 prettier 的作者之一）vjeux 在 2014 年的一次演讲[1]中总结了 CSS 不适用于大型项目的几个痛点。 
    ![Test](https://oscimg.oschina.net/oscnet/0bfa44b8-69f7-41d9-87cd-6fa160b9f68b.png  '为什么使用Tailwind Css框架-') 
-    
-   #### Why CSS modules 
+
+### 一、Tailwind CSS框架
+#### 1.1 Why CSS modules
    CSS modules 就是为了解决上面那些痛点而被发明的，具体的原理就是通过编译生成全局唯一类名，从而完全不用类名样式担心冲突。它很好的解决了项目规模增大的问题，配合 less 或者 Sass 这种预处理器也可以实现相当程度的工程化，对于大部分的场景他已经足够使用。但 CSS modules 也有着他自己的缺点： 
     
      
@@ -34,12 +35,12 @@ top: 34
    个人还有很讨厌 CSS modules 的一点就是一旦你用 CSS modules 你就必须得分两个文件，对于可读性的影响积累下来其实非常大，碰到一个稍微复杂一点的组件就得左右两头来回改。现代基于组件的 Web 开发其实更适合把模板、逻辑、样式都尽量放在一起，最好是放在一个文件[3]里。 
 ```
     
-   #### Why CSS in JS 
+#### 1.2 Why CSS in JS
    其实相比于 CSS modules，CSS in JS 的方案被 vjeux 提出的时间要更早，当然最开始的 CSS in JS 基本上可以理解为单纯的把行内样式放到对象里去，与目前流行的基于 Tagged Templates 的 CSS in JS 方案差别非常大。 
    得益于组件化理念深入人心，开发者们不再关心具体的 HTML 和 CSS，复用组件就是安装引入 npm 包后直接使用。CSS in JS 的方案可以很好的契合这一开发方式，开发者不需要引入 CSS，不再需额外处理 CSS 的 bundle、prefix，所有都是 JS 也就不再需要配置各种 CSS 预处理器，极大降低了开发成本。 
     
     
-   #### Why Tailwind CSS 
+#### 1.3 Why Tailwind CSS
    https://tailwindcss.com/ 
    Tailwind CSS 其实就是把在现代工程化框架里把原子 CSS 做到极致的一个 CSS 框架。其实原子 CSS 很早就出现了，最经典的如  
  `clearfix` 

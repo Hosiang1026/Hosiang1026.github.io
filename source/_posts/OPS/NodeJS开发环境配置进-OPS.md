@@ -1,4 +1,4 @@
----
+﻿---
 title: NodeJS开发环境配置进
 categories: 开发环境配置全攻略系列
 tags:
@@ -19,7 +19,7 @@ top: 6
 #### 1.1 Node.js版本管理
 
 ```
-**使用nvm（Node Version Manager）：**
+使用nvm（Node Version Manager）：
 ```
 
 ```bash
@@ -48,7 +48,7 @@ nvm list-remote
 ```
 
 ```
-**使用n（Mac/Linux）：**
+使用n（Mac/Linux）：
 ```
 
 ```bash
@@ -68,7 +68,7 @@ sudo n 18.17.0
 #### 1.2 npm高级配置
 
 ```
-**配置npm镜像源：**
+配置npm镜像源：
 ```
 
 ```bash
@@ -86,7 +86,7 @@ npm config set registry https://registry.npmjs.org
 ```
 
 ```
-**npm配置文件（.npmrc）：**
+npm配置文件（.npmrc）：
 ```
 
 ```ini
@@ -101,7 +101,7 @@ cache=/path/to/npm-cache
 ```
 
 ```
-**npm脚本优化：**
+npm脚本优化：
 ```
 
 ```json
@@ -120,7 +120,7 @@ cache=/path/to/npm-cache
 #### 1.3 包管理工具对比
 
 ```
-**npm vs yarn vs pnpm：**
+npm vs yarn vs pnpm：
 ```
 
 | 特性 | npm | yarn | pnpm |
@@ -131,7 +131,7 @@ cache=/path/to/npm-cache
 | 工作区支持 | 是 | 是 | 是（原生） |
 
 ```
-**pnpm安装和使用：**
+pnpm安装和使用：
 ```
 
 ```bash
@@ -150,7 +150,7 @@ pnpm remove express
 #### 2.1 构建速度优化
 
 ```
-**使用npm ci替代npm install：**
+使用npm ci替代npm install：
 ```
 
 ```bash
@@ -164,7 +164,7 @@ npm ci
 ```
 
 ```
-**并行安装优化：**
+并行安装优化：
 ```
 
 ```bash
@@ -184,7 +184,7 @@ npm install --save-dev npm-run-all
 #### 2.2 依赖管理优化
 
 ```
-**使用package.json的peerDependencies：**
+使用package.json的peerDependencies：
 ```
 
 ```json
@@ -197,7 +197,7 @@ npm install --save-dev npm-run-all
 ```
 
 ```
-**依赖分类管理：**
+依赖分类管理：
 ```
 
 ```json
@@ -216,7 +216,7 @@ npm install --save-dev npm-run-all
 ```
 
 ```
-**使用.npmignore优化发布：**
+使用.npmignore优化发布：
 ```
 
 ```.npmignore
@@ -234,7 +234,7 @@ coverage/
 #### 3.1 项目结构设计
 
 ```
-**标准Node.js项目结构：**
+标准Node.js项目结构：
 ```
 
 ```
@@ -258,7 +258,7 @@ project/
 #### 3.2 模块化开发
 
 ```
-**ES6模块系统：**
+ES6模块系统：
 ```
 
 ```javascript
@@ -278,7 +278,7 @@ import logger from './utils/logger.js';
 ```
 
 ```
-**CommonJS模块（Node.js传统方式）：**
+CommonJS模块（Node.js传统方式）：
 ```
 
 ```javascript
@@ -299,7 +299,7 @@ logger.log('Hello World');
 #### 4.1 调试技巧
 
 ```
-**使用Node.js内置调试器：**
+使用Node.js内置调试器：
 ```
 
 ```bash
@@ -311,7 +311,7 @@ node --inspect src/index.js
 ```
 
 ```
-**使用VS Code调试：**
+使用VS Code调试：
 ```
 
 ```json
@@ -323,7 +323,7 @@ node --inspect src/index.js
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": ["<node_internals>/"],
       "program": "${workspaceFolder}/src/index.js"
     }
   ]
@@ -331,7 +331,7 @@ node --inspect src/index.js
 ```
 
 ```
-**使用nodemon自动重启：**
+使用nodemon自动重启：
 ```
 
 ```bash
@@ -345,7 +345,7 @@ nodemon src/index.js
 {
   "watch": ["src"],
   "ext": "js,json",
-  "ignore": ["src/**/*.test.js"],
+  "ignore": ["src//*.test.js"],
   "exec": "node src/index.js"
 }
 ```
@@ -353,10 +353,10 @@ nodemon src/index.js
 #### 4.2 问题排查
 
 ```
-**常见问题及解决方案：**
+常见问题及解决方案：
 ```
 
-1. **模块找不到（MODULE_NOT_FOUND）**
+1. 模块找不到（MODULE_NOT_FOUND）
    ```bash
    # 检查node_modules是否存在
    ls node_modules
@@ -366,7 +366,7 @@ nodemon src/index.js
    npm install
    ```
 
-2. **权限问题（EACCES）**
+2. 权限问题（EACCES）
    ```bash
    # 修复npm全局包权限
    mkdir ~/.npm-global
@@ -374,13 +374,13 @@ nodemon src/index.js
    # 添加到PATH: export PATH=~/.npm-global/bin:$PATH
    ```
 
-3. **内存溢出**
+3. 内存溢出
    ```bash
    # 增加Node.js内存限制
    node --max-old-space-size=4096 src/index.js
    ```
 
-4. **端口被占用**
+4. 端口被占用
    ```bash
    # 查找占用端口的进程
    lsof -i :3000  # Mac/Linux
@@ -392,7 +392,7 @@ nodemon src/index.js
    ```
 
 ```
-**性能分析工具：**
+性能分析工具：
 ```
 
 ```bash

@@ -517,9 +517,9 @@ OUT_UNLOCK:
     OsTaskPriModify(muxPosted->owner, bitMapPri);
 }
   ``` 
-  
- 
-#### 小结
+
+### 一、总结
+#### 1.1 小结
 本文带领大家一起剖析了LiteOS互斥锁模块的源代码，包含互斥锁的结构体、互斥锁池初始化、互斥锁创建删除、申请释放等。 
   
                                         

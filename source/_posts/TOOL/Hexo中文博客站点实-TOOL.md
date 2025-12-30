@@ -1,4 +1,4 @@
----
+﻿---
 title: Hexo中文博客站点实
 categories: Hexo博客搭建指南系列
 tags:
@@ -21,11 +21,11 @@ top: 1
 #### 1.1 项目需求
 
 ```
-**项目背景：** 搭建一个完整的个人技术博客，支持文章发布、分类管理、标签系统、搜索功能、评论系统等。
+项目背景： 搭建一个完整的个人技术博客，支持文章发布、分类管理、标签系统、搜索功能、评论系统等。
 ```
 
 ```
-**核心需求：**
+核心需求：
 ```
 - 美观的博客主题
 - 文章分类和标签管理
@@ -39,21 +39,21 @@ top: 1
 #### 1.2 技术选型
 
 ```
-**技术栈：**
+技术栈：
 ```
-- **静态站点生成器**: Hexo 6.0+
-- **主题**: Next主题（推荐）/ Butterfly / Fluid
-- **部署平台**: GitHub Pages + Gitee Pages
-- **评论系统**: Gitalk / Valine / Giscus
-- **搜索**: Algolia / Local Search
-- **图床**: 七牛云 / 阿里云OSS / GitHub
+- 静态站点生成器: Hexo 6.0+
+- 主题: Next主题（推荐）/ Butterfly / Fluid
+- 部署平台: GitHub Pages + Gitee Pages
+- 评论系统: Gitalk / Valine / Giscus
+- 搜索: Algolia / Local Search
+- 图床: 七牛云 / 阿里云OSS / GitHub
 
 ```
-**开发工具：**
+开发工具：
 ```
-- **编辑器**: VS Code / Typora
-- **版本控制**: Git
-- **图片处理**: PicGo
+- 编辑器: VS Code / Typora
+- 版本控制: Git
+- 图片处理: PicGo
 
 ### 二、项目架构
 
@@ -109,7 +109,7 @@ hexo-blog/
 #### 3.1 项目初始化
 
 ```
-**1. 创建Hexo项目：**
+1. 创建Hexo项目：
 ```
 
 ```bash
@@ -133,7 +133,7 @@ npm install hexo-generator-baidu-sitemap --save
 ```
 
 ```
-**2. 配置Hexo主配置文件：**
+2. 配置Hexo主配置文件：
 ```
 
 ```yaml
@@ -208,7 +208,7 @@ deploy:
 #### 3.2 主题配置
 
 ```
-**安装Next主题：**
+安装Next主题：
 ```
 
 ```bash
@@ -218,7 +218,7 @@ cd ..
 ```
 
 ```
-**配置Next主题：**
+配置Next主题：
 ```
 
 ```yaml
@@ -283,7 +283,7 @@ motion:
 #### 3.3 文章管理
 
 ```
-**创建文章：**
+创建文章：
 ```
 
 ```bash
@@ -301,7 +301,7 @@ hexo new page "about"
 ```
 
 ```
-**文章Front Matter：**
+文章Front Matter：
 ```
 
 ```markdown
@@ -324,7 +324,7 @@ comments: true
 #### 3.4 插件配置
 
 ```
-**搜索插件：**
+搜索插件：
 ```
 
 ```yaml
@@ -337,7 +337,7 @@ search:
 ```
 
 ```
-**RSS插件：**
+RSS插件：
 ```
 
 ```bash
@@ -358,7 +358,7 @@ feed:
 ```
 ```
 
-**图片插件：**
+图片插件：
 
 ```bash
 npm install hexo-asset-image --save
@@ -368,13 +368,13 @@ npm install hexo-asset-image --save
 
 #### 4.1 GitHub Pages部署
 
-**1. 创建GitHub仓库：**
+1. 创建GitHub仓库：
 
 1. 登录GitHub
 2. 创建新仓库：`yourname.github.io`
 3. 设置为公开仓库
 
-**2. 配置SSH密钥：**
+2. 配置SSH密钥：
 
 ```bash
 # 生成SSH密钥
@@ -387,7 +387,7 @@ cat ~/.ssh/id_rsa.pub
 # Settings → SSH and GPG keys → New SSH key
 ```
 
-**3. 配置部署：**
+3. 配置部署：
 
 ```yaml
 # _config.yml
@@ -399,7 +399,7 @@ deploy:
 ```
 ```
 
-**4. 部署命令：**
+4. 部署命令：
 
 ```bash
 # 清理并生成
@@ -414,20 +414,20 @@ hexo d -g
 
 #### 4.2 Gitee Pages部署
 
-**1. 创建Gitee仓库：**
+1. 创建Gitee仓库：
 
 1. 登录Gitee
 2. 创建新仓库：`yourname`
 3. 同步GitHub代码
 
-**2. 开启Gitee Pages：**
+2. 开启Gitee Pages：
 
 1. 仓库 → 服务 → Gitee Pages
 2. 选择分支和目录
 3. 点击"启动"
 4. 访问地址：`https://yourname.gitee.io`
 
-**3. 自动部署脚本：**
+3. 自动部署脚本：
 
 ```bash
 #!/bin/bash
@@ -449,11 +449,11 @@ cd ..
 
 #### 4.3 自定义域名
 
-**1. 购买域名：**
+1. 购买域名：
 
 - 在域名注册商购买域名（如：阿里云、腾讯云）
 
-**2. 配置DNS：**
+2. 配置DNS：
 
 ```
 类型    主机记录    记录值
@@ -461,7 +461,7 @@ CNAME   www        yourname.github.io
 CNAME   @          yourname.github.io
 ```
 
-**3. 添加CNAME文件：**
+3. 添加CNAME文件：
 
 ```bash
 # 在source目录创建CNAME文件
@@ -472,7 +472,7 @@ echo "www.yourdomain.com" > source/CNAME
 www.yourdomain.com
 ```
 
-**4. GitHub Pages设置：**
+4. GitHub Pages设置：
 
 1. 仓库 → Settings → Pages
 2. Custom domain: 输入域名
@@ -482,29 +482,29 @@ www.yourdomain.com
 
 #### 5.1 经验总结
 
-**开发过程中的关键点：**
+开发过程中的关键点：
 
-1. **主题选择**：Next主题功能完善，文档齐全
-2. **文章管理**：使用Markdown编写，便于版本控制
-3. **图片管理**：使用图床或GitHub存储图片
-4. **SEO优化**：配置sitemap、RSS、meta标签
-5. **访问统计**：使用不蒜子或Google Analytics
+1. 主题选择：Next主题功能完善，文档齐全
+2. 文章管理：使用Markdown编写，便于版本控制
+3. 图片管理：使用图床或GitHub存储图片
+4. SEO优化：配置sitemap、RSS、meta标签
+5. 访问统计：使用不蒜子或Google Analytics
 
 #### 5.2 优化建议
 
-**性能优化：**
+性能优化：
 - 使用CDN加速静态资源
 - 压缩图片大小
 - 启用Gzip压缩
 - 使用懒加载
 
-**SEO优化：**
+SEO优化：
 - 配置sitemap
 - 添加meta标签
 - 优化文章标题和描述
 - 内链建设
 
-**功能扩展：**
+功能扩展：
 - 添加搜索功能
 - 集成评论系统
 - 添加访问统计

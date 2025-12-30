@@ -13,9 +13,9 @@ top: 65
 [iOS研习记]——记MJExtension多线程Crash的解决历程 难缠的Crash问题 本篇博客的起源是由于收集到线上用户产生的一些难缠的Crash问题，通过堆栈信息观察，Crash的堆栈信息主要有两类： 一类。..
 <!-- more -->
 
-### [iOS研习记]——记MJExtension多线程Crash的解决历程
+### 一、[iOS研习记]——记MJExtension多线程Crash的解决历程
  
-#### 难缠的Crash问题
+#### 1.1 难缠的Crash问题
     本篇博客的起源是由于收集到线上用户产生的一些难缠的Crash问题，通过堆栈信息观察，Crash的堆栈信息主要有两类： 
 一类如下：
 
@@ -54,7 +54,7 @@ top: 65
  一定和多线程相关，推测和锁可能相关。 
  
  
-#### 问题的定位与复现
+#### 1.2 问题的定位与复现
     对于iOS端开发，定位和解决Crash毕竟两个流程，首先是根据线索来分析和定位问题，得到一个大概的猜想，之后按照自己的猜想去提供外部条件，来尝试复现问题，如果问题能够成功复现并复原与线程问题相似的堆栈现场，则基本完成了90%的工作，剩下的10%才是修复此问题。 
     首先，根据前面我们对问题的分析和推理，可以从mj_objectWithKeyValues和mj_setup方法进行切入，通过对MJExtension代码的Review，可以发现这些方法中有一个宏使用的非常频繁，后来也证明问题确实出在这个宏的定义上： 
 ![Test](https://oscimg.oschina.net/oscnet/up-d46736eb6d252e729616cf2a6d78d6e5920.png  '-iOS研习记-——记MJExtension多线程Crash的解决历程') 
@@ -98,7 +98,7 @@ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
   
 通过场景复现，基本可以定位此问题原因。 
  
-#### 几个疑问的解答
+#### 1.3 几个疑问的解答
  
 ##### 1. 产生此Crash的核心原理
 多线程锁失效导致的多线程读写异常。 
@@ -107,7 +107,7 @@ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 
 需要从业务使用上来分析，之前的版本类似mj_setup相关方法的调用会放入类的+load方法中，这个在main函数调用之前，所有类的解析配置都已完成，基本不会出现多线程问题，新版本做了冷启动的优化，将mj_setup相关方法放入了+(void)initialize方法中，使得多线程问题被触发的概率大大增加了。
  
-#### MJExtension后续版本
+#### 1.4 MJExtension后续版本
 
 截止到本篇博客编写时间，MJExtension最新版本3.2.5已经处理了这个锁问题的Bug，其修复方式是将static修改为了extern，使这个信号量变量被声明为了一个全局变量，如下：
 
@@ -127,7 +127,7 @@ dispatch_once_t mje_onceTokenSemaphore;
   
 修改后的代码保证了锁的唯一性。 
  
-#### 建议
+#### 1.5 建议
 
 使用MJExtension库时，如果需要进行解析配置，优先使用复写相关配置+方法来实现，例如：
 

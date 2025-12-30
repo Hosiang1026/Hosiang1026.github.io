@@ -15,7 +15,9 @@ top: 13
 <!-- more -->
 
 本文会通过创建一个简单的 RecyclerView 实现一个列表来显示不同种类的花的名字。在实现的过程中，我也会将 RecyclerView 的每个部分揉碎了展现给大家，这样大家就可以在自己的应用中实现了。 
-#### RecyclerView 是 "何方神圣"？为什么选择它呢
+
+### 一、RecyclerView实战
+#### 1.1 RecyclerView 是 "何方神圣"？为什么选择它呢
 ```
 RecyclerView 是一个容器，它用于显示列表形式 (list) 或者网格形式 (grid) 的数据，比如文本或者照片。 
 ```
@@ -31,7 +33,7 @@ RecyclerView 是一个容器，它用于显示列表形式 (list) 或者网格�
  RecyclerView 提供默认的表项动画以及自定义动画的入口。 
  
 总之，RecyclerView 兼顾了灵活性和个性化，所以它是功能强大的工具。 
-#### 实现 RecyclerView
+#### 1.2 实现 RecyclerView
 本文会为大家展示如何实现一个简单的  
  `RecyclerView` 
  ，用它来显示不同种类花的名称。下面的代码会使用 Kotlin 语言，但是  
@@ -110,7 +112,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
   ``` 
   
-#### RecyclerView 布局
+#### 1.3 RecyclerView 布局
 接下来，在  
  `activity_main` 
   布局文件中将  
@@ -138,7 +140,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
   ``` 
   
-#### 表项布局
+#### 1.4 表项布局
 上面的示意图表示一个包含数据表项的  
  。在这里，组成  
 ```
@@ -164,7 +166,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
   ``` 
   
-#### 拆分 Adapter 类
+#### 1.5 拆分 Adapter 类
 接下来是  
   的重头戏了，也就是 ViewHolder 和 Adapter 类。ViewHolder 负责存储 RecyclerView 中每一个单独的表项所需要显示的信息。RecyclerView 仅需要创建当前所显示的表项数量的 ViewHolder 外加缓存中的几个 ViewHolder 即可。随着用户滑动屏幕，ViewHolder会被回收 (使用新数据进行填充)，已有的表项会在一端消失，并且在另一端显示一个新的表项。Adapter 类从数据源获得数据，并且将数据传递给正在更新其所持视图的 ViewHolder。下图显示了 RecyclerView、Adapter、ViewHolder 和数据之间的协作关系。 
 创建 Adapter 
@@ -284,7 +286,7 @@ override fun getItemCount(): Int {
 
   ``` 
   
-#### 连接到 MainActivity
+#### 1.6 连接到 MainActivity
 我们已经创建了布局、数据列表和 adapter。现在我们可以将  
   添加到  
  `MainActivity` 
@@ -310,7 +312,7 @@ class MainActivity : AppCompatActivity() {
   ``` 
   
 现在我们运行一下，然后看看它操作起来如何: 
-#### 下一步
+#### 1.7 下一步
 完整代码请点击 这里。 
 上面的例子为大家展示了如何实现 RecyclerView 的几个组成部分来显示简单的文本元素。当然 RecyclerView 可以包含更多有趣和复杂的元素，我们将在未来的文章和示例中为大家展示。 
 更多资源，请参阅: 

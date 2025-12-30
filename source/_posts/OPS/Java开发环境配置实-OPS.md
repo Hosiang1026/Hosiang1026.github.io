@@ -1,4 +1,4 @@
----
+﻿---
 title: Java开发环境配置实
 categories: Java开发全栈系列
 tags:
@@ -19,11 +19,11 @@ top: 20
 #### 1.1 项目需求
 
 ```
-**项目背景：** 开发一个基于Spring Boot的用户管理系统，提供用户注册、登录、信息管理、权限控制等功能，采用RESTful API设计。
+项目背景： 开发一个基于Spring Boot的用户管理系统，提供用户注册、登录、信息管理、权限控制等功能，采用RESTful API设计。
 ```
 
 ```
-**核心需求：**
+核心需求：
 ```
 - 用户注册、登录、JWT认证
 - 用户信息CRUD操作
@@ -36,25 +36,25 @@ top: 20
 #### 1.2 技术选型
 
 ```
-**技术栈：**
+技术栈：
 ```
-- **框架**: Spring Boot 2.7.0
-- **数据库**: MySQL 8.0 + MyBatis Plus
-- **缓存**: Redis
-- **认证**: Spring Security + JWT
+- 框架: Spring Boot 2.7.0
+- 数据库: MySQL 8.0 + MyBatis Plus
+- 缓存: Redis
+- 认证: Spring Security + JWT
 ```
-- **API文档**: Swagger (Springfox)
+- API文档: Swagger (Springfox)
 ```
-- **构建工具**: Maven
-- **日志**: Logback + SLF4J
+- 构建工具: Maven
+- 日志: Logback + SLF4J
 
 ```
-**开发工具：**
+开发工具：
 ```
-- **IDE**: IntelliJ IDEA
-- **数据库工具**: DBeaver / Navicat
-- **API测试**: Postman
-- **版本控制**: Git
+- IDE: IntelliJ IDEA
+- 数据库工具: DBeaver / Navicat
+- API测试: Postman
+- 版本控制: Git
 
 ### 二、项目架构
 
@@ -121,7 +121,7 @@ user-management/
 #### 3.1 项目初始化
 
 ```
-**1. 创建Spring Boot项目：**
+1. 创建Spring Boot项目：
 ```
 
 使用Spring Initializr创建项目：
@@ -130,7 +130,7 @@ user-management/
 - 添加依赖：Web、MyBatis、MySQL、Redis、Security
 
 ```
-**2. pom.xml核心依赖：**
+2. pom.xml核心依赖：
 ```
 
 ```xml
@@ -190,7 +190,7 @@ user-management/
 #### 3.2 配置文件
 
 ```
-**application.yml：**
+application.yml：
 ```
 
 ```yaml
@@ -226,7 +226,7 @@ jwt:
 #### 3.3 实体类定义
 
 ```
-**entity/User.java：**
+entity/User.java：
 ```
 
 ```java
@@ -258,7 +258,7 @@ public class User {
 #### 3.4 Service层实现
 
 ```
-**service/UserService.java：**
+service/UserService.java：
 ```
 
 ```java
@@ -309,7 +309,7 @@ public class UserService {
 #### 3.5 Controller层实现
 
 ```
-**controller/UserController.java：**
+controller/UserController.java：
 ```
 
 ```java
@@ -370,7 +370,7 @@ public class UserController {
 #### 3.6 JWT认证实现
 
 ```
-**security/JwtTokenUtil.java：**
+security/JwtTokenUtil.java：
 ```
 
 ```java
@@ -429,7 +429,7 @@ public class JwtTokenUtil {
 #### 4.1 打包应用
 
 ```
-**使用Maven打包：**
+使用Maven打包：
 ```
 
 ```bash
@@ -446,7 +446,7 @@ mvn clean package -DskipTests
 #### 4.2 运行应用
 
 ```
-**开发环境运行：**
+开发环境运行：
 ```
 
 ```bash
@@ -460,10 +460,10 @@ java -jar target/user-management-1.0.0.jar --spring.profiles.active=prod
 java -Xms512m -Xmx1024m -jar target/user-management-1.0.0.jar
 ```
 
-#### 4.3 使用systemd管理（Linux）**
+#### 4.3 使用systemd管理（Linux）
 
 ```
-**创建服务文件：**
+创建服务文件：
 ```
 
 ```bash
@@ -471,7 +471,7 @@ sudo vim /etc/systemd/system/user-management.service
 ```
 
 ```
-**服务配置：**
+服务配置：
 ```
 
 ```ini
@@ -489,7 +489,7 @@ WantedBy=multi-user.target
 ```
 
 ```
-**管理服务：**
+管理服务：
 ```
 
 ```bash
@@ -512,7 +512,7 @@ sudo systemctl enable user-management
 #### 4.4 Docker部署
 
 ```
-**Dockerfile：**
+Dockerfile：
 ```
 
 ```dockerfile
@@ -528,7 +528,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 ```
 
 ```
-**构建和运行：**
+构建和运行：
 ```
 
 ```bash
@@ -548,19 +548,19 @@ docker run -d \
 #### 5.1 经验总结
 
 ```
-**开发过程中的关键点：**
+开发过程中的关键点：
 ```
 
-1. **分层架构**：清晰的分层使代码易于维护和测试
-2. **MyBatis Plus**：简化了数据库操作，提高开发效率
-3. **JWT认证**：无状态的认证方式，适合分布式系统
-4. **统一异常处理**：GlobalExceptionHandler统一处理异常
-5. **Swagger文档**：自动生成API文档，便于前后端协作
+1. 分层架构：清晰的分层使代码易于维护和测试
+2. MyBatis Plus：简化了数据库操作，提高开发效率
+3. JWT认证：无状态的认证方式，适合分布式系统
+4. 统一异常处理：GlobalExceptionHandler统一处理异常
+5. Swagger文档：自动生成API文档，便于前后端协作
 
 #### 5.2 优化建议
 
 ```
-**性能优化：**
+性能优化：
 ```
 - 使用Redis缓存热点数据
 - 数据库连接池优化
@@ -568,7 +568,7 @@ docker run -d \
 - 使用分页查询避免全表扫描
 
 ```
-**安全优化：**
+安全优化：
 ```
 - 密码加密存储（BCrypt）
 - 实现请求频率限制
@@ -576,7 +576,7 @@ docker run -d \
 - 定期更新依赖包
 
 ```
-**监控和日志：**
+监控和日志：**
 ```
 - 集成Spring Boot Actuator
 - 使用ELK收集和分析日志

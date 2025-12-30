@@ -14,7 +14,9 @@ Linux作为一个强大的操作系统，提供了一系列内核参数供我们
 <!-- more -->
 
                                                                                                                                                                                         Linux作为一个强大的操作系统，提供了一系列内核参数供我们进行调优。光TCP的调优参数就有50多个。在和线上问题斗智斗勇的过程中，笔者积累了一些在内网环境应该进行调优的参数。在此分享出来，希望对大家有所帮助。 
-#### 调优清单
+
+### 一、Linux上TCP内核参数调优
+#### 1.1 调优清单
  
   
    序号 
@@ -73,7 +75,7 @@ Linux作为一个强大的操作系统，提供了一系列内核参数供我们
    0 
     
    
-#### tcp_max_syn_backlog,somaxconn,tcp_abort_on_overflow
+#### 1.2 tcp_max_syn_backlog,somaxconn,tcp_abort_on_overflow
 ```
 tcp_max_syn_backlog,somaxconn,tcp_abort_on_overflow这三个参数是关于 内核TCP连接缓冲队列的设置。如果应用层来不及将已经三次握手建立成功的TCP连接从队列中取出，溢出了这个缓冲队列(全连接队列)之后就会丢弃这个连接。如下图所示: ![Test](https://oscimg.oschina.net/oscnet/up-6da3083f11a90a9feb67b624b3dbc0516f5.png  'Linux上TCP的几个内核参数调优') 从而产生一些诡异的现象，这个现象诡异之处就在于，是在TCP第三次握手的时候丢弃连接 ![Test](https://oscimg.oschina.net/oscnet/up-6da3083f11a90a9feb67b624b3dbc0516f5.png  'Linux上TCP的几个内核参数调优') 就如图中所示，第二次握手的SYNACK发送给client端了。所以就会出现client端认为连接成功，而Server端确已经丢弃了这个连接的现象！由于无法感知到Server已经丢弃了连接。 所以如果没有心跳的话，只有在发出第一个请求后，Server才会发送一个reset端通知这个连接已经被丢弃了，建立连接后第二天再用，也会报错！所以我们要调大Backlog队列！ 
 ```
@@ -92,7 +94,7 @@ echo 1 > /proc/sys/net/ipv4/tcp_abort_on_overflow
 ```
 这个TCP Backlog的队列大小值是min(tcp_max_syn_backlog,somaxconn，应用层设置的backlog),而Java如果不做额外设置，Backlog默认值仅仅只有50。C语言在使用listen调用的时候需要传进Backlog参数。 
 ```
-#### tcp_tw_recycle
+#### 1.3 tcp_tw_recycle
 ```
 tcp_tw_recycle这个参数一般是用来抑制TIME_WAIT数量的，但是它有一个副作用。即在tcp_timestamps开启(Linux默认开启)，tcp_tw_recycle会经常导致下面这种现象。 ![Test](https://oscimg.oschina.net/oscnet/up-6da3083f11a90a9feb67b624b3dbc0516f5.png  'Linux上TCP的几个内核参数调优') 也即，如果你的Server开启了tcp_tw_recycle，那么别人如果通过NAT之类的调用你的Server的话，NAT后面的机器只有一台机器能正常工作，其它情况大概率失败。具体原因呢由下图所示: ![Test](https://oscimg.oschina.net/oscnet/up-6da3083f11a90a9feb67b624b3dbc0516f5.png  'Linux上TCP的几个内核参数调优') 在tcp_tw_recycle=1同时tcp_timestamps(默认开启的情况下),对同一个IP的连接会做这样的限制，也即之前后建立的连接的时间戳必须要大于之前建立连接的最后时间戳，但是经过NAT的一个IP后面是不同的机器，时间戳相差极大，就会导致内核直接丢弃时间戳较低的连接的现象。由于这个参数导致的问题，高版本内核已经去掉了这个参数。如果考虑TIME_WAIT问题，可以考虑置下 `echo 1 > /proc/sys/net/ipv4/tcp_tw_reuse` #### tcp_syn_retries
 ```
@@ -172,7 +174,7 @@ tcp_retries2这个参数表面意思是在传输过程中tcp的重传次数。�
 golang的goroutine调度模型就可以很好的解决线程资源不够的问题，但缺是goroutine里面不能有阻塞的系统调用，不然也会和上面一样，但仅仅对于系统之间互相调用而言，都是非阻塞IO，所以golang做微服务还是非常Nice的。当然了我大Java用纯IO事件触发编写代码也不会有问题，就是对心智负担太高-_-! 
 ##### 物理机突然宕机和进程宕不一样
 值得注意的是，物理机宕机和进程宕但内核还存在表现完全不一样。 ![Test](https://oscimg.oschina.net/oscnet/up-6da3083f11a90a9feb67b624b3dbc0516f5.png  'Linux上TCP的几个内核参数调优') 仅仅进程宕而内核存活，那么内核会立马发送reset给对端，从而不会卡住A系统的线程资源。 
-#### tcp_slow_start_after_idle
+#### 1.4 tcp_slow_start_after_idle
 还有一个可能需要调整的参数是tcp_slow_start_after_idle，Linux默认是1，即开启状态。开启这个参数后，我们的TCP拥塞窗口会在一个RTO时间空闲之后重置为初始拥塞窗口(CWND)大小，这无疑大幅的减少了长连接的优势。对应Linux源码为: 
 static void tcp_event_data_sent(struct tcp_sock *tp,
 				struct sk_buff *skb, struct sock *sk){
@@ -192,7 +194,7 @@ echo 0 > /proc/sys/net/ipv4/tcp_slow_start_after_idle
   
 ```  
 当然了，Linux启用这个参数也是有理由的，如果我们的网络情况是时刻在变化的，例如拿个手机到处移动，那么将拥塞窗口重置确实是个不错的选项。但是就我们内网系统间调用而言，是不太必要的了。 
-#### 初始CWND大小
+#### 1.5 初始CWND大小
 毫无疑问，新建连接之后的初始TCP拥塞窗口大小也直接影响到我们的请求速率。在Linux2.6.32源码中，其初始拥塞窗口是(2-4个)mss大小，对应于内网估计也就是(2.8-5.6K)(MTU 1500)，这个大小对于某些大请求可能有点捉襟见肘。 在Linux 2.6.39以上或者某些RedHat维护的小版本中已经把CWND 增大到RFC 6928所规定的的10段，也就是在内网里面估计14K左右(MTU 1500)。 
 Linux 新版本
 /* TCP initial congestion window */
@@ -200,7 +202,7 @@ Linux 新版本
 
   
 ```  
-#### 总结
+#### 1.6 总结
 ```
 Linux提供了一大堆内参参数供我们进行调优，其默认设置参数在很多情况下并不是最佳实践，所以我们需要潜心研究，找到最适合当前环境的组合。 ![Test](https://oscimg.oschina.net/oscnet/up-6da3083f11a90a9feb67b624b3dbc0516f5.png  'Linux上TCP的几个内核参数调优')
 ```

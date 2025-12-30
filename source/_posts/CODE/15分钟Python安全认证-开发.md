@@ -32,7 +32,8 @@ top: 7
  1 
   
   
- ####     
+### 一、
+#### 1.1 
  常见认证规范/协议 
  1.1 
   
@@ -70,7 +71,7 @@ top: 7
  2 
   
   
- ####     
+#### 1.2 
  JWT 
 
  2.1 
@@ -146,7 +147,7 @@ top: 7
  3 
   
   
- ####     
+#### 1.3 
  基于 JWT 的 Token 的认证过程 
  3.1 
   
@@ -173,7 +174,7 @@ top: 7
  4 
   
   
- ####     
+#### 1.4 
  获取 Token 实战 
  在写代码之前我们先来了解一下 OAuth2PasswordBearer 这个类的功能。OAuth2PasswordBearer 是接收 URL 作为参数的一个类：客户端会向该 URL 发送 username 和 password 参数，然后得到一个 Token 值。OAuth2PasswordBearer 并不会创建相应的 URL 路径操作，只是指明了客户端用来获取 Token 的目标 URL。 
  当请求到来的时候，FastAPI 会检查请求的 Authorization 头信息，如果没有找到 Authorization 头信息，或者头信息的内容不是 Bearer Token，它会返回 401 状态码(UNAUTHORIZED)。我们再从源码上认识一下: `class OAuth2PasswordBearer(OAuth2):` ```python
@@ -304,7 +305,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
  5 
   
   
- ####     
+#### 1.5 
  本期总结 
  1。介绍了常见的 认证规范/协议2。对 JWT 进行了深入的研究和分析3。在实际生产过程中如何产生一个有效的 Token 在代码层面进行落地4。本篇不仅可以让"守"方清楚了如何有效的制作一个 Token 来进行防御，另一方面若是做逆向的"攻"方也了解了如何进行破防，下一期我们会重点站在实践的角度去走一个登录请求的认证的全流程 
   

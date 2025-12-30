@@ -1,4 +1,4 @@
----
+﻿---
 title: Windows操作系统安装进
 categories: 操作系统安装指南系列
 tags:
@@ -21,26 +21,26 @@ top: 12
 #### 1.1 UEFI和Legacy BIOS启动
 
 ```
-**UEFI启动（推荐）：**
+UEFI启动（推荐）：
 ```
 
-- **优势**：
+- 优势：
   - 启动速度快
   - 支持安全启动（Secure Boot）
   - 支持GPT分区表（超过2TB硬盘）
   - 更好的硬件兼容性
 
 ```
-**Legacy BIOS启动：**
+Legacy BIOS启动：
 ```
 
-- **适用场景**：
+- 适用场景：
   - 老式主板（2012年以前）
   - 特殊硬件要求
   - 兼容性测试
 
 ```
-**检查启动模式：**
+检查启动模式：
 ```
 
 ```powershell
@@ -56,7 +56,7 @@ list disk
 #### 1.2 分区方案优化
 
 ```
-**GPT分区方案（UEFI）：**
+GPT分区方案（UEFI）：
 ```
 
 ```
@@ -69,7 +69,7 @@ list disk
 ```
 
 ```
-**MBR分区方案（Legacy）：**
+MBR分区方案（Legacy）：
 ```
 
 ```
@@ -81,18 +81,18 @@ list disk
 ```
 
 ```
-**分区大小建议：**
+分区大小建议：
 ```
 
-- **系统分区（C盘）**：至少100GB，推荐200GB+
-- **EFI分区**：100-500MB
-- **恢复分区**：500MB-1GB
-- **数据分区**：根据需求分配
+- 系统分区（C盘）：至少100GB，推荐200GB+
+- EFI分区：100-500MB
+- 恢复分区：500MB-1GB
+- 数据分区：根据需求分配
 
 #### 1.3 系统镜像定制
 
 ```
-**使用DISM工具定制镜像：**
+使用DISM工具定制镜像：
 ```
 
 ```powershell
@@ -110,7 +110,7 @@ dism /Unmount-Image /MountDir:C:\mount /Commit
 ```
 
 ```
-**使用NTLite定制：**
+使用NTLite定制：
 ```
 
 1. 加载Windows ISO镜像
@@ -124,7 +124,7 @@ dism /Unmount-Image /MountDir:C:\mount /Commit
 #### 2.1 安装后优化
 
 ```
-**禁用不必要的服务：**
+禁用不必要的服务：
 ```
 
 ```powershell
@@ -141,7 +141,7 @@ Set-Service -Name "ServiceName" -StartupType Disabled
 ```
 
 ```
-**优化启动项：**
+优化启动项：
 ```
 
 ```powershell
@@ -153,7 +153,7 @@ Get-CimInstance Win32_StartupCommand
 ```
 
 ```
-**优化虚拟内存：**
+优化虚拟内存：
 ```
 
 ```
@@ -168,7 +168,7 @@ Get-CimInstance Win32_StartupCommand
 #### 2.2 系统清理和维护
 
 ```
-**使用磁盘清理：**
+使用磁盘清理：
 ```
 
 ```powershell
@@ -181,7 +181,7 @@ cleanmgr /sagerun:1
 ```
 
 ```
-**清理Windows更新缓存：**
+清理Windows更新缓存：
 ```
 
 ```powershell
@@ -196,7 +196,7 @@ net start wuauserv
 ```
 
 ```
-**优化注册表：**
+优化注册表：
 ```
 
 ```powershell
@@ -210,33 +210,33 @@ net start wuauserv
 #### 3.1 多系统引导配置
 
 ```
-**Windows + Linux双系统：**
+Windows + Linux双系统：
 ```
 
-1. **安装顺序**：先安装Windows，再安装Linux
-2. **分区规划**：
+1. 安装顺序：先安装Windows，再安装Linux
+2. 分区规划：
    - Windows: NTFS分区
    - Linux: Ext4分区 + Swap分区
    - EFI: 共享EFI分区
 
-3. **引导配置**：
+3. 引导配置：
    - 使用GRUB2作为主引导
    - 在GRUB中添加Windows启动项
 
 ```
-**Windows + macOS双系统（黑苹果）：**
+Windows + macOS双系统（黑苹果）：
 ```
 
-1. **分区方案**：GPT分区表
-2. **引导工具**：OpenCore或Clover
-3. **注意事项**：
+1. 分区方案：GPT分区表
+2. 引导工具：OpenCore或Clover
+3. 注意事项：
    - Windows需要关闭快速启动
    - 时间同步问题需要解决
 
 #### 3.2 系统备份和恢复
 
 ```
-**使用Windows备份：**
+使用Windows备份：
 ```
 
 ```powershell
@@ -249,15 +249,15 @@ wbadmin start recovery -version:备份版本
 ```
 
 ```
-**使用第三方工具：**
+使用第三方工具：
 ```
 
-- **Acronis True Image**：商业备份软件
-- **Macrium Reflect**：免费备份工具
-- **AOMEI Backupper**：国产备份软件
+- Acronis True Image：商业备份软件
+- Macrium Reflect：免费备份工具
+- AOMEI Backupper：国产备份软件
 
 ```
-**系统还原点：**
+系统还原点：
 ```
 
 ```powershell
@@ -276,24 +276,24 @@ Restore-Computer -RestorePoint 还原点编号
 #### 4.1 安装问题排查
 
 ```
-**常见安装错误：**
+常见安装错误：
 ```
 
-1. **0x80070005错误（权限不足）**
+1. 0x80070005错误（权限不足）
    ```powershell
    # 以管理员身份运行安装程序
    # 检查用户权限
    whoami /priv
    ```
 
-2. **0x80070003错误（文件缺失）**
+2. 0x80070003错误（文件缺失）
    ```powershell
    # 检查ISO完整性
    # 重新下载或使用其他镜像
    # 检查U盘/光盘是否有坏道
    ```
 
-3. **安装卡在某个百分比**
+3. 安装卡在某个百分比
    ```powershell
    # 检查硬件兼容性
    # 更新BIOS/UEFI
@@ -302,7 +302,7 @@ Restore-Computer -RestorePoint 还原点编号
    ```
 
 ```
-**使用安装日志诊断：**
+使用安装日志诊断：
 ```
 
 ```powershell
@@ -318,7 +318,7 @@ eventvwr.msc
 #### 4.2 驱动安装技巧
 
 ```
-**自动安装驱动：**
+自动安装驱动：
 ```
 
 ```powershell
@@ -331,7 +331,7 @@ devmgmt.msc
 ```
 
 ```
-**手动安装驱动：**
+手动安装驱动：
 ```
 
 1. 从硬件厂商官网下载驱动
@@ -340,7 +340,7 @@ devmgmt.msc
 4. 选择驱动文件夹
 
 ```
-**驱动备份和恢复：**
+驱动备份和恢复：
 ```
 
 ```powershell
@@ -352,12 +352,12 @@ dism /online /add-driver /driver:D:\Drivers /recurse
 ```
 
 ```
-**使用驱动管理工具：**
+使用驱动管理工具：
 ```
 
-- **Driver Booster**：自动检测和更新驱动
-- **Snappy Driver Installer**：离线驱动安装
-- **3DP Chip**：自动识别硬件并下载驱动
+- Driver Booster：自动检测和更新驱动
+- Snappy Driver Installer：离线驱动安装
+- 3DP Chip：自动识别硬件并下载驱动
 
 ### 五、总结
 

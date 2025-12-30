@@ -12,10 +12,10 @@ tags:
 前言 2000 年 CollabNet 创建了 Subversion 项目，一晃 SVN 已经诞生 20 年了，截至 r1873568 SVN 主分支共有 59674 次提交，32 个开发者，288 次发布，2005 年 Linus Torvalds 创建了 Git，...
 <!-- more -->
 
-### 前言 
+### 一、前言
 2000 年 CollabNet 创建了 Subversion 项目，一晃 SVN 已经诞生 20 年了，截至 r1873568 SVN 主分支共有 59674 次提交，32 个开发者，288 次发布，2005 年 Linus Torvalds 创建了 Git，截至 de93cc14ab7e8db7645d8dbe4fd2603f76d5851f，git 主分支共有 58209 次提交，1343 个贡献者，742 次发布，诸如 Google，Microsoft，Facebook 这样的巨无霸公司都在使用 Git，Git 主要开发者来自 Google 和 Microsoft。 
 人多力量大，众人拾柴火焰高，有钱能使鬼推磨，贡献越多码越好，我们可以看到 SVN 只是缓慢变好，而 Git 却在飞速增强，到了今天为什么还不从 SVN 迁移到 Git？ 
-### Git 与 SVN 的比较
+### 二、Git 与 SVN 的比较
 Git 是最流行的分布式版本控制系统，而 SVN 是集中式版本控制系统，顾名思义，SVN 的存储库将存储在中央服务器，而 Git 的存储库是存储在本地，当网络连接断开后，SVN 便无法进行提交，使用 Git 的开发者则可以先将代码提交到本地存储库，待网络恢复后再推送到远程服务器。 
  
   
@@ -80,14 +80,14 @@ Git 是最流行的分布式版本控制系统，而 SVN 是集中式版本控�
    
   
 我们查看 Compare Repositories，可以发现，尽管 SVN 时非常优秀的版本控制系统，但大多数的人们还是选了更具活力更好的 Git。 
-### Gitee 的功能
+### 三、Gitee 的功能
 用户在使用 SVN 时，通常感到舒适的功能有部分检出，目录权限控制等等，并一直以此为理由否定 Git 的进步，随着 Git 的不断增强，Gitee 开发者的不断努力，Gitee 逐渐拥有了这些功能。 
 2019 年 5 月底，Gitee 新增只读目录支持：SVN 的文件和目录只读特性，能否在 Git 也实现？ 并且，我写了一篇文章介绍如何实现 Git 目录权限控制。 
 2020 年 1 月 17 日，码云目前已经初步支持 Git 部分克隆，结合部分克隆和稀疏检出能够提供比 SVN 更好的部分检出体验。 
 Gitee 除了在 Git 功能上推陈出新，还在团队协作，企业管理上增加了很多功能，自定义权限管理更切合企业实际，任务，里程碑，成员周报能够让开发者异地完成诸多任务，并被考核。 2019 年度疫情爆发以来，各地交通管制，返程复工有诸多不便，使用 Gitee 远程工作正当其时，为什么还不从 SVN 迁移到 Gitee 呢？ 
-### 将 SVN 存储库迁移到 Gitee
+### 四、将 SVN 存储库迁移到 Gitee
 企业只需要在 Gitee 上创建空存储库，然后将 SVN 存储库转换成 Git 存储库推送到 Gitee，便完成了向 Gitee 的迁移。 
-#### 使用 git svn 工具转换
+#### 4.1 使用 git svn 工具转换
 将 SVN 存储库转换成 Git 存储库非常简单，使用 git 自带的命令便可以完成： 
  ```text
   # convert repo to git repo
@@ -102,7 +102,7 @@ git push -u gitee --all
   git svn
   ```  的缺陷便很明显了，转换耗时比较长，这也是 GCC 从 SVN 转成 Git 反反复复花了好几年的原因。 
 ```
-#### 使用 svn2git(ruby) 转换
+#### 4.2 使用 svn2git(ruby) 转换
 ```
 在 Github 上有个实用工具 svn2git，这个工具主要是简化了转换流程： 
  ```bash
@@ -113,7 +113,7 @@ svn2git http://svn.example.com/path/to/repo
   
 ```  
 这个工具能够提供更好的提交日志，唯一遗憾的是，自 2016 年以来便不在更新。 
-#### 使用 svn-all-fast-export/svn2git 转换
+#### 4.3 使用 svn-all-fast-export/svn2git 转换
 ```
 KDE 的开发者开发了 svn-all-fast-export/svn2git 这个工具在服务器上将 SVN 存储库转换成 git 存储库，由于省去网络传输和检出，速度要远胜于 git svn/svn2git(ruby)。 
 ```
@@ -136,7 +136,7 @@ end repository
 
   
 ```  
-#### 使用 git-svn-fast-import 转换
+#### 4.4 使用 git-svn-fast-import 转换
 Gitee 还移植了一个 SVN to Git 的工具 git-svn-fast-import，这个转换又快又简单： 
  ```java
   $ mkdir -p repo.git && cd repo.git
@@ -157,7 +157,7 @@ progress Imported revision 100000
 
   ```  
 Gitee 开发者曾用此工具为某私有化客户将存储库从 SVN 转到 Git。 
-### 简易 Git 命令指南
+### 五、简易 Git 命令指南
  
   
    
@@ -222,11 +222,11 @@ Gitee 开发者曾用此工具为某私有化客户将存储库从 SVN 转到 Gi
    
   
 更多的命令可以访问 ProGit 或者运行  `git help command`  查看特定子命令的帮助信息。 
-### 在 Gitee 上使用 SVN 功能
+### 六、在 Gitee 上使用 SVN 功能
 随着开发者投入的逐步减少，因此使用 SVN 接入 Gitee 并不被提倡。 
 但是，如果你仍然想要在迁移到 Gitee 后，使用落后的 SVN，你可以在项目设置页面打开 SVN，然后使用： 
  `svn co svn+ssh://gitee.com/example/repo`  
 这将使用  `SVN Over SSH`  的方式访问远程存储库，只需要配置好 SSH 公钥，便可免密使用 SVN 协议访问远程 Git 存储库。 
 更多的 Gitee SVN 可以访问：码云 SVN 支持 
-### 总结
+### 七、总结
 开发者为开发者，Gitee 不断改进 Git 的体验，愿更多的企业从 SVN 迁移到 Gitee，享受更好的体验。

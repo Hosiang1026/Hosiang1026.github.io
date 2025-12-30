@@ -1,4 +1,4 @@
----
+﻿---
 title: JavaScript算数比较逻辑赋
 categories: Java开发全栈系列
 tags:
@@ -56,10 +56,10 @@ var z = x;
 x--;
 
   `幂运算符： 取幂运算符```text
-  **
+  
   `将第一个操作数提升到第二个操作数的幂。```java
   var x = 5;
-var z = x ** 2;          // 结果是 25
+var z = x  2;          // 结果是 25
 
   ``` 
   

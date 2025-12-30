@@ -42,7 +42,7 @@ Druid面向列的存储方式，并且可以在集群中进行大规模的并行
 即MetadataStorage，存储Druid集群的元数据信息，比如Segment的相关信息。 
 协调中间件 
 即Zookeeper，为Druid集群提供协调服务，如内部服务的监控，协调和领导者选举。 
-### 二、Druid部署
+### 一、Druid部署
 #### 1、安装包
 imply对druid做了集成，并提供从部署到配置到各种可视化工具的完整的解决方案。 
  
@@ -87,7 +87,7 @@ druid.zk.service.host=hop01:2181,hop02:2181,hop03:2181
 启动默认端口： 
  `9095` 
  ，访问界面如下： 
-### 三、基础用法
+### 二、基础用法
 #### 1、数据源配置
 选择上述Http的方式，基于imply提供的JSON测试文件。 
  
@@ -130,7 +130,7 @@ SELECT * FROM wikipedia LIMIT 3;
  `/opt/imply2.7/var/druid/segments/wikipedia/` 
   
 Druid基于Segment实现对数据的切割，数据按时间的时序分布，将不同时间范围内的数据存储在不同的Segment数据块中，按时间范围查询数据时，可以避免全数据扫描效率可以极大的提高，同时面向列进行数据压缩存储，提高分析的效率。 
-### 四、源代码地址
+### 三、源代码地址
  
   GitHub·地址
 https://github.com/cicadasmile/big-data-parent

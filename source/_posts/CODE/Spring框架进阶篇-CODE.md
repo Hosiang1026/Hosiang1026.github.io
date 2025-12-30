@@ -1,4 +1,4 @@
----
+﻿---
 title: Spring框架进阶篇
 categories: Spring生态体系系列
 tags:
@@ -20,18 +20,18 @@ top: 21
 #### 1.1 Spring AOP深入
 
 ```
-**AOP核心概念：**
+AOP核心概念：
 ```
 
-- **Aspect（切面）**：横切关注点的模块化
-- **Join Point（连接点）**：程序执行过程中的特定点
-- **Pointcut（切点）**：匹配连接点的表达式
-- **Advice（通知）**：在切点上执行的动作
-- **Target（目标对象）**：被代理的对象
-- **Proxy（代理）**：AOP创建的代理对象
+- Aspect（切面）：横切关注点的模块化
+- Join Point（连接点）：程序执行过程中的特定点
+- Pointcut（切点）：匹配连接点的表达式
+- Advice（通知）：在切点上执行的动作
+- Target（目标对象）：被代理的对象
+- Proxy（代理）：AOP创建的代理对象
 
 ```
-**AOP实现方式：**
+AOP实现方式：
 ```
 
 ```java
@@ -86,7 +86,7 @@ public class LoggingAspect {
 #### 1.2 Spring事务管理
 
 ```
-**声明式事务：**
+声明式事务：
 ```
 
 ```java
@@ -126,21 +126,21 @@ public class UserService {
 ```
 
 ```
-**事务传播行为：**
+事务传播行为：
 ```
 
-- **REQUIRED**：如果存在事务则加入，否则创建新事务（默认）
-- **REQUIRES_NEW**：总是创建新事务
-- **SUPPORTS**：如果存在事务则加入，否则非事务执行
-- **NOT_SUPPORTED**：非事务执行，挂起当前事务
-- **MANDATORY**：必须在事务中执行，否则抛出异常
-- **NEVER**：必须在非事务中执行，否则抛出异常
-- **NESTED**：嵌套事务
+- REQUIRED：如果存在事务则加入，否则创建新事务（默认）
+- REQUIRES_NEW：总是创建新事务
+- SUPPORTS：如果存在事务则加入，否则非事务执行
+- NOT_SUPPORTED：非事务执行，挂起当前事务
+- MANDATORY：必须在事务中执行，否则抛出异常
+- NEVER：必须在非事务中执行，否则抛出异常
+- NESTED：嵌套事务
 
 #### 1.3 Spring Bean生命周期
 
 ```
-**Bean生命周期阶段：**
+Bean生命周期阶段：
 ```
 
 ```java
@@ -220,7 +220,7 @@ public class LifecycleBean implements
 #### 2.1 Bean作用域优化
 
 ```
-**Bean作用域类型：**
+Bean作用域类型：
 ```
 
 ```java
@@ -250,12 +250,12 @@ public class SessionBean {
 ```
 
 ```
-**作用域选择建议：**
+作用域选择建议：
 ```
 
-- **单例**：无状态Bean，性能最好
-- **原型**：有状态Bean，线程不安全对象
-- **请求/会话**：Web相关的Bean
+- 单例：无状态Bean，性能最好
+- 原型：有状态Bean，线程不安全对象
+- 请求/会话：Web相关的Bean
 
 #### 2.2 懒加载优化
 
@@ -313,7 +313,7 @@ public class ProductionBean {
 #### 3.1 设计模式应用
 
 ```
-**单例模式：**
+单例模式：
 ```
 
 ```java
@@ -325,7 +325,7 @@ public class SingletonService {
 ```
 
 ```
-**工厂模式：**
+工厂模式：
 ```
 
 ```java
@@ -335,7 +335,7 @@ UserService userService = context.getBean(UserService.class);
 ```
 
 ```
-**代理模式：**
+代理模式：
 ```
 
 ```java
@@ -348,7 +348,7 @@ public class ProxyAspect {
 ```
 
 ```
-**模板方法模式：**
+模板方法模式：
 ```
 
 ```java
@@ -365,7 +365,7 @@ public List<User> findAll() {
 #### 3.2 模块化设计
 
 ```
-**分层架构：**
+分层架构：
 ```
 
 ```
@@ -394,7 +394,7 @@ public List<User> findAll() {
 #### 4.1 调试技巧
 
 ```
-**使用Spring Boot Actuator：**
+使用Spring Boot Actuator：
 ```
 
 ```xml
@@ -416,7 +416,7 @@ management:
       show-details: always
 ```
 
-**查看Bean信息：**
+查看Bean信息：
 
 ```bash
 # 访问端点
@@ -427,9 +427,9 @@ http://localhost:8080/actuator/health
 
 #### 4.2 问题排查
 
-**常见问题及解决方案：**
+常见问题及解决方案：
 
-1. **Bean创建失败**
+1. Bean创建失败
    ```java
 ```
    // 检查依赖注入
@@ -438,7 +438,7 @@ http://localhost:8080/actuator/health
 ```
    ```
 
-2. **事务不生效**
+2. 事务不生效
    ```java
 ```java
    // 检查@Transactional是否在public方法上
@@ -447,7 +447,7 @@ http://localhost:8080/actuator/health
 ```
    ```
 
-3. **AOP不生效**
+3. AOP不生效
    ```java
 ```java
    // 检查@EnableAspectJAutoProxy

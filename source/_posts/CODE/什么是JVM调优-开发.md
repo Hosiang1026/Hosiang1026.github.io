@@ -14,7 +14,8 @@ top: 48
 
         
                     想要学习JVM调优，我们必须提前知道他们的一些参数，这样才方便我们更好的去使用他们 
-#### JVM常用命令行参数
+### 一、
+#### 1.1 JVM常用命令行参数
 ###### 1. 查看参数列表
 虚拟机参数分为基本和扩展两类，在命令行中输入  
  `JAVA_HOME\bin\java` 
@@ -27,7 +28,7 @@ top: 48
 ###### 3. 扩展参数说明
  
  
-#### 虚拟机参数分类
+#### 1.2 虚拟机参数分类
 标准： - 开头，所有的HotSpot都支持 非标准：-X 开头，特定版本HotSpot支持特定命令 不稳定：-XX 开头，下个版本可能取消 
 例如：java -version、java -X 
  
@@ -48,10 +49,10 @@ public class HelloGC {
   
  
 区分概念：内存泄漏memory leak，内存溢出out of memory java -XX:+PrintCommandLineFlags HelloGC java -Xmn10M -Xms40M -Xmx60M -XX:+PrintCommandLineFlags -XX:+PrintGC HelloGC PrintGCDetails PrintGCTimeStamps PrintGCCauses java -XX:+UseConcMarkSweepGC -XX:+PrintCommandLineFlags HelloGC java -XX:+PrintFlagsInitial 默认参数值 java -XX:+PrintFlagsFinal 最终参数值 java -XX:+PrintFlagsFinal | grep xxx 找到对应的参数 java -XX:+PrintFlagsFinal -version |grep GC 
-#### 调优前的基础概念
+#### 1.3 调优前的基础概念
 1. 吞吐量： 用户代码时间 /（用户代码执行时间 + 垃圾回收时间） 2. 响应时间： STW（Stop The World）越短，响应时间越好 
 所谓的调优，首先自己要明确，想要的是什么，是吞吐量还是响应时间，还是在满足一定的响应时间的情况下，要求达到多大的吞吐量，一般来说根据业务类型去选择对应的调优方式，比如网站需要的是响应时间优先，JDK1.8尽量选G1，那如果是数据挖掘的需要使用的是吞吐量。 
-#### 什么是调优
+#### 1.4 什么是调优
 在没有接触过调优之前我们理解的JVM调优就是解决OOM问题，OOM只是JVM调优的一部分 
 ```
 一般是根据需求进行JVM规划和预调优优化运行JVM运行环境（慢，卡顿）解决JVM运行过程中出现的各种问题(OOM) 
@@ -65,7 +66,7 @@ public class HelloGC {
   -Xloggc:/opt/xxx/logs/xxx-xxx-gc-%t.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=20M -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCCause或者每天产生一个日志文件  
 在生产环境中日志文件，后面日志名字，按照系统时间产生，循环产生，日志个数五个，每个大小20M，这样的好处在于整体大小100M，能 控制整体文件大小 
 观察日志情况 
-#### 调优案例
+#### 1.5 调优案例
 ###### 案例一
 垂直电商，最高每日百万订单，处理订单系统需要什么样的服务器配置 
 这个问题比较鸡肋，因为很多不同的服务器配置都能够支撑 
@@ -77,12 +78,12 @@ CDN -》 LVS -》 NGINX -》 业务系统 -》每台机器1W并发
 普通电商的下单流程一般是： 
 订单 -》下单-》 订单系统减库存 -》 等待用户付款 这个事务如果同步的方式完成，TPS是支撑不了多长时间的 
 但是在12306里面的模型是 下单-》 减库存和订单同时异步进行 -》 等待付款 异步是当你下完订单之后，它一个线程去减库存，另外一个线程直接把你下单的信息扔到kafka或者redis里面直接返回OK，你下单成功后等待你付款，什么时候你付款完成后面那些个订单处理线程就会去里面拿数据，这个处理完了就会持久化到Hbase或者是mysql，一般大流量的处理方法核心思想就是：分而治之 
-#### JVM优化
+#### 1.6 JVM优化
 比如我有一个50万PV的资料类网站（从磁盘提取文档到内存）原服务器32位，1.5G的堆，用户反馈网站比较缓慢，如果对它进行升级，新服务器64位，16G的堆内存，用户还是反馈卡顿，而且还比之前更严重，这个是因为什么呢？一般来说很多用户去浏览数据，很多数据会load到内存中，导致内存不足，频繁的GC，STW时间过长，响应时间就会变慢，那我们应该怎么办呢，使用 PS-> PN+CMS或者G1。 
 还有一个就是系统CPU经常100%,我们要如何进行调优呢？ 
 首先我们可以想到CPU100%那么一定有线程在占用系统资源 
  
-#### 总结
+#### 1.7 总结
 今天我们只是讲解了一些基本的操作，具体怎么操作该怎么办呢？这一部分小农会在下一部分中进行讲解，今天主要带大家了解一些常用的参数，告诉大家怎么去使用和一些前置知识，下面我会对这些问题做一个实战性的讲解。 
 我是牧小农，怕什么真理无穷，进一步有进一步的欢喜，大家加油！！！
                 

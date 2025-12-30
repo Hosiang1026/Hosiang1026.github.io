@@ -13,11 +13,12 @@ top: 1
 前言 Flutter 作为目前通用的业界跨平台解决方案，开辟了一套全新的设计理念，通过自研的 UI 框架，支持高效构建多端平台上的应用，同时保持着原生应用一样的高性能。 在Flutter项目开发过程。..
 <!-- more -->
 
-#### 前言 
+### 一、腾讯地图Flutter插件实现
+#### 1.1 前言
 Flutter 作为目前通用的业界跨平台解决方案，开辟了一套全新的设计理念，通过自研的 UI 框架，支持高效构建多端平台上的应用，同时保持着原生应用一样的高性能。 在Flutter项目开发过程中，对插件的开发和复用能够提高开发效率，降低工程的耦合度。Flutter开发者可以引入对应插件就可以为项目快速集成相关能力，从而专注于具体业务功能的实现。 而在Flutter项目开发过程中面对通用业务逻辑拆分、或者需要对原生能力封装等场景时，开发者需要开发新的组件。 
 为减少开发者同时开发Android和iOS应用的成本，提升开发效率，降低集成地图SDK的门槛，腾讯位置服务团队也计划于业务实践中基于原生地图SDK能力封装一套地图Flutter插件，支持Flutter开发者跨平台调用地图SDK接口。 笔者在2019年实习期间，曾基于当时的最新版本4.2.4的Android地图SDK，将地图SDK中一些常用的基础的地图操作功能封装，构建了一套Android端的地图SDK Flutter插件。 
 现如今，地图SDK已经迭代到了4.4.0版本，笔者也将地图Flutter插件进行了一次相关版本升级。 本篇文章将介绍地图Flutter插件项目的构建、地图实例的加载以及demo示例呈现。对于地图基础操作的功能封装细节将在后续文章中进行详细讲解说明。 
-#### 地图Flutter插件项目的构建
+#### 1.2 地图Flutter插件项目的构建
 ##### 地图Flutter插件项目结构
 地图Flutter插件项目构架的整体结构如下图所示： 
 ![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0502845844684f60821bcb1029e409b1~tplv-k3u1fbpfcp-watermark.image  '腾讯地图Flutter业务实践——地图SDK Flutter插件实现(一)') 
@@ -86,7 +87,7 @@ Android端的Flutter插件配置项与官网关于Android地图SDK的配置说�
 
   ``` 
   
-#### 地图Flutter插件加载地图实例
+#### 1.3 地图Flutter插件加载地图实例
 Flutter插件在上层UI Dart端与底层Native SDK端之间起到了一层桥接的作用。 Flutter端与Native端之间通信的流程如下图所示： 
 Flutter 跟Native代码可以通过 MethodChannel 进行通信。客户端通过 MethodChannel 将方法调用和参数发生给服务端，服务端也通过 MethodChannel 接收相关的数据。 因此，在Flutter插件开发中，MethodChannel与EventChannel是两个不可避免用到的类。 用比较通俗的语言来解释这两个类的功能： 
  
@@ -188,7 +189,7 @@ TencentMapView继承自PlatformView。 PlatformView为Flutter 1.0版本中的通
   ``` 
   
 这里要注意的一点是，在Android端和Flutter端注册的viewType中的字符串值必须保持一致，用于唯一标识。在本文中的标识字符串为'com.tencentmap/map'，将Flutter端的AndroidView与Native端的TencentMapView建立了关联。 
-#### Flutter插件对应Demo示例呈现
+#### 1.4 Flutter插件对应Demo示例呈现
 ##### Demo示例
 demo UI采用了Flutter自支持的Material Design风格的一套UI组件。 Flutter demo调用地图SDK展示地图实例的界面如图所示： 
 demo中还实现了地图基础操作的相关功能性接口，例如相关覆盖物的绘制等，示例如下图所示： 

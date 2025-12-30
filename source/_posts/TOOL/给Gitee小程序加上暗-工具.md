@@ -13,7 +13,8 @@ top: 2
 前段时间利用空余时间基于 Gitee OpenApi 写了一个微信上的码云第三方非官方微信小程序，收获了一部分用户，一直想给它怼上跟随系统自动变化的暗黑模式，今天总算有时间给搞了。 实现原理 所。..
 <!-- more -->
 
-#### 实现原理
+### 一、小程序暗黑模式实现
+#### 1.1 实现原理
  
 所有代码基本没碰到JavaScript部分，也没有使用小程序的API进行操作，全程使用媒体查询与环境变量实现，如下： 
 ###### 原始小程序部分
@@ -84,10 +85,10 @@ top: 2
 
   ``` 
   
-#### 收工体验
+#### 1.2 收工体验
 欢迎 `码云仓库`
 ``` 
   来体验一下，小程序支持了查看仓库、Pull Requests、Issues、用户信息、粉丝关注、通知私信、组织信息等。 
 ![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df0ca2a7395644e4a613e4e3694e94a2~tplv-k3u1fbpfcp-zoom-1.image  '给Gitee小程序加上暗黑模式是什么体验') 
-#### 瞧瞧部分截图
+#### 1.3 瞧瞧部分截图
 ![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df0ca2a7395644e4a613e4e3694e94a2~tplv-k3u1fbpfcp-zoom-1.image '给Gitee小程序加上暗黑模式是什么体验') ![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df0ca2a7395644e4a613e4e3694e94a2~tplv-k3u1fbpfcp-zoom-1.image '给Gitee小程序加上暗黑模式是什么体验') ![Test](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df0ca2a7395644e4a613e4e3694e94a2~tplv-k3u1fbpfcp-zoom-1.image '给Gitee小程序加上暗黑模式是什么体验')

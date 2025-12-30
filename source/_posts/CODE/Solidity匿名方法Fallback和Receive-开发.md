@@ -1,4 +1,4 @@
----
+﻿---
 title: Solidity匿名方法Fallback和Receive
 categories: 区块链与以太坊开发系列
 tags:
@@ -18,14 +18,14 @@ Fallback和Receive函数是Solidity中处理特殊调用的匿名函数，用于
 
 ## 一、什么是匿名函数
 
-### 1.1 基本概念
+### 一、1 基本概念
 
 匿名函数是Solidity中用于处理特殊情况的函数，包括receive和fallback函数。当合约收到以太币或调用不存在的函数时，这些函数会被自动调用。
 
-### 1.2 函数类型
+### 二、2 函数类型
 
 ```
-**receive函数**：
+receive函数：
 ```
 - 接收纯以太币转账
 - 调用数据为空时触发
@@ -33,17 +33,17 @@ Fallback和Receive函数是Solidity中处理特殊调用的匿名函数，用于
 - 必须声明为external payable
 
 ```
-**fallback函数**：
+fallback函数：
 ```
 - 处理未匹配的函数调用
 - 调用数据不为空时触发
 - 可以接收以太币
 - 必须声明为external
 
-### 1.3 调用优先级
+### 三、3 调用优先级
 
 ```
-**调用顺序**：
+调用顺序：
 ```
 1. 如果调用数据为空且有receive函数，调用receive
 2. 如果有fallback函数，调用fallback
@@ -51,7 +51,7 @@ Fallback和Receive函数是Solidity中处理特殊调用的匿名函数，用于
 3. 否则revert
 
 ```
-**同时存在**：
+同时存在：
 ```
 - 可以同时定义receive和fallback
 - receive优先处理纯转账
@@ -60,10 +60,10 @@ Fallback和Receive函数是Solidity中处理特殊调用的匿名函数，用于
 
 ## 二、如何定义Receive函数
 
-### 2.1 基本定义
+### 四、1 基本定义
 
 ```
-**简单receive**：
+简单receive：
 ```
 ```solidity
 pragma solidity ^0.8.0;
@@ -78,7 +78,7 @@ contract ReceiveExample {
     function getBalance() public view returns (uint256) {
         return address(this).balance;
     }
-`**带逻辑的receive**：`solidity
+`带逻辑的receive：`solidity
 contract PaymentReceiver {
     mapping(address => uint256) public received;
     
@@ -91,10 +91,10 @@ contract PaymentReceiver {
     }
 ```
 
-### 2.2 使用场景
+### 五、2 使用场景
 
 ```java
-**接收支付**：
+接收支付：
 contract SimpleWallet {
     address public owner = msg.sender;
 ```
@@ -121,9 +121,9 @@ contract SimpleWallet {
 
 ## 三、如何定义Fallback函数
 
-### 3.1 基本定义
+### 六、1 基本定义
 
-**简单fallback**：
+简单fallback：
 contract FallbackExample {
     event FallbackCalled(bytes data);
     
@@ -132,7 +132,7 @@ contract FallbackExample {
     }
     
     }
-`**带逻辑的fallback**：`solidity
+`带逻辑的fallback：`solidity
 contract Router {
     mapping(bytes4 => address) public routes;
     
@@ -151,10 +151,10 @@ contract Router {
     }
 ```
 
-### 3.2 代理模式
+### 七、2 代理模式
 
 ```java
-**代理合约**：
+代理合约：
 contract Proxy {
     address public implementation;
 ```
@@ -184,21 +184,21 @@ contract Proxy {
 
 ## 四、Receive和Fallback的区别
 
-### 4.1 调用条件
+### 八、1 调用条件
 
-**receive调用**：
+receive调用：
 - 调用数据为空（calldata为空）
 - 有以太币发送
 - 优先于fallback
 
-**fallback调用**：
+fallback调用：
 - 调用数据不为空
 - 没有匹配的函数
 - receive不存在或调用数据不为空
 
-### 4.2 完整示例
+### 九、2 完整示例
 
-**同时定义**：
+同时定义：
 contract PaymentHandler {
     uint256 public totalReceived;
     
@@ -218,10 +218,10 @@ contract PaymentHandler {
 
 ## 五、应用场景
 
-### 5.1 支付接收
+### 十、1 支付接收
 
 ```java
-**多币种钱包**：
+多币种钱包：
 contract MultiCurrencyWallet {
     mapping(address => uint256) public ethBalances;
 ```
@@ -241,9 +241,9 @@ contract MultiCurrencyWallet {
 
 ```
 
-### 5.2 代理合约
+### 十一、2 代理合约
 
-**可升级合约**：
+可升级合约：
 contract UpgradeableProxy {
     address public admin;
     
@@ -264,10 +264,10 @@ contract UpgradeableProxy {
 
 ```
 
-### 5.3 路由合约
+### 十二、3 路由合约
 
 ```java
-**函数路由**：
+函数路由：
 contract FunctionRouter {
     mapping(bytes4 => address) public functionHandlers;
 ```
@@ -298,9 +298,9 @@ contract FunctionRouter {
 
 ```
 
-### 5.4 紧急停止
+### 十三、4 紧急停止
 
-**安全机制**：
+安全机制：
 contract SafeReceiver {
     bool public paused;
     
@@ -322,10 +322,10 @@ contract SafeReceiver {
 
 ## 六、最佳实践
 
-### 6.1 安全考虑
+### 十四、1 安全考虑
 
 ```java
-**重入保护**：
+重入保护：
 contract ReentrancyGuard {
     bool private locked;
 ```
@@ -346,7 +346,7 @@ contract ReentrancyGuard {
         // 安全接收支付
 ```
     }
-`**Gas限制**：`solidity
+`Gas限制：`solidity
 ```
     require(gasleft() > 2300, "Insufficient gas");
     // 2300是receive函数的最小Gas
@@ -354,22 +354,22 @@ contract ReentrancyGuard {
 }
 ```
 
-### 6.2 错误处理
+### 十五、2 错误处理
 
-**明确错误**：
+明确错误：
         revert("Cannot send ether to this function");
     }
 }
-`**记录日志**：`solidity
+`记录日志：`solidity
     emit PaymentReceived(msg.sender, msg.value, block.timestamp);
     // 记录所有支付
 }
 ```
 
-### 6.3 Gas优化
+### 十六、3 Gas优化
 
 ```
-**最小化逻辑**：
+最小化逻辑：
     // 保持逻辑简单
     // 减少Gas消耗
     balances[msg.sender] += msg.value;
@@ -380,19 +380,19 @@ contract ReentrancyGuard {
 
 ## 七、常见问题
 
-### 7.1 函数选择
+### 十七、1 函数选择
 
-**问题**：
+问题：
 - 何时使用receive
 - 何时使用fallback
 - 如何同时使用
 
-**解决**：
+解决：
 - receive处理纯转账
 - 可以同时定义
 - 根据需求选择
 
-### 7.2 Gas消耗
+### 十八、2 Gas消耗
 
 - receive需要至少2300 Gas
 - 复杂逻辑可能失败
@@ -407,17 +407,17 @@ contract ReentrancyGuard {
 
 Fallback和Receive函数是处理特殊调用的重要机制。关键要点：
 
-**函数定义**：
+函数定义：
 - fallback处理未匹配调用
 - 注意调用优先级
 
-**应用场景**：
+应用场景：
 - 接收支付
 - 代理合约
 - 路由功能
 - 紧急停止
 
-**最佳实践**：
+最佳实践：
 - 注意安全考虑
 - 优化Gas消耗
 - 明确错误处理

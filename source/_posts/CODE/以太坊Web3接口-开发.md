@@ -1,4 +1,4 @@
----
+﻿---
 title: 以太坊Web3接口
 categories: 区块链与以太坊开发系列
 tags:
@@ -18,14 +18,14 @@ Web3接口是连接前端应用和以太坊区块链的桥梁，提供了与智�
 
 ## 一、什么是Web3接口
 
-### 1.1 基本概念
+### 一、1 基本概念
 
 Web3接口是JavaScript库，提供了与以太坊区块链交互的API。通过Web3接口，前端应用可以连接以太坊节点，查询区块链数据，发送交易，与智能合约交互。
 
-### 1.2 主要库
+### 二、2 主要库
 
 ```
-**Web3.js**：
+Web3.js：
 ```
 - 官方JavaScript库
 - 功能完整
@@ -33,7 +33,7 @@ Web3接口是JavaScript库，提供了与以太坊区块链交互的API。通过
 - 社区支持
 
 ```
-**ethers.js**：
+ethers.js：
 ```
 - 更现代的库
 - 更好的TypeScript支持
@@ -41,7 +41,7 @@ Web3接口是JavaScript库，提供了与以太坊区块链交互的API。通过
 - 推荐使用
 
 ```
-**其他库**：
+其他库：
 ```
 - web3.py：Python版本
 - web3j：Java版本
@@ -49,10 +49,10 @@ Web3接口是JavaScript库，提供了与以太坊区块链交互的API。通过
 
 ## 二、如何使用Web3.js
 
-### 2.1 安装和配置
+### 三、1 安装和配置
 
 ```
-**安装**： `npm install web3` **基本使用**：
+安装： `npm install web3` 基本使用：
 ```
 ```javascript
 const Web3 = require('web3');
@@ -68,23 +68,23 @@ const web3 = new Web3(window.ethereum);
 
 ```
 
-### 2.2 账户操作
+### 四、2 账户操作
 
 ```java
-**创建账户**：
+创建账户：
 // 创建新账户
 const account = web3.eth.accounts.create();
 console.log('Address:', account.address);
 console.log('Private Key:', account.privateKey);
 ```
-`**查询余额**：```javascript
+`查询余额：```javascript
 ```javascript
 // 查询账户余额（返回Wei）
 const balance = await web3.eth.getBalance(address);
 // 转换为ETH显示
 console.log('Balance:', web3.utils.fromWei(balance, 'ether'), 'ETH');
 ```
-`**发送交易**：```javascript
+`发送交易：```javascript
 ```javascript
 const tx = {
     from: account.address,
@@ -102,9 +102,9 @@ console.log('Transaction hash:', receipt.transactionHash);
 ```
 ```
 
-### 2.3 合约交互
+### 五、3 合约交互
 
-**加载合约**：
+加载合约：
 // 创建合约实例
 const contract = new web3.eth.Contract(abi, contractAddress);
 
@@ -116,7 +116,7 @@ console.log('Value:', value);
 await contract.methods.setValue(42).send({
     gas: 100000
 });
-`**监听事件**：```javascript
+`监听事件：```javascript
 // 监听转账事件
 contract.events.Transfer({
     filter: { from: userAddress },  // 过滤条件
@@ -133,10 +133,10 @@ contract.events.Transfer({
 
 ## 三、如何使用ethers.js
 
-### 3.1 安装和配置
+### 六、1 安装和配置
 
 ```javascript
-**安装**： `npm install ethers` **基本使用**：
+安装： `npm install ethers` 基本使用：
 const { ethers } = require('ethers');
 ```
 
@@ -151,9 +151,9 @@ const provider = new ethers.providers.Web3Provider(window.ethereum);
 
 ```
 
-### 3.2 账户操作
+### 七、2 账户操作
 
-**创建钱包**：
+创建钱包：
 // 创建随机钱包
 const wallet = ethers.Wallet.createRandom();
 console.log('Address:', wallet.address);
@@ -171,7 +171,7 @@ await tx.wait();
 console.log('Transaction confirmed');
 ```
 
-### 3.3 合约交互
+### 八、3 合约交互
 
 ```javascript
 // 创建合约实例（只读）
@@ -207,9 +207,9 @@ contract.on(filter, (from, to, value) => {
 
 ## 四、应用场景
 
-### 4.1 DApp前端
+### 九、1 DApp前端
 
-**连接钱包**：
+连接钱包：
 // 连接MetaMask钱包
 async function connectWallet() {
     if (window.ethereum) {
@@ -218,7 +218,7 @@ async function connectWallet() {
         const address = await signer.getAddress();
         console.log('Connected:', address);
     }
-`**查询数据**：```javascript
+`查询数据：```javascript
 // 加载合约数据
 async function loadData() {
     // 查询用户余额
@@ -235,10 +235,10 @@ async function sendTransaction() {
 }
 ```
 
-### 4.2 区块链浏览器
+### 十、2 区块链浏览器
 
 ```javascript
-**查询交易**：
+查询交易：
 // 根据交易哈希查询交易信息
 async function getTransaction(txHash) {
     const tx = await provider.getTransaction(txHash);
@@ -246,7 +246,7 @@ async function getTransaction(txHash) {
     return { tx, receipt };
 ```
 }
-`**查询区块**：```javascript
+`查询区块：```javascript
 ```javascript
 // 根据区块号查询区块信息
 async function getBlock(blockNumber) {
@@ -256,9 +256,9 @@ async function getBlock(blockNumber) {
 }
 ```
 
-### 4.3 监控服务
+### 十一、3 监控服务
 
-**监听新区块**：
+监听新区块：
 // 监听新区块
 provider.on('block', (blockNumber) => {
     console.log('New block:', blockNumber);
@@ -273,10 +273,10 @@ contract.on('Transfer', (from, to, value) => {
 
 ## 五、最佳实践
 
-### 5.1 错误处理
+### 十二、1 错误处理
 
 ```javascript
-**处理错误**：
+处理错误：
 try {
     const tx = await contract.setValue(42);
 } catch (error) {
@@ -291,16 +291,16 @@ try {
 
 ```
 
-### 5.2 性能优化
+### 十三、2 性能优化
 
-**批量查询**：
+批量查询：
 // 批量查询多个地址的余额
 async function batchQuery(addresses) {
     const promises = addresses.map(addr => contract.balanceOf(addr));
     const balances = await Promise.all(promises);
     return balances;
 }
-`**缓存数据**：```javascript
+`缓存数据：```javascript
 let cachedBalance = null;
 let lastUpdate = 0;
 
@@ -316,10 +316,10 @@ async function getBalance(address) {
 }
 ```
 
-### 5.3 用户体验
+### 十四、3 用户体验
 
 ```javascript
-**加载状态**：
+加载状态：
 // 发送交易时显示加载状态
     setLoading(true);
     try {
@@ -338,18 +338,18 @@ async function getBalance(address) {
 
 Web3接口是构建DApp前端的基础工具。关键要点：
 
-**主要库**：
+主要库：
 - Web3.js：传统选择
 - ethers.js：推荐使用
 - 根据需求选择
 
-**核心功能**：
+核心功能：
 - 连接区块链
 - 查询数据
 - 发送交易
 - 合约交互
 
-**最佳实践**：
+最佳实践：
 - 错误处理
 - 性能优化
 - 用户体验

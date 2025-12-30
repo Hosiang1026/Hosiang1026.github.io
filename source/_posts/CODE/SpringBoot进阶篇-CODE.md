@@ -1,4 +1,4 @@
----
+﻿---
 title: SpringBoot进阶篇
 categories: Spring生态体系系列
 tags:
@@ -19,7 +19,7 @@ top: 18
 #### 1.1 自动配置原理
 
 ```
-**@SpringBootApplication注解：**
+@SpringBootApplication注解：
 ```
 
 ```java
@@ -37,7 +37,7 @@ public class Application {
 ```
 
 ```
-**自动配置机制：**
+自动配置机制：
 ```
 
 ```java
@@ -61,7 +61,7 @@ public class DataSourceAutoConfiguration {
 ```
 
 ```
-**条件注解：**
+条件注解：
 ```
 
 ```java
@@ -75,7 +75,7 @@ public class DataSourceAutoConfiguration {
 #### 1.2 配置文件高级用法
 
 ```
-**多环境配置：**
+多环境配置：
 ```
 
 ```yaml
@@ -102,7 +102,7 @@ logging:
 ```
 
 ```
-**配置属性绑定：**
+配置属性绑定：
 ```
 
 ```java
@@ -141,7 +141,7 @@ app:
 #### 1.3 Starter自定义
 
 ```
-**创建自定义Starter：**
+创建自定义Starter：
 ```
 
 ```java
@@ -177,7 +177,7 @@ public class MyProperties {
 #### 2.1 启动性能优化
 
 ```
-**延迟初始化：**
+延迟初始化：
 ```
 
 ```yaml
@@ -199,7 +199,7 @@ public class Application {
 }
 ```
 
-**排除自动配置：**
+排除自动配置：
 
 ```java
 ```
@@ -216,7 +216,7 @@ public class Application {
 
 #### 2.2 运行时性能优化
 
-**连接池优化：**
+连接池优化：
 
 ```yaml
 # application.yml
@@ -230,7 +230,7 @@ spring:
       max-lifetime: 1800000
 ```
 
-**JVM参数优化：**
+JVM参数优化：
 
 ```bash
 # 启动参数
@@ -246,7 +246,7 @@ java -Xms512m -Xmx1024m \
 
 #### 3.1 多模块项目
 
-**项目结构：**
+项目结构：
 
 ```
 parent-project/
@@ -259,7 +259,7 @@ parent-project/
 └── module-common/       # 公共模块
 ```
 
-**父POM配置：**
+父POM配置：
 
 ```xml
 ```html
@@ -296,7 +296,7 @@ parent-project/
 
 #### 3.2 微服务架构
 
-**Spring Cloud集成：**
+Spring Cloud集成：
 
 ```xml
 ```html
@@ -318,7 +318,7 @@ parent-project/
 
 #### 4.1 调试技巧
 
-**使用Actuator：**
+使用Actuator：
 
 ```yaml
 management:
@@ -333,7 +333,7 @@ management:
       show-details: always
 ```
 
-**查看Bean信息：**
+查看Bean信息：
 
 ```bash
 # 访问端点
@@ -344,9 +344,9 @@ http://localhost:8080/actuator/configprops
 
 #### 4.2 问题排查
 
-**常见问题：**
+常见问题：
 
-1. **启动失败**
+1. 启动失败
    ```bash
    # 查看详细日志
    # 检查端口是否被占用
@@ -357,7 +357,7 @@ http://localhost:8080/actuator/configprops
    mvn dependency:tree
    ```
 
-2. **自动配置不生效**
+2. 自动配置不生效
    ```java
 ```
    // 检查条件注解
@@ -366,7 +366,7 @@ http://localhost:8080/actuator/configprops
 ```
    ```
 
-3. **性能问题**
+3. 性能问题
    ```bash
    # 使用JProfiler分析
    # 使用JVisualVM监控

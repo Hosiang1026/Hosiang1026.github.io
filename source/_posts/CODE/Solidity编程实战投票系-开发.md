@@ -1,4 +1,4 @@
----
+﻿---
 title: Solidity编程实战投票系
 categories: 区块链与以太坊开发系列
 tags:
@@ -19,14 +19,14 @@ top: 5
 
 ## 一、什么是投票系统
 
-### 1.1 基本概念
+### 一、1 基本概念
 
 投票系统是使用智能合约实现的去中心化投票机制，可以用于选举、提案表决、DAO治理等场景。区块链的透明性和不可篡改性使其成为实现公平投票的理想平台。
 
-### 1.2 投票系统的特点
+### 二、2 投票系统的特点
 
 ```
-**透明性**：
+透明性：
 ```
 - 所有投票公开可查
 - 投票结果不可篡改
@@ -34,7 +34,7 @@ top: 5
 - 可验证性
 
 ```
-**去中心化**：
+去中心化：
 ```
 - 无需中心化机构
 - 自动执行规则
@@ -42,7 +42,7 @@ top: 5
 - 提高公信力
 
 ```
-**自动化**：
+自动化：
 ```
 - 自动统计结果
 - 自动执行决策
@@ -51,10 +51,10 @@ top: 5
 
 ## 二、如何设计投票系统
 
-### 2.1 核心功能
+### 三、1 核心功能
 
 ```
-**提案管理**：
+提案管理：
 ```
 - 创建提案
 - 设置投票期限
@@ -62,24 +62,24 @@ top: 5
 - 提案信息查询
 
 ```
-**投票功能**：
+投票功能：
 ```
 - 支持/反对投票
 - 防止重复投票
 - 投票记录
 
 ```
-**结果统计**：
+结果统计：
 ```
 - 自动计算票数
 - 判断投票结果
 - 执行决策
 - 结果查询
 
-### 2.2 数据结构
+### 四、2 数据结构
 
 ```
-**提案结构**：
+提案结构：
 ```
 ```solidity
 struct Proposal {
@@ -89,7 +89,7 @@ struct Proposal {
     bool executed;
     mapping(address => bool) hasVoted;
 }
-`**投票记录**：`solidity
+`投票记录：`solidity
 struct Vote {
     address voter;
     bool support;
@@ -99,10 +99,10 @@ struct Vote {
 
 ## 三、如何实现投票系统
 
-### 3.1 完整实现
+### 五、1 完整实现
 
 ```
-**投票合约**：
+投票合约：
 pragma solidity ^0.8.0;
 ```
 
@@ -264,9 +264,9 @@ contract VotingSystem {
 
 ```
 
-### 3.2 使用示例
+### 六、2 使用示例
 
-**部署合约**：
+部署合约：
 ```javascript
 ```javascript
 const voters = [
@@ -281,7 +281,7 @@ const VotingSystem = await ethers.getContractFactory("VotingSystem");
 const voting = await VotingSystem.deploy(voters);
 await voting.deployed();
 ```
-`**创建提案**：```javascript
+`创建提案：```javascript
 ```javascript
 const tx = await voting.createProposal(
 ```
@@ -291,12 +291,12 @@ const tx = await voting.createProposal(
 ```
 await tx.wait();
 ```
-`**投票**：```javascript
+`投票：```javascript
 ```
 await voting.vote(0, true);  // 支持
 await voting.vote(0, false); // 反对
 ```
-`**查询结果**：```javascript
+`查询结果：```javascript
 ```javascript
 const voteCount = await voting.getVoteCount(0);
 console.log('支持票数:', voteCount.toString());
@@ -305,43 +305,43 @@ console.log('支持票数:', voteCount.toString());
 
 ## 四、应用场景
 
-### 4.1 DAO治理
+### 七、1 DAO治理
 
-**项目治理**：
+项目治理：
 - 功能开发决策
 - 资金使用投票
 - 参数调整
 - 社区提案
 
-**实际案例**：
+实际案例：
 - MakerDAO治理
 - Uniswap治理
 - Compound治理
 - 各种DeFi协议
 
-### 4.2 企业投票
+### 八、2 企业投票
 
-**股东投票**：
+股东投票：
 - 重大决策
 - 董事会选举
 - 分红方案
 - 合并收购
 
-**员工投票**：
+员工投票：
 - 福利方案
 - 工作制度
 - 活动安排
 - 内部决策
 
-### 4.3 社区投票
+### 九、3 社区投票
 
-**开源项目**：
+开源项目：
 - 功能优先级
 - 技术选型
 - 版本发布
 - 社区规则
 
-**在线社区**：
+在线社区：
 - 内容审核
 - 规则制定
 - 活动策划
@@ -349,9 +349,9 @@ console.log('支持票数:', voteCount.toString());
 
 ## 五、功能扩展
 
-### 5.1 加权投票
+### 十、1 加权投票
 
-**基于代币**：
+基于代币：
 mapping(address => uint256) public tokenBalances;
 
 function vote(uint256 proposalId, bool support, uint256 weight) public {
@@ -362,10 +362,10 @@ function vote(uint256 proposalId, bool support, uint256 weight) public {
 
 ```
 
-### 5.2 委托投票
+### 十一、2 委托投票
 
 ```java
-**投票委托**：
+投票委托：
 mapping(address => address) public delegates;
 ```
 
@@ -389,9 +389,9 @@ function vote(uint256 proposalId, bool support) public {
 
 ```
 
-### 5.3 时间锁
+### 十二、3 时间锁
 
-**延迟执行**：
+延迟执行：
 mapping(uint256 => uint256) public executionTime;
 
     require(block.timestamp >= executionTime[proposalId], "Still in timelock");
@@ -402,30 +402,30 @@ mapping(uint256 => uint256) public executionTime;
 
 ## 六、最佳实践
 
-### 6.1 安全考虑
+### 十三、1 安全考虑
 
 ```
-**防止重复投票**：
+防止重复投票：
 ```
-`**时间验证**：`solidity
-`**权限控制**：`solidity
+`时间验证：`solidity
+`权限控制：`solidity
     _;
 }
 ```
 
-### 6.2 Gas优化
+### 十四、2 Gas优化
 
-**批量操作**：
+批量操作：
 function batchAddVoters(address[] memory _voters) public onlyChairperson {
     }
-`**事件记录**：`solidity
+`事件记录：`solidity
 // 使用事件替代存储历史
 ```
 
-### 6.3 用户体验
+### 十五、3 用户体验
 
 ```javascript
-**清晰接口**：
+清晰接口：
 function getProposalInfo(uint256 proposalId) 
 ```
     view 
@@ -453,9 +453,9 @@ function getProposalInfo(uint256 proposalId)
 
 ## 七、测试
 
-### 7.1 单元测试
+### 十六、1 单元测试
 
-**测试脚本**：
+测试脚本：
 describe("VotingSystem", function() {
     it("Should create proposal", async function() {
         const tx = await voting.createProposal("Test", 86400);
@@ -479,7 +479,7 @@ describe("VotingSystem", function() {
 投票系统是展示Solidity实际应用的优秀案例。关键要点：
 
 ```
-**核心功能**：
+核心功能：
 ```
 - 提案管理
 - 投票机制
@@ -487,14 +487,14 @@ describe("VotingSystem", function() {
 - 自动执行
 
 ```
-**设计要点**：
+设计要点：
 ```
 - 时间控制
 - 权限管理
 - 结果透明
 
 ```
-**应用场景**：
+应用场景：
 ```
 - DAO治理
 - 企业投票

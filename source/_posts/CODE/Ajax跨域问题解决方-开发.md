@@ -1,4 +1,4 @@
----
+﻿---
 title: Ajax跨域问题解决方案
 categories: 其他系列
 tags:
@@ -35,47 +35,47 @@ script/jquery.js （请求的地址/Path）
 #### 1.2 跨域的定义
 
 ```json
-**跨域（Cross-Origin）**是指当协议、子域名、主域名、端口号中任意一个不相同时，都算作不同的"域"。不同的域之间相互请求资源，就称为"跨域"。
+跨域（Cross-Origin）是指当协议、子域名、主域名、端口号中任意一个不相同时，都算作不同的"域"。不同的域之间相互请求资源，就称为"跨域"。
 ```
 
 ```
-**示例：**
+示例：
 ```
-- `http://www.abc.com/index.html` 请求 `http://www.def.com/server.php` → **跨域**
-- `http://www.abc.com/index.html` 请求 `http://www.abc.com/api/data` → **同域**
-- `https://www.abc.com/index.html` 请求 `http://www.abc.com/api/data` → **跨域**（协议不同）
-- `http://www.abc.com:8080/index.html` 请求 `http://www.abc.com:9090/api/data` → **跨域**（端口不同）
+- `http://www.abc.com/index.html` 请求 `http://www.def.com/server.php` → 跨域
+- `http://www.abc.com/index.html` 请求 `http://www.abc.com/api/data` → 同域
+- `https://www.abc.com/index.html` 请求 `http://www.abc.com/api/data` → 跨域（协议不同）
+- `http://www.abc.com:8080/index.html` 请求 `http://www.abc.com:9090/api/data` → 跨域（端口不同）
 
 #### 1.3 跨域产生的原因
 
-跨域问题源于浏览器的**同源策略（Same-Origin Policy，SOP）**。同源策略是浏览器实施的一种安全机制，限制当前域名下的JavaScript只能读取同域的窗口属性。
+跨域问题源于浏览器的同源策略（Same-Origin Policy，SOP）。同源策略是浏览器实施的一种安全机制，限制当前域名下的JavaScript只能读取同域的窗口属性。
 
 ```
-**同源策略的限制：**
+同源策略的限制：
 ```
 - 当前域名下的JavaScript无法直接访问其他域名的资源
 - 无法读取其他域名的Cookie、LocalStorage等数据
 - 无法发送跨域的Ajax请求（XMLHttpRequest）
 
 ```
-**同源的定义：**
+同源的定义：
 ```
 只有当协议、主机名和端口号都完全匹配时，才被认为是同源，可以被授权访问。
 
 #### 1.4 服务器端不存在跨域问题
 
 ```
-**重要说明：** 跨域是浏览器层面的安全限制，在服务器端不存在跨域之说。
+重要说明： 跨域是浏览器层面的安全限制，在服务器端不存在跨域之说。
 ```
 
 ```
-**示例场景：**
+示例场景：
 ```
 - 使用Node.js请求Java后端数据时，即使两个服务的地址不同，这也不是跨域问题
 - 跨域只发生在浏览器中，服务器之间的HTTP请求不受同源策略限制
 
 ```
-**前后端分离架构中的跨域处理：**
+前后端分离架构中的跨域处理：
 ```
 很多项目为了前后端分离，使用Node.js作为中间层。对于浏览器来说，它请求的是同域的Node.js服务，Node.js再转发请求到后端Java服务，这里并没有发生跨域。至于Java后端如何判断请求的合法性（如IP白名单、API签名等），属于服务端安全验证的范畴。
 
@@ -88,20 +88,20 @@ JSONP（JSON with Padding）是一种利用`<script>`标签不受同源策略限
 ```
 
 ```
-**工作原理：**
+工作原理：
 1. 动态创建`<script>`标签，设置`src`属性为目标API地址
 ```
 2. 服务器返回的数据包装在回调函数中
 3. 浏览器执行回调函数，获取数据
 
 ```
-**优点：**
+优点：
 ```
 - 兼容性好，支持老版本浏览器
 - 实现简单
 
 ```
-**缺点：**
+缺点：
 ```
 - 只支持GET请求
 - 安全性较低，容易受到XSS攻击
@@ -112,7 +112,7 @@ JSONP（JSON with Padding）是一种利用`<script>`标签不受同源策略限
 CORS（Cross-Origin Resource Sharing）是W3C标准，是目前最主流的跨域解决方案。
 
 ```
-**服务端配置示例（Spring Boot）：**
+服务端配置示例（Spring Boot）：
 ```
 
 ```java
@@ -131,7 +131,7 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowCredentials(true)
                 .maxAge(3600);
     }
-`**使用Filter方式：**```java
+`使用Filter方式：```java
 /**
  * Application.java
  */
@@ -155,13 +155,13 @@ public class Application {
          registrationBean.setOrder(Integer.MAX_VALUE);
          return registrationBean;
      }   
-`**前端HTML页面设置（不推荐，仅作了解）：**```html
+`前端HTML页面设置（不推荐，仅作了解）：```html
 <!-- 页面中设置CORS头，但这种方式不推荐使用 -->
 <meta http-equiv="Access-Control-Allow-Origin" content="*">
 ```
 
 ```
-**注意：** HTML的`<meta>`标签方式实际上无法真正解决跨域问题，CORS需要在服务器端配置。
+注意： HTML的`<meta>`标签方式实际上无法真正解决跨域问题，CORS需要在服务器端配置。
 ```
 
 #### 2.3 代理服务器方案
@@ -169,13 +169,13 @@ public class Application {
 通过代理服务器转发请求，将跨域请求转换为同域请求。
 
 ```
-**实现方式：**
+实现方式：
 ```
-- **开发环境：** 使用Webpack DevServer的proxy配置
-- **生产环境：** 使用Nginx反向代理
+- 开发环境： 使用Webpack DevServer的proxy配置
+- 生产环境： 使用Nginx反向代理
 
 ```
-**Nginx配置示例：**
+Nginx配置示例：
 ```
 
 ```nginx
@@ -196,13 +196,13 @@ server {
 `postMessage`是HTML5提供的跨窗口通信API，主要用于iframe之间的跨域通信。
 
 ```
-**使用场景：**
+使用场景：
 ```
 - 父页面与iframe子页面之间的通信
 - 不同窗口之间的数据传递
 
 ```
-**示例代码：**
+示例代码：
 ```
 
 ```javascript
@@ -222,38 +222,38 @@ window.addEventListener('message', function(event) {
 ### 三、方案选择建议
 
 ```
-**开发环境：**
+开发环境：
 ```
 - 推荐使用代理服务器方案（Webpack DevServer proxy）
 - 简单快速，无需修改后端代码
 
 ```
-**生产环境：**
+生产环境：
 ```
 - 推荐使用CORS方案
 - 标准规范，安全性高，支持所有HTTP方法
 - 需要在服务器端正确配置
 
 ```
-**特殊场景：**
+特殊场景：
 ```
 - 需要支持老版本浏览器：考虑JSONP方案
 - iframe跨域通信：使用postMessage方案
 
 ### 四、安全注意事项
 
-1. **CORS配置安全：**
+1. CORS配置安全：
 ```
    - 生产环境不要使用`allowedOrigins("*")`，应指定具体的域名
 ```
    - 合理设置`allowedMethods`和`allowedHeaders`
    - 对于需要携带Cookie的请求，确保`allowCredentials`为true且`allowedOrigins`不能为`*`
 
-2. **JSONP安全：**
+2. JSONP安全：
    - 验证回调函数名，防止XSS攻击
    - 对返回的数据进行转义处理
 
-3. **代理服务器安全：**
+3. 代理服务器安全：
    - 配置适当的访问控制
    - 验证请求来源，防止恶意请求
 

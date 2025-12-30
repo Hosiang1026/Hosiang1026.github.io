@@ -1,4 +1,4 @@
----
+﻿---
 title: Solidity映射类型
 categories: 区块链与以太坊开发系列
 tags:
@@ -20,16 +20,16 @@ top: 25
 
 ## 一、什么是映射
 
-### 1.1 基本概念
+### 一、1 基本概念
 
 ```
 映射（Mapping）是Solidity中的键值对存储结构，类似于其他语言中的哈希表或字典。映射使用键来查找对应的值，提供O(1)的查找效率。
 ```
 
-### 1.2 映射的特点
+### 二、2 映射的特点
 
 ```
-**键值对存储**：
+键值对存储：
 ```
 - 使用键查找值
 - 高效的查找性能
@@ -37,7 +37,7 @@ top: 25
 - 无法遍历
 
 ```
-**自动初始化**：
+自动初始化：
 ```
 - 所有可能的键都已初始化
 - 不存在的键返回默认值
@@ -45,7 +45,7 @@ top: 25
 - 布尔类型返回false
 
 ```
-**无法遍历**：
+无法遍历：
 ```
 - 不能直接遍历所有键
 - 需要额外维护键列表
@@ -54,10 +54,10 @@ top: 25
 
 ## 二、如何定义和使用映射
 
-### 2.1 基本定义
+### 三、1 基本定义
 
 ```
-**简单映射**：
+简单映射：
 ```
 ```solidity
 pragma solidity ^0.8.0;
@@ -74,17 +74,17 @@ contract MappingExample {
 ```
 
 ```
-**映射语法**：
+映射语法：
 - `mapping(键类型 => 值类型)`
 ```
 - 键类型可以是值类型
 - 值类型可以是任何类型
 - 可以嵌套映射
 
-### 2.2 基本操作
+### 四、2 基本操作
 
 ```java
-**设置值**：
+设置值：
 // 设置账户余额
 function setBalance(address account, uint256 amount) public {
     balances[account] = amount;
@@ -97,7 +97,7 @@ function setAllowance(address owner, address spender, uint256 amount) public {
     allowances[owner][spender] = amount;
 ```
 }
-`**获取值**：`solidity
+`获取值：`solidity
 ```java
 // 获取账户余额，不存在返回0
 function getBalance(address account) public view returns (uint256) {
@@ -111,7 +111,7 @@ function getAllowance(address owner, address spender) public view returns (uint2
     return allowances[owner][spender];
 ```
 }
-`**检查存在**：`solidity
+`检查存在：`solidity
 ```java
 // 检查账户是否有余额
 function hasBalance(address account) public view returns (bool) {
@@ -120,9 +120,9 @@ function hasBalance(address account) public view returns (bool) {
 }
 ```
 
-### 2.3 嵌套映射
+### 五、3 嵌套映射
 
-**二维映射**：
+二维映射：
 // ERC20代币的授权映射
 
 // 授权函数：允许spender使用owner的代币
@@ -148,7 +148,7 @@ function transferFrom(
     // 增加接收者余额
     balances[to] += amount;
 }
-`**三维映射**：`solidity
+`三维映射：`solidity
 // 用户到级别到操作到权限的映射
 mapping(address => mapping(uint256 => mapping(string => bool))) public permissions;
 
@@ -160,10 +160,10 @@ function setPermission(address user, uint256 level, string memory action) public
 
 ## 三、应用场景
 
-### 3.1 ERC20代币
+### 六、1 ERC20代币
 
 ```
-**余额和授权**：
+余额和授权：
 contract ERC20Token {
     // 账户余额映射
     // 授权映射：owner授权给spender的金额
@@ -193,9 +193,9 @@ contract ERC20Token {
 
 ```
 
-### 3.2 投票系统
+### 七、2 投票系统
 
-**投票记录**：
+投票记录：
 contract Voting {
     // 记录用户是否已投票
     mapping(address => bool) public hasVoted;
@@ -222,10 +222,10 @@ contract Voting {
 
 ```
 
-### 3.3 权限管理
+### 八、3 权限管理
 
 ```java
-**角色权限**：
+角色权限：
 contract AccessControl {
     // 管理员映射
     mapping(address => bool) public isAdmin;
@@ -259,9 +259,9 @@ contract AccessControl {
 
 ```
 
-### 3.4 用户数据
+### 九、4 用户数据
 
-**用户信息**：
+用户信息：
 contract UserData {
     struct UserInfo {
         string name;
@@ -292,10 +292,10 @@ contract UserData {
 
 ## 四、遍历映射的解决方案
 
-### 4.1 维护键列表
+### 十、1 维护键列表
 
 ```java
-**可遍历映射**：
+可遍历映射：
 contract IterableMapping {
     // 维护所有账户地址列表
     address[] public accountList;
@@ -349,9 +349,9 @@ contract IterableMapping {
 
 ```
 
-### 4.2 使用数组索引
+### 十一、2 使用数组索引
 
-**索引映射**：
+索引映射：
 contract IndexedMapping {
     // 索引到地址的映射
     mapping(uint256 => address) public indexToAddress;
@@ -380,10 +380,10 @@ contract IndexedMapping {
 
 ## 五、最佳实践
 
-### 5.1 Gas优化
+### 十二、1 Gas优化
 
 ```java
-**减少存储操作**：
+减少存储操作：
 // 批量更新余额
 function batchUpdate(address[] memory accounts, uint256[] memory amounts) public {
     require(accounts.length == amounts.length, "Arrays length mismatch");
@@ -391,7 +391,7 @@ function batchUpdate(address[] memory accounts, uint256[] memory amounts) public
         balances[accounts[i]] = amounts[i];
 ```
     }
-`**使用packed storage**：`solidity
+`使用packed storage：`solidity
 ```
 // 打包数据结构，节省存储空间
 struct PackedData {
@@ -405,13 +405,13 @@ mapping(address => PackedData) public packedBalances;
 ```
 ```
 
-### 5.2 安全考虑
+### 十三、2 安全考虑
 
-**输入验证**：
+输入验证：
     require(account != address(0), "Invalid address");
     require(amount <= type(uint128).max, "Amount too large");
 }
-`**重入保护**：`solidity
+`重入保护：`solidity
 bool private locked;
 
 // 防止重入攻击的修改器
@@ -428,10 +428,10 @@ function withdraw(uint256 amount) public nonReentrant {
 }
 ```
 
-### 5.3 设计模式
+### 十四、3 设计模式
 
 ```java
-**工厂模式**：
+工厂模式：
 mapping(address => bool) public isContract;
 mapping(address => address) public contractOwner;
 ```
@@ -450,20 +450,20 @@ function deployContract() public returns (address) {
 
 ## 六、常见问题
 
-### 6.1 无法遍历
+### 十五、1 无法遍历
 
-**问题**：
+问题：
 - 映射无法直接遍历
 - 需要维护额外列表
 - 增加Gas消耗
 
-**解决**：
+解决：
 - 维护键数组
 - 使用索引映射
 - 考虑使用数组替代
 - 根据需求选择
 
-### 6.2 默认值问题
+### 十六、2 默认值问题
 
 - 可能误判存在性
 - 需要额外检查
@@ -477,17 +477,17 @@ function deployContract() public returns (address) {
 
 映射是Solidity中最重要和常用的数据结构之一。关键要点：
 
-**基本特性**：
+基本特性：
 - 键值对存储
 - 高效查找
 
-**应用场景**：
+应用场景：
 - ERC20代币
 - 投票系统
 - 权限管理
 - 用户数据
 
-**最佳实践**：
+最佳实践：
 - 合理设计结构
 - 优化Gas消耗
 - 注意安全考虑

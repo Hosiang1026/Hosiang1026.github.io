@@ -13,8 +13,8 @@ Java 18 于今天（2022-3-22）发布 GA 版本了，今天也是我和我宝�
 <!-- more -->
 
                                                                                                                     
-### 正式发布的新特性
-#### 简易 HTTP 服务器
+### 一、正式发布的新特性
+#### 1.1 简易 HTTP 服务器
  
 为了方便大家快速建立一个 HTTP 服务器来挂载一些静态文件，实现快速简易测试，演示某些功能，JDK 18 附带了一个简易的 HTTP 服务器 - 在 bin 目录下多了一个工具  
  `jwebserver` 
@@ -58,7 +58,7 @@ Java 18 于今天（2022-3-22）发布 GA 版本了，今天也是我和我宝�
  `com.sun.net.httpserver` 
   下的类，自定义这个 HTTP 服务器的配置，自定义 HttpHandler，Filter 这些，例如： 
  
-#### 互联网地址解析 SPI
+#### 1.2 互联网地址解析 SPI
  
 原来 Java 中的互联网地址解析是内置的解析器，即使用本地 'hosts' 文件和 DNS 的组合；Java 18 之后，为互联网地址解析定义了 SPI，这样，'java.net.InetAddress' 可以使用除内置的解析器之外的解析器。 
 这个主要是为了： 
@@ -70,7 +70,7 @@ Java 18 于今天（2022-3-22）发布 GA 版本了，今天也是我和我宝�
  
  `java.net.spi.InetAddressResolverProvider` 
   
-#### Finalization 的 Deprecate For Removal
+#### 1.3 Finalization 的 Deprecate For Removal
  
 ```
 Java finalization 是 Java 一开始就有的特性，当初设计出来的时候是为了让我们避免资源泄漏：当没有人引用保存资源的实例时然后执行一段代码来回收资源。本着这个思路，就会联想到垃圾回收器知道什么时候是要回收一个对象，所以就利用垃圾回收的机制来执行这段代码就好了。所以，设计出 Object 的 `finalize()` 方法，Java 类可以覆盖这个方法，在里面填写关闭资源的代。这段代码会在对象被回收的某个时候被调用。但是这种机制带来了如下几个问题： 
@@ -98,7 +98,7 @@ Java finalization 是 Java 一开始就有的特性，当初设计出来的时�
 ```
 记录好之后，启动参数加上 `--finalization=disabled` ，这个参数让所有的 Finalization 机制失效，对比下内存用量，判断是否依赖了 Finalization。 
 ```
-#### 默认编码为 UTF-8
+#### 1.4 默认编码为 UTF-8
  
 Java 中很多方法都带有字符编码集的参数，例如： 
  
@@ -125,7 +125,7 @@ new String(new byte[10], Charset.defaultCharset());
  
 每次给 Java 添加一些新的结构特性，例如 Record 这些，都需要同时修改这三个的代码，太费劲了。所以 Java 18 中通过使用  
   下的类实现了第二种的这些 API，来减少未来添加新的语言特性所需要的工作量。这也是为了 Project Valhalla 的原生值类型（可以栈上分配，类似于 c 语言的 struct，还有其他语言的 inline class）做准备。 
-#### 可编译的 Javadoc 代码段
+#### 1.5 可编译的 Javadoc 代码段
  
 干净整洁更新及时并且有规范的示例的 API 文档会让你获益良多，并且如果 API 文档的代码如果能编译，能随着你的源码变化而变化，就更完美了，Java 18 就给了 Javadoc 这些特性。 
 我们编写一个 Maven 项目试一下(代码库地址：https://github.com/HashZhang/code-snippet-test ) 
@@ -154,8 +154,8 @@ new String(new byte[10], Charset.defaultCharset());
  `target/site` 
   目录下就能看到生成的 Javadoc，Javadoc 中可以包含你项目中的代码段：  
 你还可以高亮你的一些注释，或者使用 CSS 编辑样式，这里就不再赘述了 
-### 预览的新特性
-#### Switch 模式匹配（第二次预览）
+### 二、预览的新特性
+#### 2.1 Switch 模式匹配（第二次预览）
  
 Java 17 中正式发布了 Sealed Class（封闭类），在这特性的基础上，我们可以在 Switch 中进行模式匹配了，举一个简单的例子： 
 在某些情况下，我们可能想枚举一个接口的所有实现类，例如： 
@@ -184,8 +184,8 @@ Sealed Class （可以是 abstract class 或者 interface ）在声明时需要�
  
 对于下面的代码，穷举性检查就不会误报编译错误了：  
 这个特性还在不断改善，大家可以试一下，并可以向这里提意见交流：https://mail.openjdk.java.net/pipermail/amber-spec-experts/2022-February/003240.html 
-### 孵化中的新特性
-#### 外部函数与内存 API（第二次孵化）
+### 三、孵化中的新特性
+#### 3.1 外部函数与内存 API（第二次孵化）
  
 这个是 Project Panama（取名自巴拿马运河）带来的一个很重要的孵化中的特性，就像连接太平洋和大西洋的巴拿马运河一样，Project Panama 希望将 Java 虚拟机与外部的非 Java 库连接起来。这个特性就是其中最重要的一部分 
 这个特性主要目的是： 
@@ -210,7 +210,7 @@ Sealed Class （可以是 abstract class 或者 interface ）在声明时需要�
 
  Lucene 
  
-#### Vector API（第三次孵化）
+#### 3.2 Vector API（第三次孵化）
  
 这也是 Project Panama 中的一个重要组成部分。其中最主要的应用就是使用了 CPU 的 SIMD（单指令多数据）处理，它提供了通过程序的多通道数据流，可能有 4 条通道或 8 条通道或任意数量的单个数据元素流经的通道。并且 CPU 一次在所有通道上并行组织操作，这可以极大增加 CPU 吞吐量。通过 Vector API，Java 团队正在努力让 Java 程序员使用 Java 代码直接访问它；过去，他们必须在汇编代码级别对向量数学进行编程，或者使用 C/C++ 与 Intrinsic 一起使用，然后通过 JNI 提供给 Java。 
 一个主要的优化点就是循环，过去的循环（标量循环），一次在一个元素上执行，那很慢。现在，您可以使用 Vector API 将标量算法转换为速度更快的数据并行算法。一个使用 Vector 的例子： 

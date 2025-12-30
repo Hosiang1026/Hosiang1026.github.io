@@ -1,4 +1,4 @@
----
+﻿---
 title: Hexo中文博客站点进阶优化
 categories: Hexo博客搭建指南系列
 tags:
@@ -22,7 +22,7 @@ top: 3
 域名解析是将域名指向网站服务器IP地址的过程。对于Hexo博客，通常使用GitHub Pages或Gitee Pages托管，需要配置CNAME记录。
 
 ```
-**GitHub Pages配置：**
+GitHub Pages配置：
 ```
 
 1. 在source目录下创建CNAME文件，内容为你的域名：
@@ -34,7 +34,7 @@ top: 3
    - 记录值：yourusername.github.io
 
 ```
-**Gitee Pages配置：**
+Gitee Pages配置：
 ```
 
 1. 同样创建CNAME文件
@@ -141,29 +141,29 @@ keywords: 关键词1,关键词2,关键词3
 
 #### 2.6 提交到搜索引擎
 
-**Google Search Console:**
+Google Search Console:
 1. 访问 [Google Search Console](https://search.google.com/search-console)
 2. 添加网站属性
 3. 验证网站所有权
 4. 提交sitemap.xml
 
-**百度站长平台：**
+百度站长平台：
 1. 访问 [百度站长平台](https://ziyuan.baidu.com/)
 2. 添加网站
 4. 提交sitemap.xml和主动推送
 
 #### 2.7 优化页面加载速度
 
-1. **图片优化**
+1. 图片优化
    - 使用WebP格式
    - 压缩图片大小
    - 使用CDN加速
 
-2. **代码压缩**
+2. 代码压缩
    - 启用HTML/CSS/JS压缩
    - 使用hexo-all-minifier插件
 
-3. **CDN加速**
+3. CDN加速
    - 使用jsDelivr或unpkg加速静态资源
    - 配置CDN域名
 

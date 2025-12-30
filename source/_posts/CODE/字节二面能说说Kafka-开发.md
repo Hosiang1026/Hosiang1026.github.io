@@ -19,7 +19,7 @@ top: 2
  `Kafka Broker` 
  端处理请求的全流程，剖析下底层的网络通信是如何实现的、Reactor在kafka上的应用。 
 再说说社区为何在2.3版本将请求类型划分成两大类，又是如何实现两类请求处理的优先级。 
-### 叨叨
+### 一、叨叨
 不过在进入今天主题之前我想先叨叨几句，就源码这个事儿，不同人有不同的看法。 
 有些人听到源码这两个词就被吓到了，这么多代码怎么看。奔进去就像无头苍蝇，一路断点跟下来，跳来跳去，算了拜拜了您嘞。 
 而有些人觉得源码有啥用，看了和没看一样，看了也用不上。 
@@ -48,7 +48,7 @@ top: 2
 在源码分析之前我先总结性的说了说 
  底层的通信模型。应对面试官询问 
  请求全过程已经够了。 
-### Reactor模式
+### 二、Reactor模式
 在扯到 
  之前我们先来说说 
  `Reactor模式` 
@@ -81,7 +81,7 @@ Kafka所采用的
 ```
  如下 ![Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xNjAzNDI3OS0zNzBlZjAwYTUxZmNjYTU1LnBuZw?x-oss-process=image/format,png  '字节二面-能说说Kafka处理请求的流程么-越详细越好') 
 ```
-### Kafka Broker 网络通信模型
+### 三、Kafka Broker 网络通信模型
 ```
 简单来说就是，Broker 中有个 `Acceptor(mainReactor)` 监听新连接的到来，与新连接建连之后轮询选择一个 `Processor(subReactor)` 管理这个连接。 
 ```
@@ -116,9 +116,9 @@ Kafka所采用的
 可以看到网络线程和IO线程之间利用的经典的生产者 - 消费者模式，不论是用于处理Request的共享请求队列，还是IO处理完返回的Response。 
 这样的好处是什么？生产者和消费者之间解耦了，可以对生产者或者消费者做独立的变更和扩展。并且可以平衡两者的处理能力，例如消费不过来了，我多加些IO线程。 
 如果你看过其他中间件源码，你会发现生产者-消费者模式真的是太常见了，所以面试题经常会有手写一波生产者-消费者。 
-### 源码级别剖析网络通信模型
+### 四、源码级别剖析网络通信模型
 Kafka 网络通信组件主要由两大部分构成：SocketServer 和 KafkaRequestHandlerPool。 
-#### SocketServer
+#### 4.1 SocketServer
 ![Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xNjAzNDI3OS0zNzBlZjAwYTUxZmNjYTU1LnBuZw?x-oss-process=image/format,png  '字节二面-能说说Kafka处理请求的流程么-越详细越好') 可以看出 
  `SocketServer` 
  旗下管理着， 
@@ -139,7 +139,7 @@ Kafka 网络通信组件主要由两大部分构成：SocketServer 和 KafkaRequ
  和作为传输 
  和 
  的中转站。 
-#### Acceptor
+#### 4.2 Acceptor
 接下来我们再看看 
  `Acceptor` 
   
@@ -191,7 +191,7 @@ IO线程池，实际处理请求的线程。
  的。 ![Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xNjAzNDI3OS0zNzBlZjAwYTUxZmNjYTU1LnBuZw?x-oss-process=image/format,png  '字节二面-能说说Kafka处理请求的流程么-越详细越好') 
 ```
 最后再来个更详细的总览图，把源码分析到的类本上都对应的加上去了。 
-### 请求处理优先级
+### 五、请求处理优先级
 上面提到的 
  和 
  是时候揭开面纱了。这两个对应的就是数据类请求和控制类请求。 
@@ -226,7 +226,7 @@ IO线程池，实际处理请求的线程。
 控制类的和数据类区别就在于，就一个 
  `Porcessor线程` 
  ，并且请求队列写死的长度为20。 
-### 最后
+### 六、最后
 看源码主要就是得耐心，耐心跟下去。然后再跳出来看。你会发现不过如此，哈哈哈。 
 ```
 欢迎！[Test](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xNjAzNDI3OS0zNzBlZjAwYTUxZmNjYTU1LnBuZw?x-oss-process=image/format,png  '字节二面-能说说Kafka处理请求的流程么-越详细越好')

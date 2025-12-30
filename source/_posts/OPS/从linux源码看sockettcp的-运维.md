@@ -14,13 +14,13 @@ top: 3
 <!-- more -->
 
 ```
-                                                                                                                                                                                        ### 从linux源码看socket(tcp)的timeout 
+### 一、从linux源码看socket(tcp)的timeout
 ```
-#### 前言
+#### 1.1 前言
 ```
 网络编程中超时时间是一个重要但又容易被忽略的问题，对其的设置需要仔细斟酌。在经历了数次物理机宕机之后，笔者详细的考察了在网络编程(tcp)中的各种超时设置，于是就有了本篇博文。本文大部分讨论的是socket设置为block的情况，即setNonblock(false)，仅在最后提及了nonblock socket(本文基于linux 2.6.32-431内核)。 
 ```
-#### connectTimeout
+#### 1.2 connectTimeout
 在讨论connectTimeout之前，让我们先看下java和C语言对于socket connect调用的函数签名: 
  ```bash
 java:
@@ -273,7 +273,7 @@ Java_java_net_PlainSocketImpl_socketConnect(...){
 ```
    
   
-#### socketTimeout
+#### 1.3 socketTimeout
 ##### write系统调用的超时时间
 socket的write系统调用最后调用的是tcp_sendmsg，源码如下所示: 
 ```
@@ -346,7 +346,7 @@ int sk_stream_wait_memory(struct sock *sk, long *timeo_p){
 ```
 物理机宕机后，tcp发送msg的时候，ack不会返回，则会在重传定时器tcp_retransmit_timer到期后timeout，其重传到期时间通过tcp_retries2以及TCP_RTO_MIN计算出来。其源码可见笔者的blog: `https://my.oschina.net/alchemystar/blog/1936433` tcp_retries2的设置位置为: `cat /proc/sys/net/ipv4/tcp_retries2 笔者机器上是5,默认是15` ###### SO_SNDTIMEO不设置,write buffer满之后对端不消费，导致buffer一直满的情况
 和上面ack超时有些许不一样的是，一个逻辑是用TCP_RTO_MIN通过tcp_retries2计算出来的时间。另一个是真的通过重传超过tcp_retries2次数来time_out，两者的区别和rto的动态计算有关。但是可以大致认为是一致的。 
-#### 上述逻辑如下图所示:
+#### 1.4 上述逻辑如下图所示:
 ![Test](https://oscimg.oschina.net/oscnet/up-59900e9bb1796ee054b0a28e52e6684e9fe.png  '从linux源码看socket(tcp)的timeout') 
 ##### write_timeout表格
  
@@ -373,7 +373,7 @@ int sk_stream_wait_memory(struct sock *sk, long *timeo_p){
   
 ##### java的SocketOutputStream的sockWrite0超时时间
 java的sockWrite0没有设置超时时间的地方，同时也没有设置过SO_SNDTIMEOUT，其直接调用了系统调用，所以其超时时间和write系统调用保持一致。 
-#### readTimeout
+#### 1.5 readTimeout
 ReadTimeout可能是最容易导致问题的地方。我们先看下系统调用的源码: 
 ##### read系统调用
 socket的read系统调用最终调用的是tcp_recvmsg, 其源码如下: 
@@ -474,7 +474,7 @@ Java系统调用
    min(SO_TIMEOUT,(924.6s-1044.6s)根据动态rto定 
    
   
-#### 对端物理机宕机之后的timeout
+#### 1.6 对端物理机宕机之后的timeout
 ##### 对端物理机宕机后还依旧有数据发送
 对端物理机宕机时对端内核也gg了(不会发出任何包通知宕机)，那么本端发送任何数据给对端都不会有响应。其超时时间就由上面讨论的 min(设置的socket超时[例如SO_TIMEOUT],内核内部的定时器超时来决定)。 
 ##### 对端物理机宕机后没有数据发送，但在read等待
@@ -490,13 +490,13 @@ cat /proc/sys/net/ipv4/tcp_keepalve_probes 9 即一共探测9次
 ```
 ##### 对端物理机宕机后没有数据发送，也没有read等待
 和上面同理，也是在keepalive定时器超时之后，将连接close。所以我们可以看到一个不活跃的socket在对端物理机突然宕机之后，依旧是ESTABLISHED状态，过很长一段时间之后才会关闭。 
-#### 进程宕后的超时
+#### 1.7 进程宕后的超时
 ```
 如果仅仅是对端进程宕机的话(进程所在内核会close其拥的所有socket)，由于fin包的发送，本端内核可以立刻知道当前socket的状态。如果socket是阻塞的，那么将会在当前或者下一次write/read系统调用的时候返回给应用层相应的错误。如果是nonblock，那么会在select/epoll中触发出对应的事件通知应用层去处理。 如果fin包没发送到对端，那么在下一次write/read的时候内核会发送reset包作为回应。 
 ```
-#### nonblock
+#### 1.8 nonblock
 设置为nonblock=true后，由于read/write都是立刻返回，且通过select/epoll等处理重传超时/probe超时/keep alive超时/socket close等事件，所以根据应用层代码决定其超时特性。定时器超时事件发生的时间如上面几小节所述，和是否nonblock无关。nonblock的编程模式可以让应用层对这些事件做出响应。 
-### 总结
+### 二、总结
 网络编程中超时时间是个重要但又容易被忽略的问题，这个问题只有在遇到物理机宕机等平时遇不到的现象时候才会凸显。笔者在经历数次物理机宕机之后才好好的研究了一番，希望本篇文章可以对读者在以后遇到类似超时问题时有所帮助。 
 https://my.oschina.net/alchemystar/blog/3154409 ![Test](https://oscimg.oschina.net/oscnet/up-59900e9bb1796ee054b0a28e52e6684e9fe.png  '从linux源码看socket(tcp)的timeout')
                                         

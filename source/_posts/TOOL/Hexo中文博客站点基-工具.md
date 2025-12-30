@@ -18,7 +18,7 @@ Hexo静态博客需要服务器托管才能在线访问，而GitHub Pages、Gite
 
 ### 一、托管平台
 
-#### Github
+#### 1.1 Github
  
 ##### 1.1 注册Github
 
@@ -64,7 +64,7 @@ Hexo静态博客需要服务器托管才能在线访问，而GitHub Pages、Gite
 
 `ssh -T git@github.com`
 
-#### Coding、Gitee
+#### 1.2 Coding、Gitee
 
 Coding、Gitee与GitHub类似，选择托管国内的Coding、Gitee，网站访问速度肯定要快一点。
 

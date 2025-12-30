@@ -1,4 +1,4 @@
----
+﻿---
 title: Java项目部署至远程
 categories: Java开发全栈系列
 tags:
@@ -36,11 +36,11 @@ IntelliJ IDEA作为强大的Java开发IDE，其优秀的代码提示、丰富的
 ### 一、服务器环境准备
 
 ```
-**服务器名称：** SERVER-VM-1
+服务器名称： SERVER-VM-1
 ```
 
 ```
-**服务器系统版本：** CentOS-7 64位
+服务器系统版本： CentOS-7 64位
 ```
 
 
@@ -207,7 +207,7 @@ authenticate，false表示不使用监控，即不需要用户名和密码
 ### 五、项目代码
 
 ```
-**源码：**  [https://github.com/Hosiang1026/springmvc](https://github.com/Hosiang1026/springmvc)，欢迎Star， 有错误之处或需要帮助都可以私信评论。
+源码：  [https://github.com/Hosiang1026/springmvc](https://github.com/Hosiang1026/springmvc)，欢迎Star， 有错误之处或需要帮助都可以私信评论。
 ```
 
 

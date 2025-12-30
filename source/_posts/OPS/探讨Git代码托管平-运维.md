@@ -1,4 +1,4 @@
----
+﻿---
 title: 探讨Git代码托管平台
 categories: Git版本控制精通系列
 tags:
@@ -13,7 +13,8 @@ top: 4
 
 <!-- more -->
 
-#### 关于 Git
+### 一、Git概述
+#### 1.1 关于 Git
 
 版本控制软件种类繁多，维基百科收录的最早的版本控制系统是 1972 年贝尔实验室开发的 Source Code Control System。1986 年 Concurrent Versions System(CVS) 诞生，CVS 曾非常流行，但今时用之寥寥无几，不过 OpenBSD 仍在使用 CVS。2000 年 CollabNet 创建了 Subversion 项目，2009年，Subversion 被 Apache 基金会接受成为顶级项目并被命名为 Apache Subversion。2005 年 Linus Torvalds 创建了 Git，2007 Github 诞生后，Git 随着 Github 的发展愈发流行，14 年间，Git 成为了最流行的版本控制系统，无论是 Windows 还是 Linux 或是 Android，MySQL 等等大型软件都使用 git 进行版本控制。纵观版本控制系统流行史，前有 CVS 后有 SVN，今日 Git 更风流。俱往矣，数风流人物，还看今朝，版本控制系统莫不如斯。
 
@@ -25,11 +26,11 @@ Johannes Schindelin 此人也是 git-for-windows 的维护者。 Git 的维护�
 
 Git 与远程存储库之间的传输协议有 HTTP, GIT( `git://` )，SSH. 在 《Pro Git - 2nd Edition》4.1 Git on the Server - The Protocols 中有介绍。其中 HTTP 协议包括哑协议和智能协议，由于哑协议是只读协议，目前大多数代码托管平台均不再提供支持。HTTP 智能协议和 GIT 协议，SSH 协议类似，都是特定几组 客户端/服务端 git 命令之间的输入输出数据传输和交换。Git 传输协议较为简单，以智能传输协议 v1 为例，基本的 `fetch/push` 流程如下：
 
-**Git 拉取流程：**
+Git 拉取流程：
 
 ![Test](https://api.opics.org/api '探讨 Git 代码托管平台的若干问题 - 2019 版')
 
-**Git 推送流程：** 
+Git 推送流程： 
 虽然在 2018 年 5 月，git 推出了 `Wire Protocol` （即 Git v2 协议），增加了 Git 协议的复杂性，但在服务器上支持 git 协议（包括 v2 协议）仍然只需要在服务器上运行 git-upload-pack/git-receive-pack。这使得开发者很容易实现对 git 协议的支持。正因为 Git 协议表征的简单，所以针对不同的用户和存储库数量规模，Git 也都比 Subversion，Mercurial 有更多的选择。 
 Git 使用文件快照记录文件变更，当对象存储到松散文件目录时，每一次大小不变的文件修改相当于存储库中增加特定文件的大小，Git 使用 zlib deflate 压缩对象，对象头包括对象类型，原始大小。基于快照的方式使得 Git 在提交代码，检出文件时都比较高效，但存储库的占用缺比较高。但运行 `git gc` 时，Git 会将松散的对象打包到 pack 文件中，这个时候会使用特定的机制存储一部分文件的 `OFS_DELTA` ，这样就能节省一部分空间。 
 zlib（deflate） 压缩算法通常来说除了没有版权限制，无论是压缩比还是速度，CPU 使用率都不是一个最佳的选择，引用来自的 https://github.com/facebook/zstd 基准测试，zlib 看起来必后起之秀 `brotli` / `zstd` 差多了： 
@@ -96,7 +97,7 @@ libgit2 最初是由 Shawn Pearce 创建了初始 commit。目前主要维护者
 JGit 也是有 Shawn Pearce 创建的，目前属于 Eclipse 基金会，运行在 JVM 上，国内腾讯的工峰的 TGit 也是使用的 JGit。 
 在 Git Rev News 第48期，编辑推荐了 gitbase 通过 SQL 的方式查询 git 存储库，这个工具基于 src-d/go-git，go-git 是纯 Golang 实现的，如果基于 Golang 的项目需要简单的读写存储库，可以使用 go-git。与 libgit2 的 Golang 绑定 git2go 相比，不需要使用 CGO。 
 当然还有一些其他的 git 实现，大多是实验性的，不建议用于生产环境，比如基于 Rust 的 git-rs。 
-#### 不同伸缩性的 Git 代码托管平台
+#### 1.2 不同伸缩性的 Git 代码托管平台
 
 ##### 基于内置工具搭建 Git 代码托管服务
 
@@ -155,12 +156,12 @@ Github 是全球最大的代码托管平台，目前 Github 官方数据显示�
 在开发 Gitaly 之后， Gitlab 摆脱了 NFS 的禁锢，在平台的伸缩性方面得到了巨大的提升。要知道 Gitlab 使用 Gitaly 的原因可以阅读 The road to Gitaly v1.0。Gitaly 使用 RPC 将存储服务器上的 git 命令包转成前端服务机器上的 git 命令，并为 gitlab 服务提供存储库的读写。 Gitlab 的 SSH 功能仍然由 OpenSSH 提供，而一些静态资源，文件下载，附件等功能则由 Golang 编写的 gitlab-workhorse 实现，gitlab-workhorse 需要与 Gitaly 通信。 
 Bitbucket 是 Atlassian 开发的代码托管平台，与 Github/Gitlab 不同，Bitbucket 还提供了原生 Mercurial 支持，不过最近，Bitbucket 宣布要逐步关闭 Mercurial 的支持。Atlassian 还开发了 Jira/Sourcetree 这样著名的软件，Bitbucket 源码没有开发，推测主要使用 Java 技术栈（这个从一次 Bitbucket VFSForGit 安装包分析可得）。 
 Gitee 是目前国内最大的代码托管平台之一，早在 2015 年便开始了分布式改造，并编写了一系列服务实现分布式架构，编写了 Nginx 路由模块实现动态路由，基于 libssh 开发了 Basalt v1 SSH 服务器，基于 Golang 开发了 Basalt v2 SSH 服务器，还开发了 git-srv 智能服务后端，brzox Git HTTP/Archive 服务。以及 git-diamond git 协议内部传输服务等等。Gitee 最初代码基于 Gitlab，几年之间已经与 Gitlab 有了很大的差异，现在 Gitee 已经逐步将一些功能从 gitlab 中剥离，实现云平台的微服务，比如目前的 git/svn/hook 验证服务是基于 Golang 编写的 banjo。Gitee 需要以有限的硬件实现更多的用户接入，所以在服务的设计上更倾向于提供资源使用率，对一些比较容易造成计算资源紧张的服务进行降级。 
-#### Git 代码托管平台服务实现
+#### 1.3 Git 代码托管平台服务实现
 Git 代码托管平台的基本服务应该包括浏览器接入支持和 git 客户端接入支持，前者需要平台开发网页提供若干务供用户访问。后者需要支持 git 客户端推拉代码。通过网站访问存储库意味着 HTTP 服务需要通过一定的途径读写存储库，在 GitWeb 中，这通常使用 git 命令实现，比如使用 `git tree` 查看 `tree` ，使用 `git archive` 打包文件等等。在 Gogs 中，使用的 git-module 同样使用了命令读写存储库。而 Gogs 的分叉 Gitea 则使用的是 src-d/go-git 读写存储库。实际上我们常常有那种感觉，使用命令行可能会比直接调用 API 慢，并且错误难以处理，这通常是对的。比如我们查看 `HEAD` 对应的引用，使用命令我们可以运行 `git symbolic-ref HEAD` ，运行这个命令我们需要 fork 出一个进程，fork 成功后马上在子进程中执行 exec git symbolic-ref，为了读取 git symbolic-ref 的输出，我们还需要创建几对 Pipe，并检测 git symbolic-ref 的退出值。而使用 libgit2 API 我们只需要调用 `git_repository_open` , `git_reference_open` , `git_reference_symbolic_target` 即可拿到对应的引用。而对于服务程序而言，fork-exec 的代价可能不小。当然你也可以直接使用 `open("/path/to/.git/HEAD")` 然后解析 HEAD 对应的引用。GitBucket 使用 JGit 读写存储库，Gitlab 曾经历了 Grit (Grit 部分命令部分 Git 纯 Ruby 实现，Github 曾经使用)。后来的 Rugged，到现在 Gitaly 的纯命令 + Ruby Repository（Gitlab 现在的架构我对其保留意见，至少 IO 复制将增加多次）。Github 目前使用 Rugged 读写存储库，当然一些更多的细节因为没有源码不得而知。Gitee 目前使用 Rugged，但一部分 libgit2 实现不佳的则直接采用 git 命令实现。 
 实现 Git Over HTTP，Gitlab 最初采用了 Grack, 运行在 `unicorn` 中的 Grack 并发有限且容易影响 Web 访问（即 Git 请求较多时，Web 拒绝服务），而基于 Golang 开发的 Gogs，Gitea 使用 Golang 原生 HTTP 库编写 Git HTTP Server 功能，这要比 Grack 好要好很多，Golang HTTP 模型能够支撑更多的并发。目前 Gitee 的 Git HTTP Server Brzox 也是使用 Golang 编写。 
 实现 Git Over SSH，Gitlab 目前依然使用的是 OpenSSH，而不像 Github/BitBucket/Gitee 直接编写 SSH 服务器，直接编写 SSH 服务器可以禁用 SSH 登录，自定义错误消息，简化验证流程，减少数据拷贝。Github 早先是基于 libssh 编写的 SSH Server, 目前不得而知。BitBucket 技术上偏向 Java, 则有可能使用 Apache Mina SSHD, GitBucket 使用 Apache Mina SSHD + JGit 实现 Git Over SSH 功能。而 Gogs/Gitea 在虽然使用 Golang crypto/ssh 编写了 SSH 服务，但在实现时仍然使用了中间命令，这就导致数据拷贝次数的增加，观测 Gogs/Gitea 的各种服务实现，这可能是设计不足的妥协吧。 
 实现 Git Over TCP （git:// 协议）也非常简单，但 Git 协议并不提供验证机制，Git 代码托管平台提不提供 Git 协议支持也无关紧要，但 Git 协议无需加密，协议简单，作为平台内部传输服务倒是可以，目前 Gitee 使用 C++ Asio 编写 git-diamond 支持内部同步，企业存储库备份等功能。 
-#### Git 代码托管平台的伸缩性
+#### 1.4 Git 代码托管平台的伸缩性
 伸缩性是 Git 代码托管能否支撑成千上万用户/存储库的重要指标。像 Gogs/Gitea 这样的代码托管系统尽量认为自身运行在单一服务器上，因此这类 Git 代码托管平台伸缩性非常有限，当然如果使用 NFS/Ceph 这类分布式文件系统能够在单一服务器上支持更多的存储库，但 NFS/Ceph 这种分布式系统的做为 Git 代码托管系统的存储层，除了分布式文件系统带来的性能下降，还会带来内网带宽过高等更多的问题。 
 我们以使用 NFS 挂载实现伸缩性的平台和 Gitee 分布式模型 git 请求 对比，I/O 细节简化如下： 
 NFS I/O 细节： 
@@ -172,7 +173,7 @@ Github 目前有大约 1亿个项目，我们假设 Github 上存储库大小平
 前端服务器的扩展性实际上要比存储服务器好，前端服务器的迁移一般不需要像存储服务器那样转移存储库，服务也一般更简单。 
 存储库分片之后还是无法避免特定存储库请求过多的问题，Github 的解决方案是使用三副本读写分离的 Spokes 机制，这一方案最多能够提供 3倍于单一服务器的并发读取能力，但不支持并发写入存储库。三副本机制需要解决分布式系统常见的一致性问题，引入并发写入可能会带来更多的数据冲突，破坏一致性，因此 Github 完全禁止并发写入存储库副本（即同时有不同的写存储库请求）。Gitlab 没有实现这样的技术，BitBucket 则没有披露相关资讯，Gitee 受限与硬件限制和开发资源限制，也没有实施。 
 github-dfs： 
-#### Git 代码托管平台的增强功能
+#### 1.5 Git 代码托管平台的增强功能
 除了支持用户通过 Git 协议或者通过网页方式读写远程存储库，代码托管平台一般还需要提供一些与开发相关的功能增强用户体验，这些功能在不同平台之间的对比时显得非常重要。 
 ##### 缺陷追踪
 ##### 持续集成
@@ -192,7 +193,7 @@ Gitee 使用了 git-as-svn 实现对 svn 的支持，支持的协议有 `svn://`
 Git 代码托管平台支持 VFSforGit 客户端比较容易，目前除了 Visual Studio Online，还有 BitBucket 也增加了对 VFSforGit 的支持。我曾用 libgit2 开发了一个 `git-vfs-serve` 命令，用户访问 brzox 时，brzox 请求 git-srv，git-srv 执行 git-vfs-serve 便可以支持 VFSforGit 客户端的访问，不过并未上线。 
 ##### 安全性增强
 Github 最近宣布了支持 WebAuthn: GitHub supports Web Authentication (WebAuthn) for security keys，这种机制可以使用生物识别从而避免输入用户密码，随着信息技术的不断发展，一方面，安全机制不断完善，另一方面，用户面临的风险也会多样化，复杂化。代码托管平台管理了开发者的核心资产，因此在安全上绝不能掉以轻心。当然需要做的不仅仅是及时跟进新的安全机制，还需要对整个系统及时进行安全升级，淘汰旧的协议（比如 SSL3/TLS1.1），旧的加密，哈希算法（DSA，MD5/SHA1），及时采用新的协议（TLS1.3）,新的加密，哈希算法（ED25519，SHA3）等等。 
-#### 文件服务
+#### 1.6 文件服务
 一个优秀的 Git 代码托管平台，应该在软件的开发整个周期都给用户提供帮助，比如下载源码，软件发布。源码下载主要指 Archive 功能，软件的发布则需要平台提供 Release/附件下载功能。 
 ##### Archive
 我们知道 git-archive 命令可以将存储库特定的 commit/branch 打包成一个 zip/tar 文件，而在 Git Over SSH（Git Over TCP） 实现中，只要我们允许 `git-upload-archive` 命令在远程服务器上运行，就打包远程服务器上的存储库的特定分支。但由于 git-upload-archive 与 git-upload-pack/git-receive-pack 存在一些不同，是的 HTTP 协议无法实现 archive 协商。提供 archive 下载则需要另辟蹊径。 
@@ -200,12 +201,12 @@ Github 最近宣布了支持 WebAuthn: GitHub supports Web Authentication (WebAu
 ##### 附件，Release
 附件，Release 可以选择云方案，如果要将附件和 LFS 统一管理，实际上国内的阿里云，腾讯云之类的并不合适，这些平台对并不支持类似 AWS `x-amz-content-sha256` 这样的头部，而是 `Content-MD5` 因此这些云平台要支持 LFS 则要花费多一些功夫。选择国外的 AWS, Azure 则需要考虑经济，网络等问题。当然无论如何使用云平台都需要考虑经济问题。 
 平台自建附件，Release 功能可以使用分布式文件系统，如 FastDFS, 但 FastFDS 并不是一个好的选择，历史比较久，存储机制安全机制现在来说都不是很优秀。有个更好的选择是 Minio, minio 使用 Golang 开发，支持 AWS API。许可协议是 `Apache 2.0` ，商用没有阻碍，因此是用来搭建附件，Release 以及 LFS 存储服务器的不二选择。 
-#### Git 的未来
+#### 1.7 Git 的未来
 Git 虽然是当前最受欢迎的代码托管系统，但 Git 也面临了一些难题，一类是如何支持大文件大存储库，这些问题有 Git LFS, VFSforGit 这样的第三方解决方案，也有微软，Google 开发者参与的官方 Partial Clone，部分克隆需要 Wire 协议支持，离可用还为时尚早。 
 2017年2月，Google 开发者宣布攻破 SHA1，这曾经给一些 git 用户带来了担忧，因为 git 使用 SHA1 计算对象 ID，但 git 使用的实际上是一种特殊的 SHA1，将对象类型对象长度以及对象内容合并在一起计算 SHA1，由于有长度校验，这使得 SHA1 的冲突可能被降低了，但无论如何，SHA1 也不再是安全的，Git 在源码中增加了 sha1collisiondetection 来避免 SHA1 冲突，并且增加了计划迁移到 SHA-256，并且将一些涉及到 Hash 的代码从单一的 SHA1 转变成 `object_id`。关于 Hash 转换，可以查看文档 Git hash function transition。
 
 Git 从 SHA1 迁移到 SHA-256 困难重重，从首次增加文档距今已经有两年时间，而 SHA-256 的实现还不见全貌。与 Hash 迁移相比，压缩算法的演进不重要更难实施，时至今日，zlib 压缩已经不再优秀，但 Git 可能还要负重前行。
 
-#### 道路漫漫
+#### 1.8 道路漫漫
 
 软件开发一直是一个飞速变化的领域，而代码托管也要不断面临新的挑战，道路漫漫，吾辈不休。

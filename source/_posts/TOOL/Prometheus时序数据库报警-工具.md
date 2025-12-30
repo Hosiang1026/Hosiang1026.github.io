@@ -1,4 +1,4 @@
----
+﻿---
 title: Prometheus时序数据库报警
 categories: 数据库深度解析系列
 tags:
@@ -13,13 +13,13 @@ top: 7
 Prometheus时序数据库-报警的计算 在前面的文章中，笔者详细的阐述了Prometheus的数据插入存储查询等过程。但作为一个监控神器，报警计算功能是必不可少的。自然的Prometheus也提供了灵活强大。..
 <!-- more -->
 
-                                                                                                                                                                                        ### Prometheus时序数据库-报警的计算 
+### 一、Prometheus时序数据库-报警的计算
 在前面的文章中，笔者详细的阐述了Prometheus的数据插入存储查询等过程。但作为一个监控神器，报警计算功能是必不可少的。自然的Prometheus也提供了灵活强大的报警规则可以让我们自由去发挥。在本篇文章里，笔者就带读者去看下Prometheus内部是怎么处理报警规则的。 
-#### 报警架构
+#### 1.1 报警架构
 ```
 Prometheus只负责进行报警计算，而具体的报警触发则由AlertManager完成。如果我们不想改动AlertManager以完成自定义的路由规则，还可以通过webhook外接到另一个系统(例如，一个转换到kafka的程序)。 ![Test](https://oscimg.oschina.net/oscnet/up-66fea7ae49f9ad663511fdb0381b815650f.png  'Prometheus时序数据库-报警的计算') 在本篇文章里，笔者并不会去设计alertManager，而是专注于Prometheus本身报警规则的计算逻辑。 
 ```
-#### 一个最简单的报警规则
+#### 1.2 一个最简单的报警规则
  
  ```java
   rules:
@@ -35,7 +35,7 @@ Prometheus只负责进行报警计算，而具体的报警触发则由AlertManag
   ``` 
   
 这上面的规则即是http请求数量<100从持续1min，则我们开始报警，报警级别为warning 
-#### 什么时候触发这个计算
+#### 1.3 什么时候触发这个计算
 在加载完规则之后，Prometheus按照evaluation_interval这个全局配置去不停的计算Rules。代码逻辑如下所示: 
  
  ```text
@@ -70,7 +70,7 @@ func (g *Group) run(ctx context.Context) {
 ```
 整个过程如下图所示: ![Test](https://oscimg.oschina.net/oscnet/up-66fea7ae49f9ad663511fdb0381b815650f.png  'Prometheus时序数据库-报警的计算') 
 ```
-#### 对单个rule的计算
+#### 1.4 对单个rule的计算
 我们可以看到，最重要的就是rule.Eval这个函数。代码如下所示: 
  
 ```go
@@ -120,7 +120,7 @@ func (g *Group) run(ctx context.Context) {
 	// 对左节点计算出来的所有的数据sample
 	for _, lhsSample := range lhs {
 		// 由于左边lv = 75 < 右边rv = 100，且op为less
-		/**
+		/
 			vectorElemBinop(){
 ```
 				case LESS
@@ -129,7 +129,7 @@ func (g *Group) run(ctx context.Context) {
 ```
 			}
 ```
-		**/
+		/
 		// 这边得到的结果value=75,keep = true
 		value, keep := vectorElemBinop(op, lv, rv)
 		if keep {
@@ -150,7 +150,7 @@ func (g *Group) run(ctx context.Context) {
 
   ``` 
   
-#### 报警状态变迁
+#### 1.5 报警状态变迁
 ```
 计算过程讲完了，笔者还稍微讲一下报警的状态变迁，也就是最开始报警规则中的rule中的for，也即报警持续for(规则中为1min)，我们才真正报警。为了实现这种功能，这就需要一个状态机了。笔者这里只阐述下从Pending(报警出现)->firing(真正发送)的逻辑。 
 ```
@@ -194,7 +194,7 @@ r.active[h] = &Alert{
 ```
 上面代码逻辑如下图所示: ![Test](https://oscimg.oschina.net/oscnet/up-66fea7ae49f9ad663511fdb0381b815650f.png  'Prometheus时序数据库-报警的计算') 
 ```
-#### 总结
+#### 1.6 总结
 ```
 Prometheus作为一个监控神器，给我们提供了各种各样的遍历。其强大的报警计算功能就是其中之一。了解其中告警的计算原理，才能让我们更好的运用它。 ![Test](https://oscimg.oschina.net/oscnet/up-66fea7ae49f9ad663511fdb0381b815650f.png  'Prometheus时序数据库-报警的计算')
 ```

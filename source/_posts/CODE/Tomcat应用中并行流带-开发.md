@@ -1,4 +1,4 @@
----
+﻿---
 title: Tomcat应用中并行流带来的问题
 categories: Java开发全栈系列
 tags:
@@ -14,8 +14,9 @@ top: 51
 
                                                                                                                                                                                          
 随着 Java8 的不断流行，越来越多的开发人员使用并行流（parallel）这一特性提升代码执行效率。但是，作者发现在 Tomcat 容器中使用并行流会出现动态加载类失败的情况，通过对比 Tomcat 多个版本的源码，结合并行流和 JVM 类加载机制的原理，成功定位到问题来源。本文对这个问题展开分析，并给出解决方案。 
- 
-#### 一、问题场景
+
+### 一、问题场景与分析
+#### 1.1 问题场景
 在某应用中，服务启动时会通过并行流调用 Dubbo，调用代码如下： 
  ```javascript
   Lists.partition(ids, BATCH_QUERY_LIMIT).stream()
@@ -27,7 +28,7 @@ top: 51
   ```  
 调用日志中发现大量的 WARN 日志com.alibaba.com.caucho.hessian.io.SerializerFactory.getDeserializer Hessian/Burlap:‘XXXXXXX’ is an unknown class in null:java.lang.ClassNotFoundException: XXXXXXX，在使用接口返回结果的时候抛出错误 java.lang.ClassCastException: java.util.HashMap cannot be cast to XXXXXXX。 
  
-#### 二、原因分析
+#### 1.2 原因分析
  
 ##### 1、初步定位
 首先根据错误日志可以看到，由于依赖的 Dubbo 服务返回参数的实体类没有找到，导致 Dubbo 返回的数据报文在反序列化时无法转换成对应的实体，类型强制转化中报了java.lang.ClassCastException。通过对线程堆栈和WARN日志定位到出现问题的类为com.alibaba.com.caucho.hessian.io.SerializerFactory，由于 _loader 为 null 所以无法对类进行加载，相关代码如下： 
@@ -41,7 +42,7 @@ top: 51
    }
 
   ```  
-接下来继续向上定位为什么** _loader** 会为 null，SerializerFactory 构造方法中对 _loader 进行了初始化，初始化代码如下，可以看出 _loader 使用的是当前线程的 contextClassLoader。 
+接下来继续向上定位为什么 _loader 会为 null，SerializerFactory 构造方法中对 _loader 进行了初始化，初始化代码如下，可以看出 _loader 使用的是当前线程的 contextClassLoader。 
 ```java
   public SerializerFactory() {
     this(Thread.currentThread().getContextClassLoader());
@@ -95,7 +96,7 @@ public SerializerFactory(ClassLoader loader) {
  
 因此 Tomcat 默认使用SafeForkJoinWorkerThreadFactory作为ForkJoinWorkerThreadFactory，并将该工厂创建的ForkJoinWorkerThread的contextClassLoader都指定为ForkJoinPool.class.getClassLoader()，而不是JDK默认的继承父线程的contextClassLoader，进而避免了Tomcat应用中由并行流带来的类加载器内存泄露。 
  
-#### 三、总结
+#### 1.3 三、总结
 在开发过程中，如果在计算密集型任务中使用了并行流，请避免在子任务中动态加载类；其他业务场景请尽量使用线程池，而非并行流。总之，我们需要避免在Tomcat应用中通过并行流进行自定义类或者第三方类的动态加载。 
 更多内容敬请 
 注：转载文章请先与微信号：labs2020 联系

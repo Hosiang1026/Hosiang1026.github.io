@@ -1,4 +1,4 @@
----
+﻿---
 title: SpringBoot入门篇
 categories: Spring生态体系系列
 tags:
@@ -22,7 +22,7 @@ SaaS（Software as a Service）多租户平台是现代云服务的重要架构�
 假设我们需要开发一个应用程序，并且希望将同一个应用程序销售给N家客户使用。
 
 ```
-**传统部署方式的问题：**
+传统部署方式的问题：
 ```
 
 在常规情况下，我们需要：
@@ -31,28 +31,28 @@ SaaS（Software as a Service）多租户平台是现代云服务的重要架构�
 - 为N个客户部署相同的应用程序N次
 
 ```
-**维护成本问题：**
+维护成本问题：
 ```
 
-1. **升级困难**：如果应用程序进行了升级或者做了其他改动，需要更新N个应用程序
-2. **服务器维护**：需要同时维护N台服务器
-3. **版本管理**：如果业务增长，客户由N个变成N+M个，将面临N个应用程序和M个应用程序版本的维护问题
-4. **成本控制**：设备维护成本、人力成本急剧增加
-5. **运维压力**：运维人员需要管理大量独立的部署实例
+1. 升级困难：如果应用程序进行了升级或者做了其他改动，需要更新N个应用程序
+2. 服务器维护：需要同时维护N台服务器
+3. 版本管理：如果业务增长，客户由N个变成N+M个，将面临N个应用程序和M个应用程序版本的维护问题
+4. 成本控制：设备维护成本、人力成本急剧增加
+5. 运维压力：运维人员需要管理大量独立的部署实例
 
 #### 1.2 多租户SaaS解决方案
 
-为了解决上述问题，我们可以开发**多租户应用程序（Multi-Tenant Application）**。
+为了解决上述问题，我们可以开发多租户应用程序（Multi-Tenant Application）。
 
 ```
-**核心思想：**
+核心思想：
 ```
 - 根据当前用户所属的租户，动态选择对应的数据库
 - 例如：当请求来自A公司的用户时，应用程序连接A公司的数据库
 - 当请求来自B公司的用户时，自动将数据库切换到B公司数据库
 
 ```
-**优势：**
+优势：
 ```
 - 只需要部署一套应用程序
 - 升级和维护只需要操作一次
@@ -62,10 +62,10 @@ SaaS（Software as a Service）多租户平台是现代云服务的重要架构�
 
 从理论上讲没有什么问题，但如果考虑将现有的应用程序改造成SaaS模式，我们将遇到以下关键问题：
 
-1. **如何识别请求来自哪一个租户？**
-2. **如何自动切换数据源？**
-3. **如何维护租户信息？**
-4. **如何保证数据隔离？**
+1. 如何识别请求来自哪一个租户？
+2. 如何自动切换数据源？
+3. 如何维护租户信息？
+4. 如何保证数据隔离？
 
 接下来我们将详细讲解这些问题的解决方案。
 
@@ -73,7 +73,7 @@ SaaS（Software as a Service）多租户平台是现代云服务的重要架构�
 
 #### 2.1 租户信息维护
 
-我们可以提供一个**独立的库来存放租户信息**，包括：
+我们可以提供一个独立的库来存放租户信息，包括：
 - 数据库名称
 - 数据库连接地址
 - 用户名、密码
@@ -86,56 +86,56 @@ SaaS（Software as a Service）多租户平台是现代云服务的重要架构�
 租户的识别和路由有很多种方法，下面列举几种常用的方式：
 
 ```
-**方式一：域名识别（推荐）**
+方式一：域名识别（推荐）
 ```
 
-- **实现方式**：为每一个租户提供一个唯一的二级域名
-- **示例**：`tenantone.example.com`、`tenanttwo.example.com`
-- **识别关键**：`tenantone`和`tenanttwo`就是我们识别租户的关键信息
-- **优点**：直观、易于理解，每个租户有独立的访问地址
-- **缺点**：需要配置DNS，域名管理相对复杂
+- 实现方式：为每一个租户提供一个唯一的二级域名
+- 示例：`tenantone.example.com`、`tenanttwo.example.com`
+- 识别关键：`tenantone`和`tenanttwo`就是我们识别租户的关键信息
+- 优点：直观、易于理解，每个租户有独立的访问地址
+- 缺点：需要配置DNS，域名管理相对复杂
 
 ```
-**方式二：请求参数识别**
+方式二：请求参数识别
 ```
 
-- **实现方式**：将租户信息作为请求参数传递给服务端
+- 实现方式：将租户信息作为请求参数传递给服务端
 ```
-- **示例**：`saas.example.com?tenantId=tenant1`、`saas.example.com?tenantId=tenant2`
+- 示例：`saas.example.com?tenantId=tenant1`、`saas.example.com?tenantId=tenant2`
 ```
-- **识别关键**：参数`tenantId`就是应用程序识别租户的关键信息
-- **优点**：实现简单，无需额外配置
-- **缺点**：URL中暴露租户信息，安全性较低
+- 识别关键：参数`tenantId`就是应用程序识别租户的关键信息
+- 优点：实现简单，无需额外配置
+- 缺点：URL中暴露租户信息，安全性较低
 
 ```
-**方式三：请求头识别（推荐）**
+方式三：请求头识别（推荐）
 ```
 
-- **实现方式**：在请求头（Header）中设置租户信息
-- **技术方案**：使用JWT等技术，服务端通过解析Header中相关参数获得租户信息
-- **示例**：`X-Tenant-Id: tenant1`
-- **优点**：安全性高，不暴露在URL中，支持RESTful API
-- **缺点**：需要前端配合设置请求头
+- 实现方式：在请求头（Header）中设置租户信息
+- 技术方案：使用JWT等技术，服务端通过解析Header中相关参数获得租户信息
+- 示例：`X-Tenant-Id: tenant1`
+- 优点：安全性高，不暴露在URL中，支持RESTful API
+- 缺点：需要前端配合设置请求头
 
 ```
-**方式四：Session识别**
+方式四：Session识别
 ```
 
-- **实现方式**：在用户成功登录系统后，将租户信息保存在Session中
-- **使用方式**：在需要的时候从Session取出租户信息
-- **优点**：实现简单，适合传统Web应用
-- **缺点**：不适合前后端分离架构，不支持无状态服务
+- 实现方式：在用户成功登录系统后，将租户信息保存在Session中
+- 使用方式：在需要的时候从Session取出租户信息
+- 优点：实现简单，适合传统Web应用
+- 缺点：不适合前后端分离架构，不支持无状态服务
 
 #### 2.3 动态数据源配置
 
 ```
-**传统方式的问题：**
+传统方式的问题：
 ```
 
 在启动Spring Boot应用程序之前，就需要为其提供有关数据源的配置信息。按照需求，有N个客户需要使用我们的应用程序，就需要提前配置好N个数据源（多数据源）。
 
 ```
-**问题分析：**
+问题分析：
 - 如果N < 50，可能还能忍受
 - 如果N > 50甚至更多，这样显然是无法接受的
 ```
@@ -143,20 +143,20 @@ SaaS（Software as a Service）多租户平台是现代云服务的重要架构�
 - 新增租户需要修改配置并重启应用
 
 ```
-**解决方案：动态数据源**
+解决方案：动态数据源
 ```
 
-我们需要借助**Hibernate 5提供的动态数据源特性**，让应用程序具备动态配置客户端数据源的能力。
+我们需要借助Hibernate 5提供的动态数据源特性，让应用程序具备动态配置客户端数据源的能力。
 
 ```
-**实现流程：**
+实现流程：
 ```
 
-1. **存储租户信息**：当用户请求系统资源时，将用户提供的租户信息（tenantId）存放在`ThreadLocal`中
-2. **获取租户信息**：从`ThreadLocal`中获取租户信息
-3. **查询配置**：根据租户信息查询租户配置库，获取当前租户的数据源配置信息
-4. **动态设置数据源**：借助Hibernate动态配置数据源的能力，为当前请求设置数据源
-5. **执行请求**：使用设置好的数据源执行用户的请求
+1. 存储租户信息：当用户请求系统资源时，将用户提供的租户信息（tenantId）存放在`ThreadLocal`中
+2. 获取租户信息：从`ThreadLocal`中获取租户信息
+3. 查询配置：根据租户信息查询租户配置库，获取当前租户的数据源配置信息
+4. 动态设置数据源：借助Hibernate动态配置数据源的能力，为当前请求设置数据源
+5. 执行请求：使用设置好的数据源执行用户的请求
 
 - 只需要在应用程序中维护一份数据源配置信息（租户数据库配置库）
 - 其余的数据源动态查询配置
@@ -637,7 +637,7 @@ publicclass TenantInterceptor implements HandlerInterceptor{
 publicclass InterceptorConfig extends WebMvcConfigurationSupport {
 
     protected void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new TenantInterceptor()).addPathPatterns("/**").excludePathPatterns("/login.html");
+        registry.addInterceptor(new TenantInterceptor()).addPathPatterns("/").excludePathPatterns("/login.html");
         super.addInterceptors(registry);
     }
 
@@ -689,7 +689,7 @@ import com.ramostear.una.saas.context.TenantContextHolder;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 
-/**
+/
  * @create-time 2019/5/26 0026-22:38
  */
  publicclass CurrentTenantIdentifierResolverImpl implements CurrentTenantIdentifierResolver {

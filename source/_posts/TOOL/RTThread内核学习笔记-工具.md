@@ -22,22 +22,23 @@ RT-Thread 内核学习笔记 - 内核对象初始化链表组织方式
 RT-Thread 内核学习笔记 - 内核对象链表结构深入理解 
 RT-Thread 内核学习笔记 - 设备模型rt_device的理解 
 RT-Thread 内核学习笔记 - 理解defunct僵尸线程 
- 
-#### 背景
+
+### 一、RT-Thread内核学习
+#### 1.1 背景
  
  目的还是学习并熟悉RT-Thread 操作系统。 
  从最简单的对象管理切入 
  了解操作系统最基本的组成单位：Object 
  
  
-#### 内核对象API
+#### 1.2 内核对象API
 内核对象的主要操作方法：内核文件：object.c中实现 
 ![Test](https://oss-club.rt-thread.org/uploads/20210124/b807950824783f507017e4891c5dab82.png RT-Thread 内核学习笔记 - 内核对象操作API) 
  
-#### 知识点
+#### 1.3 知识点
 查看内核文件：object.c，发现的主要的几个知识点 
  
-#### 验证与测试
+#### 1.4 验证与测试
  
  光看内核代码，不如敲一敲（抄一下）。 
  可以使用模拟器，写几个测试函数，看看对象操作的流程。 
@@ -177,7 +178,7 @@ MSH_CMD_EXPORT(obj_test_detach, object test detach);
 MSH_CMD_EXPORT(obj_test_delete, object test del);
   ```  
  
-#### 学习总结
+#### 1.5 学习总结
  
 ##### 总结一
  
@@ -264,7 +265,7 @@ object init : object size=6
 |  005  |      tidle0  |   00   |  0x81  |
   ```  
  
-#### 总结
+#### 1.6 总结
  
  RT-Thread 内核对象的管理并不复杂 
  相关的知识点，如链表的初始化、插入、遍历、通过链表指针获取对象指针等比较的重要。 

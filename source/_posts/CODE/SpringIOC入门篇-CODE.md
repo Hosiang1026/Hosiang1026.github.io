@@ -1,4 +1,4 @@
----
+﻿---
 title: SpringIOC入门篇
 categories: Spring生态体系系列
 tags:
@@ -19,21 +19,21 @@ top: 12
 #### 1.1 什么是SpringIOC
 
 ```
-**IOC（Inversion of Control）控制反转：**
+IOC（Inversion of Control）控制反转：
 ```
 
 IOC是Spring框架的核心概念之一，是一种设计思想。传统方式中，对象之间的依赖关系由程序代码直接控制，而IOC将对象的创建和依赖关系的管理交给Spring容器来处理。
 
 ```
-**IOC的核心思想：**
+IOC的核心思想：
 ```
 
-- **控制反转**：将对象的控制权从应用程序代码转移到Spring容器
-- **依赖注入（DI）**：IOC的实现方式，通过容器注入对象所需的依赖
-- **解耦**：降低对象之间的耦合度，提高代码的可维护性
+- 控制反转：将对象的控制权从应用程序代码转移到Spring容器
+- 依赖注入（DI）：IOC的实现方式，通过容器注入对象所需的依赖
+- 解耦：降低对象之间的耦合度，提高代码的可维护性
 
 ```
-**传统方式 vs IOC方式：**
+传统方式 vs IOC方式：
 ```
 
 ```java
@@ -60,36 +60,36 @@ public class UserService {
 #### 1.2 核心特性
 
 ```
-**IOC的主要特性：**
+IOC的主要特性：
 ```
 
-- **Bean管理**：Spring容器负责创建、配置和管理Bean
-- **依赖注入**：自动注入对象所需的依赖
-- **生命周期管理**：管理Bean的创建、初始化和销毁
-- **作用域管理**：支持单例、原型等多种作用域
-- **配置灵活**：支持XML、注解、Java配置等多种方式
+- Bean管理：Spring容器负责创建、配置和管理Bean
+- 依赖注入：自动注入对象所需的依赖
+- 生命周期管理：管理Bean的创建、初始化和销毁
+- 作用域管理：支持单例、原型等多种作用域
+- 配置灵活：支持XML、注解、Java配置等多种方式
 
 ```
-**依赖注入的三种方式：**
+依赖注入的三种方式：
 ```
 
-1. **构造函数注入**：通过构造函数注入依赖
-2. **Setter注入**：通过Setter方法注入依赖
-3. **字段注入**：通过@Autowired注解直接注入字段
+1. 构造函数注入：通过构造函数注入依赖
+2. Setter注入：通过Setter方法注入依赖
+3. 字段注入：通过@Autowired注解直接注入字段
 
 ### 二、环境准备
 
 #### 2.1 系统要求
 
 ```
-**开发环境：**
+开发环境：
 ```
-- **JDK**: JDK 8或更高版本
-- **IDE**: IntelliJ IDEA / Eclipse
-- **构建工具**: Maven / Gradle
+- JDK: JDK 8或更高版本
+- IDE: IntelliJ IDEA / Eclipse
+- 构建工具: Maven / Gradle
 
 ```
-**Spring版本：**
+Spring版本：
 ```
 - Spring Framework 5.3+
 - 或 Spring Boot 2.7+（内置Spring）
@@ -97,7 +97,7 @@ public class UserService {
 #### 2.2 工具安装
 
 ```
-**使用Maven创建项目：**
+使用Maven创建项目：
 ```
 
 ```xml
@@ -113,7 +113,7 @@ public class UserService {
 ```
 
 ```
-**使用Gradle创建项目：**
+使用Gradle创建项目：
 ```
 
 ```gradle
@@ -128,7 +128,7 @@ dependencies {
 #### 3.1 创建第一个IOC项目
 
 ```
-**1. 定义Bean类：**
+1. 定义Bean类：
 ```
 
 ```java
@@ -160,7 +160,7 @@ public class UserService {
 ```
 
 ```
-**2. 使用XML配置：**
+2. 使用XML配置：
 ```
 
 ```xml
@@ -182,7 +182,7 @@ public class UserService {
 ```
 
 ```
-**3. 使用Java配置：**
+3. 使用Java配置：
 ```
 
 ```java
@@ -202,7 +202,7 @@ public class AppConfig {
 ```
 
 ```
-**4. 使用注解配置：**
+4. 使用注解配置：
 ```
 
 ```java
@@ -229,7 +229,7 @@ public class UserService {
 #### 3.2 运行示例
 
 ```
-**使用ApplicationContext：**
+使用ApplicationContext：
 ```
 
 ```java
@@ -256,11 +256,11 @@ public class Main {
 #### 4.1 安装问题
 
 ```
-**问题1：找不到Spring依赖**
+问题1：找不到Spring依赖
 ```
 
 ```
-**解决方案：**
+解决方案：
 ```
 ```xml
 <!-- 检查Maven仓库配置 -->
@@ -269,11 +269,11 @@ public class Main {
 ```
 
 ```
-**问题2：Bean创建失败**
+问题2：Bean创建失败
 ```
 
 ```
-**解决方案：**
+解决方案：
 ```
 - 检查类路径是否正确
 - 检查Bean的构造函数参数
@@ -282,11 +282,11 @@ public class Main {
 #### 4.2 配置问题
 
 ```
-**问题1：依赖注入失败**
+问题1：依赖注入失败
 ```
 
 ```
-**解决方案：**
+解决方案：
 ```
 ```java
 // 检查@Autowired注解
@@ -295,11 +295,11 @@ public class Main {
 ```
 
 ```
-**问题2：循环依赖**
+问题2：循环依赖
 ```
 
 ```
-**解决方案：**
+解决方案：
 ```
 ```java
 // 使用@Lazy延迟初始化

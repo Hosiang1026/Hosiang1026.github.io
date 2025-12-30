@@ -1,4 +1,4 @@
----
+﻿---
 title: 最全的Markdown语法
 categories: 其他系列
 tags:
@@ -13,12 +13,12 @@ top: 26
 
 <!-- more -->
 
-### 最全的Markdown语法 
+### 一、最全的Markdown语法
 Markdown是Github最常见的文档说明。Markdown的语法简洁明了、学习容易。按照官方Markdown Cheat Sheet逐个操作一遍自然就会了。 
 ![Test](https://oscimg.oschina.net/oscnet/up-abdef724184cacc384fc609e044cf17bc76.png  '最全的Markdown语法') 
 
 [TOC]这个语法在markdown工具里能够识别，但是在这里不能识别。
-#### 目录
+#### 1.1 目录
  
  代码： 
  
@@ -32,7 +32,7 @@ Markdown是Github最常见的文档说明。Markdown的语法简洁明了、学�
  
  效果显示如上 
  
-#### 多级标题
+#### 1.2 多级标题
  
  代码： 
  
@@ -46,7 +46,7 @@ Markdown是Github最常见的文档说明。Markdown的语法简洁明了、学�
  
   效果 ### 一级标题 #### 二级标题 多级标题  
  
-#### 引用与注释
+#### 1.3 引用与注释
  
 代码：
 
@@ -60,7 +60,7 @@ Markdown是Github最常见的文档说明。Markdown的语法简洁明了、学�
   效果 
     
  
-#### 插入代码
+#### 1.4 插入代码
 ##### 行内代码
  
  代码： 
@@ -100,7 +100,7 @@ print s
 markdown
 ```
   
-#### 多级列表
+#### 1.5 多级列表
 
 ##### 无序列表
 
@@ -141,7 +141,7 @@ markdown
    这是有序的 
     
  
-#### 超链接
+#### 1.6 超链接
 ##### 行内超链接
  
  代码： `[百度](baidu.com)` 效果 
@@ -157,15 +157,15 @@ markdown
 
   ``` 
   
-#### 字体
+#### 1.7 字体
  
  代码： 
  
  
 ```
   *斜体*
-**粗体**
-***斜体加粗***
+粗体
+*斜体加粗*
 ```
 ~~删除线~~
 
@@ -176,7 +176,7 @@ markdown
  效果 
  
 斜体 粗体 斜体加粗 删除线 
-#### 表格
+#### 1.8 表格
  
  代码： 
  
@@ -224,7 +224,7 @@ markdown
    $1 
    
   
-#### 图片
+#### 1.9 图片
  
  代码： 
  
@@ -283,7 +283,7 @@ Reference-style: ![Test](https://oscimg.oschina.net/oscnet/up-abdef724184cacc384
 ```html
 <img src="https://api.opics.org/api" alt="图片替换文本" width=25% /> 
 ```
-#### 多选框
+#### 1.10 多选框
  
  代码： 
  
@@ -317,7 +317,7 @@ Reference-style: ![Test](https://oscimg.oschina.net/oscnet/up-abdef724184cacc384
   [x] 修复 LaTex 公式渲染问题  
   [x] 新增 LaTex 公式编号功能  
  
-#### 脚注 (footnote)
+#### 1.11 脚注 (footnote)
  
  代码： 
  
@@ -332,7 +332,7 @@ Reference-style: ![Test](https://oscimg.oschina.net/oscnet/up-abdef724184cacc384
  效果显示 
  
 文章正文某处^脚注id文章正文 
-#### 流程图
+#### 1.12 流程图
  
  代码： 
  

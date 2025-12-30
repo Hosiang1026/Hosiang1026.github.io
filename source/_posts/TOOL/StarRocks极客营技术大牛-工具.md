@@ -25,7 +25,7 @@ StarRocks 极客营，
 隐藏在社区中的极客们， 
 春天到了，露一手！ 
  
-### ●活动亮点●
+### 一、●活动亮点●
  
 ###### 总有一款适合你
 StarRocks 社区选取 Execution Engine、Storage Engine、Data Lake Analysis、Ecosystem、Loading、Observability、Planner、Usability  8 个方向，开放了 34 个开发任务，难度分为挑战级、中等、简单三档。无论你是新手开发者、进阶攻城狮、资深技术专家，此次活动的开发任务，总有一款适合你。通过本次极客营，你将对 OLAP 技术有更加深入的了解和洞察，助你成为技术专家！ 

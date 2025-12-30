@@ -1,4 +1,4 @@
----
+﻿---
 title: Solidity区块和交易属性
 categories: 区块链与以太坊开发系列
 tags:
@@ -19,14 +19,14 @@ top: 14
 
 ## 一、什么是区块和交易属性
 
-### 1.1 基本概念
+### 一、1 基本概念
 
 Solidity提供了多个全局对象来访问当前区块和交易的信息，包括block、msg、tx等。这些属性在智能合约中非常常用，用于获取时间戳、调用者地址、Gas价格等信息。
 
-### 1.2 全局对象
+### 二、2 全局对象
 
 ```
-**block对象**：
+block对象：
 ```
 - 包含当前区块信息
 - 时间戳、区块号、难度等
@@ -34,7 +34,7 @@ Solidity提供了多个全局对象来访问当前区块和交易的信息，包
 - 所有节点相同
 
 ```
-**msg对象**：
+msg对象：
 ```
 - 包含当前消息/调用信息
 - 发送者、值、数据等
@@ -42,7 +42,7 @@ Solidity提供了多个全局对象来访问当前区块和交易的信息，包
 - 可能在不同调用中不同
 
 ```
-**tx对象**：
+tx对象：
 ```
 - 包含交易信息
 - Gas价格、原始发送者
@@ -51,10 +51,10 @@ Solidity提供了多个全局对象来访问当前区块和交易的信息，包
 
 ## 二、区块属性
 
-### 2.1 基本属性
+### 三、1 基本属性
 
 ```
-**block.timestamp**：
+block.timestamp：
 ```
 ```solidity
 pragma solidity ^0.8.0;
@@ -67,7 +67,7 @@ contract BlockInfo {
     function isAfter(uint256 targetTime) public view returns (bool) {
         return block.timestamp >= targetTime;
     }
-`**block.number**：`solidity
+`block.number：`solidity
 function getCurrentBlock() public view returns (uint256) {
     return block.number;  // 当前区块号
 }
@@ -75,24 +75,24 @@ function getCurrentBlock() public view returns (uint256) {
 function getBlocksSince(uint256 startBlock) public view returns (uint256) {
     return block.number - startBlock;
 }
-`**block.difficulty**：`solidity
+`block.difficulty：`solidity
 function getDifficulty() public view returns (uint256) {
     return block.difficulty;  // 当前区块难度
 }
-`**block.gaslimit**：`solidity
+`block.gaslimit：`solidity
 function getGasLimit() public view returns (uint256) {
     return block.gaslimit;  // 当前区块Gas限制
 }
-`**block.coinbase**：`solidity
+`block.coinbase：`solidity
 function getMiner() public view returns (address) {
     return block.coinbase;  // 当前区块矿工地址
 }
 ```
 
-### 2.2 区块哈希
+### 四、2 区块哈希
 
 ```java
-**blockhash函数**：
+blockhash函数：
 function getBlockHash(uint256 blockNumber) public view returns (bytes32) {
     require(blockNumber < block.number && blockNumber >= block.number - 256, 
             "Block out of range");
@@ -108,7 +108,7 @@ function getPreviousBlockHash() public view returns (bytes32) {
 
 ```
 
-**限制说明**：
+限制说明：
 - 只能查询最近256个区块
 - 超出范围返回0
 - 用于验证历史区块
@@ -116,9 +116,9 @@ function getPreviousBlockHash() public view returns (bytes32) {
 
 ## 三、消息属性
 
-### 3.1 基本属性
+### 五、1 基本属性
 
-**msg.sender**：
+msg.sender：
 contract MessageInfo {
     address public owner = msg.sender;  // 部署者地址
     
@@ -130,7 +130,7 @@ contract MessageInfo {
         require(msg.sender == owner, "Not owner");
         // 只有owner可以调用
     }
-`**msg.value**：`solidity
+`msg.value：`solidity
 function deposit() public payable {
     balances[msg.sender] += msg.value;  // 发送的以太币数量（wei）
 }
@@ -138,7 +138,7 @@ function deposit() public payable {
 function getValue() public view returns (uint256) {
     return msg.value;  // 当前调用发送的以太币
 }
-`**msg.data**：`solidity
+`msg.data：`solidity
 function getCallData() public view returns (bytes memory) {
     return msg.data;  // 完整的调用数据
 }
@@ -148,10 +148,10 @@ function getFunctionSelector() public view returns (bytes4) {
 }
 ```
 
-### 3.2 函数选择器
+### 六、2 函数选择器
 
 ```java
-**msg.sig**：
+msg.sig：
 function transfer(address to, uint256 amount) public {
     bytes4 selector = msg.sig;  // transfer函数的选择器
     // 可以用于路由调用
@@ -162,9 +162,9 @@ function transfer(address to, uint256 amount) public {
 
 ## 四、交易属性
 
-### 4.1 基本属性
+### 七、1 基本属性
 
-**tx.gasprice**：
+tx.gasprice：
 function getGasPrice() public view returns (uint256) {
     return tx.gasprice;  // 交易的Gas价格
 }
@@ -172,7 +172,7 @@ function getGasPrice() public view returns (uint256) {
 function calculateFee(uint256 gasUsed) public view returns (uint256) {
     return gasUsed * tx.gasprice;  // 计算交易费用
 }
-`**tx.origin**：`solidity
+`tx.origin：`solidity
 function getOrigin() public view returns (address) {
     return tx.origin;  // 交易的原始发起者
 }
@@ -182,10 +182,10 @@ function getOrigin() public view returns (address) {
 // msg.sender: 直接调用者（可能是中间合约）
 ```
 
-### 4.2 区别说明
+### 八、2 区别说明
 
 ```java
-**msg.sender vs tx.origin**：
+msg.sender vs tx.origin：
 contract A {
     function callB(address b) public {
         B(b).someFunction();  // msg.sender = A的地址
@@ -203,7 +203,7 @@ contract B {
 
 ```
 
-**安全提示**：
+安全提示：
 - 通常使用msg.sender
 - tx.origin可能导致安全问题
 - 避免使用tx.origin做权限检查
@@ -211,9 +211,9 @@ contract B {
 
 ## 五、Gas相关
 
-### 5.1 gasleft函数
+### 九、1 gasleft函数
 
-**剩余Gas**：
+剩余Gas：
 function checkGas() public view returns (uint256) {
     return gasleft();  // 返回剩余Gas
 }
@@ -224,7 +224,7 @@ function measureGas() public {
     uint256 gasUsed = gasStart - gasleft();
     // gasUsed 是执行操作的Gas消耗
 }
-`**Gas优化**：`solidity
+`Gas优化：`solidity
 function optimizedFunction() public {
     uint256 gasBefore = gasleft();
     // 执行操作
@@ -235,10 +235,10 @@ function optimizedFunction() public {
 
 ## 六、应用场景
 
-### 6.1 时间锁
+### 十、1 时间锁
 
 ```java
-**基于时间戳**：
+基于时间戳：
 contract TimeLock {
     mapping(address => uint256) public lockTime;
     mapping(address => uint256) public lockedAmount;
@@ -277,9 +277,9 @@ contract TimeLock {
 
 ```
 
-### 6.2 随机数生成
+### 十一、2 随机数生成
 
-**基于区块信息**：
+基于区块信息：
 contract RandomGenerator {
     function generateRandom(uint256 max) public view returns (uint256) {
         return uint256(keccak256(abi.encodePacked(
@@ -295,10 +295,10 @@ contract RandomGenerator {
 
 ```
 
-### 6.3 权限控制
+### 十二、3 权限控制
 
 ```java
-**基于调用者**：
+基于调用者：
 contract AccessControl {
     address public owner = msg.sender;
     mapping(address => bool) public isAdmin;
@@ -331,9 +331,9 @@ contract AccessControl {
 
 ```
 
-### 6.4 支付处理
+### 十三、4 支付处理
 
-**处理以太币**：
+处理以太币：
 contract PaymentProcessor {
     function processPayment(address recipient) public payable {
         require(recipient != address(0), "Invalid recipient");
@@ -353,10 +353,10 @@ contract PaymentProcessor {
 
 ## 七、最佳实践
 
-### 7.1 时间戳使用
+### 十四、1 时间戳使用
 
 ```
-**注意事项**：
+注意事项：
 ```
 - 矿工可以操纵时间戳（±15秒）
 - 不要用于关键随机数
@@ -364,7 +364,7 @@ contract PaymentProcessor {
 - 考虑时间窗口
 
 ```java
-**安全使用**：
+安全使用：
 function safeTimeCheck(uint256 targetTime) public view returns (bool) {
     // 使用时间窗口，允许一定误差
     uint256 timeWindow = 300;  // 5分钟
@@ -375,15 +375,15 @@ function safeTimeCheck(uint256 targetTime) public view returns (bool) {
 
 ```
 
-### 7.2 区块号使用
+### 十五、2 区块号使用
 
-**应用场景**：
+应用场景：
 - 计算区块间隔
 - 实现基于区块的时间锁
 - 记录特定区块的状态
 - 验证区块历史
 
-**示例**：
+示例：
 mapping(uint256 => bool) public blockProcessed;
 
 function processBlock() public {
@@ -394,10 +394,10 @@ function processBlock() public {
 
 ```
 
-### 7.3 安全考虑
+### 十六、3 安全考虑
 
 ```java
-**避免tx.origin**：
+避免tx.origin：
 // 不推荐
 function badCheck() public {
     require(tx.origin == owner, "Not owner");  // 不安全
@@ -410,7 +410,7 @@ function goodCheck() public {
     require(msg.sender == owner, "Not owner");  // 安全
 ```
 }
-`**Gas限制**：`solidity
+`Gas限制：`solidity
 ```java
 function gasLimitedFunction() public {
     require(gasleft() > 50000, "Insufficient gas");
@@ -420,20 +420,20 @@ function gasLimitedFunction() public {
 
 ## 八、常见问题
 
-### 8.1 时间戳精度
+### 十七、1 时间戳精度
 
-**问题**：
+问题：
 - 时间戳精度为秒
 - 矿工可以操纵
 - 不适合精确时间
 
-**解决**：
+解决：
 - 使用时间窗口
 - 考虑区块间隔
 - 不用于关键随机数
 - 适合相对时间
 
-### 8.2 区块哈希限制
+### 十八、2 区块哈希限制
 
 
 - 检查范围
@@ -445,7 +445,7 @@ function gasLimitedFunction() public {
 
 区块和交易属性是Solidity中访问区块链信息的重要工具。关键要点：
 
-**全局对象**：
+全局对象：
 - block：区块信息
 - msg：消息/调用信息
 - tx：交易信息
@@ -456,7 +456,7 @@ function gasLimitedFunction() public {
 - 支付处理
 - 状态验证
 
-**最佳实践**：
+最佳实践：
 - 注意时间戳精度
 - 避免使用tx.origin
 - 检查区块哈希范围

@@ -1,4 +1,4 @@
----
+﻿---
 title: Solidity结构体类型
 categories: 区块链与以太坊开发系列
 tags:
@@ -19,14 +19,14 @@ top: 21
 
 ## 一、什么是结构体
 
-### 1.1 基本概念
+### 一、1 基本概念
 
 结构体（Struct）是一种用户定义的数据类型，可以将多个不同类型的字段组合在一起，形成一个逻辑单元。结构体类似于其他语言中的类或记录类型。
 
-### 1.2 结构体的特点
+### 二、2 结构体的特点
 
 ```
-**组合数据**：
+组合数据：
 ```
 - 将相关数据组合
 - 逻辑清晰
@@ -34,7 +34,7 @@ top: 21
 - 提高可读性
 
 ```
-**类型灵活**：
+类型灵活：
 ```
 - 可以包含各种类型
 - 可以嵌套结构体
@@ -42,7 +42,7 @@ top: 21
 - 灵活组合
 
 ```
-**存储位置**：
+存储位置：
 ```
 - 需要指定storage或memory
 - storage持久化存储
@@ -51,10 +51,10 @@ top: 21
 
 ## 二、如何定义和使用结构体
 
-### 2.1 基本定义
+### 三、1 基本定义
 
 ```
-**简单结构体**：
+简单结构体：
 ```
 ```solidity
 pragma solidity ^0.8.0;
@@ -74,17 +74,17 @@ contract StructExample {
 ```
 
 ```
-**结构体字段**：
+结构体字段：
 ```
 - 可以包含任何类型
 - 字段有名称和类型
 - 可以设置默认值
 - 可以嵌套
 
-### 2.2 创建结构体实例
+### 四、2 创建结构体实例
 
 ```javascript
-**使用命名参数**：
+使用命名参数：
 function addPerson(
 ```
     string memory _name,
@@ -105,7 +105,7 @@ function addPerson(
     personByAddress[_wallet] = newPerson;
 ```
 }
-`**使用位置参数**：`solidity
+`使用位置参数：`solidity
 ```javascript
 function addPersonSimple(
     Person memory newPerson = Person(_name, _age, _wallet, true);
@@ -113,9 +113,9 @@ function addPersonSimple(
 }
 ```
 
-### 2.3 访问和修改
+### 五、3 访问和修改
 
-**访问字段**：
+访问字段：
 function getPerson(uint256 index) public view returns (
     string memory,
     uint256,
@@ -129,7 +129,7 @@ function getPerson(uint256 index) public view returns (
 function getPersonName(uint256 index) public view returns (string memory) {
     return people[index].name;
 }
-`**修改字段**：`solidity
+`修改字段：`solidity
 function updatePersonAge(uint256 index, uint256 _age) public {
     people[index].age = _age;
 }
@@ -139,16 +139,16 @@ function deactivatePerson(uint256 index) public {
 }
 ```
 
-### 2.4 存储位置
+### 六、4 存储位置
 
 ```java
-**storage引用**：
+storage引用：
 function updateStorage(uint256 index) public {
     Person storage p = people[index];  // 引用storage
     p.age = 30;  // 修改会影响原数据
 ```
 }
-`**memory副本**：`solidity
+`memory副本：`solidity
 ```java
 function processMemory(uint256 index) public {
     Person memory p = people[index];  // 创建副本
@@ -161,9 +161,9 @@ function processMemory(uint256 index) public {
 
 ## 三、应用场景
 
-### 3.1 用户管理
+### 七、1 用户管理
 
-**用户信息**：
+用户信息：
 contract UserManagement {
     struct User {
         uint256 registrationTime;
@@ -193,10 +193,10 @@ contract UserManagement {
 
 ```
 
-### 3.2 订单系统
+### 八、2 订单系统
 
 ```
-**订单信息**：
+订单信息：
 contract OrderSystem {
     struct Order {
         uint256 orderId;
@@ -247,9 +247,9 @@ contract OrderSystem {
 
 ```
 
-### 3.3 投票系统
+### 九、3 投票系统
 
-**提案和投票**：
+提案和投票：
 contract VotingSystem {
     struct Proposal {
         string description;
@@ -293,10 +293,10 @@ contract VotingSystem {
 
 ```
 
-### 3.4 NFT元数据
+### 十、4 NFT元数据
 
 ```
-**NFT信息**：
+NFT信息：
 contract NFTContract {
     struct NFT {
         uint256 tokenId;
@@ -336,9 +336,9 @@ contract NFTContract {
 
 ## 四、高级用法
 
-### 4.1 嵌套结构体
+### 十一、1 嵌套结构体
 
-**嵌套定义**：
+嵌套定义：
 contract NestedStruct {
     struct Address {
         string street;
@@ -370,10 +370,10 @@ contract NestedStruct {
 
 ```
 
-### 4.2 结构体数组
+### 十二、2 结构体数组
 
 ```
-**数组操作**：
+数组操作：
 contract StructArray {
     struct Item {
         bool available;
@@ -421,9 +421,9 @@ contract StructArray {
 
 ```
 
-### 4.3 结构体映射
+### 十三、3 结构体映射
 
-**映射使用**：
+映射使用：
 contract StructMapping {
     struct Account {
         uint256 transactionCount;
@@ -449,10 +449,10 @@ contract StructMapping {
 
 ## 五、最佳实践
 
-### 5.1 设计原则
+### 十四、1 设计原则
 
 ```
-**相关数据组合**：
+相关数据组合：
 ```
 - 将逻辑相关的数据组合
 - 避免过度嵌套
@@ -460,7 +460,7 @@ contract StructMapping {
 - 易于理解
 
 ```
-**字段命名**：
+字段命名：
 // 好的命名
     string userName;
     uint256 registrationDate;
@@ -479,9 +479,9 @@ struct Data {
 
 ```
 
-### 5.2 Gas优化
+### 十五、2 Gas优化
 
-**打包存储**：
+打包存储：
 // 优化前：多个存储槽
 struct Unpacked {
     uint256 value1;  // 存储槽1
@@ -497,7 +497,7 @@ struct Packed {
     bool flag1;      // 存储槽2
     bool flag2;      // 存储槽2
 }
-`**使用memory**：`solidity
+`使用memory：`solidity
 function process(uint256 index) public {
     Person memory p = people[index];  // 使用memory
     // 处理逻辑
@@ -505,10 +505,10 @@ function process(uint256 index) public {
 }
 ```
 
-### 5.3 安全考虑
+### 十六、3 安全考虑
 
 ```java
-**输入验证**：
+输入验证：
 function addPerson(string memory _name, uint256 _age) public {
     require(bytes(_name).length > 0, "Name cannot be empty");
     require(_age > 0 && _age < 150, "Invalid age");
@@ -518,7 +518,7 @@ function addPerson(string memory _name, uint256 _age) public {
     people.push(Person({
     }));
 ```
-`**边界检查**：`solidity
+`边界检查：`solidity
 ```java
 function updatePerson(uint256 index, uint256 _age) public {
     require(index < people.length, "Index out of bounds");
@@ -530,19 +530,19 @@ function updatePerson(uint256 index, uint256 _age) public {
 
 结构体是Solidity中组织和管理复杂数据的重要工具。关键要点：
 
-**定义使用**：
+定义使用：
 - 组合多个字段
 - 支持嵌套和复杂类型
 - 需要指定存储位置
 - 灵活的数据组织
 
-**应用场景**：
+应用场景：
 - 用户管理
 - 订单系统
 - 投票系统
 - NFT元数据
 
-**最佳实践**：
+最佳实践：
 - 合理设计结构
 - 优化Gas消耗
 - 验证输入数据

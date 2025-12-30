@@ -1,4 +1,4 @@
----
+﻿---
 title: 6张图为你分析Kafka核心原理
 categories: 消息队列技术系列
 tags:
@@ -20,15 +20,14 @@ top: 4
  当消息还存储在缓存中的时候, 假如Producer客户端挂掉了，消息是不是就丢失了? 
  当最新的Producer Batch还有空余的内存，但是接下来的一条消息很大，不足以加上上一个Batch中，会怎么办呢？ 
  那么创建Producer Batch的时候，应该分配多少的内存呢？ 
- 
- 
-#### 什么是消息累加器Record Accumulator
+### 一、Kafka消息累加器原理
+#### 1.1 什么是消息累加器Record Accumulator
 kafka为了提高Producer客户端的发送吞吐量和提高性能，选择了将消息暂时缓存起来，等到满足一定的条件, 再进行批量发送, 这样可以减少网络请求，提高吞吐量。 
 而缓存这个消息的就是Record Accumulator类. 
  
 上图就是整个消息存放的缓存模型，我们接下来一个个来讲解。 
  
-#### 消息缓存模型
+#### 1.2 消息缓存模型
  
 上图表示的就是 消息缓存的模型, 生产的消息就是暂时存放在这个里面。 
  
@@ -42,7 +41,7 @@ kafka为了提高Producer客户端的发送吞吐量和提高性能，选择了�
  当消息发送成功之后, Batch会被释放掉。 
  
  
-#### ProducerBatch的内存大小
+#### 1.3 ProducerBatch的内存大小
 那么创建ProducerBatch的时候，应该分配多少的内存呢？ 
 ```
 先说结论: 当消息预估内存大于batch.size的时候，则按照消息预估内存创建, 否则按照batch.size的大小创建(默认16k). 
@@ -54,7 +53,7 @@ RecordAccumulator#append
  ```java
       /**
      * 微信：szzdzhp001
-     **/
+     /
        // 找到 batch.size 和 这条消息在batch中的总内存大小的 最大值
        int size = Math.max(this.batchSize, AbstractRecords.estimateSizeInBytesUpperBound(maxUsableMagic, compression, key, value, headers));
        // 申请内存
@@ -75,7 +74,7 @@ DefaultRecordBatch#estimateBatchSizeUpperBound
  
   
 ```python
-      /**
+      /
     * 使用给定的键和值获取只有一条记录的批次大小的上限。
     * 这只是一个估计，因为它没有考虑使用的压缩算法的额外开销。
     **/
@@ -96,13 +95,13 @@ DefaultRecordBatch#estimateBatchSizeUpperBound
 也就是说创建一个ProducerBatch，最少就要83B . 
 比如我发送一条消息 " 1 " , 预估得到的大小是 86B, 跟batch.size(默认16384) 相比取最大值。 那么申请内存的时候取最大值 16384 。 
  
-#### 内存分配
+#### 1.4 内存分配
 我们都知道RecordAccumulator里面的缓存大小是一开始定义好的, 由buffer.memory控制, 默认33554432 (32M) 
 当生产的速度大于发送速度的时候，就可能出现Producer写入阻塞。 
 而且频繁的创建和释放ProducerBatch，会导致频繁GC, 所有kafka中有个缓存池的概念，这个缓存池会被重复使用，但是只有固定( batch.size)的大小才能够使用缓存池。 
 PS：以下16k指得是 batch.size的默认值. 
  
-#### Batch的创建和释放
+#### 1.5 Batch的创建和释放
  
 ##### 1. 内存16K 缓存池中有可用内存
 ①. 创建Batch的时候, 会去缓存池中，获取队首的一块内存ByteBuffer 使用。 
@@ -128,7 +127,7 @@ PS：以下16k指得是 batch.size的默认值.
  
 注意：这里我们涉及到的 非缓存池中的内存分配, 仅仅指的的内存数字的增加和减少。 
  
-#### 问题和答案
+#### 1.6 问题和答案
 1、发送消息的时候, 当Broker挂掉了，消息体还能写入到消息缓存中吗？ 
 当Broker挂掉了，Producer会提示下面的警告⚠️, 但是发送消息过程中 
 这个消息体还是可以写入到 消息缓存中的，也仅仅是写到到缓存中而已。 

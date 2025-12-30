@@ -1,4 +1,4 @@
----
+﻿---
 title: Python开发环境配置进
 categories: 开发环境配置全攻略系列
 tags:
@@ -19,7 +19,7 @@ top: 9
 #### 1.1 Python版本管理
 
 ```
-**使用pyenv管理多个Python版本：**
+使用pyenv管理多个Python版本：
 ```
 
 ```bash
@@ -56,7 +56,7 @@ pyenv shell 3.11.5
 ```
 
 ```
-**使用conda管理环境（Anaconda/Miniconda）：**
+使用conda管理环境（Anaconda/Miniconda）：
 ```
 
 ```bash
@@ -85,7 +85,7 @@ conda env remove -n myenv
 #### 1.2 虚拟环境高级用法
 
 ```
-**使用venv（Python 3.3+内置）：**
+使用venv（Python 3.3+内置）：
 ```
 
 ```bash
@@ -106,7 +106,7 @@ python3.11 -m venv venv
 ```
 
 ```
-**使用virtualenv（更灵活）：**
+使用virtualenv（更灵活）：
 ```
 
 ```bash
@@ -127,7 +127,7 @@ virtualenv --system-site-packages venv
 ```
 
 ```
-**使用pipenv（推荐，结合pip和virtualenv）：**
+使用pipenv（推荐，结合pip和virtualenv）：
 ```
 
 ```bash
@@ -156,7 +156,7 @@ pipenv install --dev
 #### 1.3 包管理优化
 
 ```
-**配置pip镜像源：**
+配置pip镜像源：
 ```
 
 ```bash
@@ -181,7 +181,7 @@ trusted-host = pypi.tuna.tsinghua.edu.cn
 ```
 
 ```
-**requirements.txt管理：**
+requirements.txt管理：
 ```
 
 ```txt
@@ -212,7 +212,7 @@ pip install --upgrade -r requirements.txt
 
 #### 2.1 虚拟环境优化
 
-**使用.venv目录（Python 3.12+）：**
+使用.venv目录（Python 3.12+）：
 
 ```bash
 # Python 3.12+支持.venv作为默认目录名
@@ -225,7 +225,7 @@ echo "3.11.5" > .python-version
 ```
 ```
 
-**使用poetry管理依赖（现代化方案）：**
+使用poetry管理依赖（现代化方案）：
 
 ```bash
 # 安装poetry
@@ -250,7 +250,7 @@ poetry export -f requirements.txt --output requirements.txt
 
 #### 2.2 IDE配置优化
 
-**VS Code Python配置：**
+VS Code Python配置：
 
 ```json
 ```
@@ -268,7 +268,7 @@ poetry export -f requirements.txt --output requirements.txt
 }
 ```
 
-**PyCharm配置：**
+PyCharm配置：
 
 1. File → Settings → Project → Python Interpreter
 2. 选择虚拟环境解释器
@@ -279,7 +279,7 @@ poetry export -f requirements.txt --output requirements.txt
 
 #### 3.1 项目结构设计
 
-**标准Python项目结构：**
+标准Python项目结构：
 
 ```
 project/
@@ -303,7 +303,7 @@ project/
 └── README.md
 ```
 
-**使用setuptools打包：**
+使用setuptools打包：
 
 ```python
 # setup.py
@@ -332,7 +332,7 @@ setup(
 
 #### 4.1 调试技巧
 
-**使用pdb调试器：**
+使用pdb调试器：
 
 ```python
 # 在代码中插入断点
@@ -349,7 +349,7 @@ breakpoint()
 python -m pdb script.py
 ```
 
-**使用ipdb（增强版pdb）：**
+使用ipdb（增强版pdb）：
 
 ```bash
 pip install ipdb
@@ -360,7 +360,7 @@ import ipdb; ipdb.set_trace()
 ```
 ```
 
-**使用VS Code调试：**
+使用VS Code调试：
 
 ```json
 ```
@@ -387,9 +387,9 @@ import ipdb; ipdb.set_trace()
 
 #### 4.2 问题排查
 
-**常见问题及解决方案：**
+常见问题及解决方案：
 
-1. **模块导入错误（ModuleNotFoundError）**
+1. 模块导入错误（ModuleNotFoundError）
    ```bash   # 检查Python路径
 ```python
    python -c "import sys; print('\n'.join(sys.path))"
@@ -401,7 +401,7 @@ import ipdb; ipdb.set_trace()
 ```
    ```
 
-2. **虚拟环境激活失败**
+2. 虚拟环境激活失败
    ```bash   # Windows PowerShell执行策略
    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
    
@@ -409,7 +409,7 @@ import ipdb; ipdb.set_trace()
    python -m venv --help
    ```
 
-3. **包安装失败**
+3. 包安装失败
    ```bash   # 升级pip
    python -m pip install --upgrade pip
    
@@ -420,7 +420,7 @@ import ipdb; ipdb.set_trace()
    pip cache purge
    ```
 
-4. **版本冲突**
+4. 版本冲突
    ```bash   # 查看已安装包
    pip list
    
@@ -431,7 +431,7 @@ import ipdb; ipdb.set_trace()
    pip check
    ```
 
-**性能分析工具：**
+性能分析工具：
 
 ```bash
 # 使用cProfile分析性能

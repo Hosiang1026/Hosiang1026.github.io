@@ -1,4 +1,4 @@
----
+﻿---
 title: MacOS操作系统安装
 categories: 操作系统安装指南系列
 tags:
@@ -21,13 +21,13 @@ top: 7
 #### 1.1 OpenCore引导配置
 
 ```
-**OpenCore vs Clover：**
+OpenCore vs Clover：
 ```
 
 OpenCore是新一代的黑苹果引导工具，相比Clover更加现代化和稳定。
 
 ```
-**OpenCore优势：**
+OpenCore优势：
 ```
 - 更接近原生macOS启动流程
 - 更好的安全性和稳定性
@@ -35,7 +35,7 @@ OpenCore是新一代的黑苹果引导工具，相比Clover更加现代化和稳
 - 更好的硬件兼容性
 
 ```
-**OpenCore配置文件结构：**
+OpenCore配置文件结构：
 ```
 
 ```plist
@@ -87,26 +87,26 @@ OpenCore是新一代的黑苹果引导工具，相比Clover更加现代化和稳
 #### 1.2 驱动（Kext）管理
 
 ```
-**常用驱动分类：**
+常用驱动分类：
 ```
 
-1. **必须驱动：**
-   - **Lilu.kext**: 驱动加载框架
-   - **WhateverGreen.kext**: 显卡驱动
-   - **AppleALC.kext**: 声卡驱动
-   - **VirtualSMC.kext**: 系统管理控制器
+1. 必须驱动：
+   - Lilu.kext: 驱动加载框架
+   - WhateverGreen.kext: 显卡驱动
+   - AppleALC.kext: 声卡驱动
+   - VirtualSMC.kext: 系统管理控制器
 
-2. **网络驱动：**
-   - **IntelMausi.kext**: Intel网卡
-   - **RealtekRTL8111.kext**: Realtek网卡
-   - **AtherosE2200Ethernet.kext**: Atheros网卡
+2. 网络驱动：
+   - IntelMausi.kext: Intel网卡
+   - RealtekRTL8111.kext: Realtek网卡
+   - AtherosE2200Ethernet.kext: Atheros网卡
 
-3. **USB驱动：**
-   - **USBInjectAll.kext**: USB端口注入
-   - **XHCI-unsupported.kext**: USB 3.0支持
+3. USB驱动：
+   - USBInjectAll.kext: USB端口注入
+   - XHCI-unsupported.kext: USB 3.0支持
 
 ```
-**驱动加载顺序：**
+驱动加载顺序：
 ```
 
 ```
@@ -120,23 +120,23 @@ OpenCore是新一代的黑苹果引导工具，相比Clover更加现代化和稳
 #### 1.3 ACPI补丁和SSDT
 
 ```
-**ACPI补丁类型：**
+ACPI补丁类型：
 ```
 
-1. **重命名补丁：**
+1. 重命名补丁：
    - 修复设备名称不匹配
    - 例如：EC0 → EC
 
-2. **禁用补丁：**
+2. 禁用补丁：
    - 禁用不兼容的设备
    - 例如：禁用独立显卡
 
-3. **修复补丁：**
+3. 修复补丁：
    - 修复ACPI错误
    - 例如：修复电源管理
 
 ```
-**SSDT（Secondary System Description Table）：**
+SSDT（Secondary System Description Table）：
 ```
 
 ```asl
@@ -171,7 +171,7 @@ DefinitionBlock ("", "SSDT", 2, "HACK", "EC", 0x00001000)
 #### 2.1 系统性能优化
 
 ```
-**CPU电源管理：**
+CPU电源管理：
 ```
 
 ```bash
@@ -184,7 +184,7 @@ sysctl -n hw.cpufrequency
 ```
 
 ```
-**内存优化：**
+内存优化：
 ```
 
 ```bash
@@ -196,7 +196,7 @@ sudo sysctl -w vm.swappiness=10
 ```
 
 ```
-**磁盘优化：**
+磁盘优化：
 ```
 
 ```bash
@@ -213,7 +213,7 @@ sudo diskutil repairPermissions /
 #### 2.2 引导优化
 
 ```
-**减少启动时间：**
+减少启动时间：
 ```
 
 ```plist
@@ -228,7 +228,7 @@ sudo diskutil repairPermissions /
 ```
 
 ```
-**优化内核加载：**
+优化内核加载：
 ```
 
 ```plist
@@ -252,7 +252,7 @@ sudo diskutil repairPermissions /
 #### 3.1 多系统引导配置
 
 ```
-**配置OpenCore多系统启动：**
+配置OpenCore多系统启动：
 ```
 
 ```plist
@@ -274,23 +274,23 @@ sudo diskutil repairPermissions /
 ```
 
 ```
-**Windows + macOS双系统：**
+Windows + macOS双系统：
 ```
 
-1. **分区方案：**
+1. 分区方案：
    - GPT分区表
    - Windows: NTFS分区
    - macOS: APFS分区
    - EFI: FAT32分区（共享）
 
-2. **引导顺序：**
+2. 引导顺序：
    - OpenCore作为主引导
    - 在OpenCore中选择Windows或macOS
 
 #### 3.2 配置文件管理
 
 ```
-**使用ProperTree编辑config.plist：**
+使用ProperTree编辑config.plist：
 ```
 
 ```bash
@@ -301,7 +301,7 @@ python3 ProperTree.command
 ```
 
 ```
-**配置文件验证：**
+配置文件验证：
 ```
 
 ```bash
@@ -319,7 +319,7 @@ python3 ProperTree.command
 #### 4.1 调试技巧
 
 ```
-**使用-v参数启动（详细模式）：**
+使用-v参数启动（详细模式）：
 ```
 
 ```plist
@@ -331,7 +331,7 @@ python3 ProperTree.command
 ```
 
 ```
-**查看启动日志：**
+查看启动日志：
 ```
 
 ```bash
@@ -346,7 +346,7 @@ log show --predicate 'process == "kernel"' --last boot
 ```
 
 ```
-**使用IORegistryExplorer：**
+使用IORegistryExplorer：
 ```
 
 1. 下载IORegistryExplorer
@@ -357,10 +357,10 @@ log show --predicate 'process == "kernel"' --last boot
 #### 4.2 问题排查
 
 ```
-**常见问题及解决方案：**
+常见问题及解决方案：
 ```
 
-1. **卡在Apple Logo**
+1. 卡在Apple Logo
    ```bash
    # 添加启动参数
    -v  # 详细模式
@@ -371,21 +371,21 @@ log show --predicate 'process == "kernel"' --last boot
    # 移除可能有问题的驱动
    ```
 
-2. **显卡无法驱动**
+2. 显卡无法驱动
    ```plist
    <!-- 检查WhateverGreen是否正确加载 -->
    <!-- 检查DeviceProperties中的显卡注入 -->
    <!-- 检查BIOS中的显卡设置 -->
    ```
 
-3. **声卡无法工作**
+3. 声卡无法工作
    ```bash
    # 检查AppleALC是否正确加载
    # 检查layout-id是否正确
    # 使用Hackintool查看音频设备
    ```
 
-4. **USB端口不工作**
+4. USB端口不工作
    ```bash
    # 使用USBInjectAll注入所有端口
    # 使用Hackintool映射USB端口
@@ -393,7 +393,7 @@ log show --predicate 'process == "kernel"' --last boot
    ```
 
 ```
-**使用Hackintool诊断：**
+使用Hackintool诊断：
 ```
 
 ```bash
@@ -406,7 +406,7 @@ log show --predicate 'process == "kernel"' --last boot
 ```
 
 ```
-**性能监控工具：**
+性能监控工具：
 ```
 
 ```bash

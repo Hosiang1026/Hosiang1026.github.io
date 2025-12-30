@@ -14,10 +14,10 @@ Dataway介绍 Dataway 是基于 DataQL 服务聚合能力，为应用提供的�
 <!-- more -->
 
                                                                                                                                                                                          
-### Dataway介绍
+### 一、Dataway介绍
  
  
-### 第一步：引入相关依赖
+### 二、第一步：引入相关依赖
  ```xml
 <dependency>
     <groupId>net.hasor</groupId>
@@ -29,7 +29,7 @@ Dataway介绍 Dataway 是基于 DataQL 服务聚合能力，为应用提供的�
 ```  
 hasor-spring 负责 Spring 和 Hasor 框架之间的整合。 hasor-dataway 是工作在 Hasor 之上，利用 hasor-spring 我们就可以使用 dataway了。 
  
-### 第二步：配置 Dataway，并初始化数据表
+### 三、第二步：配置 Dataway，并初始化数据表
 dataway 会提供一个界面让我们配置接口，这一点类似 Swagger 只要jar包集成就可以实现接口配置。找到我们 springboot 项目的配置文件 application.properties 
  ```java
   # 是否启用 Dataway 功能（必选：默认false）
@@ -87,7 +87,7 @@ CREATE TABLE `interface_release` (
 create index idx_interface_release on interface_release (pub_api_id);
   ```  
  
-### 第三步：配置数据源
+### 四、第三步：配置数据源
 作为 Spring Boot 项目有着自己完善的数据库方面工具支持。我们这次采用 druid + MySQL + spring-boot-starter-jdbc 的方式。 
 首先引入依赖 
 ```html
@@ -125,7 +125,7 @@ spring.datasource.druid.filter.stat.slow-sql-millis=1
   ```  
 如果项目已经集成了自己的数据源，那么可以忽略第三步。 
  
-### 第四步：把数据源设置到 Hasor 容器中
+### 五、第四步：把数据源设置到 Hasor 容器中
 Spring Boot 和 Hasor 本是两个独立的容器框架，我们做整合之后为了使用 Dataway 的能力需要把 Spring 中的数据源设置到 Hasor 中。 
 首先新建一个 Hasor 的 模块，并且将其交给 Spring 管理。然后把数据源通过 Spring 注入进来。 
   @DimModule
@@ -142,7 +142,7 @@ public class ExampleModule implements SpringModule {
   ```  
 Hasor 启动的时候会调用 loadModule 方法，在这里再把 DataSource 设置到 Hasor 中。 
  
-### 第五步：在SprintBoot 中启用 Hasor
+### 六、第五步：在SprintBoot 中启用 Hasor
 ```java
   @EnableHasor()
 @EnableHasorWeb()
@@ -155,7 +155,7 @@ public class ExampleApplication {
   ```  
 这一步非常简单，只需要在 Spring 启动类上增加两个注解即可。 
  
-### 第六步：启动应用
+### 七、第六步：启动应用
 应用在启动过程中会看到 Hasor Boot 的欢迎信息 
    _    _                        ____              _
 | |  | |                      |  _             | |
@@ -182,11 +182,11 @@ public class ExampleApplication {
   ```  
 当看到 “dataway API workAt /API/” 、 dataway admin workAt /interface-ui/ 信息时，就可以确定 Dataway 的配置已经生效了。 
  
-### 第七步：访问接口管理页面进行接口配置
+### 八、第七步：访问接口管理页面进行接口配置
 在浏览器中输入 “http://127.0.0.1:8080/interface-ui/” 就可以看到期待已久的界面了。 
 ![Test](https://oscimg.oschina.net/oscnet/up-aa9b52ddde3ce466cb08e4bbb7fe9183117.png  '绝了！Dataway让Spring Boot不再需要Controller-Service-DAO-Mapper') 
  
-### 第八步：新建一个接口
+### 九、第八步：新建一个接口
 Dataway 提供了2中语言模式，我们可以使用强大的 DataQL 查询语言，也可以直接使用 SQL 语言（在 Dataway 内部 SQL 语言也会被转换为 DataQL 的形式执行。） 
 首先我们在 SQL 模式下尝试执行一条 select 查询，立刻就可以看到这条 SQL 的查询结果。 
 同样的方式我们使用 DataQL 的方式需要这样写： 
@@ -204,7 +204,7 @@ return query()
 当接口写好之后就可以保存发布了，为了测试方便，我选用 GET 方式。 
 接口发布之后我们直接请求：http://127.0.0.1:8080/API/demos，就看到期待已久的接口返回值了。 
  
-### 最后总结
+### 十、最后总结
 经过上面的几个步骤我们介绍了如何基于 Spring Boot 项目使用 Dataway 来简单的配置接口。Dataway 的方式确实给人耳目一新，一个接口竟然可以如此简单的配置出来无需开发任何一行代码，也不需要做任何 Mapping 实体映射绑定。 
 后面会有更多 Dataway 的文章推出，大家在使用过程中遇到什么问题可以在评论区留言 
 最后放几个有用的连接： 

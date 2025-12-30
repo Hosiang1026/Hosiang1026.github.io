@@ -10,17 +10,15 @@ top: 183
 ---
 
 
-#### 背景
-与JavaScript语言不同的是，TypeScript使用的是静态类型，比如说它指定了变量可以保存的数据类型。
-
 <!-- more -->
 
-#### 背景
+### 一、TypeScript中string和String的区别
+#### 1.1 背景
 与JavaScript语言不同的是，TypeScript使用的是静态类型，比如说它指定了变量可以保存的数据类型。如下图所示，如果在JS中，指定变量可以保存的数据类型，会报错：“类型注释只可以在TS文件中被使用”： 
  
 TypeScript是JavaScript的超集（superset），TypeScript需要编译（语法转换）生成JavaScript才能被浏览器执行，它也区分了string和String这两个数据类型。通常来说，string表示原生类型，而String表示对象。 
  
-#### 原生string
+#### 1.3 原生string
 JavaScript在ES6标准里支持6种原生类型（number），string是其中之一。 
  
 原生的string是不包含属性的值（即没有properties），包括字面上没有定义类型、字面上定义了string、字面上定义了String和一些从string函数调用返回的strings也都可以被归为原生类型： 
@@ -29,13 +27,13 @@ JavaScript在ES6标准里支持6种原生类型（number），string是其中之
 以上三个变的类型（typeof()）是string。 
 ```
  
-#### 对象String
+#### 1.4 对象String
 ```javascript
 对象是不同属性的累积，一个对象可以调用许多相应的方法。 `let msg3: String = new String('Hello world!');` 这个变量msg3的类型就是object： `console.log(typeof(msg3)); // object` String对象支持的方法： 
 ```
  
  
-#### 代码对比
+#### 1.5 代码对比
 我们对下面4个变量进行类型的探索与比较： 
  
   
@@ -55,7 +53,7 @@ console.log(msg2 === msg3);  //false
   ``` 
   
  
-#### 为什么需要String对象
+#### 1.6 为什么需要String对象
 首先，当我们使用关键字new新建一个String对象的时候，TS会创建一个新的对象；即我们用new新建了两个String对象，即使内容相同，它们也是指向不同的内存。 
 举下面两个栗子： 
 1。当用a1,b1代表相同值的两个变量的时候，它们是相同的；而当用new新建两个对象的时候，即使值相同，它们也是不同的（下图会输出false, true）： 
@@ -80,7 +78,7 @@ console.log(obj.property); //输出为PaaS
   ``` 
   
  
-#### 两者区别总结
+#### 1.7 两者区别总结
  
  
  

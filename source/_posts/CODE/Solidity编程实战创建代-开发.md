@@ -1,4 +1,4 @@
----
+﻿---
 title: Solidity编程实战创建代
 categories: 区块链与以太坊开发系列
 tags:
@@ -20,14 +20,14 @@ top: 7
 
 ## 一、什么是代币
 
-### 1.1 基本概念
+### 一、1 基本概念
 
 代币（Token）是基于区块链发行的数字资产，可以代表价值、权益或功能。ERC20是以太坊上最常用的代币标准，定义了代币的基本接口和功能。
 
-### 1.2 代币的特点
+### 二、2 代币的特点
 
 ```
-**标准化**：
+标准化：
 ```
 - 遵循ERC20标准
 - 兼容各种钱包和交易所
@@ -35,7 +35,7 @@ top: 7
 - 易于集成
 
 ```
-**可编程**：
+可编程：
 ```
 - 自定义发行规则
 - 实现特殊功能
@@ -43,7 +43,7 @@ top: 7
 - 丰富的应用场景
 
 ```
-**去中心化**：
+去中心化：
 ```
 - 无需中心化机构
 - 自动执行规则
@@ -52,10 +52,10 @@ top: 7
 
 ## 二、ERC20标准
 
-### 2.1 标准接口
+### 三、1 标准接口
 
 ```
-**必需函数**：
+必需函数：
 ```
 ```solidity
 interface IERC20 {
@@ -66,22 +66,22 @@ interface IERC20 {
     function approve(address spender, uint256 amount) external returns (bool);
     function transferFrom(address from, address to, uint256 amount) external returns (bool);
 }
-`**标准事件**：`solidity
+`标准事件：`solidity
 event Transfer(address indexed from, address indexed to, uint256 value);
 event Approval(address indexed owner, address indexed spender, uint256 value);
 ```
 
-### 2.2 可选功能
+### 四、2 可选功能
 
 ```
-**元数据**：
+元数据：
 ```
 - name：代币名称
 - symbol：代币符号
 - decimals：小数位数
 
 ```
-**其他功能**：
+其他功能：
 ```
 - 增发/销毁
 - 暂停功能
@@ -90,10 +90,10 @@ event Approval(address indexed owner, address indexed spender, uint256 value);
 
 ## 三、如何实现代币
 
-### 3.1 基础实现
+### 五、1 基础实现
 
 ```
-**简单代币**：
+简单代币：
 pragma solidity ^0.8.0;
 ```
 
@@ -120,7 +120,7 @@ contract SimpleToken {
 ```javascript
     // 构造函数：初始化代币
     constructor(uint256 _initialSupply) {
-        totalSupply = _initialSupply * 10**decimals;
+        totalSupply = _initialSupply * 10decimals;
         // 将所有代币分配给部署者
         balances[msg.sender] = totalSupply;
         emit Transfer(address(0), msg.sender, totalSupply);
@@ -182,9 +182,9 @@ contract SimpleToken {
 
 ```
 
-### 3.2 完整实现
+### 六、2 完整实现
 
-**功能完整代币**：
+功能完整代币：
 contract MyToken {
     string public name;
     string public symbol;
@@ -292,10 +292,10 @@ contract MyToken {
 
 ## 四、如何使用代币
 
-### 4.1 部署代币
+### 七、1 部署代币
 
 ```
-**部署脚本**：
+部署脚本：
 ```
 ```javascript
 const MyToken = await ethers.getContractFactory("MyToken");
@@ -310,16 +310,16 @@ console.log("Token address:", token.address);
 
 ```
 
-### 4.2 转账操作
+### 八、2 转账操作
 
 ```
-**直接转账**：
+直接转账：
 await token.transfer(recipientAddress, ethers.utils.parseEther("100"));
 ```
 
 ```
 
-**授权转账**：
+授权转账：
 // 1. 授权：允许spender使用100个代币
 await token.approve(spenderAddress, ethers.utils.parseEther("100"));
 
@@ -328,14 +328,14 @@ await token.transferFrom(ownerAddress, recipientAddress, ethers.utils.parseEther
 
 ```
 
-### 4.3 查询信息
+### 九、3 查询信息
 
 ```javascript
-**查询余额**：
+查询余额：
 const balance = await token.balanceOf(userAddress);
 console.log("Balance:", ethers.utils.formatEther(balance), "MTK");
 ```
-`**查询授权**：```javascript
+`查询授权：```javascript
 ```javascript
 const allowance = await token.allowance(ownerAddress, spenderAddress);
 console.log("Allowance:", ethers.utils.formatEther(allowance), "MTK");
@@ -344,37 +344,37 @@ console.log("Allowance:", ethers.utils.formatEther(allowance), "MTK");
 
 ## 五、应用场景
 
-### 5.1 项目代币
+### 十、1 项目代币
 
-**ICO/IDO**：
+ICO/IDO：
 - 项目融资
 - 代币发行
 - 投资者分配
 - 团队激励
 
-**治理代币**：
+治理代币：
 - DAO治理
 - 投票权
 - 提案权
 - 收益分配
 
-### 5.2 功能代币
+### 十一、2 功能代币
 
-**游戏代币**：
+游戏代币：
 - 游戏内货币
 - 道具购买
 - 奖励发放
 - 交易系统
 
-**积分系统**：
+积分系统：
 - 用户积分
 - 奖励兑换
 - 等级系统
 - 会员权益
 
-### 5.3 稳定币
+### 十二、3 稳定币
 
-**锚定资产**：
+锚定资产：
 - 与法币锚定
 - 价格稳定
 - 支付工具
@@ -382,9 +382,9 @@ console.log("Allowance:", ethers.utils.formatEther(allowance), "MTK");
 
 ## 六、功能扩展
 
-### 6.1 税费机制
+### 十三、1 税费机制
 
-**交易税费**：
+交易税费**：
 uint256 public taxRate = 100; // 1%
 address public taxRecipient;
 
@@ -404,10 +404,10 @@ address public taxRecipient;
 
 ```
 
-### 6.2 锁仓机制
+### 十四、2 锁仓机制
 
 ```java
-**时间锁**：
+时间锁：
 mapping(address => uint256) public lockTime;
 mapping(address => uint256) public lockedAmount;
 ```
@@ -433,9 +433,9 @@ function unlock() public {
 
 ```
 
-### 6.3 销毁机制
+### 十五、3 销毁机制
 
-**自动销毁**：
+自动销毁：
 // 转账时自动销毁一部分代币
     uint256 burnAmount = amount / 100; // 1% 销毁
     uint256 transferAmount = amount - burnAmount;
@@ -450,17 +450,17 @@ function unlock() public {
 
 ## 七、最佳实践
 
-### 7.1 安全考虑
+### 十六、1 安全考虑
 
 ```
-**溢出保护**：
+溢出保护：
 ```
 - 使用0.8.0+版本
 - 自动检查溢出
 - 无需SafeMath
 
 ```java
-**重入保护**：
+重入保护：
 bool private locked;
 ```
 
@@ -478,9 +478,9 @@ modifier nonReentrant() {
 
 ```
 
-### 7.2 Gas优化
+### 十七、2 Gas优化
 
-**批量操作**：
+批量操作：
 // 批量转账：减少交易次数
 function batchTransfer(address[] memory recipients, uint256[] memory amounts) public {
     require(recipients.length == amounts.length, "Arrays length mismatch");
@@ -490,10 +490,10 @@ function batchTransfer(address[] memory recipients, uint256[] memory amounts) pu
 
 ```
 
-### 7.3 标准兼容
+### 十八、3 标准兼容
 
 ```
-**遵循ERC20**：
+遵循ERC20：
 ```
 - 实现所有必需函数
 - 发出标准事件
@@ -505,20 +505,20 @@ function batchTransfer(address[] memory recipients, uint256[] memory amounts) pu
 创建代币是掌握智能合约开发的重要实践。关键要点：
 
 ```
-**核心功能**：
+核心功能：
 ```
 - 转账功能
 - 授权机制
 - 余额查询
 
 ```
-**标准实现**：
+标准实现：
 ```
 - 实现必需函数
 - 兼容各种应用
 
 ```
-**功能扩展**：
+功能扩展：
 ```
 - 锁仓机制
 

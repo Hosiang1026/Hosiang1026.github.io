@@ -230,9 +230,9 @@ select sum(abs(price - (bid+ask)/2.0)*qty)/sum(price*qty) as cost from aj(trades
   `使用window join为每一个交易找到前10毫秒的报价，计算平均中间价作为交易成本的基准：```sql
 SELECT sum(abs(price - mid)*qty)/sum(price*qty) as cost from pwj(trades, quotes, -10:0, <avg((bid + ask)/2.0) as mid>,`date`sym`time) where date between dateRange group by sym;
   ``` 
-  
- 
-#### 2.4 SQL的其它扩展
+
+### 一、DolphinDB SQL扩展
+#### 1.1 SQL的其它扩展
 为满足大数据分析的要求，DolphinDB对SQL还做了很多其他扩展。这儿我们例举一些常用功能。 
  
  用户自定义的函数无需编译、打包和部署，即可在本节点或分布式环境的SQL中使用此函数。 

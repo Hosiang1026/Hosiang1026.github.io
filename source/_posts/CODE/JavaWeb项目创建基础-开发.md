@@ -1,4 +1,4 @@
----
+﻿---
 title: JavaWeb项目创建基础
 categories: Java开发全栈系列
 tags:
@@ -142,13 +142,13 @@ IntelliJ IDEA作为强大的Java开发IDE，其优秀的代码提示、丰富的
 ### 三、Servlet简单实现
 
 ```
-**Servlet运行原理：**
+Servlet运行原理：
 ```
 
 ![IntelliJ IDEA](/photo/album/image/java20180501022.png "Servlet运行原理")
 
 ```
-**项目结构：**
+项目结构：
 ```
 
 ![IntelliJ IDEA](/photo/album/image/java20180501023.png "项目结构")

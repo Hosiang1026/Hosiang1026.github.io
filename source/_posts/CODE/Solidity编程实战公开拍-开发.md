@@ -1,4 +1,4 @@
----
+﻿---
 title: Solidity编程实战公开拍
 categories: 区块链与以太坊开发系列
 tags:
@@ -19,14 +19,14 @@ top: 15
 
 ## 一、什么是公开拍卖
 
-### 1.1 基本概念
+### 一、1 基本概念
 
 公开拍卖是使用智能合约实现的去中心化拍卖系统，参与者可以出价竞拍物品，系统自动处理竞价、退款和结算。区块链的透明性和自动执行特性使其成为实现公平拍卖的理想平台。
 
-### 1.2 拍卖的特点
+### 二、2 拍卖的特点
 
 ```
-**透明性**：
+透明性：
 ```
 - 所有出价公开
 - 竞价历史可查
@@ -34,7 +34,7 @@ top: 15
 - 提高信任度
 
 ```
-**自动化**：
+自动化：
 ```
 - 自动处理竞价
 - 自动退款
@@ -42,7 +42,7 @@ top: 15
 - 减少人工干预
 
 ```
-**去中心化**：
+去中心化：
 ```
 - 无需中介机构
 - 降低交易成本
@@ -51,10 +51,10 @@ top: 15
 
 ## 二、如何设计拍卖系统
 
-### 2.1 核心功能
+### 三、1 核心功能
 
 ```
-**拍卖创建**：
+拍卖创建：
 ```
 - 设置拍卖物品
 - 设置起拍价
@@ -62,7 +62,7 @@ top: 15
 - 设置卖家地址
 
 ```
-**竞价功能**：
+竞价功能：
 ```
 - 接收出价
 - 验证出价有效性
@@ -70,17 +70,17 @@ top: 15
 - 更新最高出价
 
 ```
-**结束拍卖**：
+结束拍卖：
 ```
 - 判断拍卖结束
 - 处理最终结算
 - 退款未中标者
 - 转移物品所有权
 
-### 2.2 数据结构
+### 四、2 数据结构
 
 ```
-**拍卖结构**：
+拍卖结构：
 ```
 ```solidity
 struct Auction {
@@ -97,10 +97,10 @@ struct Auction {
 
 ## 三、如何实现拍卖系统
 
-### 3.1 基础实现
+### 五、1 基础实现
 
 ```
-**简单拍卖**：
+简单拍卖：
 pragma solidity ^0.8.0;
 ```
 
@@ -191,9 +191,9 @@ contract SimpleAuction {
 
 ```
 
-### 3.2 完整实现
+### 六、2 完整实现
 
-**功能完整拍卖**：
+功能完整拍卖：
 contract AuctionSystem {
         string itemDescription;
         address[] bidders;
@@ -307,10 +307,10 @@ contract AuctionSystem {
 
 ## 四、如何使用拍卖系统
 
-### 4.1 创建拍卖
+### 七、1 创建拍卖
 
 ```
-**部署和创建**：
+部署和创建：
 ```
 ```javascript
 const AuctionSystem = await ethers.getContractFactory("AuctionSystem");
@@ -327,10 +327,10 @@ await tx.wait();
 
 ```
 
-### 4.2 参与竞价
+### 八、2 参与竞价
 
 ```
-**出价**：
+出价：
 // 出价 2 ETH
 await auction.bid(0, { value: ethers.utils.parseEther("2.0") });
 ```
@@ -339,15 +339,15 @@ await auction.bid(0, { value: ethers.utils.parseEther("2.0") });
 // 出价 3 ETH（自动退款之前的2 ETH）
 await auction.bid(0, { value: ethers.utils.parseEther("3.0") });
 ```
-`**提取退款**：```javascript
+`提取退款：```javascript
 ```
 await auction.withdraw(0);
 ```
 ```
 
-### 4.3 结束拍卖
+### 九、3 结束拍卖
 
-**结束并结算**：
+结束并结算：
 // 等待拍卖结束
 await auction.endAuction(0);
 
@@ -358,10 +358,10 @@ await auction.endAuction(0);
 
 ## 五、应用场景
 
-### 5.1 NFT拍卖
+### 十、1 NFT拍卖
 
 ```
-**数字艺术品**：
+数字艺术品：
 ```
 - NFT拍卖
 - 限量版收藏
@@ -369,16 +369,16 @@ await auction.endAuction(0);
 - 版税分配
 
 ```
-**实际案例**：
+实际案例：
 ```
 - OpenSea拍卖
 - Foundation拍卖
 - SuperRare拍卖
 
-### 5.2 实物拍卖
+### 十一、2 实物拍卖
 
 ```
-**商品拍卖**：
+商品拍卖：
 ```
 - 二手商品
 - 收藏品
@@ -386,17 +386,17 @@ await auction.endAuction(0);
 - 特殊物品
 
 ```
-**供应链**：
+供应链：
 ```
 - 原材料拍卖
 - 库存处理
 - 批量采购
 - 反向拍卖
 
-### 5.3 服务拍卖
+### 十二、3 服务拍卖
 
 ```
-**服务竞标**：
+服务竞标：
 ```
 - 开发服务
 - 设计服务
@@ -405,10 +405,10 @@ await auction.endAuction(0);
 
 ## 六、功能扩展
 
-### 6.1 反向拍卖
+### 十三、1 反向拍卖
 
 ```java
-**最低价获胜**：
+最低价获胜：
 contract ReverseAuction {
     uint256 public lowestBid;
     address public lowestBidder;
@@ -429,9 +429,9 @@ contract ReverseAuction {
 
 ```
 
-### 6.2 密封投标
+### 十四、2 密封投标
 
-**隐藏出价**：
+隐藏出价：
 contract SealedBidAuction {
     mapping(address => bytes32) public sealedBids;
     uint256 public revealDeadline;
@@ -447,10 +447,10 @@ contract SealedBidAuction {
 
 ```
 
-### 6.3 荷兰式拍卖
+### 十五、3 荷兰式拍卖
 
 ```java
-**降价拍卖**：
+降价拍卖：
 contract DutchAuction {
     uint256 public currentPrice;
     uint256 public priceDecrement;
@@ -476,9 +476,9 @@ contract DutchAuction {
 
 ## 七、最佳实践
 
-### 7.1 安全考虑
+### 十六、1 安全考虑
 
-**重入保护**：
+重入保护：
 bool private locked;
 
 modifier nonReentrant() {
@@ -491,13 +491,13 @@ modifier nonReentrant() {
 function withdraw(uint256 auctionId) public nonReentrant {
     // 提取退款
 }
-`**时间验证**：`solidity
+`时间验证：`solidity
 ```
 
-### 7.2 Gas优化
+### 十七、2 Gas优化
 
 ```java
-**批量操作**：
+批量操作：
 function batchWithdraw(uint256[] memory auctionIds) public {
     for (uint256 i = 0; i < auctionIds.length; i++) {
         withdraw(auctionIds[i]);
@@ -506,9 +506,9 @@ function batchWithdraw(uint256[] memory auctionIds) public {
 
 ```
 
-### 7.3 用户体验
+### 十八、3 用户体验
 
-**清晰接口**：
+清晰接口：
 function getAuctionStatus(uint256 auctionId) 
     view 
         bool isActive,
@@ -531,14 +531,14 @@ function getAuctionStatus(uint256 auctionId)
 公开拍卖是展示智能合约复杂逻辑的优秀案例。关键要点：
 
 ```
-**核心功能**：
+核心功能：
 ```
 - 拍卖创建
 - 竞价机制
 - 结束结算
 
 ```
-**设计要点**：
+设计要点：
 ```
 - 防止重入攻击
 - 时间控制
@@ -546,7 +546,7 @@ function getAuctionStatus(uint256 auctionId)
 - 状态管理
 
 ```
-**应用场景**：
+应用场景：
 ```
 - 商品拍卖
 - 服务竞标

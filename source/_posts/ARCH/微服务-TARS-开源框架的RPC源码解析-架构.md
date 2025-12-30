@@ -16,10 +16,11 @@ top: 45
 
                                                                                                                                                                                         ![Test](https://oscimg.oschina.net/oscnet/up-3d1ed2aeead300bca91bfabe8de33b33978.JPEG  '微服务开源框架TARS的RPC源码解析 之 初识TARS C++服务端') 
 导语：微服务开源框架TARS的RPC调用包含客户端与服务端，《微服务开源框架TARS的RPC源码解析》系列文章将从初识客户端、客户端的同步及异步调用、初识服务端、服务端的工作流程四部分，以C++语言为载体，深入浅出地带你了解TARS RPC调用的原理。 
-#### 什么是TARS
+### 一、
+#### 1.1 什么是TARS
 TARS是腾讯使用十年的微服务开发框架，目前支持C++、Java、PHP、Node.js、Go语言。该开源项目为用户提供了涉及到开发、运维、以及测试的一整套微服务平台PaaS解决方案，帮助一个产品或者服务快速开发、部署、测试、上线。目前该框架应用在腾讯各大核心业务，基于该框架部署运行的服务节点规模达到数十万。 
 TARS的通信模型中包含客户端和服务端。客户端服务端之间主要是利用RPC进行通信。本系列文章分上下两篇，对RPC调用部分进行源码解析。本文是下篇，我们将以C++语言为载体，带大家了解一下TARS的服务端。 
-#### 初识服务端
+#### 1.2 初识服务端
 在使用TARS构建RPC服务端的时候，TARS会帮你生成一个XXXServer类，这个类是继承自Application类的，声明变量XXXServer g_app，以及调用函数：
 
 ```cpp
@@ -41,7 +42,7 @@ TC_EpollServer才是真正的服务端，如果把Application比作风扇，那�
 BindAdapter本身可以认为是一个服务的实例，能建立真实存在的监听socket并对外服务，与网络模块NetThread以及业务模块HandleGroup都有关联，例如，多个NetThread的第一个线程负责对BindAdapter的listen socket进行监听，有客户连接到BindAdapter的listen socket就随机在多个NetThread中选取一个，将连接放进被选中的NetThread的ConnectionList中。BindAdapter则通常会与一组HandleGroup进行关联，该HandleGroup里面的业务线程就执行BindAdapter对应的服务。可见，BindAdapter与网络模块以及业务模块都有所关联。 
 好了，介绍完这几个类之后，通过类图看看他们之间的关系： 
 服务端TC_EpollServer管理类图中左侧的网络模块与右侧的业务模块，前者负责建立与管理服务端的网络关系，后者负责执行服务端的业务代码，两者通过BindAdapter构成一个整体，对外进行RPC服务。 
-#### 初始化
+#### 1.3 初始化
 ```
 与客户端一样，服务端也需要进行初始化，来构建上面所说的整体，按照上面的介绍，可以将初始化分为两模块——网络模块的初始化与业务模块的初始化。初始化的所有代码在Application的void main()以及void waitForQuit()中，初始化包括屏蔽pipe信号，读取配置文件等，这些将忽略不讲，主要看看其如何通过epoll与建立listen socket来构建网络部分，以及如何设置业务线程组构建业务部分。 
 ```
@@ -519,7 +520,7 @@ ServantHandle::initialize()的主要作用是取得用户实现的RPC方法，�
 
   ```  
 Handle线程通过条件变量来让所有业务线程阻塞等待被唤醒 ，因为本章是介绍初始化，因此代码解读到这里先告一段落，稍后再详解服务端中的业务线程Handle被唤醒后，如何通过map<string, ServantPtr> ServantHandle:: _servants查找并执行业务。现在通过函数流程图复习一下上述的代码流程： 
-#### 服务端的工作
+#### 1.4 服务端的工作
 ```
 经过了初始化工作后，服务端就进入工作状态了，服务端的工作线程分为两类，正如前面所介绍的网络线程与业务线程，网络线程负责接受客户端的连接与收发数据，而业务线程则只关注执行用户所定义的PRC方法，两种线程在初始化的时候都已经执行start()启动了。 
 大部分服务器都是按照accept()->read()->write()->close()的流程执行的，大致工作流程图如下图所示： 

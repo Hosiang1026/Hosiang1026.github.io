@@ -13,7 +13,7 @@ Dubbo服务发布 Dubbo服务发布影响流程的主要包括三个部分，依
 <!-- more -->
 
                                                                                                                                                                                          
-### Dubbo服务发布
+### 一、Dubbo服务发布
 Dubbo服务发布影响流程的主要包括三个部分，依次是： 
  
  服务暴露 
@@ -22,7 +22,7 @@ Dubbo服务发布影响流程的主要包括三个部分，依次是：
  
 服务暴露是对外提供服务及暴露端口，以便消费端可以正常调通服务。心跳机制保证服务器端及客户端正常长连接的保持，服务注册是向注册中心注册服务暴露服务的过程。 
  
-#### Dubbo服务暴露
+#### 1.1 Dubbo服务暴露
 此处只记录主要代码部分以便能快速定位到主要的核心代码： 
 ServiceConfig.java中代码 
  ```java
@@ -584,7 +584,7 @@ protected void doOpen() throws Throwable {
 AbstractServer 接下来获取到从DataStore对象中获取之前缓存的线程池 ，设置 NettyServer的 executor属性。 
 自此，Dubbo服务暴露的代码解析完毕，NettyServer的类结构图如下： 
  
-#### 心跳服务
+#### 1.2 心跳服务
 Dubbo provider的心跳服务是 HeaderExchanger bind代码执行的最后一步：参数是上面生成的Server对象 (NettyServer)。 
   public HeaderExchangeServer(Server server) {
         throw new IllegalArgumentException("server == null");
@@ -620,7 +620,7 @@ Dubbo provider的心跳服务是 HeaderExchanger bind代码执行的最后一步
 接下来在DubboProtocol的openServer(URL) 方法中将创建的ExchangeServer对象放入 DubboProtocol的 serverMap 集合对象中  key为服务的ip:port 如 192.168.20.218:20880 value为之前创建的ExchangeServer对象 
 DubboProtocol export方法到此执行完毕，最终返回的是 DubboExporter对象包装了入参的invoker对象，serviceKey信息，及服务暴露的 exporterMap对象。 
  
-#### 服务注册
+#### 1.3 服务注册
 我们接着来看RegistryProtocol 接下来的执行代码： 
 
     //registry provider 添加定时任务  ping request response
@@ -853,6 +853,6 @@ protected void doRegister(URL url) {
   ```  
 4。由registryProviderUrl获取overrideSubscribeUrl 再构建OverrideListener   
  
-#### 赞赏支持
+#### 1.4 赞赏支持
   
   

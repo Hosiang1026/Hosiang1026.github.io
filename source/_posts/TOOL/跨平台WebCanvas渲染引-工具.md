@@ -20,7 +20,7 @@ top: 19
 ```
    
   
- ### 设计目标 
+### 一、设计目标
   
 ```
  标准化：Web Canvas标准主要指的是W3C的Canvas2D和WebGL。标准化的好处一方面是学习成本低，另一方面上层的游戏引擎也可以以很低的适配成本得到复用; 
@@ -34,10 +34,10 @@ top: 19
  可扩展: 从下文的Canvas分层设计上可以看到，每一层的技术选型都是多样化的，不同场景可能会选择不同的实现方案，因此架构上需要有一定的可扩展性，最好能够做到关键模块可插拔、可替换。 
    
   
- ### Canvas渲染引擎原理概览 
+### 二、Canvas渲染引擎原理概览
   
    
- ### ▐  工作原理 
+### 三、▐  工作原理
   
  ###   
 ```
@@ -52,7 +52,7 @@ top: 19
   ![Test](https://api.opics.org/api  '跨平台Web Canvas渲染引擎架构的设计与思考') 
   
    
- ### ▐  分层架构 
+### 四、▐  分层架构
    
  从业务形态上看，不管是小程序、小游戏还是其他容器，实现上都是相似的，如下图所示，通过JSBinding实现标准Canvas接口，开发者可以通过适配在上面跑web游戏引擎（laya、egret、threejs...），下边是JS引擎，这一层可以有不同的技术选型，如老牌的V8、JSC，后起之秀quickjs、hermes等等，在这之下就是Canvas核心实现了，这一层需要分别提供WebGL、Canvas2D的能力。WebGL较为简单，基本与OpenGLES接口一一对应，简单封装即可。 
    
@@ -65,7 +65,7 @@ top: 19
    
   
   
- ### JS Binding机制 
+### 五、JS Binding机制
   
    
 ```
@@ -119,7 +119,7 @@ v8::Persistent<v8::Context> context =
 ```
    
   
- ### 平台窗体抽象层设计 
+### 六、平台窗体抽象层设计
   
    
  要想做到跨平台，就需要设计一个抽象的平台胶水层，胶水层的职责是对下屏蔽各个平台间的实现差异，对上为Canvas提供统一的接口操作Surface，封装MakeCurrent、SwapBuffer等行为。实现上可以借鉴Flutter Engine，Flutter Engine的Shell模块对GL胶水层做了较好的封装，可以无缝接入到Android、iOS等主流平台，扩展到新平台比如鸿蒙OS也不在话下。 
@@ -167,12 +167,12 @@ v8::Persistent<v8::Context> context =
  具体如何选择需要分场景来看，以我们为例，我们这边同时支持在SurfaceView和TextureView中渲染，但是由于目前主要服务于淘宝小程序互动业务，而在小程序容器中，需要通过UC提供的WebView同层渲染技术将Canvas嵌入到WebView中，由于业务上需要同时支持全屏和非全屏互动，且需要支持各种CSS效果，因此只能选择EmbedSurface模式，而EmbedSurface不支持SurfaceView，因此我们选择的是TextureView。 
    
   
- ### 渲染管线 
+### 七、渲染管线
   
  Canvas渲染引擎的核心当然是染了，上层的互动业务的性能表现，很大程度取决于Canvas的渲染管线设计是否足够优秀。这一部分会分别讨论Canvas2D/WebGL的渲染管线技术选型及具体的方案设计。 
    
   
- ### ▐  Canvas2D Rendering Context 
+### 八、▐  Canvas2D Rendering Context
    
  基础能力 
    
@@ -252,7 +252,7 @@ v8::Persistent<v8::Context> context =
   
   
   
- ### ▐  WebGL Rendering Context 
+### 九、▐  WebGL Rendering Context
    
  WebGL实现比2D要简单的多，因为WebGL的API基本与OpenGLES一一对应，只需要对OpenGLES API简单进行封装即可。这里不再介绍OpenGL本身的渲染管线，而主要关注下WebGL Binding层的设计，从技术实现上主要分为单线程模型和双线程模型。 
    
@@ -273,7 +273,7 @@ v8::Persistent<v8::Context> context =
  最后再提一句，在chromium中，不仅实现了多线程的WebGL渲染模型，还支持了多进程Command Buffer的型，使用多进程模型可以有效屏蔽各种硬件兼容性问题，带来更好的稳定性。 
    
   
- ### ▐  离屏渲染 
+### 十、▐  离屏渲染
  离屏Canvas在Web中还是个实验特性，不过因为其实用性，目前主流的小游戏/小程序容器基本都实现了。使用到离屏Canvas的主要是2D的 drawImage 接口以及WebGL的 texImage2D/texSubImage2D 接口，WebGL通常会使用离屏Canvas渲染文本或者做一些游戏场景的预热等等。 
    
  离屏渲染通常会使用PBuffer或者FBO来实现： 
@@ -294,7 +294,7 @@ v8::Persistent<v8::Context> context =
   
   
   
- ### 帧同步机制 
+### 十一、帧同步机制
   
 ```
  所谓帧同步指的是游戏渲染循环与操作系统的显示子系统(在Android平台即为SurfaceFlinger)和底层硬件之间的同步。众所周知，在GPU加速模式下，我们在屏幕上看到的游戏或者动画需要先在CPU上完成游戏逻辑的运算，然后生成一系列渲染指令，再交由GPU进行渲染，GPU的渲染结果写入FrameBuffer，最终会由显示设备刷新到屏幕。 
@@ -360,13 +360,13 @@ v8::Persistent<v8::Context> context =
  以上可见，在游戏等重渲染场景，SurfaceView是比TextureView更好的选择，另外，分析卡顿往往需要对整个系统的底层机制有较深了解才能顺利解决问题，这对开发者也提出了更高的要求。 
    
   
- ### 调试 
+### 十二、调试
   
  最后讨论下调试的话题。对于Canvas渲染引擎，传统的调试方法如日志、断点调试、systrace对于问题诊断依然十分有用。不过由于引擎会用到Java/OC/C++/JS等语言，调试的链路大大延长，开发者需要根据经验或者对问题的分析进行针对性的调试，有一定的难度。除了使用上面几种方式调试之外，还可以使用一些GPU调试工具辅助，下面简要介绍下。 
    
   
 ```
- ### ▐  Gapid(Graphic API Debugger) 
+### 十三、▐  Gapid(Graphic API Debugger)
 ```
    
 ```
@@ -375,7 +375,7 @@ v8::Persistent<v8::Context> context =
   
   
    
- ### ▐  Snapdragon Profiler 
+### 十四、▐  Snapdragon Profiler
    
  Snapdragon Profiler是高通开发一款GPU调试工具，使用了高通芯片的设备应该都能使用。这个工具也提供了类似的GPU Profiler的工具，可以抓帧分析，不过个人觉得没有gapid好用。除此之外，snapdragon还提供了实时性能分析的功能，可以查看CPU、GPU、网络、FPS、电量等等全方位的性能数据，比Android Studio更强大。有兴趣的同学可以研究下。 
   
@@ -383,7 +383,7 @@ v8::Persistent<v8::Context> context =
   
   
   
- ### 总结 
+### 十五、总结
   
  以上基本讲清楚了如何实现一个跨平台Canvas引擎，然而这还只是第一步，还有更多的挑战在前面，比如Canvas与容器层的研发链路、生产链路如何协同? 如何保障线上功能的稳定性？如何管控内存使用？如何优化启动速度等等。另外，对于复杂游戏来说，游戏引擎的使用必不可少，游戏引擎使用Canvas作为渲染接口并不是性能最佳的方案，如果可以将游戏引擎中的通用逻辑下沉，提供更高阶API，势必会对性能带来更大的提升。 
  https://developer.aliyun.com/article/783275?utm_content=g_1000258838 

@@ -18,17 +18,19 @@ top: 5
                                                                                                                     
 KubeVela 目前已经支持了 AWS、Azure、GCP、阿里云、腾讯云、百度云、UCloud 等云厂商，也提供了简单快捷的命令行工具[1]引入云服务商的云资源，但是在 KubeVela 里一个一个地支持云服务商的云资源不利于快速满足用户对于云资源的需求，本文提供了一个方案，用不到 100 行代码快速引入 AWS 前 50 最受欢迎的云资源。 
 同时，我们也期望用户受到本文的启发，贡献其他云服务商的云资源。 
-#### AWS 最受欢迎的云资源在哪里
+
+### 一、KubeVela快速引入AWS云资源
+#### 1.1 AWS 最受欢迎的云资源在哪里
 ```
 Terraform 官网提供了各个云服务商的 Terraform modules，比如 AWS 的云资源 Terraform modules[2]。其中，云资源按照受欢迎的使用程度（下载量）排序，比如 AWS VPC 下载量为 1870 万次。 
 ```
 通过简单分析，我们发现 AWS 前 50 Terraform modules 的数据可以通过请求 https://registry.terraform.io/v2/modules?filter%5Bprovider%5D=aws&include=latest-version&page%5Bsize%5D=50&page%5Bnumber%5D=1 获取。 
-#### 开始之前
+#### 1.2 开始之前
 代码接受两个用户传入参数： • provider 的名称 • 该 provider 对应的 Terraform Modules 的 URL 
 ```
 对于 AWS 来说，Provider名称为 “aws”，对应的 Terraform modules 为 Terraform Modules json 格式接口[3]（即在 Terraform Registry[4]中搜索 provider 为 aws 时最受欢迎的 50 种云资源）。 在执行代码之前需要确认 providerName(aws) 和 Modules 链接无误。 
 ```
-#### 执行代码
+#### 1.3 执行代码
 那么你就可以通过以下 100 行左右的代码（文件名 gen.go）来批量地快速引入 AWS 最受欢迎的前 50 种云资源。 
  
  ```bash
@@ -139,7 +141,7 @@ go run gen.go aws "https://registry.terraform.io/v2/modules?filter%5Bprovider%5D
 
   ``` 
   
-#### 代码简要说明
+#### 1.4 代码简要说明
 ##### 解析云资源数据
 访问用户传入的 URL，将返回的 json 数据解析为 Go 中的结构体。 
 资源对应的 json 格式如下： 
@@ -237,12 +239,12 @@ yamlFileName}
 ```
 • yamlFileName：terraform-{providerName}-{Module.Attributes.Name}.yaml 
 ```
-#### 你也来试试
+#### 1.5 你也来试试
 还有不少云服务商也提供了丰富的 Terraform modules，比如 
 GCP： https://registry.terraform.io/namespaces/terraform-google-modules 
 阿里云： https://registry.terraform.io/namespaces/terraform-alicloud-modules 
 你要不要也为 KubeVela 引入你正在使用的、或喜欢的云服务商的云资源？ 
-#### 相关链接
+#### 1.6 相关链接
 ```
 [1] 简单快捷的命令行工具 
 ```

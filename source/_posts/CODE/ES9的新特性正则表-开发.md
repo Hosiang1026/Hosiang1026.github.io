@@ -13,11 +13,11 @@ top: 99
 <!-- more -->
 
                                                                                                                                                                                          
-### 简介
+### 一、简介
 正则表达式是我们做数据匹配的时候常用的一种工具，虽然正则表达式的语法并不复杂，但是如果多种语法组合起来会给人一种无从下手的感觉。 
 于是正则表达式成了程序员的噩梦。今天我们来看一下如何在ES9中玩转正则表达式。 
  
-### Numbered capture groups
+### 二、Numbered capture groups
 我们知道正则表达式可以分组，分组是用括号来表示的，如果想要获取到分组的值，那么就叫做capture groups。 
 通常来说，我们是通过序号来访问capture groups的，这叫做Numbered capture groups。 
 举个例子： 
@@ -56,7 +56,7 @@ const day = matchObj[3]; // 31
  
 可以看到matchObj是一个数组，index 0存储的是要匹配的字符串。这里我们看到matchObj还有一个groups是undefined，这个groups就是命名groups。 
  
-### Named capture groups
+### 三、Named capture groups
 上面讲到了numbered capture groups是通过序列号来访问到匹配的数据。但是匹配到的group是没有名字的。 
 我们看下怎么才能够给这些groups起个名字： 
  
@@ -124,7 +124,7 @@ console.log('1999-12-31'.replace(
 input 是整个的输入。{year, month, day} 匹配的是named groups。 
 ```
  
-### RegExp中Unicode属性的转义
+### 四、RegExp中Unicode属性的转义
 在Unicode标准中，每一个字符都有属性，简单点说属性就是用来描述这个字符的。 
 ```
 比如说General_Category表示的是字符的分类： x: General_Category = Lowercase_Letter 
@@ -162,7 +162,7 @@ true
  , 后面跟的是属性值。 
 注意，我们还要在正则表达式后面加上u，以表示使用的是Unicode属性转义。 
  
-### lookaround assertion
+### 五、lookaround assertion
 lookaround assertion可以被翻译为环视断言，它是正则表达式中的一种结构，用来判断要匹配的对象的前后环境是什么样的。 
 有两种lookaround assertion，一种是Lookahead一种是Lookbehind。 
 我们先看一下Lookahead的使用： 
@@ -230,7 +230,7 @@ Lookbehind和Lookahead查的方向刚刚相反。
   ``` 
   
  
-### dotAll flag
+### 六、dotAll flag
 正常情况下dot . 代表的是一个字符，但是这个字符不能够代表行的结束符： 
  
   
@@ -257,7 +257,7 @@ true
  U+2029 PARAGRAPH SEPARATOR 
  
  
-### 总结
+### 七、总结
 以上就是ES9中引入的正则表达式RegExp的新特性了，希望大家能够喜欢。 
 
                                         

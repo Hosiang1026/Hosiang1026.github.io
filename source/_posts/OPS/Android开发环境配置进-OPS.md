@@ -1,4 +1,4 @@
----
+﻿---
 title: Android开发环境配置进
 categories: 开发环境配置全攻略系列
 tags:
@@ -22,7 +22,7 @@ top: 8
 Android Studio使用Gradle作为构建系统，掌握Gradle的高级配置可以显著提升开发效率。Gradle是一个基于Groovy/Kotlin DSL的构建工具，支持增量构建、并行构建和构建缓存等高级特性。
 
 ```
-**Gradle配置文件结构：**
+Gradle配置文件结构：
 ```
 
 ```gradle
@@ -115,7 +115,7 @@ dependencies {
 ```
 
 ```
-**多模块项目配置：**
+多模块项目配置：
 ```
 
 ```gradle
@@ -155,7 +155,7 @@ dependencies {
 #### 1.2 依赖管理最佳实践
 
 ```
-**依赖配置类型详解：**
+依赖配置类型详解：
 ```
 
 ```gradle
@@ -185,7 +185,7 @@ dependencies {
 ```
 
 ```
-**依赖版本管理策略：**
+依赖版本管理策略：
 ```
 
 ```gradle
@@ -225,7 +225,7 @@ dependencies {
 ```
 
 ```
-**依赖冲突解决：**
+依赖冲突解决：
 ```
 
 ```gradle
@@ -279,7 +279,7 @@ android {
 #### 2.1 构建速度优化
 
 ```
-**启用构建缓存：**
+启用构建缓存：
 ```
 
 ```gradle
@@ -292,7 +292,7 @@ org.gradle.jvmargs=-Xmx4096m -XX:MaxPermSize=512m
 ```
 
 ```
-**使用KSP替代KAPT（Kotlin项目）：**
+使用KSP替代KAPT（Kotlin项目）：
 ```
 
 ```gradle
@@ -308,7 +308,7 @@ dependencies {
 #### 2.2 应用性能优化配置
 
 ```
-**启用R8代码压缩：**
+启用R8代码压缩：
 ```
 
 ```gradle
@@ -324,7 +324,7 @@ android {
 ```
 
 ```
-**配置ProGuard规则：**
+配置ProGuard规则：
 ```
 
 ```proguard
@@ -340,7 +340,7 @@ android {
 #### 3.1 现代Android架构组件
 
 ```
-**MVVM架构模式：**
+MVVM架构模式：
 ```
 
 ```kotlin
@@ -370,7 +370,7 @@ class DataRepository {
 #### 3.2 依赖注入配置
 
 ```
-**使用Hilt（推荐）：**
+使用Hilt（推荐）：
 ```
 
 ```kotlin
@@ -390,7 +390,7 @@ class MainActivity : AppCompatActivity() {
 #### 4.1 调试技巧
 
 ```
-**使用Android Profiler：**
+使用Android Profiler：
 ```
 
 - CPU Profiler：分析CPU使用情况
@@ -398,7 +398,7 @@ class MainActivity : AppCompatActivity() {
 - Network Profiler：监控网络请求
 
 ```
-**Logcat高级过滤：**
+Logcat高级过滤：
 ```
 
 ```bash
@@ -415,25 +415,25 @@ adb logcat > log.txt
 #### 4.2 问题排查
 
 ```
-**常见问题及解决方案：**
+常见问题及解决方案：
 ```
 
-1. **Gradle同步失败**
+1. Gradle同步失败
    - 检查网络连接和代理设置
    - 清理Gradle缓存：`./gradlew clean`
    - 删除`.gradle`和`build`目录
 
-2. **内存溢出（OOM）**
+2. 内存溢出（OOM）
    - 使用LeakCanary检测内存泄漏
    - 优化图片加载（使用Glide/Picasso）
    - 检查Activity/Fragment生命周期
 
-3. **构建变体混淆问题**
+3. 构建变体混淆问题
    - 检查ProGuard规则
    - 使用`-keep`规则保护需要的类
    - 测试Release版本确保功能正常
 
-4. **依赖冲突**
+4. 依赖冲突
    ```bash
    ./gradlew :app:dependencies > dependencies.txt
    ```

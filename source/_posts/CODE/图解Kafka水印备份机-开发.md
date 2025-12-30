@@ -10,8 +10,10 @@ top: 1
 高可用是很多分布式系统中必备的特征之一，Kafka 日志的高可用是通过基于 leader-follower 的多副本同步实现的，每个分区下有多个副本，其中只有一个是 leader 副本，提供发送和消费消息，其。..
 <!-- more -->
 
-                                                                                                                                                                                        高可用是很多分布式系统中必备的特征之一，Kafka 日志的高可用是通过基于 leader-follower 的多副本同步实现的，每个分区下有多个副本，其中只有一个是 leader 副本，提供发送和消费消息，其余都是 follower 副本，不断地发送 fetch 请求给 leader 副本以同步消息，如果 leader 在整个集群运行过程中不发生故障，follower 副本不会起到任何作用，问题就在于任何系统都不能保证其稳定运行，当 leader 副本所在的 broker 崩溃之后，其中一个 follower 副本就会成为该分区下新的 leader 副本，那么问题来了，在选为新的 leader 副本时，会导致消息丢失或者离散吗？Kafka 是如何解决 leader 副本变更时消息不会出错？以及 leader 与 follower 副本之间的数据同步是如何进行的？带着这几个问题，我们接着往下看，一起揭开 Kafka 水印备份的神秘面纱。 
-#### 水印相关概念
+高可用是很多分布式系统中必备的特征之一，Kafka 日志的高可用是通过基于 leader-follower 的多副本同步实现的，每个分区下有多个副本，其中只有一个是 leader 副本，提供发送和消费消息，其余都是 follower 副本，不断地发送 fetch 请求给 leader 副本以同步消息，如果 leader 在整个集群运行过程中不发生故障，follower 副本不会起到任何作用，问题就在于任何系统都不能保证其稳定运行，当 leader 副本所在的 broker 崩溃之后，其中一个 follower 副本就会成为该分区下新的 leader 副本，那么问题来了，在选为新的 leader 副本时，会导致消息丢失或者离散吗？Kafka 是如何解决 leader 副本变更时消息不会出错？以及 leader 与 follower 副本之间的数据同步是如何进行的？带着这几个问题，我们接着往下看，一起揭开 Kafka 水印备份的神秘面纱。 
+
+### 一、Kafka水印备份机制
+#### 1.1 水印相关概念
 在讲解水印备份之前，我们必须要先搞清楚几个关键的术语以及它们的含义，下面我用一张图来示意 Kafka 分区副本的位移信息： 
 ![Test](https://oscimg.oschina.net/oscnet/up-ab359ed75935540d12d06b9ec95b328e95f.png  '图解 Kafka 水印备份机制') 
 如上图所示，绿色部分表示已完全备份的消息，对消费者可见，紫色部分表示未完全备份的消息，对消费者不可见。 
@@ -43,7 +45,7 @@ follower HW 更新机制：
  
  follower 更新 HW 发生在其更新 LEO 之后，每次 follower Fetch 响应体都会包含 leader 的 HW 值，然后比较当前 LEO 值，取最小的作为新的 HW 值。 
  
-#### 图解水印备份过程
+#### 1.2 图解水印备份过程
 ```
 在了解了 Kafka 水印备份机制的相关概念之后，下面我用图来帮大家更好地理解 Kafka 的水印备份过程，假设某个分区有两个副本，min.insync.replica=1： 
 ```
@@ -53,7 +55,7 @@ Step 2：生产者发送了消息 m1 到分区 leader 副本，写入该条消�
 ```
 Step 3：follower 发送 fetch 请求，携带当前最新的 offset = 0，leader 处理 fetch 请求时，更新 remote LEO = 0，对比 LEO 值最小为 0，所以 HW = 0，leader 副本响应消息数据及 leader HW = 0 给 follower，follower 写入消息后，更新 LEO 值，同时对比 leader HW 值，取最小的作为新的 HW 值，此时 follower HW = 0，这也意味着，follower HW 是不会超过 leader HW 值的。 
 Step 4：follower 发送第二轮 fetch 请求，携带当前最新的 offset = 1，leader 处理 fetch 请求时，更新 remote LEO = 1，对比 LEO 值最小为 1，所以 HW = 1，此时 leader 没有新的消息数据，所以直接返回 leader HW = 1 给 follower，follower 对比当前最新的 LEO 值 与 leader HW 值，取最小的作为新的 HW 值，此时 follower HW = 1。 
-#### 基于水印备份机制的一些缺陷
+#### 1.3 基于水印备份机制的一些缺陷
 从以上步骤可看出，leader 中保存的 remote LEO 值的更新总是需要额外一轮 fetch RPC 请求才能完成，这意味着在 leader 切换过程中，会存在数据丢失以及数据不一致的问题，下面我用图来说明存在的问题： 
  
  数据丢失 
@@ -74,7 +76,7 @@ Step 4：follower 发送第二轮 fetch 请求，携带当前最新的 offset = 
  B 消息写入到 pagecache，但尚未 flush 到磁盘。 
  
 分区有两个副本，其中 A 为 Leader 副本，B 为 follower 副本，A 已经写入两条消息，且 HW 更新到 2，B 只写了 1条消息，HW 为 1，此时 A 和 B 同时宕机，B 先重启，B 成为了 leader 副本，这时生产者发送了一条消息，保存到 B 中，由于此时分区只有 B，B 在写入消息时把 HW 更新到 2，就在这时候 A 重新启动，发现 leader HW 为 2，跟自己的 HW 一样，因此没有执行日志截断，这就造成了 A 的 offset=1 的日志与 B 的 offset=1 的日志不一样的现象。 
-#### leader epoch
+#### 1.4 leader epoch
 为了解决 HW 更新时机是异步延迟的，而 HW 又是决定日志是否备份成功的标志，从而造成数据丢失和数据不一致的现象，Kafka 引入了 leader epoch 机制，在每个副本日志目录下都创建一个 leader-epoch-checkpoint 文件，用于保存 leader 的 epoch 信息，如下，leader epoch 长这样： 
 ```
 它的格式为 (epoch offset)，epoch指的是 leader 版本，它是一个单调递增的一个正整数值，每次 leader 变更，epoch 版本都会 +1，offset 是每一代 leader 写入的第一条消息的位移值，比如： 
@@ -103,5 +105,5 @@ leader epoch 具体的工作机制如下：
 如上图所示，A 重启之后，发送 LeaderEpochRequest 请求给 B，由于 B 还没追加消息，此时 epoch = request epoch = 0，因此返回 LastOffset = leader LEO = 2 给 A，A 拿到 LastOffset 之后，发现等于当前 LEO 值，故不用进行日志截断。就在这时 B 宕机了，A 成为 leader，在 B 启动回来后，会重复 A 的动作，同样不需要进行日志截断，数据没有丢失。 
 （2）解决数据不一致/离散 
 如上图所示，A 和 B 同时宕机后，B 先重启回来成为分区 leader，这时候生产者发送了一条消息过来，leader epoch 更新到 1，此时 A 启动回来后，发送 LeaderEpochRequest（follower epoch = 0） 给 B，B 判断 follower epoch 不等于 最新的 epoch，于是找到大于 follower epoch 最小的 epoch = 1，即 LastOffset = epoch start offset = 1，A 拿到 LastOffset 后，判断小于当前 LEO 值，于是从 LastOffset 位置进行日志截断，接着开始发送 fetch 请求给 B 开始同步消息，避免了消息不一致/离散的问题。 
-张乘辉，目前就职于中通科技信息中心技术平台部，主要负责中通消息平台与全链路压测项目的研发，热爱分享技术，技术博客（https://objcoding.com/）博主，Seata Contributor，GitHub ID：objcoding。 
+
                                         

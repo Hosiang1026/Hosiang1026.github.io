@@ -1,4 +1,4 @@
----
+﻿---
 title: iOS开发环境配置进
 categories: 开发环境配置全攻略系列
 tags:
@@ -19,7 +19,7 @@ top: 11
 #### 1.1 CocoaPods依赖管理
 
 ```
-**安装CocoaPods：**
+安装CocoaPods：
 ```
 
 ```bash
@@ -34,7 +34,7 @@ pod repo update
 ```
 
 ```
-**使用CocoaPods：**
+使用CocoaPods：
 ```
 
 ```bash
@@ -63,7 +63,7 @@ pod search Alamofire
 ```
 
 ```
-**重要提示：** 使用CocoaPods后，需要使用`.xcworkspace`文件打开项目，而不是`.xcodeproj`。
+重要提示： 使用CocoaPods后，需要使用`.xcworkspace`文件打开项目，而不是`.xcodeproj`。
 ```
 
 ```
@@ -71,7 +71,7 @@ pod search Alamofire
 ```
 
 ```
-**在Xcode中使用SPM：**
+在Xcode中使用SPM：
 ```
 
 1. File → Add Packages...
@@ -80,7 +80,7 @@ pod search Alamofire
 4. 点击Add Package
 
 ```
-**使用Package.swift（命令行）：**
+使用Package.swift（命令行）：
 ```
 
 ```swift
@@ -107,7 +107,7 @@ let package = Package(
 #### 1.3 Carthage依赖管理
 
 ```
-**安装和使用Carthage：**
+安装和使用Carthage：
 ```
 
 ```bash
@@ -127,7 +127,7 @@ carthage build --platform iOS
 ```
 
 ```
-**在Xcode中链接框架：**
+在Xcode中链接框架：
 ```
 
 1. 将`Carthage/Build/iOS`中的框架拖到项目
@@ -139,23 +139,23 @@ carthage build --platform iOS
 #### 2.1 Xcode构建优化
 
 ```
-**Build Settings优化：**
+Build Settings优化：
 ```
 
-1. **编译优化：**
+1. 编译优化：
    - Debug: `-Onone`（快速编译）
    - Release: `-O`（优化代码）
 
-2. **并行编译：**
+2. 并行编译：
    - Build Settings → Build Options
    - 启用"Parallelize Build"
 
-3. **增量编译：**
+3. 增量编译：
    - 使用模块化架构
    - 合理使用`@import`替代`#import`
 
 ```
-**DerivedData清理：**
+DerivedData清理：
 ```
 
 ```bash
@@ -169,7 +169,7 @@ rm -rf ~/Library/Developer/Xcode/DerivedData
 #### 2.2 模拟器优化
 
 ```
-**模拟器性能优化：**
+模拟器性能优化：
 ```
 
 ```bash
@@ -188,7 +188,7 @@ open -a Simulator
 ```
 
 ```
-**模拟器设置优化：**
+模拟器设置优化：
 ```
 - 关闭不必要的动画效果
 - 减少模拟器分辨率
@@ -197,7 +197,7 @@ open -a Simulator
 #### 2.3 代码签名优化
 
 ```
-**自动管理签名：**
+自动管理签名：
 ```
 
 1. 在项目设置中启用"Automatically manage signing"
@@ -205,7 +205,7 @@ open -a Simulator
 3. Xcode会自动处理证书和配置文件
 
 ```
-**手动管理签名（高级）：**
+手动管理签名（高级）：
 ```
 
 ```bash
@@ -224,7 +224,7 @@ codesign -vv --deep --strict /path/to/app
 #### 3.1 项目结构设计
 
 ```
-**标准iOS项目结构：**
+标准iOS项目结构：
 ```
 
 ```
@@ -260,7 +260,7 @@ MyApp/
 #### 3.2 架构模式
 
 ```
-**MVVM架构示例：**
+MVVM架构示例：
 ```
 
 ```swift
@@ -301,7 +301,7 @@ class HomeViewController: UIViewController {
 #### 4.1 调试技巧
 
 ```
-**使用LLDB调试器：**
+使用LLDB调试器：
 ```
 
 ```bash
@@ -323,20 +323,20 @@ continue
 ```
 
 ```
-**使用Instruments进行性能分析：**
+使用Instruments进行性能分析：
 ```
 
 ```
 1. Product → Profile (Cmd + I)
 ```
 2. 选择分析工具：
-   - **Time Profiler**: CPU性能分析
-   - **Allocations**: 内存分配分析
-   - **Leaks**: 内存泄漏检测
-   - **Network**: 网络请求分析
+   - Time Profiler: CPU性能分析
+   - Allocations: 内存分配分析
+   - Leaks: 内存泄漏检测
+   - Network: 网络请求分析
 
 ```
-**使用断点和日志：**
+使用断点和日志：
 ```
 
 ```swift
@@ -354,10 +354,10 @@ debugPrint(variable)  // 更详细的输出
 #### 4.2 问题排查
 
 ```
-**常见问题及解决方案：**
+常见问题及解决方案：
 ```
 
-1. **证书和配置文件问题**
+1. 证书和配置文件问题
    ```bash
    # 清理证书
    rm -rf ~/Library/MobileDevice/Provisioning\ Profiles/*
@@ -366,7 +366,7 @@ debugPrint(variable)  // 更详细的输出
    # Xcode → Preferences → Accounts → Download Manual Profiles
    ```
 
-2. **构建失败 - 找不到模块**
+2. 构建失败 - 找不到模块
    ```bash
    # 清理构建
    Product → Clean Build Folder
@@ -376,7 +376,7 @@ debugPrint(variable)  // 更详细的输出
    rm -rf ~/Library/Developer/Xcode/DerivedData
    ```
 
-3. **模拟器无法启动**
+3. 模拟器无法启动
    ```bash
    # 重置模拟器
    xcrun simctl shutdown all
@@ -386,7 +386,7 @@ debugPrint(variable)  // 更详细的输出
    sudo killall -9 com.apple.CoreSimulator.CoreSimulatorService
    ```
 
-4. **CocoaPods安装失败**
+4. CocoaPods安装失败
    ```bash
    # 更新Ruby和gem
    sudo gem update --system
@@ -398,7 +398,7 @@ debugPrint(variable)  // 更详细的输出
    ```
 
 ```
-**性能问题排查：**
+性能问题排查：
 ```
 
 ```swift

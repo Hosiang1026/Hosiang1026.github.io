@@ -1,4 +1,4 @@
----
+﻿---
 title: SpringCloudGateway实战之五内
 categories: Spring生态体系系列
 tags:
@@ -40,7 +40,7 @@ spring:
         - id: path_route
           uri: http://127.0.0.1:8082
           predicates:
-            - Path=/hello/**
+            - Path=/hello/
           filters:
             - AddRequestHeader=x-request-foo, bar-config
 
@@ -53,7 +53,7 @@ spring:
             {
                 "name": "Path",
                 "args": {
-                    "pattern": "/hello/**"
+                    "pattern": "/hello/"
                 }
         ],
         "filters": [
@@ -164,7 +164,7 @@ spring:
       - id: ingredients
 ```
         uri: lb://ingredients
-        - Path=//ingredients/**
+        - Path=//ingredients/
 ```
         - name: CircuitBreaker
           args:
@@ -298,7 +298,7 @@ spring:
  ```xml
   #服务端口
 ```
-          - Path=/test/**
+          - Path=/test/
           - RewritePath=/test/?(?<segment>.*), /hello/$\{segment}
 ```
 
@@ -334,13 +334,13 @@ NEVER_STRIP：不执行 AS_IN_REQUEST ：原始请求没有vesion，就执行 AL
  
   RewriteResponseHeader很好理解：修改响应header，参数有三个：header的key，匹配value的正则表达式，修改value的结果  
 ```json
-  下面的配置表示修改响应header中<font color="blue">X-Response-Red</font>这个key的value，找到password=xxx的内容，改成password=***  
+  下面的配置表示修改响应header中<font color="blue">X-Response-Red</font>这个key的value，找到password=xxx的内容，改成password=*  
 ```
  
  
   #服务端口
 ```
-          - RewriteResponseHeader=X-Response-Red, , password=[^&]+, password=***
+          - RewriteResponseHeader=X-Response-Red, , password=[^&]+, password=*
 ```
 
   ``` 

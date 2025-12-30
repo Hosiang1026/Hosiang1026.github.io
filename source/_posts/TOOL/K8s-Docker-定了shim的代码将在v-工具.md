@@ -21,17 +21,17 @@ top: 1
  为了照顾新的小伙伴，我们再明确下，本次 Kubernetes 移除 dockershim 的树内代码，对于不同角色（架构、开发、集群管理员等等）的小伙伴都有哪些影响以及需要做些什么。 
  首先，还是需要给大家一剂强心针，本次 Kubernetes 移除树内 dockershim 代码 并不说明 Docker 不可用！而 dockershim 本身作用就是通过 CRI 的方式连接 Kubelet 和 Docker 的。Kubernetes 推出了 CRI，以满足对不同容器运行时的支持！我们需要从根本上，了解 Docker 的定位以及 dockershim 对 Kubernetes 来讲意味着什么。 
   
- ### 追根溯源 - Docker 的定位以及 Kubernetes CRI 
+### 一、追根溯源 - Docker 的定位以及 Kubernetes CRI
  知道的越多，恐惧的越少。 
   
- #### Docker 
+#### 1.1 Docker
  Docker 的定位是 Development Platform ，即，作为一个开发者工具，而非底层的容器运行时。 
  所以，我们可以看到，Docker 于 2017年 给 CNCF 贡献了 containerd ，同年的 11月 ，Kubernetes 也增加了对 containerd 的支持（2018 年， Kubernetes 的 containerd 集成，正式 GA）。 
   
  图 1 ，Kubernetes CRI 与容器运行时 containerd 的集成 
  图1 展示了，如果将容器运行时替换为 containerd 的话，整个的处理链路是什么。可以看到，处理链路缩短了。 
   
- #### Kubernetes CRI 
+#### 1.2 Kubernetes CRI
  2016 年 12 月， Kubernetes 发布 CRI （Container Runtime Interface）。 
  在之前的文章中，我们也说过，2014年 Kubernetes 的诞生就是为了解决大规模场景下 Docker 容器编排的问题。在当时，Docker 是最流行也是唯一的容器运行时，对 Docker 的支持，使得 Kubernetes 在早期就迎来了大量的用户。 
  为了能防止被锁定在 Docker 这一容器运行时，也为了减轻在集成其他运行时的时候的开发工作量，Kubernetes 推出了一个统一的 CRI 接口，凡是支持 CRI 的运行时，皆可直接作为 Kubernetes 的底层运行时，以此来应对更多更复杂的需求及场景。  
@@ -49,13 +49,13 @@ top: 1
    RuntimeService - 包含 RPC 来管理 Pod 和容器的生命周期，以及与容器交互的调用（exec/attach/port-forward）。  
   
   
- #### 有些尴尬又不知所措的 dockershim？ 
+#### 1.3 有些尴尬又不知所措的 dockershim？
  dockershim 一直都是 Kubernetes 社区为了能让 Docker 成为其支持的容器运行时，所维护的一个兼容程序。 
  而我们也不必为了 dockershim 太过担心，Mirantis 已经承诺会接管并且持续支持 dockershim。也就是说，虽然 Kubernetes 代码仓库中移除了 dockershim 的代码，但是，Mirantis 会维护一份树外的 dockershim 。如果你想继续使用 Docker 作为 Kubernetes 的容器运行时，那么就需要运行树外的 dockershim 了。 
  也请小伙伴们耐心查看下方视频，Mirantis 再次公开声明，我们大可不必为 dockershim 的未来忧心。 
    
   
- ### 影响 
+### 二、影响
  相信很多小伙伴最关心的就是，这种变化，会对我们日常的生产、开发环境带来哪些变化。我们要怎样快速的进行应对！ 
  抛开这个问题，请小伙伴们评估下各自的实际生产环境。 
   

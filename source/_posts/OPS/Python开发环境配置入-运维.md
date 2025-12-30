@@ -1,4 +1,4 @@
----
+﻿---
 title: Python开发环境配置入门
 categories: 开发环境配置全攻略系列
 tags:
@@ -19,33 +19,33 @@ Python由吉多·范罗苏姆（Guido van Rossum）于1989年开发，作为ABC�
 ### 一、Python简介
 
 ```
-**什么是Python：**
+什么是Python：
 ```
 
 Python是一种高级、解释型的编程语言，由Guido van Rossum于1989年开发。Python具有简洁的语法和强大的功能，广泛应用于Web开发、数据分析、人工智能、自动化脚本等领域。
 
 ```
-**Python的特点：**
+Python的特点：
 ```
 
-- **简单易学**：语法清晰，代码可读性强
-- **跨平台**：支持Windows、macOS、Linux
-- **丰富的库**：拥有庞大的标准库和第三方库
-- **社区活跃**：拥有庞大的开发者社区
+- 简单易学：语法清晰，代码可读性强
+- 跨平台：支持Windows、macOS、Linux
+- 丰富的库：拥有庞大的标准库和第三方库
+- 社区活跃：拥有庞大的开发者社区
 
 ```
-**Python版本选择：**
+Python版本选择：
 ```
 
-- **Python 3.x**：推荐使用，是未来趋势
-- **Python 2.x**：已停止维护，不推荐使用
+- Python 3.x：推荐使用，是未来趋势
+- Python 2.x：已停止维护，不推荐使用
 
 ### 二、安装Python
 
 #### 2.1 Windows平台安装
 
 ```
-**1. 下载安装包：**
+1. 下载安装包：
 ```
 
 ```
@@ -57,14 +57,14 @@ Python是一种高级、解释型的编程语言，由Guido van Rossum于1989年
 ```
 
 ```
-**2. 安装步骤：**
+2. 安装步骤：
 ```
 
 1. 运行下载的安装程序
-2. **重要**：勾选"Add Python to PATH"（添加到环境变量）
+2. 重要：勾选"Add Python to PATH"（添加到环境变量）
 3. 选择安装方式：
-   - **Install Now**：默认安装到用户目录
-   - **Customize installation**：自定义安装
+   - Install Now：默认安装到用户目录
+   - Customize installation：自定义安装
 4. 选择安装组件（推荐全选）：
    - Python解释器
    - pip包管理器
@@ -75,7 +75,7 @@ Python是一种高级、解释型的编程语言，由Guido van Rossum于1989年
 6. 点击"Install"开始安装
 
 ```
-**3. 验证安装：**
+3. 验证安装：
 ```
 
 打开命令提示符（Win+R，输入cmd），执行：
@@ -95,7 +95,7 @@ python
 ```
 
 ```
-**预期输出：**
+预期输出：
 ```
 ```
 Python 3.11.5
@@ -105,7 +105,7 @@ pip 23.2.1 from C:\Users\...\pip (python 3.11)
 #### 2.2 macOS平台安装
 
 ```
-**方法1：官方安装包**
+方法1：官方安装包
 ```
 
 ```
@@ -115,7 +115,7 @@ pip 23.2.1 from C:\Users\...\pip (python 3.11)
 3. 双击安装包，按照向导完成安装
 
 ```
-**方法2：使用Homebrew（推荐）**
+方法2：使用Homebrew（推荐）
 ```
 
 ```bash
@@ -134,13 +134,13 @@ pip3 --version
 ```
 
 ```
-**注意：** macOS可能自带Python 2.7，使用`python3`命令运行Python 3。
+注意： macOS可能自带Python 2.7，使用`python3`命令运行Python 3。
 ```
 
 #### 2.3 Linux平台安装
 
 ```
-**Ubuntu/Debian：**
+Ubuntu/Debian：
 ```
 
 ```bash
@@ -159,7 +159,7 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 ```
 
 ```
-**CentOS/RHEL：**
+CentOS/RHEL：
 ```
 
 ```bash
@@ -174,7 +174,7 @@ python3 --version
 ```
 
 ```
-**从源码编译安装（高级）：**
+从源码编译安装（高级）：
 ```
 
 ```bash
@@ -200,13 +200,13 @@ python3.11 --version
 #### 3.1 Windows环境变量
 
 ```
-**自动配置（推荐）：**
+自动配置（推荐）：
 ```
 
 安装Python时勾选"Add Python to PATH"，安装程序会自动配置。
 
 ```
-**手动配置：**
+手动配置：
 ```
 
 1. 右键"此电脑" → 属性 → 高级系统设置 → 环境变量
@@ -217,7 +217,7 @@ python3.11 --version
 4. 点击"确定"保存
 
 ```
-**验证配置：**
+验证配置：
 ```
 
 ```bash
@@ -231,7 +231,7 @@ pip --version
 #### 3.2 macOS/Linux环境变量
 
 ```
-**检查Python路径：**
+检查Python路径：
 ```
 
 ```bash
@@ -244,7 +244,7 @@ echo $PATH
 ```
 
 ```
-**配置PATH（如需要）：**
+配置PATH（如需要）：
 ```
 
 ```bash
@@ -267,7 +267,7 @@ source ~/.zshrc
 #### 4.1 pip基础使用
 
 ```
-**安装包：**
+安装包：
 ```
 
 ```bash
@@ -299,7 +299,7 @@ pip install -r requirements.txt
 #### 4.2 配置pip镜像
 
 ```
-**使用国内镜像（推荐）：**
+使用国内镜像（推荐）：
 ```
 
 ```bash
@@ -320,7 +320,7 @@ trusted-host = pypi.tuna.tsinghua.edu.cn
 ```
 
 ```
-**常用镜像源：**
+常用镜像源：
 ```
 
 - 清华大学：https://pypi.tuna.tsinghua.edu.cn/simple
@@ -336,7 +336,7 @@ trusted-host = pypi.tuna.tsinghua.edu.cn
 #### 5.2 创建虚拟环境
 
 ```
-**使用venv（Python 3.3+内置，推荐）：**
+使用venv（Python 3.3+内置，推荐）：
 ```
 
 ```bash
@@ -360,7 +360,7 @@ deactivate
 ```
 
 ```
-**使用virtualenv：**
+使用virtualenv：
 ```
 
 ```bash
@@ -381,7 +381,7 @@ virtualenv -p python3.11 venv
 #### 6.1 Visual Studio Code（推荐）
 
 ```
-**安装Python扩展：**
+安装Python扩展：
 ```
 
 1. 打开VS Code
@@ -390,7 +390,7 @@ virtualenv -p python3.11 venv
 4. 安装Microsoft的Python扩展
 
 ```
-**配置Python解释器：**
+配置Python解释器：
 ```
 
 1. 按Ctrl+Shift+P打开命令面板
@@ -398,7 +398,7 @@ virtualenv -p python3.11 venv
 3. 选择Python解释器（可以是虚拟环境中的）
 
 ```
-**创建第一个Python文件：**
+创建第一个Python文件：
 ```
 
 ```python
@@ -411,7 +411,7 @@ print("Hello, World!")
 #### 6.2 PyCharm
 
 ```
-**配置Python解释器：**
+配置Python解释器：
 ```
 
 1. File → Settings → Project → Python Interpreter
@@ -420,7 +420,7 @@ print("Hello, World!")
 4. 可以选择虚拟环境
 
 ```
-**创建项目：**
+创建项目：
 ```
 
 1. File → New Project
@@ -485,22 +485,22 @@ python hello.py
 ### 八、常见问题解决
 
 ```
-**问题1：python命令找不到**
+问题1：python命令找不到
 ```
 
 ```
-**解决方案：**
+解决方案：
 ```
 - Windows：检查是否勾选了"Add Python to PATH"
 - macOS/Linux：使用`python3`命令
 - 检查PATH环境变量
 
 ```
-**问题2：pip命令找不到**
+问题2：pip命令找不到
 ```
 
 ```
-**解决方案：**
+解决方案：
 ```
 ```bash
 # 确保pip已安装
@@ -510,11 +510,11 @@ python -m ensurepip --upgrade
 ```
 
 ```
-**问题3：权限错误（macOS/Linux）**
+问题3：权限错误（macOS/Linux）
 ```
 
 ```
-**解决方案：**
+解决方案：
 ```
 ```bash
 # 使用--user安装
@@ -524,11 +524,11 @@ pip install --user package-name
 ```
 
 ```
-**问题4：模块导入错误**
+问题4：模块导入错误
 ```
 
 ```
-**解决方案：**
+解决方案：
 ```
 ```bash
 # 检查模块是否安装

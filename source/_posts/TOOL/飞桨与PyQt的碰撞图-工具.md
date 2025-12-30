@@ -27,11 +27,12 @@ pip install -f https://paddlepaddle.org.cn/pip/oschina/gpu paddlepaddle-gpu
 2、介绍通过飞桨进行模型保存和模型加载 
 3、如何利用飞桨检测单帧图像 
 4、PyQt5效果展示 
- 
-#### Pycharm下搭建PyQt5的环境
+
+### 一、飞桨与PyQt5集成
+#### 1.1 Pycharm下搭建PyQt5的环境
 该过程见此链接https://zhuanlan.zhihu.com/p/110224202，作者将飞桨和PyQt5安装在了同一个虚拟环境下面。 
  
-#### 通过飞桨保存模型和加载模型
+#### 1.2 通过飞桨保存模型和加载模型
 介绍模型的保存和加载，目的是更好地了解飞桨预测过程。本文主要介绍模型保存函数：fluid.io.save_params；fluid.io.save_inference_model和模型加载函数 ；fluid.io.save_params ；fluid.io.load_inference_model。 
 1. 模型的保存 
  
@@ -62,7 +63,7 @@ fluid.io.load_inference_model：根据上文得知，该函数表示加载参数
 ```
 除了上述谈到的模型加载和保存的方式，还有另外一组即fluid.io.save_persistables和fluid.io.load_persistables。 
  
-#### 如何利用飞桨进行预测
+#### 1.3 如何利用飞桨进行预测
 PaddleDetection里面已经有了相应的预测代码infer.py，该代码利用paddle的reader机制进行图像的预测，同时该代码使用的加载模型的方式是fluid.io.load_params。作者个人为了能配合后续在qt下运行检测，使用fluid.io.load_inference_model作为模型的加载方式，从paddle的AI Studio上截取一部分代码重新构造了预测代码。本段预测代码加载的模型是yolov3（主干网络MobileNet）训练出来的模型。 
 作者构造自身的预测代码思路如下图所示： 
 代码如下： 

@@ -14,11 +14,13 @@ top: 3
 <!-- more -->
 
                                                                                                                                                                                         ![Test](https://cdn.pixabay.com/photo/2015/01/15/14/51/wal-600387_1280.png  'Docker是如何实现隔离的') 
-#### 概述
+
+### 一、Docker隔离技术实现
+#### 1.1 概述
 容器化技术在当前云计算、微服务等体系下大行其道，而 Docker 便是容器化技术的典型，对于容器化典型的技术，我们有必要弄懂它，所以这篇文章，我会来分析下 Docker 是如何实现隔离技术的，Docker 与虚拟机又有哪些区别呢？接下来，我们开始逐渐揭开它的面纱。 
-#### 从运行一个容器开始
+#### 1.2 从运行一个容器开始
 我们开始运行一个简单的容器，这里以 `busybox` 镜像为例，它是一个常用的Linux工具箱，可以用来执行很多Linux命令，我们以它为镜像启动容器方便来查看容器内部环境。 执行命令： `docker run -it --name demo_docker busybox /bin/sh` 这条命令的作用是：启动一个 `busybox` 镜像的 Docker 容器。`-it` 参数表示给容器提供一个输入/输出的交互环境（TTY）。`/bin/sh` 表示容器交互运行的命令或程序。 
-#### 进程的隔离
+#### 1.3 进程的隔离
 执行成功后我们就会进入到了 Docker 容器内部,我们执行 `ps -ef` 查看进程 
  ```bash
 / # ps -ef
@@ -152,7 +154,7 @@ PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
   ```  
 结果也只有2个进程的信息。 
 这就是容器隔离进程的基本原理了，Docker主要就是借助 Linux 内核技术Namespace来做到隔离的，其实包括我后面要说到文件的隔离，资源的隔离都是在新的命名空间下通过 `mount` 挂载的方式来隔离的。 
-#### 文件的隔离
+#### 1.4 文件的隔离
 了解完进程的隔离，相信你们已经对 Docker 容器的隔离玩法就大概的印象了，我们接下来看看，Docker 内部的文件系统如何隔离，也就是你在 Docker 内部执行 `ls` 显示的文件夹和文件如何来的。 
 我们还是以前面的 Docker 命令为例，执行 `ls` ```bash
 bin   dev   etc   home  proc  root  run   sys   tmp   usr   var
@@ -198,7 +200,7 @@ bin  dev  etc  home  proc  root  run  sys  tmp  usr  var
   ```  
 我们发现这个和我们容器的目录是一致的，我们在这个目录下创建一个新的目录，然后看看容器内部是不是会出现新的目录。 ![Test](https://cdn.pixabay.com/photo/2015/01/15/14/51/wal-600387_1280.png  'Docker是如何实现隔离的') 
 上面的图片验证了容器内部的文件内容和挂载的 `/var/lib/docker/overlay2/ID/merged` 下是一致的，这就是Docker文件系统隔离的基本原理。 
-#### 资源的限制
+#### 1.5 资源的限制
 玩过 Docker 的同学肯定知道，Docker 还是可以限制资源使用的，比如 CPU 和内存等，那这部分是如何实现的呢？ 这里就涉及到Linux的另外一个概念 `Cgroups` 技术,它是为进程设置资源限制的重要手段，在Linux 中，一切皆文件，所以 `Cgroups` 技术也会体现在文件中，我们执行 `mount -t cgroup` 就可以看到 `Cgroups` 的挂载情况 
 cgroup on /sys/fs/cgroup/systemd type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd)
 cgroup on /sys/fs/cgroup/devices type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,devices)
@@ -244,11 +246,11 @@ docker run -d --name='cpu_set_demo' --cpu-period=100000 --cpu-quota=20000 busybo
   
 ```  
 发现这里我们的容器启动设置参数一样,也就是说通过这里的文件值来限制容器的cpu使用情况。这里需要注意的是，不同的Linux版本 Docker Cgroup 文件位置可能不一样，有些是在 `/sys/fs/cgroup/cpu/docker/ID/` 下。 
-#### 与传统虚拟机技术的区别
+#### 1.6 与传统虚拟机技术的区别
 经过前面的进程、文件系统、资源限制分析，详细各位已经对 Docker 的隔离原理有了基本的认识，那么它和传统的虚拟机技术有和区别呢？这里贴一个网上的Docker和虚拟机区别的图 
 这张图应该可以清晰的展示了虚拟机技术和 Docker 技术的区别了，虚拟机技术是完全虚拟出一个单独的系统，有这个系统去处理应用的各种运行请求，所以它实际上对于性能来说是有影响的。而 Docker 技术 完全是依赖 Linux 内核特性 Namespace 和Cgroup 技术来实现的，本质来说：你运行在容器的应用在宿主机来说还是一个普通的进程，还是直接由宿主机来调度的，相对来说，性能的损耗就很少，这也是 Docker 技术的重要优势。 
 Docker 技术由于 还是一个普通的进程，所以隔离不是很彻底，还是共用宿主机的内核，在隔离级别和安全性上没有虚拟机高，这也是它的一个劣势。 
-#### 总结
+#### 1.7 总结
 这篇文章我通过实践来验证了 Docker 容器技术在进程、文件系统、资源限制的隔离原理，最后也比较了虚拟机和 Docker 技术的区别，总的来说 Docker技术由于是一个普通的宿主机进程，所以具有性能优势，而虚拟机由于完全虚拟系统，所以具备了高隔离性和安全性的优势，两者互有优缺点。不过容器化是当下的趋势，相信随着技术的成熟，目前的隔离不彻底的问题也能解决，容器化走天下不是梦。 
  
  http://people.redhat.com/vgoyal/papers-presentations/vault-2017/vivek-overlayfs-and-containers-presentation-valult-2017.pdf 

@@ -385,14 +385,14 @@ DeepSQL是对openGauss DB4AI能力的增强，让对MADLib比较熟悉的数据�
 ### 二、环境部署
 DeepSQL环境包括编译数据库和安装算法库两个部分。 
  
-#### 前提条件
+#### 2.1 前提条件
  
  环境中安装python2.7.12以上版本Python。 
  数据库需要开启对PL/Python存储过程的支持。 
  安装算法库需要拥有管理员权限的用户。 
  
  
-#### 操作步骤
+#### 2.2 操作步骤
  
   检查部署Python环境。 安装前，请查看系统安装的python版本，当前DeepSQL需要python2.7.12以上版本的环境。 
    
@@ -448,7 +448,7 @@ install为安装的命令，除此之外，还有reinstall（重新安装），u
   
 ### 三、使用指导
  
-#### PL/Python存储过程
+#### 3.1 PL/Python存储过程
 当前PL/Python存储过程优先支持python2；默认版本也是python2。 
 PL/Python中的函数通过标准的CREATE FUNCTION声明： 
  
@@ -478,7 +478,7 @@ return b
 ``` 
   
  
-#### 数据库Null, None和空串处理
+#### 3.2 数据库Null, None和空串处理
 如果向函数传递了一个SQL null值，参数值在Python中将会显示为None。在数据库中，不同的兼容性下，空串的行为会被当做NULL处理。 
 同一个函数，在不同的兼容性下表现不同。 
  
@@ -552,10 +552,10 @@ NULL
  
 可以看到，在兼容性“A”中，空串被当为NULL了。 
  
-#### 触发器
+#### 3.3 触发器
 当前PL/Python存储过程中，不支持触发器功能。 
  
-#### 匿名代码块
+#### 3.4 匿名代码块
 PL/Python也支持DO声明的匿名代码块： 
  
   DO $$
@@ -565,29 +565,29 @@ PL/Python也支持DO声明的匿名代码块：
   
 一个匿名代码块不接受参数，并且丢弃它可能返回的值。 
  
-#### 共享数据
+#### 3.5 共享数据
 每个函数都在Python解释器里获得自己的执行环境。 
 全局字典SD在函数调用之间用于存储数据。这些变量是私有静态数据。每一个函数都有自己的SD数据空间，函数A的全局数据和函数参数是函数B不可用的。 
 全局字典GD是公共数据，在一个gsql会话中，所有python函数都可访问和改变，使用时需要小心。 
 当gsql断开或退出，共享数据就被释放。 
  
  
-#### 数据库访问
+#### 3.6 数据库访问
 PL/Python语言模块自动import一个叫plpy的Python模块。 
 plpy模块提供几个函数执行数据库命令：比如plpy.execute，plpy.prepare等。 
 plpy模块也提供了函数plpy.debug(msg)、 plpy.log(msg)、plpy.info(msg)、 plpy.notice(msg)、plpy.warning(msg)、 plpy.error(msg)和plpy.fatal(msg)。 plpy.error和 plpy.fatal实际上抛出了一个Python异常，会导致当前事务或者子事务退出。 
 另一个实用函数集是plpy.quote_literal(string)、 plpy.quote_nullable(string)和 plpy.quote_ident(string)。 
  
-#### 关于审计
+#### 3.7 关于审计
  
-#### 关于并发执行
+#### 3.8 关于并发执行
 当前PL/Python存储过程对并发执行不友好，建议串行执行。 
  
  
-#### 库内算法
+#### 3.9 库内算法
  
  
-#### 其他算法支持
+#### 3.10 其他算法支持
 除了MADlib提供的算法外，openGauss又额外提供了以下三个算法。 
 表 1 额外增加的模块列表 
  
@@ -636,7 +636,7 @@ CREATE database test1 dbcompatibility='B';
 ``` 
   
  
-#### 分类算法
+#### 4.1 分类算法
 以svm分类房价为例子： 
  
   数据集准备。  
@@ -735,7 +735,7 @@ SELECT COUNT(*) FROM houses_pred_gaussian JOIN houses USING (id) WHERE houses_pr
   其他参 除了指定不同的核方法外，还可以指定迭代次数，初始参数，比如init_stepsize, max_iter, class_weight等。  
  
  
-#### 回归算法
+#### 4.2 回归算法
 我们以线性回归预测波士顿房价为例： 
  
   数据集准备。 同svm的数据集，请参见1。  
@@ -802,7 +802,7 @@ ORDER BY id;
   ``` 
    
  
-#### 聚类算法
+#### 4.3 聚类算法
 以kmeans为例： 
  
   准备数据。  
@@ -872,7 +872,7 @@ SELECT * FROM km_points_silh ORDER BY pid;
   ``` 
    
  
-#### gbdt算法
+#### 4.4 gbdt算法
 gdbt的基学习器虽然是回归树，但算法本身支持分类和回归两种操作。以下将展示两种任务的具体实现。这里值得注意的一点是，本方法不支持标签列含有空值（NULL）的情况。 
 分类任务： 
  
@@ -1002,7 +1002,7 @@ id | test_prediction | class
   ``` 
    
  
-#### 回归任务
+#### 4.5 回归任务
  
   准备数据。  
 DROP TABLE IF EXISTS crime;
@@ -1151,7 +1151,7 @@ SELECT test_output.id, test_prediction,CrimeRat  from test_output join crime usi
 ``` 
    
  
-#### xgboost算法
+#### 4.6 xgboost算法
 新增的xgboost支持分类和回归两种操作。下面以分类iris花为例，展示xgboost算法。 
 xgboost支持grid search方式，可以同时训练多组参数。 
  
@@ -1240,7 +1240,7 @@ select t1.id, prediction, label from iris as t1, iris_xgbc_out as t2 where t1.id
   ``` 
    
  
-#### prophet算法
+#### 4.7 prophet算法
 新增facebook的prophet时序预测算法。下面以时序数据为例，展示prophet算法使用。 
  
   准备数据。  

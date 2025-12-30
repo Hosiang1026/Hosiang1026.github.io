@@ -1,4 +1,4 @@
----
+﻿---
 title: 极简入门Shiro的认证
 categories: 系统安全与认证系列
 tags:
@@ -39,20 +39,20 @@ Shiro对以上功能都进行了很好的支持，它可以非常容易的开发
 从上图可以看出，Security Manager是Shiro的核心管理器，认证授权会话缓存等都是在其内部完成，然后会委托给具体的组件来处理，比如认证过程委托给Authenticator，授权委托给Authorizer组件。所以，整理还是比较清晰，源代码也容易追踪。 
 我们来具体聊聊所有的组件： 
 ```
-**Subject：**主体，可以看到主体可以是任何可以与应用交互的“用户”； 
-**SecurityManager：**Shiro的心脏；所有具体的交互都通过SecurityManager进行控制；负责所Subject、且负责进行认证和授权、及会话、缓存的管理。 
+Subject：主体，可以看到主体可以是任何可以与应用交互的“用户”； 
+SecurityManager：Shiro的心脏；所有具体的交互都通过SecurityManager进行控制；负责所Subject、且负责进行认证和授权、及会话、缓存的管理。 
 ```
  
  Authenticator：认证器，判断用户是否正常登陆 
  Authorizer：授权器，判断用户是否有权限操作资源 
  
 ```
-**Realm：**可以有1个或多个Realm，主要提供认证和授权的数据； 
-**Session：**Shiro提供一个权限的企业级Session解决方案，session的生命周期都在SessionManager中进行管理。 
-**SessionManager：**shiro的会话管理器； 
-**SessionDAO：**用于会话的CRUD，比如存储到ehcache或者redis中的会话增删改查； 
-**CacheManager：**缓存控制器，来管理如用户、角色、权限等的缓存的；因为这些数据基本上很少去改变，放到缓存中后可以提高访问的性能 
-**Cryptography：**密码模块，Shiro提高了一些常见的加密组件用于如密码加密/解密的。 
+Realm：可以有1个或多个Realm，主要提供认证和授权的数据； 
+Session：Shiro提供一个权限的企业级Session解决方案，session的生命周期都在SessionManager中进行管理。 
+SessionManager：shiro的会话管理器； 
+SessionDAO：用于会话的CRUD，比如存储到ehcache或者redis中的会话增删改查； 
+CacheManager：缓存控制器，来管理如用户、角色、权限等的缓存的；因为这些数据基本上很少去改变，放到缓存中后可以提高访问的性能 
+Cryptography：密码模块，Shiro提高了一些常见的加密组件用于如密码加密/解密的。 
 ```
 ##### 官方简单示例
 官网例子：http://shiro.apache.org/tutorial.html 

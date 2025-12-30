@@ -13,9 +13,10 @@ top: 37
 存储接口（Container Storage Interface）简称 CSI，CSI 建立了行业标准接口的规范，借助 CSI 容器编排系统（CO）可以将任意存储系统暴露给自己的容器工作负载。JuiceFS CSI Driver 通过。..
 <!-- more -->
 
-                                                                                                                    
-                                                                                                    容器存储接口（Container Storage Interface）简称 CSI，CSI 建立了行业标准接口的规范，借助 CSI 容器编排系统（CO）可以将任意存储系统暴露给自己的容器工作负载。JuiceFS CSI Driver 通过实现 CSI 接口使得 Kubernetes 上的应用可以通过 PVC（PersistentVolumeClaim）使用 JuiceFS。本文将详细介绍 CSI 的工作原理以及 JuiceFS CSI Driver 的架构设计。 
-#### CSI 的基本组件
+容器存储接口（Container Storage Interface）简称 CSI，CSI 建立了行业标准接口的规范，借助 CSI 容器编排系统（CO）可以将任意存储系统暴露给自己的容器工作负载。JuiceFS CSI Driver 通过实现 CSI 接口使得 Kubernetes 上的应用可以通过 PVC（PersistentVolumeClaim）使用 JuiceFS。本文将详细介绍 CSI 的工作原理以及 JuiceFS CSI Driver 的架构设计。 
+
+### 一、CSI工作原理
+#### 1.1 CSI 的基本组件
 CSI 的 cloud providers 有两种类型，一种为 in-tree 类型，一种为 out-of-tree 类型。前者是指运行在 K8s 核心组件内部的存储插件；后者是指独立在 K8s 组件之外运行的存储插件。本文主要介绍 out-of-tree 类型的插件。 
 out-of-tree 类型的插件主要是通过 gRPC 接口跟 K8s 组件交互，并且 K8s 提供了大量的 SideCar 组件来配合 CSI 插件实现丰富的功能。对于 out-of-tree 类型的插件来说，所用到的组件分为 SideCar 组件和第三方需要实现的插件。 
 ##### SideCar 组件
@@ -211,7 +212,7 @@ CSI 插件与 kubelet 以及 K8s 外部组件是通过 Unix Domani Socket gRPC �
   将其挂载到 pod 中； 
  `NodeUnstageVolume` 
   为其反操作。 
-#### 工作流程
+#### 1.2 工作流程
 下面来看看 pod 挂载 volume 的整个工作流程。整个流程流程分别三个阶段：Provision/Delete、Attach/Detach、Mount/Unmount，不过不是每个存储方案都会经历这三个阶段，比如 NFS 就没有 Attach/Detach 阶段。 
 整个过程不仅仅涉及到上面介绍的组件的工作，还涉及 ControllerManager 的 AttachDetachController 组件和 PVController 组件以及 kubelet。下面分别详细分析一下 Provision、Attach、Mount 三个阶段。 
 ##### Provision
@@ -469,7 +470,7 @@ func (c *csiMountMgr) SetUpAt(dir string, mounterArgs volume.MounterArgs) error 
   NodeUnPublishVolume
   ``` 
   接口的是 volumeManager 的 csiMountMgr。至此，整个 Pod 的 volume 流程就已经梳理清楚了。 
-#### JuiceFS CSI Driver 工作原理
+#### 1.3 JuiceFS CSI Driver 工作原理
 接下来再来看看 JuiceFS CSI Driver 的工作原理。架构图如下： 
  
 JuiceFS 在 CSI Node 接口  
@@ -584,5 +585,5 @@ func (p *PodMount) waitUtilPodReady(podName string) error {
   ``` 
   
 CSI Driver 与 juicefs 客户端解耦，做升级不会影响到业务容器；将客户端独立在 pod 中运行也就使其在 K8s 的管控内，可观测性更强；同时 pod 的好处我们也能享受到，比如隔离性更强，可以单独设置客户端的资源配额等。 
-#### 总结
+#### 1.4 总结
 本文从 CSI 的组件、CSI 接口、volume 如何挂载到 pod 上，三个方面入手，分析了 CSI 整个体系工作的过程，并介绍了 JuiceFS CSI Driver 的工作原理。CSI 是整个容器生态的标准存储接口，CO 通过 gRPC 方式和 CSI 插件通信，而为了做到普适，K8s 设计了很多外部组件来配合 CSI 插件来实现不同的功能，从而保证了 K8s 内部逻辑的纯粹以及 CSI 插件的简单易用。

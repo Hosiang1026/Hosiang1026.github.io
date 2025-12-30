@@ -152,7 +152,8 @@ Java 14又引入了
  `java.lang.ref.Cleaner` 
   。 
 因此，所有该方法会被标记为过时，未来将被移除。 
-#### 总结
+### 一、
+#### 1.1 总结
 很少有人在生产中使用 JDK 18，因为它不是 LTS 版本。去年九月发布JDK 17 LTS 版本更为重要，很多类库，特别是Spring framework 6.0和Spring Boot 3.0 都将基于JDK17，你还要在Java 8坚持多久呢？已经相差了10个版本了。下一个是LTS是 2023 年 9 月的 Java 21。 
  
 ```text

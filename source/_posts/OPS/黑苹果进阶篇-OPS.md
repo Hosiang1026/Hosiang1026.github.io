@@ -1,4 +1,4 @@
----
+﻿---
 title: 黑苹果进阶篇
 categories: 操作系统安装指南系列
 tags:
@@ -19,7 +19,7 @@ top: 11
 
 #### 1.1 OpenCore高级配置
 
-**ACPI补丁详解：**
+ACPI补丁详解：
 
 ```plist
 <!-- ACPI重命名补丁 -->
@@ -41,7 +41,7 @@ top: 11
 </dict>
 ```
 
-**内核扩展（Kext）加载顺序：**
+内核扩展（Kext）加载顺序：
 
 1. Lilu.kext（必须第一个加载）
 2. VirtualSMC.kext（系统管理）
@@ -49,7 +49,7 @@ top: 11
 4. AppleALC.kext（声卡）
 5. 其他驱动
 
-**设备属性注入：**
+设备属性注入：
 
 ```plist
 <!-- 显卡注入示例 -->
@@ -72,15 +72,15 @@ top: 11
 
 #### 1.2 SSDT定制
 
-**常用SSDT文件：**
+常用SSDT文件：
 
-1. **SSDT-EC.aml**：修复EC（嵌入式控制器）
-2. **SSDT-PLUG.aml**：CPU电源管理
-3. **SSDT-PMC.aml**：NVRAM支持（300系列主板）
-4. **SSDT-AWAC.aml**：修复AWAC时钟（300系列主板）
-5. **SSDT-USBX.kext**：USB电源管理
+1. SSDT-EC.aml：修复EC（嵌入式控制器）
+2. SSDT-PLUG.aml：CPU电源管理
+3. SSDT-PMC.aml：NVRAM支持（300系列主板）
+4. SSDT-AWAC.aml：修复AWAC时钟（300系列主板）
+5. SSDT-USBX.kext：USB电源管理
 
-**生成SSDT：**
+生成SSDT：
 
 ```bash
 # 使用SSDTTime生成
@@ -93,7 +93,7 @@ top: 11
 
 #### 1.3 SMBIOS选择
 
-**根据CPU选择SMBIOS：**
+根据CPU选择SMBIOS：
 
 | CPU系列 | 推荐SMBIOS | 说明 |
 |---------|-----------|------|
@@ -103,7 +103,7 @@ top: 11
 | Intel 11-12代 | iMac21,1 / iMac21,2 | 需要特殊配置 |
 | AMD Ryzen | iMacPro1,1 | 需要内核补丁 |
 
-**生成SMBIOS信息：**
+生成SMBIOS信息：
 
 ```bash
 # 使用GenSMBIOS
@@ -119,7 +119,7 @@ top: 11
 
 #### 2.1 系统性能优化
 
-**CPU电源管理：**
+CPU电源管理：
 
 ```bash
 # 检查CPU频率
@@ -130,7 +130,7 @@ sysctl -n hw.cpufrequency
 # 自动生成适合你CPU的电源管理表
 ```
 
-**内存优化：**
+内存优化：
 
 ```bash
 # 检查内存信息
@@ -140,7 +140,7 @@ system_profiler SPHardwareDataType
 sudo sysctl -w vm.swappiness=10
 ```
 
-**显卡性能：**
+显卡性能：
 
 ```bash
 # 检查显卡加速
@@ -153,7 +153,7 @@ system_profiler SPDisplaysDataType
 
 #### 2.2 引导优化
 
-**减少启动时间：**
+减少启动时间：
 
 ```plist
 <key>Boot</key>
@@ -165,7 +165,7 @@ system_profiler SPDisplaysDataType
 </dict>
 ```
 
-**优化内核加载：**
+优化内核加载：
 
 ```plist
 <!-- 只加载必要的驱动 -->
@@ -185,21 +185,21 @@ system_profiler SPDisplaysDataType
 
 #### 3.1 多系统引导
 
-**Windows + macOS双系统：**
+Windows + macOS双系统：
 
-1. **分区方案**：
+1. 分区方案：
 
    磁盘布局：
    ├── EFI分区（共享，FAT32）
    ├── Windows分区（NTFS）
    └── macOS分区（APFS）
 
-2. **引导配置**：
+2. 引导配置：
    - OpenCore作为主引导
    - 在OpenCore中选择Windows或macOS
    - Windows需要关闭快速启动
 
-3. **时间同步问题**：
+3. 时间同步问题：
 
    ```bash
    # 在Windows中修复时间同步
@@ -208,7 +208,7 @@ system_profiler SPDisplaysDataType
 
 #### 3.2 配置文件管理
 
-**使用ProperTree编辑：**
+使用ProperTree编辑：
 
 ```bash
 # ProperTree功能：
@@ -224,7 +224,7 @@ python3 ProperTree.command
 # File → Open → 选择config.plist
 ```
 
-**配置文件验证：**
+配置文件验证：
 
 ```bash
 # 使用ocvalidate验证
@@ -240,7 +240,7 @@ python3 ProperTree.command
 
 #### 4.1 调试技巧
 
-**使用详细模式启动：**
+使用详细模式启动：
 
 ```plist
 <key>Boot</key>
@@ -250,7 +250,7 @@ python3 ProperTree.command
 </dict>
 ```
 
-**查看启动日志：**
+查看启动日志：
 
 ```bash
 # 系统日志位置
@@ -263,7 +263,7 @@ log show --predicate 'process == "kernel"' --last boot
 /Library/Logs/DiagnosticReports/
 ```
 
-**使用IORegistryExplorer：**
+使用IORegistryExplorer：
 
 1. 下载IORegistryExplorer
 2. 查看设备树结构
@@ -272,9 +272,9 @@ log show --predicate 'process == "kernel"' --last boot
 
 #### 4.2 问题排查
 
-**常见问题诊断：**
+常见问题诊断：
 
-**1. 系统无法启动：**
+1. 系统无法启动：
 
 ```bash
 # 检查步骤：
@@ -285,7 +285,7 @@ log show --predicate 'process == "kernel"' --last boot
 # 5. 验证config.plist配置
 ```
 
-**2. 性能问题：**
+2. 性能问题：
 
 ```bash
 # 检查CPU频率
@@ -298,7 +298,7 @@ system_profiler SPDisplaysDataType
 # 应用程序 → 实用工具 → 活动监视器
 ```
 
-**3. 驱动问题：**
+3. 驱动问题：
 
 ```bash
 # 检查驱动是否加载
@@ -312,7 +312,7 @@ dmesg | grep -i "驱动名称"
 ```
 
 ```
-**使用Hackintool诊断：**
+使用Hackintool诊断：
 ```
 
 ```bash
@@ -326,7 +326,7 @@ dmesg | grep -i "驱动名称"
 ```
 
 ```
-**性能监控工具：**
+性能监控工具：
 ```
 
 ```bash

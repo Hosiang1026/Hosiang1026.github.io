@@ -1,4 +1,4 @@
----
+﻿---
 title: iOS开发环境配置实
 categories: 开发环境配置全攻略系列
 author: 狂欢马克思
@@ -20,11 +20,11 @@ tags:
 #### 1.1 项目需求
 
 ```
-**项目背景：** 开发一个待办事项管理应用（Todo App），支持任务的增删改查、分类管理、提醒功能等。
+项目背景： 开发一个待办事项管理应用（Todo App），支持任务的增删改查、分类管理、提醒功能等。
 ```
 
 ```
-**核心需求：**
+核心需求：
 ```
 - 任务列表展示
 - 任务创建、编辑、删除
@@ -36,21 +36,21 @@ tags:
 #### 1.2 技术选型
 
 ```
-**技术栈：**
+技术栈：
 ```
-- **开发语言**: Swift 5.0+
-- **UI框架**: UIKit + Storyboard / SwiftUI
-- **数据持久化**: Core Data
-- **架构模式**: MVVM
-- **网络请求**: URLSession / Alamofire
-- **依赖管理**: CocoaPods / SPM
+- 开发语言: Swift 5.0+
+- UI框架: UIKit + Storyboard / SwiftUI
+- 数据持久化: Core Data
+- 架构模式: MVVM
+- 网络请求: URLSession / Alamofire
+- 依赖管理: CocoaPods / SPM
 
 ```
-**开发工具：**
+开发工具：
 ```
-- **IDE**: Xcode 14+
-- **设计工具**: Sketch / Figma
-- **版本控制**: Git
+- IDE: Xcode 14+
+- 设计工具: Sketch / Figma
+- 版本控制: Git
 
 ### 二、项目架构
 
@@ -108,7 +108,7 @@ TodoApp/
 #### 3.1 项目初始化
 
 ```
-**1. 创建Xcode项目：**
+1. 创建Xcode项目：
 ```
 
 1. 打开Xcode，选择Create a new Xcode project
@@ -120,7 +120,7 @@ TodoApp/
    - Use Core Data: ✓
 
 ```
-**2. 配置Core Data：**
+2. 配置Core Data：
 ```
 
 ```swift
@@ -152,7 +152,7 @@ func saveContext() {
 #### 3.2 数据模型
 
 ```
-**Core Data实体定义：**
+Core Data实体定义：
 ```
 
 1. 打开`TodoApp.xcdatamodeld`
@@ -166,7 +166,7 @@ func saveContext() {
 ```
 
 ```
-**Swift模型类：**
+Swift模型类：
 ```
 
 ```swift
@@ -197,7 +197,7 @@ extension TodoItem : Identifiable {
 #### 3.3 ViewModel实现
 
 ```
-**TodoListViewModel.swift：**
+TodoListViewModel.swift：
 ```
 
 ```swift
@@ -266,7 +266,7 @@ class TodoListViewModel: ObservableObject {
 #### 3.4 ViewController实现
 
 ```
-**TodoListViewController.swift：**
+TodoListViewController.swift：
 ```
 
 ```swift
@@ -365,7 +365,7 @@ extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
 #### 4.1 配置App ID和证书
 
 ```
-**1. 在Apple Developer创建App ID：**
+1. 在Apple Developer创建App ID：
 ```
 
 ```
@@ -376,7 +376,7 @@ extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
 4. 配置Bundle ID和功能
 
 ```
-**2. 创建开发证书：**
+2. 创建开发证书：
 ```
 
 1. Certificates → Development
@@ -385,7 +385,7 @@ extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
 4. 上传CSR文件（在Keychain Access中创建）
 
 ```
-**3. 创建配置文件：**
+3. 创建配置文件：
 ```
 
 1. Profiles → Development
@@ -395,7 +395,7 @@ extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
 #### 4.2 真机测试
 
 ```
-**1. 连接设备：**
+1. 连接设备：
 ```
 
 1. 使用USB连接iPhone/iPad
@@ -403,7 +403,7 @@ extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
 3. 在Xcode中选择设备作为运行目标
 
 ```
-**2. 配置开发者账号：**
+2. 配置开发者账号：
 ```
 
 1. Xcode → Preferences → Accounts
@@ -411,7 +411,7 @@ extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
 3. 在项目设置中选择Team
 
 ```
-**3. 运行应用：**
+3. 运行应用：
 ```
 
 - 点击运行按钮或按Cmd + R
@@ -420,7 +420,7 @@ extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
 #### 4.3 App Store发布
 
 ```
-**1. 准备发布版本：**
+1. 准备发布版本：
 ```
 
 ```bash
@@ -432,7 +432,7 @@ extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
 ```
 
 ```
-**2. Archive应用：**
+2. Archive应用：
 ```
 
 1. Product → Archive
@@ -440,7 +440,7 @@ extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
 3. 在Organizer中验证归档
 
 ```
-**3. 上传到App Store Connect：**
+3. 上传到App Store Connect：
 ```
 
 1. 在Organizer中选择归档
@@ -450,7 +450,7 @@ extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
 5. 等待上传完成
 
 ```
-**4. 提交审核：**
+4. 提交审核：
 ```
 
 ```
@@ -465,19 +465,19 @@ extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
 #### 5.1 经验总结
 
 ```
-**开发过程中的关键点：**
+开发过程中的关键点：
 ```
 
-1. **Core Data使用**：合理设计数据模型，注意性能优化
-2. **MVVM架构**：分离视图和业务逻辑，便于测试和维护
-3. **内存管理**：注意循环引用，使用weak/unowned
-4. **UI设计**：遵循iOS设计规范，提供良好的用户体验
-5. **错误处理**：完善的错误处理机制，提升应用稳定性
+1. Core Data使用：合理设计数据模型，注意性能优化
+2. MVVM架构：分离视图和业务逻辑，便于测试和维护
+3. 内存管理：注意循环引用，使用weak/unowned
+4. UI设计：遵循iOS设计规范，提供良好的用户体验
+5. 错误处理：完善的错误处理机制，提升应用稳定性
 
 #### 5.2 优化建议
 
 ```
-**性能优化：**
+性能优化：
 ```
 - 使用懒加载优化列表性能
 - Core Data批量操作优化
@@ -485,7 +485,7 @@ extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
 - 合理使用GCD进行异步处理
 
 ```
-**用户体验优化：**
+用户体验优化：
 ```
 - 添加下拉刷新功能
 - 实现搜索和筛选
@@ -493,7 +493,7 @@ extension TodoListViewController: UITableViewDataSource, UITableViewDelegate {
 - 优化动画效果
 
 ```
-**代码质量：**
+代码质量：
 ```
 - 编写单元测试
 - 使用SwiftLint规范代码

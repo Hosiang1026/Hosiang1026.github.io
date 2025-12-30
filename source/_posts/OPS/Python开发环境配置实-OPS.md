@@ -1,4 +1,4 @@
----
+﻿---
 title: Python开发环境配置实
 categories: 开发环境配置全攻略系列
 tags:
@@ -20,11 +20,11 @@ top: 7
 #### 1.1 项目需求
 
 ```
-**项目背景：** 开发一个基于Flask的RESTful API服务，提供任务管理功能，支持用户认证、任务CRUD操作、文件上传等功能。
+项目背景： 开发一个基于Flask的RESTful API服务，提供任务管理功能，支持用户认证、任务CRUD操作、文件上传等功能。
 ```
 
 ```
-**核心需求：**
+核心需求：
 ```
 - 用户注册、登录、JWT认证
 - 任务创建、查询、更新、删除
@@ -37,23 +37,23 @@ top: 7
 #### 1.2 技术选型
 
 ```
-**技术栈：**
+技术栈：
 ```
-- **Web框架**: Flask 2.3.0
-- **数据库**: SQLite（开发）/ PostgreSQL（生产）
-- **ORM**: SQLAlchemy
-- **认证**: Flask-JWT-Extended
-- **API文档**: Flask-RESTX
-- **数据验证**: Marshmallow
-- **测试**: pytest + pytest-flask
+- Web框架: Flask 2.3.0
+- 数据库: SQLite（开发）/ PostgreSQL（生产）
+- ORM: SQLAlchemy
+- 认证: Flask-JWT-Extended
+- API文档: Flask-RESTX
+- 数据验证: Marshmallow
+- 测试: pytest + pytest-flask
 
 ```
-**开发工具：**
+开发工具：
 ```
-- **虚拟环境**: venv / pipenv
-- **代码格式化**: black
-- **代码检查**: flake8 / pylint
-- **类型检查**: mypy
+- 虚拟环境: venv / pipenv
+- 代码格式化: black
+- 代码检查: flake8 / pylint
+- 类型检查: mypy
 
 ### 二、项目架构
 
@@ -113,7 +113,7 @@ task-manager/
 #### 3.1 项目初始化
 
 ```
-**1. 创建虚拟环境并安装依赖：**
+1. 创建虚拟环境并安装依赖：
 ```
 
 ```bash
@@ -134,7 +134,7 @@ pip install pytest pytest-flask black flake8
 ```
 
 ```
-**2. requirements.txt：**
+2. requirements.txt：
 ```
 
 ```txt
@@ -156,7 +156,7 @@ flake8==6.1.0
 #### 3.2 应用配置
 
 ```
-**app/config.py：**
+app/config.py：
 ```
 
 ```python
@@ -179,7 +179,7 @@ class Config:
 ```
 
 ```
-**app/__init__.py：**
+app/__init__.py：
 ```
 
 ```python
@@ -221,7 +221,7 @@ def create_app(config_class=Config):
 #### 3.3 数据模型
 
 ```
-**app/models/user.py：**
+app/models/user.py：
 ```
 
 ```python
@@ -255,7 +255,7 @@ class User(db.Model):
 ```
 
 ```
-**app/models/task.py：**
+app/models/task.py：
 ```
 
 ```python
@@ -287,7 +287,7 @@ class Task(db.Model):
 #### 3.4 API实现
 
 ```
-**app/api/auth.py：**
+app/api/auth.py：
 ```
 
 ```python
@@ -346,7 +346,7 @@ class Login(Resource):
 ```
 
 ```
-**app/api/tasks.py：**
+app/api/tasks.py：
 ```
 
 ```python
@@ -426,7 +426,7 @@ class TaskDetail(Resource):
 #### 3.5 应用入口
 
 ```
-**run.py：**
+run.py：
 ```
 
 ```python
@@ -459,7 +459,7 @@ timeout = 120
 #### 4.2 Docker部署
 
 ```
-**Dockerfile：**
+Dockerfile：
 ```
 
 ```dockerfile
@@ -478,7 +478,7 @@ CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:create_app()"]
 ```
 
 ```
-**docker-compose.yml：**
+docker-compose.yml：
 ```
 
 ```yaml
@@ -510,7 +510,7 @@ volumes:
 ```
 
 ```
-**构建和运行：**
+构建和运行：
 ```
 
 ```bash
@@ -532,19 +532,19 @@ docker-compose down
 #### 5.1 经验总结
 
 ```
-**开发过程中的关键点：**
+开发过程中的关键点：
 ```
 
-1. **Flask应用结构**：使用蓝图组织代码，便于维护
-2. **SQLAlchemy ORM**：简化数据库操作，提高开发效率
-3. **JWT认证**：无状态的认证方式，适合RESTful API
-4. **Flask-RESTX**：自动生成API文档，便于前后端协作
-5. **虚拟环境**：隔离项目依赖，避免版本冲突
+1. Flask应用结构：使用蓝图组织代码，便于维护
+2. SQLAlchemy ORM：简化数据库操作，提高开发效率
+3. JWT认证：无状态的认证方式，适合RESTful API
+4. Flask-RESTX：自动生成API文档，便于前后端协作
+5. 虚拟环境：隔离项目依赖，避免版本冲突
 
 #### 5.2 优化建议
 
 ```
-**性能优化：**
+性能优化：
 ```
 - 使用Redis缓存热点数据
 - 数据库连接池优化
@@ -552,7 +552,7 @@ docker-compose down
 - 使用异步任务处理（Celery）
 
 ```
-**安全优化：**
+安全优化：
 ```
 - 密码加密存储（Werkzeug）
 - 实现请求频率限制
@@ -560,7 +560,7 @@ docker-compose down
 - 使用HTTPS加密传输
 
 ```
-**监控和日志：**
+监控和日志：
 ```
 - 集成日志系统（如ELK）
 - 使用APM工具监控性能

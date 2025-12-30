@@ -70,8 +70,9 @@ top: 142
   下面介绍 18 个常用的 webpack 插件。 
   本文在gitthub做了收录： 
   https://github.com/Michael-lzg/my--article/blob/master/webpack/%E6%80%BB%E7%BB%9318%E4%B8%AAwebpack%E6%8F%92%E4%BB%B6.md 
-   
-  #### HotModuleReplacementPlugin 
+
+### 一、Webpack插件详解
+#### 1.1 HotModuleReplacementPlugin
   模块热更新插件。 
  `Hot-Module-Replacement` 
   的热更新是依赖于  
@@ -92,7 +93,7 @@ top: 142
   ``` 
   
    
-  #### html-webpack-plugin 
+#### 1.2 html-webpack-plugin
   生成 html 文件。将 webpack 中 
  `entry` 
  配置的相关入口  
@@ -194,7 +195,7 @@ top: 142
   中仅引入了 index 的 js 文件，而  
   中也仅引入了 login 的 js 文件。 
    
-  #### clean-webpack-plugin 
+#### 1.3 clean-webpack-plugin
    
  `clean-webpack-plugin` 
   用于在打包前清理上一次项目生成的 bundle 文件，它会根据  
@@ -205,7 +206,7 @@ top: 142
   ``` 
   
    
-  #### extract-text-webpack-plugin 
+#### 1.4 extract-text-webpack-plugin
   将 css 成生文件，而非内联 。该插件的主要是为了抽离 css 样式，防止将样式打包在 js 中引起页面样式加载错乱的现象 
    
 ```javascript
@@ -214,7 +215,7 @@ top: 142
   ``` 
   
    
-  #### mini-css-extract-plugin 
+#### 1.5 mini-css-extract-plugin
   将 CSS 提取为独立的文件的插件，对每个包含 css 的 js 文件都会创建一个 CSS 文件，支持按需加载 css 和  
  `sourceMap` 
  。只能用在 webpack4 中，对比另一个插件 extract-text-webpack-plugin 有以下特点: 
@@ -242,7 +243,7 @@ top: 142
   ``` 
   
    
-  #### purifycss-webpack 
+#### 1.6 purifycss-webpack
   有时候我们 css 写得多了或者重复了，这就造成了多余的代码，我们希望在生产环境进行去。 
    
 ```javascript
@@ -251,7 +252,7 @@ top: 142
   ``` 
   
    
-  #### optimize-css-assets-webpack-plugin 
+#### 1.7 optimize-css-assets-webpack-plugin
   我们希望减小 css 打包后的体积，可以用到  
  `optimize-css-assets-webpack-plugin` 
  。 
@@ -260,7 +261,7 @@ top: 142
   ``` 
   
    
-  #### UglifyJsPlugin 
+#### 1.8 UglifyJsPlugin
    
  `uglifyJsPlugin` 
   是  
@@ -273,7 +274,7 @@ top: 142
   ``` 
   
    
-  #### ParallelUglifyPlugin 
+#### 1.9 ParallelUglifyPlugin
   开启多个子进程，把对多个文件压缩的工作分别给多个子进程去完成，每个子进程其实还是通过  
  `UglifyJS` 
   去压缩代码，但是变成了并行执行。 
@@ -282,7 +283,7 @@ top: 142
   ``` 
   
    
-  #### terser-webpack-plugin 
+#### 1.10 terser-webpack-plugin
   Webpack4.0 默认是使用  
  `terser-webpack-plugin` 
   这个压缩插件，在此之前是使用  
@@ -297,7 +298,7 @@ top: 142
   ``` 
   
    
-  #### NoErrorsPlugin 
+#### 1.11 NoErrorsPlugin
   报错但不退出 webpack 进程。编译出现错误时，使用  
  `NoEmitOnErrorsPlugin` 
   来跳过输出阶段。这样可以确保输出资源不会包含错误。 `plugins: [new webpack.NoEmitOnErrorsPlugin()]` #### compression-webpack-plugin 
@@ -312,7 +313,7 @@ top: 142
   
   当然，这个方法还需要后端配置支持。 
    
-  #### DefinePlugin 
+#### 1.12 DefinePlugin
   我们可以通过  
  `DefinePlugin` 
   可以定义一些全局的变量，我们可以在模块当中直接使用这些变量，无需作任何声明， 
@@ -325,7 +326,7 @@ top: 142
   ``` 
   
    
-  #### ProvidePlugin 
+#### 1.13 ProvidePlugin
   自动加载模块。任何时候，当  
  `identifier` 
   被当作未赋值的变量时， module 就会自动被加载，并且  
@@ -335,7 +336,7 @@ top: 142
   ``` 
   
    
-  #### DLLPlugin 
+#### 1.14 DLLPlugin
 ```
   这是在一个额外的独立的 webpack 设置中创建一个只有 dll 的 `bundle(dll-only-bundle)` 。这个插件会生成一个名为  
 ```
@@ -383,7 +384,7 @@ top: 142
 ``` 
   
    
-  #### HappyPack 
+#### 1.15 HappyPack
    
  `HappyPack` 
   能让 webpack 把任务分解给多个子进程去并发的执行，子进程处理完后再把结果发送给主进程。要注意的是  
@@ -413,7 +414,7 @@ top: 142
   
   注意，当项目较小时，多线程打包反而会使打包速度变慢。 
    
-  #### copy-webpack-plugin 
+#### 1.16 copy-webpack-plugin
   我们在  
  `public/index.html` 
   中引入了静态资源，但是打包的时候 webpack 并不会帮我们拷贝到 dist 目录，因此  
@@ -424,7 +425,7 @@ top: 142
   ``` 
   
    
-  #### IgnorePlugin 
+#### 1.17 IgnorePlugin
   这是 webpack 内置插件，它的作用是：忽略第三方包指定目录，让这些指定目录不要被打包去 
   比如我们要使用  
  `moment` 

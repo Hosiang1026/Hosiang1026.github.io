@@ -16,14 +16,14 @@ top: 49
 ![Test](https://oscimg.oschina.net/oscnet/up-265cdf85aba4a83e39ffbf8c1fd6b63144d.png '生产环境的 ServiceMesh 流量劫持怎么搞-百度有新招') 
  
  
-### 背景
+### 一、背景
   
 ServiceMesh 社区使用 iptables 实现流量劫持，这个机制在百度生产环境使用会遇到一些问题，因此，我们探索了其他的流量劫持方式，如基于服务发现的流量劫持机制、基于 SDK 的流量劫持机制、基于固定 Virutal IP 的流量劫持机制等。 
   
 本文主要介绍基于服务发现的流量劫持机制，这个机制是在服务发现步骤 "伪造" 地址来完成流量劫持。 
   
  
-### 基于 iptables 流量劫持机制
+### 二、基于 iptables 流量劫持机制
   
 我们先简单的看看社区的流量劫持方案，首先看下 Inbound 流量劫持，如图1 所示： 
   
@@ -70,7 +70,7 @@ ServiceMesh 社区使用 iptables 实现流量劫持，这个机制在百度生�
 因此我们探索了其他的劫持机制，接下来我来介绍下百度生产环境正在使用的流量劫持机制——基于服务发现的流量劫持机制。 
   
  
-### 基于服务发现的流量劫持机制
+### 三、基于服务发现的流量劫持机制
   
 先来看下该机制的设计思路，服务流量根据方向的不同，可以分为 Outbound 和 Inbound。如图3 所示，有两个服务：Client 和 Server，Client 的 Envoy 记为 EnvoyC，Server的 Envoy 记为 EnvoyS（本质是一样的，只不过为了表述方便取了不同的名字）。EnvoyC 要劫持的流量是来自在相同机器上的 Client 发出的 Outbound 流量，而 EnvoyS 要劫持的流量大部分是来自不同机器上的服务发给 Server 的流量。 
   
@@ -79,7 +79,7 @@ ServiceMesh 社区使用 iptables 实现流量劫持，这个机制在百度生�
 图3 ServiceMesh 流量劫持 
   
  
-#### Outbound 流量劫持
+#### 3.1 Outbound 流量劫持
   
 一个完整的请求大概要经历域名解析（或者是服务发现）、建立连接、发送请求这几个步骤，现在 iptables 用不了，其他依赖 Kernel 的劫持方案暂时也用不了，我们将目光转向第一步——服务发现。百度生产环境的服务基本都依赖 Naming 系统来解析服务真实的 ip 列表，我们只需要让 Naming 系统返回 Envoy 的 ip 地址，就能将服务的 Outbound 流量劫持到 Envoy。 
   
@@ -104,7 +104,7 @@ ServiceMesh 社区使用 iptables 实现流量劫持，这个机制在百度生�
 至此，Envoy 能够劫持 Outbound 流量，但是，只有 Outbound 流量劫持能力的 Envoy 是不完整的，对于入口限流等功能，还需要具备 Inbound 流量劫持的能力。 
   
  
-#### Inbound 流量劫持
+#### 3.2 Inbound 流量劫持
   
 Inbound 流量主要来自其他机器，我们无法再依赖单机的 Naming Agent 伪造地址，得另寻出路。还是基于 Naming 系统的思路，EnvoyS 和 Server 是同机部署的，他们对外提供的地址，唯一的区别在于端口，因此，只要我们能更换 EnvoyC 访问 Server 时的端口，就能将 Inbound 流量劫持到 EnvoyS。 
   
@@ -141,7 +141,7 @@ L3/L4 层通信 协议的异常点驱逐（被动健康检查）功能失效
 我们目前采用的解决方案是完善L3/L4 层通信协议的驱逐条件，增加访问超时作为驱逐条件。因此，当 Server 异常时，EnvoyC 会因为一直无法得到应答，而将该下游标记为异常。 
  
  
-### 总结
+### 四、总结
   
 最后简单的对比下上述两种方案： 
   

@@ -9,12 +9,10 @@ date: 2023-01-17 00:00:00
 top: 3
 ---
 
-#### K8s 设计模式 Kubernetes 是一个具有普遍意义的容器编排工具，它提供了一套基于容器构建分布式系统的基础依赖，其意义等同于 Linux 在操作系统中的地位，可以认为是分布式的操作系统。 ##### 自定义资源 K8s 提供了 Pod、Service、Volume 等一系列基...
-
 <!-- more -->
 
- 
-#### K8s 设计模式
+### 一、K8s设计模式与最佳实践
+#### 1.1 K8s 设计模式
  
 Kubernetes 是一个具有普遍意义的容器编排工具，它提供了一套基于容器构建分布式系统的基础依赖，其意义等同于 Linux 在操作系统中的地位，可以认为是分布式的操作系统。 
   
@@ -45,7 +43,7 @@ Operator 提供了标准化的设计流程：
  自定义 Controller 实现 K8s 协调（reconcile）逻辑； 
    
  
-#### 有了锤子，看到的只有钉子
+#### 1.3 有了锤子，看到的只有钉子
  
 我们团队（KubeOne 团队）一直在致力于解决复杂中间件应用如何部署到 K8s，自然也是 Operator 模式的践行者。经历了近 2 年的开发，初步解决了中间件在各个环境 K8s 的部署，当前中间也走了很多弯路，踩了很多坑。  KubeOne 内核也经历 3 个大版本的迭代，前 2 次开发过程基本都是 follow Operator 标准开发流程进行开发设计。遵循一个标准的、典型的 Operator 的设计过程看上去一切都是这么的完美，但是每次设计都非常痛苦，践行 Operator 模式之后，最值得反思和借鉴的就是”有了锤子，看到的只有钉子，简单总结一下就是 4 个一切： 
   
@@ -56,7 +54,7 @@ Operator 提供了标准化的设计流程：
  一切交互皆 cr。 
  
   
-#### 误区1：一切设计皆 YAML
+#### 1.4 误区1：一切设计皆 YAML
  
 K8s 的 API 是 YAML 格式，Operator 设计流程也是让大家首先定义 CRD，所以团队开始设计时直接采用了 YAML 格式。 
   
@@ -244,12 +242,12 @@ spec:
  不需要 Operator 化的对象，直接编写 Controller； 
  
   
-#### 误区2：一切皆合一
+#### 1.5 误区2：一切皆合一
  
 为了保证一个应用的终态，或者为了使用 gitops 管理一个应用，是否应该把应用相关的内容都放入一个 CRD 或一个 IAC 文件？根据 gitops 设计，每次变更时需要下发整个文件？ 
  
  
-#### 案例
+#### 1.6 案例
 案例1: 应用 WordPress，需要依赖一个 MySQL，终态如何定义? 
  `apiVersion: apps.mwops.alibaba-inc.com/v1alpha1`  `kind: AppDefinition`  `metadata:`  `labels:`  `app: "WordPress"`  `name: WordPress-1.0 //chart-name+chart-version`  `namespace: kubeone`  `spec:`  `appName: WordPress //chart-name`  `version: 1.0 //chart-version`  ```text
   ```  `parameterValues: //注 parameterValues标识业务属性`  `- name: "enableTenant"`  `value: "1"`  `- name: "CPU"`  `value: "1"`  `- name: "MEM"`  `value: "2Gi"`  `- name: "jvm"` `value: "flag;gc"` `- name: replicas`  `value: 3`  `- name: connectstring`  `valueFromConfigMap:` `name: ${resources:test-db.exposes.connectstring}` ```java
@@ -259,7 +257,7 @@ spec:
  上方的代码是 wordPress 应用的终态吗？这个文件包含了应用所需要的 DB 的定义和应用的定义，只要一次下发就可以先创建对应的数据库，再把应用拉起。 案例2：每次变更时，直接修改整个 yaml 的部分内容，修改后直接下发到 K8s，引起不必要的变更。例如：要从 3 个节点扩容到 5 个节点，修改上面 YAML 文件的 replicas 之后，需要下发整个 YAML。整个下发的 YAML 经过二次解析成底层的 StatefulSet 或 Deployment，解析逻辑升级后，可能会产生不符合预期的变化，导致所有 Pod 重建。 
   
  
-#### 反思
+#### 1.7 反思
   
 先回答第一个问题，上方 YAML 文件不是应用的终态，而是一个编排，此编排包含了 DB 的定义和应用的定义。应用的终态只应该包含自己必须的依赖引用，而不包含依赖是如何创建的。因为这个依赖引用可以是新创建的，也可以是一个已有，也可以是手工填写的，依赖如何创建与应用终态无关。 
  ```text
@@ -341,7 +339,7 @@ CRD 或 IAC 定义时，单个对象的终态只应该包含自身及对依赖�
 2、不适用场景 多个对象要一次性创建，并且需要按照顺序创建，存在依赖关系，需要通过编排层实现。 
   
  
-#### 误区3：一切皆终态
+#### 1.8 误区3：一切皆终态
   
   
  
@@ -399,7 +397,7 @@ SQL 语句就是最明显的一种声明式编程的例子，例如：
 一次性的流程编排，有频繁交互的控制流程。 命令式和声明式本就是 2 种互补的编程模式，就像有了面向对象之后，有人就鄙视面向过程的编程，现在有了声明式，就开始鄙视命令式编程，那一屋！ 
   
  
-#### 误区4：一切交互皆 cr
+#### 1.9 误区4：一切交互皆 cr
  
 因为 K8s 的 API 交互只能通过 YAML，导致大家的设计都以 cr 为中心，所有的交互都设计为下发一个 cr，通过 watch cr 触发对应的逻辑。 
  
@@ -434,7 +432,7 @@ K8s 对 YAML 操作命令有 create、apply、patch、delete、get 等，但一�
   
   
  
-#### 总结
+#### 1.10 总结
   
   
  

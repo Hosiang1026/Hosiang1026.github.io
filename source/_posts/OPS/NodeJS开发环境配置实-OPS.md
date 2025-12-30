@@ -1,4 +1,4 @@
----
+﻿---
 title: NodeJS开发环境配置实
 categories: 开发环境配置全攻略系列
 tags:
@@ -19,11 +19,11 @@ top: 5
 #### 1.1 项目需求
 
 ```
-**项目背景：** 开发一个RESTful API服务器，提供用户管理、文章管理、评论等功能，支持JWT认证和文件上传。
+项目背景： 开发一个RESTful API服务器，提供用户管理、文章管理、评论等功能，支持JWT认证和文件上传。
 ```
 
 ```
-**核心需求：**
+核心需求：
 ```
 - 用户注册、登录、JWT认证
 - 文章CRUD操作
@@ -35,27 +35,27 @@ top: 5
 #### 1.2 技术选型
 
 ```
-**技术栈：**
+技术栈：
 ```
-- **运行时**: Node.js 18+
-- **框架**: Express.js
-- **数据库**: MongoDB + Mongoose
+- 运行时: Node.js 18+
+- 框架: Express.js
+- 数据库: MongoDB + Mongoose
 ```
-- **认证**: JWT (jsonwebtoken)
+- 认证: JWT (jsonwebtoken)
 ```
-- **验证**: express-validator
-- **文件上传**: multer
-- **API文档**: swagger-jsdoc + swagger-ui-express
-- **日志**: winston
-- **环境变量**: dotenv
+- 验证: express-validator
+- 文件上传: multer
+- API文档: swagger-jsdoc + swagger-ui-express
+- 日志: winston
+- 环境变量: dotenv
 
 ```
-**开发工具：**
+开发工具：
 ```
-- **代码质量**: ESLint + Prettier
-- **测试**: Jest + Supertest
-- **热重载**: nodemon
-- **版本控制**: Git
+- 代码质量: ESLint + Prettier
+- 测试: Jest + Supertest
+- 热重载: nodemon
+- 版本控制: Git
 
 ### 二、项目架构
 
@@ -117,7 +117,7 @@ nodejs-api/
 #### 3.1 项目初始化
 
 ```
-**1. 创建项目并安装依赖：**
+1. 创建项目并安装依赖：
 ```
 
 ```bash
@@ -136,7 +136,7 @@ npm install -D nodemon eslint prettier jest supertest
 ```
 
 ```
-**2. 配置package.json：**
+2. 配置package.json：
 ```
 
 ```json
@@ -156,7 +156,7 @@ npm install -D nodemon eslint prettier jest supertest
 #### 3.2 数据库配置
 
 ```
-**config/database.js：**
+config/database.js：
 ```
 
 ```javascript
@@ -181,7 +181,7 @@ module.exports = connectDB;
 #### 3.3 数据模型定义
 
 ```
-**models/User.js：**
+models/User.js：
 ```
 
 ```javascript
@@ -226,7 +226,7 @@ module.exports = mongoose.model('User', userSchema);
 ```
 
 ```
-**models/Article.js：**
+models/Article.js：
 ```
 
 ```javascript
@@ -259,7 +259,7 @@ module.exports = mongoose.model('Article', articleSchema);
 #### 3.4 认证中间件
 
 ```
-**middleware/auth.js：**
+middleware/auth.js：
 ```
 
 ```javascript
@@ -294,7 +294,7 @@ module.exports = auth;
 #### 3.5 控制器实现
 
 ```
-**controllers/authController.js：**
+controllers/authController.js：
 ```
 
 ```javascript
@@ -365,7 +365,7 @@ exports.login = async (req, res) => {
 #### 3.6 路由配置
 
 ```
-**routes/articles.js：**
+routes/articles.js：
 ```
 
 ```javascript
@@ -404,7 +404,7 @@ module.exports = router;
 #### 3.7 应用入口
 
 ```
-**src/app.js：**
+src/app.js：
 ```
 
 ```javascript
@@ -445,7 +445,7 @@ app.listen(PORT, () => {
 #### 4.1 环境配置
 
 ```
-**创建.env文件：**
+创建.env文件：
 ```
 
 ```env
@@ -484,7 +484,7 @@ pm2 startup
 ```
 
 ```
-**ecosystem.config.js配置：**
+ecosystem.config.js配置：
 ```
 
 ```javascript
@@ -505,7 +505,7 @@ module.exports = {
 #### 4.3 Docker部署
 
 ```
-**Dockerfile：**
+Dockerfile：
 ```
 
 ```dockerfile
@@ -524,7 +524,7 @@ CMD ["node", "src/app.js"]
 ```
 
 ```
-**docker-compose.yml：**
+docker-compose.yml：
 ```
 
 ```yaml
@@ -555,19 +555,19 @@ volumes:
 #### 5.1 经验总结
 
 ```
-**开发过程中的关键点：**
+开发过程中的关键点：
 ```
 
-1. **项目结构**：清晰的分层架构便于维护和扩展
-2. **错误处理**：统一的错误处理中间件提高代码质量
-3. **数据验证**：使用express-validator确保数据安全
-4. **认证授权**：JWT实现无状态的用户认证
-5. **API文档**：Swagger自动生成API文档，便于前后端协作
+1. 项目结构：清晰的分层架构便于维护和扩展
+2. 错误处理：统一的错误处理中间件提高代码质量
+3. 数据验证：使用express-validator确保数据安全
+4. 认证授权：JWT实现无状态的用户认证
+5. API文档：Swagger自动生成API文档，便于前后端协作
 
 #### 5.2 优化建议
 
 ```
-**性能优化：**
+性能优化：
 ```
 - 使用Redis缓存热点数据
 - 实现数据库查询优化和索引
@@ -575,7 +575,7 @@ volumes:
 - 启用Gzip压缩
 
 ```
-**安全优化：**
+安全优化：
 ```
 - 使用HTTPS加密传输
 - 实现请求频率限制（rate limiting）
@@ -583,7 +583,7 @@ volumes:
 - 定期更新依赖包，修复安全漏洞
 
 ```
-**监控和日志：**
+监控和日志：
 ```
 - 集成日志收集系统（如ELK）
 - 使用APM工具监控应用性能

@@ -12,7 +12,8 @@ top: 178
 前言 在分析ThreadLocal导致的内存泄露前，需要普及了解一下内存泄露、强引用与弱引用以及GC回收机制，这样才能更好的分析为什么ThreadLocal会导致内存泄露呢？更重要的是知道该如何避免这样。..
 <!-- more -->
 
-                                                                                                                                                                                        #### 前言 
+### 一、ThreadLocal内存泄露分析
+#### 1.1 前言
 在分析ThreadLocal导致的内存泄露前，需要普及了解一下内存泄露、强引用与弱引用以及GC回收机制，这样才能更好的分析为什么ThreadLocal会导致内存泄露呢？更重要的是知道该如何避免这样情况发生，增强系统的健壮性。 
 ##### 内存泄露
 内存泄露为程序在申请内存后，无法释放已申请的内存空间，一次内存泄露危害可以忽略，但内存泄露堆积后果很严重，无论多少内存，迟早会被占光， 
@@ -28,7 +29,7 @@ JVM如何找到需要回收的对象，方式有两种：
  可达性分析法：从 GC Roots 开始向下搜索，搜索所走过的路径称为引用链。当一个对象到 GC Roots 没有任何引用链相连时，则证明此对象是不可用的，那么虚拟机就判断是可回收对象。 
  
  
-#### ThreadLocal的内存泄露分析
+#### 1.2 ThreadLocal的内存泄露分析
 先从前言的了解了一些概念（已懂忽略），接下来我们开始正式的来理解ThreadLocal导致的内存泄露的解析。 
 ##### 实现原理
  ```java
@@ -125,7 +126,7 @@ ThreadLocal的实现原理，每一个Thread维护一个ThreadLocalMap，key为�
 由于Thread中包含变量ThreadLocalMap，因此ThreadLocalMap与Thread的生命周期是一样长，如果都没有手动删除对应key，都会导致内存泄漏。 
 但是使用弱引用可以多一层保障：弱引用ThreadLocal不会内存泄漏，对应的value在下一次ThreadLocalMap调用set(),get(),remove()的时候会被清除。 
 因此，ThreadLocal内存泄漏的根源是：由于ThreadLocalMap的生命周期跟Thread一样长，如果没有手动删除对应key就会导致内存泄漏，而不是因为弱引用。 
-#### ThreadLocal正确的使用方法
+#### 1.3 ThreadLocal正确的使用方法
  
   每次使用完ThreadLocal都调用它的remove()方法清除数据  
   将ThreadLocal变量定义成private static，这样就一直存在ThreadLocal的强引用，也就能保证何时候都能通过ThreadLocal的弱引用访问到Entry的value值，进而清除掉 。  

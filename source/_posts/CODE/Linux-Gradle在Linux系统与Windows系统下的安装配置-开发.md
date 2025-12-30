@@ -12,7 +12,7 @@ Gradle 在 Linux 系统与 Windows 系统下的安装配置 1、Gradle 概述与
 <!-- more -->
 
                                                                                                                                                                                          
-### Gradle 在 Linux 系统与 Windows 系统下的安装配置
+### 一、Gradle 在 Linux 系统与 Windows 系统下的安装配置
 1、Gradle 概述与了解 
 Java 生态体系中有三大构建工具：Ant、Maven 和 Gradle 。 
 Ant 是由 Apache 软件基金会维护； Maven 这个单词意为知识的积累，最初在 Jakata Turbine 项目中用来简化构建过程； Gradle 是一个基于 Apache Ant 和 Apache Maven 概念的项目， 是一个开源的构建自动化工具， 它引入了基于 Java 和 Groovy 的 DSL（特定领域的语言）而不是XML（可扩展标记语言）来声明项目配置，抛弃了基于 XML 的各种繁琐配置， 它能够构建几乎所有类型的软件，它是为多项目构建而设计的。 

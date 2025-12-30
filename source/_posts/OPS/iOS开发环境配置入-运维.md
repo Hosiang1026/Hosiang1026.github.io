@@ -1,4 +1,4 @@
----
+﻿---
 title: iOS开发环境配置入门
 categories: 开发环境配置全攻略系列
 tags:
@@ -47,38 +47,38 @@ iOS是苹果公司开发的移动操作系统，最初于2007年发布，现已�
 Xcode是Apple官方提供的iOS开发IDE，包含了开发iOS应用所需的所有工具。
 
 ```
-**Xcode安装步骤：**
+Xcode安装步骤：
 ```
 
-1. **从App Store安装Xcode**
+1. 从App Store安装Xcode
    - 打开Mac App Store
    - 搜索"Xcode"
    - 点击"获取"或"安装"（需要Apple ID登录）
    - 等待下载完成（文件较大，约10-15GB）
 
-2. **首次启动配置**
+2. 首次启动配置
    - 打开Xcode，接受许可协议
    - 等待安装额外组件（Command Line Tools等）
    - 可能需要输入管理员密码
 
-3. **验证安装**
+3. 验证安装
    - 打开Xcode，选择 Xcode → About Xcode
    - 查看版本信息，确认安装成功
 
 ```
-**Xcode主要组件：**
+Xcode主要组件：
 ```
 
-- **Xcode IDE** - 集成开发环境
-- **iOS Simulator** - iOS模拟器
-- **Instruments** - 性能分析工具
-- **Interface Builder** - 可视化界面设计工具
-- **Swift Playgrounds** - Swift代码实验环境
+- Xcode IDE - 集成开发环境
+- iOS Simulator - iOS模拟器
+- Instruments - 性能分析工具
+- Interface Builder - 可视化界面设计工具
+- Swift Playgrounds - Swift代码实验环境
 
 ### 三、配置开发环境
 
 ```
-**1. 安装Command Line Tools**
+1. 安装Command Line Tools
 ```
 
 ```bash
@@ -88,7 +88,7 @@ xcode-select --install
 ```
 
 ```
-**2. 配置开发者账号**
+2. 配置开发者账号
 ```
 
 - 打开Xcode，选择 Xcode → Preferences → Accounts
@@ -96,7 +96,7 @@ xcode-select --install
 - 如果没有Apple Developer账号，可以使用免费的个人账号进行开发
 
 ```
-**3. 创建开发者证书**
+3. 创建开发者证书
 ```
 
 - 在Accounts中，选择你的Apple ID
@@ -105,12 +105,12 @@ xcode-select --install
 
 ### 四、创建第一个iOS项目
 
-1. **创建新项目**
+1. 创建新项目
    - 打开Xcode，选择 Create a new Xcode project
    - 选择iOS平台，选择App模板
    - 点击Next
 
-2. **配置项目信息**
+2. 配置项目信息
    - Product Name: 项目名称
    - Team: 选择你的开发团队
    - Organization Identifier: 组织标识符（通常是反向域名）
@@ -118,7 +118,7 @@ xcode-select --install
    - Language: 选择Swift或Objective-C
    - 点击Next，选择保存位置
 
-3. **运行项目**
+3. 运行项目
    - 选择模拟器（如iPhone 14 Pro）
    - 点击运行按钮（或按 `Cmd + R`）
    - 等待编译完成，模拟器会自动启动并运行应用
@@ -126,7 +126,7 @@ xcode-select --install
 ### 五、iOS模拟器使用
 
 ```
-**启动模拟器：**
+启动模拟器：
 ```
 - 在Xcode中选择 Window → Devices and Simulators
 - 选择Simulators标签
@@ -134,7 +134,7 @@ xcode-select --install
 - 选择设备类型和iOS版本
 
 ```
-**常用模拟器操作：**
+常用模拟器操作：
 ```
 - `Cmd + Shift + H`: 返回主屏幕
 - `Cmd + K`: 显示/隐藏键盘
@@ -144,13 +144,13 @@ xcode-select --install
 ### 六、真机调试配置
 
 ```
-**1. 连接设备**
+1. 连接设备
 ```
 - 使用USB线连接iPhone/iPad到Mac
 - 在设备上信任此电脑
 
 ```
-**2. 配置开发者证书**
+2. 配置开发者证书
 ```
 - 在Xcode中选择你的项目
 - 选择Signing & Capabilities
@@ -158,7 +158,7 @@ xcode-select --install
 - Xcode会自动管理证书和描述文件
 
 ```
-**3. 在设备上运行**
+3. 在设备上运行
 ```
 - 选择连接的设备作为运行目标
 - 点击运行按钮
@@ -167,7 +167,7 @@ xcode-select --install
 ### 七、常用开发工具
 
 ```
-**1. CocoaPods（依赖管理）**
+1. CocoaPods（依赖管理）
 ```
 
 # 安装CocoaPods
@@ -181,13 +181,13 @@ pod install
 
 ```
 
-**2. Swift Package Manager**
+2. Swift Package Manager
 
 - Xcode内置的包管理器
 - 在Xcode中选择 File → Add Packages
 - 输入包的URL或搜索包名
 
-**3. Instruments（性能分析）**
+3. Instruments（性能分析）
 
 - 选择 Product → Profile（或按 `Cmd + I`）
 - 选择分析模板（如Time Profiler、Allocations等）
@@ -203,32 +203,32 @@ pod install
 
 ### 九、常见问题解决
 
-**问题1：Xcode下载缓慢**
+问题1：Xcode下载缓慢
 - 使用稳定的网络连接
 - 可以考虑使用代理或VPN
 
-**问题2：模拟器无法启动**
+问题2：模拟器无法启动
 - 检查系统版本是否支持
 - 尝试重启Mac
 - 删除并重新创建模拟器
 
-**问题3：真机调试失败**
+问题3：真机调试失败
 - 检查开发者证书是否有效
 - 确认设备已信任开发者
 - 检查描述文件是否正确安装
 
-**问题4：编译错误**
+问题4：编译错误
 - 清理项目：Product → Clean Build Folder（`Cmd + Shift + K`）
 - 删除DerivedData文件夹
 - 重启Xcode
 
 ### 十、开发最佳实践
 
-1. **使用版本控制** - 使用Git管理代码
-2. **代码规范** - 遵循Swift/Objective-C编码规范
-3. **测试驱动** - 编写单元测试和UI测试
-4. **性能优化** - 使用Instruments定期分析性能
-5. **安全考虑** - 注意数据加密和隐私保护
-6. **持续学习** - 关注WWDC和Apple官方更新
+1. 使用版本控制 - 使用Git管理代码
+2. 代码规范 - 遵循Swift/Objective-C编码规范
+3. 测试驱动 - 编写单元测试和UI测试
+4. 性能优化 - 使用Instruments定期分析性能
+5. 安全考虑 - 注意数据加密和隐私保护
+6. 持续学习 - 关注WWDC和Apple官方更新
 
 通过以上步骤，你已经完成了iOS开发环境的配置，可以开始开发iOS应用了！

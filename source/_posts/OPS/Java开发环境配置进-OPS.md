@@ -1,4 +1,4 @@
----
+﻿---
 title: Java开发环境配置进
 categories: Java开发全栈系列
 tags:
@@ -19,7 +19,7 @@ top: 2
 #### 1.1 JDK版本管理
 
 ```
-**使用SDKMAN管理多个JDK版本：**
+使用SDKMAN管理多个JDK版本：
 ```
 
 ```bash
@@ -44,7 +44,7 @@ sdk list java | grep installed
 ```
 
 ```
-**使用jenv管理JDK版本（Mac/Linux）：**
+使用jenv管理JDK版本（Mac/Linux）：
 ```
 
 ```bash
@@ -68,7 +68,7 @@ jenv global 11
 #### 1.2 Maven高级配置
 
 ```
-**settings.xml配置优化：**
+settings.xml配置优化：
 ```
 
 ```xml
@@ -106,7 +106,7 @@ jenv global 11
 ```
 
 ```
-**多模块项目配置：**
+多模块项目配置：
 ```
 
 ```xml
@@ -140,7 +140,7 @@ jenv global 11
 #### 1.3 Gradle高级配置
 
 ```
-**gradle.properties优化：**
+gradle.properties优化：
 ```
 
 ```properties
@@ -158,7 +158,7 @@ systemProp.user.home=D:/maven
 ```
 
 ```
-**多项目构建配置：**
+多项目构建配置：
 ```
 
 ```groovy
@@ -188,10 +188,10 @@ subprojects {
 #### 2.1 IDE性能优化
 
 ```
-**IntelliJ IDEA优化：**
+IntelliJ IDEA优化：
 ```
 
-1. **内存配置（idea64.vmoptions）：**
+1. 内存配置（idea64.vmoptions）：
 ```
 -Xms2048m
 -Xmx4096m
@@ -200,19 +200,19 @@ subprojects {
 -XX:SoftRefLRUPolicyMSPerMB=50
 ```
 
-2. **禁用不必要的插件：**
+2. 禁用不必要的插件：
    - File → Settings → Plugins
    - 禁用不常用的插件以提升启动速度
 
-3. **索引优化：**
+3. 索引优化：
    - File → Settings → Directories
    - 将不需要索引的目录标记为Excluded
 
 ```
-**Eclipse优化：**
+Eclipse优化：
 ```
 
-1. **eclipse.ini配置：**
+1. eclipse.ini配置：
 ```
 -vmargs
 -Xms512m
@@ -221,14 +221,14 @@ subprojects {
 -XX:MaxMetaspaceSize=512m
 ```
 
-2. **禁用自动构建：**
+2. 禁用自动构建：
    - Project → Build Automatically（取消勾选）
    - 手动构建：Project → Build Project
 
 #### 2.2 构建速度优化
 
 ```
-**Maven构建优化：**
+Maven构建优化：
 ```
 
 ```xml
@@ -250,7 +250,7 @@ mvn clean install -DskipTests
 mvn clean install -o
 ```
 
-**Gradle构建优化：**
+Gradle构建优化：
 
 ```bash
 # 并行构建
@@ -270,7 +270,7 @@ mvn clean install -o
 
 #### 3.1 项目结构设计
 
-**标准Maven项目结构：**
+标准Maven项目结构：
 
 ```
 project/
@@ -296,7 +296,7 @@ project/
 
 #### 3.2 依赖管理策略
 
-**版本统一管理：**
+版本统一管理：
 
 ```xml
 <!-- 父pom.xml -->
@@ -321,7 +321,7 @@ project/
 ```
 ```
 
-**排除冲突依赖：**
+排除冲突依赖：
 
 ```xml
 ```html
@@ -342,7 +342,7 @@ project/
 
 #### 4.1 调试技巧
 
-**使用JDB命令行调试：**
+使用JDB命令行调试：
 
 ```bash
 # 启动调试模式
@@ -354,7 +354,7 @@ java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 MainClas
 jdb -attach localhost:5005
 ```
 
-**IntelliJ IDEA远程调试：**
+IntelliJ IDEA远程调试：
 
 1. Run → Edit Configurations
 2. 添加Remote JVM Debug
@@ -366,7 +366,7 @@ jdb -attach localhost:5005
 ```
 ```
 
-**使用JProfiler进行性能分析：**
+使用JProfiler进行性能分析：
 
 ```bash
 # 启动时附加JProfiler
@@ -377,9 +377,9 @@ java -agentpath:/path/to/jprofiler/bin/linux-x64/libjprofilerti.so=port=8849 Mai
 
 #### 4.2 问题排查
 
-**常见问题及解决方案：**
+常见问题及解决方案：
 
-1. **内存溢出（OutOfMemoryError）**
+1. 内存溢出（OutOfMemoryError）
    ```bash
    # 增加堆内存
    java -Xms512m -Xmx2048m -XX:+HeapDumpOnOutOfMemoryError MainClass
@@ -389,7 +389,7 @@ java -agentpath:/path/to/jprofiler/bin/linux-x64/libjprofilerti.so=port=8849 Mai
    # 或使用Eclipse Memory Analyzer
    ```
 
-2. **类加载问题（ClassNotFoundException/NoClassDefFoundError）**
+2. 类加载问题（ClassNotFoundException/NoClassDefFoundError）
    ```bash
    # 检查类路径
    java -cp .:lib/* MainClass
@@ -400,7 +400,7 @@ java -agentpath:/path/to/jprofiler/bin/linux-x64/libjprofilerti.so=port=8849 Mai
 ```
    ```
 
-3. **线程死锁**
+3. 线程死锁
    ```bash
    # 查看线程转储
 ```
@@ -411,7 +411,7 @@ java -agentpath:/path/to/jprofiler/bin/linux-x64/libjprofilerti.so=port=8849 Mai
    jvisualvm
    ```
 
-4. **GC问题**
+4. GC问题
    ```bash
    # 启用GC日志
 ```
@@ -422,12 +422,12 @@ java -agentpath:/path/to/jprofiler/bin/linux-x64/libjprofilerti.so=port=8849 Mai
    # 使用GCViewer或在线工具分析
    ```
 
-**性能分析工具：**
+性能分析工具：
 
-- **JVisualVM**: JDK自带，`jvisualvm`
-- **JProfiler**: 商业工具，功能强大
-- **Arthas**: 阿里开源，在线诊断工具
-- **JMC (Java Mission Control)**: Oracle官方工具
+- JVisualVM: JDK自带，`jvisualvm`
+- JProfiler: 商业工具，功能强大
+- Arthas: 阿里开源，在线诊断工具
+- JMC (Java Mission Control): Oracle官方工具
 
 ### 五、总结
 

@@ -1,4 +1,4 @@
----
+﻿---
 title: Android开发环境配置实
 categories: 开发环境配置全攻略系列
 tags:
@@ -20,11 +20,11 @@ top: 10
 #### 1.1 项目需求
 
 ```
-**项目背景：** 开发一个完整的Android新闻阅读应用，包含文章列表、详情、收藏、搜索等功能。
+项目背景： 开发一个完整的Android新闻阅读应用，包含文章列表、详情、收藏、搜索等功能。
 ```
 
 ```
-**核心需求：**
+核心需求：
 ```
 - 展示新闻列表，支持下拉刷新和上拉加载
 - 新闻详情页面，支持图片查看和分享
@@ -35,19 +35,19 @@ top: 10
 #### 1.2 技术选型
 
 ```
-**技术栈：**
+技术栈：
 ```
-- **开发语言**: Kotlin（推荐）或 Java
-- **架构模式**: MVVM（Model-View-ViewModel）
-- **网络请求**: Retrofit + OkHttp
-- **图片加载**: Glide
-- **数据库**: Room（SQLite封装）
-- **依赖注入**: Hilt
-- **异步处理**: Coroutines + Flow
-- **UI框架**: Jetpack Compose（可选）或传统View系统
+- 开发语言: Kotlin（推荐）或 Java
+- 架构模式: MVVM（Model-View-ViewModel）
+- 网络请求: Retrofit + OkHttp
+- 图片加载: Glide
+- 数据库: Room（SQLite封装）
+- 依赖注入: Hilt
+- 异步处理: Coroutines + Flow
+- UI框架: Jetpack Compose（可选）或传统View系统
 
 ```
-**开发工具：**
+开发工具：
 ```
 - Android Studio Hedgehog或更高版本
 - Git版本控制
@@ -72,7 +72,7 @@ top: 10
 #### 2.2 模块划分
 
 ```
-**项目结构：**
+项目结构：
 ```
 
 ```
@@ -97,13 +97,13 @@ app/
 #### 3.1 项目初始化
 
 ```
-**1. 创建新项目：**
+1. 创建新项目：
 ```
 
 打开Android Studio → New Project → 选择Empty Activity → 配置项目信息
 
 ```
-**2. 配置Gradle依赖：**
+2. 配置Gradle依赖：
 ```
 
 ```gradle
@@ -229,7 +229,7 @@ class MainViewModel @Inject constructor(
 #### 4.1 签名配置
 
 ```
-**生成签名密钥：**
+生成签名密钥：
 ```
 
 ```bash
@@ -237,7 +237,7 @@ keytool -genkey -v -keystore my-release-key.jks -keyalg RSA -keysize 2048 -valid
 ```
 
 ```
-**配置签名：**
+配置签名：
 ```
 
 ```gradle
@@ -265,7 +265,7 @@ android {
 #### 4.2 构建发布版本
 
 ```
-**生成APK：**
+生成APK：
 ```
 
 ```bash
@@ -273,7 +273,7 @@ android {
 ```
 
 ```
-**生成AAB（推荐，用于Google Play）：**
+生成AAB（推荐，用于Google Play）：
 ```
 
 ```bash
@@ -281,37 +281,37 @@ android {
 ```
 
 ```
-**输出位置：**
+输出位置：
 ```
 - APK: `app/build/outputs/apk/release/app-release.apk`
 - AAB: `app/build/outputs/bundle/release/app-release.aab`
 
 #### 4.3 Google Play发布流程
 
-1. **创建Google Play Console账号**
-2. **创建应用**：填写应用信息、分类、内容分级
-3. **上传AAB文件**
-4. **填写商店信息**：应用描述、截图、图标等
-5. **提交审核**
+1. 创建Google Play Console账号
+2. 创建应用：填写应用信息、分类、内容分级
+3. 上传AAB文件
+4. 填写商店信息：应用描述、截图、图标等
+5. 提交审核
 
 ### 五、项目总结
 
 #### 5.1 经验总结
 
 ```
-**开发过程中的关键点：**
+开发过程中的关键点：
 ```
 
-1. **架构选择**：MVVM架构使代码更清晰，便于测试和维护
-2. **异步处理**：使用Kotlin Coroutines处理异步操作，避免回调地狱
-3. **数据持久化**：Room数据库提供类型安全的数据库访问
-4. **网络请求**：Retrofit简化了网络请求的处理
-5. **图片加载**：Glide自动处理图片缓存和内存管理
+1. 架构选择：MVVM架构使代码更清晰，便于测试和维护
+2. 异步处理：使用Kotlin Coroutines处理异步操作，避免回调地狱
+3. 数据持久化：Room数据库提供类型安全的数据库访问
+4. 网络请求：Retrofit简化了网络请求的处理
+5. 图片加载：Glide自动处理图片缓存和内存管理
 
 #### 5.2 优化建议
 
 ```
-**性能优化：**
+性能优化：
 ```
 - 使用RecyclerView的DiffUtil优化列表更新
 - 实现分页加载，避免一次性加载大量数据
@@ -319,7 +319,7 @@ android {
 - 启用ProGuard代码混淆和资源压缩
 
 ```
-**用户体验优化：**
+用户体验优化：
 ```
 - 添加加载状态提示
 - 实现下拉刷新和上拉加载更多
@@ -327,7 +327,7 @@ android {
 - 支持离线阅读功能
 
 ```
-**代码质量：**
+代码质量：
 ```
 - 编写单元测试和UI测试
 - 使用Lint检查代码规范

@@ -1,4 +1,4 @@
----
+﻿---
 title: Windows上搭建Truffle开发框
 categories: 区块链与以太坊开发系列
 tags:
@@ -18,14 +18,14 @@ Truffle是以太坊智能合约开发的流行框架，提供了编译、测试�
 
 ## 一、什么是Truffle
 
-### 1.1 基本概念
+### 一、1 基本概念
 
 Truffle是以太坊智能合约开发的开发框架，提供了编译、测试、部署等完整工具链。Truffle简化了智能合约的开发流程，提高了开发效率。
 
-### 1.2 Truffle的特点
+### 二、2 Truffle的特点
 
 ```
-**完整工具链**：
+完整工具链：
 ```
 - 合约编译
 - 自动化测试
@@ -33,7 +33,7 @@ Truffle是以太坊智能合约开发的开发框架，提供了编译、测试�
 - 网络配置
 
 ```
-**开发友好**：
+开发友好：
 ```
 - 项目模板
 - 快速开发
@@ -41,7 +41,7 @@ Truffle是以太坊智能合约开发的开发框架，提供了编译、测试�
 - 丰富文档
 
 ```
-**生态支持**：
+生态支持：
 ```
 - Ganache集成
 - Drizzle支持
@@ -50,10 +50,10 @@ Truffle是以太坊智能合约开发的开发框架，提供了编译、测试�
 
 ## 二、如何安装Truffle
 
-### 2.1 前置要求
+### 三、1 前置要求
 
 ```
-**Node.js**：
+Node.js：
 ```
 - 安装Node.js（推荐LTS版本）
 - 访问 https://nodejs.org/
@@ -61,7 +61,7 @@ Truffle是以太坊智能合约开发的开发框架，提供了编译、测试�
 - 安装并验证
 
 ```
-**验证安装**：
+验证安装：
 ```
 ```bash
 node --version
@@ -69,14 +69,14 @@ npm --version
 
 ```
 
-### 2.2 安装Truffle
+### 四、2 安装Truffle
 
 ```
-**全局安装**： `npm install -g truffle` **项目安装**： `npm install --save-dev truffle` **验证安装**： `truffle version` ### 2.3 安装Ganache
+全局安装： `npm install -g truffle` 项目安装： `npm install --save-dev truffle` 验证安装： `truffle version` ### 2.3 安装Ganache
 ```
 
 ```
-**安装Ganache CLI**： `npm install -g ganache-cli` **或安装Ganache GUI**：
+安装Ganache CLI： `npm install -g ganache-cli` 或安装Ganache GUI：
 ```
 - 访问 https://trufflesuite.com/ganache/
 - 下载Windows版本
@@ -84,15 +84,15 @@ npm --version
 
 ## 三、如何创建Truffle项目
 
-### 3.1 初始化项目
+### 五、1 初始化项目
 
 ```
-**创建项目**：
+创建项目：
 ```
 mkdir my-project
 cd my-project
 truffle init
-`**项目结构**：`
+`项目结构：`
 my-project/
 ├── contracts/          # 智能合约
 ├── migrations/         # 部署脚本
@@ -101,9 +101,9 @@ my-project/
 └── package.json
 ```
 
-### 3.2 配置Truffle
+### 六、2 配置Truffle
 
-**配置文件**：
+配置文件：
 ```javascript
 ```
 // truffle-config.js
@@ -140,16 +140,16 @@ module.exports = {
 
 ## 四、如何使用Truffle
 
-### 4.1 编译合约
+### 七、1 编译合约
 
-**编译**： `truffle compile` **输出**：
+编译： `truffle compile` 输出：
 - `build/contracts/` 目录
 - 包含ABI和字节码
 - JSON格式文件
 
-### 4.2 测试合约
+### 八、2 测试合约
 
-**运行测试**： `truffle test` **编写测试**：
+运行测试： `truffle test` 编写测试：
 // test/MyContract.test.js
 const MyContract = artifacts.require("MyContract");
 
@@ -163,10 +163,10 @@ contract("MyContract", (accounts) => {
 
 ```
 
-### 4.3 部署合约
+### 九、3 部署合约
 
 ```
-**部署脚本**：
+部署脚本：
 // migrations/2_deploy_contracts.js
 ```
 
@@ -175,24 +175,24 @@ module.exports = function(deployer) {
     deployer.deploy(MyContract);
 ```
 };
-`**执行部署**：```bash
+`执行部署：```bash
 truffle migrate --network development
 ```
 
 ## 五、应用场景
 
-### 5.1 开发流程
+### 十、1 开发流程
 
-**标准流程**：
+标准流程：
 1. 编写合约
 2. 编译代码
 3. 编写测试
 4. 运行测试
 5. 部署合约
 
-### 5.2 团队协作
+### 十一、2 团队协作
 
-**版本控制**：
+版本控制：
 - Git管理代码
 - 共享配置
 - 统一环境
@@ -200,9 +200,9 @@ truffle migrate --network development
 
 ## 六、最佳实践
 
-### 6.1 配置管理
+### 十二、1 配置管理
 
-**环境变量**：
+环境变量：
 require('dotenv').config();
 
       provider: () => new HDWalletProvider(
@@ -214,10 +214,10 @@ require('dotenv').config();
 };
 ```
 
-### 6.2 测试策略
+### 十三、2 测试策略
 
 ```
-**全面测试**：
+全面测试：
 ```
 - 单元测试
 - 集成测试
@@ -229,7 +229,7 @@ require('dotenv').config();
 Truffle是智能合约开发的重要工具。关键要点：
 
 ```
-**安装配置**：
+安装配置：
 ```
 - 安装Node.js
 - 安装Truffle
@@ -237,7 +237,7 @@ Truffle是智能合约开发的重要工具。关键要点：
 - 设置编译器
 
 ```
-**开发流程**：
+开发流程：
 ```
 - 编写合约
 - 编译测试
@@ -245,7 +245,7 @@ Truffle是智能合约开发的重要工具。关键要点：
 - 持续改进
 
 ```
-**最佳实践**：
+最佳实践：
 ```
 - 环境变量管理
 - 全面测试

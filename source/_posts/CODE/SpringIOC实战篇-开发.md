@@ -1,4 +1,4 @@
----
+﻿---
 title: SpringIOC实战篇
 categories: Spring生态体系系列
 tags:
@@ -72,7 +72,7 @@ IoC（控制反转）是Spring框架的核心，通过DI（依赖注入）实现
 
 ```
 
-### 四、创建BeanFactory接口
+### 三、创建BeanFactory接口
 
 创建一个BeanFactory接口用来创建bean （模拟spring）
 
@@ -90,7 +90,7 @@ public interface BeanFactory {
 ```
 
 
-### 五、创建ClassPathXmlApplicationContext实现类
+### 四、创建ClassPathXmlApplicationContext实现类
 
 创建一个用来处理xml的类ClassPathXmlApplicationContext （也是模拟spring）
 
@@ -263,5 +263,5 @@ public class UserServiceTest {
 ```
 
 
-***注：*** [简单的Spring-IOC](https://github.com/Hosiang1026/simple-springioc)
+*注：* [简单的Spring-IOC](https://github.com/Hosiang1026/simple-springioc)
 

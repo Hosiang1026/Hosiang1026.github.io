@@ -13,16 +13,16 @@ top: 3
 <!-- more -->
 
                                                                                                                                                                                          
-### 简介
+### 一、简介
 使用java做项目的朋友肯定对maven不陌生，maven为我们提供了一个中心仓库，我们在构建java项目时，直接从maven中心仓库中下载依赖的jar包到本地，然后打包进行构建。 
 所有人都知道有这样一个maven仓库，但是很少有人去探寻这个maven仓库到底在什么地方，能不能发布自己的jar包到中心仓库呢？今天给大家介绍一下maven中心仓库和OSSRH的使用。 
  
-### 为什么使用中心仓库
+### 二、为什么使用中心仓库
 maven中心仓库的地址是 https://search.maven.org/#browse ， 我们可以通过该链接去查找需要的jar包，而这些jar包都是各个开源组织发布上去的。 
 这个中心仓库是Apache Maven, SBT 默认的repository。同时还可以支持 Apache Ant/Ivy, Gradle 等构建工具的使用。 
 现在的软件界是开源的软件界，越来越多的人和企业愿意在网络上贡献自己的代码，于是有了maven社区的中心仓库，可以方便任何人共享和使用jar包。 
  
-### 发布到中心仓库前的准备工作
+### 三、发布到中心仓库前的准备工作
 发布到中心仓库是需要权限的，我们需要注册我们的项目也就是artifacts id，并且指定需要将项目发布到哪里。 
 ```
 Sonatype 提供了一个叫做开源软件资源库托管Open Source Software Repository Hosting (OSSRH) 的工具，帮助我们来方便的将项目发布到中心仓库中。它是项目所有者和贡献者将其组件发布到中央资源库的主要途径。 
@@ -34,14 +34,14 @@ Sonatype 提供了一个叫做开源软件资源库托管Open Source Software Re
  GitHub重定向：设置你的域名到托管项目的GitHub URL的重定向。 
  
  
-### 使用OSSRH
+### 四、使用OSSRH
 Sonatype OSSRH（OSS存储库托管）使用Sonatype Nexus存储库管理器为开源项目二进制文件提供存储库托管服务。 OSSRH使用的是Maven存储库格式，我们可以部署开发版本的二进制文件snapshots，阶段发布二进制文件，还可以升级二进制文件并将其同步到中央仓库中。 
  
-#### 使用Sonatype创建ticket
+#### 4.1 使用Sonatype创建ticket
 Sonatype使用JIRA来管理创建请求，所以我们需要首先创建一个JIRA账号，创建账号地址： https://issues.sonatype.org/secure/Signup!default.jspa ， 然后使用该账户创建一个Project ticket，创建ticket地址：https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&pid=10134。 
 一般来说会在2个工作日内进行审核。 
  
-#### 中央仓库中的组件要求
+#### 4.2 中央仓库中的组件要求
 不同于我们自己的私人仓库，中央仓库中的组件的格式是有一定要求的。我们需要遵循它的格式规范。 
  
 ##### 提供Javadoc 和源代码
@@ -156,11 +156,11 @@ SCM是你项目的地址，如果使用的svn可以这样写：
   ``` 
   
  
-#### 部署
+#### 4.3 部署
 部署的目的是将生成的组件部署到本地的仓库中，有很多工具可以使用，最常见的就是Apache Maven，其他的构建工具比如Apache ant、Gradle、sbt等都可以很方便的构建项目。 
  
  
-#### 上传到中央仓库
+#### 4.4 上传到中央仓库
 本地部署好之后，就可以上传到中央仓库了。 
 可以使用Nexus Staging Maven Plugin 或者 Ant Tasks 来通过命令行上传。也可以直接浏览器访问 https://oss.sonatype.org/ 来上传。 
 一旦发布，组件会在10分钟之内发布到中央仓库，并且在2个小时之内，可以从中央仓库搜索到。 

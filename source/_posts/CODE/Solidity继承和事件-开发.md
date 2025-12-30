@@ -1,4 +1,4 @@
----
+﻿---
 title: Solidity继承和事件
 categories: 区块链与以太坊开发系列
 tags:
@@ -20,14 +20,14 @@ top: 26
 
 ## 一、什么是继承
 
-### 1.1 基本概念
+### 一、1 基本概念
 
 继承是Solidity中实现代码复用和模块化的重要机制，允许一个合约继承另一个合约的功能。Solidity支持多重继承，子合约可以继承多个父合约。
 
-### 1.2 继承的特点
+### 二、2 继承的特点
 
 ```
-**代码复用**：
+代码复用：
 ```
 - 继承父合约的功能
 - 减少重复代码
@@ -35,7 +35,7 @@ top: 26
 - 模块化设计
 
 ```
-**多重继承**：
+多重继承：
 ```
 - 可以继承多个合约
 - 使用C3线性化
@@ -43,7 +43,7 @@ top: 26
 - 灵活组合功能
 
 ```
-**函数覆盖**：
+函数覆盖：
 ```
 - 可以覆盖父合约函数
 - 使用virtual和override
@@ -52,10 +52,10 @@ top: 26
 
 ## 二、如何实现继承
 
-### 2.1 单继承
+### 三、1 单继承
 
 ```
-**基础继承**：
+基础继承：
 ```
 ```solidity
 pragma solidity ^0.8.0;
@@ -92,10 +92,10 @@ contract MyContract is Ownable {
 
 ```
 
-### 2.2 多重继承
+### 四、2 多重继承
 
 ```java
-**多个父合约**：
+多个父合约：
 // 可暂停合约
 contract Pausable {
     bool public paused;
@@ -143,9 +143,9 @@ contract MyContract is Ownable, Pausable {
 
 ```
 
-### 2.3 函数覆盖
+### 五、3 函数覆盖
 
-**virtual和override**：
+virtual和override：
 contract Base {
     // 声明为virtual，允许子合约覆盖
     function foo() public virtual returns (string memory) {
@@ -157,7 +157,7 @@ contract Derived is Base {
     function foo() public pure override returns (string memory) {
         return "Derived";
     }
-`**多重覆盖**：`solidity
+`多重覆盖：`solidity
 contract A {
     function test() public virtual returns (string memory) {
         return "A";
@@ -176,14 +176,14 @@ contract C is A, B {
 
 ## 三、什么是事件
 
-### 3.1 基本概念
+### 六、1 基本概念
 
 事件（Event）是Solidity中用于记录日志和通知链下应用的机制。事件数据存储在交易日志中，可以被前端应用监听和处理。
 
-### 3.2 事件的特点
+### 七、2 事件的特点
 
 ```
-**链下通知**：
+链下通知：
 ```
 - 前端可以监听
 - 实时获取状态变化
@@ -191,7 +191,7 @@ contract C is A, B {
 - 提高用户体验
 
 ```
-**Gas效率**：
+Gas效率：
 ```
 - 比存储更便宜
 - 适合记录历史
@@ -199,7 +199,7 @@ contract C is A, B {
 - 优化Gas消耗
 
 ```
-**不可篡改**：
+不可篡改：
 ```
 - 记录在区块链
 - 永久保存
@@ -208,10 +208,10 @@ contract C is A, B {
 
 ## 四、如何定义和使用事件
 
-### 4.1 事件定义
+### 八、1 事件定义
 
 ```
-**简单事件**：
+简单事件：
 ```
 
 ```python
@@ -231,7 +231,7 @@ contract EventExample {
         emit ValueChanged(oldValue, _value);
 ```
     }
-`**索引参数**：`solidity
+`索引参数：`solidity
 ```
 event Transfer(
 ```
@@ -246,9 +246,9 @@ event Transfer(
 ```
 ```
 
-### 4.2 事件使用
+### 九、2 事件使用
 
-**触发事件**：
+触发事件：
 contract Token {
     // 转账事件
     // 授权事件
@@ -273,10 +273,10 @@ contract Token {
 
 ```
 
-### 4.3 监听事件
+### 十、3 监听事件
 
 ```
-**使用Web3.js**：
+使用Web3.js：
 ```
 ```javascript
 // 监听转账事件
@@ -291,7 +291,7 @@ contract.events.Transfer({
     console.log('To:', event.returnValues.to);
     console.log('Value:', event.returnValues.value);
 });
-`**使用ethers.js**：```javascript
+`使用ethers.js：```javascript
 // 监听所有转账事件
 contract.on("Transfer", (from, to, value, event) => {
     console.log(`Transfer: ${from} -> ${to}, ${value}`);
@@ -306,10 +306,10 @@ contract.on(filter, (from, to, value) => {
 
 ## 五、应用场景
 
-### 5.1 标准接口
+### 十一、1 标准接口
 
 ```
-**ERC20事件**：
+ERC20事件：
 contract ERC20 {
     // 标准转账事件
     // 标准授权事件
@@ -319,7 +319,7 @@ contract ERC20 {
         // 转账逻辑
 ```
     }
-`**ERC721事件**：`solidity
+`ERC721事件：`solidity
 ```python
 contract ERC721 {
     // NFT转账事件：tokenId也是indexed
@@ -335,9 +335,9 @@ contract ERC721 {
     }
 ```
 
-### 5.2 状态追踪
+### 十二、2 状态追踪
 
-**订单状态**：
+订单状态：
 contract OrderSystem {
     enum OrderStatus { Created, Paid, Shipped, Delivered }
     
@@ -360,10 +360,10 @@ contract OrderSystem {
 
 ```
 
-### 5.3 审计日志
+### 十三、3 审计日志
 
 ```
-**操作记录**：
+操作记录：
 contract Auditable {
     // 管理员操作事件
     event AdminAction(
@@ -402,9 +402,9 @@ contract Auditable {
 
 ## 六、继承最佳实践
 
-### 6.1 设计模式
+### 十四、1 设计模式
 
-**可拥有合约**：
+可拥有合约：
     // 所有权转移事件
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
     
@@ -416,7 +416,7 @@ contract Auditable {
     
         emit OwnershipTransferred(owner, newOwner);
     }
-`**可暂停合约**：`solidity
+`可暂停合约：`solidity
 contract Pausable is Ownable {
     // 暂停事件
     event Paused(address account);
@@ -439,10 +439,10 @@ contract Pausable is Ownable {
     }
 ```
 
-### 6.2 库的使用
+### 十五、2 库的使用
 
 ```javascript
-**可重用库**：
+可重用库：
 library SafeMath {
     // 安全加法：检查溢出
     function add(uint256 a, uint256 b) internal pure returns (uint256) {
@@ -467,9 +467,9 @@ contract MyContract {
 
 ```
 
-### 6.3 接口定义
+### 十六、3 接口定义
 
-**标准接口**：
+标准接口：
 interface IERC20 {
     function transfer(address to, uint256 amount) external returns (bool);
     function balanceOf(address account) external view returns (uint256);
@@ -490,10 +490,10 @@ contract MyToken is IERC20 {
 
 ## 七、事件最佳实践
 
-### 7.1 事件设计
+### 十七、1 事件设计
 
 ```
-**完整信息**：
+完整信息：
 // 订单创建事件：包含所有重要信息
 event OrderCreated(
 ```
@@ -514,9 +514,9 @@ event OrderCreated(
 );
 ```
 
-### 7.2 Gas优化
+### 十八、2 Gas优化
 
-**替代存储**：
+替代存储：
 // 不推荐：存储历史数据（消耗Gas）
 mapping(uint256 => uint256) public history;
 
@@ -534,23 +534,23 @@ function setValue(uint256 index, uint256 value) public {
 
 ## 八、常见问题
 
-### 8.1 继承顺序
+### 十九、1 继承顺序
 
 ```
-**问题**：
+问题：
 ```
 - 多重继承的顺序
 - C3线性化规则
 
 ```
-**解决**：
+解决：
 ```
 - 理解继承顺序
 - 测试验证
 - 使用override明确
 - 查看编译器警告
 
-### 8.2 事件过滤
+### 二十、2 事件过滤
 
 - 如何高效过滤事件
 - 索引参数限制
@@ -565,21 +565,21 @@ function setValue(uint256 index, uint256 value) public {
 继承和事件是Solidity中实现代码复用和链下通信的重要机制。关键要点：
 
 ```
-**继承机制**：
+继承机制：
 ```
 - 代码复用
 - 多重继承
 - 函数覆盖
 
 ```
-**事件系统**：
+事件系统：
 ```
 - 链下通知
 - Gas高效
 - 不可篡改
 
 ```
-**最佳实践**：
+最佳实践：
 ```
 - 合理设计继承结构
 - 使用标准模式

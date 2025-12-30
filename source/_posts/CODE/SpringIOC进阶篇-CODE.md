@@ -1,4 +1,4 @@
----
+﻿---
 title: SpringIOC进阶篇
 categories: Spring生态体系系列
 tags:
@@ -19,7 +19,7 @@ top: 5
 #### 1.1 Bean作用域深入
 
 ```
-**Spring支持的Bean作用域：**
+Spring支持的Bean作用域：
 ```
 
 ```java
@@ -60,17 +60,17 @@ public class ApplicationBean {
 ```
 
 ```
-**作用域选择建议：**
+作用域选择建议：
 ```
 
-- **单例**：无状态Bean，性能最好，推荐使用
-- **原型**：有状态Bean，线程不安全对象
-- **请求/会话**：Web相关的Bean
+- 单例：无状态Bean，性能最好，推荐使用
+- 原型：有状态Bean，线程不安全对象
+- 请求/会话：Web相关的Bean
 
 #### 1.2 依赖注入高级用法
 
 ```
-**条件注入：**
+条件注入：
 ```
 
 ```java
@@ -93,7 +93,7 @@ public class ProdBean {
 ```
 
 ```
-**集合注入：**
+集合注入：
 ```
 
 ```java
@@ -115,7 +115,7 @@ public class OrderService {
 ```
 
 ```
-**可选依赖：**
+可选依赖：
 ```
 
 ```java
@@ -135,7 +135,7 @@ public class UserService {
 #### 1.3 Bean生命周期回调
 
 ```
-**初始化回调：**
+初始化回调：
 ```
 
 ```java
@@ -168,7 +168,7 @@ public LifecycleBean lifecycleBean() {
 ```
 
 ```
-**销毁回调：**
+销毁回调：
 ```
 
 ```java
@@ -199,7 +199,7 @@ public class LifecycleBean implements DisposableBean {
 #### 2.1 Bean创建优化
 
 ```
-**懒加载：**
+懒加载：
 ```
 
 ```java
@@ -225,7 +225,7 @@ public class ServiceBean {
 ```
 
 ```
-**Bean定义优化：**
+Bean定义优化：
 ```
 
 ```java
@@ -244,7 +244,7 @@ private Service service;
 #### 2.2 循环依赖处理
 
 ```
-**循环依赖类型：**
+循环依赖类型：
 ```
 
 ```java
@@ -271,7 +271,7 @@ public class PrototypeServiceA {
 ```
 
 ```
-**解决方案：**
+解决方案：
 ```
 
 ```java
@@ -302,7 +302,7 @@ public class ServiceA {
 #### 3.1 设计模式应用
 
 ```
-**工厂模式：**
+工厂模式：
 ```
 
 ```java
@@ -321,7 +321,7 @@ public class FactoryConfig {
 ```
 
 ```
-**单例模式：**
+单例模式：
 ```
 
 ```java
@@ -333,7 +333,7 @@ public class SingletonService {
 ```
 
 ```
-**策略模式：**
+策略模式：
 ```
 
 ```java
@@ -365,7 +365,7 @@ public class PaymentService {
 #### 3.2 模块化设计
 
 ```
-**多配置类管理：**
+多配置类管理：
 ```
 
 ```java
@@ -395,7 +395,7 @@ public class CacheConfig {
 #### 4.1 调试技巧
 
 ```
-**查看Bean信息：**
+查看Bean信息：
 ```
 
 ```java
@@ -416,7 +416,7 @@ System.out.println(definition.getScope());
 ```
 
 ```
-**使用Spring Boot Actuator：**
+使用Spring Boot Actuator：
 ```
 
 ```yaml
@@ -433,10 +433,10 @@ management:
 #### 4.2 问题排查
 
 ```
-**常见问题及解决方案：**
+常见问题及解决方案：
 ```
 
-1. **Bean创建失败**
+1. Bean创建失败
    ```java
    // 检查：
    // 1. 类路径是否正确
@@ -445,7 +445,7 @@ management:
    // 4. 是否有循环依赖
    ```
 
-2. **依赖注入失败**
+2. 依赖注入失败
    ```java
    // 检查：
    // 1. @Autowired注解是否正确
@@ -454,7 +454,7 @@ management:
    // 4. 是否有多个同类型Bean（需要@Qualifier）
    ```
 
-3. **作用域问题**
+3. 作用域问题
    ```java
    // 单例Bean注入原型Bean时，原型Bean不会每次都创建新实例
    // 解决方案：使用@Lookup或ObjectFactory

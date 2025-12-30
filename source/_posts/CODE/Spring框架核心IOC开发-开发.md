@@ -1,4 +1,4 @@
----
+﻿---
 title: Spring框架核心IOC开发
 categories: Spring生态体系系列
 tags:
@@ -520,6 +520,6 @@ ApplicationContext以一种更向面向框架的方式工作以及对上下文�
 
 
 ```
-***注：*** [SpringIOC详解](https://github.com/Hosiang1026/springioc)
+*注：* [SpringIOC详解](https://github.com/Hosiang1026/springioc)
 ```
 

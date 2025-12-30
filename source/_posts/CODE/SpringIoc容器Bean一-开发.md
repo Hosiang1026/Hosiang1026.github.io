@@ -1,4 +1,4 @@
----
+﻿---
 title: SpringIoc容器Bean一
 categories: Spring生态体系系列
 tags:
@@ -14,8 +14,8 @@ Bean的命名 Bean在Ioc容器中可以有一个或多个名称，但这些名�
 ```
 <!-- more -->
 
-                                                                                                                                                                                         
-#### Bean的命名
+### 一、Spring IoC容器Bean管理
+#### 1.1 Bean的命名
 Bean在Ioc容器中可以有一个或多个名称，但这些名称在容器内必须唯一，在Xml中配置id和name属性就可以为Bean起别名。 
  
  ```xml
@@ -30,7 +30,7 @@ Bean在Ioc容器中可以有一个或多个名称，但这些名称在容器内�
 ```
  
 ```java
-#### Bean的实例化 `<bean class=""/>` class属性代表着Ioc要实例化的Bean的类型，通常Ioc容器会通过反射机制调用其无参构造函数直接创建Bean。 
+#### 1.2 Bean的实例化 `<bean class=""/>` class属性代表着Ioc要实例化的Bean的类型，通常Ioc容器会通过反射机制调用其无参构造函数直接创建Bean。
 ```
 除此之外还可以配置使用静态工厂方法或者实例工厂方法来实例化对象。 
  
@@ -77,7 +77,7 @@ public class InstanceFactory {
 ```
 使用factory-bean指定要创建Bean实例的方法的Bean的名称，使用factory-method指定工厂方法名称。 
  
-#### Bean依赖注入
+#### 1.3 Bean依赖注入
 依赖注入指Ioc要创建A的实例，但A内部又依赖于B的实例，依赖注入主要有两种类型：基于构造函数的依赖注入和基于Setter的依赖注入。 
  
  构造函数注入 
@@ -92,7 +92,7 @@ public class InstanceFactory {
 ```
  
  
-#### Bean的作用域
+#### 1.4 Bean的作用域
 bean的作用域通过scope属性配置 
  
   
@@ -133,7 +133,7 @@ bean的作用域通过scope属性配置
  的生命周期 
    
   
-#### Bean的生命周期回调
+#### 1.5 Bean的生命周期回调
  
 除此之外还有其他的Aware，功能是为了获得接口申明的依赖 
  
@@ -166,7 +166,7 @@ bean的作用域通过scope属性配置
    Bean的类加载器 
    
   
-#### Bean的parent属性
+#### 1.6 Bean的parent属性
 parent属性用来指定要继承的配置数据，parent所指向的bean的定义必须要指定abstract属性为true，声明为抽象定义的Bean不能通过id获取实例，parent中定义的属性如果子bean重新配置，则会覆盖父bean的配置。 
 ```java
 <bean id="inheritedTestBean" abstract="true" class="com.example.demo.spring.TestBean">
@@ -185,7 +185,7 @@ parent属性用来指定要继承的配置数据，parent所指向的bean的定�
     <property name="addr" value="西安"></property>
 ```
  
-#### Bean的扩展
+#### 1.7 Bean的扩展
  
  BeanPostProcessor 
  
@@ -197,7 +197,7 @@ public class InstantiationTracingBeanPostProcessor implements BeanPostProcessor 
 
 ```java
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("************postProcessBeforeInitialization*********** + " + beanName);
+        System.out.println("**********postProcessBeforeInitialization******* + " + beanName);
         return bean;
 ```
     }
@@ -205,7 +205,7 @@ public class InstantiationTracingBeanPostProcessor implements BeanPostProcessor 
 
 ```java
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("************postProcessAfterInitialization*********** + " + beanName);
+        System.out.println("********postProcessAfterInitialization********* + " + beanName);
 ```
     }
  
@@ -271,7 +271,7 @@ datasource.userName=root
 datasource.password=root 
 最终Bean password值会是root被PropertyOverrideConfigurer覆盖。 
  
-#### FactoryBean
+#### 1.8 FactoryBean
 FactoryBean是一个特殊的接口，它不同于BeanFactory，BeanFacoty是Spring的工厂，而FactoryBean是容器中的一个特殊bean，可以创建指定的类型Bean的实例。 
 public class DataSourceFanctoryBean implements FactoryBean<DataSource> {
 

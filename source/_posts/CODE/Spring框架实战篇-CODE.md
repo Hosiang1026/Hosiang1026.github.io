@@ -1,4 +1,4 @@
----
+﻿---
 title: Spring框架实战篇
 categories: Spring生态体系系列
 tags:
@@ -21,11 +21,11 @@ top: 6
 #### 1.1 项目需求
 
 ```
-**项目背景：** 开发一个基于Spring框架的图书管理系统，提供图书的增删改查、借阅管理、用户管理等功能。
+项目背景： 开发一个基于Spring框架的图书管理系统，提供图书的增删改查、借阅管理、用户管理等功能。
 ```
 
 ```
-**核心需求：**
+核心需求：
 ```
 - 用户注册、登录、权限管理
 - 图书信息CRUD操作
@@ -37,20 +37,20 @@ top: 6
 #### 1.2 技术选型
 
 ```
-**技术栈：**
+技术栈：
 ```
-- **框架**: Spring 5.3 + Spring MVC
-- **数据访问**: Spring JDBC / MyBatis
-- **数据库**: MySQL 8.0
-- **构建工具**: Maven
-- **服务器**: Tomcat 9.0
+- 框架: Spring 5.3 + Spring MVC
+- 数据访问: Spring JDBC / MyBatis
+- 数据库: MySQL 8.0
+- 构建工具: Maven
+- 服务器: Tomcat 9.0
 
 ```
-**开发工具：**
+开发工具：
 ```
-- **IDE**: IntelliJ IDEA
-- **数据库工具**: DBeaver
-- **API测试**: Postman
+- IDE: IntelliJ IDEA
+- 数据库工具: DBeaver
+- API测试: Postman
 
 ### 二、项目架构
 
@@ -117,7 +117,7 @@ book-management/
 #### 3.1 项目初始化
 
 ```
-**1. 创建Maven项目：**
+1. 创建Maven项目：
 ```
 
 ```xml
@@ -187,7 +187,7 @@ book-management/
 #### 3.2 配置类实现
 
 ```
-**WebConfig.java：**
+WebConfig.java：
 ```
 
 ```java
@@ -208,7 +208,7 @@ public class WebConfig implements WebMvcConfigurer {
     // 静态资源处理
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**")
+        registry.addResourceHandler("/static/")
                 .addResourceLocations("/static/");
     }
     
@@ -221,7 +221,7 @@ public class WebConfig implements WebMvcConfigurer {
 ```
 
 ```
-**DataSourceConfig.java：**
+DataSourceConfig.java：
 ```
 
 ```java
@@ -266,7 +266,7 @@ public class DataSourceConfig {
 #### 3.3 实体类定义
 
 ```
-**Book.java：**
+Book.java：
 ```
 
 ```java
@@ -289,7 +289,7 @@ public class Book {
 #### 3.4 Repository层实现
 
 ```
-**BookRepository.java：**
+BookRepository.java：**
 ```
 
 ```java
@@ -352,7 +352,7 @@ public class BookRepository {
 #### 3.5 Service层实现
 
 ```
-**BookService.java：**
+BookService.java：
 ```
 
 ```java
@@ -395,7 +395,7 @@ public class BookService {
 #### 3.6 Controller层实现
 
 ```
-**BookController.java：**
+BookController.java：
 ```
 
 ```java
@@ -448,7 +448,7 @@ public class BookController {
 #### 4.1 打包应用
 
 ```
-**使用Maven打包：**
+使用Maven打包：
 ```
 
 ```bash
@@ -462,7 +462,7 @@ mvn clean package
 #### 4.2 部署到Tomcat
 
 ```
-**1. 部署步骤：**
+1. 部署步骤：
 ```
 
 1. 将WAR文件复制到Tomcat的`webapps`目录
@@ -470,7 +470,7 @@ mvn clean package
 3. 访问：`http://localhost:8080/book-management-1.0.0/api/books`
 
 ```
-**2. 配置server.xml（可选）：**
+2. 配置server.xml（可选）：
 ```
 
 ```xml
@@ -482,19 +482,19 @@ mvn clean package
 #### 5.1 经验总结
 
 ```
-**开发过程中的关键点：**
+开发过程中的关键点：
 ```
 
-1. **分层架构**：清晰的分层便于维护和测试
-2. **依赖注入**：使用Spring的IoC容器管理Bean
-3. **事务管理**：使用声明式事务简化代码
-4. **RESTful设计**：遵循REST规范设计API
-5. **异常处理**：统一的异常处理机制
+1. 分层架构：清晰的分层便于维护和测试
+2. 依赖注入：使用Spring的IoC容器管理Bean
+3. 事务管理：使用声明式事务简化代码
+4. RESTful设计：遵循REST规范设计API
+5. 异常处理：统一的异常处理机制
 
 #### 5.2 优化建议
 
 ```
-**性能优化：**
+性能优化：
 ```
 - 使用连接池优化数据库连接
 - 添加缓存机制（Redis）
@@ -502,7 +502,7 @@ mvn clean package
 - 优化SQL查询语句
 
 ```
-**功能扩展：**
+功能扩展：
 ```
 - 添加用户认证和授权
 - 实现文件上传功能

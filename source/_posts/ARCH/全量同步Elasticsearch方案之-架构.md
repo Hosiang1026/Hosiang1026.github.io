@@ -15,9 +15,10 @@ top: 34
 ```
 <!-- more -->
 
-                                                                                                                                                                                        ![Test](https://oscimg.oschina.net/oscnet/up-2f6057cce7f25dd90d0d9b893dc074cf547.png  '全量同步Elasticsearch方案之Canal') 
-### 一、
-#### 1.1 一、前言
+![Test](https://oscimg.oschina.net/oscnet/up-2f6057cce7f25dd90d0d9b893dc074cf547.png  '全量同步Elasticsearch方案之Canal') 
+
+### 一、全量同步Elasticsearch方案之Canal
+#### 1.1 前言
  
 Canal 是阿里的一款开源项目，纯 Java 开发。基于数据库增量日志解析，提供增量数据订阅&消费，目前主要支持了 MySQL（也支持 MariaDB）。 
  
@@ -25,8 +26,7 @@ Canal 除了支持 binlog 实时增量同步数据库之外也支持全量同步
  
 PS：关于Canal的部署与 实时同步 请看文章《Canal高可用架构部署》 
   
-```
-#### 1.2 二、ETL接口 `adapter` 的 `ETL` 接口为： `/etl/{type}/{task}` 默认web端口为 `8081` type 为类型(hbase/es7/rdb)
+#### 1.2 ETL接口 `adapter` 的 `ETL` 接口为： `/etl/{type}/{task}` 默认web端口为 `8081` type 为类型(hbase/es7/rdb)
 ```
  task 为任务名对应配置文件名，如sys_user.yml 
  

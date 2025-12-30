@@ -49,10 +49,9 @@ public String callHello() {
         null
 }
   
-``` 
-  
- 
-### 一、
+  ``` 
+
+### 一、Spring Cloud Hystrix配置
 #### 1.1 配置详解
 HystrixCommand 中除了 fallbackMethod 还有很多的配置，下面我们来看看这些配置，如下表所示： 
  HystrixCommand 配置详解 

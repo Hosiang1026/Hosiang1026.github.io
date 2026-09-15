@@ -1,0 +1,7 @@
+name = "gitalk-oauth-proxy"
+main = "gitalk-oauth-proxy.js"
+compatibility_date = "2026-09-15"
+
+routes = [
+  { pattern = "haoxiang.eu.org/gitalk-oauth", zone_name = "haoxiang.eu.org" }
+]

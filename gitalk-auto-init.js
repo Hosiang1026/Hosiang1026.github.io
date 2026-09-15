@@ -2,20 +2,16 @@ const fs = require('fs');
 const path = require('path');
 const url = require('url');
 
-const request = require('request');
 const xmlParser = require('xml-parser');
-const md5 = require('blueimp-md5');
-const moment = require('moment');
 
-// 配置信息
 const config = {
-    username: 'Hosiang1026', // GitHub repository 所有者，可以是个人或者组织。对应Gitalk配置中的owner
-    repo: 'bolg-comment', // 储存评论issue的github仓库名，仅需要仓库名字即可。对应 Gitalk配置中的repo
-    token: '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', // 前面申请的 personal access token
-    sitemap: path.join(__dirname, './public/sitemap.xml'), // 自己站点的 sitemap 文件地址
-    cache: true, // 是否启用缓存，启用缓存会将已经初始化的数据写入配置的 gitalkCacheFile 文件，下一次直接通过缓存文件判断
-    gitalkCacheFile: path.join(__dirname, './gitalk-init-cache.json'), // 用于保存 gitalk 已经初始化的 id 列表
-    gitalkErrorFile: path.join(__dirname, './gitalk-init-error.json'), // 用于保存 gitalk 初始化报错的数据
+    username: 'Hosiang1026',
+    repo: 'bolg-comment',
+    token: process.env.GITALK_GITHUB_TOKEN || '',
+    sitemap: path.join(__dirname, './public/sitemap.xml'),
+    cache: true,
+    gitalkCacheFile: path.join(__dirname, './gitalk-init-cache.json'),
+    gitalkErrorFile: path.join(__dirname, './gitalk-init-error.json'),
 };
 
 const api = 'https://api.github.com/repos/' + config.username + '/' + config.repo + '/issues';
@@ -79,33 +75,28 @@ const getGitalkId = ({
  * @param {string} gitalk 初始化的id
  * @return {[boolean, boolean]} 第一个值表示是否出错，第二个值 false 表示没初始化， true 表示已经初始化
  */
-const getIsInitByRequest = (id) => {
-    const options = {
-        headers: {
-            'Authorization': 'token ' + config.token,
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
-            'Accept': 'application/json'
-        },
-        url: api + '?labels=' + 'Gitalk,' + id,
-        method: 'GET'
-    };
-
-    return new Promise((resolve) => {
-        setTimeout(resolve, 1000);
-        request(options, function (err, response, body) {
-            if (err) {
-                return resolve([err, false]);
+const getIsInitByRequest = async (id) => {
+    await new Promise((r) => setTimeout(r, 1000));
+    try {
+        const response = await fetch(api + '?labels=' + 'Gitalk,' + id, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'token ' + config.token,
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
+                'Accept': 'application/json'
             }
-            if (response.statusCode != 200) {
-                return resolve([response, false]);
-            }
-            const res = JSON.parse(body);
-            if (res.length > 0) {
-                return resolve([false, true]);
-            }
-            return resolve([false, false]);
         });
-    });
+        if (response.status != 200) {
+            return [response, false];
+        }
+        const res = await response.json();
+        if (res.length > 0) {
+            return [false, true];
+        }
+        return [false, false];
+    } catch (err) {
+        return [err, false];
+    }
 };
 
 /**
@@ -146,7 +137,7 @@ const idIsInit = async (id) => {
 };
 
 // 初始化
-const gitalkInit = ({
+const gitalkInit = async ({
                         url,
                         id,
                         title,
@@ -159,28 +150,24 @@ const gitalkInit = ({
         'body': url + '\r\n\r\n' + desc
     };
 
-    const options = {
-        headers: {
-            'Authorization': 'token ' + config.token,
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
-            'Accept': 'application/json',
-            'Content-Type': 'application/json;charset=UTF-8'
-        },
-        url: api,
-        body: JSON.stringify(reqBody),
-        method: 'POST'
-    };
-    return new Promise((resolve) => {
-        request(options, function (err, response, body) {
-            if (err) {
-                return resolve([err, false]);
-            }
-            if (response.statusCode != 201) {
-                return resolve([response, false]);
-            }
-            return resolve([false, true]);
+    try {
+        const response = await fetch(api, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'token ' + config.token,
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            body: JSON.stringify(reqBody)
         });
-    });
+        if (response.status != 201) {
+            return [response, false];
+        }
+        return [false, true];
+    } catch (err) {
+        return [err, false];
+    }
 };
 
 

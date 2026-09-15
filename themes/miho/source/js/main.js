@@ -15,12 +15,10 @@
         clientHeight = d.documentElement.clientHeight; //获取可视区的高度
     var Blog = {
         showHeaderMenu: function (scrollTop) {
-            if (scrollTop > clientHeight * 0.1) {
-                headerMenu.removeClass("slide-down");
-                headerMenu.addClass("slide-up");
+            if (scrollTop > 48) {
+                headerMenu.addClass("is-scrolled");
             } else {
-                headerMenu.removeClass("slide-up");
-                headerMenu.addClass("slide-down");
+                headerMenu.removeClass("is-scrolled");
             }
         },
         showBackTop: function (scrollTop) {

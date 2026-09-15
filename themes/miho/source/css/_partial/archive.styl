@@ -20,8 +20,11 @@
   avoid-column-break()
 .archive-article-inner
   @extend $block
-  padding: 10px
-  margin-bottom: 15px
+  padding: 14px 16px
+  margin-bottom: 14px
+  transition: box-shadow .2s ease
+  &:hover
+    box-shadow: 0 4px 16px rgba(20, 26, 34, .1)
 .archive-article-header h1
   @extend $ellipsis
 .archive-article-title
@@ -30,6 +33,8 @@
   transition: color 0.2s
   line-height: line-height
   font-size: 18px
+  font-weight: 600
+  letter-spacing: .05em
   @extend $ellipsis
   &:hover
     color: main-color

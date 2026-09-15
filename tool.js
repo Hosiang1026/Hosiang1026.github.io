@@ -1,6 +1,5 @@
 "use strict";
 var fs = require("fs");
-var request = require("request");
 var date = require("silly-datetime");
 var baseUrl = "/photo/album/";
 var albumPath = "./themes/miho/source/photo/album/";

@@ -3,12 +3,17 @@
   min-height: calc(100vh - 530px)
 .article
   margin: block-margin 0
-  background: #fff
-  border-radius: 0
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2)
+  background: color-card
+  border-radius: 8px
+  border: 1px solid color-border
+  box-shadow: box-shadow
+  overflow: hidden
 
 .article-inner
   @extend $block
+  border: none
+  box-shadow: none
+  border-radius: 0
   overflow: inherit
 
 .article-date
@@ -18,8 +23,7 @@
 .article-category
   float: left
   line-height: 1em
-  color: #ccc
-  text-shadow: 0 1px #fff
+  color: color-grey
   margin-left: 8px
   &:before
     content: "\2022"
@@ -34,47 +38,47 @@
 
 .article-title
   display: block
-  padding: 7px 80px 7px 15px
-  border-left: 4px solid #0cc
+  padding: 8px 88px 8px 16px
+  border-left: 3px solid main-color
   text-decoration: none
-  font-size: 1.3em
+  font-size: 1.4em
+  font-weight: 600
+  letter-spacing: .06em
   color: color-default
   line-height: line-height-title
-  transition: all 0.3s ease
+  transition: color 0.2s ease, padding-left 0.2s ease
   @extend $ellipsis
   &:hover
     color: main-color
-    padding-left: 8px
+    padding-left: 12px
 
 .article-header .header-cate
   background: main-color
   position: absolute
   display: inline-block
-  padding: 8px
+  padding: 7px 12px
   text-align: center
   color: #fff
-  top: 16px
-  right: -10px
-  box-shadow: 0 1px 2px rgba(0,0,0,.3)
+  font-size: 12px
+  letter-spacing: .5px
+  top: 18px
+  right: 0
+  border-radius: 3px 0 0 3px
+  box-shadow: 0 2px 8px rgba(26, 74, 110, .25)
   a
     text-decoration: none
     color: #fff
   &:after
-    position: absolute
-    content: ""
-    top: 30px
-    right: 0
-    border-bottom: 10px solid transparent
-    border-left: 10px solid #099
+    display: none
 
 .article-entry
   @extend $base-style
   clearfix()
   position: relative
-  padding: 15px
-  background: #f9f9f9
-  border-top: 1px solid #e8e8e8
-  border-bottom: 1px solid #e8e8e8
+  padding: 18px 20px
+  background: #fafbfc
+  border-top: 1px solid color-border
+  border-bottom: 1px solid color-border
   color: color-default
   p, table
     line-height: line-height
@@ -82,22 +86,25 @@
     margin: line-height-margin 0
     word-wrap: break-word
   h4, h5, h6
-    font-weight: bold
+    font-weight: 600
   h1, h2, h3
-    padding-bottom: 5px;
-    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px
+    border-bottom: 1px solid color-border
+    font-weight: 600
   h1, h2, h3, h4, h5, h6
     line-height: line-height-title
     margin: line-height-title 0
+    color: #1c2430
   a
     color: color-link
     text-decoration: none
+    border-bottom: 1px solid rgba(26, 74, 110, .25)
     &:hover
-      text-decoration: underline
+      border-bottom-color: main-color
   ol, dl
     margin-top: line-height-margin
     margin-bottom: line-height-margin
-    font-size: 16px
+    font-size: 15px
   img, video
     max-width: 100%
     height: auto
@@ -109,30 +116,30 @@
     width: 100%
     border-collapse: collapse
     border-spacing: 0
-    border: 1px solid #ddd
+    border: 1px solid color-border
     thead th
-      background: #f1f1f1
+      background: #f3f5f8
       text-align: center
-      border: 1px solid #ddd
-      padding: 15px 0
+      border: 1px solid color-border
+      padding: 12px 8px
     th
-      font-weight: bold
+      font-weight: 600
     td
-      border: 1px solid #ddd
+      border: 1px solid color-border
       vertical-align: middle
-      padding: 15px 0
+      padding: 12px 8px
       text-align: center
   center
     font-size: 1rem
   blockquote
     position: relative
     padding: 16px 20px
-    border-left: 4px solid main-color
-    color: #6e6e6e
-    background: #f5f5f5
+    border-left: 3px solid main-color
+    color: #5a6472
+    background: #f3f5f8
     font-size: 14px
-    border-radius: 0 2px 2px 0
-    margin: 10px 0
+    border-radius: 0 4px 4px 0
+    margin: 12px 0
     footer
       font-size: font-size
       margin: line-height 0
@@ -160,7 +167,7 @@
     text-align: center
   .video-container
     position: relative
-    padding-top: (9 / 16 * 100)% // 16:9 ratio
+    padding-top: (9 / 16 * 100)%
     height: 0
     overflow: hidden
     iframe, object, embed
@@ -175,21 +182,16 @@
     width: 300px
     height: 150px
     overflow: hidden
+    border-radius: 4px
     a
       cursor: pointer
     img
       width: 100%
       height: 150px
-      transition: 0.8s all
-      -moz-transition: 0.8s all
-      -webkit-transition: 0.8s all
-      -o-transition: 0.8s all
+      object-fit: cover
+      transition: transform 0.4s ease
       &:hover
-        transform: scale(1.5)
-        -ms-transform: scale(1.5)
-        -moz-transform: scale(1.5)
-        -webkit-transform: scale(1.5)
-        -o-transform: scale(1.5)
+        transform: scale(1.06)
   .article-feed
     margin-left: 320px
   .article-tags
@@ -199,32 +201,36 @@
     ul a
       text-decoration: none
       display: inline-block
-      margin-right: 5px
-      padding: 0 5px
-      border: 1px solid main-color
+      margin-right: 6px
+      padding: 2px 8px
+      border: 1px solid rgba(26, 74, 110, .35)
+      border-radius: 2px
       font-size: 12px
       color: main-color
       cursor: pointer
+      transition: background .2s ease, color .2s ease
       &:hover
         background: main-color
         color: #fff
+        border-color: main-color
 
 .article-more-link
   float: right
-  padding: 8px 20px
+  padding: 9px 18px
   border: 0
-  border-radius: 0
+  border-radius: 3px
   background: main-color
-  box-shadow: 0 3px 10px rgba(0,0,0,0.06), 0 3px 10px rgba(0,0,0,0.13)
-  transition: all .1s
+  box-shadow: 0 2px 8px rgba(26, 74, 110, .2)
+  transition: background .2s ease, box-shadow .2s ease
   display: inline-block
   line-height: 1em
   cursor: pointer
   color: #fff!important
+  font-size: 13px
+  letter-spacing: .5px
   &:hover
-    opacity: .8
-    box-shadow: 0 4px 10px rgba(0,0,0,0.09), 0 4px 10px rgba(0,0,0,0.17)
-    text-shadow: 0 1px darken(color-link, 20%)
+    background: main-color-hover
+    box-shadow: 0 4px 12px rgba(26, 74, 110, .28)
 
 .article-footer
   clearfix()

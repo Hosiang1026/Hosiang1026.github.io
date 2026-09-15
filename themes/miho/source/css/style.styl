@@ -28,9 +28,16 @@ html, body, #container
 body
   font-family: font-family
   background: color-background
+  background-image: linear-gradient(180deg, #e8ecf2 0%, color-background 120px)
+  background-attachment: fixed
   font-size: font-size
+  color: color-default
   -webkit-text-size-adjust: 100%
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
   position: relative
+  letter-spacing: .04em
+  word-spacing: .05em
 
 .outer
   clearfix()
@@ -108,3 +115,4 @@ if sidebar is left
 @import "_partial/share"
 @import "_partial/scroll"
 @import "_partial/reward"
+@import "_partial/motion"

@@ -1,7 +1,7 @@
 <header id="header">
    <div id="banner"></div>
     <div id="header-outer">
-        <div id="header-menu" class="header-menu-pos animated">
+        <div id="header-menu" class="header-menu-pos">
             <div class="header-menu-container">
                 <a href="<%- url_for() %>" class="left">
                     <span class="site-title"><%= theme.header_title %></span>
@@ -23,7 +23,7 @@
         <div id="header-row">
             <div id="logo">
                 <a href="<%- url_for() %>">
-                    <img src="<%= url_for(theme.logo) %>" alt="logo">
+                    <img src="<%= url_for(theme.logo) %>" alt="logo" width="120" height="120" decoding="async">
                 </a>
             </div>
             <div class="header-info">

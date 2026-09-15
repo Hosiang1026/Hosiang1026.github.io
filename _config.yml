@@ -91,7 +91,7 @@ theme: miho
 # Live2D
 ## https://github.com/EYHN/hexo-helper-live2d
 live2d:
-  enable: true
+  enable: false
   scriptFrom: local
   pluginRootPath: live2dw/
   pluginJsPath: lib/
@@ -109,12 +109,12 @@ live2d:
     scale: 0.5
 
 #压缩静态文件 github.com/chenzhutian/hexo-all-minifier
-all_minifier: false
+all_minifier: true
 
 # html压缩
 html_minifier:
   enable: true
-  ignore_error: false
+  ignore_error: true
   exclude:
 
 # css压缩
@@ -220,10 +220,14 @@ nofollow:
     exclude:
     - haoxiang.eu.org
 
+# hexo-admin custom metadata (editable in /admin gear panel)
+metadata:
+  sticky: 0
+
 # hexo-admin authentification
 admin:
   username: admin
-  password_hash: $2a$10$LiL/X5wZ1o5kt1cdVja.F.82eAQG41sC6e7J2xoYQoy0vhQu98Tma
+  password_hash: $2a$10$C5fyUAGVdXZo4ySYJjI/cuwbfo4Yw5FO3N5tl5hYf9wEzHZNmmU7G
   secret: my super secret phrase
 
 # Deployment

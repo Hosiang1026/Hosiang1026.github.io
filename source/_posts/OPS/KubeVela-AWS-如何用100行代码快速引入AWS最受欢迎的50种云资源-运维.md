@@ -1,6 +1,8 @@
 ---
 title: KubeVela如何用100行代码
-categories: Kubernetes云原生系列
+categories:
+  - 运维
+  - 云原生
 tags:
   - SQL
   - Go
@@ -9,31 +11,31 @@ date: 2024-01-13 00:00:00
 top: 5
 ---
 
+通过简单分析，我们发现 AWS 前 50 Terraform modules 的数据可以通过请求 https://registry.terraform.io/v2/modules?filter%...
 
-```
-：KubeVela 社区 KubeVela 目前已经支持了 AWS、Azure、GCP、阿里云、腾讯云、百度云、UCloud 等云厂商，也提供了简单快捷的命令行工具[1]引入云服务商的云资源，但是在 KubeVela 里一个。..
-```
 <!-- more -->
 
-                                                                                                                    
-KubeVela 目前已经支持了 AWS、Azure、GCP、阿里云、腾讯云、百度云、UCloud 等云厂商，也提供了简单快捷的命令行工具[1]引入云服务商的云资源，但是在 KubeVela 里一个一个地支持云服务商的云资源不利于快速满足用户对于云资源的需求，本文提供了一个方案，用不到 100 行代码快速引入 AWS 前 50 最受欢迎的云资源。 
-同时，我们也期望用户受到本文的启发，贡献其他云服务商的云资源。 
-
 ### 一、KubeVela快速引入AWS云资源
+
 #### 1.1 AWS 最受欢迎的云资源在哪里
+
 ```
-Terraform 官网提供了各个云服务商的 Terraform modules，比如 AWS 的云资源 Terraform modules[2]。其中，云资源按照受欢迎的使用程度（下载量）排序，比如 AWS VPC 下载量为 1870 万次。 
+Terraform 官网提供了各个云服务商的 Terraform modules，比如 AWS 的云资源 Terraform modules[2]。其中，云资源按照受欢迎的使用程度（下载量）排序，比如 AWS VPC 下载量为 1870 万次。
 ```
-通过简单分析，我们发现 AWS 前 50 Terraform modules 的数据可以通过请求 https://registry.terraform.io/v2/modules?filter%5Bprovider%5D=aws&include=latest-version&page%5Bsize%5D=50&page%5Bnumber%5D=1 获取。 
+通过简单分析，我们发现 AWS 前 50 Terraform modules 的数据可以通过请求 https://registry.terraform.io/v2/modules?filter%5Bprovider%5D=aws&include=latest-version&page%5Bsize%5D=50&page%5Bnumber%5D=1 获取。
+
 #### 1.2 开始之前
-代码接受两个用户传入参数： • provider 的名称 • 该 provider 对应的 Terraform Modules 的 URL 
+
+代码接受两个用户传入参数： • provider 的名称 • 该 provider 对应的 Terraform Modules 的 URL
 ```
-对于 AWS 来说，Provider名称为 “aws”，对应的 Terraform modules 为 Terraform Modules json 格式接口[3]（即在 Terraform Registry[4]中搜索 provider 为 aws 时最受欢迎的 50 种云资源）。 在执行代码之前需要确认 providerName(aws) 和 Modules 链接无误。 
+对于 AWS 来说，Provider名称为 “aws”，对应的 Terraform modules 为 Terraform Modules json 格式接口[3]（即在 Terraform Registry[4]中搜索 provider 为 aws 时最受欢迎的 50 种云资源）。 在执行代码之前需要确认 providerName(aws) 和 Modules 链接无误。
 ```
+
 #### 1.3 执行代码
-那么你就可以通过以下 100 行左右的代码（文件名 gen.go）来批量地快速引入 AWS 最受欢迎的前 50 种云资源。 
- 
- ```bash
+
+那么你就可以通过以下 100 行左右的代码（文件名 gen.go）来批量地快速引入 AWS 最受欢迎的前 50 种云资源。
+
+ ```
 import (
   "encoding/json"
   "fmt"
@@ -136,18 +138,22 @@ func generateDefinition(provider, name, gitURL, path, description string) error 
   fmt.Println(string(stdout))
   return nil
 
-  `执行命令：```bash
+  执行命令：
+
+```
 go run gen.go aws "https://registry.terraform.io/v2/modules?filter%5Bprovider%5D=aws&include=latest-version&page%5Bsize%5D=50&page%5Bnumber%5D=1"
 
-  ``` 
-  
+  ```
+
 #### 1.4 代码简要说明
-##### 解析云资源数据
-访问用户传入的 URL，将返回的 json 数据解析为 Go 中的结构体。 
-资源对应的 json 格式如下： 
- 
+
+#### 解析云资源数据
+
+访问用户传入的 URL，将返回的 json 数据解析为 Go 中的结构体。
+资源对应的 json 格式如下：
+
 {
-```json
+```
   "data": [
 ```
     {
@@ -183,7 +189,7 @@ go run gen.go aws "https://registry.terraform.io/v2/modules?filter%5Bprovider%5D
     },
     ...
   ],
-```json
+```
   "included": [
 ```
     {
@@ -206,21 +212,25 @@ go run gen.go aws "https://registry.terraform.io/v2/modules?filter%5Bprovider%5D
   ...
 }
 
-  
-``` 
-  
-在 Modules 对应的 json 数据中，我们只关心两个键值对，即： 
-• data：包含 Modules 名称及属性的列表 • Included：筛选出的特定版本的 Modules 具体信息 
-其中，对于 data 中的每个 Module 元素，解析它的属性，Id 和 relationship 中的 latest-version 对应的 id；对于 Included 中的每个 Module 版本元素，解析它的属性和Id。 
-属性又解析如下五项： 
-• Name • Downloads • Source • Description • Verified 
-结构体定义在结构体 TFDownload 中，通过 http 库取 json 数据，再通过 json.Unmarshal 解析出 Terraform modules 的结构体。 
-##### 批量生产云资源
-###### 1. 新建目录，生成资源所需文件
-解析完毕后，在当前目录下新建文件夹，文件夹命名为 provider 名称。 遍历解析后的 data，对于其中每个 Module 元素，执行下述操作，为其生成相应配置文件，定义和相应文档。 
-###### 2. 生成定义文件
-通过下述 vela 指令从模块对应的 github 仓库读取相应信息生成定义文件。 
- 
+```
+
+在 Modules 对应的 json 数据中，我们只关心两个键值对，即：
+• data：包含 Modules 名称及属性的列表 • Included：筛选出的特定版本的 Modules 具体信息
+其中，对于 data 中的每个 Module 元素，解析它的属性，Id 和 relationship 中的 latest-version 对应的 id；对于 Included 中的每个 Module 版本元素，解析它的属性和Id。
+属性又解析如下五项：
+• Name • Downloads • Source • Description • Verified
+结构体定义在结构体 TFDownload 中，通过 http 库取 json 数据，再通过 json.Unmarshal 解析出 Terraform modules 的结构体。
+
+#### 批量生产云资源
+
+#### 1. 新建目录，生成资源所需文件
+
+解析完毕后，在当前目录下新建文件夹，文件夹命名为 provider 名称。 遍历解析后的 data，对于其中每个 Module 元素，执行下述操作，为其生成相应配置文件，定义和相应文档。
+
+#### 2. 生成定义文件
+
+通过下述 vela 指令从模块对应的 github 仓库读取相应信息生成定义文件。
+
 vela def init {
 ModuleName} --type component --provider {
 providerName} --git {
@@ -228,39 +238,43 @@ gitURL} --desc {
 description} -o {
 yamlFileName}
 
-  
-``` 
-  
-指令中需要填入的几项由解析好的 Module 结构体传入。 
-```
-• gitURL: {Module.Attributes.Source}.git 
-```
-• description: 如果 Included 中存在元素 ID 与模块 relationship 中 latest-version 对应 ID 相同，则 description 为 Included 中对应元素属性的 description；否则 description 为 providerName 与模块名称的拼接 
-```
-• yamlFileName：terraform-{providerName}-{Module.Attributes.Name}.yaml 
-```
-#### 1.5 你也来试试
-还有不少云服务商也提供了丰富的 Terraform modules，比如 
-GCP： https://registry.terraform.io/namespaces/terraform-google-modules 
-阿里云： https://registry.terraform.io/namespaces/terraform-alicloud-modules 
-你要不要也为 KubeVela 引入你正在使用的、或喜欢的云服务商的云资源？ 
-#### 1.6 相关链接
-```
-[1] 简单快捷的命令行工具 
-```
-https://kubevela.io/docs/next/platform-engineers/components/component-terraform 
-```
-[2] AWS 的云资源Terraform modules 
 ```
 
-https://registry.terraform.io/namespaces/terraform-aws-modules 
+指令中需要填入的几项由解析好的 Module 结构体传入。
 ```
-[3] Terraform Modules json 格式接口 
+• gitURL: {Module.Attributes.Source}.git
 ```
-https://registry.terraform.io/v2/modules?filter%5Bprovider%5D=aws&include=latest-version&page%5Bsize%5D=50&page%5Bnumber%5D=1 
+• description: 如果 Included 中存在元素 ID 与模块 relationship 中 latest-version 对应 ID 相同，则 description 为 Included 中对应元素属性的 description；否则 description 为 providerName 与模块名称的拼接
 ```
-[4] Terraform Registry 
+• yamlFileName：terraform-{providerName}-{Module.Attributes.Name}.yaml
+```
+
+#### 1.5 你也来试试
+
+还有不少云服务商也提供了丰富的 Terraform modules，比如
+GCP： https://registry.terraform.io/namespaces/terraform-google-modules
+阿里云： https://registry.terraform.io/namespaces/terraform-alicloud-modules
+你要不要也为 KubeVela 引入你正在使用的、或喜欢的云服务商的云资源？
+
+#### 1.6 相关链接
+
+```
+[1] 简单快捷的命令行工具
+```
+https://kubevela.io/docs/next/platform-engineers/components/component-terraform
+```
+[2] AWS 的云资源Terraform modules
+```
+
+https://registry.terraform.io/namespaces/terraform-aws-modules
+```
+[3] Terraform Modules json 格式接口
+```
+https://registry.terraform.io/v2/modules?filter%5Bprovider%5D=aws&include=latest-version&page%5Bsize%5D=50&page%5Bnumber%5D=1
+```
+[4] Terraform Registry
 ```
 
 https://aregistry.terraform.io/
-                                        
+
+```

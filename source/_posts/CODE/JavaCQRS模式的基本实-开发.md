@@ -1,6 +1,8 @@
 ---
 title: Java CQRS模式的基本实现
-categories: Java开发全栈系列
+categories:
+  - 开发
+  - Java
 tags:
   - TypeScript
   - Java
@@ -9,7 +11,7 @@ date: 2021-02-19 00:00:00
 top: 37
 ---
 
-CQRS（命令查询职责分离）是一种清晰简洁的设计模式，通过在业务层面分离命令（写操作）和查询（读操作），使系统具备更好的可扩展性和性能表现，能够对不同部分进行独立扩展和优化。本文详细介绍CQRS模式的基本概念、设计思想、实现方式和实际应用场景，通过Java代码示例演示如何在项目中应用CQRS模...
+我们平常最熟悉的就是三层架构，通常都是通过数据访问层来修改或者查询数据，一般修改和查询使用的是相同的实体。然后通过业务层来处理业务逻辑，将处理结果封装成DTO对象返回给控制层，再通过前端渲染。反之亦然。
 
 <!-- more -->
 
@@ -19,7 +21,6 @@ CQRS（命令查询职责分离）是一种清晰简洁的设计模式，通过�
 
 我们平常最熟悉的就是三层架构，通常都是通过数据访问层来修改或者查询数据，一般修改和查询使用的是相同的实体。然后通过业务层来处理业务逻辑，将处理结果封装成DTO对象返回给控制层，再通过前端渲染。反之亦然。
 
- 
 这里基本上是围绕关系数据库构建而成的“创建、读取、更新、删除”系统（即CRUD系统），此类系统在一些业务逻辑简单的项目中可能没有什么问题，但是随着系统逻辑变得复杂，用户增多，这种设计就会出现一些性能问题。
 我们经常用到的解决方案就是对数据库进行读写分离。让主数据库处理事务性的增、删、改操作，让从数据库处理查询操作，然后主从数据库之间进行同步。但是这只是从DB角度处理了读写分离，从业务或者系统层面上来说，读和写的逻辑仍然是存放在一起的，他们都是操作同一个实体对象。
 这时候，CQRS 就该登场了。
@@ -28,9 +29,7 @@ CQRS（命令查询职责分离）是一种清晰简洁的设计模式，通过�
 
 简单的说，CQRS（Command Query Responsibility Segration）就是一个系统，从架构上把 CRUD 系统拆分为两部分：命令（Command）处理和查询（Query）处理。其中命令处理包括增、删、改。
 
-
 然后命令与查询两边可以用不同的架构实现，以实现CQ两端（即Command Side，简称C端；Query Side，简称Q端）的分别优化。两边所涉及到的实体对象也可以不同，从而继续演变成下面这样。
-
 
 当然了，CQRS 作为一个读写分离思想的架构，在数据存储方面，也没有做过多的约束。所以 CQRS可以有不同层次的实现。
 
@@ -40,33 +39,34 @@ CQRS 可以有两种实现方式。
 
 1）CQ 两端数据库共享，只是在上层代码上分离。这样做的好处是可以让我们的代码读写分离，更容易维护，而且不存在 CQ 两端的数据一致性问题，因为是共享一个数据库的。这种架构是非常实用的（也就是我上面画的那种）。
 
-
 ### 四、CQRS 的简单实现
 
 说了这么多，该怎么实现呢？我们以上面提到的第一种方式为例：代码层面实现分离，数据库共享。这种方式在企业里也非常实用。
 首先有几个概念需要介绍一下，CQRS 模式中，首先需要有 Command，这个 Command 命令会对应一个实体和一个命令的执行类。那整个系统中肯定有很多不同的 Command，那么还需要一个 CommandBus 来做命令的分发处理。
 可能大家觉得比较抽象，我来写几行示例代码，一看就明白了。假设有个订单模块，我要新增一个订单信息。那么根据上文的分析，需要有个新增命令以及对应的订单实体（并不一定和数据库的订单实体完全对应）。首先先创建一个命令接口（绑定命令对应的实体），接口内部有个该命令的处理方法。
 
-```java
+```
 public interface Command<T> {
     Object execute(T commandModel);
 }
-`OK，接下来我们可以创建订单的新增命令了。```java
+OK，接下来我们可以创建订单的新增命令了。
+
+```
 @Component
 public class CreateOrderCommand implements Command<CreateOrderModel> {
 
     @Override
     public Object execute(CreateOrderModel model) {
-        // 具体的逻辑
+// 具体的逻辑
     }
 ```
 
 到这里，我们写好了具体的创建订单命令的逻辑，那么该命令需要放到 CommandBus 中去执行，所以我们要写这个 CommandBus。
 
-```java
+```
 public class CommandBus {
     public <T> Object dispatch(Command<T> cmd, T model) {
-        return cmd.excute(model);
+return cmd.excute(model);
 ```
     }
 
@@ -86,12 +86,12 @@ public class OrderController {
 
     @PostMapping(value = "/getInfo")
     public Object getOrderInfo(GetOrderInfoModel model) {
-        return getOrderInfoService.getOrderInfos(model);
+return getOrderInfoService.getOrderInfos(model);
     }
 
     @PostMapping(value = "/creat")
     public Object createOrderInfo(CreateOrderModel model) {
-        return commandBus.dispatch(createOrderCommand, model);
+return commandBus.dispatch(createOrderCommand, model);
     }
 
 ```
@@ -102,3 +102,4 @@ public class OrderController {
 
 注：特别申明一下，本篇文章来源于网络，觉得写的很好，便整理分享给大家！
 
+```

@@ -1,37 +1,41 @@
 $block-caption
   text-decoration: none
   text-transform: uppercase
-  letter-spacing: 2px
+  letter-spacing: 1.5px
   color: color-grey
   margin-bottom: 1em
   margin-left: 5px
   line-height: 1em
-  text-shadow: 0 1px #fff
-  font-weight: bold
+  font-weight: 600
 
 $block
-  background: #fff
-  box-shadow: 1px 2px 3px #ddd
+  background: color-card
+  box-shadow: box-shadow
   border: 1px solid color-border
-  border-radius: 3px
+  border-radius: 6px
 
 $base-style
   h1
-    font-size: 3rem
+    font-size: 2.4rem
+    letter-spacing: .06em
   h2
-    font-size: 2.8rem
+    font-size: 2rem
+    letter-spacing: .05em
   h3
     font-size: 1.5rem
+    letter-spacing: .04em
   h4
-    font-size: 1.2rem
+    font-size: 1.25rem
+    letter-spacing: .03em
   h5
-    font-size: 1rem
+    font-size: 1.1rem
   h6
     font-size: 1em
   hr
-    border: 1px dashed color-border
+    border: none
+    border-top: 1px solid color-border
   strong
-    font-weight: bold
+    font-weight: 600
   em, cite
     font-style: italic
   sup, sub
@@ -59,28 +63,28 @@ $base-style
   ol
     list-style: decimal
   dt
-    font-weight: bold
+    font-weight: 600
 $tags-style
   .color1
     background: main-color
     &:before
       border-right-color: main-color
   .color2
-    background: #EE6252
+    background: #6b5b73
     &:before
-      border-right-color: #EE6252
+      border-right-color: #6b5b73
   .color3
-    background: #4cae4c
+    background: #3d6b5a
     &:before
-      border-right-color: #4cae4c
+      border-right-color: #3d6b5a
   .color4
-    background: #E23794
+    background: #8b5a4a
     &:before
-      border-right-color:#E23794
+      border-right-color: #8b5a4a
   .color5
-    background: #f0ad4e
+    background: accent-color
     &:before
-      border-right-color:#f0ad4e
+      border-right-color: accent-color
 $ellipsis
   overflow: hidden
   text-overflow: ellipsis

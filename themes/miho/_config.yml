@@ -119,9 +119,9 @@ open_new_link: false
 # Article default cover picture，size：350*150 | 文章默认封面图，尺寸：350*150
 cover_picture: images/deafult.jpg
 # Open background particles | 开启背景粒子
-open_bg_particle: true
+open_bg_particle: false
 # Open animation in homepage and head | 开启主页及头部动画
-open_animation: true
+open_animation: false
 
 # Article
 
@@ -133,7 +133,7 @@ share: true
 # Style customization | 样式定制
 style:
   # Main color tone | 主色调
-  main_color: '#0cc'
+  main_color: '#1a4a6e'
 
 # Reward | 打赏
 
@@ -179,6 +179,7 @@ gitalk:
   #clientID和clientSecret
   clientID: 37a2dd4473e8970cecc2
   clientSecret: e30efa17d86d9de4f4ab810872dc62a7b2e7e634
+  proxy: https://haoxiang.eu.org/gitalk-oauth
 
 # Valine Settings
 valine:
@@ -245,8 +246,8 @@ qihu_seo: false
 baidu_seo: true
 # 百度分析，输入key值
 baidu_analytics: 3cd8fa109426bf3f10bd5c362175bace
-# google analytics | google分析
-google_analytics: UA-111653724-1
+# google analytics | UA 已停服，未接 GA4 前关闭
+google_analytics: false
 
 # Footer
 # Access statistics | “不蒜子”访问量统计

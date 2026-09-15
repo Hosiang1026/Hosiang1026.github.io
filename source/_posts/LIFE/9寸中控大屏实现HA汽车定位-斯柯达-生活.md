@@ -1,6 +1,8 @@
-﻿---
+---
 title: 9寸中控大屏实现HA汽车定位-斯柯达
-categories: 柯迪亚克
+categories:
+  - 生活
+  - 车机
 author: 狂欢马克思
 tags:
   - Skoda
@@ -10,15 +12,13 @@ abbrlink: f9583615
 date: 2024-12-13 10:04:00
 ---
 
-本文详细介绍如何通过柯迪亚克9寸中控大屏实现汽车实时定位功能，结合高德地图和Home Assistant智能家居系统，打造完整的汽车位置监控方案。从前提条件准备、高德地图配置、Home Assistant集成到实际应用场景，手把手教您实现汽车定位功能，让您随时掌握爱车位置，提升用车安全性和便利性。
+在实现HA（Home Assistant）与柯迪亚克9寸中控大屏的定位功能之前，您需要满足以下前提条件：
 
 <!-- more -->
 
-![Popular](https://hosiang1026.github.io/photos/image/2024/12/17/nk44hp.jpg "HA汽车定位")
+### 一、前提条件
 
-### 一、前提条件  
-
-在实现HA（Home Assistant）与柯迪亚克9寸中控大屏的定位功能之前，您需要满足以下前提条件：  
+在实现HA（Home Assistant）与柯迪亚克9寸中控大屏的定位功能之前，您需要满足以下前提条件：
 
 #### 1.1 硬件要求
 
@@ -50,11 +50,11 @@ Home Assistant要求：
 - 高德地图账号（用于车机和手机端登录）
 - 高德地图开发者账号（用于获取API Key）
 - 手机抓包工具（如HttpCanary、Packet Capture等）
-- 稳定的网络连接  
+- 稳定的网络连接
 
 ---
 
-### 二、操作方法  
+### 二、操作方法
 
 #### 2.1 登录高德地图账号
 
@@ -70,9 +70,7 @@ Home Assistant要求：
    - 使用手机端高德地图APP扫描二维码
    - 确认登录成功
 
-<p align="center">扫码登录高德地图车机版</p> 
-
-![推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP](https://hosiang1026.github.io/photos/image/2024/12/17/ha997u.jpg)  
+<p align="center">扫码登录高德地图车机版</p>
 
 注意事项：
 - 确保车机和手机都连接到网络（WiFi或手机热点）
@@ -119,11 +117,6 @@ Home Assistant要求：
   - 重要：包含车辆和设备信息
 
 操作截图参考：
-
-![抓包截图1](https://hosiang1026.github.io/photos/image/2024/12/17/hbicro.jpg)  
-![抓包截图2](https://hosiang1026.github.io/photos/image/2024/12/17/hbhyjj.jpg)  
-![抓包截图3](https://hosiang1026.github.io/photos/image/2024/12/17/hbi9tm.jpg)  
-![抓包截图4](https://hosiang1026.github.io/photos/image/2024/12/17/hbigo7.jpg)  
 
 抓包技巧：
 - 如果抓不到数据，尝试在车机端启动导航后再抓包
@@ -185,20 +178,18 @@ Home Assistant要求：
 
 <p align="center">选项 - 高德地图开发 - 获取key</p>
 
-![高德开发者KEY](https://hosiang1026.github.io/photos/image/2024/12/17/hbi1uc.jpg)  
-
 步骤三：配置插件
 
 1. 在Home Assistant配置文件中添加autoamap配置
 2. 填入抓取到的key、sessionid等参数
 3. 填入高德地图开发者KEY
-4. 保存配置并重启Home Assistant  
+4. 保存配置并重启Home Assistant
 
 ---
 
-### 三、实现效果  
+### 三、实现效果
 
-通过上述操作完成后，HA可以接入高德地图的定位数据，实现车辆实时位置与状态展示。  
+通过上述操作完成后，HA可以接入高德地图的定位数据，实现车辆实时位置与状态展示。
 
 #### 3.1 实时车辆位置展示
 
@@ -222,9 +213,7 @@ Home Assistant要求：
    - 支持缩放、拖拽等地图操作
    - 可以查看车辆的历史轨迹
 
-<p align="center">显示汽车位置</p> 
-
-![车辆位置展示](https://hosiang1026.github.io/photos/image/2024/12/17/hbi2wx.jpg)  
+<p align="center">显示汽车位置</p>
 
 #### 3.2 车辆状态信息展示
 
@@ -251,15 +240,13 @@ Home Assistant要求：
 - 查看车辆行驶轨迹
 - 实现基于位置的自动化（如车辆到家自动开灯）
 
-<p align="center">显示汽车信息</p> 
-
-![汽车信息展示](https://hosiang1026.github.io/photos/image/2024/12/17/hbhy5p.png)  
+<p align="center">显示汽车信息</p>
 
 ---
 
-### 四、注意事项  
+### 四、注意事项
 
-在操作过程中，请注意以下问题：  
+在操作过程中，请注意以下问题：
 
 #### 4.1 多设备账号问题
 
@@ -349,9 +336,9 @@ Home Assistant要求：
 
 ---
 
-### 六、总结  
+### 六、总结
 
-通过本教程，您可以轻松实现柯迪亚克9寸中控大屏与Home Assistant的汽车定位功能，利用高德地图API和HA的强大集成能力，达到实时监控车辆位置与信息的效果。  
+通过本教程，您可以轻松实现柯迪亚克9寸中控大屏与Home Assistant的汽车定位功能，利用高德地图API和HA的强大集成能力，达到实时监控车辆位置与信息的效果。
 
 功能优势：
 - 实时掌握车辆位置
@@ -365,5 +352,4 @@ Home Assistant要求：
 - 基于位置的自动化
 - 车辆安全监控
 
-如果您在操作过程中遇到任何问题，欢迎在评论区留言交流！  
-
+如果您在操作过程中遇到任何问题，欢迎在评论区留言交流！

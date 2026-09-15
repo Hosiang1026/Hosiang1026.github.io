@@ -1,6 +1,8 @@
 ---
 title: Docker秒杀微服务架构
-categories: 架构设计思想系列
+categories:
+  - 运维
+  - 架构设计
 tags:
   - Java
 author: 狂欢马克思
@@ -9,17 +11,11 @@ date: 2018-10-11 00:00:00
 top: 1
 ---
 
-Docker是一个开源的应用容器引擎，基于Go语言开发，可以让开发者将应用及其依赖打包到轻量级、可移植的容器中，实现"一次构建，到处运行"。本文以秒杀系统微服务架构为实战案例，详细介绍如何使用Docker实现容器化部署，包括Docker基础概念、镜像构建、容器编排、服务编排等核心技术
+个人开发项目可以忽略部分环节，如果是团队项目以上所有环节都是必不可少的，测试->预生产->生产环境(蓝绿+灰度发布)
 
 <!-- more -->
 
-![Docker](https://hosiang1026.github.io/photos/image/2024/12/15/10u1mvq.png "Docker秒杀微服务架构容器化部署")
-
----
-
 ### 一、部署
-
-![Docker秒杀微服务架构容器化部署](https://hosiang1026.github.io/photos/image/2024/12/15/10u3tm7.png "Docker秒杀微服务架构容器化部署")
 
 ```
 个人开发项目可以忽略部分环节，如果是团队项目以上所有环节都是必不可少的，测试->预生产->生产环境(蓝绿+灰度发布)
@@ -52,30 +48,15 @@ docker.io/portainer/portainer
 
 初次使用需要创建超级用户密码：
 
-![](https://hosiang1026.github.io/photos/image/2024/12/15/10u1m90.png)
-
 创建完成以后，你可以选择管理本地或者远程容器：
 
-![](https://hosiang1026.github.io/photos/image/2024/12/15/10u1nhm.png)
-
-![](https://hosiang1026.github.io/photos/image/2024/12/15/10u1ush.png)
-
 进入首页：
-
-![](https://hosiang1026.github.io/photos/image/2024/12/15/10u1zjb.png)
 
 撸主跑了7个容器服务，2个正常运行，5个已经死翘翘中。
 
 一些常用的镜像模板：
 
-![](https://hosiang1026.github.io/photos/image/2024/12/15/10u2l38.png)
-
 可以对容器服务进行启动、删除、重启等一系列操作，还可以查看日志、系统占用资源统计。
-
-![](https://hosiang1026.github.io/photos/image/2024/12/15/10u2vhx.png)
-
-![](https://hosiang1026.github.io/photos/image/2024/12/15/10u39ut.png)
-
 
 ### 三、小结
 

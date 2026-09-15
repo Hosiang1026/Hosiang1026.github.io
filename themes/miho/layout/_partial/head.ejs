@@ -1,29 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="Access-Control-Allow-Origin" content="*" />
-  <!-- <meta http-equiv="X-Frame-Options" content="ALLOW-FROM https://m.myhkw.cn"> -->
-  <script type="text/javascript">
-    //统计耗时开始
-    var start_time = (new Date()).getTime();
-  </script>
-  <meta http-equiv="Cache-Control"content="no-cache"/>
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <!-- Baidu SEO http://www.baidu.com/search/url_submit.html -->
-  <meta name="baidu-site-verification" content="codeva-JcuFKkCTW2" />
-  <!-- Google SEO http://www.google.com/addurl.html -->
-  <meta name="google-site-verification" content="GOa_MDr6Uz7cL7SHoNQIoPhiBCMp1WMlUeUa8avuIOg" />
-  <!-- 360 SEO http://info.so.360.cn/site_submit.html -->
-  <meta name="360-site-verification" content="2a299bcaf5d0e17606cbc47c55252c34" />
-  <!-- SouGou SEO https://zhanzhang.sogou.com 需要认证一堆信息 -->
-  <!-- <meta name="sogou_site_verification" content="Kw5py15yoP" /> -->
-  <!-- Baidu Union -->
-  <meta name="baidu_union_verify" content="7fdc0fcf59a6c750e39da4f72040c01e">
-
-  <!-- Bing SEO http://www.bing.com/toolbox/submit-site-url 同步google数据-->
-  <!-- <meta name="sogou_site_verification" content="MSmrTj7lHV"/> -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <script>var start_time = Date.now();</script>
+  <!-- Baidu SEO -->
+  <meta name="baidu-site-verification" content="codeva-JcuFKkCTW2">
+  <!-- Google SEO -->
+  <meta name="google-site-verification" content="GOa_MDr6Uz7cL7SHoNQIoPhiBCMp1WMlUeUa8avuIOg">
+  <!-- 360 SEO -->
+  <meta name="360-site-verification" content="2a299bcaf5d0e17606cbc47c55252c34">
   <%
   var title = page.title;
 
@@ -42,9 +30,8 @@
   }
   %>
   <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
   <% if (theme.keywords){ %>
-    <meta name="keywords" content="<%- theme.keywords %>" />
+    <meta name="keywords" content="<%- theme.keywords %>">
   <% } %>
   <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
   <% if (theme.rss){ %>
@@ -53,12 +40,12 @@
   <% if (theme.favicon){ %>
     <link rel="icon" href="<%- theme.favicon %>">
   <% } %>
-  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <link href="https://cdn.bootcss.com/font-awesome-animation/0.1.0/font-awesome-animation.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
   <%- css('css/style') %>
   <%- partial('plugins/analytics/baidu-analytics') %>
   <%- partial('plugins/analytics/cnzz-analytics') %>
-  <!--<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>-->
   <%- partial('plugins/seo/baidu-seo') %>
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </head>

@@ -1,6 +1,8 @@
-﻿---
+---
 title: 9寸中控屏安装第三方APP-斯柯达
-categories: 柯迪亚克
+categories:
+  - 生活
+  - 车机
 author: 狂欢马克思
 tags:
   - Skoda
@@ -10,11 +12,9 @@ abbrlink: cebc765c
 date: 2024-12-13 10:04:00
 ---
 
-合众北斗9寸中控屏车机存在APP安装白名单限制，传统悟空推送方式无法使用。本文分享一个无需Root、安全无风险的通用解决方案，通过ADB命令轻松绕过白名单限制，实现第三方APP安装。无需开启手机热点或WiFi，只需一根双公头USB数据线连接电脑，即可完成APP安装，让您的车机功能更加丰富强大。
+1. Windows系统笔记本电脑- 用于操作ADB命令- 建议使用Windows 10或更高版本- 确保USB接口正常工作
 
 <!-- more -->
-
-![Popular](https://hosiang1026.github.io/photos/image/2024/12/15/h2ktnw.png "#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 ### 一、准备要求
 
@@ -43,14 +43,14 @@ date: 2024-12-13 10:04:00
    - 建议放在容易找到的路径（如D盘根目录）
    - 确保APK文件完整且未损坏
 
-<div align="center">  
-  <p>2018款柯迪亚克车机系统信息</p>  
-  <img src="https://hosiang1026.github.io/photos/image/2024/12/15/h2l2td.png" alt="车机系统信息" title="车机系统信息">
+<div align="center">
+  <p>2018款柯迪亚克车机系统信息</p>
+
 </div>
 
-<div align="center">  
-  <p>双公头USB数据线</p>  
-  <img src="https://hosiang1026.github.io/photos/image/2024/12/15/h2l49p.png" alt="双公头USB数据线" title="双公头USB数据线">
+<div align="center">
+  <p>双公头USB数据线</p>
+
 </div>
 
 ### 二、操作步骤
@@ -79,11 +79,11 @@ date: 2024-12-13 10:04:00
 注意事项：
 - 密码输入要准确，注意大小写和特殊字符
 - 如果输入后没有反应，检查是否在拨号界面输入
-- 某些车型的密码可能不同，如果无效请咨询车友或查看相关论坛  
+- 某些车型的密码可能不同，如果无效请咨询车友或查看相关论坛
 
-<div align="center">  
-  <p>解锁USB模式</p>  
-  <img src="https://hosiang1026.github.io/photos/image/2024/12/15/h2l22l.png" alt="解锁USB模式" title="解锁USB模式">
+<div align="center">
+  <p>解锁USB模式</p>
+
 </div>
 
 2. 连接车机与电脑
@@ -110,9 +110,9 @@ date: 2024-12-13 10:04:00
 - 如果连接后电脑无法识别设备，尝试更换USB接口
 - 某些情况下需要安装USB驱动，Windows 10通常会自动安装
 
-<div align="center">  
-  <p>查看设备连接状态</p>  
-  <img src="https://hosiang1026.github.io/photos/image/2024/12/15/h2lglv.png" alt="查看设备连接" title="查看设备连接">
+<div align="center">
+  <p>查看设备连接状态</p>
+
 </div>
 
 3. 安装ADB工具并执行命令
@@ -133,7 +133,7 @@ ADB工具是免安装的，不需要配置全局环境变量。最简单的方�
 3. 执行ADB命令：
 
 步骤一：查看设备连接状态
-```bash
+```
 adb devices
 ```
 - 如果连接成功，会显示设备列表
@@ -141,7 +141,7 @@ adb devices
 - 如果显示`unauthorized`，需要在车机上允许USB调试授权
 
 步骤二：安装APP
-```bash
+```
 adb install D:\SkodaEQ.apk
 ```
 - 将`D:\SkodaEQ.apk`替换为你的APP实际路径
@@ -159,45 +159,48 @@ adb install D:\SkodaEQ.apk
 
 <p align="center">APP路径</p>
 
-![Popular](https://hosiang1026.github.io/photos/image/2024/12/15/h2lqsv.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
-
 <p align="center">在adb所在路径上输入cmd, 按回车键</p>
-
-![Popular](https://hosiang1026.github.io/photos/image/2024/12/15/h2ll52.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 <p align="center">使用adb命令详细如下</p>
 
-![Popular](https://hosiang1026.github.io/photos/image/2024/12/15/h2ll7e.png "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
-
-
 ### 三、ADB命令
 
-```bash
+```
+
 # 打开USB模式
+
 *#534*62559##*
 
 # 关闭USB模式
+
 *#62559*534##*
 
 # 连接车机
+
 adb devices
 
 # 安装APP
+
 adb install <path_apk>
 
 # 推送图片
+
 adb  push  D:/19110104_032696c5d8.png sdcard/
 
 # 所有APP列表
+
 adb shell pm list packages
 
 # 卸载APP
+
 adb shell pm uninstall --user 0 <path_apk>
 
 # APP的路径
+
 adb shell pm path <path_apk>
 
 # 导出APP安装包
+
 adb pull <path_apk> <out_apk>
 
 #温馨提示: 车机操作结束后，记得关闭USB模式(不关闭，USB口不能充电)
@@ -228,7 +231,7 @@ adb reboot
 ### 四、常见问题
 
 1. 安装失败：INSTALL_FAILED_OLDER_SDK
-- 原因：APP的最低支持版本 `minSdkVersion` 太高，中控屏系统版本较低。  
+- 原因：APP的最低支持版本 `minSdkVersion` 太高，中控屏系统版本较低。
 - 解决：更换低版本APP，例如：若APP要求Android 4.0以上，而车机仅支持1.3版本。
 
 ---
@@ -241,15 +244,13 @@ adb reboot
 1. 使用论坛提供的脚本设置第三方音乐播放器；
 2. 若触控按键失效或系统重启，通过备份的`hkmanager.apk`恢复原功能。
 
-![Popular](https://hosiang1026.github.io/photos/image/2024/12/15/h2lpx0.png "#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
-
 ### 六、附件下载
 
-相关帖子：  
-- [9寸车机解锁USB模式](https://club.autohome.com.cn/bbs/thread/84fffc2a4d664764/86248552-1.html)  
-- [破解收音机、安装APP限制](https://club.autohome.com.cn/bbs/thread/532d43b11f73ae35/81904759-1.html)  
+相关帖子：
+- [9寸车机解锁USB模式](https://club.autohome.com.cn/bbs/thread/84fffc2a4d664764/86248552-1.html)
+- [破解收音机、安装APP限制](https://club.autohome.com.cn/bbs/thread/532d43b11f73ae35/81904759-1.html)
 
-附件下载：  
+附件下载：
 
 请前往[菜单栏-收藏](https://haoxiang.eu.org/collection)下载车机软件包
 
@@ -259,39 +260,23 @@ adb reboot
 - 腾讯地图的优点: 主要是提供微信小程序进行爱车的定位显示
 - 高德地图的优点: 开屏显示斯柯达车标版本，同步驾驶里程和常用地址收藏
 
-![Popular](https://hosiang1026.github.io/photos/image/2024/12/17/gk5bku.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
-
 ### 七、工程模式
 
 进入工程模式
 
-- USB调试：部分车型的USB调试模式可能隐藏在工程菜单中。  
+- USB调试：部分车型的USB调试模式可能隐藏在工程菜单中。
 - 系统升级：若有原厂固件，可以在此进行升级或故障诊断。
 
 这个截图，来自其他车型破解方法
 
-![Popular](https://hosiang1026.github.io/photos/image/2024/12/15/126znpo.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
-
-![Popular](https://hosiang1026.github.io/photos/image/2024/12/15/126zg10.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
-
-![Popular](https://hosiang1026.github.io/photos/image/2024/12/15/126zgsj.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
-
 - 在中控屏四角按顺序点击，进入工程菜单。
 中控屏版本信息，屏幕的四角按顺序点击，就可以出现下面的隐藏页面：
 
-![Popular](https://hosiang1026.github.io/photos/image/2024/12/15/126zh6v.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
-
 工程模式，看上去很简单，不知道有没有隐藏啥后门，大家可以尝试碰碰运气
-
-![Popular](https://hosiang1026.github.io/photos/image/2024/12/15/126zm4y.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 升级入口，有原厂固件就可以升级，甚至可以自己定制修改。
 
 发生故障，可以通过日志排查问题，这一般都是我们开发人员查找问题依据。
-
-![Popular](https://hosiang1026.github.io/photos/image/2024/12/15/126zk4j.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
-
-![Popular](https://hosiang1026.github.io/photos/image/2024/12/15/126zmmb.jpg "推荐系列-#斯柯达#柯迪亚克9寸中控屏安装第三方APP")
 
 收音机设置，左边输入数字，不知道是啥密码。上面的收音机参数，用处不太清楚，也不敢轻易修改。
 

@@ -1,6 +1,8 @@
-﻿---
+---
 title: Solidity枚举类型
-categories: 区块链与以太坊开发系列
+categories:
+  - 开发
+  - 区块链
 tags:
   - TypeScript
   - Solidity
@@ -13,37 +15,30 @@ top: 6
 
 <!-- more -->
 
-![Solidity Enum](https://hosiang1026.github.io/photos/image/2024/12/15/10s6uva.jpg "Solidity枚举类型")
-
----
-
 ## 一、什么是枚举
 
-### 一、1 基本概念
+#### 1. 基本概念
 
 枚举（Enum）是一种用户定义的类型，用于创建一组命名常量。枚举值从0开始递增，每个值都有一个名称，使代码更加可读和易于维护。
 
-### 二、2 枚举的特点
+#### 2. 枚举的特点
 
-```
-命名常量：
-```
+#### 命名常量
+
 - 使用有意义的名称
 - 提高代码可读性
 - 避免魔法数字
 - 类型安全
 
-```
-自动编号：
-```
+#### 自动编号
+
 - 从0开始递增
 - 可以显式转换为整数
 - 最多256个值
 - 节省存储空间
 
-```
-类型安全：
-```
+#### 类型安全
+
 - 编译时检查
 - 防止无效值
 - 减少错误
@@ -51,30 +46,26 @@ top: 6
 
 ## 二、如何定义和使用枚举
 
-### 三、1 基本定义
+#### 1. 基本定义
+
+#### 简单枚举
 
 ```
-简单枚举：
-```
-```solidity
 pragma solidity ^0.8.0;
 
 contract EnumExample {
     enum Status { Pending, Approved, Rejected, Cancelled }
-    
+
     Status public currentStatus;
-    
+
     function setStatus(Status _status) public {
-        currentStatus = _status;
+currentStatus = _status;
     }
-    
+
     function getStatus() public view returns (Status) {
-        return currentStatus;
+return currentStatus;
     }
 
-```
-
-```
 枚举值：
 - `Status.Pending` = 0
 - `Status.Approved` = 1
@@ -82,40 +73,40 @@ contract EnumExample {
 - `Status.Cancelled` = 3
 ```
 
-### 四、2 枚举操作
+#### 2. 枚举操作
 
-```java
+```
 设置枚举值：
 function approve() public {
     currentStatus = Status.Approved;
 ```
 }
 
-```java
+```
 function reject() public {
     currentStatus = Status.Rejected;
 ```
 }
 `比较枚举：`solidity
-```java
+```
 function isApproved() public view returns (bool) {
     return currentStatus == Status.Approved;
 ```
 }
 
-```java
+```
 function isPending() public view returns (bool) {
     return currentStatus == Status.Pending;
 ```
 }
 `类型转换：`solidity
-```java
+```
 function getStatusValue() public view returns (uint8) {
     return uint8(currentStatus);  // 转换为整数
 ```
 }
 
-```java
+```
 function setStatusByValue(uint8 _value) public {
     require(_value <= uint8(Status.Cancelled), "Invalid status");
     currentStatus = Status(_value);  // 整数转枚举
@@ -123,7 +114,7 @@ function setStatusByValue(uint8 _value) public {
 }
 ```
 
-### 五、3 枚举限制
+#### 3. 枚举限制
 
 值数量限制：
 - 超过会编译错误
@@ -137,119 +128,112 @@ function setStatusByValue(uint8 _value) public {
 
 ## 三、应用场景
 
-### 六、1 状态机
+#### 1. 状态机
 
 订单状态：
 contract Order {
     enum OrderStatus { Created, Paid, Shipped, Delivered, Cancelled }
-    
+
     OrderStatus public status;
     mapping(OrderStatus => bool) public allowedTransitions;
-    
+
     constructor() {
-        allowedTransitions[OrderStatus.Created] = true;
-        allowedTransitions[OrderStatus.Paid] = true;
+allowedTransitions[OrderStatus.Created] = true;
+allowedTransitions[OrderStatus.Paid] = true;
     }
-    
+
     function pay() public {
-        require(status == OrderStatus.Created, "Invalid status");
-        status = OrderStatus.Paid;
+require(status == OrderStatus.Created, "Invalid status");
+status = OrderStatus.Paid;
     }
-    
+
     function ship() public {
-        require(status == OrderStatus.Paid, "Invalid status");
-        status = OrderStatus.Shipped;
+require(status == OrderStatus.Paid, "Invalid status");
+status = OrderStatus.Shipped;
     }
 `工作流管理：`solidity
 contract Workflow {
     enum Stage { Draft, Review, Approved, Published }
-    
+
     Stage public currentStage;
-    
+
     function nextStage() public {
-        if (currentStage == Stage.Draft) {
-            currentStage = Stage.Review;
-        } else if (currentStage == Stage.Review) {
-            currentStage = Stage.Approved;
-        } else if (currentStage == Stage.Approved) {
-            currentStage = Stage.Published;
-        }
+if (currentStage == Stage.Draft) {
+currentStage = Stage.Review;
+} else if (currentStage == Stage.Review) {
+currentStage = Stage.Approved;
+} else if (currentStage == Stage.Approved) {
+currentStage = Stage.Published;
+}
 ```
 
-### 七、2 权限管理
+#### 2. 权限管理
 
 ```
 用户角色：
 contract AccessControl {
     enum Role { None, User, Moderator, Admin }
-```
-    
-```java
+
     mapping(address => Role) public roles;
-```
-    
-```java
+
     function setRole(address user, Role role) public {
-        require(roles[msg.sender] == Role.Admin, "Not admin");
-        roles[user] = role;
+require(roles[msg.sender] == Role.Admin, "Not admin");
+roles[user] = role;
 ```
     }
-    
-```java
+
+```
     function hasPermission(address user, Role requiredRole) public view returns (bool) {
-        return uint8(roles[user]) >= uint8(requiredRole);
+return uint8(roles[user]) >= uint8(requiredRole);
 ```
     }
 
 ```
 
-### 八、3 投票系统
+#### 3. 投票系统
 
 投票选项：
 contract Voting {
     enum VoteOption { Abstain, Yes, No }
-    
+
     mapping(address => VoteOption) public votes;
     mapping(VoteOption => uint256) public voteCounts;
-    
+
     function vote(VoteOption option) public {
-        require(votes[msg.sender] == VoteOption.Abstain, "Already voted");
-        votes[msg.sender] = option;
-        voteCounts[option]++;
+require(votes[msg.sender] == VoteOption.Abstain, "Already voted");
+votes[msg.sender] = option;
+voteCounts[option]++;
     }
-    
+
     function getWinner() public view returns (VoteOption) {
-        if (voteCounts[VoteOption.Yes] > voteCounts[VoteOption.No]) {
-            return VoteOption.Yes;
-        } else if (voteCounts[VoteOption.No] > voteCounts[VoteOption.Yes]) {
-            return VoteOption.No;
-        } else {
-            return VoteOption.Abstain;
-        }
+if (voteCounts[VoteOption.Yes] > voteCounts[VoteOption.No]) {
+return VoteOption.Yes;
+} else if (voteCounts[VoteOption.No] > voteCounts[VoteOption.Yes]) {
+return VoteOption.No;
+} else {
+return VoteOption.Abstain;
+}
 
 ```
 
 ## 四、最佳实践
 
-### 九、1 命名规范
+#### 1. 命名规范
 
 ```
 清晰命名：
 // 好的命名
 enum OrderStatus { Pending, Processing, Completed, Cancelled }
-```
 
-```
 // 避免模糊命名
 enum State { S1, S2, S3, S4 }  // 不推荐
 ```
+
 `使用前缀：`solidity
 ```
 enum ProposalStatus { ProposalPending, ProposalActive, ProposalSucceeded, ProposalFailed }
-```
-```
 
-### 十、2 状态转换
+#### 2. 状态转换
 
 验证转换：
 function transition(Status newStatus) public {
@@ -266,21 +250,16 @@ function isValidTransition(Status from, Status to) internal pure returns (bool) 
 
 ```
 
-### 十一、3 Gas优化
+#### 3. Gas优化
 
-```java
+```
 使用枚举替代字符串：
 // 不推荐：使用字符串
 string public status = "pending";
-```
-
-```java
+java
 // 推荐：使用枚举
 enum Status { Pending, Approved }
 Status public status;
-```
-
-```
 
 存储效率：
 - 枚举只占用1字节
@@ -307,4 +286,4 @@ Status public status;
 - 替代字符串提高效率
 
 通过合理使用枚举，可以编写更清晰、更安全、更高效的智能合约代码。
-
+```

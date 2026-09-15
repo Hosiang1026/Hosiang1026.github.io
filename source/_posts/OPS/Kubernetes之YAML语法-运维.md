@@ -1,6 +1,8 @@
-﻿---
+---
 title: Kubernetes之YAML语法
-categories: Kubernetes云原生系列
+categories:
+  - 运维
+  - 云原生
 tags:
   - Python
   - JavaScript
@@ -11,22 +13,22 @@ top: 6
 
 YAML 是一种非常简洁/强大/专门用来写配置文件的语言！
 
-<!-- more --> 
- 
-###### YAML 语法特性
+<!-- more -->
 
-学过编程的人理解起来应该非常容易
-语法特点 
- 
- 大小写敏感 
- 通过缩进表示层级关系 
- 禁止使用tab缩进，只能使用空格键 
- 缩进的空格数目不重要，只要相同层级左对齐 
- 使用#表示注释 
- 
- 
-```yaml
+### YAML 语法特性
+
+语法特点
+
+ 大小写敏感
+ 通过缩进表示层级关系
+ 禁止使用tab缩进，只能使用空格键
+ 缩进的空格数目不重要，只要相同层级左对齐
+ 使用#表示注释
+
+```
+
 # yaml
+
 languages:
     - Ruby
     - Perl
@@ -36,10 +38,9 @@ websites:
     Ruby: ruby-lang.org
     Python: python.org
     Perl: use.perl.org
-```
 
-```json
 # Json
+
 {
     languages: [
         'Ruby',
@@ -61,19 +62,23 @@ websites:
 - 数组: 一组按次序排列的列表
 - 纯量: 单个的且不可再分的值
 
-```yaml
+```
+
 # 纯量
+
 hello
 
 # 数组
+
 - Cat
 - Dog
 - Goldfish
 
 # 对象
+
 animal: pets
 ```
-  
+
 引号区别
 
 - 单引号(''): 特殊字符作为普通字符串处理
@@ -81,21 +86,25 @@ animal: pets
 
 示例：
 
-```yaml
-# 单引号
-name: 'Hi,\nTom'
 ```
 
-```yaml
+# 单引号
+
+name: 'Hi,\nTom'
+
 # 双引号
+
 name: "Hi,\nTom"
 ```
 
 内置类型列表
 
-```yaml
+```
+
 # YAML允许使用个感叹号(!)强制转换数据类型
+
 # 单叹号通常是自定义类型，双叹号是内置类型
+
 money: !!str
 123
 
@@ -103,26 +112,30 @@ date: !Boolean
 true
 ```
 
-###### YAML 中的纯量
+### YAML 中的纯量
 
 纯量是最基本的且不可再分的值
 
 字符串
 
-```yaml
+```
+
 # 不使用引号
+
 name: Tom
 
 # 使用单引号
+
 name: 'Tom'
 
 # 使用双引号
+
 name: "Tom"
 ```
 
 布尔值
 
-```yaml
+```
 debug: true
 debug: false
 ```
@@ -140,19 +153,21 @@ debug: false
 
 Null
 
-```yaml
+```
 date: ~
 date: null
 ```
 
 时间
 
-```yaml
+```
+
 # 使用iso-8601标准表示日期
+
 date: 2018-01-01t16:59:43.10-05:00
 ```
- 
-###### YAML 特殊类型
+
+### YAML 特殊类型
 
 日常使用中基本不会用到的类型
 
@@ -160,18 +175,20 @@ date: 2018-01-01t16:59:43.10-05:00
 
 注意"|"与文本之间须另起一行。使用|标注的文本内容缩进表示的块，可以保留块中已有的回车换行：
 
-```yaml
+```
 value: |
   hello
   world!
 
 # 输出结果
+
 # hello 换行 world
+
 ```
 
 +表示保留文字块末尾的换行，-表示删除字符串末尾的换行：
 
-```yaml
+```
 value: |-
 hello
 
@@ -179,11 +196,12 @@ value: |+
 hello
 
 # hello\n hello hello\n\n
+
 ```
 
 注意">"与文本之间的空格。使用>标注的文本内容缩进表示的块，将块中回车替换为空格最终连接成一行：
 
-```yaml
+```
 value: > hello
 ```
 
@@ -191,9 +209,9 @@ value: > hello
 
 锚点与引用
 
-复制代码注意*引用部分不能追加内容。使用&定义数据锚点，即要复制的数据。使用*引用锚点数据，即数据的复制目的地：
+注意*引用部分不能追加内容。使用&定义数据锚点，即要复制的数据。使用*引用锚点数据，即数据的复制目的地：
 
-```yaml
+```
 name: &a yaml
 book: *a
 
@@ -204,19 +222,22 @@ books:
 
 book： yaml
 books：[java, yaml, python]
-``` 
-  
- 
-###### YAML 实例说明
-光说不练假把式 => JS-Yaml 官网实例地址 https://nodeca.github.io/js-yaml  
+```
+
+### YAML 实例说明
+
+光说不练假把式 => JS-Yaml 官网实例地址 https://nodeca.github.io/js-yaml
   ---
+
 # Collection Types #############################################################
 ################################################################################
 
 # http://yaml.org/type/map.html -----------------------------------------------#
 
 map:
-  # Unordered set of key: value pairs.
+
+# Unordered set of key: value pairs.
+
   Block style: !!map
     Clark: Evans
     Ingy: döt Net
@@ -226,19 +247,26 @@ map:
 # http://yaml.org/type/omap.html ----------------------------------------------#
 
 omap:
-  # Explicitly typed ordered map (dictionary).
+
+# Explicitly typed ordered map (dictionary).
+
   Bestiary: !!omap
     - aardvark: African pig-like ant eater. Ugly.
     - anteater: South-American ant eater. Two species.
     - anaconda: South-American constrictor snake. Scaly.
-    # Etc.
-  # Flow style
+
+# Etc.
+
+# Flow style
+
   Numbers: !!omap [one: 1, two: 2, three: 3]
 
 # http://yaml.org/type/pairs.html ---------------------------------------------#
 
 pairs:
-  # Explicitly typed pairs.
+
+# Explicitly typed pairs.
+
   Block tasks: !!pairs
     - meeting: with team.
     - meeting: with boss.
@@ -249,7 +277,9 @@ pairs:
 # http://yaml.org/type/set.html -----------------------------------------------#
 
 set:
-  # Explicitly typed set.
+
+# Explicitly typed set.
+
   baseball players: !!set
     ? Mark McGwire
     ? Sammy Sosa
@@ -259,7 +289,9 @@ set:
 # http://yaml.org/type/seq.html -----------------------------------------------#
 
 seq:
-  # Ordered sequence of nodes
+
+# Ordered sequence of nodes
+
   Block style: !!seq
     - Mercury # Rotates - no light/dark sides.
     - Venus # Deadliest. Aptly named.
@@ -322,7 +354,7 @@ merge:
   - &BIG { r: 10 }
   - &SMALL { r: 1 }
 
-  # All the following maps are equal:
+# All the following maps are equal:
 
   - # Explicit keys
     x: 1
@@ -347,14 +379,20 @@ merge:
 # http://yaml.org/type/null.html ----------------------------------------------#
 
 null:
-  # This mapping has four keys,
-  # one has a value.
+
+# This mapping has four keys,
+
+# one has a value.
+
   empty:
   canonical: ~
   english: null
   ~: null key
-  # This sequence has five
-  # entries, two have values.
+
+# This sequence has five
+
+# entries, two have values.
+
   sparse:
     - ~
     - 2nd entry
@@ -397,20 +435,31 @@ function: !!js/function >
 # Custom types #################################################################
 
 # JS-YAML allows you to specify a custom YAML types for your structures.
+
 # This is a simple example of custom constructor defined in `js/demo.js` for
+
 # custom `!sexy` type:
+
 #
+
 # var SexyYamlType = new jsyaml.Type('!sexy', {
+
 # kind: 'sequence',
+
 # construct: function (data) {
+
 # return data.map(function (string) { return 'sexy ' + string; });
+
 # }
+
 # });
+
 # var SEXY_SCHEMA = jsyaml.Schema.create([ SexyYamlType ]);
+
 #
+
 # result = jsyaml.load(yourData, { schema: SEXY_SCHEMA });
 
 foobar: !sexy
   - bunny
   - chocolate
-```

@@ -1,7 +1,7 @@
 <div id="gitalk"></div>
 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-<script>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js" data-cfasync="false"></script>
+<script data-cfasync="false">
     var gitalk = new Gitalk({
       id: '<%- url_for(post.path) %>',
       repo: '<%= theme.gitalk.repo %>',
@@ -9,6 +9,7 @@
       admin: '<%= theme.gitalk.admin %>',
       clientID:  '<%=theme.gitalk.clientID%>',
       clientSecret: '<%=theme.gitalk.clientSecret%>',
+      proxy: '<%= theme.gitalk.proxy %>',
       pagerDirection: 'last',
       distractionFreeMode: true,
       createIssueManually: false

@@ -30,6 +30,7 @@
     "hexo-wordcount": "^6.0.1",
     "live2d-widget-model-hijiki": "^1.0.5",
     "silly-datetime": "^0.1.2",
+    "tildify": "^2.0.0",
     "xml-parser": "^1.2.1"
   },
   "yuqueConfig": {

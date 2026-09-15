@@ -5,9 +5,11 @@ categories:
   - 数据与存储
 tags:
   - SQL
+  - Redis
 abbrlink: 910aba23
 date: 2019-09-03 00:00:00
 top: 8
+published: false
 ---
 
 背景：GaussDB(for Redis)是华为云数据库团队推出的企业级Redis，完全兼容开源Redis，既能显著降低成本，又能提供更稳定可靠的KV存储服务。

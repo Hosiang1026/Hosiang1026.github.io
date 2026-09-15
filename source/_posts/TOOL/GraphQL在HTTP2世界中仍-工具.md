@@ -8,6 +8,7 @@ tags:
 abbrlink: 5f0befc1
 date: 2021-02-18 00:00:00
 top: 6
+published: false
 ---
 
 大约一周前，Phil Sturgeon 的这则推文激起了许多 GraphQL 爱好者的关注。

@@ -2,7 +2,7 @@
 title: JVM自定义类加载器
 categories:
   - 开发
-  - Java
+  - 后端
 tags:
   - Java
 abbrlink: a0d1e74c

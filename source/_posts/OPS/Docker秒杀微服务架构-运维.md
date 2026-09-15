@@ -2,9 +2,10 @@
 title: Docker秒杀微服务架构
 categories:
   - 运维
-  - 架构设计
+  - 云原生
 tags:
   - Java
+  - Docker
 author: 狂欢马克思
 abbrlink: 7b98c8b4
 date: 2018-10-11 00:00:00

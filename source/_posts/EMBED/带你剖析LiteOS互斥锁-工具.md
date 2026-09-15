@@ -1,14 +1,16 @@
 ---
 title: 带你剖析LiteOS互斥锁
 categories:
-  - 工具
-  - 工程效能
+  - 嵌入式
+  - RTOS
 tags:
   - SQL
   - Python
+  - C
 abbrlink: ec317255
 date: 2021-01-04 00:00:00
 top: 91
+sticky: 909
 ---
 
 LiteOS内核互斥锁源代码

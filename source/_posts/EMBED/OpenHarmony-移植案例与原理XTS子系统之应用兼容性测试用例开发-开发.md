@@ -1,14 +1,15 @@
 ---
 title: OpenHarmony移植案例与原理
 categories:
-  - 开发
-  - Linux与网络
+  - 嵌入式
+  - 鸿蒙
 tags:
   - TypeScript
   - JavaScript
 abbrlink: ec495026
 date: 2025-01-05 00:00:00
 top: 17
+sticky: 901
 ---
 
 XTS（X Test Suite）子系统是OpenHarmony生态认证测试套件的集合，当前包括：

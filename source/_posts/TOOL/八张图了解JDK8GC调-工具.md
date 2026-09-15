@@ -2,12 +2,13 @@
 title: 八张图了解JDK8GC调
 categories:
   - 工具
-  - Java
+  - 后端
 tags:
   - Java
 abbrlink: 8572ec7e
 date: 2019-06-19 00:00:00
 top: 17
+published: false
 ---
 
 JVM的参数有很多很多，根据我的统计JDK8中JVM的参数总共有1853个，正式的参数也有680个。 这么多参数带给我们的是对JVM的细粒度的控制，但是并不是所有的参数都需要我们自己去调节的，我...

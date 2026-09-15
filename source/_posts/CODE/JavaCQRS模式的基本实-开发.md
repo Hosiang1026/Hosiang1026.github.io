@@ -2,7 +2,7 @@
 title: Java CQRS模式的基本实现
 categories:
   - 开发
-  - Java
+  - 分布式与微服务
 tags:
   - TypeScript
   - Java

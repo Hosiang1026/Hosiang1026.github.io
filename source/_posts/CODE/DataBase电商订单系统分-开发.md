@@ -2,7 +2,7 @@
 title: 电商订单系统分库分表实践
 categories:
   - 开发
-  - 分布式与微服务
+  - 数据与存储
 tags:
   - SQL
 author: 狂欢马克思

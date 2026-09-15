@@ -2,7 +2,7 @@
 title: 你写的Java对象究竟
 categories:
   - 开发
-  - Java
+  - 后端
 tags:
   - Java
 abbrlink: f650595f

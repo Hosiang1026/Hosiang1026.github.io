@@ -1,14 +1,15 @@
 ---
 title: 鸿蒙开源第三方组件——SlidingMenu_ohos侧滑菜单组件
 categories:
-  - 开发
-  - 前端
+  - 嵌入式
+  - 鸿蒙
 tags:
   - TypeScript
   - JavaScript
 abbrlink: 34c2c3d2
 date: 2022-02-21 00:00:00
 top: 20
+sticky: 906
 ---
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;

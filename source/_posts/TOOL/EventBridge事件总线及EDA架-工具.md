@@ -2,13 +2,14 @@
 title: EventBridge事件总线及EDA架构
 categories:
   - 工具
-  - 架构设计
+  - 消息队列
 tags:
   - Kubernetes
   - JavaScript
 abbrlink: 298a77c3
 date: 2021-03-19 00:00:00
 top: 14
+published: false
 ---
 
 作为 Gartner 定义的 10 大战略技术趋势之一，事件驱动架构（EDA）逐渐成为主流技术架构。根据 Gartner 的预估，在新型数字化商业的解决方案中，将有 60%使用 EDA，在商业组织参与的技术栈中，EDA 有一半的占比。

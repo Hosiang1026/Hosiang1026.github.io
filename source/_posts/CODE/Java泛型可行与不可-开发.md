@@ -2,7 +2,7 @@
 title: Java泛型可行与不可
 categories:
   - 开发
-  - Java
+  - 后端
 tags:
   - Java
 abbrlink: d7905983

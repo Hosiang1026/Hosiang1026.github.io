@@ -2,9 +2,10 @@
 title: ES9的新特性正则表
 categories:
   - 开发
-  - Java
+  - 前端
 tags:
   - Java
+  - JavaScript
 abbrlink: 3c8a13fd
 date: 2021-01-17 00:00:00
 top: 99

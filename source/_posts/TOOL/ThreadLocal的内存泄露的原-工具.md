@@ -2,12 +2,13 @@
 title: ThreadLocal的内存泄露的原
 categories:
   - 工具
-  - Java
+  - 后端
 tags:
   - Java
 abbrlink: 7dd04bbc
 date: 2024-02-01 00:00:00
 top: 178
+published: false
 ---
 
 在分析ThreadLocal导致的内存泄露前，需要普及了解一下内存泄露、强引用与弱引用以及GC回收机制，这样才能更好的分析为什么ThreadLocal会导致内存泄露呢？更重要的是知道该如何避免这样情况发生，增强系统的健壮性。

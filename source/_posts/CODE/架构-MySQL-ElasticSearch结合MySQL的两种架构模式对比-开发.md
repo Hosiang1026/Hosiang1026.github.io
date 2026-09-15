@@ -2,11 +2,11 @@
 title: MySQLElasticSearch结合MySQL的两种
 categories:
   - 开发
-  - 架构设计
+  - 数据与存储
 tags:
   - SQL
   - MySQL
-  - ElasticSearch
+  - Elasticsearch
 abbrlink: 5b1f4da1
 date: 2021-08-08 00:00:00
 top: 2006

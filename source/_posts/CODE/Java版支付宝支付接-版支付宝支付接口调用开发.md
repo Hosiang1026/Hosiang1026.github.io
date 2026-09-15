@@ -2,7 +2,7 @@
 title: Java版支付宝支付接
 categories:
   - 开发
-  - Java
+  - 后端
 tags:
   - Java
 abbrlink: e5aec429

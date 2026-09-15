@@ -2,7 +2,7 @@
 title: OpenShift与OpenStack让云变得更简单
 categories:
   - 运维
-  - Linux与网络
+  - 云原生
 tags:
   - Docker
 abbrlink: f509949c

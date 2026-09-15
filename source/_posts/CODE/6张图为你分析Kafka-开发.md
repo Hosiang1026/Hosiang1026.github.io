@@ -6,6 +6,7 @@ categories:
 tags:
   - C
   - Java
+  - Kafka
 abbrlink: c3cd8f3
 date: 2021-01-03 00:00:00
 top: 4

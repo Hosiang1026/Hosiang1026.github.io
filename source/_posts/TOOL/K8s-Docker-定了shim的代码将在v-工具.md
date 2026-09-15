@@ -6,9 +6,11 @@ categories:
 tags:
   - Kubernetes
   - YAML
+  - Docker
 abbrlink: bfe14f73
 date: 2019-04-08 00:00:00
 top: 1
+published: false
 ---
 
 知道的越多，恐惧的越少。

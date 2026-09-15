@@ -45,12 +45,17 @@ Github-Pages 作为备份站，Cloudflare 作为主站（同步仓库部署）�
 #### 6. 构建与后台
 - 开启 `hexo-all-minifier`，关闭 Live2D
 - `postinstall`：`inject-admin-sticky.js`、`patch-connect-headers.js`
-- 新增 `fix:images`、`migrate:taxonomy` 脚本
+- 新增 `fix:images` 脚本
 - hexo-admin 增加 `metadata.sticky`
 
 #### 7. 文档清理
 - 移除 Travis-CI / Serverless / 钉钉通知等过时方案说明
 - 同步当前 npm scripts 与密码加密用法
+
+#### 8. Gitalk OAuth 代理
+- 默认代理 `cors-anywhere.azm.workers.dev` 不可用，改为本域 Cloudflare Worker
+- 代码：`cloudflare/gitalk-oauth-proxy.js`，路由：`haoxiang.eu.org/gitalk-oauth`
+- 主题配置 `proxy: https://haoxiang.eu.org/gitalk-oauth`
 
 ### 2017-12-14
 
@@ -75,7 +80,6 @@ npm run prod                 # hexo clean && hexo g && hexo d
 npm run deploy               # 同 prod
 npm run gitalk               # 批量初始化 Gitalk（需 GITALK_GITHUB_TOKEN）
 npm run fix:images           # 修复失效图片
-npm run migrate:taxonomy     # 迁移分类/标签
 hexo version
 ```
 
@@ -101,6 +105,20 @@ password: <Base64编码后的密码>
 - 密钥派生：PBKDF2 + SHA-256
 - 加密算法：AES-256-CBC
 - 消息认证：HMAC-SHA256
+
+## Gitalk 评论登录
+
+默认 OAuth 代理失效会导致登录失败。本站用 Cloudflare Worker 转发：
+
+```bash
+npx wrangler deploy --config cloudflare/wrangler.toml
+```
+
+或在 Cloudflare 控制台创建 Worker，粘贴 `cloudflare/gitalk-oauth-proxy.js`，路由设为 `haoxiang.eu.org/gitalk-oauth`。
+
+GitHub OAuth App 的 Authorization callback URL 填 `https://haoxiang.eu.org`，然后重新部署博客。
+
+批量初始化 Issue（新文章）：`GITALK_GITHUB_TOKEN=xxx npm run gitalk`
 
 ## GitHub Pages Action
 

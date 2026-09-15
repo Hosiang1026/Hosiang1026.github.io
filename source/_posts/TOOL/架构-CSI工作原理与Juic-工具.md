@@ -9,6 +9,7 @@ tags:
 abbrlink: c9560f5f
 date: 2022-08-01 00:00:00
 top: 37
+published: false
 ---
 
 CSI 的 cloud providers 有两种类型，一种为 in-tree 类型，一种为 out-of-tree 类型。前者是指运行在 K8s 核心组件内部的存储插件；后者是指独立在 K8s...

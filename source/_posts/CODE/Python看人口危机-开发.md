@@ -2,15 +2,14 @@
 title: Python看人口危机
 categories:
   - 开发
-  - Python
+  - 后端
 tags:
   - Python
-  - Data-Analysis
-  - Data-Visualization
+  - 数据分析
+  - 数据可视化
 abbrlink: 9fbf36c0
 
 updated: 2026-09-15 15:00:00
-sticky: 5
 top: 201
 ---
 

@@ -6,6 +6,7 @@ categories:
 tags:
   - SQL
   - Go
+  - Kubernetes
 abbrlink: 59c230c2
 date: 2024-01-13 00:00:00
 top: 5

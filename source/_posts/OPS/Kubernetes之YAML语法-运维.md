@@ -6,6 +6,7 @@ categories:
 tags:
   - Python
   - JavaScript
+  - Kubernetes
 abbrlink: 793d1c91
 date: 2021-07-10 00:00:00
 top: 6

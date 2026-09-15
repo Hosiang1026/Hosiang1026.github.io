@@ -5,6 +5,7 @@ categories:
   - 消息队列
 tags:
   - Java
+  - Kafka
 abbrlink: 60dfec47
 date: 2022-02-13 00:00:00
 top: 8

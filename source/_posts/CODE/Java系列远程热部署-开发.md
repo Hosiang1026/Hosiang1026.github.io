@@ -2,7 +2,7 @@
 title: Java系列远程热部署
 categories:
   - 开发
-  - Java
+  - 后端
 tags:
   - Java
 abbrlink: f7676a54

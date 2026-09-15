@@ -2,7 +2,7 @@
 title: Java开发环境配置入门
 categories:
   - 运维
-  - Java
+  - 环境与安装
 tags:
   - Java
 abbrlink: 69f02c64

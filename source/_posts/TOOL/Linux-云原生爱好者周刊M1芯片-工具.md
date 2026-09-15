@@ -2,13 +2,14 @@
 title: Linux-云原生爱好者周刊M1芯片
 categories:
   - 工具
-  - Linux与网络
+  - 云原生
 tags:
   - SQL
   - Shell
 abbrlink: '22758167'
 date: 2022-02-01 00:00:00
 top: 21
+published: false
 ---
 
 KubePlus 是一个 Kubernetes Operator，可以将任何容器化的应用程序转化为 SaaS，它通过自动化多租户管理和 day2 操作（如监控、故障排除和应用升级）将其作为服务交付。

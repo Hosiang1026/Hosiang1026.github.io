@@ -5,6 +5,7 @@ categories:
   - 数据与存储
 tags:
   - Shell
+  - Redis
 abbrlink: 841b6057
 date: 2019-01-03 00:00:00
 top: 1

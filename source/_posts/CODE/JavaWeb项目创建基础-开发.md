@@ -2,7 +2,7 @@
 title: JavaWeb项目创建基础
 categories:
   - 开发
-  - Java
+  - 后端
 tags:
   - Java
 abbrlink: ef327ebc

@@ -2,7 +2,7 @@
 title: 自己实现一个RPC框
 categories:
   - 开发
-  - 前端
+  - 分布式与微服务
 tags:
   - Java
 abbrlink: 2a99d64a

@@ -1,8 +1,8 @@
 ---
 title: 海思NAS的IPv6访问
 categories:
-  - 工具
-  - Linux与网络
+  - 嵌入式
+  - 智能硬件
 tags:
   - Go
   - JavaScript
@@ -10,7 +10,7 @@ author: 狂欢马克思
 abbrlink: f18d78f5
 
 updated: 2026-09-15 19:00:00
-sticky: 9
+sticky: 907
 top: 206
 ---
 

@@ -1,14 +1,14 @@
 ---
 title: IoT时代WiFi配网技
 categories:
-  - 工具
-  - Linux与网络
+  - 嵌入式
+  - IoT
 abbrlink: 91bc0da4
 date: 2019-03-20 00:00:00
 top: 25
 tags:
   - Go
-  - --
+sticky: 903
 ---
 
 物联网系统层次物联网系统从架构上划分为三个层次：感知层、网络层、应用层：

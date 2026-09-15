@@ -8,7 +8,7 @@ date: 2021-02-26 00:00:00
 top: 6
 tags:
   - TypeScript
-  - --
+published: false
 ---
 
 在 Apache Pulsar 中，为了避免消息的重复投递，消费者进行消息确认是非常重要的一步。当一条消息被消费者消费后，需要消费者发送一个Ack请求给Broker，Broker才会认为这条消息...

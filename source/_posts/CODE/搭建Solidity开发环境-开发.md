@@ -6,6 +6,7 @@ categories:
 tags:
   - JavaScript
   - TypeScript
+  - Solidity
 abbrlink: 88ed06f8
 date: 2024-06-16 00:00:00
 top: 20

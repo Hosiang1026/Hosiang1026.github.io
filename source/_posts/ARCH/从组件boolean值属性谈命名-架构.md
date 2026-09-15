@@ -2,7 +2,7 @@
 title: 从组件boolean值属性谈命名
 categories:
   - 架构
-  - 前端
+  - 架构设计
 tags:
   - JavaScript
 abbrlink: d8da04dc

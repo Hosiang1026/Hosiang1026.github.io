@@ -2,10 +2,11 @@
 title: Java版简单的比特币
 categories:
   - 开发
-  - Java
+  - 区块链
 tags:
   - Java
   - Solidity
+  - 区块链
 abbrlink: 8308a8d6
 date: 2025-01-03 00:00:00
 top: 58

@@ -6,7 +6,7 @@ categories:
 tags:
   - JavaScript
   - Solidity
-  - Ethereum
+  - 以太坊
 abbrlink: 81e0932f
 date: 2021-02-21 00:00:00
 top: 111

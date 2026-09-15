@@ -2,9 +2,10 @@
 title: JavaScript基本数据类型
 categories:
   - 开发
-  - Java
+  - 前端
 tags:
   - Java
+  - JavaScript
 abbrlink: f7e413c5
 date: 2025-01-06 00:00:00
 top: 59

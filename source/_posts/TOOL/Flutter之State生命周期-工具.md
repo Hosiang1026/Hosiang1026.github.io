@@ -2,12 +2,14 @@
 title: Flutter之State生命周期
 categories:
   - 工具
-  - 工程效能
+  - 性能与安全
 tags:
   - JavaScript
+  - Kotlin
 abbrlink: 7d2ca02a
 date: 2019-09-29 00:00:00
 top: 85
+published: false
 ---
 
 State 的生命周期，指的是在用户参与的情况下，其关联的 Widget 所经历的，从创建到显示，再到更新最后到停止，直至销毁等各个阶段不同的阶段涉及到特定的任务处理

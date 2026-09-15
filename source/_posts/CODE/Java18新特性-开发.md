@@ -2,13 +2,12 @@
 title: Java 18新特性
 categories:
   - 开发
-  - Java
+  - 后端
 tags:
   - Java
 abbrlink: c5c079eb
 
 updated: 2026-09-15 13:00:00
-sticky: 3
 top: 62
 ---
 

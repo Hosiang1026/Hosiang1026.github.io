@@ -2,13 +2,14 @@
 title: 轻松上手使用gsdump
 categories:
   - 工具
-  - 数据与存储
+  - 工程效能
 tags:
   - Shell
   - SQL
 abbrlink: 8b0e0d0b
 date: 2019-04-12 00:00:00
 top: 33
+published: false
 ---
 
 概述导出单个数据库导出所有数据库无权限角色导出数据

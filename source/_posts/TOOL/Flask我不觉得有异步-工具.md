@@ -2,12 +2,13 @@
 title: Flask我不觉得有异步
 categories:
   - 工具
-  - Python
+  - 后端
 tags:
   - Python
 abbrlink: 3b81777e
 date: 2022-01-28 00:00:00
 top: 129
+published: false
 ---
 
 英文 | I'm not feeling the async pressure【1】原作 | Armin Ronacher，2020.01.01译者 | 豌豆花下猫@Python猫

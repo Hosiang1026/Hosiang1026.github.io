@@ -8,7 +8,7 @@ date: 2019-08-26 00:00:00
 top: 71
 tags:
   - Java
-  - --
+published: false
 ---
 
 音频隐写（Audio Steganography）是一种将信息隐藏到音频文件中的技术，是隐写术（Steganography）的一个分支。与加密技术不同，隐写术的目的是隐藏信息的存在，而不是保护信息的内容。

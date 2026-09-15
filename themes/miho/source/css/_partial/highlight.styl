@@ -1,102 +1,167 @@
-// https://github.com/chriskempson/tomorrow-theme
-highlight-background = #4a4949
-highlight-current-line = #393939
-highlight-selection = #515151
-highlight-foreground = #fcfafa
-highlight-comment = #f3f2f2
-highlight-red = #f2777a
-highlight-orange = #f99157
-highlight-yellow = #ffcc66
-highlight-green = #99cc99
-highlight-aqua = #66cccc
-highlight-blue = #6699cc
-highlight-purple = #cc99cc
+// VS Code Dark+
+vscode-bg = #1e1e1e
+vscode-bg2 = #252526
+vscode-fg = #d4d4d4
+vscode-comment = #6a9955
+vscode-keyword = #569cd6
+vscode-control = #c586c0
+vscode-string = #ce9178
+vscode-number = #b5cea8
+vscode-function = #dcdcaa
+vscode-type = #4ec9b0
+vscode-variable = #9cdcfe
+vscode-selection = #264f78
+vscode-line = #858585
+vscode-border = #3c3c3c
+vscode-inline = #2d2d2d
+vscode-scroll = #424242
+vscode-scroll-hover = #4f4f4f
+code-font = "JetBrains Mono", "Cascadia Code", "Fira Code", Consolas, "Courier New", monospace
 
 $code-block
-  background: highlight-background
-  margin: 8px article-padding * -1
-  padding: 15px article-padding
-  border-style: solid
-  border-color: color-border
-  border-width: 1px 0
+  background: vscode-bg
+  margin: 1.25em 0
+  padding: 0
+  border: 1px solid vscode-border
+  border-radius: 8px
   overflow: auto
-  color: highlight-foreground
-  line-height: font-size * line-height
-  word-break: break-all;
+  color: vscode-fg
+  line-height: 1.6
+  word-break: normal
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18)
+  -webkit-overflow-scrolling: touch
+
+  &::-webkit-scrollbar
+    height: 8px
+    width: 8px
+  &::-webkit-scrollbar-track
+    background: transparent
+  &::-webkit-scrollbar-thumb
+    background: vscode-scroll
+    border-radius: 4px
+  &::-webkit-scrollbar-thumb:hover
+    background: vscode-scroll-hover
 
 $line-numbers
-  color: #f5f0f0
-  font-size: 0.85em
+  color: vscode-line
+  font-size: 13px
+  user-select: none
 
 .article-entry
   pre, code
-    font-family: font-mono
-    font-size: 1.3em
-  code
-    color: #f5f0f0
-    white-space: normal
-    line-height: 2
-    margin: 0 4px
-    font-size: 85%
-    padding: 2px 4px
-    //border: 1px solid #0c0c0c
-    border-radius: 2px
-    word-wrap: break-word
-    background-color: #060606
+    font-family: code-font
+    font-size: 13.5px
+    -webkit-font-smoothing: antialiased
+
+  p > code, li > code, td > code, h1 > code, h2 > code, h3 > code, h4 > code, h5 > code, h6 > code, blockquote > code
+    color: vscode-string
+    background: vscode-inline
+    border: 1px solid vscode-border
+    border-radius: 4px
+    padding: 0.12em 0.4em
+    margin: 0 0.15em
+    font-size: 0.88em
+    line-height: 1.5
+    white-space: break-spaces
+    word-break: break-word
+
   .code
-    font: 14px "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace
+    font-family: code-font
+
   pre
     @extend $code-block
+    padding: 14px 16px
     code
       background: none
-      text-shadow: none
+      border: none
+      color: inherit
       padding: 0
-  .highlight
+      margin: 0
+      font-size: inherit
+      white-space: pre
+      word-break: normal
+      line-height: inherit
+
+  figure.highlight
     @extend $code-block
+    position: relative
+    margin: 1.35em 0
+
+    figcaption
+      display: flex
+      align-items: center
+      justify-content: space-between
+      background: vscode-bg2
+      border-bottom: 1px solid vscode-border
+      color: #cccccc
+      font-size: 12px
+      font-family: font-sans
+      line-height: 1
+      padding: 8px 14px
+      border-radius: 8px 8px 0 0
+      a
+        color: vscode-keyword
+        float: none
+        &:hover
+          text-decoration: underline
+
     pre
       border: none
       margin: 0
       padding: 0
+      background: transparent
+      border-radius: 0
+      box-shadow: none
+      overflow: visible
+
     table
       margin: 0
-      width: auto
+      width: 100%
       border-collapse: collapse
       border-spacing: 0
       border: none
+      background: transparent
+
     th
-      font-weight: bold
-      border-bottom: 3px solid color-border
-      padding-bottom: 0.5em
+      font-weight: 600
+      border-bottom: 1px solid vscode-border
+      padding: 6px 12px
+      color: #cccccc
+
     td
       border: none
       padding: 0
       text-align: left
-    figcaption
-      clearfix()
-      font-size: 0.85em
-      color: highlight-comment
-      line-height: 1em
-      margin-bottom: 1em
-      a
-        float: right
-    .gutter pre
-      @extend $line-numbers
-      text-align: right
-      padding-right: 20px
+      vertical-align: top
+
+    .gutter
+      width: 1%
+      background: vscode-bg
+      border-right: 1px solid vscode-border
+      pre
+        @extend $line-numbers
+        text-align: right
+        padding: 14px 10px 14px 12px
+        min-width: 2.2em
+
+    .code pre
+      padding: 14px 16px 14px 14px
+
     .line
-      height: font-size * line-height
+      height: auto
+      min-height: 1.6em
+      line-height: 1.6
+
     .line.marked
-      background: highlight-selection
+      background: vscode-selection
+
   .gist
-    margin: 0 article-padding * -1
-    border-style: solid
-    border-color: color-border
-    border-width: 1px 0
-    background: highlight-background
-    padding: 15px article-padding 15px 0
+    @extend $code-block
+    margin: 1.25em 0
+    padding: 14px 16px
     .gist-file
       border: none
-      font-family: font-mono
+      font-family: code-font
       margin: 0
       .gist-data
         background: none
@@ -105,73 +170,233 @@ $line-numbers
           @extend $line-numbers
           background: none
           border: none
-          padding: 0 20px 0 0
+          padding: 0 12px 0 0
         .line-data
           padding: 0 !important
       .highlight
         margin: 0
         padding: 0
         border: none
+        box-shadow: none
       .gist-meta
-        background: highlight-background
-        color: highlight-comment
-        font: 0.85em font-sans
-        text-shadow: 0 0
-        padding: 0
-        margin-top: 1em
-        margin-left: article-padding
+        background: vscode-bg2
+        color: vscode-line
+        font: 12px font-sans
+        text-shadow: none
+        padding: 8px 0 0
+        margin-top: 10px
         a
-          color: color-link
+          color: vscode-keyword
           font-weight: normal
           &:hover
             text-decoration: underline
 
+lang-badge()
+  position: absolute
+  top: 8px
+  right: 12px
+  z-index: 2
+  font-size: 11px
+  font-family: font-sans
+  letter-spacing: 0.04em
+  text-transform: uppercase
+  color: #9d9d9d
+  background: rgba(255, 255, 255, 0.06)
+  border: 1px solid vscode-border
+  border-radius: 4px
+  padding: 2px 7px
+  pointer-events: none
+
+figure.highlight.java:after
+  content: 'JAVA'
+  lang-badge()
+figure.highlight.javascript:after
+  content: 'JS'
+  lang-badge()
+figure.highlight.js:after
+  content: 'JS'
+  lang-badge()
+figure.highlight.typescript:after
+  content: 'TS'
+  lang-badge()
+figure.highlight.ts:after
+  content: 'TS'
+  lang-badge()
+figure.highlight.python:after
+  content: 'PYTHON'
+  lang-badge()
+figure.highlight.py:after
+  content: 'PYTHON'
+  lang-badge()
+figure.highlight.go:after
+  content: 'GO'
+  lang-badge()
+figure.highlight.rust:after
+  content: 'RUST'
+  lang-badge()
+figure.highlight.shell:after
+  content: 'SHELL'
+  lang-badge()
+figure.highlight.bash:after
+  content: 'SHELL'
+  lang-badge()
+figure.highlight.sh:after
+  content: 'SHELL'
+  lang-badge()
+figure.highlight.sql:after
+  content: 'SQL'
+  lang-badge()
+figure.highlight.yaml:after
+  content: 'YAML'
+  lang-badge()
+figure.highlight.yml:after
+  content: 'YAML'
+  lang-badge()
+figure.highlight.json:after
+  content: 'JSON'
+  lang-badge()
+figure.highlight.xml:after
+  content: 'XML'
+  lang-badge()
+figure.highlight.html:after
+  content: 'HTML'
+  lang-badge()
+figure.highlight.css:after
+  content: 'CSS'
+  lang-badge()
+figure.highlight.vue:after
+  content: 'VUE'
+  lang-badge()
+figure.highlight.kotlin:after
+  content: 'KOTLIN'
+  lang-badge()
+figure.highlight.swift:after
+  content: 'SWIFT'
+  lang-badge()
+figure.highlight.cpp:after
+  content: 'C++'
+  lang-badge()
+figure.highlight.c:after
+  content: 'C'
+  lang-badge()
+figure.highlight.csharp:after
+  content: 'C#'
+  lang-badge()
+figure.highlight.dockerfile:after
+  content: 'DOCKER'
+  lang-badge()
+figure.highlight.solidity:after
+  content: 'SOLIDITY'
+  lang-badge()
+figure.highlight.plaintext:after
+  content: 'TEXT'
+  lang-badge()
+figure.highlight.text:after
+  content: 'TEXT'
+  lang-badge()
+figure.highlight.diff:after
+  content: 'DIFF'
+  lang-badge()
+
 pre
+figure.highlight
   .comment
-  .title
-    color: highlight-comment
-  .variable
-  .attribute
-  .tag
-  .regexp
-  .ruby .constant
-  .xml .tag .title
-  .xml .pi
-  .xml .doctype
-  .html .doctype
-  .css .id
-  .css .class
-  .css .pseudo
-    color: highlight-red
-  .number
-  .preprocessor
+  .hljs-comment
+  .hljs-quote
+    color: vscode-comment
+    font-style: italic
+
+  .keyword
+  .hljs-keyword
+  .hljs-selector-tag
+  .hljs-literal
+  .javascript .function
+    color: vscode-keyword
+
   .built_in
-  .literal
-  .params
-  .constant
-    color: highlight-orange
+  .hljs-built_in
+  .type
+  .hljs-type
   .class
-  .ruby .class .title
+  .hljs-class .hljs-title
   .css .rules .attribute
-    color: highlight-green
+    color: vscode-type
+
   .string
+  .hljs-string
+  .hljs-doctag
   .value
   .inheritance
   .header
   .ruby .symbol
   .xml .cdata
-    color: highlight-green
-  .css .hexcolor
-    color: highlight-aqua
+    color: vscode-string
+
+  .number
+  .hljs-number
+  .hljs-bullet
+  .preprocessor
+  .params
+  .constant
+  .hljs-constant
+  .hljs-symbol
+    color: vscode-number
+
   .function
+  .hljs-function
+  .hljs-title
+  .hljs-title.function_
   .python .decorator
   .python .title
-  .ruby .function .title
-  .ruby .title .keyword
-  .perl .sub
   .javascript .title
-  .coffeescript .title
-    color: highlight-blue
-  .keyword
-  .javascript .function
-    color: highlight-purple
+    color: vscode-function
+
+  .variable
+  .hljs-variable
+  .hljs-params
+  .attribute
+  .hljs-attr
+  .hljs-attribute
+  .hljs-property
+  .hljs-name
+  .tag
+  .hljs-tag
+  .regexp
+  .hljs-regexp
+  .css .id
+  .css .class
+  .css .pseudo
+  .hljs-selector-id
+  .hljs-selector-class
+    color: vscode-variable
+
+  .hljs-meta
+  .hljs-meta-keyword
+    color: vscode-control
+
+  .hljs-deletion
+    color: #f44747
+    background: rgba(244, 71, 71, 0.12)
+  .hljs-addition
+    color: #b5cea8
+    background: rgba(181, 206, 168, 0.12)
+
+  .css .hexcolor
+    color: vscode-number
+
+  .hljs-emphasis
+    font-style: italic
+  .hljs-strong
+    font-weight: 700
+
+@media screen and (max-width: 760px)
+  .article-entry
+    pre, code
+      font-size: 12.5px
+    figure.highlight
+      border-radius: 6px
+      .gutter pre
+        padding: 12px 6px 12px 8px
+        min-width: 1.8em
+      .code pre
+        padding: 12px 12px 12px 10px

@@ -2,12 +2,13 @@
 title: NullPointerException的处理新方式Java
 categories:
   - 工具
-  - Java
+  - 后端
 tags:
   - Java
 abbrlink: 61e085fc
 date: 2021-01-23 00:00:00
 top: 33
+published: false
 ---
 
 SAP在2006年为其商业JVM实现了增强型的 NullPointerException。2019年2月，它被提议作为OpenJDK社区的一个增强，之后很快，它成为了一个JEP。所以，该功能在2...

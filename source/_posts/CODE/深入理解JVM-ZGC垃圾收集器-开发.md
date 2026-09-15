@@ -2,7 +2,7 @@
 title: 深入理解JVM - ZGC垃圾收集器
 categories:
   - 开发
-  - Java
+  - 后端
 tags:
   - Java
 abbrlink: f4bae9a8

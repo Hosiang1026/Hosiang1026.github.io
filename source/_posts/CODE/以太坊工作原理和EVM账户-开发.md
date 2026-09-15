@@ -6,6 +6,7 @@ categories:
 tags:
   - JavaScript
   - Solidity
+  - 以太坊
 abbrlink: bf4e3e59
 date: 2024-01-11 00:00:00
 top: 16

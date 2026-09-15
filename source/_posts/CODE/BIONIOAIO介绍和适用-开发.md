@@ -2,7 +2,7 @@
 title: BIONIOAIO介绍和适用
 categories:
   - 开发
-  - 前端
+  - 后端
 tags:
   - Java
 abbrlink: ff15bd17

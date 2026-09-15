@@ -2,7 +2,7 @@
 title: ArrayList集合底层扩容原理
 categories:
   - 开发
-  - 性能与安全
+  - 后端
 tags:
   - Java
 abbrlink: 68561f61

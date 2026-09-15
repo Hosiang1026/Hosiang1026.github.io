@@ -2,13 +2,13 @@
 title: Spring进阶
 categories:
   - 开发
-  - Spring
+  - 后端
 tags:
   - Java
+  - Spring
 abbrlink: e60a371
 
 updated: 2026-09-15 12:00:00
-sticky: 2
 top: 21
 ---
 

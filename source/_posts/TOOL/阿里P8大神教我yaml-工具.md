@@ -5,9 +5,11 @@ categories:
   - 云原生
 tags:
   - Java
+  - YAML
 abbrlink: f96145fc
 date: 2023-01-14 00:00:00
 top: 2
+published: false
 ---
 
 什么是YAML基本语法数据类型标量对象数组文本块显示指定类型引用单文件多配置

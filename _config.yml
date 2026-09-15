@@ -4,17 +4,15 @@
 # 图床 https://www.picb.cc/hosiang1026/?lang=zh-CN
 # Site
 title: 狂欢马克思
-subtitle: 专注硬件开发
-description: 硬件驱动创新，智能引领未来。
-# subtitle: 专注Web开发
-# description: 编写代码，改变世界。
+subtitle: 后端转嵌入式
+description: 从 Java/后端到 MCU、RTOS 与智能硬件的实战笔记
+# subtitle: 专注硬件开发
+# description: 硬件驱动创新，智能引领未来。
 author: Howe Hsiang
 language: zh-CN
 timezone: Asia/Shanghai
 
-# 2024年起转型为嵌入式开发工程师，主要开发语言C，专注于嵌入式系统与硬件的开发，致力于将软件与硬件结合，
- 
-# 推动智能硬件创新。热爱开源项目，持续关注新技术与新事物。
+# 2015–2023 后端；2024 起转向嵌入式（C / MCU / RTOS / 智能硬件）
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -54,8 +52,10 @@ future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: false
-  tab_replace:
+  auto_detect: true
+  tab_replace: '  '
+  wrap: false
+  hljs: true
   
 # Home page setting
 # path: Root path for your blogs index page. (default = '')

@@ -6,6 +6,7 @@ categories:
 tags:
   - SQL
   - Shell
+  - Redis
 abbrlink: 5e7b7f21
 date: 2022-12-08 00:00:00
 top: 51

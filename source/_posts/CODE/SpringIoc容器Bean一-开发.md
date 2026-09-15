@@ -2,9 +2,10 @@
 title: SpringIoc容器Bean一
 categories:
   - 开发
-  - Spring
+  - 后端
 tags:
   - Java
+  - Spring
 abbrlink: 60636d31
 date: 2019-08-26 00:00:00
 top: 9

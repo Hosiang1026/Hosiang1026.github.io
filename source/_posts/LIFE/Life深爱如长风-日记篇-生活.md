@@ -2,9 +2,9 @@
 title: Life深爱如长风-日记篇
 categories:
   - 生活
-  - 生活
+  - 随笔
 tags:
-  - 生活
+  - Java
 author: 狂欢马克思
 abbrlink: 62da4569
 top: 4

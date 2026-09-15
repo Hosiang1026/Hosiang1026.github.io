@@ -1,8 +1,8 @@
 ---
 title: LiteOS内核源码分析-任务栈信息
 categories:
-  - 工具
-  - Linux与网络
+  - 嵌入式
+  - RTOS
 tags:
   - TypeScript
   - JavaScript
@@ -10,6 +10,7 @@ tags:
 abbrlink: c444c65c
 date: 2021-02-03 00:00:00
 top: 9
+sticky: 902
 ---
 
 typedef struct {VOID *stackTop; // 栈顶指针UINT32 stackSize; // 栈大小CHAR *stackName; // 栈名称

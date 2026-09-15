@@ -2,12 +2,13 @@
 title: RPC框架Kitex实践入门
 categories:
   - 工具
-  - 性能与安全
+  - 分布式与微服务
 tags:
   - Go
 abbrlink: 2775245b
 date: 2019-07-10 00:00:00
 top: 1
+published: false
 ---
 
 日前，字节跳动服务框架团队正式开源 CloudWeGo ，在抖音、今日头条均有深度应用的 Golang 微服务 RPC 框架 Kitex 也包含在其中。

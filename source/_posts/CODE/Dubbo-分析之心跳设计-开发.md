@@ -2,7 +2,7 @@
 title: Dubbo分析之心跳设计
 categories:
   - 开发
-  - Linux与网络
+  - 分布式与微服务
 tags:
   - Go
   - JavaScript

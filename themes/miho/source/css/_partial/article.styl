@@ -41,10 +41,11 @@
   padding: 8px 88px 8px 16px
   border-left: 3px solid main-color
   text-decoration: none
-  font-size: 1.4em
+  font-family: font-serif
+  font-size: 1.32em
   font-weight: 600
-  letter-spacing: .06em
-  color: color-default
+  letter-spacing: .05em
+  color: #1c2430
   line-height: line-height-title
   transition: color 0.2s ease, padding-left 0.2s ease
   @extend $ellipsis
@@ -75,36 +76,54 @@
   @extend $base-style
   clearfix()
   position: relative
-  padding: 18px 20px
-  background: #fafbfc
+  padding: 28px 36px
+  background: #fbfaf7
   border-top: 1px solid color-border
   border-bottom: 1px solid color-border
-  color: color-default
+  color: #2c2a26
+  font-family: font-serif
+  font-size: 1.05em
+  font-weight: 400
+  line-height: line-height
+  letter-spacing: .04em
+  text-align: justify
+  text-justify: inter-ideograph
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
   p, table
     line-height: line-height
-    font-size: 1rem
+    font-size: 1em
     margin: line-height-margin 0
+    word-wrap: break-word
+  li, dd
+    line-height: line-height
+    font-size: 1em
     word-wrap: break-word
   h4, h5, h6
     font-weight: 600
   h1, h2, h3
-    padding-bottom: 6px
+    padding-bottom: 8px
     border-bottom: 1px solid color-border
     font-weight: 600
   h1, h2, h3, h4, h5, h6
+    font-family: font-sans
     line-height: line-height-title
-    margin: line-height-title 0
+    margin: 1.75em 0 .85em
     color: #1c2430
+    letter-spacing: .02em
+    text-align: left
   a
     color: color-link
     text-decoration: none
     border-bottom: 1px solid rgba(26, 74, 110, .25)
     &:hover
       border-bottom-color: main-color
-  ol, dl
+  ul, ol, dl
     margin-top: line-height-margin
     margin-bottom: line-height-margin
-    font-size: 15px
+    font-size: 1em
+  li
+    margin: .35em 0
   img, video
     max-width: 100%
     height: auto
@@ -130,18 +149,21 @@
       padding: 12px 8px
       text-align: center
   center
-    font-size: 1rem
+    font-size: 1em
   blockquote
     position: relative
-    padding: 16px 20px
-    border-left: 3px solid main-color
-    color: #5a6472
-    background: #f3f5f8
-    font-size: 14px
+    padding: 16px 22px
+    border-left: 3px solid accent-color
+    color: #5a554c
+    background: #f5f2eb
+    font-family: font-serif
+    font-size: .98em
+    line-height: 1.95
+    letter-spacing: .03em
     border-radius: 0 4px 4px 0
-    margin: 12px 0
+    margin: 1.35em 0
     footer
-      font-size: font-size
+      font-size: .9em
       margin: line-height 0
       font-family: font-sans
       cite
@@ -161,7 +183,8 @@
   .caption
     color: color-grey
     display: block
-    font-size: 0.9em
+    font-size: 0.88em
+    letter-spacing: .02em
     margin-top: 0.5em
     position: relative
     text-align: center
@@ -194,6 +217,21 @@
         transform: scale(1.06)
   .article-feed
     margin-left: 320px
+    font-family: font-serif
+    font-size: 1em
+    line-height: 1.95
+    letter-spacing: .04em
+    color: #2c2a26
+    text-align: justify
+    text-justify: inter-ideograph
+    p
+      margin: 0
+      line-height: 1.95
+      letter-spacing: .04em
+      display: -webkit-box
+      -webkit-box-orient: vertical
+      -webkit-line-clamp: 5
+      overflow: hidden
   .article-tags
     position: absolute
     left: 315px

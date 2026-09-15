@@ -2,7 +2,7 @@
 title: EasyUI部分问题总结技巧篇
 categories:
   - 开发
-  - Java
+  - 前端
 tags:
   - TypeScript
   - JavaScript

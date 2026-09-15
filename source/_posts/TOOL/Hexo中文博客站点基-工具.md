@@ -9,6 +9,7 @@ author: 狂欢马克思
 abbrlink: 81ec0d4a
 date: 2018-09-12 00:00:00
 top: 4
+published: false
 ---
 
 在本地搭建好Hexo后可以将内容同步到Github上，可以在网上浏览。则需要托管平台，Github官网上去注册账户，注册的过程就不罗嗦了。

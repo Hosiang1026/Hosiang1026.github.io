@@ -2,9 +2,10 @@
 title: java管道流PipedInputStream的应用
 categories:
   - 开发
-  - Java
+  - 后端
 tags:
   - Python
+  - Java
 abbrlink: ec4ba199
 date: 2023-01-16 00:00:00
 top: 53

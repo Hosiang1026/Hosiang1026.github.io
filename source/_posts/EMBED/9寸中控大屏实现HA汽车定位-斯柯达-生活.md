@@ -1,15 +1,16 @@
 ---
 title: 9寸中控大屏实现HA汽车定位-斯柯达
 categories:
-  - 生活
+  - 嵌入式
   - 车机
 author: 狂欢马克思
 tags:
-  - Skoda
+  - 斯柯达
 top: 3
 cover_picture: 'https://api.opics.org/api'
 abbrlink: f9583615
 date: 2024-12-13 10:04:00
+sticky: 912
 ---
 
 在实现HA（Home Assistant）与柯迪亚克9寸中控大屏的定位功能之前，您需要满足以下前提条件：

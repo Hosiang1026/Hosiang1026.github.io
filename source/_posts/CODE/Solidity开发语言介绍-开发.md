@@ -5,6 +5,7 @@ categories:
   - 区块链
 tags:
   - JavaScript
+  - Solidity
 abbrlink: e95ab342
 date: 2023-01-03 00:00:00
 top: 3

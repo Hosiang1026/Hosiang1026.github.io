@@ -9,6 +9,7 @@ tags:
 abbrlink: 7a7eef13
 date: 2022-06-13 00:00:00
 top: 212
+published: false
 ---
 
 很多人觉得 FreeBSD 就是一个操作系统，作为桌面来说又极其糟糕。事实不能否认，FreeBSD 确实如此。FreeBSD 的小恶魔是其标志物，代表守护进程及其 fork。

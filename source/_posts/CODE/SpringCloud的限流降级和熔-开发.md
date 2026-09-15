@@ -2,9 +2,10 @@
 title: SpringCloud的限流降级和熔
 categories:
   - 开发
-  - Java
+  - 分布式与微服务
 tags:
   - Java
+  - Spring
 abbrlink: '1e157905'
 date: 2019-05-12 00:00:00
 top: 12

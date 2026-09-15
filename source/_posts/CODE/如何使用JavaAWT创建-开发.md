@@ -2,7 +2,7 @@
 title: 如何使用JavaAWT创建图形界面
 categories:
   - 开发
-  - Java
+  - 后端
 tags:
   - Go
   - Java

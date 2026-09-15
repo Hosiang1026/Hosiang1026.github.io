@@ -8,6 +8,7 @@ tags:
 abbrlink: f94fb1be
 date: 2019-04-04 00:00:00
 top: 29
+published: false
 ---
 
 Golang 的 1.13 版本 与 1.14 版本对 defer 进行了两次优化，使得 defer 的性能开销在大部分场景下都得到大幅降低，其中到底经历了什么原理？

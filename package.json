@@ -53,8 +53,7 @@
     "prod": "hexo clean && hexo g && hexo d",
     "deploy": "npm run prod",
     "gitalk": "node gitalk-auto-init.js",
-    "fix:images": "node scripts/fix-dead-images.js",
-    "migrate:taxonomy": "node scripts/migrate-taxonomy.js"
+    "fix:images": "node scripts/fix-dead-images.js"
   },
   "devDependencies": {
     "hexo-generator-baidu-sitemap": "^0.1.6",

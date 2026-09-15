@@ -2,12 +2,13 @@
 title: MeterSphere在开源压测工具
 categories:
   - 工具
-  - 分布式与微服务
+  - 性能与安全
 tags:
   - Java
 abbrlink: 29d9e8dd
 date: 2024-01-16 00:00:00
 top: 9
+published: false
 ---
 
 ■ 开源：JMeter是一款开源的免费软件，支持多种协议的接口和性能测试；■ 轻量级：JMeter的软件包小巧轻量，只需要在JDK环境下就可以运行，无需其他额外的部署安装（单机版）；

@@ -9,8 +9,8 @@ tags:
 abbrlink: 369d98ac
 
 updated: 2026-09-15 20:00:00
-sticky: 10
 top: 207
+published: false
 ---
 
 Kyuubi 是面向 Spark 的多租户 SQL 网关，用来替代单点的 Spark Thrift Server。

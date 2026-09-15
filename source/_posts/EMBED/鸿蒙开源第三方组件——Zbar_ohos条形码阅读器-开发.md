@@ -1,14 +1,15 @@
 ---
 title: 鸿蒙开源第三方组件——Zbar_ohos条形码阅读器
 categories:
-  - 开发
-  - 前端
+  - 嵌入式
+  - 鸿蒙
 tags:
   - C
   - JavaScript
 abbrlink: 387f985e
 date: 2019-05-14 00:00:00
 top: 5
+sticky: 905
 ---
 
 private void openCamera(){// 获取 CameraKit 对象cameraKit = CameraKit.getInstance(this);

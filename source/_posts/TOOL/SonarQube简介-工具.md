@@ -10,6 +10,7 @@ tags:
 abbrlink: f3adb730
 date: 2025-01-25 00:00:00
 top: 192
+published: false
 ---
 
 Sonar 是一个用于代码质量管理的开放平台。通过插件机制，Sonar 可以集成不同的测试工具，代码分析工具，以及持续集成工具。 与持续集成工具（例如 Hudson/Jenkins 等）不同，S...

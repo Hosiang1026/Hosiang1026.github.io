@@ -2,10 +2,9 @@
 title: Navidrome简介
 categories:
   - 生活
-  - 生活
+  - 车机
 tags:
   - Shell
-  - 生活
 abbrlink: 1d8f5496
 date: 2019-07-03 00:00:00
 top: 60

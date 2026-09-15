@@ -2,7 +2,7 @@
 title: Java810Java18
 categories:
   - 开发
-  - Java
+  - 后端
 tags:
   - Java
 abbrlink: 80ebccf

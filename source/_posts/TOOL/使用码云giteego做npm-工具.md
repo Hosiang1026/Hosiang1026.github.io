@@ -8,6 +8,7 @@ tags:
 abbrlink: 8a001657
 date: 2019-08-10 00:00:00
 top: 6
+published: false
 ---
 
 gitee-go 其实去年已经上线了，但当时太忙，没时间折腾。经过一再折腾，终于搞通了。操作步骤按照以下流程：Step-1：在仓库的 DevOps 进入 Gitee Go 的配置页面，点击新建流水线（以下 2 图）

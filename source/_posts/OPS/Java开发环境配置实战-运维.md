@@ -2,7 +2,7 @@
 title: Java开发环境配置实战
 categories:
   - 运维
-  - Java
+  - 环境与安装
 tags:
   - Java
 abbrlink: 8445e9eb

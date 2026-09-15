@@ -1,15 +1,16 @@
 ---
 title: 9寸中控屏安装第三方APP-斯柯达
 categories:
-  - 生活
+  - 嵌入式
   - 车机
 author: 狂欢马克思
 tags:
-  - Skoda
+  - 斯柯达
 top: 3
 cover_picture: 'https://api.opics.org/api'
 abbrlink: cebc765c
 date: 2024-12-13 10:04:00
+sticky: 911
 ---
 
 1. Windows系统笔记本电脑- 用于操作ADB命令- 建议使用Windows 10或更高版本- 确保USB接口正常工作

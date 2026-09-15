@@ -2,7 +2,7 @@
 title: 什么是JVM调优
 categories:
   - 开发
-  - Java
+  - 后端
 tags:
   - Java
 abbrlink: 1dcbf860

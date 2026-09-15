@@ -2,9 +2,9 @@
 title: Work在北京过得怎样-工作篇
 categories:
   - 生活
-  - 生活
+  - 随笔
 tags:
-  - 生活
+  - JavaScript
 author: 狂欢马克思
 abbrlink: 68baa64a
 top: 1

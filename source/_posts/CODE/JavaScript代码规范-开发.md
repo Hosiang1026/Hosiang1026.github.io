@@ -2,13 +2,13 @@
 title: JavaScript代码规范
 categories:
   - 开发
-  - Java
+  - 前端
 tags:
   - Java
+  - JavaScript
 abbrlink: aa03cc2
 
 updated: 2026-09-15 14:00:00
-sticky: 4
 top: 64
 ---
 

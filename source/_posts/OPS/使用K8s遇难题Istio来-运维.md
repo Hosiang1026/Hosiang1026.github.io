@@ -5,6 +5,7 @@ categories:
   - 云原生
 tags:
   - Shell
+  - Kubernetes
 abbrlink: 9fa18772
 date: 2022-04-24 00:00:00
 top: 8

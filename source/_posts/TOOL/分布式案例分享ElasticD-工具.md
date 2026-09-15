@@ -4,11 +4,12 @@ categories:
   - 工具
   - 分布式与微服务
 tags:
-  - Distributed
-  - ElasticSearch
+  - 分布式
+  - Elasticsearch
 abbrlink: 93c14ecb
 date: 2019-10-30 00:00:00
 top: 10
+published: false
 ---
 
 - 基于ElasticSearch的分布式数据解决方案- 提供高可用、高性能的数据存储和检索- 支持水平扩展和自动分片- 适合大规模数据场景

@@ -8,6 +8,7 @@ tags:
 abbrlink: 3c0e5011
 date: 2019-07-14 00:00:00
 top: 63
+published: false
 ---
 
 explain 的用法explain 的使用场景 案例一：join 语句会过滤 null 的值吗？ 案例二：group by 分组语句会进行排序吗？ 案例三：哪条sql执行效率高呢？ 案例四：定位产生数据倾斜的代码段

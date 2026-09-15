@@ -2,12 +2,13 @@
 title: 干掉前端！3分钟纯 Java 注解搭个管理系统，我直接好家伙
 categories:
   - 工具
-  - Java
+  - 后端
 tags:
   - Java
 abbrlink: fa12c89
 date: 2019-04-06 00:00:00
 top: 9
+published: false
 ---
 
 `Erupt`一个通用后台管理框架，据说有 超低代码量、 零前端代码、零 CURD操作、无需建表，纯Java注解开发等特色，号称三分钟就可以搭建一个完整的后台管理系统。

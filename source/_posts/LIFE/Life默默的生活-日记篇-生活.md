@@ -2,7 +2,7 @@
 title: Life默默的生活-日记篇
 categories:
   - 生活
-  - 生活
+  - 随笔
 tags:
   - 生活
 author: 狂欢马克思

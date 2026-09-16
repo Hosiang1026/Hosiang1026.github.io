@@ -1,10 +1,19 @@
 <%
-    var shareUrl = url.replace(/index\.html$/, '')
-    var shareTitle = page.title ? '《'+ page.title +'》 — ' + config.title : config.title
-    var shareDesc = truncate(strip_html(page.excerpt || config.description), { length: 80})
-    var sharePic = post.cover_picture ? post.cover_picture
-        : (/^(http:|https:)?\/\//.test(theme.logo) ? theme.logo
-            : config.url.replace(/\/$/, '') + theme.logo)
+    function toAbsolute(path) {
+      if (!path) return '';
+      if (/^(https?:)?\/\//.test(path)) {
+        return path.replace(/^\/\//, 'https://');
+      }
+      var base = config.url.replace(/\/$/, '');
+      path = path.replace(/^\.\.\//, '/');
+      if (path.charAt(0) !== '/') path = '/' + path;
+      return base + path;
+    }
+    var rawUrl = (typeof url === 'string' ? url : page.permalink);
+    var shareUrl = toAbsolute(String(rawUrl).replace(/index\.html$/, ''));
+    var shareTitle = page.title ? '《'+ page.title +'》 — ' + config.title : config.title;
+    var shareDesc = truncate(strip_html(page.excerpt || config.description), { length: 80});
+    var sharePic = toAbsolute(post.cover_picture || theme.cover_picture || theme.logo);
 %>
 <div class="post-share">
     <a href="javascript:" id="share-sub" class="post-share-fab">
@@ -20,11 +29,6 @@
           <li>
             <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=<%-shareTitle%>&url=<%-shareUrl%>&via=<%-config.url%>" data-title="Twitter">
               <i class="fa fa-twitter" style="padding-top: 9px !important;" ></i>
-            </a>
-          </li>
-          <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=<%-shareUrl%>" data-title="Google+">
-              <i class="fa fa-google-plus" style="padding-top: 9px !important;" ></i>
             </a>
           </li>
             <li>
@@ -48,7 +52,7 @@
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="<%- 'qrcode' in locals ? qrcode(shareUrl) : '//api.qrserver.com/v1/create-qr-code/?data=' + shareUrl  %>" alt="微信分享二维码">
+    <img src="<%- qrcode(shareUrl) %>" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>

@@ -14,7 +14,7 @@ header_title: 狂欢马克思
 # Head description | 头部描述
 header_description: 后端 → 嵌入式
 # Link to your logo | logo地址
-logo: ../images/logo.png
+logo: /images/logo.png
 # Link to your banner_img | 首页banner图地址
 #banner_img:
 # Menu setting | 菜单设置
